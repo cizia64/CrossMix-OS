@@ -4,22 +4,22 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 50 \
     -c "220,220,220" \
     -t "Applying \"$(basename "$0" .sh)\" by default..." &
 
-cat >/tmp/ra_patch.cfg <<-EOM
+cat >/tmp/crossmix_ra_patch.cfg <<-EOM
 savestate_auto_load = "false"
 EOM
 
 # Patch RA config
-/mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh /tmp/ra_patch.cfg
-rm /tmp/ra_patch.cfg
+/mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh /tmp/crossmix_ra_patch.cfg
+rm /tmp/crossmix_ra_patch.cfg
 
 # Menu modification to reflect the change immediately
 
-json_file="/mnt/SDCARD/System/etc/systemtools.json"
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
     echo "{}" >"$json_file"
 fi

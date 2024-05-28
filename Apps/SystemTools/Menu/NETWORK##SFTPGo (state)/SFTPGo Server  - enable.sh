@@ -2,12 +2,12 @@
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "Applying \"$(basename "$0" .sh)\" by default..." &
 
-json_file="/mnt/SDCARD/System/etc/systemtools.json"
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
 
 if [ ! -f "$json_file" ]; then
   echo "{}" >"$json_file"
@@ -39,7 +39,7 @@ IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')
 echo "SFTPGo: http://$IP:8080"
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "SFTPGo: http://$IP:8080" &

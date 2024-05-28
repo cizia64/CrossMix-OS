@@ -10,7 +10,7 @@ echo 0 >"$analog_count"
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "Detecting Dual Shock compatible games..." &
@@ -81,7 +81,7 @@ pkill -f sdl2imgshow
 sleep 0.3
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "$(cat "$analog_count") analog compatible game(s) detected." &

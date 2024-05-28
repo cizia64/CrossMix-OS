@@ -10,7 +10,7 @@ NumAdded=0
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "./background.jpg" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 100  \
   -c "220,0,0" \
   -t "Cleaning..." & 
@@ -68,7 +68,7 @@ sleep 1
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "./background-info.jpg" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 40  \
   -c "255,255,255" \
   -t "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." & 

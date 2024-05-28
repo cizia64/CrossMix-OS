@@ -17,11 +17,11 @@ sync
 
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
--i "/usr/trimui/res/skin/bg.png" \
--f "/usr/trimui/res/regular.ttf" \
--s 50  \
--c "220,220,220" \
--t "Generating thumbnails..." &
+  -i "/usr/trimui/res/skin/bg.png" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+  -s 50  \
+  -c "220,220,220" \
+  -t "Generating thumbnails..." &
   sleep 0.3
   pkill -f sdl2imgshow
 

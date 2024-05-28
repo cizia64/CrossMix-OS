@@ -4,7 +4,7 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 25 \
     -c "220,220,220" \
     -t "UDISK formating: press A to continue, B to cancel." &
@@ -17,7 +17,7 @@ if [ "$button" = "B" ]; then
     echo "UDISK formating canceled"
     /mnt/SDCARD/System/bin/sdl2imgshow \
         -i "/usr/trimui/res/skin/bg.png" \
-        -f "/usr/trimui/res/regular.ttf" \
+        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
         -s 25 \
         -c "220,220,220" \
         -t "UDISK formating: canceled." &
@@ -28,7 +28,7 @@ fi
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 25 \
     -c "220,220,220" \
     -t "UDISK formating..." &
@@ -115,7 +115,7 @@ pkill -f sdl2imgshow
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 25 \
     -c "220,220,220" \
     -t "Rebooting..." &

@@ -4,7 +4,7 @@ output_file="/tmp/cpumax.sh"
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 40 \
     -c "220,220,220" \
     -t "Applying \"$(basename "$0" .sh)\"." &

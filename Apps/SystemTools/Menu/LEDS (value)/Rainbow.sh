@@ -4,7 +4,7 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 50 \
     -c "220,220,220" \
     -t "Applying \"$(basename "$0" .sh)\" mode..." &
@@ -58,7 +58,7 @@ pkill -f "led_config.sh"
 
 script_name=$(basename "$0" .sh)
 
-json_file="/mnt/SDCARD/System/etc/systemtools.json"
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
     echo "{}" >"$json_file"
 fi

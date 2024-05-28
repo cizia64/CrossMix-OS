@@ -2,12 +2,12 @@
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "/usr/trimui/res/skin/bg.png" \
-    -f "/usr/trimui/res/regular.ttf" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 50 \
     -c "220,220,220" \
     -t "Applying \"$(basename "$0" .sh)\" by default..." &
 
-json_file="/mnt/SDCARD/System/etc/systemtools.json"
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
 
 if [ ! -f "$json_file" ]; then
     echo "{}" >"$json_file"

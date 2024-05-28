@@ -6,7 +6,7 @@ rm /mnt/SDCARD/System/starts/start_tab.sh
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "$(basename "$0" .sh) by default." &
@@ -15,7 +15,7 @@ rm /mnt/SDCARD/System/starts/start_tab.sh
 
 script_name=$(basename "$0" .sh)
 
-json_file="/mnt/SDCARD/System/etc/systemtools.json"
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
   echo "{}" >"$json_file"
 fi
