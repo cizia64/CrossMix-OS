@@ -1,15 +1,15 @@
 {
-"label":"NAOMI",
-"icon":"ic-Naomi.png",
-"iconsmall":"",
-"iconlist":"",
-"effectsh":"effect.sh",
-"background":"bg.png",
-"themecolor":"FFFFFF",
-"launch":"launch.sh",
-"rompath":"../../Roms/NAOMI",
-"imgpath":"../../Imgs/NAOMI",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "NAOMI",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/NAOMI.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "effectsh": "effect.sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/NAOMI.png",
+  "themecolor": "FFFFFF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/NAOMI",
+  "imgpath": "../../Imgs/NAOMI",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

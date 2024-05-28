@@ -1,15 +1,15 @@
 {
-"label":"TI83",
-"icon":"ti83.png",
-"iconsmall":"ic-cps1-80-n.png",
-"iconlist":"ic-cps1-32-n.png",
-"background":"bg.png",
-"themecolor":"0000FF",
-"launch":"launch.sh",
-"rompath":"../../Roms/TI83",
-"imgpath":"../../Imgs/TI83",
-"useswap":1,
-"shortname":1,
-"hidebios":1,
-"extlist":"zip|83p|83P"
+  "label": "TI83",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/TI83.png",
+  "iconsmall": "ic-cps1-80-n.png",
+  "iconlist": "ic-cps1-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/TI83.png",
+  "themecolor": "0000FF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/TI83",
+  "imgpath": "../../Imgs/TI83",
+  "useswap": 1,
+  "shortname": 1,
+  "hidebios": 1,
+  "extlist": "zip|83p|83P"
 }

@@ -1,13 +1,13 @@
 {
-"label":"ZXSPECTRUM",
-"icon":"zxs.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/ZXS",
-"imgpath":"../../Imgs/ZXS",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "ZXSPECTRUM",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ZXS.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ZXS.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/ZXS",
+  "imgpath": "../../Imgs/ZXS",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

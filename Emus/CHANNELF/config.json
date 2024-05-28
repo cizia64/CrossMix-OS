@@ -1,14 +1,14 @@
 {
-"label":"CHANNELF",
-"icon":"ic-Channel-F.png",
-"iconsmall":"ic-C64-small.png",
-"iconlist":"ic-C64-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/CHANNELF",
-"imgpath":"../../Imgs/CHANNELF",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "CHANNELF",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/CHANNELF.png",
+  "iconsmall": "ic-C64-small.png",
+  "iconlist": "ic-C64-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/CHANNELF.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/CHANNELF",
+  "imgpath": "../../Imgs/CHANNELF",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

@@ -1,14 +1,14 @@
 {
-"label":"FLASHBACK",
-"icon":"iic-Flashback.png",
-"iconsmall":"ic-C64-small.png",
-"iconlist":"ic-C64-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/FLASHBACK",
-"imgpath":"../../Imgs/FLASHBACK",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "FLASHBACK",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/FLASHBACK.png",
+  "iconsmall": "ic-C64-small.png",
+  "iconlist": "ic-C64-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/FLASHBACK.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/FLASHBACK",
+  "imgpath": "../../Imgs/FLASHBACK",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

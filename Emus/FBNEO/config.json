@@ -1,0 +1,24 @@
+{
+  "label": "ARC. FBNEO",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/FBNEO.png",
+  "iconsel": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/FBNEO.png",
+  "themecolor": "EC7063",
+  "launch": "FBNEO.sh",
+  "rompath": "../../Roms/FBNEO",
+  "imgpath": "../../Imgs/FBNEO",
+  "useswap": 1,
+  "shortname": 1,
+  "hidebios": 1,
+  "extlist": "zip",
+  "launchlist": [
+    {
+      "name": "FB NEO",
+      "launch": "FBNEO.sh"
+    },
+    {
+      "name": "FB Alpha",
+      "launch": "FBAlpha.sh"
+    }
+  ]
+}

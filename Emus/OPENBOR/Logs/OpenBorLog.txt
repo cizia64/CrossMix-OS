@@ -1,0 +1,135 @@
+Total Ram:  1021763584 Bytes (   974 MB )
+ Free Ram:   536674304 Bytes (   511 MB )
+ Used Ram:     1293312 Bytes (     1 MB )
+
+debug:nativeWidth, nativeHeight, bpp, Hz  1280, 720, 24, 60
+OpenBoR v3.0 Build 7144 (commit hash: b8303cc), Compile Date: Nov 21 2023
+
+Game Selected: /mnt/SDCARD/Emus/OPENBOR/../../Roms/OPENBOR/Asterix and Caesars Challenge.PAK
+
+Loaded mapping for X360 Controller
+Loaded mapping for Keyboard
+FileCaching System Init......	Enabled
+Initializing video............
+'data/video.txt' not found.
+Initialized video.............	320x240 (Mode: 0)
+
+320x240
+Loading menu.txt.............	Done!
+Loading fonts................	1 2 3 4 Done!
+Timer init...................	Done!
+Initialize Sound..............	
+Loading sprites..............	Done!
+Loading level order..........	Done!
+Loading model constants......	Done!
+Loading script settings......	Done!
+Loading scripts..............	Done!
+Loading models...............
+
+Controller or joystick hotplugged: SDL device ID=0
+X360 Controller (device #0, SDL ID 0) is a game controller.
+Hotplugged controller set as device #0
+Cacheing 'Flash' from data/chars/misc/flash.txt
+Cacheing 'Asterix' from data/chars/Asterix/Asterix.txt
+Cacheing 'Obelix' from data/chars/Obelix/Obelix.txt
+Cacheing 'Apple' from data/chars/misc/apple.txt
+Cacheing 'Meat' from data/chars/misc/meat.txt
+Cacheing '1up' from data/chars/misc/1up.txt
+Cacheing 'Money' from data/chars/misc/money.txt
+Cacheing 'Gold' from data/chars/misc/gold.txt
+Cacheing 'Time' from data/chars/misc/time.txt
+Cacheing 'Rain' from data/chars/misc/rain.txt
+Cacheing 'Rain2' from data/chars/misc/rain2.txt
+Cacheing 'Rain3' from data/chars/misc/rain3.txt
+Cacheing 'poison' from data/chars/misc/poison.txt
+Cacheing 'Box' from data/chars/misc/box.txt
+Cacheing 'Crate' from data/chars/misc/crate.txt
+Cacheing 'Trash' from data/chars/misc/trash.txt
+Cacheing 'Table' from data/chars/misc/table.txt
+Cacheing 'Chair' from data/chars/misc/chair.txt
+Cacheing 'Fence' from data/chars/misc/fence.txt
+Cacheing 'Drum' from data/chars/misc/drum.txt
+Cacheing 'Trolly' from data/chars/misc/trolly.txt
+Cacheing 'Romano1' from data/chars/Romano1/Romano1.txt
+Cacheing 'Romano2' from data/chars/Romano2/Romano2.txt
+Cacheing 'Romano3' from data/chars/Romano3/Romano3.txt
+Cacheing 'Romano4' from data/chars/Romano4/Romano4.txt
+Cacheing 'Centuri' from data/chars/Centuri/Centuri.txt
+Cacheing 'Tutam' from data/chars/Tutam/Tutam.txt
+Cacheing 'Tarugo' from data/chars/Tarugo/Tarugo.txt
+Cacheing 'Tigre' from data/chars/Tigre/Tigre.txt
+Cacheing 'Gitano1' from data/chars/gitano1/gitano1.txt
+Cacheing 'Gitano2' from data/chars/gitano2/gitano2.txt
+Cacheing 'Gitano3' from data/chars/gitano3/gitano3.txt
+Cacheing 'Gladi1' from data/chars/Gladi1/Gladi1.txt
+Cacheing 'Gladi2' from data/chars/Gladi2/Gladi2.txt
+Cacheing 'Arqui' from data/chars/arqui/arqui.txt
+Cacheing 'Indu2' from data/chars/Indu2/Indu2.txt
+Cacheing 'Indu3' from data/chars/Indu3/Indu3.txt
+Cacheing 'Indu1' from data/chars/indu1/indu1.txt
+Cacheing 'Tornado' from data/chars/tornado/tornado.txt
+Cacheing 'Charco' from data/chars/charco/charco.txt
+Cacheing 'Pajaro' from data/chars/pajaro/pajaro.txt
+Cacheing 'Galli' from data/chars/galli/galli.txt
+Cacheing 'Musi' from data/chars/musi/musi.txt
+Cacheing 'Pano' from data/chars/pano/pano.txt
+Cacheing 'Pesca' from data/chars/pesca/pesca.txt
+Cacheing 'Arqui2' from data/chars/arqui2/arqui2.txt
+Cacheing 'Knife' from data/chars/misc/knife.txt
+Cacheing 'Shot' from data/chars/misc/shot.txt
+Cacheing 'Steam' from data/chars/misc/steam.txt
+Cacheing 'Steamer' from data/chars/misc/steamer.txt
+Cacheing 'Furnace' from data/chars/misc/furnace.txt
+Cacheing 'Lobster' from data/chars/Lobster/Lobster.txt
+
+Loaded 'Flash' from data/chars/misc/flash.txt 
+Loaded 'Asterix' from data/chars/Asterix/Asterix.txt 
+Loaded 'Obelix' from data/chars/Obelix/Obelix.txt 
+
+Loading models...............	Done!
+Object engine init...........	Done!
+Input init...................	X360 Controller (device #0, SDL ID 0) is a game controller.
+Done!
+Create blending tables.......	Done!
+Save settings so far........	Done!
+
+
+
+************ Shutting Down ************
+
+OpenBOR v3.0 Build 7144 (commit hash: b8303cc), Compile Date: Nov 21 2023
+Presented by the OpenBOR Team.
+www.chronocrash.com
+OpenBOR is the open source continuation of Beats of Rage by Senile Team.
+
+Special thanks to SEGA and SNK.
+
+Total Ram:  1021763584 Bytes (   974 MB )
+ Free Ram:   517103616 Bytes (   493 MB )
+ Used Ram:    20008960 Bytes (    19 MB )
+
+Release level data...........
+Done!
+
+Release graphics data........	Done!
+Release game data............
+
+Unload 'Flash' ............Done.
+Unload 'Asterix' ............Done.
+Unload 'Obelix' ............Done.
+
+Release game data............	Done!
+Release timer................	Done!
+Release input hardware.......	Done!
+Release sound system.........	Done!
+Release FileCaching System...	Done!
+
+**************** Done *****************
+
+OpenBOR v3.0 Build 7144 (commit hash: b8303cc), Compile Date: Nov 21 2023
+Presented by the OpenBOR Team.
+www.chronocrash.com
+OpenBOR is the open source continuation of Beats of Rage by Senile Team.
+
+Special thanks to SEGA and SNK.
+

@@ -1,14 +1,14 @@
 {
-"label":"C64",
-"icon":"ic-C64.png",
-"iconsmall":"ic-C64-small.png",
-"iconlist":"ic-C64-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/C64",
-"imgpath":"../../Imgs/C64",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "C64",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/C64.png",
+  "iconsmall": "ic-C64-small.png",
+  "iconlist": "ic-C64-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/C64.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/C64",
+  "imgpath": "../../Imgs/C64",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

@@ -1,0 +1,27 @@
+{
+  "label": "PICO-8",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/PICO.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/PICO.png",
+  "themecolor": "00FF88",
+  "launch": "fake08.sh",
+  "rompath": "../../Roms/PICO",
+  "imgpath": "../../Imgs/PICO",
+  "useswap": 1,
+  "shortname": 0,
+  "extlist": "p8|png",
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "FAKE08",
+      "launch": "fake08.sh"
+    },
+    {
+      "name": "RETRO8",
+      "launch": "retro8.sh"
+    },
+    {
+      "name": "SPLORE",
+      "launch": "splore.sh"
+    }
+  ]
+}

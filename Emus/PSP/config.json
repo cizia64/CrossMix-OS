@@ -1,0 +1,36 @@
+{
+  "label": "PSP",
+  "label.ch.lang": "PSP",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/PSP.png",
+  "launch": "launch_performance.sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/PSP.png",
+  "themecolor": "64A8BD",
+  "iconsel": "",
+  "rompath": "../../Roms/PSP",
+  "imgpath": "../../Imgs/PSP",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "launchlist": [
+    {
+      "name": "PPSSPP 1.17.1 - perf.",
+      "name.ch.lang": "PPSSPP性能模式",
+      "launch": "launch_performance.sh"
+    },
+    {
+      "name": "PPSSPP 1.17.1",
+      "name.ch.lang": "PPSSPP正常模式",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "PPSSPP-1.5.4 - Perf.",
+      "name.ch.lang": "PPSSPP-1.5.4性能模式",
+      "launch": "launch_performance_1.15.4.sh"
+    },
+    {
+      "name": "PPSSPP-1.5.4",
+      "name.ch.lang": "PPSSPP-1.5.4正常模式",
+      "launch": "launch_1.15.4.sh"
+    }
+  ]
+}

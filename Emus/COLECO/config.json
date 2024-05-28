@@ -1,0 +1,14 @@
+{
+  "label": "COLECO",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/COLECO.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/COLECO.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/COLECO",
+  "imgpath": "../../Imgs/COLECO",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
+}

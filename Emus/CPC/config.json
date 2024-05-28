@@ -1,13 +1,13 @@
 {
-"label":"AMSTRAD CPC",
-"icon":"cpc.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/CPC",
-"imgpath":"../../Imgs/CPC",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "AMSTRAD CPC",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/CPC.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/CPC.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/CPC",
+  "imgpath": "../../Imgs/CPC",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

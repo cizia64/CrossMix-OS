@@ -1,0 +1,27 @@
+{
+"label":"PICO-8",
+"icon":"ic-PICO.png",
+"background":"bg.png",
+"themecolor":"00FF88",
+"launch":"fake08.sh",
+"rompath":"../../Roms/PICO8",
+"imgpath":"../../Imgs/PICO8",
+"useswap":1,
+"shortname":0,
+"extlist":"p8|png",
+"hidebios":1,
+ "launchlist": [
+        {
+            "name": "FAKE08",
+            "launch": "fake08.sh"
+        },
+        {
+            "name": "RETRO8",
+            "launch": "retro8.sh"
+        },
+        {   "name": "SPLORE",
+            "launch": "splore.sh"
+        }
+    ]
+}
+

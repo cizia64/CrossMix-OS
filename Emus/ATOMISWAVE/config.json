@@ -1,15 +1,15 @@
 {
-"label":"ATOMISWAVE",
-"icon":"ic-Atomiswave.png",
-"iconsmall":"",
-"iconlist":"",
-"effectsh":"",
-"background":"bg.png",
-"themecolor":"FFFFFF",
-"launch":"launch.sh",
-"rompath":"../../Roms/ATOMISWAVE",
-"imgpath":"../../Imgs/ATOMISWAVE",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "ATOMISWAVE",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ATOMISWAVE.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "effectsh": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ATOMISWAVE.png",
+  "themecolor": "FFFFFF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/ATOMISWAVE",
+  "imgpath": "../../Imgs/ATOMISWAVE",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

@@ -1,14 +1,14 @@
 {
-"label":"POKEMINI",
-"icon":"ic-Pokemini.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/POKEMINI",
-"imgpath":"../../Imgs/POKEMINI",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "N. POKEMINI",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/POKEMINI.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/POKEMINI.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/POKEMINI",
+  "imgpath": "../../Imgs/POKEMINI",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

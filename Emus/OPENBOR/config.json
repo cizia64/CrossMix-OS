@@ -1,14 +1,14 @@
 {
-"label":"OpenBOR",
-"icon":"open.png",
-"background":"bg.png",
-"iconsmall":"ic-openbor.png",
-"iconlist":"ic-openbor.png",
-"launch":"launch.sh",
-"rompath":"../../Roms/OPENBOR",
-"imgpath":"../../Roms/OPENBOR/Imgs",
-"useswap":1,
-"shortname":0,
-"hidebios":0,
-"extlist":"pak|Pak|PAK"
+  "label": "OpenBOR",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/OPENBOR.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/OPENBOR.png",
+  "iconsmall": "ic-openbor.png",
+  "iconlist": "ic-openbor.png",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/OPENBOR",
+  "imgpath": "../../Imgs/OPENBOR",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "pak|Pak|PAK"
 }

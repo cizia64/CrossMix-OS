@@ -1,13 +1,13 @@
 {
-"label":"SEGA32X",
-"icon":"32X.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/SEGA32X",
-"imgpath":"../../Imgs/SEGA32X",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"gen|md|smd|32x"
+  "label": "SEGA 32X",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SEGA32X.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SEGA32X.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SEGA32X",
+  "imgpath": "../../Imgs/SEGA32X",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "gen|smd|md|32x|bin|iso|sms|68k|chd|zip|7z"
 }

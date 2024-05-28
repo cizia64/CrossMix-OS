@@ -1,14 +1,14 @@
 {
-"label":"ATARI LYNX",
-"icon":"ic-LYNX.png",
-"iconsmall":"ic-LYNX-small.png",
-"iconlist":"ic-LYNX-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/LYNX",
-"imgpath":"../../Imgs/LYNX",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "ATARI LYNX",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/LYNX.png",
+  "iconsmall": "ic-LYNX-small.png",
+  "iconlist": "ic-LYNX-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/LYNX.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/LYNX",
+  "imgpath": "../../Imgs/LYNX",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

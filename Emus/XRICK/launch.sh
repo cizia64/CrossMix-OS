@@ -1,5 +1,6 @@
 #!/bin/sh
 echo $0 $*
+source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/XRICK
 

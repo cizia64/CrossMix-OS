@@ -1,0 +1,3862 @@
+
+#### animationscript function main #####
+# data/chars/benimaru/hitflash/skflash.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==0)
+    {
+        if(frame==1)
+        {
+            randBranch(50, "ANI_FOLLOW1", "ANI_FOLLOW2");
+        }
+        return;
+    }
+    if(animhandle==1)
+    {
+        if(frame==0)
+        {
+            randBranch(50, "ANI_FOLLOW3", "");
+        }
+        return;
+    }
+    if(animhandle==2)
+    {
+        if(frame==0)
+        {
+            randBranch(50, "ANI_FOLLOW4", "");
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/misc/flash/qflash.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==8)
+    {
+        if(frame==1)
+        {
+            randBranch(50, "ANI_FOLLOW1", "ANI_FOLLOW2");
+        }
+        return;
+    }
+    if(animhandle==9)
+    {
+        if(frame==0)
+        {
+            randBranch(50, "ANI_FOLLOW3", "");
+        }
+        return;
+    }
+    if(animhandle==10)
+    {
+        if(frame==0)
+        {
+            randBranch(50, "ANI_FOLLOW4", "");
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Axel/Axel.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==20)
+    {
+        if(frame==0)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==37)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_ATTACK4", 0, "DA", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==38)
+    {
+        if(frame==5)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==44)
+    {
+        if(frame==0)
+        {
+            keyCheck();
+        }
+        if(frame==1)
+        {
+            counter();
+        }
+        if(frame==2)
+        {
+            counter();
+        }
+        if(frame==3)
+        {
+            counter();
+        }
+        if(frame==4)
+        {
+            counter();
+        }
+        if(frame==5)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==45)
+    {
+        if(frame==0)
+        {
+            damageMp(7);
+        }
+        return;
+    }
+    if(animhandle==47)
+    {
+        if(frame==0)
+        {
+            damageMp(10);
+        }
+        return;
+    }
+    if(animhandle==49)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==1)
+        {
+            dasher(0.6, 0, 0);
+        }
+        if(frame==11)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==50)
+    {
+        if(frame==0)
+        {
+            dasher(0.5, 0, 0);
+        }
+        if(frame==1)
+        {
+            dasher(1, 0, 0);
+        }
+        if(frame==5)
+        {
+            looper(1, 1);
+        }
+        if(frame==6)
+        {
+            clearL();
+        }
+        if(frame==10)
+        {
+            stop();
+        }
+        if(frame==11)
+        {
+            leaper(1.5, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==51)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 20, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, 5, 50, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -15, 30, -1, 1);
+        }
+        if(frame==2)
+        {
+            throw(29, -2.6, 1.6, 0, 0);
+        }
+        if(frame==2)
+        {
+            depost(0);
+        }
+        if(frame==2)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==52)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, 0, 70, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(2, 35, 50, -1, 0);
+        }
+        if(frame==2)
+        {
+            hurt(32);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", 30, 0, -1);
+        }
+        if(frame==2)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==2)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(-1, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==54)
+    {
+        if(frame==0)
+        {
+            costSelf(25);
+        }
+        return;
+    }
+    if(animhandle==55)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL2");
+        }
+        if(frame==1)
+        {
+            costSelf(35);
+        }
+        if(frame==23)
+        {
+            leaper(0, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==56)
+    {
+        if(frame==0)
+        {
+            costSelf(30);
+        }
+        if(frame==6)
+        {
+            leaper(0.3, 1.5, 0);
+        }
+        if(frame==19)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==28)
+        {
+            leaper(1, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==58)
+    {
+        if(frame==5)
+        {
+            leaper(0.6, 3.5, 0);
+        }
+        return;
+    }
+    if(animhandle==59)
+    {
+        if(frame==0)
+        {
+            leaper(0.6, 0, 0);
+        }
+        if(frame==11)
+        {
+            stop();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Axel/Axe3.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==67)
+    {
+        if(frame==0)
+        {
+            dasher(0.7, 0, 0);
+        }
+        if(frame==5)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==70)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 20, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, 5, 50, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -15, 30, -1, 1);
+        }
+        if(frame==2)
+        {
+            throw(29, -2.6, 1.6, 0, 0);
+        }
+        if(frame==2)
+        {
+            depost(0);
+        }
+        if(frame==2)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==71)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, 0, 70, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(2, 35, 50, -1, 0);
+        }
+        if(frame==2)
+        {
+            hurt(32);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", 30, 0, -1);
+        }
+        if(frame==2)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==2)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(-1, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==72)
+    {
+        if(frame==0)
+        {
+            costSelf(25);
+        }
+        return;
+    }
+    if(animhandle==73)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL2");
+        }
+        if(frame==1)
+        {
+            costSelf(25);
+        }
+        if(frame==23)
+        {
+            leaper(0, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==74)
+    {
+        if(frame==0)
+        {
+            costSelf(30);
+        }
+        if(frame==6)
+        {
+            leaper(0.3, 1.5, 0);
+        }
+        if(frame==19)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==28)
+        {
+            leaper(1, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==75)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Axel/Axe4.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==76)
+    {
+        if(frame==0)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==0)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        if(frame==2)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==2)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        if(frame==4)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==4)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        return;
+    }
+    if(animhandle==77)
+    {
+        if(frame==0)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==0)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        if(frame==2)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==2)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        if(frame==4)
+        {
+            shoot("mshbl", 48, 65, 1);
+        }
+        if(frame==4)
+        {
+            tosser("shel", 28, 70, 1, 0.5, 1, 0);
+        }
+        return;
+    }
+    if(animhandle==79)
+    {
+        if(frame==0)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==81)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==1)
+        {
+            dasher(0.6, 0, 0);
+        }
+        if(frame==11)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==82)
+    {
+        if(frame==0)
+        {
+            dasher(0.5, 0, 0);
+        }
+        if(frame==1)
+        {
+            dasher(1, 0, 0);
+        }
+        if(frame==5)
+        {
+            looper(1, 1);
+        }
+        if(frame==6)
+        {
+            clearL();
+        }
+        if(frame==10)
+        {
+            stop();
+        }
+        if(frame==11)
+        {
+            leaper(1.5, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==83)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 20, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, 5, 50, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -15, 30, -1, 1);
+        }
+        if(frame==2)
+        {
+            throw(29, -2.6, 1.6, 0, 0);
+        }
+        if(frame==2)
+        {
+            depost(0);
+        }
+        if(frame==2)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==84)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, 0, 70, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(2, 35, 50, -1, 0);
+        }
+        if(frame==2)
+        {
+            hurt(32);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", 30, 0, -1);
+        }
+        if(frame==2)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==2)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(-1, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==85)
+    {
+        if(frame==0)
+        {
+            costSelf(25);
+        }
+        return;
+    }
+    if(animhandle==86)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL2");
+        }
+        if(frame==1)
+        {
+            costSelf(25);
+        }
+        if(frame==23)
+        {
+            leaper(0, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==87)
+    {
+        if(frame==0)
+        {
+            costSelf(30);
+        }
+        if(frame==6)
+        {
+            leaper(0.3, 1.5, 0);
+        }
+        if(frame==19)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==28)
+        {
+            leaper(1, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==88)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Axel/Axe5.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==94)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 20, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, 5, 50, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -15, 30, -1, 1);
+        }
+        if(frame==2)
+        {
+            throw(29, -2.6, 1.6, 0, 0);
+        }
+        if(frame==2)
+        {
+            depost(0);
+        }
+        if(frame==2)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==95)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, 0, 70, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(2, 35, 50, -1, 0);
+        }
+        if(frame==2)
+        {
+            hurt(32);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", 30, 0, -1);
+        }
+        if(frame==2)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==2)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(-1, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==96)
+    {
+        if(frame==0)
+        {
+            costSelf(25);
+        }
+        return;
+    }
+    if(animhandle==97)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL2");
+        }
+        if(frame==1)
+        {
+            costSelf(25);
+        }
+        if(frame==23)
+        {
+            leaper(0, 2.5, 0);
+        }
+        return;
+    }
+    if(animhandle==98)
+    {
+        if(frame==0)
+        {
+            costSelf(30);
+        }
+        if(frame==6)
+        {
+            leaper(0.3, 1.5, 0);
+        }
+        if(frame==19)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==28)
+        {
+            leaper(1, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==99)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Blaze/Blaze.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==102)
+    {
+        if(frame==0)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==117)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_ATTACK4", 0, "DA", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==118)
+    {
+        if(frame==1)
+        {
+            leaper(4, 0, 0);
+        }
+        if(frame==5)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==122)
+    {
+        if(frame==0)
+        {
+            flip();
+        }
+        if(frame==6)
+        {
+            flip();
+        }
+        return;
+    }
+    if(animhandle==125)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==3)
+        {
+            leaper(1.4, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==126)
+    {
+        if(frame==1)
+        {
+            leaper(1.5, 1.2, 0);
+        }
+        if(frame==3)
+        {
+            stop();
+        }
+        if(frame==3)
+        {
+            dasher(0.5, 0, 0);
+        }
+        if(frame==8)
+        {
+            dasher(1.7, 0, 0);
+        }
+        if(frame==10)
+        {
+            looper(8, 5);
+        }
+        if(frame==11)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==127)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 15, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(0, 10, 15, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, -15, 20, -1, 1);
+        }
+        if(frame==2)
+        {
+            antiWall(-30, 30, -1);
+        }
+        if(frame==2)
+        {
+            position(1, -30, 29, -1, 1);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            throw(35, -2, 2, 0, -1);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==128)
+    {
+        if(frame==0)
+        {
+            keyCheck();
+        }
+        if(frame==1)
+        {
+            counter();
+        }
+        if(frame==2)
+        {
+            counter();
+        }
+        if(frame==3)
+        {
+            counter();
+        }
+        if(frame==4)
+        {
+            counter();
+        }
+        if(frame==5)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==129)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 15, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(0, 10, 15, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, -15, 20, -1, 1);
+        }
+        if(frame==2)
+        {
+            antiWall(-30, 30, -1);
+        }
+        if(frame==2)
+        {
+            position(1, -30, 29, -1, 1);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            throw(50, -2, 2, 0, -1);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==130)
+    {
+        if(frame==0)
+        {
+            damageMp(7);
+        }
+        return;
+    }
+    if(animhandle==131)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==132)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        return;
+    }
+    if(animhandle==133)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_FREESPECIAL2", 0, "J", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==134)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL4");
+        }
+        if(frame==1)
+        {
+            lock();
+        }
+        if(frame==1)
+        {
+            slamStart();
+        }
+        if(frame==1)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            slamStart();
+        }
+        if(frame==5)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==9)
+        {
+            slamStart();
+        }
+        if(frame==9)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==12)
+        {
+            hurt(37);
+        }
+        if(frame==12)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==13)
+        {
+            antiWall(50, -45, -1);
+        }
+        if(frame==13)
+        {
+            position(3, 50, 0, -1, 0);
+        }
+        if(frame==13)
+        {
+            depost(0);
+        }
+        if(frame==13)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==135)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            slamStart();
+        }
+        if(frame==8)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==9)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt2(37, 1);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==12)
+        {
+            slamStart();
+        }
+        if(frame==12)
+        {
+            position(0, -20, 0, -1, -1);
+        }
+        if(frame==12)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==13)
+        {
+            position(1, -10, 47, -1, -1);
+        }
+        if(frame==14)
+        {
+            position(2, 30, 20, -1, -1);
+        }
+        if(frame==15)
+        {
+            hurt(37);
+        }
+        if(frame==15)
+        {
+            position(2, 30, 0, -1, -1);
+        }
+        if(frame==15)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==16)
+        {
+            position(3, 50, 0, -1, -1);
+        }
+        if(frame==16)
+        {
+            depost(0);
+        }
+        if(frame==16)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==136)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==7)
+        {
+            leaper(0.2, 3.5, 0);
+        }
+        if(frame==8)
+        {
+            position(1, 10, 40, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, 20, 60, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt(45);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 40, 0, 0);
+        }
+        if(frame==12)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==12)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            depost(0);
+        }
+        if(frame==12)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==137)
+    {
+        if(frame==6)
+        {
+            leaper(3, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==138)
+    {
+        if(frame==0)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==2)
+        {
+            leaper(-2, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==139)
+    {
+        if(frame==0)
+        {
+            damageMp(10);
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Blaze/bla2.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==147)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==2)
+        {
+            leaper(1.4, 2.6, 0);
+        }
+        return;
+    }
+    if(animhandle==148)
+    {
+        if(frame==2)
+        {
+            leaper(1.6, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==149)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 15, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(0, 10, 15, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, -15, 20, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -30, 29, -1, 1);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            throw(35, -2, 2, 0, -1);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==150)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==151)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        return;
+    }
+    if(animhandle==152)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_FREESPECIAL2", 0, "J", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==153)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL4");
+        }
+        if(frame==1)
+        {
+            lock();
+        }
+        if(frame==1)
+        {
+            slamStart();
+        }
+        if(frame==1)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            slamStart();
+        }
+        if(frame==5)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==9)
+        {
+            slamStart();
+        }
+        if(frame==9)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==12)
+        {
+            hurt(37);
+        }
+        if(frame==12)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==13)
+        {
+            position(3, 50, 0, -1, 0);
+        }
+        if(frame==13)
+        {
+            depost(0);
+        }
+        if(frame==13)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==155)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            slamStart();
+        }
+        if(frame==8)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==9)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt2(37, 1);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==12)
+        {
+            slamStart();
+        }
+        if(frame==12)
+        {
+            position(0, -20, 0, -1, -1);
+        }
+        if(frame==12)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==13)
+        {
+            position(1, -10, 47, -1, -1);
+        }
+        if(frame==14)
+        {
+            position(2, 30, 20, -1, -1);
+        }
+        if(frame==15)
+        {
+            hurt(37);
+        }
+        if(frame==15)
+        {
+            position(2, 30, 0, -1, -1);
+        }
+        if(frame==15)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==16)
+        {
+            position(3, 50, 0, -1, -1);
+        }
+        if(frame==16)
+        {
+            depost(0);
+        }
+        if(frame==16)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==156)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==7)
+        {
+            leaper(0.2, 3.5, 0);
+        }
+        if(frame==8)
+        {
+            position(1, 10, 40, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, 20, 60, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt(45);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 40, 0, 0);
+        }
+        if(frame==12)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==13)
+        {
+            depost(0);
+        }
+        if(frame==14)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==157)
+    {
+        if(frame==6)
+        {
+            leaper(3, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==158)
+    {
+        if(frame==0)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==2)
+        {
+            leaper(-2, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==159)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Blaze/bla4.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==168)
+    {
+        if(frame==0)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==169)
+    {
+        if(frame==0)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==0)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==2)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==2)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==4)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==4)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==6)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==6)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        return;
+    }
+    if(animhandle==170)
+    {
+        if(frame==0)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==0)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==2)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==2)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==4)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==4)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        if(frame==6)
+        {
+            shoot("mshbl", 48, 48, 1);
+        }
+        if(frame==6)
+        {
+            tosser("shel", 28, 52, 1, 0.5, 1, 0);
+        }
+        return;
+    }
+    if(animhandle==171)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==3)
+        {
+            leaper(1.4, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==172)
+    {
+        if(frame==1)
+        {
+            leaper(1.5, 1.2, 0);
+        }
+        if(frame==3)
+        {
+            stop();
+        }
+        if(frame==3)
+        {
+            dasher(0.5, 0, 0);
+        }
+        if(frame==8)
+        {
+            dasher(1.7, 0, 0);
+        }
+        if(frame==10)
+        {
+            looper(8, 5);
+        }
+        if(frame==11)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==173)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 15, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(0, 10, 15, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, -15, 20, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -30, 29, -1, 1);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            throw(35, -2, 2, 0, -1);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==174)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==175)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        return;
+    }
+    if(animhandle==176)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_FREESPECIAL2", 0, "J", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==177)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL4");
+        }
+        if(frame==1)
+        {
+            lock();
+        }
+        if(frame==1)
+        {
+            slamStart();
+        }
+        if(frame==1)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            slamStart();
+        }
+        if(frame==5)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==9)
+        {
+            slamStart();
+        }
+        if(frame==9)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==12)
+        {
+            hurt(37);
+        }
+        if(frame==12)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==13)
+        {
+            position(3, 50, 0, -1, 0);
+        }
+        if(frame==13)
+        {
+            depost(0);
+        }
+        if(frame==13)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==179)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            slamStart();
+        }
+        if(frame==8)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==9)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt2(37, 1);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==12)
+        {
+            slamStart();
+        }
+        if(frame==12)
+        {
+            position(0, -20, 0, -1, -1);
+        }
+        if(frame==12)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==13)
+        {
+            position(1, -10, 47, -1, -1);
+        }
+        if(frame==14)
+        {
+            position(2, 30, 20, -1, -1);
+        }
+        if(frame==15)
+        {
+            hurt(37);
+        }
+        if(frame==15)
+        {
+            position(2, 30, 0, -1, -1);
+        }
+        if(frame==15)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==16)
+        {
+            position(3, 50, 0, -1, -1);
+        }
+        if(frame==16)
+        {
+            depost(0);
+        }
+        if(frame==16)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==180)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==7)
+        {
+            leaper(0.2, 3.5, 0);
+        }
+        if(frame==8)
+        {
+            position(1, 10, 40, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, 20, 60, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt(45);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 40, 0, 0);
+        }
+        if(frame==12)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            depost(0);
+        }
+        if(frame==12)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==181)
+    {
+        if(frame==6)
+        {
+            leaper(3, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==182)
+    {
+        if(frame==0)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==2)
+        {
+            leaper(-2, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==183)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Blaze/bla5.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==184)
+    {
+        if(frame==0)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==190)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL5");
+        }
+        if(frame==1)
+        {
+            dasher(2, 0, 0);
+        }
+        if(frame==3)
+        {
+            looper(1, 10);
+        }
+        if(frame==3)
+        {
+            stop();
+        }
+        if(frame==3)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==191)
+    {
+        if(frame==1)
+        {
+            dasher(2, 0, 0);
+        }
+        if(frame==3)
+        {
+            looper(1, 15);
+        }
+        if(frame==3)
+        {
+            stop();
+        }
+        if(frame==3)
+        {
+            clearL();
+        }
+        return;
+    }
+    if(animhandle==192)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 15, 0, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(0, 10, 15, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, -15, 20, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(1, -30, 29, -1, 1);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            throw(35, -2, 2, 0, -1);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==193)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==194)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        return;
+    }
+    if(animhandle==195)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_FREESPECIAL2", 0, "J", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==196)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL4");
+        }
+        if(frame==1)
+        {
+            lock();
+        }
+        if(frame==1)
+        {
+            slamStart();
+        }
+        if(frame==1)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            slamStart();
+        }
+        if(frame==5)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==9)
+        {
+            slamStart();
+        }
+        if(frame==9)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==12)
+        {
+            hurt(37);
+        }
+        if(frame==12)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==13)
+        {
+            position(3, 50, 0, -1, 0);
+        }
+        if(frame==13)
+        {
+            depost(0);
+        }
+        if(frame==13)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==198)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            slamStart();
+        }
+        if(frame==8)
+        {
+            position(0, -20, 0, -1, 0);
+        }
+        if(frame==8)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==9)
+        {
+            position(1, -10, 47, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(2, 30, 20, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt2(37, 1);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==12)
+        {
+            slamStart();
+        }
+        if(frame==12)
+        {
+            position(0, -20, 0, -1, -1);
+        }
+        if(frame==12)
+        {
+            spawn01("fblock", 20, 50, 1);
+        }
+        if(frame==13)
+        {
+            position(1, -10, 47, -1, -1);
+        }
+        if(frame==14)
+        {
+            position(2, 30, 20, -1, -1);
+        }
+        if(frame==15)
+        {
+            hurt(37);
+        }
+        if(frame==15)
+        {
+            position(2, 30, 0, -1, -1);
+        }
+        if(frame==15)
+        {
+            spawn01("qflash", 45, 0, -1);
+        }
+        if(frame==16)
+        {
+            position(3, 50, 0, -1, -1);
+        }
+        if(frame==16)
+        {
+            depost(0);
+        }
+        if(frame==16)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==199)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 35, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==7)
+        {
+            leaper(0.2, 3.5, 0);
+        }
+        if(frame==8)
+        {
+            position(1, 10, 40, -1, 0);
+        }
+        if(frame==10)
+        {
+            position(1, 20, 60, -1, 0);
+        }
+        if(frame==11)
+        {
+            position(2, 30, 0, -1, 0);
+        }
+        if(frame==11)
+        {
+            hurt(45);
+        }
+        if(frame==11)
+        {
+            spawn01("qflash", 40, 0, 0);
+        }
+        if(frame==12)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==12)
+        {
+            depost(0);
+        }
+        if(frame==12)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==200)
+    {
+        if(frame==6)
+        {
+            leaper(3, 2, 0);
+        }
+        return;
+    }
+    if(animhandle==201)
+    {
+        if(frame==0)
+        {
+            leaper(0, 2, 0);
+        }
+        if(frame==2)
+        {
+            leaper(-2, 3, 0);
+        }
+        return;
+    }
+    if(animhandle==202)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Ralf/Ralf.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==211)
+    {
+        if(frame==6)
+        {
+            incAtt();
+        }
+        return;
+    }
+    if(animhandle==216)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_ATTACK4", 0, "DA", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==217)
+    {
+        if(frame==5)
+        {
+            dasher(2.8, 0, 0);
+        }
+        if(frame==11)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==218)
+    {
+        if(frame==0)
+        {
+            costSelf(50);
+        }
+        return;
+    }
+    if(animhandle==219)
+    {
+        if(frame==0)
+        {
+            costSelf(70);
+        }
+        return;
+    }
+    if(animhandle==221)
+    {
+        if(frame==1)
+        {
+            dasher(1, 1.8);
+        }
+        if(frame==2)
+        {
+            dasher(1.5, 2.6);
+        }
+        if(frame==3)
+        {
+            dasher(1, 2.6);
+        }
+        if(frame==4)
+        {
+            dasher(0.7, 2.1);
+        }
+        if(frame==5)
+        {
+            dasher(0.7, 1.2);
+        }
+        if(frame==6)
+        {
+            dasher(0.7, 0.3);
+        }
+        if(frame==7)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==227)
+    {
+        if(frame==0)
+        {
+            keyCheck();
+        }
+        if(frame==1)
+        {
+            counter();
+        }
+        if(frame==2)
+        {
+            counter();
+        }
+        if(frame==3)
+        {
+            counter();
+        }
+        if(frame==4)
+        {
+            counter();
+        }
+        if(frame==5)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==232)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_FREESPECIAL5", 0, "J", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==233)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, -20, 90, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(2, 25, 60, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(2, 35, 40, -1, 0);
+        }
+        if(frame==3)
+        {
+            hurt(20);
+        }
+        if(frame==3)
+        {
+            spawn01("qflash", 30, 0, -1);
+        }
+        if(frame==3)
+        {
+            antiWall(30, -30, -1);
+        }
+        if(frame==3)
+        {
+            position(3, 30, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            depost(0);
+        }
+        if(frame==4)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==238)
+    {
+        if(frame==0)
+        {
+            damageMp(9);
+        }
+        return;
+    }
+    if(animhandle==241)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL8");
+        }
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 26, 0, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(0, 15, 0, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(0, 7, 10, -1, 1);
+        }
+        if(frame==3)
+        {
+            position(1, -11, 95, -1, 1);
+        }
+        if(frame==4)
+        {
+            position(2, -55, 35, -1, 1);
+        }
+        if(frame==5)
+        {
+            antiWall(-78, 78, 0);
+        }
+        if(frame==5)
+        {
+            hurt(20);
+        }
+        if(frame==5)
+        {
+            position(2, -78, 0, -1, 1);
+        }
+        if(frame==5)
+        {
+            spawn01("qflash", -78, 0, 1);
+        }
+        if(frame==6)
+        {
+            position(3, -78, 0, -1, 1);
+        }
+        if(frame==6)
+        {
+            depost(0);
+        }
+        if(frame==6)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==242)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 25, 0, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, 5, 15, -1, 1);
+        }
+        if(frame==3)
+        {
+            position(1, -19, 105, -1, 1);
+        }
+        if(frame==4)
+        {
+            antiWall(-55, 55, 0);
+        }
+        if(frame==5)
+        {
+            throw(45, -3.2, 2, 0, -1);
+        }
+        if(frame==5)
+        {
+            depost(0);
+        }
+        if(frame==5)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==243)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, 0, 95, -1, 1);
+        }
+        if(frame==3)
+        {
+            position(2, 0, 85, -1, 1);
+        }
+        if(frame==4)
+        {
+            position(2, 0, 75, -1, 1);
+        }
+        if(frame==6)
+        {
+            hurt2(53, 1);
+        }
+        if(frame==6)
+        {
+            antiWall(50, -50, 0);
+        }
+        if(frame==6)
+        {
+            position(2, 0, 0, -1, 1);
+        }
+        if(frame==6)
+        {
+            spawn01("qflash", -5, 0, 1);
+        }
+        if(frame==10)
+        {
+            finish(1, 2, 2, 0, -1);
+        }
+        if(frame==10)
+        {
+            depost(0);
+        }
+        if(frame==10)
+        {
+            clearSlam();
+        }
+        if(frame==11)
+        {
+            leaper(-1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==244)
+    {
+        if(frame==0)
+        {
+            fullMpAni("ANI_FREESPECIAL4");
+        }
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 19, 0, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(0, 18, 0, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(0, 17, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            position(1, 10, 30, -1, 1);
+        }
+        if(frame==4)
+        {
+            position(1, 8, 37, -1, 1);
+        }
+        if(frame==5)
+        {
+            position(1, 5, 50, -1, 1);
+        }
+        if(frame==6)
+        {
+            position(2, 0, 60, -1, 1);
+        }
+        if(frame==7)
+        {
+            position(2, -3, 62, -1, 1);
+        }
+        if(frame==8)
+        {
+            position(2, -5, 65, -1, 1);
+        }
+        if(frame==9)
+        {
+            position(2, -6, 65, -1, 1);
+        }
+        if(frame==10)
+        {
+            position(2, -7, 63, -1, 1);
+        }
+        if(frame==11)
+        {
+            leaper(-0.9, 2.4, 0);
+        }
+        if(frame==14)
+        {
+            position(2, -7, 47, -1, 1);
+        }
+        if(frame==15)
+        {
+            position(2, -7, 40, -1, 1);
+        }
+        if(frame==16)
+        {
+            antiWall(50, -50, 0);
+        }
+        if(frame==16)
+        {
+            hurt(39);
+        }
+        if(frame==16)
+        {
+            position(1, -7, 0, -1, 1);
+        }
+        if(frame==16)
+        {
+            spawn01("qflash", -7, 0, 1);
+        }
+        if(frame==17)
+        {
+            position(3, -38, 30, -1, 1);
+        }
+        if(frame==17)
+        {
+            depost(0);
+        }
+        if(frame==17)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==245)
+    {
+        if(frame==2)
+        {
+            spawn01("Cops", -300, 0, 0);
+        }
+        if(frame==3)
+        {
+            spawn01("Cops", -300, 0, 0);
+        }
+        if(frame==4)
+        {
+            spawn01("Cops", -300, 0, 0);
+        }
+        return;
+    }
+    if(animhandle==246)
+    {
+        if(frame==5)
+        {
+            dasher(1.6, 0, 0);
+        }
+        if(frame==18)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==247)
+    {
+        if(frame==0)
+        {
+            dasher(1.8, 0, 0);
+        }
+        if(frame==4)
+        {
+            stop();
+        }
+        if(frame==4)
+        {
+            dasher(0.3, 0, 0);
+        }
+        if(frame==10)
+        {
+            stop();
+        }
+        if(frame==10)
+        {
+            dasher(0.3, 0, 0);
+        }
+        if(frame==20)
+        {
+            stop();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Benimaru/Benimaru.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==270)
+    {
+        if(frame==0)
+        {
+            keyInt("ANI_ATTACK4", 0, "DA", 0, 0);
+        }
+        return;
+    }
+    if(animhandle==272)
+    {
+        if(frame==0)
+        {
+            costSelf(30);
+        }
+        if(frame==39)
+        {
+            leaper(-1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==273)
+    {
+        if(frame==0)
+        {
+            costSelf(80);
+        }
+        return;
+    }
+    if(animhandle==275)
+    {
+        if(frame==1)
+        {
+            dasher(1, 1.8);
+        }
+        if(frame==2)
+        {
+            dasher(1.5, 2.6);
+        }
+        if(frame==3)
+        {
+            dasher(1, 2.6);
+        }
+        if(frame==4)
+        {
+            dasher(0.7, 2.1);
+        }
+        if(frame==5)
+        {
+            dasher(0.7, 1.2);
+        }
+        if(frame==6)
+        {
+            dasher(0.7, 0.3);
+        }
+        if(frame==7)
+        {
+            stop();
+        }
+        return;
+    }
+    if(animhandle==282)
+    {
+        if(frame==0)
+        {
+            keyCheck();
+        }
+        if(frame==1)
+        {
+            counter();
+        }
+        if(frame==2)
+        {
+            counter();
+        }
+        if(frame==3)
+        {
+            counter();
+        }
+        if(frame==4)
+        {
+            counter();
+        }
+        if(frame==5)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==293)
+    {
+        if(frame==0)
+        {
+            damageMp(9);
+        }
+        return;
+    }
+    if(animhandle==296)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 32, 0, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(0, 20, 0, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(0, 37, 10, -1, 1);
+        }
+        if(frame==3)
+        {
+            position(1, 20, 85, -1, 1);
+        }
+        if(frame==4)
+        {
+            position(2, -25, 70, -1, 1);
+        }
+        if(frame==5)
+        {
+            antiWall(-78, 78, 0);
+        }
+        if(frame==5)
+        {
+            hurt(30);
+        }
+        if(frame==5)
+        {
+            position(2, -78, 0, -1, 1);
+        }
+        if(frame==5)
+        {
+            spawn01("qflash", -78, 0, 1);
+        }
+        if(frame==6)
+        {
+            position(3, -70, 0, -1, 1);
+        }
+        if(frame==6)
+        {
+            depost(0);
+        }
+        if(frame==6)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==298)
+    {
+        if(frame==0)
+        {
+            call();
+        }
+        return;
+    }
+    if(animhandle==302)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 25, 0, -1, 1);
+        }
+        if(frame==2)
+        {
+            position(0, 5, 15, -1, 1);
+        }
+        if(frame==3)
+        {
+            position(1, -19, 105, -1, 1);
+        }
+        if(frame==4)
+        {
+            antiWall(-55, 55, 0);
+        }
+        if(frame==5)
+        {
+            throw(45, -3.2, 2, 0, -1);
+        }
+        if(frame==5)
+        {
+            depost(0);
+        }
+        if(frame==5)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==303)
+    {
+        if(frame==9)
+        {
+            stop();
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Shiva/Shiva.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==313)
+    {
+        if(frame==0)
+        {
+            lockR(30, 12, 50, "ANI_FOLLOW3", "");
+        }
+        return;
+    }
+    if(animhandle==314)
+    {
+        if(frame==0)
+        {
+            airFree("ANI_FOLLOW2");
+        }
+        return;
+    }
+    if(animhandle==315)
+    {
+        if(frame==0)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==0)
+        {
+            position(3, -20, 0, -1, 1);
+        }
+        if(frame==0)
+        {
+            hurt(39);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==316)
+    {
+        if(frame==0)
+        {
+            leaper(2, 2, 0);
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        return;
+    }
+    if(animhandle==318)
+    {
+        if(frame==2)
+        {
+            incAtt();
+        }
+        return;
+    }
+    if(animhandle==319)
+    {
+        if(frame==3)
+        {
+            incAtt();
+        }
+        return;
+    }
+    if(animhandle==324)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            slamStart();
+        }
+        if(frame==3)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 20, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            position(0, 0, 30, -1, 1);
+        }
+        if(frame==6)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        if(frame==7)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==7)
+        {
+            antiWall(-40, 30, -1);
+        }
+        if(frame==7)
+        {
+            position(3, -40, 0, -1, 1);
+        }
+        if(frame==7)
+        {
+            hurt(31);
+        }
+        if(frame==8)
+        {
+            depost(0);
+        }
+        if(frame==8)
+        {
+            clearSlam();
+        }
+        if(frame==9)
+        {
+            leaper(1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==325)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 0, 30, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==2)
+        {
+            antiWall(-40, 40, -1);
+        }
+        if(frame==2)
+        {
+            position(3, -40, 0, -1, 1);
+        }
+        if(frame==2)
+        {
+            hurt(29);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==327)
+    {
+        if(frame==0)
+        {
+            damageMp(7);
+        }
+        return;
+    }
+    if(animhandle==328)
+    {
+        if(frame==0)
+        {
+            keyCheck();
+        }
+        if(frame==1)
+        {
+            counter();
+        }
+        if(frame==2)
+        {
+            counter();
+        }
+        if(frame==3)
+        {
+            counter();
+        }
+        if(frame==4)
+        {
+            counter();
+        }
+        if(frame==5)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==329)
+    {
+        if(frame==0)
+        {
+            damageMp(4);
+        }
+        return;
+    }
+    if(animhandle==330)
+    {
+        if(frame==0)
+        {
+            damageMp(7);
+        }
+        return;
+    }
+    if(animhandle==331)
+    {
+        if(frame==0)
+        {
+            damageMp(7);
+        }
+        return;
+    }
+    if(animhandle==336)
+    {
+        if(frame==0)
+        {
+            costSelf(20);
+        }
+        return;
+    }
+    if(animhandle==337)
+    {
+        if(frame==0)
+        {
+            costSelf(18);
+        }
+        return;
+    }
+    if(animhandle==338)
+    {
+        if(frame==4)
+        {
+            spawn02("white");
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/Shiva/SShiva.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==341)
+    {
+        if(frame==0)
+        {
+            lockR(30, 12, 50, "ANI_FOLLOW3", "");
+        }
+        return;
+    }
+    if(animhandle==342)
+    {
+        if(frame==0)
+        {
+            leaper(2, 2, 0);
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        return;
+    }
+    if(animhandle==343)
+    {
+        if(frame==0)
+        {
+            airFree("ANI_FOLLOW2");
+        }
+        return;
+    }
+    if(animhandle==344)
+    {
+        if(frame==0)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==0)
+        {
+            position(3, -20, 0, -1, 1);
+        }
+        if(frame==0)
+        {
+            hurt(45);
+        }
+        if(frame==1)
+        {
+            depost(0);
+        }
+        if(frame==1)
+        {
+            clearSlam();
+        }
+        return;
+    }
+    if(animhandle==346)
+    {
+        if(frame==2)
+        {
+            incAtt();
+        }
+        return;
+    }
+    if(animhandle==347)
+    {
+        if(frame==3)
+        {
+            incAtt();
+        }
+        return;
+    }
+    if(animhandle==351)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==1)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==2)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==3)
+        {
+            slamStart();
+        }
+        if(frame==3)
+        {
+            position(0, 30, 0, -1, 0);
+        }
+        if(frame==4)
+        {
+            slamStart();
+        }
+        if(frame==4)
+        {
+            position(0, 20, 0, -1, 0);
+        }
+        if(frame==5)
+        {
+            position(0, 0, 30, -1, 1);
+        }
+        if(frame==6)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        if(frame==7)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==7)
+        {
+            antiWall(-40, 30, -1);
+        }
+        if(frame==7)
+        {
+            position(3, -40, 0, -1, 1);
+        }
+        if(frame==7)
+        {
+            hurt(37);
+        }
+        if(frame==8)
+        {
+            depost(0);
+        }
+        if(frame==8)
+        {
+            clearSlam();
+        }
+        if(frame==9)
+        {
+            leaper(1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==352)
+    {
+        if(frame==0)
+        {
+            lock();
+        }
+        if(frame==0)
+        {
+            slamStart();
+        }
+        if(frame==0)
+        {
+            position(0, 0, 30, -1, 1);
+        }
+        if(frame==1)
+        {
+            position(1, -20, 45, -1, 1);
+        }
+        if(frame==2)
+        {
+            spawn01("qflash", -40, 0, 1);
+        }
+        if(frame==2)
+        {
+            antiWall(-40, 40, -1);
+        }
+        if(frame==2)
+        {
+            position(3, -40, 0, -1, 1);
+        }
+        if(frame==2)
+        {
+            hurt(32);
+        }
+        if(frame==3)
+        {
+            depost(0);
+        }
+        if(frame==3)
+        {
+            clearSlam();
+        }
+        if(frame==4)
+        {
+            leaper(1.5, 1.5, 0);
+        }
+        return;
+    }
+    if(animhandle==353)
+    {
+        if(frame==0)
+        {
+            costSelf(13);
+        }
+        return;
+    }
+    if(animhandle==354)
+    {
+        if(frame==0)
+        {
+            costSelf(15);
+        }
+        return;
+    }
+
+}
+
+#### animationscript function main #####
+# data/chars/misc/mshbl.txt
+########################################
+void main()
+{
+    int frame = getlocalvar("frame");
+    int animhandle = getlocalvar("animhandle");
+    if(animhandle==357)
+    {
+        if(frame==0)
+        {
+            randBranch(15, "ANI_ATTACK1","");
+        }
+        if(frame==0)
+        {
+            randBranch(50, "ANI_ATTACK2","ANI_ATTACK3");
+        }
+        return;
+    }
+
+}

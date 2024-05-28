@@ -1,14 +1,14 @@
 {
-"label":"MS",
-"icon":"ic-SMS.png",
-"iconsel":"",
-"background":"bg.png",
-"themecolor":"740009",
-"launch":"launch.sh",
-"rompath":"../../Roms/MS",
-"imgpath":"../../Imgs/MS",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"sms|rom|gg|sg|zip"
+  "label": "SEGA MS",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/MS.png",
+  "iconsel": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MS.png",
+  "themecolor": "740009",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/MS",
+  "imgpath": "../../Imgs/MS",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "sms|rom|gg|sg|zip|7z"
 }

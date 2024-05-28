@@ -1,13 +1,13 @@
 {
-"label":"ARDUBOY",
-"icon":"arduboy.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/ARDUBOY",
-"imgpath":"../../Imgs/ARDUBOY",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "ARDUBOY",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ARDUBOY.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ARDUBOY.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/ARDUBOY",
+  "imgpath": "../../Imgs/ARDUBOY",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

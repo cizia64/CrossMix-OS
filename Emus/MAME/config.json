@@ -1,24 +1,35 @@
 {
-"label":"MAME",
-"icon":"ic-mame-plus.png",
-"background":"bg.png",
-"themecolor":"00FF88",
-"launch":"mame2000.sh",
-"rompath":"../../Roms/MAME",
-"imgpath":"../../Imgs/MAME",
-"useswap":1,
-"shortname":0,
-"extlist":"",
-"hidebios":1,
- "launchlist": [
-        {
-            "name": "MAME2000",
-            "launch": "mame2000.sh"
-        },
-        {
-            "name": "MAME2003",
-            "launch": "mame2003.sh"
-        }
-    ]
+  "label": "MAME",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/MAME.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MAME.png",
+  "themecolor": "00FF88",
+  "launch": "mame.sh",
+  "rompath": "../../Roms/MAME",
+  "imgpath": "../../Imgs/MAME",
+  "useswap": 1,
+  "shortname": 0,
+  "extlist": "",
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "MAME - default(0.259)",
+      "launch": "mame.sh"
+    },
+    {
+      "name": "MAME (0.219)",
+      "launch": "mame(0.219).sh"
+    },
+    {
+      "name": "MAME2000",
+      "launch": "mame2000.sh"
+    },
+    {
+      "name": "MAME2015",
+      "launch": "mame2015.sh"
+    },
+    {
+      "name": "MAME2016",
+      "launch": "mame2016.sh"
+    }
+  ]
 }
-

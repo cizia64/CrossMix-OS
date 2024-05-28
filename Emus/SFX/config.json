@@ -1,14 +1,14 @@
 {
-"label":"SFX",
-"icon":"ic-SFX.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/SFX",
-"imgpath":"../../Imgs/SFX",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "SFX",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SFX.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SFX.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SFX",
+  "imgpath": "../../Imgs/SFX",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

@@ -1,14 +1,14 @@
 {
-"label":"SATURN",
-"icon":"ic-saturn.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/SATURN",
-"imgpath":"../../Imgs/SATURN",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "SEGA SATURN",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SATURN.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SATURN.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SATURN",
+  "imgpath": "../../Imgs/SATURN",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

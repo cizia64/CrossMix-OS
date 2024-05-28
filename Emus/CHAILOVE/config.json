@@ -1,14 +1,14 @@
 {
-"label":"CHAILOVE",
-"icon":"chailove.png",
-"iconsmall":"ic-atari2600-80-n.png",
-"iconlist":"ic-atari2600-32-n.png",
-"background":"bg.png",
-"themecolor":"AF7AC5",
-"launch":"launch.sh",
-"rompath":"../../Roms/CHAILOVE",
-"imgpath":"../../Imgs/CHAILOVE",
-"useswap":0,
-"shortname":0,
-"hidebios":0
+  "label": "CHAILOVE",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/CHAILOVE.png",
+  "iconsmall": "ic-atari2600-80-n.png",
+  "iconlist": "ic-atari2600-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/CHAILOVE.png",
+  "themecolor": "AF7AC5",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/CHAILOVE",
+  "imgpath": "../../Imgs/CHAILOVE",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0
 }

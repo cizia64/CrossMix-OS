@@ -1,15 +1,15 @@
 {
-"label":"SFCMSU",
-"icon":"ic-SFCMSU.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FF0000",
-"launch":"launch.sh",
-"rompath":"../../Roms/SFCMSU",
-"imgpath":"../../Imgs/SFCMSU",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"smc|fig|sfc|gd3|gd7|dx2|bsx|swc|zip"
+  "label": "N. SFCMSU",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SFCMSU.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SFCMSU.png",
+  "themecolor": "FF0000",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SFCMSU",
+  "imgpath": "../../Imgs/SFCMSU",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "smc|fig|sfc|gd3|gd7|dx2|bsx|swc|zip|7z"
 }

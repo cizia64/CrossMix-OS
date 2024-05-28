@@ -1,15 +1,15 @@
 {
-"label":"SATELLAVIEW",
-"icon":"ic-Satellaview.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FF0000",
-"launch":"launch.sh",
-"rompath":"../../Roms/SATELLAVIEW",
-"imgpath":"../../Imgs/SATELLAVIEW",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"smc|fig|sfc|gd3|gd7|dx2|bsx|swc|zip"
+  "label": "SATELLAVIEW",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SATELLAVIEW.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SATELLAVIEW.png",
+  "themecolor": "FF0000",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SATELLAVIEW",
+  "imgpath": "../../Imgs/SATELLAVIEW",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "smc|fig|sfc|gd3|gd7|dx2|bsx|swc|zip"
 }

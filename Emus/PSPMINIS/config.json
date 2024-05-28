@@ -1,14 +1,13 @@
 {
-    "label":"PSPMINIS",
-    "icon":"ic-ppsspp@2x.png",
-    "launch":"launch.sh",
-    "background":"bg.png",
-    "themecolor":"64A8BD",
-    "iconsel":"",
-    "rompath":"../../Roms/PSPMINIS",
-    "imgpath":"../../Imgs/PSPMINIS",
-    "useswap":0,
-    "shortname":0,
-    "hidebios":0
+  "label": "PSPMINIS",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/PSPMINIS.png",
+  "launch": "launch.sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/PSPMINIS.png",
+  "themecolor": "64A8BD",
+  "iconsel": "",
+  "rompath": "../../Roms/PSPMINIS",
+  "imgpath": "../../Imgs/PSPMINIS",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0
 }
-    

@@ -1,15 +1,15 @@
 {
-"label":"DC",
-"icon":"ic-dc.png",
-"iconsmall":"ic-dc-small.png",
-"iconlist":"ic-dc-list.png",
-"effectsh":"effect.sh",
-"background":"bg.png",
-"themecolor":"FFFFFF",
-"launch":"launch.sh",
-"rompath":"../../Roms/DC",
-"imgpath":"../../Imgs/DC",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "SEGA DC",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/DC.png",
+  "iconsmall": "ic-dc-small.png",
+  "iconlist": "ic-dc-list.png",
+  "effectsh": "effect.sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/DC.png",
+  "themecolor": "FFFFFF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/DC",
+  "imgpath": "../../Imgs/DC",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

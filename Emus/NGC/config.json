@@ -1,13 +1,13 @@
 {
-"label":"NGC",
-"icon":"ngc.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/NGC",
-"imgpath":"../../Imgs/NGC",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"ngc|ngp|zip"
+  "label": "NGC",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/NGC.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/NGC.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/NGC",
+  "imgpath": "../../Imgs/NGC",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "ngp|ngc|zip|7z"
 }

@@ -1,14 +1,14 @@
 {
-"label":"N64DD",
-"icon":"ic-n64.png",
-"iconsmall":"ic-n64-80-n.png",
-"iconlist":"ic-n64-32-n.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/N64DD",
-"imgpath":"../../Imgs/N64DD",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "N. N64DD",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/N64DD.png",
+  "iconsmall": "ic-n64-80-n.png",
+  "iconlist": "ic-n64-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/N64DD.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/N64DD",
+  "imgpath": "../../Imgs/N64DD",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

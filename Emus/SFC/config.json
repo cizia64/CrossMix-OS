@@ -1,27 +1,31 @@
 {
-"label":"SFC",
-"icon":"ic-SFC.png",
-"background":"bg.png",
-"themecolor":"00FF88",
-"launch":"snes9x.sh",
-"rompath":"../../Roms/SFC",
-"imgpath":"../../Imgs/SFC",
-"useswap":1,
-"shortname":0,
-"extlist":"",
-"hidebios":1,
- "launchlist": [
-        {
-            "name": "SNES9x",
-            "launch": "snes9x.sh"
-        },
-        {
-            "name": "SNES9X2002",
-            "launch": "snes9x2002.sh"
-        },
-        {   "name": "SNES9X2005",
-            "launch": "snes9x2005.sh"
-        }
-    ]
+  "label": "N. SNES",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SFC.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SFC.png",
+  "themecolor": "00FF88",
+  "launch": "snes9x.sh",
+  "rompath": "../../Roms/SFC",
+  "imgpath": "../../Imgs/SFC",
+  "useswap": 1,
+  "shortname": 0,
+  "extlist": "sfc|smc|fig|bs|st|zip|7z",
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "SNES9x",
+      "launch": "snes9x.sh"
+    },
+    {
+      "name": "SNES9X2002",
+      "launch": "snes9x2002.sh"
+    },
+    {
+      "name": "SNES9X2005",
+      "launch": "snes9x2005.sh"
+    },
+    {
+      "name": "Beetle Supafaust",
+      "launch": "supafaust.sh"
+    }
+  ]
 }
-

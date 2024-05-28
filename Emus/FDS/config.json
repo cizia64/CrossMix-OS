@@ -1,13 +1,13 @@
 {
-"label":"FDS",
-"icon":"fds.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/FDS",
-"imgpath":"../../Imgs/FDS",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"nes|fds|unf|unif"
+  "label": "N. FDS",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/FDS.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/FDS.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/FDS",
+  "imgpath": "../../Imgs/FDS",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "nes|fds|unf|unif|7z|zip"
 }

@@ -1,0 +1,79 @@
+v0.2
+- audio
+
+v0.3
+- neon_memcpy asm added for video performance uplift
+- mouse support added -> `Select + A` to enter mouse mode, `Start` to exit (config in cfg/onioncfg.json for scaling/acceleration/increment values etc)
+- quit hotkey added -> `Select + Start` - Can't use Select + Menu as pico seems to release the key occasionally and it locks up.
+- overclocking added -> configure currently in the cfg/onioncfg.json file - set to 1400 by default
+- keybinds added but don't edit these as there's no way to rebind within pico8 currently (needs console support)
+- again, if you dropped into the console you'll have to quit out. the console ignores any input i send to it currently (apart from enter/return)
+- mount bind added to launch.sh to bind your Roms/PICO location to the carts directory
+
+v0.4
+- housekeeping of package (removed res dirs)
+- swapped A & B
+- X now brings up the in game menu and allows to exit when at menu (instead of menu btn)
+- L2 now acts as a toggle for mouse mode
+- exit gracefully  shortcut is now select + menu
+- all keys not used by single player games bound to D
+- select + L1 now restarts the current cart
+- added shortcut to raise/lower the cpuclock with Select + UP/DOWN and option in onioncfg.json with max 100 increment size, default 25
+- changed cpuclock ceiling to 1800 and floor to 600
+- lowered default clock to 1300
+
+v0.5
+- fixed mouse bounds so it can't go into the screen bezel edges (pico window area = 240x240)
+- app name for applist changed to `Pico-8`
+- ceiling of cpu clock set to `1700` after feedback
+- added basic overlay/bezel for proof of concept (delete it or rename/edit to whatever)
+- guard against missing onioncfg.json (set all defaults for mouse, keyboard, cpuclock)
+- guard against missing res (digits/bezels)
+- added cpuclock indicator and bezel refresh logic
+    - cpuclock will decay over time and stop being drawn
+    - bezel will be permanent (upcoming keybinds for this)
+- removed carts from the package
+
+v0.6
+- housekeeping - removed backup libs/unrequired libs
+- added bezel scrolling with SELECT + LEFT/RIGHT - saves on graceful exit, reads on good load.
+- updated json saving function to save it in PRETTY format instead of inline for readability
+- added some default bezels/bezels for examples
+
+v0.6.1
+- fix OC display
+
+v0.7
+- fix audio issue when wifi is disabled/enabled (new launch.sh) 
+- add mouse icon by Hoo, mouse icon now shows on screen when l2 is pressed 
+- add min/max CPU values as configurable config options in performance object in onioncfg.json 
+- added a new default bezel by drkhrse and a remix by xk. 
+- add location for bezels/digits to onioncfg.json, defaults to /res/digits and /res/bezels 
+- lowered the wait time in config.txt for frame processing for foreground/background 
+- disabled some debugging for drawing items 
+- add sighandler 
+
+v0.7.1
+- slight performance uplift
+
+v0.7.2
+- fix repeating input when swapping to mouse
+
+v0.8 
+- display mode shortcut added -> SELECT + R1 will toggle between scaled, fullscreen, native output (384x384 from pico-8) (which also has its own bezel selection)
+- frame time adjustments
+- border -> bezel - folder name replaced, all references replaced to make it a more relateable name
+- added "integer_scaled" bezel directory, added "standard" bezel directory
+- removed "def_" version of bezels logic
+- always draw mouse icon when it's enabled
+- only draw alpha when required (for bezels, mouse icon)
+
+v0.8.1
+- performance pass, FPS now more stable
+- added 2 new bezels from u/hippotgfc
+- bezels added by @Pogeba and @LiquidDream in #5 and #3
+- add a config file fixer function to launch.sh (to fix black screen at launch)
+- fix volume down key ghosting last input
+
+todo:
+- modify the mouse hotkey to something other than L2 so 2 player games can be played

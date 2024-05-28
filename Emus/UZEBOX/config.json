@@ -1,13 +1,13 @@
 {
-"label":"UZEBOX",
-"icon":"UZEBOX.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/UZEBOX",
-"imgpath":"../../Imgs/UZEBOX",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "UZEBOX",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/UZEBOX.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/UZEBOX.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/UZEBOX",
+  "imgpath": "../../Imgs/UZEBOX",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

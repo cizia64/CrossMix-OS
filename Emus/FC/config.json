@@ -1,27 +1,27 @@
 {
-"label":"FC",
-"icon":"ic-FC.png",
-"background":"bg.png",
-"themecolor":"00FF88",
-"launch":"fceumm.sh",
-"rompath":"../../Roms/FC",
-"imgpath":"../../Imgs/FC",
-"useswap":1,
-"shortname":0,
-"extlist":"",
-"hidebios":1,
- "launchlist": [
-        {
-            "name": "FCEUMM",
-            "launch": "fceumm.sh"
-        },
-        {
-            "name": "NESTOPIA",
-            "launch": "nestopia.sh"
-        },
-        {   "name": "QUICKNES",
-            "launch": "quicknes.sh"
-        }
-    ]
+  "label": "N. NES",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/FC.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/FC.png",
+  "themecolor": "00FF88",
+  "launch": "fceumm.sh",
+  "rompath": "../../Roms/FC",
+  "imgpath": "../../Imgs/FC",
+  "useswap": 1,
+  "shortname": 0,
+  "extlist": "fds|nes|unif|unf|zip|7z",
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "FCEUMM",
+      "launch": "fceumm.sh"
+    },
+    {
+      "name": "NESTOPIA",
+      "launch": "nestopia.sh"
+    },
+    {
+      "name": "QUICKNES",
+      "launch": "quicknes.sh"
+    }
+  ]
 }
-

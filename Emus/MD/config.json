@@ -1,15 +1,29 @@
 {
-"label":"MD",
-"icon":"ic-MD.png",
-"iconsmall":"ic-MD-80-n.png",
-"iconlist":"ic-MD-32-n.png",
-"background":"bg.png",
-"themecolor":"0088CF",
-"launch":"launch.sh",
-"rompath":"../../Roms/MD",
-"imgpath":"../../Imgs/MD",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"bin|gen|md|smd|32x|zip"
+  "label": "SEGA MD",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/MD.png",
+  "iconsmall": "ic-MD-80-n.png",
+  "iconlist": "ic-MD-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MD.png",
+  "themecolor": "0088CF",
+  "launch": "picodrive.sh",
+  "rompath": "../../Roms/MD",
+  "imgpath": "../../Imgs/MD",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "gen|smd|md|32x|bin|iso|sms|68k|chd|zip|7z",
+  "launchlist": [
+    {
+      "name": "PicoDrive",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "GenesisPlusGX",
+      "launch": "genplus.sh"
+    },
+    {
+      "name": "GenesisPlusGX Wide",
+      "launch": "genplus_wide.sh"
+    }
+  ]
 }

@@ -1,14 +1,14 @@
 {
-"label":"MSX",
-"icon":"ic-MSX.png",
-"iconsmall":"ic-MSX-small.png",
-"iconlist":"ic-MSX-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/MSX",
-"imgpath":"../../Imgs/MSX",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "MSX",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/MSX.png",
+  "iconsmall": "ic-MSX-small.png",
+  "iconlist": "ic-MSX-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MSX.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/MSX",
+  "imgpath": "../../Imgs/MSX",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

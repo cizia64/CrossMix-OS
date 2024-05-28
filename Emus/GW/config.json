@@ -1,14 +1,14 @@
 {
-"label":"GAME&WATCH",
-"icon":"ic-GW.png",
-"iconsmall":"ic-GW-small.png",
-"iconlist":"ic-GW-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/GW",
-"imgpath":"../../Imgs/GW",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "GAME&WATCH",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/GW.png",
+  "iconsmall": "ic-GW-small.png",
+  "iconlist": "ic-GW-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/GW.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/GW",
+  "imgpath": "../../Imgs/GW",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

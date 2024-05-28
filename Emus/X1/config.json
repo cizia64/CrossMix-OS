@@ -1,14 +1,14 @@
 {
-"label":"SHARP x1",
-"icon":"ic-X1.png",
-"iconsmall":"ic-X1-small.png",
-"iconlist":"ic-X1-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/X1",
-"imgpath":"../../Imgs/X1",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "SHARP x1",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/X1.png",
+  "iconsmall": "ic-X1-small.png",
+  "iconlist": "ic-X1-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/X1.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/X1",
+  "imgpath": "../../Imgs/X1",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

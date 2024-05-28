@@ -1,27 +1,31 @@
 {
-"label":"GB",
-"icon":"ic-GB.png",
-"background":"bg.png",
-"themecolor":"00FF88",
-"launch":"gambatte.sh",
-"rompath":"../../Roms/GB",
-"imgpath":"../../Imgs/GB",
-"useswap":1,
-"shortname":0,
-"extlist":"",
-"hidebios":1,
- "launchlist": [
-        {
-            "name": "GAMBATTE",
-            "launch": "gambatte.sh"
-        },
-        {
-            "name": "MGBA",
-            "launch": "mgba.sh"
-        },
-        {   "name": "GEARBOY",
-            "launch": "gearboy.sh"
-        }
-    ]
+  "label": "N. GB",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/GB.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/GB.png",
+  "themecolor": "00FF88",
+  "launch": "gambatte.sh",
+  "rompath": "../../Roms/GB",
+  "imgpath": "../../Imgs/GB",
+  "useswap": 1,
+  "shortname": 0,
+  "extlist": "bin|dmg|gb|gbc|zip|7z",
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "GAMBATTE",
+      "launch": "gambatte.sh"
+    },
+    {
+      "name": "MGBA",
+      "launch": "mgba.sh"
+    },
+    {
+      "name": "GEARBOY",
+      "launch": "gearboy.sh"
+    },
+    {
+      "name": "TGB DUAL",
+      "launch": "tgbdual.sh"
+    }
+  ]
 }
-

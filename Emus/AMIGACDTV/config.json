@@ -1,13 +1,13 @@
 {
-"label":"AMIGA CDTV",
-"icon":"cdtv.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/AMIGACDTV",
-"imgpath":"../../Imgs/AMIGACDTV",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "AMIGA CDTV",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/AMIGACDTV.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/AMIGACDTV.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/AMIGACDTV",
+  "imgpath": "../../Imgs/AMIGACDTV",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

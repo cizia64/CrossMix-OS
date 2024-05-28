@@ -1,14 +1,14 @@
 {
-"label":"DOSBOX",
-"icon":"ic-dos.png",
-"iconsmall":"ic-dos-small.png",
-"iconlist":"ic-dos-list.png",
-"background":"bg.png",
-"themecolor":"FFFF88",
-"launch":"launch.sh",
-"rompath":"../../Roms/DOS",
-"imgpath":"../../Imgs/DOS",
-"useswap":1,
-"shortname":0,
-"hidebios":1
+  "label": "DOS",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/DOS.png",
+  "iconsmall": "ic-dos-small.png",
+  "iconlist": "ic-dos-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/DOS.png",
+  "themecolor": "FFFF88",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/DOS",
+  "imgpath": "../../Imgs/DOS",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1
 }

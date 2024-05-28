@@ -1,15 +1,15 @@
 {
-"label":"MEGADUCK",
-"icon":"ic-MegaDuck.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"FF0000",
-"launch":"launch.sh",
-"rompath":"../../Roms/MEGADUCK",
-"imgpath":"../../Imgs/MEGADUCK",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"bin|zip"
+  "label": "MEGADUCK",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/MEGADUCK.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MEGADUCK.png",
+  "themecolor": "FF0000",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/MEGADUCK",
+  "imgpath": "../../Imgs/MEGADUCK",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "bin|zip|7z"
 }

@@ -1,15 +1,15 @@
 {
-"label":"PCE",
-"icon":"ic-PCE.png",
-"iconsmall":"ic-PCE-80-n.png",
-"iconlist":"ic-PCE-32-n.png",
-"background":"bg.png",
-"themecolor":"EA483F",
-"launch":"launch.sh",
-"rompath":"../../Roms/PCE",
-"imgpath":"../../Imgs/PCE",
-"useswap":0,
-"shortname":0,
-"hidebios":0,
-"extlist":"pce|cue|zip"
+  "label": "PCE",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/PCE.png",
+  "iconsmall": "ic-PCE-80-n.png",
+  "iconlist": "ic-PCE-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/PCE.png",
+  "themecolor": "EA483F",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/PCE",
+  "imgpath": "../../Imgs/PCE",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0,
+  "extlist": "pce|ccd|iso|img|chd|cue|zip|7z"
 }

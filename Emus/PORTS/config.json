@@ -1,15 +1,29 @@
 {
-"label":"PORTS",
-"icon":"icon.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"",
-"themecolor":"61A8DD",
-"launch":"launch.sh",
-"rompath":"../../Roms/PORTS",
-"imgpath":"../../Imgs/PORTS",
-"useswap":1,
-"shortname":0,
-"hidebios":1,
-"extlist":"sh"
+  "label": "PORTS",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/PORTS.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/PORTS.png",
+  "themecolor": "61A8DD",
+  "launch": "launch_balanced.sh",
+  "rompath": "../../Roms/PORTS",
+  "imgpath": "../../Imgs/PORTS",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1,
+    "extlist":"sh",
+    "launchlist": [
+        {
+            "name": "Battery Saver",
+            "launch": "launch_batterysaver.sh"
+        },
+        {
+            "name": "Balanced",
+            "launch": "launch_balanced.sh"
+        },
+        {
+            "name": "High Performance",
+            "launch": "launch_performance.sh"
+        }
+    ]
 }

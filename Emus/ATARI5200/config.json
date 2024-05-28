@@ -1,14 +1,14 @@
 {
-"label":"ATARI5200",
-"icon":"ic-atari 5200.png",
-"iconsmall":"",
-"iconlist":"",
-"background":"bg.png",
-"themecolor":"A569BD",
-"launch":"launch.sh",
-"rompath":"../../Roms/ATARI5200",
-"imgpath":"../../Imgs/ATARI5200",
-"useswap":0,
-"shortname":0,
-"hidebios":0
+  "label": "ATARI 5200",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ATARI5200.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ATARI5200.png",
+  "themecolor": "A569BD",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/ATARI5200",
+  "imgpath": "../../Imgs/ATARI5200",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 0
 }

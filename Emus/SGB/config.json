@@ -1,13 +1,13 @@
 {
-"label":"SUPER GB",
-"icon":"sgb.png",
-"background":"bg.png",
-"iconsel":"",
-"launch":"launch.sh",
-"rompath":"../../Roms/SGB",
-"imgpath":"../../Imgs/SGB",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":""
+  "label": "N. SUPER GB",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/SGB.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/SGB.png",
+  "iconsel": "",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/SGB",
+  "imgpath": "../../Imgs/SGB",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": ""
 }

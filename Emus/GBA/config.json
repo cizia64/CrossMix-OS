@@ -1,29 +1,33 @@
 {
-"label":"GBA",
-"icon":"ic-GBA.png",
-"iconsmall":"ic-GBA-80-n.png",
-"iconlist":"ic-GBA-32-n.png",
-"background":"bg.png",
-"themecolor":"FF00FF",
-"launch":"launch.sh",
-"rompath":"../../Roms/GBA",
-"imgpath":"../../Imgs/GBA",
-"useswap":0,
-"shortname":0,
-"hidebios":1,
-"extlist":"gba|agb|gbz|zip",
- "launchlist": [
-        {
-            "name": "MGBA",
-            "launch": "mgba.sh"
-        },
-        {
-            "name": "VBAM",
-            "launch": "vbam.sh"
-        },
-        {   "name": "VBANEXT",
-            "launch": "vbanext.sh"
-        }
-    ]
+  "label": "N. GBA",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/GBA.png",
+  "iconsmall": "ic-GBA-80-n.png",
+  "iconlist": "ic-GBA-32-n.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/GBA.png",
+  "themecolor": "FF00FF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/GBA",
+  "imgpath": "../../Imgs/GBA",
+  "useswap": 0,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": "bin|gba|agb|gbz|zip|7z",
+  "launchlist": [
+    {
+      "name": "MGBA",
+      "launch": "mgba.sh"
+    },
+    {
+      "name": "gpSP",
+      "launch": "gpsp.sh"
+    },
+    {
+      "name": "VBAM",
+      "launch": "vbam.sh"
+    },
+    {
+      "name": "VBANEXT",
+      "launch": "vbanext.sh"
+    }
+  ]
 }
-
