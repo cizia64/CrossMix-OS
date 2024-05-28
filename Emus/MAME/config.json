@@ -1,0 +1,24 @@
+{
+"label":"MAME",
+"icon":"ic-mame-plus.png",
+"background":"bg.png",
+"themecolor":"00FF88",
+"launch":"mame2000.sh",
+"rompath":"../../Roms/MAME",
+"imgpath":"../../Imgs/MAME",
+"useswap":1,
+"shortname":0,
+"extlist":"",
+"hidebios":1,
+ "launchlist": [
+        {
+            "name": "MAME2000",
+            "launch": "mame2000.sh"
+        },
+        {
+            "name": "MAME2003",
+            "launch": "mame2003.sh"
+        }
+    ]
+}
+

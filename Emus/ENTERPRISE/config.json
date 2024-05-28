@@ -1,0 +1,14 @@
+{
+"label":"ENTERPRISE",
+"icon":"enterprise.png",
+"iconsmall":"ic-C64-small.png",
+"iconlist":"ic-C64-list.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/ENTERPRISE",
+"imgpath":"../../Imgs/ENTERPRISE",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

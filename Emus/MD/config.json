@@ -1,0 +1,15 @@
+{
+"label":"MD",
+"icon":"ic-MD.png",
+"iconsmall":"ic-MD-80-n.png",
+"iconlist":"ic-MD-32-n.png",
+"background":"bg.png",
+"themecolor":"0088CF",
+"launch":"launch.sh",
+"rompath":"../../Roms/MD",
+"imgpath":"../../Imgs/MD",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":"bin|gen|md|smd|32x|zip"
+}

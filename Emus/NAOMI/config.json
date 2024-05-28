@@ -1,0 +1,15 @@
+{
+"label":"NAOMI",
+"icon":"ic-Naomi.png",
+"iconsmall":"",
+"iconlist":"",
+"effectsh":"effect.sh",
+"background":"bg.png",
+"themecolor":"FFFFFF",
+"launch":"launch.sh",
+"rompath":"../../Roms/NAOMI",
+"imgpath":"../../Imgs/NAOMI",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

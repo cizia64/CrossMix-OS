@@ -1,0 +1,14 @@
+{
+"label":"GAMEGEAR",
+"icon":"ic-GG.png",
+"iconsmall":"ic-GG-small.png",
+"iconlist":"ic-GG-list.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/GG",
+"imgpath":"../../Imgs/GG",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

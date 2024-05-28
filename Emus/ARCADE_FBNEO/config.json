@@ -1,0 +1,14 @@
+{
+"label":"ARCADE FBNEO",
+"icon":"ic-ARCADE-FBN.png",
+"iconsel":"",
+"background":"bg.png",
+"themecolor":"EC7063",
+"launch":"launch.sh",
+"rompath":"../../Roms/ARCADE_FBNEO",
+"imgpath":"../../Imgs/ARCADE_FBNEO",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"zip"
+}

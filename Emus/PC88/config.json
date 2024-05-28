@@ -1,0 +1,15 @@
+{
+"label":"PC88",
+"icon":"pc88.png",
+"iconsmall":"ic-cps1-80-n.png",
+"iconlist":"ic-cps1-32-n.png",
+"background":"bg.png",
+"themecolor":"0000FF",
+"launch":"launch.sh",
+"rompath":"../../Roms/PC88",
+"imgpath":"../../Imgs/PC88",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"zip|d88"
+}

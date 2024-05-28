@@ -1,0 +1,13 @@
+{
+"label":"SHARP X68000",
+"icon":"X68000.png",
+"background":"bg.png",
+"iconsel":"",
+"launch":"launch.sh",
+"rompath":"../../Roms/X68000",
+"imgpath":"../../Imgs/X68000",
+"useswap":0,
+"shortname":0,
+"hidebios":1,
+"extlist":""
+}

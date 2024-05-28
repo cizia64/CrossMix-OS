@@ -1,0 +1,14 @@
+{
+"label":"FFMPEG",
+"label.ch.lang":"FF视频播放",
+"icon":"ffmpeg.png",
+"background":"bg.png",
+"themecolor":"DDEEFF",
+"launch":"launch.sh",
+"rompath":"../../Roms/VIDEOS",
+"imgpath":"../../Imgs/FFMPEG",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|wma|jpg|png|bmp"
+}

@@ -1,0 +1,15 @@
+{
+"label":"NGP",
+"icon":"ic-NGP.png",
+"iconsmall":"ic-NGP-80-n.png",
+"iconlist":"ic-NGP-32-n.png",
+"background":"bg.png",
+"themecolor":"FFFFFF",
+"launch":"launch.sh",
+"rompath":"../../Roms/NGP",
+"imgpath":"../../Imgs/NGP",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":"ngc|ngp|zip"
+}

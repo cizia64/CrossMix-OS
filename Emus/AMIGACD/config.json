@@ -1,0 +1,13 @@
+{
+"label":"AMIGA CD32",
+"icon":"cd32.png",
+"background":"bg.png",
+"iconsel":"",
+"launch":"launch.sh",
+"rompath":"../../Roms/AMIGACD",
+"imgpath":"../../Imgs/AMIGACD",
+"useswap":0,
+"shortname":0,
+"hidebios":1,
+"extlist":""
+}

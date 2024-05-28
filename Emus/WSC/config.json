@@ -1,0 +1,15 @@
+{
+"label":"WSC",
+"icon":"ic-WSC.png",
+"iconsmall":"ic-WSC-80-n.png",
+"iconlist":"ic-WSC-32-n.png",
+"background":"bg.png",
+"themecolor":"3C4593",
+"launch":"launch.sh",
+"rompath":"../../Roms/WS",
+"imgpath":"../../Imgs/WS",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":"wsc|ws|zip"
+}

@@ -1,0 +1,14 @@
+{
+"label":"NEOCD",
+"icon":"ic-NEOCD.png",
+"iconsmall":"ic-NEOCD-small.png",
+"iconlist":"ic-NEOCD-list.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/NEOCD",
+"imgpath":"../../Imgs/NEOCD",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

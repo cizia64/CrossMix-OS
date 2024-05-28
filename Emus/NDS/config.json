@@ -1,0 +1,14 @@
+{
+    "label":"NDS",
+    "icon":"ic-NDS.png",
+    "launch":"launch.sh",
+    "background":"bg.png",
+    "themecolor":"FF8800",
+    "iconsel":"",
+    "rompath":"../../Roms/NDS",
+    "imgpath":"../../Imgs/NDS",
+    "useswap":0,
+    "shortname":0,
+    "hidebios":0
+}
+    

@@ -1,0 +1,13 @@
+{
+"label":"SG-1000",
+"icon":"SG1000.png",
+"background":"bg.png",
+"iconsel":"",
+"launch":"launch.sh",
+"rompath":"../../Roms/SG1000",
+"imgpath":"../../Imgs/SG1000",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":"gen|md|smd|32x|zip"
+}

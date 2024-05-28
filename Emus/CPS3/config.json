@@ -1,0 +1,16 @@
+{
+"label":"CPS3",
+"icon":"ic-cps3.png",
+"iconsmall":"ic-cps3-80-n.png",
+"iconlist":"ic-cps3-32-n.png",
+"background":"bg.png",
+"themecolor":"FF4400",
+"effectsh":"effect.sh",
+"launch":"launch.sh",
+"rompath":"../../Roms/CPS3",
+"imgpath":"../../Imgs/CPS3",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"zip"
+}

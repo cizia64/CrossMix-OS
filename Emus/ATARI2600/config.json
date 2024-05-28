@@ -1,0 +1,14 @@
+{
+"label":"ATARI2600",
+"icon":"ic-atari2600.png",
+"iconsmall":"ic-atari2600-80-n.png",
+"iconlist":"ic-atari2600-32-n.png",
+"background":"bg.png",
+"themecolor":"AF7AC5",
+"launch":"launch.sh",
+"rompath":"../../Roms/ATARI2600",
+"imgpath":"../../Imgs/ATARI2600",
+"useswap":0,
+"shortname":0,
+"hidebios":0
+}

@@ -1,0 +1,27 @@
+{
+"label":"GB",
+"icon":"ic-GB.png",
+"background":"bg.png",
+"themecolor":"00FF88",
+"launch":"gambatte.sh",
+"rompath":"../../Roms/GB",
+"imgpath":"../../Imgs/GB",
+"useswap":1,
+"shortname":0,
+"extlist":"",
+"hidebios":1,
+ "launchlist": [
+        {
+            "name": "GAMBATTE",
+            "launch": "gambatte.sh"
+        },
+        {
+            "name": "MGBA",
+            "launch": "mgba.sh"
+        },
+        {   "name": "GEARBOY",
+            "launch": "gearboy.sh"
+        }
+    ]
+}
+

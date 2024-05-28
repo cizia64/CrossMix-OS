@@ -1,0 +1,16 @@
+{
+"label":"CPS2",
+"icon":"ic-cps2.png",
+"iconsmall":"ic-cps2-80-n.png",
+"iconlist":"ic-cps2-32-n.png",
+"background":"bg.png",
+"themecolor":"FFFF00",
+"effectsh":"effect.sh",
+"launch":"launch.sh",
+"rompath":"../../Roms/CPS2",
+"imgpath":"../../Imgs/CPS2",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"zip"
+}

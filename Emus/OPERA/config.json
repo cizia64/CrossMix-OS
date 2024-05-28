@@ -1,0 +1,14 @@
+{
+"label":"3DO",
+"icon":"ic-OPERA.png",
+"iconsmall":"ic-OPERA-small.png",
+"iconlist":"ic-OPERA-list.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/OPERA",
+"imgpath":"../../Imgs/OPERA",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

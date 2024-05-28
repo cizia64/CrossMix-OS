@@ -1,0 +1,15 @@
+{
+"label":"SUFAMI",
+"icon":"ic-Sufami.png",
+"iconsmall":"",
+"iconlist":"",
+"background":"bg.png",
+"themecolor":"FF0000",
+"launch":"launch.sh",
+"rompath":"../../Roms/SUFAMI",
+"imgpath":"../../Imgs/SUFAMI",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":"smc|fig|sfc|gd3|gd7|dx2|bsx|swc|zip"
+}

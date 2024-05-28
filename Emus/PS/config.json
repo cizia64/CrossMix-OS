@@ -1,0 +1,15 @@
+{
+"label":"PS",
+"icon":"ic-PS.png",
+"iconsmall":"ic-PS-80-n.png",
+"iconlist":"ic-PS-32-n.png",
+"background":"bg.png",
+"themecolor":"00FF00",
+"launch":"launch.sh",
+"rompath":"../../Roms/PS",
+"imgpath":"../../Imgs/PS",
+"useswap":1,
+"shortname":0,
+"hidebios":1,
+"extlist":"bin|cue|img|mdf|pbp|toc|cbn|m3u|chd"
+}

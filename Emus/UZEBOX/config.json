@@ -1,0 +1,13 @@
+{
+"label":"UZEBOX",
+"icon":"UZEBOX.png",
+"background":"bg.png",
+"iconsel":"",
+"launch":"launch.sh",
+"rompath":"../../Roms/UZEBOX",
+"imgpath":"../../Imgs/UZEBOX",
+"useswap":0,
+"shortname":0,
+"hidebios":1,
+"extlist":""
+}

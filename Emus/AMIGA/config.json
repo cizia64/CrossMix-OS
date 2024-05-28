@@ -1,0 +1,14 @@
+{
+"label":"AMIGA",
+"icon":"amiga.png",
+"iconsmall":"ic-AMIGA-small.png",
+"iconlist":"ic-AMIGA-list.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/AMIGA",
+"imgpath":"../../Imgs/AMIGA",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}

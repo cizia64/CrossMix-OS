@@ -1,0 +1,14 @@
+{
+"label":"N64",
+"icon":"ic-n64.png",
+"iconsmall":"ic-n64-80-n.png",
+"iconlist":"ic-n64-32-n.png",
+"background":"bg.png",
+"themecolor":"FFFF88",
+"launch":"launch.sh",
+"rompath":"../../Roms/N64",
+"imgpath":"../../Imgs/N64",
+"useswap":1,
+"shortname":0,
+"hidebios":1
+}
