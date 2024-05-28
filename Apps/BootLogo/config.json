@@ -1,0 +1,7 @@
+{
+"label":"BootLogo",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"Flash your own bootlogo."
+}

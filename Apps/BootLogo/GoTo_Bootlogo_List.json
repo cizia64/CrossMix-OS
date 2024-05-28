@@ -1,0 +1,41 @@
+{
+	"list":	[{
+			"title":	198,
+			"type":	0,
+			"tabidx":	3,
+			"tabstartidx":	1,
+			"tabstate":	[{
+				}, {
+					"currpos":	0,
+					"pagestart":	0,
+					"pageend":	0
+				}, {
+					"currpos":	0,
+					"pagestart":	0,
+					"pageend":	7
+				}, {
+					"currpos":	0,
+					"pagestart":	0,
+					"pageend":	7
+				}, {
+					"currpos":	0,
+					"pagestart":	0,
+					"pageend":	7
+				}, {
+					"currpos":	0,
+					"pagestart":	0,
+					"pageend":	7
+				}, {
+					"currpos":	7,
+					"pagestart":	0,
+					"pageend":	7
+				}]
+		}, {
+			"title":	-1,
+			"type":	23,
+			"currpos":	0,
+			"pagestart":	0,
+			"pageend":	0,
+			"emulaunch":	"/mnt/SDCARD/Emus/_BootLogo/launch.sh"
+		}]
+}
