@@ -1,0 +1,7 @@
+{
+"label":"EmuCleaner",
+"icon":"EmulatorsCleaner.png",
+"iconsel":"EmulatorsCleaner.png",
+"launch":"launch.sh",
+"description":"Hide Emulators without roms in a subfolder"
+}
