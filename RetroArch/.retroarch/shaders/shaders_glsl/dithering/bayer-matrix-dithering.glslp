@@ -1,0 +1,4 @@
+shaders = 1
+
+shader0 = shaders/bayer-matrix-dithering.glsl
+filter_linear0 = false

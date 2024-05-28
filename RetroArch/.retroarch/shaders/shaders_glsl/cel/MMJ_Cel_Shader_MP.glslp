@@ -1,0 +1,6 @@
+shaders = 4
+
+shader0 = shaders/MMJ_Cel_Shader_MP_Blur_H.glsl
+shader1 = shaders/MMJ_Cel_Shader_MP_Blur_V.glsl
+shader2 = shaders/MMJ_Cel_Shader_MP_Outline.glsl
+shader3 = shaders/MMJ_Cel_Shader_MP_Color.glsl

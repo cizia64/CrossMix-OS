@@ -1,0 +1,8 @@
+#reference "plain.glslp"
+
+CS = "1.000000"
+C_STR = "0.500000"
+zoomx = "-0.10000"
+centerx = "1.4"
+SATURATION = "0.900000"
+

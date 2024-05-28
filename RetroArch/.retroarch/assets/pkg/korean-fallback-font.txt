@@ -1,0 +1,7 @@
+korean-fallback-font.ttf: Spoqa Han Sans
+
+Spoqa Han Sans is a custom font based on Noto Sans and Lato to fit multilingual UI
+
+Spoqa Han Sans is available for all users, including individuals and businesses,
+and can be freely used, modified and redistributed under an open font license.
+

@@ -1,0 +1,5 @@
+fallback-font.ttf: DejaVu Sans
+
+It covers a large western languages and arabic language. The main purpose is to
+provide good Arabic language support.
+

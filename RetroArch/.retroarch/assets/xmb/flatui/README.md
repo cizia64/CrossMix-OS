@@ -1,0 +1,2 @@
+### Theme Font
+ * This theme uses the [Open Sans](http://mplus-fonts.osdn.jp/design.html#mplus_p1) typeface by the [Steve Matteson](https://twitter.com/@SteveMatteson1) covered under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
