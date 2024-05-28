@@ -1,0 +1,149 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+{{end}}
+
+{{define "page_body"}}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">{{.Title}}</h6>
+    </div>
+    <div class="card-body">
+        {{if .Error}}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{.Error}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {{end}}
+        {{if eq .Mode 3}}
+        <div class="card mb-4 border-left-info">
+            <div class="card-body">
+                Create and save one or more new folders or generate a data provider independent JSON file to import.
+                <br>
+                The following placeholder is supported:
+                <br><br>
+                <ul>
+                    <li><span class="text-success">%name%</span> will be replaced with the specified folder name</li>
+                </ul>
+                The generated folders can be saved or exported. Exported folders can be imported from the "Maintenance" section of this SFTPGo instance or another.
+            </div>
+        </div>
+        {{end}}
+        <form id="folder_form" enctype="multipart/form-data" action="{{.CurrentURL}}" method="POST" autocomplete="off" {{if eq .Mode 3}}target="_blank"{{end}}>
+            {{if eq .Mode 3}}
+            <div class="card bg-light mb-3">
+                <div class="card-header">
+                   <b>Folders</b>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-md-12 form_field_tpl_folders_outer">
+                            <div class="row form_field_tpl_folder_outer_row">
+                                <div class="form-group col-md-10">
+                                    <input type="text" class="form-control" id="idTplFolder0" name="tpl_foldername" placeholder="Folder name" maxlength="255">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <button class="btn btn-circle btn-danger remove_tpl_folder_btn_frm_field">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mx-1">
+                        <button type="button" class="btn btn-secondary add_new_tpl_folder_field_btn">
+                            <i class="fas fa-plus"></i> Add new folder name
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="name" id="idFolderName" value="{{.Folder.Name}}">
+            {{else}}
+            <div class="form-group row">
+                <label for="idFolderName" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="idFolderName" name="name" placeholder=""
+                        value="{{.Folder.Name}}" maxlength="255" autocomplete="nope" required {{if ge .Mode 2}}readonly{{end}}>
+                </div>
+            </div>
+            {{end}}
+            <div class="form-group row">
+                <label for="idDescription" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="idDescription" name="description" placeholder=""
+                        value="{{.Folder.Description}}" maxlength="255" aria-describedby="descriptionHelpBlock">
+                    <small id="descriptionHelpBlock" class="form-text text-muted">
+                        Optional description
+                    </small>
+                </div>
+            </div>
+
+            {{template "fshtml" .FsWrapper}}
+
+            <input type="hidden" name="_form_token" value="{{.CSRFToken}}">
+            <div class="col-sm-12 text-right px-0">
+                {{if eq .Mode 3}}
+                <button type="submit" class="btn btn-secondary mt-3 px-5" name="form_action" value="export_from_template">Generate and export folders</button>
+                {{end}}
+                <button type="submit" class="btn btn-primary mt-3 ml-3 px-5" name="form_action" value="submit">{{if eq .Mode 3}}Generate and save new folders{{else}}Submit{{end}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        onFilesystemChanged('{{.Folder.FsConfig.Provider.Name}}');
+
+        $("body").on("click", ".add_new_tpl_folder_field_btn", function () {
+            let index = $(".form_field_tpl_folders_outer").find(".form_field_tpl_folder_outer_row").length;
+            while (document.getElementById("idTplFolder"+index) != null){
+                index++;
+            }
+            $(".form_field_tpl_folders_outer").append(`
+                    <div class="row form_field_tpl_folder_outer_row">
+                        <div class="form-group col-md-10">
+                            <input type="text" class="form-control" id="idTplFolder${index}" name="tpl_foldername" placeholder="Folder name" maxlength="255">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <button class="btn btn-circle btn-danger remove_tpl_folder_btn_frm_field">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `);
+        });
+
+        $("body").on("click", ".remove_tpl_folder_btn_frm_field", function () {
+            $(this).closest(".form_field_tpl_folder_outer_row").remove();
+        });
+
+    });
+</script>
+
+{{template "fsjs"}}
+{{end}}

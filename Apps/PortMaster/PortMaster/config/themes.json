@@ -1,0 +1,162 @@
+{
+    "prefix": "theme",
+    "api": "GitHubRawReleaseV1",
+    "name": "PortMaster Themes",
+    "url": "https://api.github.com/repos/PortsMaster/PortMaster-Themes/releases/latest",
+    "last_checked": "2024-04-11T01:42:38.622462",
+    "version": 4,
+    "data": {
+        "info": {
+            "Fallout": {
+                "name": "Fallout",
+                "creator": "Tekkenfede",
+                "image": "Fallout.screenshot.png",
+                "file": "Fallout.theme.zip",
+                "md5": "8ddc72c4fac76fad5dc0bdd8732d609f",
+                "description": "Beta theme, can contain minor flaws. \nFallout Theme made by Tekkenfede."
+            },
+            "Stardew": {
+                "name": "Stardew",
+                "creator": "Gargisnar and Tekkenfede",
+                "image": "Stardew.screenshot.png",
+                "file": "Stardew.theme.zip",
+                "md5": "470e640e825f5ee2037df327a41a3265",
+                "description": "Stardew Theme made by Gargisnar and Tekkenfede."
+            },
+            "Zelda": {
+                "name": "Zelda",
+                "creator": "Tekkenfede",
+                "image": "Zelda.screenshot.png",
+                "file": "Zelda.theme.zip",
+                "md5": "b4c658eee8e393948e92d79c506d7aac",
+                "description": "TLOZ:ALTTP Theme made by Tekkenfede."
+            },
+            "ff_VII": {
+                "name": "FFVII",
+                "creator": "Tekkenfede",
+                "image": "ff_VII.screenshot.png",
+                "file": "ff_VII.theme.zip",
+                "md5": "807a52a857e41111d30444cf78a3a3a6",
+                "description": "FFVII Theme made by Tekkenfede."
+            },
+            "hiviz": {
+                "name": "Hi Viz",
+                "creator": "Johnny on Flame and Tekkenfede",
+                "image": "hiviz.screenshot.png",
+                "file": "hiviz.theme.zip",
+                "md5": "d96772361807cdd4166671e983e7dec2",
+                "description": "A theme focused on simplicity and readability."
+            },
+            "Doom": {
+                "name": "DOOM",
+                "creator": "Slayer366 and Tekkenfede",
+                "image": "Doom.screenshot.png",
+                "file": "Doom.theme.zip",
+                "md5": "38a40eba31e90022ff060adbfc71f70d",
+                "description": "Doom Theme made by Slayer366."
+            },
+            "basic_theme": {
+                "name": "Basic Theme",
+                "creator": "kloptops",
+                "image": "basic_theme.screenshot.png",
+                "file": "basic_theme.theme.zip",
+                "md5": "2feb1a9d992e16848dfe7151a73c54d9",
+                "description": ""
+            }
+        },
+        "ports": [],
+        "utils": [],
+        "data": {
+            "basic_theme.theme.zip": {
+                "name": "basic_theme.theme.zip",
+                "size": 390447,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/basic_theme.theme.zip"
+            },
+            "basic_theme.theme.zip.md5": {
+                "name": "basic_theme.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/basic_theme.theme.zip.md5"
+            },
+            "doom.theme.zip": {
+                "name": "Doom.theme.zip",
+                "size": 32978558,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Doom.theme.zip"
+            },
+            "doom.theme.zip.md5": {
+                "name": "Doom.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Doom.theme.zip.md5"
+            },
+            "fallout.theme.zip": {
+                "name": "Fallout.theme.zip",
+                "size": 27587521,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Fallout.theme.zip"
+            },
+            "fallout.theme.zip.md5": {
+                "name": "Fallout.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Fallout.theme.zip.md5"
+            },
+            "ff_vii.theme.zip": {
+                "name": "ff_VII.theme.zip",
+                "size": 31358294,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/ff_VII.theme.zip"
+            },
+            "ff_vii.theme.zip.md5": {
+                "name": "ff_VII.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/ff_VII.theme.zip.md5"
+            },
+            "hiviz.theme.zip": {
+                "name": "hiviz.theme.zip",
+                "size": 21255947,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/hiviz.theme.zip"
+            },
+            "hiviz.theme.zip.md5": {
+                "name": "hiviz.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/hiviz.theme.zip.md5"
+            },
+            "images.zip": {
+                "name": "images.zip",
+                "size": 926727,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/images.zip"
+            },
+            "images.zip.md5": {
+                "name": "images.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/images.zip.md5"
+            },
+            "stardew.theme.zip": {
+                "name": "Stardew.theme.zip",
+                "size": 26754079,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Stardew.theme.zip"
+            },
+            "stardew.theme.zip.md5": {
+                "name": "Stardew.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Stardew.theme.zip.md5"
+            },
+            "themes.json": {
+                "name": "themes.json",
+                "size": 2244,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/themes.json"
+            },
+            "theme_translations.json": {
+                "name": "theme_translations.json",
+                "size": 4575,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/theme_translations.json"
+            },
+            "zelda.theme.zip": {
+                "name": "Zelda.theme.zip",
+                "size": 25262189,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Zelda.theme.zip"
+            },
+            "zelda.theme.zip.md5": {
+                "name": "Zelda.theme.zip.md5",
+                "size": 33,
+                "url": "https://github.com/PortsMaster/PortMaster-Themes/releases/download/2024-04-03_2355/Zelda.theme.zip.md5"
+            }
+        }
+    }
+}

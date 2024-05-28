@@ -1,0 +1,20 @@
+#!/bin/sh
+
+export PATH="/mnt/SDCARD/System/bin:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+export EX_CONFIG_PATH="/mnt/SDCARD/System/etc"
+export EX_RESOURCE_PATH="/mnt/SDCARD/System/resources"
+
+export TRIMUI_VERSION=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+
+export NETWORK_FIX="Y"
+export NETWORK_SSH="Y"
+export NETWORK_SFTPGO="Y"
+
+if [ $TRIMUI_VERSION -gt 20240401 ]; then
+    # They fixed the mac address in: 20240413
+    export NETWORK_FIX="N"
+fi
+
+# Override the above options in the file below
+[ -f "$EX_CONFIG_PATH/ex_options" ] && source "$EX_CONFIG_PATH/ex_options"

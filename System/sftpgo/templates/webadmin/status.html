@@ -1,0 +1,176 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "page_body"}}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Services</h6>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4 {{ if .Status.SSH.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">SFTP/SSH server</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.SSH.IsActive}}"Started"{{else}}"Stopped"{{end}}
+                    {{if .Status.SSH.IsActive}}
+                    <br>
+                    {{range .Status.SSH.Bindings}}
+                    <br>
+                    Address: "{{.GetAddress}}" {{if .HasProxy}}Proxy: ON{{end}}
+                    <br>
+                    {{end}}
+                    Accepted authentications: "{{.Status.SSH.GetSupportedAuthsAsString}}"
+                    <br>
+                    Accepted commands: "{{.Status.SSH.GetSSHCommandsAsString}}"
+                    <br>
+                    {{range .Status.SSH.HostKeys}}
+                    <br>
+                    Host Key: "{{.Path}}"
+                    <br>
+                    Fingerprint: "{{.Fingerprint}}"
+                    <br>
+                    Algorithms: "{{.GetAlgosAsString}}"
+                    <br>
+                    {{end}}
+                    <br>
+                    MAC algorithms: "{{.Status.SSH.GetMACsAsString}}"
+                    <br><br>
+                    KEX algorithms: "{{.Status.SSH.GetKEXsAsString}}"
+                    <br><br>
+                    Ciphers: "{{.Status.SSH.GetCiphersAsString}}"
+                    <br>
+                    {{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.FTP.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">FTP server</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.FTP.IsActive}}"Started"{{else}}"Stopped"{{end}}
+                    {{if .Status.FTP.IsActive}}
+                    <br>
+                    {{range .Status.FTP.Bindings}}
+                    <br>
+                    Address: "{{.GetAddress}}" {{if .HasProxy}}Proxy: ON{{end}}
+                    <br>
+                    TLS: "{{.GetTLSDescription}}"
+                    {{if .ForcePassiveIP}}
+                    <br>
+                    Passive IP: {{.ForcePassiveIP}}
+                    {{end}}
+                    <br>
+                    {{range .PassiveIPOverrides}}
+                    Passive IP: {{.IP}} for networks: {{.GetNetworksAsString}}
+                    <br>
+                    {{end}}
+                    {{end}}
+                    <br>
+                    Passive port range: "{{.Status.FTP.PassivePortRange.Start}}-{{.Status.FTP.PassivePortRange.End}}"
+                    {{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.WebDAV.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">WebDAV server</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.WebDAV.IsActive}}"Started"{{else}}"Stopped"{{end}}
+                    {{if .Status.WebDAV.IsActive}}
+                    <br>
+                    {{range .Status.WebDAV.Bindings}}
+                    <br>
+                    Address: "{{.GetAddress}}"
+                    <br>
+                    Protocol: {{if .EnableHTTPS}} HTTPS {{else}} HTTP {{end}}
+                    <br>
+                    {{end}}
+                    {{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.AllowList.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">Allow list</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.AllowList.IsActive}}"Enabled"{{else}}"Disabled"{{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.Defender.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">Defender</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.Defender.IsActive}}"Enabled"{{else}}"Disabled"{{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.RateLimiters.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">Rate limiters</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.RateLimiters.IsActive}}"Enabled"{{else}}"Disabled"{{end}}
+                    {{if .Status.RateLimiters.IsActive}}
+                    <br>
+                    Protocols: {{.Status.RateLimiters.GetProtocolsAsString}}
+                    {{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4 {{ if .Status.MFA.IsActive}}border-left-success{{else}}border-left-info{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">Multi-factor authentication</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.MFA.IsActive}}"Enabled"{{else}}"Disabled"{{end}}
+                    {{ if .Status.MFA.IsActive}}
+                    <br>
+                    Time-based one time passwords (RFC 6238) configurations:
+                    <br>
+                    <ul>
+                    {{range .Status.MFA.TOTPConfigs}}
+                    <li>Name: "{{.Name}}", issuer: "{{.Issuer}}", HMAC algorithm: "{{.Algo}}"</li>
+                    {{end}}
+                    </ul>
+                    {{end}}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-2 {{ if .Status.DataProvider.IsActive}}border-left-success{{else}}border-left-warning{{end}}">
+            <div class="card-body">
+                <h6 class="card-title font-weight-bold">Data provider</h6>
+                <p class="card-text">
+                    Status: {{ if .Status.DataProvider.IsActive}}"OK"{{else}}"{{.Status.DataProvider.Error}}"{{end}}
+                    <br>
+                    Driver: "{{.Status.DataProvider.Driver}}"
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{end}}

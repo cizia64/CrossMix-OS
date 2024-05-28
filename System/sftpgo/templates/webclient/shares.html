@@ -1,0 +1,293 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/fixedHeader.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+{{end}}
+
+{{define "page_body"}}
+<div id="errorMsg" class="alert alert-warning fade show" style="display: none;" role="alert">
+    <span id="errorTxt"></span>
+    <button type="button" class="close" aria-label="Close" onclick="dismissErrorMsg();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script type="text/javascript">
+    function dismissErrorMsg(){
+        $('#errorMsg').hide();
+    }
+</script>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">View and manage shares</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover nowrap" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Scope</th>
+                        <th>Info</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Shares}}
+                    <tr>
+                        <td>{{.ShareID}}</td>
+                        <td>{{.Name}}</td>
+                        <td>{{.GetScopeAsString}}</td>
+                        <td>{{.GetInfoString}}</td>
+                        <td>{{if .IsExpired}}1{{else}}0{{end}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "dialog"}}
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    Confirmation required
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to delete the selected share?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-warning" href="#" onclick="deleteAction()">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="linkModal" tabindex="-1" role="dialog" aria-labelledby="linkModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkModalLabel">
+                    Share access links
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="readShare">
+                    <p>You can download the shared contents, as single zip file, using this <a id="readLink" href="#" target="_blank">link</a>.</p>
+                    <p>If the share consists of a single directory you can browse and download files using this <a id="readBrowseLink" href="#" target="_blank">page</a>.</p>
+                    <p>If the share consists of a single file you can download it uncompressed using this <a id="readUncompressedLink" href="#" target="_blank">link</a>.</p>
+                </div>
+                <div id="writeShare">
+                    <p>You can upload one or more files to the shared directory using this <a id="writePageLink" href="#" target="_blank">page</a></p>
+                </div>
+                <div id="expiredShare">
+                    This share is no longer accessible because it has expired
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.responsive.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.select.min.js"></script>
+<script type="text/javascript">
+
+    function deleteAction() {
+        let table = $('#dataTable').DataTable();
+        table.button('delete:name').enable(false);
+        let shareID = table.row({ selected: true }).data()[0];
+        let path = '{{.ShareURL}}' + "/" + fixedEncodeURIComponent(shareID);
+        $('#deleteModal').modal('hide');
+        $('#errorMsg').hide();
+
+        $.ajax({
+            url: path,
+            type: 'DELETE',
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN' : '{{.CSRFToken}}'},
+            timeout: 15000,
+            success: function (result) {
+                window.location.href = '{{.SharesURL}}';
+            },
+            error: function ($xhr, textStatus, errorThrown) {
+                let txt = "Unable to delete the selected share";
+                if ($xhr) {
+                    let json = $xhr.responseJSON;
+                    if (json) {
+                        if (json.message){
+                            txt += ": " + json.message;
+                        } else {
+                            txt += ": " + json.error;
+                        }
+                    }
+                }
+                $('#errorTxt').text(txt);
+                $('#errorMsg').show();
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.fn.dataTable.ext.buttons.add = {
+            text: '<i class="fas fa-plus"></i>',
+            name: 'add',
+            titleAttr: "Add",
+            action: function (e, dt, node, config) {
+                window.location.href = '{{.ShareURL}}';
+            }
+        };
+
+        $.fn.dataTable.ext.buttons.edit = {
+            text: '<i class="fas fa-pen"></i>',
+            name: 'edit',
+            titleAttr: "Edit",
+            action: function (e, dt, node, config) {
+                var shareID = dt.row({ selected: true }).data()[0];
+                var path = '{{.ShareURL}}' + "/" + fixedEncodeURIComponent(shareID);
+                window.location.href = path;
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.delete = {
+            text: '<i class="fas fa-trash"></i>',
+            name: 'delete',
+            titleAttr: "Delete",
+            action: function (e, dt, node, config) {
+                $('#deleteModal').modal('show');
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.link = {
+            text: '<i class="fas fa-link"></i>',
+            name: 'link',
+            titleAttr: "Link",
+            action: function (e, dt, node, config) {
+                var shareData = dt.row({ selected: true }).data();
+                var shareID = shareData[0];
+                var shareScope = shareData[2];
+                var isExpired = shareData[4];
+                if (isExpired == "1"){
+                    $('#expiredShare').show();
+                    $('#writeShare').hide();
+                    $('#readShare').hide();
+                } else {
+                    var shareURL = '{{.BasePublicSharesURL}}' + "/" + fixedEncodeURIComponent(shareID);
+                    if (shareScope == 'Read'){
+                        $('#expiredShare').hide();
+                        $('#writeShare').hide();
+                        $('#readShare').show();
+                        $('#readLink').attr("href", shareURL);
+                        $('#readLink').attr("title", shareURL);
+                        $('#readUncompressedLink').attr("href", shareURL+"?compress=false");
+                        $('#readUncompressedLink').attr("title", shareURL+"?compress=false");
+                        $('#readBrowseLink').attr("href", shareURL+"/browse");
+                        $('#readBrowseLink').attr("title", shareURL+"/browse");
+                    } else {
+                        $('#expiredShare').hide();
+                        $('#writeShare').show();
+                        $('#readShare').hide();
+                        $('#writePageLink').attr("href", shareURL+"/upload");
+                        $('#writePageLink').attr("title", shareURL+"/upload");
+                    }
+                }
+                $('#linkModal').modal('show');
+            },
+            enabled: false
+        };
+
+        var table = $('#dataTable').DataTable({
+            "select": {
+                "style": "single",
+                "blurable": true
+            },
+            "stateSave": true,
+            "stateDuration": 0,
+            "buttons": [],
+            "columnDefs": [
+                {
+                    "targets": [0, 4],
+                    "visible": false,
+                    "searchable": false
+                }
+            ],
+            "scrollX": false,
+            "scrollY": false,
+            "responsive": true,
+            "language": {
+                "emptyTable": "No share defined"
+            },
+            "order": [[1, 'asc']]
+        });
+
+        new $.fn.dataTable.FixedHeader( table );
+
+        table.button().add(0,'link');
+        table.button().add(0,'delete');
+        table.button().add(0,'edit');
+        table.button().add(0,'add');
+
+        table.buttons().container().appendTo('.col-md-6:eq(0)', table.table().container());
+
+        table.on('select deselect', function () {
+            var selectedRows = table.rows({ selected: true }).count();
+            table.button('edit:name').enable(selectedRows == 1);
+            table.button('clone:name').enable(selectedRows == 1);
+            table.button('delete:name').enable(selectedRows == 1);
+            table.button('link:name').enable(selectedRows == 1);
+        });
+    });
+</script>
+{{end}}

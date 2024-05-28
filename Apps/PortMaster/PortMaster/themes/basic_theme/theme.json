@@ -1,0 +1,155 @@
+{
+    "#info": {
+        "version": 1,
+        "name": "Basic Theme",
+        "creator": "kloptops"
+    },
+
+    "#pallet": {
+        "text": "#000",
+        "text-select": "#c00",
+        "text-no-select": "#444",
+        "background": "#ddd",
+        "progress-empty": "#bbb",
+        "progress-fill": "#ce9"
+    },
+
+    "#base": {
+        "font": "DejaVuSans.ttf",
+        "font-size": 20,
+        "font-color": "text",
+        "select-color": "text-select",
+        "no-select-color": "text-no-select",
+        "progress-fill": "progress-fill"
+    },
+
+    "#override": {
+        "_A":         "A:",
+        "_B":         "B:",
+        "_X":         "X:",
+        "_Y":         "Y:",
+        "_UP":        "UP:",
+        "_DOWN":      "DOWN:",
+        "_LEFT":      "LEFT:",
+        "_RIGHT":     "RIGHT:",
+        "_START":     "START:",
+        "_SELECT":    "SELECT:",
+        "_L":         "L",
+        "_R":         "R",
+        "_CHECKED":   "[x]",
+        "_UNCHECKED": "[  ]"
+    },
+
+    "#elements": {
+        "background": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "fill": "background"
+        },
+
+        "main_area": {
+            "area": [ 5, 5, -5, -35 ]
+        },
+
+        "button_bar": {
+            "area": [ 5, -30, -5, -5 ],
+            "bar": []
+        }
+    },
+
+    "ports_list": {
+        "#element:background": {},
+
+        "ports_list": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "list": []
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "port_info": {
+        "#element:background": {},
+
+        "port_info": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "text": "Title: {port_info.title}\nPorter: {port_info.porter}\nGenres: {port_info.genres}\nDownload Size: {port_info.download_size}{if:port_info.runtime}\nRuntime: {port_info.runtime} ({port_info.runtime_status}){endif}\nDescription: {port_info.description}",
+            "text-wrap": true
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "main_menu": {
+        "#element:background": {},
+
+        "option_list": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "list": []
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "option_menu": {
+        "#element:background": {},
+
+        "option_list": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "list": []
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "filter_list": {
+        "#element:background": {},
+
+        "filter_list": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "list": []
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "message_window": {
+        "#element:background": {},
+
+        "message_text": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, -45, 1.0 ],
+            "text": " ",
+            "text-wrap": true,
+            "align": "bottomleft"
+        },
+
+        "progress_bar": {
+            "area": [ 0.0, -20, 1.0, 1.0 ],
+            "parent": "main_area",
+            "fill": "progress-empty",
+            "bar": ["{system.progress_text}", null, "{system.progress_amount}"],
+            "align": "midleft"
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "message_box": {
+        "#element:background": {},
+
+        "message_text": {
+            "parent": "main_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "text": "",
+            "text-wrap": true,
+            "align": "bottomleft"
+        },
+
+        "#element:button_bar": {}
+    }
+}

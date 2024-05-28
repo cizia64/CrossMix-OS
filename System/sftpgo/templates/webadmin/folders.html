@@ -1,0 +1,361 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/fixedHeader.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/colReorder.bootstrap4.min.css" rel="stylesheet">
+{{end}}
+
+{{define "page_body"}}
+<div id="errorMsg" class="alert alert-warning fade show" style="display: none;" role="alert">
+    <span id="errorTxt"></span>
+    <button type="button" class="close" aria-label="Close" onclick="dismissErrorMsg();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script type="text/javascript">
+    function dismissErrorMsg(){
+        $('#errorMsg').hide();
+    }
+</script>
+
+<div id="successMsg" class="card mb-4 border-left-success" style="display: none;">
+    <div id="successTxt" class="card-body"></div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">View and manage folders</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover nowrap" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Storage</th>
+                        <th>Description</th>
+                        <th>Associated users</th>
+                        <th>Associated groups</th>
+                        <th>Quota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Folders}}
+                    <tr>
+                        <td>{{.GetLastQuotaUpdateAsString}}</td>
+                        <td>{{.Name}}</td>
+                        <td>{{.GetStorageDescrition}}</td>
+                        <td>{{.Description}}</td>
+                        <td>{{.GetUsersAsString}}</td>
+                        <td>{{.GetGroupsAsString}}</td>
+                        <td>{{.GetQuotaSummary}}</td>
+                    </tr>
+                    {{end}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "dialog"}}
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    Confirmation required
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to delete the selected virtual folder and any users mapping?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-warning" href="#" onclick="deleteAction()">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.colVis.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.responsive.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.select.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/ellipsis.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.colReorder.min.js"></script>
+<script type="text/javascript">
+
+function deleteAction() {
+        let table = $('#dataTable').DataTable();
+        table.button('delete:name').enable(false);
+        let folderName = table.row({ selected: true }).data()[1];
+        let path = '{{.FolderURL}}' + "/" + fixedEncodeURIComponent(folderName);
+        $('#deleteModal').modal('hide');
+        $('#errorMsg').hide();
+
+        $.ajax({
+            url: path,
+            type: 'DELETE',
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN' : '{{.CSRFToken}}'},
+            timeout: 15000,
+            success: function (result) {
+                window.location.href = '{{.FoldersURL}}';
+            },
+            error: function ($xhr, textStatus, errorThrown) {
+                var txt = "Unable to delete the selected folder";
+                if ($xhr) {
+                    var json = $xhr.responseJSON;
+                    if (json) {
+                        if (json.message){
+                            txt += ": " + json.message;
+                        } else {
+                            txt += ": " + json.error;
+                        }
+                    }
+                }
+                $('#errorTxt').text(txt);
+                $('#errorMsg').show();
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.fn.dataTable.ext.buttons.add = {
+            text: '<i class="fas fa-plus"></i>',
+            name: 'add',
+            titleAttr: "Add",
+            action: function (e, dt, node, config) {
+                window.location.href = '{{.FolderURL}}';
+            }
+        };
+
+        $.fn.dataTable.ext.buttons.edit = {
+            text: '<i class="fas fa-pen"></i>',
+            name: 'edit',
+            titleAttr: "Edit",
+            action: function (e, dt, node, config) {
+                var folderName = table.row({ selected: true }).data()[1];
+                var path = '{{.FolderURL}}' + "/" + fixedEncodeURIComponent(folderName);
+                window.location.href = path;
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.template = {
+            text: '<i class="fas fa-clone"></i>',
+            name: 'template',
+            titleAttr: "Template",
+            action: function (e, dt, node, config) {
+                var selectedRows = table.rows({ selected: true }).count();
+                if (selectedRows == 1){
+                    var folderName = table.row({ selected: true }).data()[1];
+                    var path = '{{.FolderTemplateURL}}' + "?from=" + encodeURIComponent(folderName);
+                    window.location.href = path;
+                } else {
+                    window.location.href = '{{.FolderTemplateURL}}';
+                }
+            }
+        };
+
+        $.fn.dataTable.ext.buttons.delete = {
+            text: '<i class="fas fa-trash"></i>',
+            name: 'delete',
+            titleAttr: "Delete",
+            action: function (e, dt, node, config) {
+                $('#deleteModal').modal('show');
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.quota_scan = {
+            text: '<i class="fas fa-redo-alt"></i>',
+            name: 'quota_scan',
+            titleAttr: 'Quota Scan',
+            action: function (e, dt, node, config) {
+                dt.button('quota_scan:name').enable(false);
+                let folderName = dt.row({ selected: true }).data()[1];
+                let path = '{{.FolderQuotaScanURL}}'+ "/" + fixedEncodeURIComponent(folderName);
+                $.ajax({
+                    url: path,
+                    type: 'POST',
+                    headers: {'X-CSRF-TOKEN' : '{{.CSRFToken}}'},
+                    timeout: 15000,
+                    success: function (result) {
+                        //dt.button('quota_scan:name').enable(true);
+                        $('#successTxt').text("Quota scan started for the selected folder. Please reload the folders page to check when the scan ends");
+                        $('#successMsg').show();
+                        setTimeout(function () {
+                            $('#successMsg').hide();
+                        }, 15000);
+                    },
+                    error: function ($xhr, textStatus, errorThrown) {
+                        dt.button('quota_scan:name').enable(true);
+                        var txt = "Unable to update quota for the selected folder";
+                        if ($xhr) {
+                            var json = $xhr.responseJSON;
+                            if (json) {
+                                if (json.message) {
+                                    txt += ": " + json.message;
+                                } else if (json.error) {
+                                    txt += ": " + json.error;
+                                }
+                            }
+                        }
+                        $('#errorTxt').text(txt);
+                        $('#errorMsg').show();
+                    }
+                });
+            },
+            enabled: false
+        };
+
+        let dateFn = $.fn.dataTable.render.datetime();
+        let table = $('#dataTable').DataTable({
+            "select": {
+                "style": "single",
+                "blurable": true
+            },
+            "colReorder": {
+                "enable": true,
+                "fixedColumnsLeft": 2
+            },
+            "stateSave": true,
+            "stateDuration": 0,
+            "buttons": [
+                {
+                    "text": "Column visibility",
+                    "extend": "colvis",
+                    "columns": ":not(.noVis)"
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "className": "noVis"
+                },
+                {
+                    "targets": [1],
+                    "className": "noVis"
+                },
+                {
+                    "targets": [2],
+                    "render": $.fn.dataTable.render.ellipsis(50, true)
+                },
+                {
+                    "targets": [3],
+                    "visible": false
+                },
+                {
+                    "targets": [4],
+                    "render": $.fn.dataTable.render.ellipsis(40, true)
+                },
+                {
+                    "targets": [5],
+                    "visible": false,
+                    "render": $.fn.dataTable.render.ellipsis(40, true)
+                },
+                {
+                    "targets": [6],
+                    "visible": false,
+                    "render": function ( data, type, row, meta ) {
+                        if (type !== 'display') {
+			                return data;
+		                }
+                        if (row[0] !== ""){
+                            let formattedDate = dateFn(row[0], type);
+                            data = `${data}. Updated at: ${formattedDate}`;
+                        }
+                        let ellipsisFn = $.fn.dataTable.render.ellipsis(60, true);
+                        return ellipsisFn(data, type);
+                    }
+                }
+            ],
+            "scrollX": false,
+            "scrollY": false,
+            "responsive": true,
+            "language": {
+                "emptyTable": "No folder defined"
+            },
+            "order": [[1, 'asc']]
+        });
+
+        new $.fn.dataTable.FixedHeader( table );
+
+        {{if .LoggedAdmin.HasPermission "quota_scans"}}
+        table.button().add(0,'quota_scan');
+        {{end}}
+
+        {{if .LoggedAdmin.HasPermission "del_users"}}
+        table.button().add(0,'delete');
+        {{end}}
+
+        {{if .LoggedAdmin.HasPermission "add_users"}}
+        table.button().add(0,'template');
+        {{end}}
+
+        {{if .LoggedAdmin.HasPermission "edit_users"}}
+        table.button().add(0,'edit');
+        {{end}}
+
+        {{if .LoggedAdmin.HasPermission "add_users"}}
+        table.button().add(0,'add');
+        {{end}}
+
+        table.buttons().container().appendTo('.col-md-6:eq(0)', table.table().container());
+
+        table.on('select deselect', function () {
+            var selectedRows = table.rows({ selected: true }).count();
+            {{if .LoggedAdmin.HasPermission "del_users"}}
+            table.button('delete:name').enable(selectedRows == 1);
+            {{end}}
+            {{if .LoggedAdmin.HasPermission "edit_users"}}
+            table.button('edit:name').enable(selectedRows == 1);
+            {{end}}
+            {{if .LoggedAdmin.HasPermission "quota_scans"}}
+            table.button('quota_scan:name').enable(selectedRows == 1);
+            {{end}}
+        });
+
+    });
+
+</script>
+{{end}}

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -z "$SSH_CONNECTION" ]; then
+    nano "$@"
+else
+    micro.bin "$@"
+fi

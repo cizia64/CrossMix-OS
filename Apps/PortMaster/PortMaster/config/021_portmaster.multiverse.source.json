@@ -1,0 +1,434 @@
+{
+    "prefix": "pmmv",
+    "api": "PortMasterV3",
+    "name": "PortMaster Multiverse",
+    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/latest/download/ports.json",
+    "last_checked": "2024-05-22T07:40:53.351021",
+    "version": 2,
+    "data": {
+        "ports": [
+            "gta3.zip",
+            "gtavc.zip",
+            "loderunneronline.zip",
+            "soh.zip",
+            "smworld.zip",
+            "sm.zip",
+            "wipeout.zip",
+            "zelda3.zip"
+        ],
+        "utils": [
+            "gameinfo.zip"
+        ],
+        "data": {
+            "gta3.zip": {
+                "name": "gta3.zip",
+                "size": 6769441,
+                "md5": "3827e058f2829f6c9490b7b4fff3b21b",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gta3.zip"
+            },
+            "gtavc.zip": {
+                "name": "gtavc.zip",
+                "size": 6198815,
+                "md5": "859d07cabd65707177c643fb62f57f1e",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gtavc.zip"
+            },
+            "loderunneronline.zip": {
+                "name": "loderunneronline.zip",
+                "size": 30491428,
+                "md5": "641922a587d52ee1c169e8bf9525fae2",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/loderunneronline.zip"
+            },
+            "soh.zip": {
+                "name": "soh.zip",
+                "size": 18809698,
+                "md5": "8e2166dc28280c66a1a9869c27ae2528",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/soh.zip"
+            },
+            "smworld.zip": {
+                "name": "smworld.zip",
+                "size": 1111539,
+                "md5": "4fe69d88527a73ddca6165400c053a1f",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/smworld.zip"
+            },
+            "sm.zip": {
+                "name": "sm.zip",
+                "size": 1992726,
+                "md5": "126446e019c6473352e5b85f39d600eb",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/sm.zip"
+            },
+            "wipeout.zip": {
+                "name": "wipeout.zip",
+                "size": 1147485,
+                "md5": "ec804b2c5acf193c65bc80a58fa0e471",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/wipeout.zip"
+            },
+            "zelda3.zip": {
+                "name": "zelda3.zip",
+                "size": 1192243,
+                "md5": "33e5dcd24e70bfcbefd9d342a38ba997",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/zelda3.zip"
+            },
+            "gameinfo.zip": {
+                "name": "gameinfo.zip",
+                "size": 2183866,
+                "md5": "c2848d2bcb267c10995595df746ae390",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gameinfo.zip"
+            },
+            "images.zip": {
+                "name": "images.zip",
+                "size": 1120874,
+                "md5": "73ab8667d9226b69f2b0b66c169aa7d6",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/images.zip"
+            }
+        },
+        "info": {
+            "gta3.zip": {
+                "version": 2,
+                "name": "gta3.zip",
+                "items": [
+                    "Grand Theft Auto 3.sh",
+                    "gta3"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Grand Theft Auto 3",
+                    "porter": [
+                        "Orson"
+                    ],
+                    "desc": "Welcome to Liberty City. Where it all began. The critically acclaimed blockbuster Grand Theft Auto III brings to life the dark and seedy underworld of Liberty City. With a massive and diverse open world, a wild cast of characters from every walk of life, and the freedom to explore at will, Grand Theft Auto III puts the dark, intriguing, and ruthless world of crime at your fingertips.",
+                    "inst": "Copy all files from the original game to roms/ports/gta3. The game requires assets from the classic version released in 2001 (not the Definitive Edition, 2021). Versions from Steam and Rockstar Store are confirmed to work fine.\n\nIf needed, readjust analog sticks sensitivity by changing LeftStickSens/RightStickSens values in re3.ini.",
+                    "genres": [
+                        "action"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-10-28",
+                    "date_updated": "2024-04-10",
+                    "md5": "3827e058f2829f6c9490b7b4fff3b21b",
+                    "release_id": "2024-04-10_1445",
+                    "size": 6769441,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gta3.zip"
+                }
+            },
+            "gtavc.zip": {
+                "version": 2,
+                "name": "gtavc.zip",
+                "items": [
+                    "Grand Theft Auto Vice City.sh",
+                    "gtavc/"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Grand Theft Auto Vice City",
+                    "porter": [
+                        "Orson"
+                    ],
+                    "desc": "Welcome to the 1980s. From the decade of big hair, excess, and pastel suits comes a story of one man's rise to the top of the criminal pile as Grand Theft Auto returns.",
+                    "inst": "Copy all files from the original game to roms/ports/gtavc. The game requires assets from the classic version released in 2002 (not the Definitive Edition, 2021). Versions from Steam and Rockstar Store are confirmed to work fine.\n\nIf needed, readjust analog sticks sensitivity by changing LeftStickSens/RightStickSens values in reVC.ini.",
+                    "genres": [
+                        "action"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-10-28",
+                    "date_updated": "2024-04-10",
+                    "md5": "859d07cabd65707177c643fb62f57f1e",
+                    "release_id": "2024-04-10_1445",
+                    "size": 6198815,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gtavc.zip"
+                }
+            },
+            "loderunneronline.zip": {
+                "version": 2,
+                "name": "loderunneronline.zip",
+                "items": [
+                    "Lode Runner Online.sh",
+                    "loderunneronline"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Lode Runner Online",
+                    "porter": [
+                        "tabreturn",
+                        "Slayer366"
+                    ],
+                    "desc": "This project is a fan-made cross-platform clone of Lode Runner Online: The Mad Monks' Revenge.",
+                    "inst": "You can download Lode Runner Online free at: https://mmr.quarkrobot.com/ . Download the Linux version and extract it, and place the game files in the gamedata directory. This has been tested with the LODERUNN-LINUX-2402.tar.gz release.\n\nYou can change controls in the options (cog) menu, but you must **plug in a mouse to assign the gamepad inputs.**\n\nFor the CD soundtrack, download the DLC here: https://mmr.quarkrobot.com/manual/get-started#soundtrack, and place the LR_AUDIO.PRS file in the port's *savadata* folder.",
+                    "genres": [
+                        "platformer",
+                        "puzzle"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.png",
+                        "covers": [],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": true,
+                    "exp": false,
+                    "runtime": "mono-6.12.0.122-aarch64.squashfs",
+                    "reqs": [],
+                    "arch": []
+                },
+                "source": {
+                    "date_added": "2024-03-12",
+                    "date_updated": "2024-04-09",
+                    "md5": "641922a587d52ee1c169e8bf9525fae2",
+                    "release_id": "2024-04-09_1309",
+                    "size": 30491428,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/loderunneronline.zip"
+                }
+            },
+            "soh.zip": {
+                "version": 2,
+                "name": "soh.zip",
+                "items": [
+                    "Ship of Harkinian.sh",
+                    "soh"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Ship of Harkinian",
+                    "porter": [
+                        "Jeod"
+                    ],
+                    "desc": "A source port of Ocarina of Time &amp; Master Quest. Ship of Harkinian features extensive and significant enhancements over the original game, such as improved performance, increased frame-rate, native ultra-widescreen support, and extensive mod support (especially compared to emulated versions of the original), among other features.",
+                    "inst": "Follow the guide at https://www.shipofharkinian.com/setup-guide for your desired platform to create your oot.otr and/or oot-mq.otr files. Once created put in the ports/soh folder.",
+                    "genres": [
+                        "action",
+                        "adventure"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.png",
+                        "covers": [
+                            "cover.jpg"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "exp": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ]
+                },
+                "source": {
+                    "date_added": "2024-04-10",
+                    "date_updated": "2024-04-10",
+                    "md5": "8e2166dc28280c66a1a9869c27ae2528",
+                    "size": 18809698,
+                    "release_id": "2024-04-10_1445",
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/soh.zip"
+                }
+            },
+            "smworld.zip": {
+                "version": 2,
+                "name": "smworld.zip",
+                "items": [
+                    "smworld.sh",
+                    "smworld"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Super Mario World (and All Stars)",
+                    "porter": [
+                        "Tekkenfede"
+                    ],
+                    "desc": "Super Mario World is a 2D side-scrolling platform game in which the player controls Mario or Luigi, the protagonists of the game. The game has similar gameplay to earlier games in the Super Mario series \u2013 Super Mario Bros., Super Mario Bros. 2, and Super Mario Bros. 3 \u2013 but introduces new elements. As well as dashing and jumping, the player can also fly or float with the aid of the Cape Feather and P-Balloon and can execute the new Spin Jump move.[",
+                    "inst": "See Wiki",
+                    "genres": [
+                        "platformer"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.smb1.png",
+                            "cover.smbll.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-11-08",
+                    "date_updated": "2024-04-09",
+                    "md5": "4fe69d88527a73ddca6165400c053a1f",
+                    "release_id": "2024-04-09_1309",
+                    "size": 1111539,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/smworld.zip"
+                }
+            },
+            "sm.zip": {
+                "version": 2,
+                "name": "sm.zip",
+                "items": [
+                    "sm.sh",
+                    "sm"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Super Metroid (Redux Included)",
+                    "porter": [
+                        "Tekkenfede"
+                    ],
+                    "desc": "Super Metroid (\u30b9\u30fc\u30d1\u30fc\u30e1\u30c8\u30ed\u30a4\u30c9 S\u016bp\u0101 Metoroido?), also known as Metroid 3, is a video game developed by Nintendo R&D1 and published by Nintendo for the Super Nintendo Entertainment System. Super Metroid is the third installment in the Metroid series. With its 24-megabit (3 megabyte) cartridge size, it was the largest video game on the Super Nintendo at the time of its release\n",
+                    "inst": "To make it work just copy the Super Metroid US rom renamed as sm.smc in the root folder.\nFor redux same thing, but use the redux Rom",
+                    "genres": [
+                        "action",
+                        "adventure"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.sm.png",
+                            "cover.smredux.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-10-31",
+                    "date_updated": "2024-04-09",
+                    "md5": "126446e019c6473352e5b85f39d600eb",
+                    "release_id": "2024-04-09_1309",
+                    "size": 1992726,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/sm.zip"
+                }
+            },
+            "wipeout.zip": {
+                "version": 2,
+                "name": "wipeout.zip",
+                "items": [
+                    "wipeout.sh",
+                    "Wip"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Wipeout",
+                    "porter": [
+                        "Tekkenfede"
+                    ],
+                    "desc": "Wipeout is a racing game that is set in 2052, where players compete in the F3600 anti-gravity racing league. The game allows the player to pilot one of a selection of craft in races on several different tracks.",
+                    "inst": "Copy the game data inside the wipeout folder. A prepackaged zip is avaiable on phoboslab site",
+                    "genres": [
+                        "racing"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-10-29",
+                    "date_updated": "2024-04-09",
+                    "md5": "ec804b2c5acf193c65bc80a58fa0e471",
+                    "release_id": "2024-04-09_1309",
+                    "size": 1147485,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/wipeout.zip"
+                }
+            },
+            "zelda3.zip": {
+                "version": 2,
+                "name": "zelda3.zip",
+                "items": [
+                    "zelda3.sh",
+                    "zelda"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Zelda A Link to The Past",
+                    "porter": [
+                        "Tekkenfede"
+                    ],
+                    "desc": "*For devices with lower resolution of 640x480 or weird low res aspect ratio you need to modify the zelda3.ini file* The game begins with series protagonist Link, the last descendant of the Knights of Hyrule, and his uncle, being awakened by a telepathic message from Zelda, who says that she has been locked in Hyrule Castle's dungeon by Agahnim and requires rescue. Link's uncle goes to rescue her first, and Link follows despite his uncle's orders to remain home. His uncle is slain, though beforehand, Link receives a sword and shield from him. Link infiltrates Hyrule Castle and successfully hides Zelda in the Sanctuary as his uncle's last wish.",
+                    "inst": "Copy  the zelda3_assets.dat file in the root of the zelda folder. The file can be obtained from the snes rom.",
+                    "genres": [
+                        "action",
+                        "adventure"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.jpg",
+                        "covers": [
+                            "cover.png"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ],
+                    "exp": false
+                },
+                "source": {
+                    "date_added": "2023-10-29",
+                    "date_updated": "2024-04-09",
+                    "md5": "33e5dcd24e70bfcbefd9d342a38ba997",
+                    "release_id": "2024-04-09_1309",
+                    "size": 1192243,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-09_1309/zelda3.zip"
+                }
+            }
+        }
+    }
+}

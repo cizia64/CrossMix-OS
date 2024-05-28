@@ -1,0 +1,209 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/codemirror/codemirror.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/codemirror/addon/dialog/dialog.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/codemirror/addon/search/matchesonscrollbar.css" rel="stylesheet">
+<style>
+    .CodeMirror {
+        border: 1px solid #eee;
+        height: 30em;
+        font-size: 13px;
+    }
+    .shortcut {font-family: monospace; color: #666;}
+</style>
+{{end}}
+{{define "additionalnavitems"}}
+<li class="nav-item dropdown no-arrow mx-1">
+    <a class="nav-link dropdown-toggle" href="#" id="infoDropdown" role="button"
+        data-toggle="modal" data-target="#infoModal">
+        <i class="fas fa-info fa-fw"></i>
+    </a>
+</li>
+
+<div class="topbar-divider d-none d-sm-block"></div>
+{{end}}
+
+{{define "page_body"}}
+<div id="errorMsg" class="alert alert-warning fade show" style="display: none;" role="alert">
+    <span id="errorTxt"></span>
+    <button type="button" class="close" aria-label="Close" onclick="dismissErrorMsg();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script type="text/javascript">
+    function dismissErrorMsg(){
+        $('#errorMsg').hide();
+    }
+</script>
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h6 class="d-flex justify-content-between align-items-center">
+            <span class="font-weight-bold text-primary">{{- if .ReadOnly}}View{{- else}}Edit{{- end}} file "{{.Path}}"</span>
+            <span class="btn-toolbar">
+                <a id="idBack" class="btn btn-secondary mx-1 my-1" href='{{.FilesURL}}?path={{.CurrentDir}}' role="button">Back</a>
+                {{if not .ReadOnly}}
+                <a id="idSave" class="btn btn-primary mx-1 my-1" href="#" onclick="saveFile()" role="button">Save</a>
+                {{end}}
+            </span>
+        </h6>
+    </div>
+    <div class="card-body">
+        <div class="col-sm-12">
+            <textarea id="editor" name="editor"></textarea>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "dialog"}}
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">
+                    Editor keybindings
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <span class="shortcut">Ctrl-F / Cmd-F</span> => Start searching
+                </p>
+                <p>
+                    <span class="shortcut">Ctrl-G / Cmd-G</span> => Find next
+                </p>
+                <p>
+                    <span class="shortcut">Shift-Ctrl-G / Shift-Cmd-G</span> => Find previous
+                </p>
+                <p>
+                    <span class="shortcut">Shift-Ctrl-F / Cmd-Option-F</span> => Replace
+                </p>
+                <p>
+                    <span class="shortcut">Shift-Ctrl-R / Shift-Cmd-Option-F</span> => Replace all
+                </p>
+                <p>
+                    <span class="shortcut">Alt-G</span> => Jump to line
+                </p>
+                <p>
+                    <span class="shortcut">Alt-F</span> => Persistent search: enter to find next, Shift-Enter to find previous
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/codemirror/codemirror.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/meta.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/selection/active-line.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/dialog/dialog.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/search/searchcursor.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/search/search.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/scroll/annotatescrollbar.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/search/matchesonscrollbar.js"></script>
+<script src="{{.StaticURL}}/vendor/codemirror/addon/search/jump-to-line.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var cm = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            lineNumbers: true,
+            styleActiveLine: true,
+            extraKeys: {"Alt-F": "findPersistent"},
+            {{if .ReadOnly}}
+            readOnly: true,
+            {{end}}
+            autofocus: true
+        });
+        var filename = "{{.Path}}";
+        var extension = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
+        mode = CodeMirror.findModeByExtension(extension);
+        if (mode != null) {
+            cm.setOption("mode", mode.mode);
+        }
+        cm.setValue("{{.Data}}");
+        setInterval(keepAlive, 300000);
+    });
+
+    function keepAlive() {
+        $.ajax({
+            url: '{{.ProfileURL}}',
+            timeout: 15000
+        });
+    }
+
+    {{if not .ReadOnly}}
+    function saveFile() {
+        $('#idSave').addClass("disabled");
+        $('#errorMsg').hide();
+
+        async function uploadFile() {
+            var errorMessage = "Error saving file";
+            let response;
+            try {
+                var uploadPath = '{{.FileURL}}?path='+encodeURIComponent('{{.CurrentDir}}/{{.Name}}');
+                var cm = document.querySelector('.CodeMirror').CodeMirror;
+                var blob = new Blob([cm.getValue()]);
+                response = await fetch(uploadPath, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{.CSRFToken}}'
+                    },
+                    credentials: 'same-origin',
+                    redirect: 'error',
+                    body: blob
+                });
+                if (response.status == 201){
+                    window.location.href = '{{.FilesURL}}?path='+encodeURIComponent('{{.CurrentDir}}');
+                } else {
+                    let jsonResponse;
+                    try {
+                        jsonResponse = await response.json();
+                    } catch(e){
+                        throw Error(errorMessage);
+                    }
+                    if (jsonResponse.message) {
+                        errorMessage = jsonResponse.message;
+                    }
+                    if (jsonResponse.error) {
+                        errorMessage += ": " + jsonResponse.error;
+                    }
+                    throw Error(errorMessage);
+                }
+            } catch (e){
+                throw Error(errorMessage+": " +e.message);
+            }
+        }
+
+        uploadFile().catch(function(error){
+            $('#idSave').removeClass("disabled");
+            $('#errorTxt').text(error.message);
+            $('#errorMsg').show();
+        });
+    }
+    {{end}}
+</script>
+{{end}}

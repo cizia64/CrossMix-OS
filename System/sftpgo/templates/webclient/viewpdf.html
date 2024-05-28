@@ -1,0 +1,34 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{.Title}}</title>
+
+        {{range .Branding.ExtraCSS}}
+        <link href="{{$.StaticURL}}{{.}}" rel="stylesheet" type="text/css">
+        {{end}}
+    </head>
+
+<body>
+    <script src="{{.StaticURL}}/vendor/pdfobject/pdfobject.min.js"></script>
+    <script type="text/javascript">
+        PDFObject.embed("{{.URL}}", document.body);
+    </script>
+</body>
+</html>

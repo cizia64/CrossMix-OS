@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+  <title>The GNU nano editor FAQ</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="The genesis story of the nano editor, plus the solution to some common problems.">
+  <style>
+    .indented { margin-left: 2em; font-family: courier; font-size: 110%; }
+  </style>
+</head>
+
+<body text="#330000" bgcolor="#ffffff" link="#0000ef" vlink="#51188e" alink="#ff0000">
+
+<h1>The GNU nano editor FAQ</h1>
+<h3>Table of Contents</h3>
+<h3><a href="#1">1. General</a></h3>
+<blockquote><p>
+  <a href="#1.1">1.1. What is GNU nano?</a><br>
+  <a href="#1.2">1.2. What is the history behind nano?</a><br>
+  <a href="#1.3">1.3. Why the name change from TIP?</a><br>
+  <a href="#1.4">1.4. What is the current version of nano?</a><br>
+  <a href="#1.5">1.5. I want to read the manpage without having to download the program!</a>
+</p></blockquote>
+<h3><a href="#2">2. Where to get GNU nano.</a></h3>
+<blockquote><p>
+  <a href="#2.1">2.1. FTP and WWW sites that carry nano.</a><br>
+  <a href="#2.2">2.2. RedHat and derivatives (.rpm) packages.</a><br>
+  <a href="#2.3">2.3. Debian (.deb) packages.</a><br>
+  <a href="#2.4">2.4. By git (for the brave).</a>
+</p></blockquote>
+<h3><a href="#3">3. Installation and Configuration</a></h3>
+<blockquote><p>
+  <a href="#3.1">3.1. How do I install the RPM or DEB package?</a><br>
+  <a href="#3.2">3.2. Compiling from source: WHAT THE HECK DO I DO NOW?</a><br>
+  <a href="#3.3">3.3. Why does everything go into /usr/local?</a><br>
+  <a href="#3.4">3.4. nano should automatically run strip on the binary when installing it!</a><br>
+  <a href="#3.5">3.5. How can I make the executable smaller? This is too bloated!</a><br>
+  <a href="#3.6">3.6. Tell me more about this multibuffer stuff!</a><br>
+  <a href="#3.7">3.7. Tell me more about this verbatim input stuff!</a><br>
+  <a href="#3.8">3.8. How do I make a .nanorc file that nano will read when I start it?</a><br>
+  <a href="#3.9">3.9. Why does my self-compiled nano not read /etc/nanorc?</a><br>
+</p></blockquote>
+<h3><a href="#4">4. Running</a></h3>
+<blockquote><p>
+  <a href="#4.1">4.1. Alt+Up does nothing on a Linux console. How can I make it scroll?</a><br>
+  <a href="#4.2">4.2. How can I make Ctrl+Shift+Left/Right select words on urxvt?</a><br>
+  <a href="#4.3">4.3. Ack! My numeric keypad's keys don't work properly when NumLock is off! What can I do?</a><br>
+  <a href="#4.4">4.4. With what keystroke can I paste text from the clipboard into nano?</a><br>
+  <a href="#4.5">4.5. How do I select text for or paste text from the clipboard when nano's mouse support is turned on?</a><br>
+  <a href="#4.6">4.6. When I paste text into a document, each line gets indented further than the last. Why? And how can I stop this?</a><br>
+  <a href="#4.7">4.7. When I paste from Windows into a remote nano, nano rewraps the lines. What gives?</a><br>
+  <a href="#4.8">4.8. I've compiled nano with color support, but I don't see any color when I run it!</a><br>
+  <a href="#4.9">4.9. How do I make nano my default editor (in Pine, mutt, etc.)?</a><br>
+</p></blockquote>
+<h3><a href="#5">5. Internationalization</a></h3>
+<blockquote><p>
+  <a href="#5.1">5.1. There's no translation for my language!</a><br>
+  <a href="#5.2">5.2. I don't like the translation for &lt;x&gt; in my language. How can I fix it?</a><br>
+  <a href="#5.3">5.3. What is the status of Unicode support?</a>
+</p></blockquote>
+<h3><a href="#6">6. Advocacy and Licensing</a></h3>
+<blockquote><p>
+  <a href="#6.1">6.1. Why should I use nano instead of Pico?</a><br>
+  <a href="#6.2">6.2. Why should I use Pico instead of nano?</a><br>
+  <a href="#6.3">6.3. What is so bad about the older Pine license?</a><br>
+  <a href="#6.4">6.4. Okay, well, what mail program should I use then?</a>
+</p></blockquote>
+<h3><a href="#7">7. Miscellaneous</a></h3>
+<blockquote><p>
+  <a href="#7.1">7.1. Where can I ask questions or send suggestions?</a><br>
+  <a href="#7.2">7.2. How do I submit a bug report or patch?</a><br>
+  <a href="#7.3">7.3. I want to send the development team a big load of cash (or just a thank you).</a><br>
+  <a href="#7.4">7.4. How do I join the development team?</a><br>
+  <a href="#7.5">7.5. Can I have write access to the git tree?</a>
+</p></blockquote>
+<hr width="100%">
+
+<h1><a name="1"></a>1. General</h1>
+<h3><a name="1.1"></a>1.1. What is GNU nano?</h3>
+<blockquote><p>GNU nano was designed to be a free replacement for the Pico text editor, part of the Pine email suite from <a href="http://www.washington.edu/pine/">The University of Washington</a>. It aimed to &quot;emulate Pico as closely as is reasonable and then include extra functionality&quot;.</p></blockquote>
+<h3><a name="1.2"></a>1.2. What is the history behind nano?</h3>
+<blockquote><p>Funny you should ask!</p>
+  <p><b>In the beginning...</b></p>
+  <p>For years Pine was THE program used to read email on a Unix system. The Pico text editor is the portion of the program one would use to compose his or her mail messages. Many beginners to Unix flocked to Pico and Pine because of their well organized, easy to use interfaces. With the proliferation of GNU/Linux in the mid to late 90's, many University students became intimately familiar with the strengths (and weaknesses) of Pine and Pico.</p>
+  <p><b>Then came Debian...</b></p>
+  <p>The <a href="https://www.debian.org/">Debian GNU/Linux</a> distribution, known for its strict standards in distributing truly &quot;free&quot; software (i.e. software with no restrictions on redistribution), would not include a binary package for Pine or Pico. Many people had a serious dilemma: they loved these programs, but the versions available at the time were not truly free software in the <a href="https://www.gnu.org/philosophy/free-sw.html">GNU</a> sense of the word.</p>
+  <p><b>The event...</b></p>
+  <p>It was in late 1999 when Chris Allegretta (our hero) was yet again complaining to himself about the less-than-perfect license Pico was distributed under, the 1000 makefiles that came with it and how just a few small improvements could make it the Best Editor in the World (TM). Having been a convert from Slackware to Debian, he missed having a simple binary package that included Pine and Pico, and had grown tired of downloading them himself.</p>
+  <p>Finally something snapped inside and Chris coded and hacked like a madman for many hours straight one weekend to make a (barely usable) Pico clone, at the time called TIP (Tip Isn't Pico). The program could not be invoked without a filename, could not save files, had no help text display, spell checker, and so forth. But over time it improved, and with the help of a few great coders it matured to the (hopefully) stable state it is in today.</p>
+  <p>In February 2001, nano was declared an official GNU program by Richard Stallman. nano also reached its first production release on March 22, 2001.</p></blockquote>
+<h3><a name="1.3"></a>1.3. Why the name change from TIP?</h3>
+<blockquote><p>On January 10, 2000, TIP was officially renamed to nano because of a namespace conflict with another program called 'tip'. The original 'tip' program &quot;establishes a full duplex terminal connection to a remote host&quot;, and was included with many older Unix systems (and newer ones like Solaris). The conflict was not noticed at first because there is no 'tip' utility included with most GNU/Linux distributions (where nano was developed).</p></blockquote>
+<h3><a name="1.4"></a>1.4. What is the current version of nano?</h3>
+<blockquote><p>The current version of nano <i>should</i> be <b>7.2</b>.  Of course, you should always check the <a href="https://nano-editor.org/">nano homepage</a> to see what the latest and greatest version is.</p></blockquote>
+<h3><a name="1.5"></a>1.5. I want to read the man page without having to download the program!</h3>
+<blockquote><p>Jeez, demanding, aren't we? Okay, look <a href="https://nano-editor.org/dist/latest/nano.1.html">here</a>.</p></blockquote>
+<hr width="100%">
+
+<h1><a name="2"></a>2. Where to get GNU nano.</h1>
+<h3><a name="2.1"></a>2.1. Web sites that carry nano.</h3>
+<blockquote><p>The nano source tarballs can be downloaded from the following web sites:</p>
+  <ul>
+    <li><a href="https://nano-editor.org/dist/latest/">https://nano-editor.org/dist/latest/</a></li>
+    <li><a href="https://ftpmirror.gnu.org/gnu/nano/">https://ftpmirror.gnu.org/gnu/nano/</a></li>
+  </ul>
+</blockquote>
+<h3><a name="2.2"></a>2.2. RPM packages (RedHat, OpenSuse, and derivatives).</h3>
+<blockquote>
+  <ul>
+    <li><a href="https://kojipkgs.fedoraproject.org//packages/nano/">https://kojipkgs.fedoraproject.org//packages/nano/</a></li>
+    <li><a href="https://software.opensuse.org/package/nano">https://software.opensuse.org/package/nano</a></li>
+  </ul>
+</blockquote>
+<h3><a name="2.3"></a>2.3. Deb packages (Debian and derivatives):</h3>
+<blockquote><p>Debian users can check out the current nano packages for:</p>
+  <ul>
+    <li><a href="https://packages.debian.org/stable/editors/nano">stable</a></li>
+    <li><a href="https://packages.debian.org/testing/editors/nano">testing</a></li>
+    <li><a href="https://packages.debian.org/unstable/editors/nano">unstable</a></li>
+  </ul>
+  <p>You can also have a look at the <a href="http://ftp.debian.org/debian/pool/main/n/nano/">Package Pool</a> to see all the available binary and source packages.</p>
+</blockquote>
+<h3><a name="2.4"></a>2.4. By git (for the brave).</h3>
+<blockquote><p>For the "bleeding edge" current version of nano, you can use <b>git</b> to download the current source code. <i>Note:</i> believe it or not, by downloading code that has not yet stabilized into an official release, there could quite possibly be bugs, in fact the code may not even compile! Anyway, see <a href="http://git.savannah.gnu.org/cgit/nano.git/tree/README.hacking">the hacking document</a> for info on getting and building nano from git.</p></blockquote>
+<hr width="100%">
+
+<h1><a name="3"></a>3. Installation and Configuration</h1>
+<h3><a name="3.1"></a>3.1. How do I install the RPM or DEB package?</h3>
+<blockquote><p>It's simple really! As root, type <b>rpm -Uvh nano-x.y-1*.rpm</b> if you have a RedHat-ish system or <b>dpkg -i nano_x.y-1*.deb</b> if you have a Debian-ish system, where <b>x.y</b> is the version number of nano. There are other programs to install packages, and if you wish to use those, knock yourself out.</p></blockquote>
+<h3><a name="3.2"></a>3.2. Compiling from source: WHAT THE HECK DO I DO NOW?</h3>
+<blockquote><p>Okay, take a deep breath, this really isn't hard. Unpack the nano source with a command like:</p>
+  <p class="indented"><b>tar -xvf nano-x.y.tar.gz</b></p>
+  <p>Then you need to run <b>configure</b> with any options you might want (if any).</p>
+  <p>The average case is this:</p>
+  <p class="indented"><b>cd nano-x.y/</b><br>
+  <b>./configure</b><br>
+  <b>make</b><br>
+  <b>make install</b>&nbsp;&nbsp; #(as root, of course)</p></blockquote>
+<h3><a name="3.3"></a>3.3. Why does everything go into /usr/local?</h3>
+<blockquote><p>Well, that's what the <b>configure</b> script defaults to. If you wish to change this, simply do this:</p>
+  <p class="indented"><b>./configure --prefix=/usr</b></p>
+  <p>This will put nano into /usr/bin when you run <b>make install</b>.</p></blockquote>
+<h3><a name="3.4"></a>3.4. nano should automatically run strip on the binary when installing it!</h3>
+<blockquote><p>It does when you use <b>make install-strip</b>. The default <b>make install</b> does not, and will not, run strip automatically.</p></blockquote>
+<h3><a name="3.5"></a>3.5. How can I make the executable smaller? This is too bloated!</h3>
+<blockquote><p>Actually, there are several parts of the editor that can be disabled. You can pass arguments to the <b>configure</b> script that disable certain features. Here's a brief list:</p>
+  <pre>
+    <b>--disable-browser</b>       Disable the built-in file browser
+    <b>--disable-color</b>         Disable color and syntax highlighting
+    <b>--disable-comment</b>       Disable the comment/uncomment function
+    <b>--disable-extra</b>         Disable the easter egg
+    <b>--disable-formatter</b>     Disable the formatting tool
+    <b>--disable-help</b>          Disable the built-in help texts
+    <b>--disable-histories</b>     Disable the saving of search strings and cursor positions
+    <b>--disable-justify</b>       Disable the justify/unjustify functions
+    <b>--disable-libmagic</b>      Disable the use of libmagic for determining a file's syntax
+    <b>--disable-linenumbers</b>   Disable line numbering
+    <b>--disable-linter</b>        Disable the linting tool
+    <b>--disable-mouse</b>         Disable mouse support
+    <b>--disable-multibuffer</b>   Disable the opening of multiple file buffers
+    <b>--disable-nanorc</b>        Disable the use of .nanorc files
+    <b>--disable-operatingdir</b>  Disable the setting of an operating directory
+    <b>--disable-speller</b>       Disable the spell-checking tool
+    <b>--disable-tabcomp</b>       Disable the tab-completion functions
+    <b>--disable-wordcomp</b>      Disable the word-completion function
+    <b>--disable-wrapping</b>      Disable all hard-wrapping of text</pre>
+  <p>There's also the <b>--enable-tiny</b> option which disables everything above, as well as some larger chunks of the program (like the undo/redo code and the code for selecting text). Also, if you know you don't need other languages, you can use <b>--disable-nls</b> to disable internationalization and save a few kilobytes. And finally, there's always good old <b>strip</b> to remove all unneeded symbols.</p>
+</blockquote>
+<h3><a name="3.6"></a>3.6. Tell me more about this multibuffer stuff!</h3>
+<blockquote><p>To use multiple file buffers, you must not have configured nano with <b>--disable-multibuffer</b> nor with <b>--enable-tiny</b> (use <b>nano -V</b> to check the compilation options). Then when you want to insert a file into its own buffer instead of into the current file, just hit <b>Meta-F</b> after typing <b>^R</b>. If you always want files to be loaded into their own buffers, use the <b>-F</b> or <b>--multibuffer</b> flag when you invoke nano, or add <b>set multibuffer</b> to your .nanorc file.</p>
+  <p>You can move between the buffers you have open with the <b>Meta-&lt;</b> and <b>Meta-&gt;</b> keys, or more easily without holding Shift: <b>Meta-,</b> and <b>Meta-.</b> (clear as mud, right? =-). When you have more than one buffer open, the ^X shortcut will say &quot;Close&quot;, instead of &quot;Exit&quot;.</p></blockquote>
+<h3><a name="3.7"></a>3.7. Tell me more about this verbatim input stuff!</h3>
+<blockquote><p>When you want to insert a literal character into the file you're editing, such as a control character that nano usually treats as a command, first press <b>Meta-V</b> (if you're not at a prompt, you'll get the message &quot;Verbatim Input&quot; on the status bar), then press the key(s) that generate the character you want.</p>
+  <p>Alternatively, if Unicode support is enabled (see section <a href="#5.3">5.3</a>), you can press <b>Meta-V</b> and then type a six-digit hexadecimal code (from 000000 to 10FFFF, case-insensitive), and the character with the corresponding value will be inserted. The status bar will change to &quot;Unicode Input: ......&quot; when you do this.</p></blockquote>
+<h3><a name="3.8"></a>3.8. How do I make a .nanorc file that will be read when I start nano?</h3>
+<blockquote><p>It's not hard at all! Simply copy the <b>sample.nanorc</b> from the doc/ directory in the nano source package (or from /usr/doc/nano on your system) to <b>.nanorc</b> in your home directory, and then edit it. If you didn't get a sample nanorc, the syntax of the file is simple: features are turned on and off by using the words <b>set</b> and <b>unset</b> followed by the long option name of the feature (see <b>man nanorc</b> for the full list of options). For example, &quot;set quickblank&quot; or &quot;set smarthome&quot;. Of course, for this to work, your nano must <b>not</b> have been compiled with <b>--disable-nanorc</b>.</p></blockquote>
+<h3><a name="3.9"></a>3.9. Why does my self-compiled nano not read /etc/nanorc?</h3>
+<blockquote><p>By default (see <a href="#3.3">3.3</a>), nano gets installed into /usr/local. This also means that, at startup, nano will read <b>/usr/local/etc/nanorc</b> instead of <b>/etc/nanorc</b>. You can make a symlink from the former to the latter if you want your self-compiled nano to read the same nanorc as the system-installed nano. Or you can configure your nano to overwrite the system nano (again, see <a href="#3.3">3.3</a>).</p></blockquote>
+<hr width="100%">
+
+<h1><a name="4"></a>4. Running</h1>
+<h3><a name="4.1"></a>4.1. Alt+Up does nothing on a Linux console. How can I make it scroll?</h3>
+<blockquote><p>On Debian and its derivatives, the <b>Alt+Up</b> keystroke on a Linux console
+  produces by default a 'KeyboardSignal', which normally does absolutely nothing and is useless
+  for the average user.  To get the keystroke to do what it ought to do (scroll the viewport
+  one row up), run this in a Linux console:</p>
+  <p class="indented"><b>dumpkeys --full | sed s/KeyboardSignal/Up/ | sudo loadkeys -</b></p>
+  <p>You will need to run this command whenever you first switch to a Linux console.</p>
+  <p>Or you can (as root) execute the following little script just once:</p>
+  <p class="indented"><b>for file in /etc/console-setup/cached*.kmap.gz; do<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;gunzip $file;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;sed -i 's/KeyboardSignal/Up/' ${file%.gz};<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;gzip ${file%.gz};<br>
+  done</b></p></blockquote>
+<h3><a name="4.2"></a>4.2. How can I make Ctrl+Shift+Left/Right select words on urxvt?</h3>
+<blockquote><p>The urxvt terminal emulator produces non-standard escape sequences for the modified cursor keys.  These deviant sequences are not listed in the terminfo database, which means that ncurses does not recognize them.  The easiest way around this is to tell urxvt to produce xterm-compatible escape sequences for the relevant keystrokes.  To achieve this, add the following lines to your ~/.Xresources file:</p>
+<pre>
+    URxvt.iso14755_52: False
+
+    URxvt.keysym.C-S-Up: \033[1;6A
+    URxvt.keysym.C-S-Down: \033[1;6B
+    URxvt.keysym.C-S-Right: \033[1;6C
+    URxvt.keysym.C-S-Left: \033[1;6D
+
+    URxvt.keysym.M-Up: \033[1;3A
+    URxvt.keysym.M-Down: \033[1;3B
+    URxvt.keysym.M-Right: \033[1;3C
+    URxvt.keysym.M-Left: \033[1;3D
+
+    URxvt.keysym.M-Insert: \033[2;3~
+    URxvt.keysym.M-Delete: \033[3;3~
+
+    URxvt.keysym.M-Page_Up: \033[5;3~
+    URxvt.keysym.M-Page_Down: \033[6;3~</pre>
+<p>Then run <b>xrdb ~/.Xresources</b> and restart your urxvt terminal.  Now <b>Ctrl+Shift+Left</b> and <b>Ctrl+Shift+Right</b> will select words, <b>Alt+Up</b> and <b>Alt+Down</b> will scroll the text without moving the cursor, and several such things more.</p></blockquote>
+<h3><a name="4.3"></a>4.3. Ack! My numeric keypad's keys don't work properly when NumLock is off! What can I do?</h3>
+<blockquote><p>You can use the <b>-K</b> or <b>--rawsequences</b> option on the command line, or add the line <b>set rawsequences</b> to your .nanorc. However, nano's mouse support will be disabled if you do any of these things.</p></blockquote>
+<h3><a name="4.4"></a>4.4. With what keystroke can I paste text from the clipboard into nano?</h3>
+<blockquote><p>In most desktop environments <b>Shift+Insert</b> will paste the contents of the clipboard.</p></blockquote>
+<h3><a name="4.5"></a>4.5. How do I select text for or paste text from the clipboard when nano's mouse support is turned on?</h3>
+<blockquote><p>Try holding down the Shift key and selecting or pasting the text as you normally would.</p></blockquote>
+<h3><a name="4.6"></a>4.6. When I paste text into a document, each line gets indented further than the last. Why? And how can I stop this?</h3>
+<blockquote><p>You have the <i>autoindent</i> feature turned on. Hit <b>Meta-I</b> to turn it off, paste your text, and then hit <b>Meta-I</b> again to turn it back on.</p>
+  <p><i>Update:</i> Since version 4.8, nano will suppress auto-indentation during a paste, so you no longer need to toggle it off and on manually.</p></blockquote>
+<h3><a name="4.7"></a>4.7. When I paste from Windows into a remote nano, nano rewraps the lines. What gives?</h3>
+<blockquote><p>When pasting from Windows, in some situations linefeeds are sent instead of carriage returns (Enters). And linefeeds are <b>^J</b>s, which make nano justify (rewrap) the current paragraph. To prevent these linefeeds from causing these unwanted justifications, add this line to your .nanorc on the remote Linux box: <b>unbind ^J main</b> or <b>bind ^J enter main</b>, depending on whether the paste contains CR + LF or only LF.</p>
+  <p><i>Update:</i> Since version 4.8, nano will ignore linefeed characters in a paste, so you no longer need the above workaround.</p></blockquote>
+<h3><a name="4.8"></a>4.8. I've compiled nano with color support, but I don't see any color when I run it!</h3>
+<blockquote><p>If you want nano to actually use color, you have to specify the color configurations you want it to use in your .nanorc. Several example configurations are in the <b>syntax/</b> subdirectory of the nano source, which are normally installed to <b>/usr/local/share/nano/</b>. To enable all of them, uncomment the line <b># include "/usr/local/share/nano/*.nanorc"</b> in your nanorc. See also section <a href="#3.9">3.9</a>.</p></blockquote>
+<h3><a name="4.9"></a>4.9. How do I make nano my default editor (in Pine, mutt, etc.)?</h3>
+<blockquote><p>You need to make nano your $EDITOR. If you want this to be saved, you should put a line like this in your <b>.bashrc</b> if you use bash (or <b>.zshrc</b> if you believe in zsh):</p>
+  <p class="indented"><b>export EDITOR=/usr/local/bin/nano</b></p>
+  <p>or, if you use tcsh, put this in your <b>.cshrc</b> file:</p>
+  <p class="indented"><b>setenv EDITOR /usr/local/bin/nano</b></p>
+  <p>Change /usr/local/bin/nano to wherever nano is installed on your system. Type &quot;which nano&quot; to find out. This will not take effect until the next time you log in. So log out and back in again.</p>
+  <p>Then, on top of that, if you use Pine, you must go into setup (type <b>S</b> at the main menu), and then configure (type <b>C</b>). Hit Enter on the lines that say:</p>
+  <p class="indented"><b>[ ] enable-alternate-editor-cmd</b><br>
+  <b>[ ] enable-alternate-editor-implicitly</b></p>
+  <p>Then exit (<b>E</b>) and select Yes (<b>Y</b>).</p>
+  <p>If you're a mutt user, you should see an effect immediately the next time you log in. No further configuration is needed. However, if you want to let people know you use nano to compose your email messages, you can put a line like this in your <b>.muttrc</b>:</p>
+  <p class="indented"><b>my_hdr X-Composer: nano-x.y</b></p>
+  <p>Again, replace x.y with the version of nano you use.</p></blockquote>
+<hr width="100%">
+
+<h1><a name="5"></a>5. Internationalization</h1>
+<h3><a name="5.1"></a>5.1. There's no translation for my language!</h3>
+<blockquote><p>In June 2001, GNU nano entered the <a href="https://translationproject.org/html/welcome.html">Translation Project</a> and since then, translations should be managed from there.</p>
+  <p>If there isn't a translation for your language, you could ask <a href="https://translationproject.org/team/">your language team</a> to translate nano, or better still, join that team and do it yourself. Joining a team is easy. You just need to ask the team leader to add you, and then send a <a href="https://translationproject.org/disclaim.txt">translation disclaimer to the FSF</a> (this is necessary as nano is an official GNU package, but it does <b>not</b> mean that you transfer the rights of your work to the FSF, it's just so the FSF can legally manage them).</p>
+  <p>In any case, translating nano is easy. Just grab the latest <b>nano.pot</b> file listed on <a href="https://translationproject.org/domain/nano.html">nano's page</a> at the TP, and translate each <b>msgid</b> line into your native language on the <b>msgstr</b> line. When you're done, you should send it to the TP's central PO-file repository.</p></blockquote>
+<h3><a name="5.2"></a>5.2. I don't like the translation for &lt;x&gt; in my language. How can I fix it?</h3>
+<blockquote><p>The best way is to send an e-mail with your suggested corrections to the team's mailing list. The address is mentioned in the <code>Language-Team:</code> field in the relevant PO file. The team leader or the assigned translator can then make the changes reach the nano-devel list.</p></blockquote>
+<h3><a name="5.3"></a>5.3. What is the status of Unicode support?</h3>
+<blockquote><p>Unicode should be fully usable nowadays. When the encoding of your terminal is set to UTF-8, and your locale (mainly the LANG environment variable) is UTF-8 too, then you should be able to read, enter and save Unicode text.</p></blockquote>
+<hr width="100%">
+
+<h1><a name="6"></a>6. Advocacy and Licensing</h1>
+<h3><a name="6.1"></a>6.1. Why should I use nano instead of Pico?</h3>
+<blockquote><p>If you want features like undo/redo, syntax highlighting, line numbers, soft-wrapping, opening multiple files at once, an interface localized to your language, or search and replace with support for regular expressions, then you want nano.</p></blockquote>
+<h3><a name="6.2"></a>6.2. Why should I use Pico instead of nano?</h3>
+<blockquote><p>If you use your editor only to write emails or other texts and have no need for the above-mentioned features, then Pico will do fine for you.</p></blockquote>
+<h3><a name="6.3"></a>6.3. What is so bad about the older Pine license?</h3>
+<blockquote><p>The U of W license for older versions of Pine and Pico is not considered truly Free Software according to both the Free Software Foundation and the <a href="https://www.debian.org/social_contract#guidelines">Debian Free Software Guidelines</a>. The main problem regards the limitations on distributing derived works: according to UW, you can distribute their software, and you can modify it, but you can not do both, i.e. distribute modified binaries.</p></blockquote>
+<h3><a name="6.4"></a>6.4. Okay, well, what mail program should I use then?</h3>
+<blockquote><p>If you are looking to use a Free Software program similar to Pine, and Emacs is not your thing, you should definitely take a look at <a href="http://www.mutt.org/">mutt</a>. It is a full-screen, console based mail program that actually has a lot more flexibility than Pine, but has a keymap included in the distribution that allows you to use the same keystrokes as Pine would to send and receive mail. It's also under the GNU General Public License, version 2.0.</p>
+<p>Of course, due to the license change you can now use the <a href="http://www.washington.edu/alpine/">Alpine distribution</a> of PINE as it is now considered Free Software, but you would be sacrificing many of nano's features to do so.</p></blockquote>
+<hr width="100%">
+
+<h1><a name="7"></a>7. Miscellaneous</h1>
+<h3><a name="7.1"></a>7.1. Where can I ask questions or send suggestions?</h3>
+<blockquote><p>There are three mailing lists for nano hosted at <a href="https://savannah.gnu.org/">Savannah</a>: info-nano, help-nano and nano-devel. info-nano is a very low traffic list where new versions of nano are announced (surprise!). help-nano is for getting help with the editor without needing to hear all of the development issues surrounding it. nano-devel is a normally low, sometimes high traffic list for discussing the present and future development of nano. Here are links to where you can sign up for a given list:</p>
+  <p>info-nano - <a href="https://lists.gnu.org/mailman/listinfo/info-nano/">https://lists.gnu.org/mailman/listinfo/info-nano/</a><br>
+  help-nano - <a href="https://lists.gnu.org/mailman/listinfo/help-nano/">https://lists.gnu.org/mailman/listinfo/help-nano/</a><br>
+  nano-devel - <a href="https://lists.gnu.org/mailman/listinfo/nano-devel/">https://lists.gnu.org/mailman/listinfo/nano-devel/</a></p></blockquote>
+<h3><a name="7.2"></a>7.3. How do I submit a bug report or patch?</h3>
+<blockquote>
+  <p>The best way to submit bugs is through the <a href="https://savannah.gnu.org/bugs/?group=nano">Savannah bug tracker</a>, as you can check whether the bug you are reporting has already been submitted, and it makes it easier for the maintainers to keep track of them.
+  <p>You can submit patches for nano via <a href="https://savannah.gnu.org/patch/?group=nano">Savannah's patch manager</a>.</p></blockquote>
+<h3><a name="7.3"></a>7.3. I want to send the development team a big load of cash (or just a thank you).</h3>
+<blockquote><p>That's fine. Send it <a href="mailto:nano-devel@gnu.org">our way</a>! Better yet, fix a <a href="https://savannah.gnu.org/bugs/?group=nano">bug</a> in the program or implement a <a href="https://nano-editor.org/dist/latest/TODO">cool feature</a> and send us that instead (though cash is fine too).</p></blockquote>
+<h3><a name="7.4"></a>7.4. How do I join the development team?</h3>
+<blockquote><p>The easiest way is to consistently send in good patches that add some needed functionality, fix a bug or two, and/or make the program more optimized/efficient. Then ask nicely and you will probably be added to the Savannah development list and be given write access after a while. There is a lot of responsibility that goes along with being a team member, so don't think it's just something to add to your resume.</p></blockquote>
+<h3><a name="7.5"></a>7.5. Can I have write access to the git tree?</h3>
+<blockquote><p>Re-read section <a href="#7.4">7.4</a> and you should know the answer.</p></blockquote>
+<hr width="100%">
+
+</body>
+</html>

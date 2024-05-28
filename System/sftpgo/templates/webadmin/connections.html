@@ -1,0 +1,221 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/fixedHeader.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+{{end}}
+
+{{define "page_body"}}
+<div id="errorMsg" class="alert alert-warning fade show" style="display: none;" role="alert">
+    <span id="errorTxt"></span>
+    <button type="button" class="close" aria-label="Close" onclick="dismissErrorMsg();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script type="text/javascript">
+    function dismissErrorMsg(){
+        $('#errorMsg').hide();
+    }
+</script>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">View and manage connections</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover nowrap" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Node</th>
+                        <th>Username</th>
+                        <th>Time</th>
+                        <th>Info</th>
+                        <th>Transfers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Connections}}
+                    <tr>
+                        <td>{{.ConnectionID}}</td>
+                        <td>{{.Node}}</td>
+                        <td>{{.Username}}</td>
+                        <td>{{.GetConnectionDuration}}</td>
+                        <td>{{.GetConnectionInfo}}</td>
+                        <td>{{.GetTransfersAsString}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "dialog"}}
+<div class="modal fade" id="disconnectModal" tabindex="-1" role="dialog" aria-labelledby="disconnectModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="disconnectModalLabel">
+                    Confirmation required
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to close the selected connection?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-warning" href="#" onclick="disconnectAction()">
+                    Disconnect
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.colVis.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.responsive.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.select.min.js"></script>
+<script type="text/javascript">
+
+    function disconnectAction() {
+        let table = $('#dataTable').DataTable();
+        table.button('disconnect:name').enable(false);
+        let selectedData = table.row({ selected: true }).data()
+        let connectionID = selectedData[0];
+        let nodeID = selectedData[1];
+        let path = '{{.ConnectionsURL}}' + "/" + fixedEncodeURIComponent(connectionID)+"?node="+encodeURIComponent(nodeID);
+        $('#disconnectModal').modal('hide');
+        $('#errorMsg').hide();
+
+        $.ajax({
+            url: path,
+            type: 'DELETE',
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN' : '{{.CSRFToken}}'},
+            timeout: 15000,
+            success: function (result) {
+                window.location.href = '{{.ConnectionsURL}}';
+            },
+            error: function ($xhr, textStatus, errorThrown) {
+                var txt = "Failed to close the selected connection";
+                if ($xhr) {
+                    var json = $xhr.responseJSON;
+                    if (json) {
+                        if (json.message){
+                            txt += ": " + json.message;
+                        } else {
+                            txt += ": " + json.error;
+                        }
+                    }
+                }
+                $('#errorTxt').text(txt);
+                $('#errorMsg').show();
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.fn.dataTable.ext.buttons.disconnect = {
+            text: 'Disconnect',
+            name: 'disconnect',
+            action: function (e, dt, node, config) {
+                $('#disconnectModal').modal('show');
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.refresh = {
+            text: '<i class="fas fa-sync-alt"></i>',
+            name: 'refresh',
+            titleAttr: "Refresh",
+            action: function (e, dt, node, config) {
+                location.reload();
+            }
+        };
+
+        var table = $('#dataTable').DataTable({
+            "select": {
+                "style": "single",
+                "blurable": true
+            },
+            "buttons": [
+                {
+                    "text": "Column visibility",
+                    "extend": "colvis",
+                    "columns": ":not(.noVis)"
+                }
+            ],
+            "lengthChange": true,
+            "columnDefs": [
+                {
+                    "targets": [0, 1],
+                    "visible": false,
+                    "searchable": false,
+                    "className": "noVis"
+                },
+                {
+                    "targets": [2],
+                    "className": "noVis"
+                }
+            ],
+            "scrollX": false,
+            "scrollY": false,
+            "responsive": true,
+            "language": {
+                "emptyTable": "No user connected"
+            },
+            "order": [[2, 'asc']]
+        });
+
+        new $.fn.dataTable.FixedHeader( table );
+
+        table.button().add(0, 'refresh');
+        //table.button().add(0,'pageLength');
+
+        {{if .LoggedAdmin.HasPermission "close_conns"}}
+        table.button().add(0,'disconnect');
+
+        table.on('select deselect', function () {
+            var selectedRows = table.rows({ selected: true }).count();
+            table.button('disconnect:name').enable(selectedRows == 1);
+        });
+        {{end}}
+        table.buttons().container().appendTo('.col-md-6:eq(0)', table.table().container());
+    });
+</script>
+{{end}}

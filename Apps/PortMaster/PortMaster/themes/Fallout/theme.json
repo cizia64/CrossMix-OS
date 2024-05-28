@@ -1,0 +1,1053 @@
+{
+    "#info": {
+        "version": 1,
+        "name": "Fallout",
+        "creator": "Tekkenfede",
+        "description": "Beta theme, can contain minor flaws. \nFallout Theme made by Tekkenfede."
+    },
+
+    "#base": {
+        "font": "ShareTechMono-Regular.ttf",
+        "font[zh_TW]": "NotoSansTC-Regular.ttf",
+        "font[zh_CN]": "NotoSansSC-Regular.ttf",
+        "font[zh_HK]": "NotoSansHK-Regular.ttf",
+        "font[ko_KR]": "NotoSansKR-Regular.ttf",
+        "font[ja_JP]": "NotoSansJP-Regular.ttf",
+        "font-scale[30:17]": 1.0,
+        "font-scale[1920x1152|1920x1080]": 2.0,
+        "font-scale[1280x720|1280x800]": 1.3,
+        "font-scale[3:2]": 0.85,
+        "font-scale[427:240]": 0.9
+    },
+
+    "#pallet": {
+        "background": [ 85, 85, 85, 255 ],
+        "background_fade": [ 0, 0, 0, 210 ],
+        "list_text": [ 113, 255, 124 ],
+        "list_selected": [ 255, 255, 255, 255 ],
+        "list_unselectable": [ 128, 0, 0, 255 ],
+        "button": [ 113, 255, 124, 255 ],
+        "general_font": [ 113, 255, 124 ],
+        "download_font": [ 113, 255, 124, 255 ],
+        "selection-fill": [ 40, 220, 40, 35 ]
+    },
+
+    "#resources": {
+        "ui_hacking_charscroll.ogg": {
+            "name": "scroll"
+        },
+        "ui_pipboy_highlight.ogg": {
+            "name": "pipscroll"
+        },
+        "ui_pipboy_holotape_stop.ogg": {
+            "name": "pipcancel"
+        },
+
+        "ui_hacking_passbad.ogg": {
+            "name": "cancel"
+        },
+        "ui_pipboy_holotape_start.ogg": {
+            "name": "pipclick"
+        },
+
+
+        "ui_hacking_passgood.ogg": {
+            "name": "click"
+        },
+        "buttons.png": {
+            "image-mod": [ 113, 255, 124 ],
+            "atlas": {
+                "_A": [ 0, 0, 180, 180 ],
+                "_B": [ 180, 0, 180, 180 ],
+                "_X": [ 360, 0, 180, 180 ],
+                "_Y": [ 540, 0, 180, 180 ],
+                "_START": [ 0, 180, 360, 180 ],
+                "_SELECT": [ 360, 180, 360, 180 ],
+                "_L": [ 0, 360, 270, 180 ],
+                "_R": [ 270, 360, 270, 180 ],
+                "_UNCHECKED": [ 720, 0, 180, 180 ],
+                "_CHECKED": [ 900, 0, 180, 180 ],
+                "_MORE": [ 720, 180, 180, 180 ],
+                "_LEFT": [ 900, 180, 90, 180 ],
+                "_RIGHT": [ 990, 180, 90, 180 ],
+                "_UP": [ 900, 360, 180, 90 ],
+                "_DOWN": [ 900, 450, 180, 90 ]
+            }
+
+        },
+
+        "portmasterfallout.png": {
+            "atlas": {
+                "_back": [ 185, 0, 1280, 960 ],
+                "_backlittle": [ 215, 0, 600, 400 ],
+                "_backlittle4-3": [ 185, 0, 640, 480 ],
+                "_back16-9": [ 0, 0, 1280, 720 ],
+                "_back30-17": [ 30, 0, 960, 544 ],
+                "_back427-240": [ 80, 0, 854, 480 ],
+                "_back5-3": [ 0, 0, 1920, 1152 ],
+                "_back1-1": [ 130, 0, 720, 720 ],
+                "_backdeck": [ 0, 0, 1280, 800 ]
+
+
+
+
+            }
+        },
+        "hearts.png": {
+            "atlas": {
+                "hearts_0": [ 350, 0, 350, 32 ],
+                "hearts_10": [ 315, 0, 350, 32 ],
+                "hearts_20": [ 280, 0, 350, 32 ],
+                "hearts_30": [ 245, 0, 350, 32 ],
+                "hearts_40": [ 210, 0, 350, 32 ],
+                "hearts_50": [ 175, 0, 350, 32 ],
+                "hearts_60": [ 140, 0, 350, 32 ],
+                "hearts_70": [ 105, 0, 350, 32 ],
+                "hearts_80": [ 70, 0, 350, 32 ],
+                "hearts_90": [ 35, 0, 350, 32 ],
+                "hearts_100": [ 1, 0, 350, 32 ]
+            }
+        },
+        "portmasterfalloutscan.png": {
+            "atlas": {
+                "_scanback": [ 0, 0, 1280, 960 ],
+                "_scanbacklittle": [ 270, 0, 480, 320 ],
+                "_scanback16-9": [ 0, 0, 1280, 720 ],
+                "_scanback30-17": [ 20, 0, 960, 544 ],
+                "_scanback427-240": [ 50, 0, 854, 480 ],
+                "_scanback5-3": [ 0, 0, 1920, 1152 ],
+                "_scanback1-1": [ 125, 0, 720, 720 ]
+
+
+
+
+            }
+        },
+
+
+        "portmastermenu.png": {
+            "atlas": {
+                "_back2": [ 190, 0, 1280, 960 ],
+                "_backlistdeck": [ 0, 0, 1280,800 ],
+                "_backlistlittle": [ 190, 0, 480, 320 ],
+                "_backlist4-3": [ 200, 0, 640, 480 ]
+
+
+            }
+        },
+
+        "portmastermenu1_1.png": {
+            "atlas": {
+                "_backlist1-1": [ 0, 0, 720, 720 ]
+
+            }
+        },
+
+        "portmastermenu5_3.png": {
+            "atlas": {
+                "_backlist5-3": [ 0, 0, 1920, 1152 ]
+
+            }
+        },
+        "portmastermenu30_17.png": {
+            "atlas": {
+                "_backlist30-17": [ 0, 0, 960, 544 ]
+
+            }
+        },
+
+        "portmastermenu16_9.png": {
+            "atlas": {
+                "_backlist16-9": [ 0, 0, 1280, 720 ]
+
+            }
+        },
+
+        "portmastermenu427_240.png": {
+            "atlas": {
+                "_backlist427-240": [ 0, 0, 854, 480 ]
+
+            }
+        },
+
+
+
+        
+
+        "portmastermenulittle.png": {
+            "atlas": {
+                "_backlistlittle": [ 0, 0, 480, 320 ]
+
+
+            }
+        },
+
+
+        "generalscan.png": {
+            "atlas": {
+                "_scanlistback": [ 0, 0, 1280, 960 ],
+                "_scanlistbacklittle": [ 0, 0, 600, 400 ],
+                "_scanlistback16-9": [ 0, 0, 1280, 720 ],
+                "_scanlistback30-17": [ 0, 0, 960, 544 ],
+                "_scanlistback427-240": [ 0, 0, 854, 480 ],
+                "_scanlistback5-3": [ 0, 0, 1920, 1152 ],
+                "_scanlistbackdeck": [ 0, 0, 1280,800 ],
+                "_scanlistback1-1": [ 0, 0, 720, 720 ]
+
+
+
+
+            }
+        },
+
+        "portmastermenutitle.png": {
+            "atlas": {
+                "_portmastermenuclear": [ 180, 0, 640, 480 ]
+            }
+        },
+
+        "portmastermenutitlelittle.png": {
+            "atlas": {
+                "_portmastermenuclearlittle": [ 0, 0, 480, 320 ]
+
+            }
+        },
+
+        "portmastermenutitle5_3.png": {
+            "atlas": {
+                "_portmastermenutitle5_3": [ 0, 0, 1952,  1152 ],
+                "_portmastermenutitle30_17": [ 0, 0, 960,  544 ],
+                "_portmastermenutitledeck": [ 0, 0, 1280,  800 ]
+
+
+            }
+        },
+
+        "portmastermenutitle30_17.png": {
+            "atlas": {
+                "_portmastermenutitle30_17": [ 0, 0, 960,  544 ]
+
+
+            }
+        },
+
+        "portmastermenutitle1_1.png": {
+            "atlas": {
+                "_portmastermenutitle1_1": [ 0, 0, 720,  720 ]
+
+
+            }
+        },
+        "portmastermenutitle16_9.png": {
+            "atlas": {
+                "_portmastermenutitle16_9": [ 0, 0, 1280,  720 ]
+
+
+            }
+        },
+
+        "portmastermenutitle427_240.png": {
+            "atlas": {
+                "_portmastermenutitle427_240": [ 0, 0, 854,  480 ]
+
+
+            }
+        },
+
+
+
+        
+
+        "portmastermenuclear.png": {
+            "atlas": {
+                "_portmastermenunull": [ 180, 0, 640, 480 ],
+                "_portmastermenunulllittle": [ 180, 0, 480, 320 ],
+                "_portmastermenunull5_3": [ 180, 0, 960, 544 ],
+                "_portmastermenunull1_1": [ 180, 0, 720, 720 ],
+                "_portmastermenunull16_9": [ 180, 0, 1280, 720 ],
+                "_portmastermenunull427_240": [ 180, 0, 854, 480 ],
+                "_portmastermenunulldeck": [ 180, 0, 1280, 800 ]
+
+
+            }
+        }
+
+
+
+    },
+
+
+    "#elements": {
+        "left_pane": {
+            "comment": "Left side of the screen.",
+            "area": [ 0.0, 0.0, 0.3, 1.0 ],
+            "area[3:2]": [ 0.0, 0.0, 0.4, 1.0 ],
+            "area[wide]": [ 0.0, 0.0, 0.4, 1.0 ]
+        },
+        "right_pane": {
+            "comment": "Right side of the screen.",
+            "area": [ 0.3, 0.0, 1.0, 1.0 ],
+            "area[3:2]": [ 0.4, 0.0, 1.0, 1.0 ],
+            "area[wide]": [ 0.4, 0.0, 1.0, 1.0 ]
+        },
+        "port_info_list_area": {
+            "comment": "List area",
+            "parent": "left_pane",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ]
+        },
+        "port_info_area": {
+            "comment": "The area used for the info text/image",
+            "parent": "right_pane",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ]
+        },
+        "port_info_title_area": {
+            "comment": "Port Title",
+            "parent": "port_info_area",
+            "area": [ 0.0, 0.0, 1.0, 0.1 ]
+        },
+        "port_info_image_area": {
+            "comment": "Port image",
+            "parent": "port_info_area",
+            "area": [ 0.0, 0.1, 1.0, 0.4 ],
+            "area[hires]": [ 0.0, 0.1, 1.0, 0.5 ],
+            "area[4:3]": [ 0.0, 0.1, 1.0, 0.5 ]
+        },
+
+        "port_info_text_area": {
+            "comment": "Port Info",
+            "parent": "port_info_area",
+            "area": [ 0.0, 0.4, 1.0, 1.0 ],
+            "area[1920x1152, hires]": [ 0.0, 0.5, 1.0, 1.0 ]
+        },
+        "background": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "border": 8,
+            "image": "_back",
+            "image[3:2]": "_backlittle",
+            "image[4:3]": "_backlittle4-3",
+            "image[1280x720|1920x1080]": "_back16-9",
+            "image[30:17]": "_back30-17",
+            "image[427:240]": "_back427-240",
+            "image[1920x1152]": "_back5-3",
+            "image[1280x800]": "_backdeck",
+            "image[1:1]": "_back1-1",
+            "image-align": "center",
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ]
+
+        },
+
+        "background2": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_back2",
+            "image[3:2]": "_backlistlittle",
+            "image[4:3]": "_backlist4-3",
+            "image[1280x720|1920x1080]": "_backlist16-9",
+            "image[30:17]": "_backlist30-17",
+            "image[427:240]": "_backlist427-240",
+            "image[1920x1152]": "_backlist5-3",
+            "image[1280x800]": "_backlistdeck",
+            "image[1:1]": "_backlist1-1",
+            "image-align": "center",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ]
+
+        },
+        "background3": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "fill": "background",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ]
+        },
+
+        "background4": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_back",
+            "image[3:2]": "_backlittle",
+            "image[4:3]": "_backlittle4-3",
+            "image[1280x800]": "_backdeck",
+            "image[1280x720|1920x1080]": "_back16-9",
+            "image[30:17]": "_back30-17",
+            "image[427:240]": "_back427-240",
+            "image[1920x1152]": "_back5-3",
+            "image[1:1]": "_back1-1",
+            "image-align": "center",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ]
+        },
+
+        "portmastermenuclear": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_portmastermenuclear",
+            "image[3:2]": "_portmastermenuclearlittle",
+            "image[5:3]": "_portmastermenutitle5_3",
+            "image[30:17]": "_portmastermenutitle30_17",
+            "image[1:1]": "_portmastermenutitle1_1",
+            "image[1280x720|1920x1080]": "_portmastermenutitle16_9",
+            "image[427:240]": "_portmastermenutitle427_240",
+            "image[1280x800]": "_portmastermenutitledeck"
+
+
+        },
+
+        "portmastermenunull": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_portmastermenunull",
+            "image[3:2]": "_portmastermenunulllittle",
+            "image[5:3]": "_portmastermenunull5_3",
+            "image[30:17]": "_portmastermenunull30_17",
+            "image[1:1]": "_portmastermenunull1_1",
+            "image[427:240]": "_portmastermenunull427_240",
+            "image[1280x800]": "_portmastermenunulldeck",
+            "image[1280x720|1920x1080]": "_portmastermenunull16_9"
+        },
+
+
+
+        "scanlinemain": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_scanback",
+            "image[3:2]": "_scanbacklittle",
+            "image[1280x720|1920x1080]": "_scanback16-9",
+            "image[30:17]": "_scanback30-17",
+            "image[427:240]": "_scanback427-240",
+            "image[1920x1152]": "_scanback5-3",
+            "image[1:1]": "_scanback1-1",
+            "image[1280x800]":"_scanlistbackdeck",
+            "image-align": "center",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ],
+            "music": "mainmenu.ogg",
+            "music-volume": 100
+
+        },
+
+        "scanlinemain2": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_scanback",
+            "image[3:2]": "_scanbacklittle",
+            "image[1280x720|1920x1080]": "_scanback16-9",
+            "image[30:17]": "_scanback30-17",
+            "image[427:240]": "_scanback427-240",
+            "image[1920x1152]": "_scanback5-3",
+            "image[1:1]": "_scanback1-1",
+            "image[1280x800]":"_scanlistbackdeck",
+            "image-align": "center",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ],
+            "music": "mainmenu.ogg",
+            "music-volume": 100
+
+        },
+
+
+        "scanlinelist": {
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "_scanlistback",
+            "image[3:2]": "_scanlistbacklittle",
+            "image[1280x720|1920x1080]": "_scanlistback16-9",
+            "image[30:17]": "_scanlistback30-17",
+            "image[427:240]": "_scanlistback427-240",
+            "image[1920x1152]": "_scanlistback5-3",
+            "image[1:1]": "_scanlistback1-1",
+            "image[1280x800]":"_scanlistbackdeck",
+            "image-align": "center",
+            "border": 8,
+            "font-size": 36,
+            "font-color": [ 0, 0, 0 ],
+            "music": "mainmenu.ogg",
+            "music-volume": 100
+
+        },
+
+
+
+
+        "button_bar": {
+            "button-sound": "click",
+            "button-sound-volume": 64,
+            "button-sound-alt": "cancel",
+            "button-sound-alt-volume": 64,
+            "area": [ 0.60, 0.93, 0.98, 0.97 ],
+            "font-size": 18,
+            "font-size[pl_PL]": 13,
+            "font-size[fr_FR]": 10,
+            "font-color": "general_font",
+            "align": "midright",
+            "bar": [
+                "_A",
+                "Accept",
+                "_B",
+                "Back"
+
+            ]
+        },
+
+        "option_list": {
+            "area": [ 0.25, 0.30, 1.0, 0.9 ],
+            "align": "center",
+            "border": 8,
+            "font-size": 30,
+            "font-size[pl_PL]": 25,
+            "font-color": "list_text",
+            "select-color": "list_selected",
+            "text-clip": true,
+            "thickness": 10
+        }
+    },
+
+    "ports_list": {
+        "#element:background2": {},
+
+        "ports_list": {
+            "parent": "port_info_list_area",
+            "select-fill": "selection-fill",
+            "area": [ 0.2, 0.1, 1.0, 0.9 ],
+            "area[3:2]": [ 0.05, 0.1, 0.8, 0.9 ],
+            "area[1920x1152]": [ 0.33, 0.1, 1.0, 0.9 ],
+            "area[30:17]": [ 0.33, 0.1, 1.0, 0.9 ],
+            "border-x": 16,
+            "border-y": 22,
+            "font-size": 19,
+            "font-size[427:240]": 22,
+            "font-size[1280x720|1280x800|1920x1080]": 19,
+            "font-size[1920x1152]": 15,
+            "font-color": "list_text",
+            "select-color": "list_selected",
+            "text-clip": true,
+            "text-wrap": false,
+            "autoscroll": "slide",
+            "scroll-speed": 30,
+            "scroll-delay-start": 500,
+            "scroll-delay-end": 500,
+            "pointer-size": [ 36, 18 ],
+            "pointer-attach": "text",
+            "pointer-offset": [ 3, 5 ],
+            "pointer-flip-x": true,
+            "pointer-flip-y": false,
+            "click-sound": "pipscroll",
+            "click-sound-volume": 32
+
+
+        },
+
+        "port_general_info": {
+            "parent": "port_info_text_area",
+            "area": [ 0.05, 0.3, 0.85, 0.4 ],
+            "area[3:2]": [ 0.05, 0.15, 0.95, 0.30 ],
+            "area[1920x1152]": [ 0.13, 0.08, 0.85, 0.18 ],
+            "border-x": 4,
+            "border-y": 5,
+            "font-size": 16,
+            "font-size[1920x1152]": 11,
+            "font-size[1280x720|1280x800|1920x1080]": 11,
+            "font-color": "general_font",
+            "text": "Genres: {port_info.genres}    Download Size: {port_info.download_size}{if:port_info.runtime}    Runtime: {port_info.runtime} ({port_info.runtime_status}){endif}",
+            "autoscroll": "slide",
+            "scroll-speed": 30,
+            "scroll-delay-start": 1000,
+            "scroll-delay-end": 1000
+        },
+
+
+
+        "port_desc": {
+            "parent": "port_info_text_area",
+            "image-mode": "stretch",
+            "border-x": 16,
+            "border-y": 16,
+            "area": [ 5, 65, -5, -45 ],
+            "area[4:3]": [ 5, 118, -15, -50 ],
+            "area[3:2]": [ 5, 59, -5, -28 ],
+            "area[1280x720|1280x800]": [ 5, 165, -5, -100 ],
+            "area[1920x1152]": [ 0.1, 0.2, 0.9, 0.6 ],
+            "area[1920x1080]": [ 0.0, 0.4, 0.9, 0.7 ],
+            "area[427:240]": [ 5, 145, -5, -50 ],
+            "area[30:17]": [ 5, 145, -5, -65 ],
+            "area[1:1]": [ 5, 140, -5, -65 ],
+            "font-size": 17,
+            "font-size[1920x1152]": 13,
+            "font-size[1280x720|1280x800|1920x1080]": 13,
+            "font-color": "general_font",
+            "text-wrap": true,
+            "autoscroll": "marquee",
+            "scroll-speed": 60,
+            "scroll-delay-start": 1500,
+            "scroll-delay-end": 1500,
+            "text": "{port_info.description}"
+        },
+
+
+        "port_title": {
+            "area": [ 0.35, 0.45, 0.9, 0.68 ],
+            "area[3:2]": [ 0.43, 0.5, 0.95, 0.68 ],
+            "area[5:3]": [ 0.5, 0.5, 0.9, 0.68 ],
+            "area[30:17]": [ 0.5, 0.46, 0.9, 0.68 ],
+            "align":"center",
+            "text": "{port_info.title}",
+            "font-size": 22,
+            "font-color": [ 113, 255, 124 ],
+            "autoscroll": "slide",
+            "scroll-speed": 30,
+            "scroll-delay-start": 1000,
+            "scroll-delay-end": 1000
+        },
+
+
+        "port_image": {
+            "area": [ 0.35, 0.1, 0.92, 0.5 ],
+            "area[3:2]": [ 0.52, 0.13, 0.87, 0.5 ],
+            "area[5:3|30:17]": [ 0.45, 0.1, 0.95, 0.5 ],
+            "image": "{port_info.image}"
+
+        },
+
+        "port_filters_text": {
+            "text": "{if:!ports_list.total_ports::ports_list.filter_ports}Available Ports: {ports_list.filter_ports} / {ports_list.total_ports}  \nFilters: {ports_list.filters}{endif}",
+            "text[3:2]": "{if:!ports_list.total_ports::ports_list.filter_ports}Available Ports: {ports_list.filter_ports} / {ports_list.total_ports}      Filters: {ports_list.filters}{endif}",
+            "border-x[3:2]": 16,
+            "border-y[3:2]": 1,
+            "parent": "port_info_text_area",
+            "area": [ 0.02, 0.86, 0.35, 0.96 ],
+            "area[4:3|30:17|3:2]": [ 0.03, 0.86, 0.34, 0.96 ],
+            "area[3:2]": [ 0.03, 0.90, 0.34, 0.96 ],
+            "font-size": 14,
+            "align": "topleft",
+            "font-color": "general_font",
+            "text-wrap": true,
+            "autoscroll": "marquee",
+            "scroll-speed": 40,
+            "scroll-delay-start": 1500,
+            "scroll-delay-end": 1500
+        },
+
+        "#element:scanlinelist": {},
+
+        "#element:button_bar": {
+            "button-sound": "pipclick",
+            "button-sound-volume": 64,
+            "button-sound-alt": "pipcancel",
+            "button-sound-alt-volume": 64
+
+        }
+
+
+    },
+
+    "port_info": {
+        "#element:portmastermenuclear": {},
+
+        "port_info": {
+            "area": [ 0.05, 0.68, 0.95, 0.9 ],
+            "text": "{port_info.description}",
+            "thickness": 6,
+            "border": 8,
+            "autoscroll": "marquee",
+            "scroll-speed": 60,
+            "scroll-delay-start": 1500,
+            "scroll-delay-end": 1500,
+            "font-size": 15,
+            "font-size[427:240]": 22,
+            "font-color": "general_font",
+            "text-wrap": true
+
+        },
+
+        "port_title": {
+            "text": "{port_info.title}",
+            "area": [ 0.35, 0.0, 0.65, 0.1 ],
+            "area[3:2]": [ 0.33, 0.0, 0.65, 0.1 ],
+            "area[5:3]": [ 0.33, 0.0, 0.65, 0.1 ],
+            "area[1280x720|1280x800|1920x1080]": [ 0.35, 0.02, 0.65, 0.12 ],
+            "area[1:1]": [ 0.35, 0.0, 0.63, 0.07 ],
+            "font-color": [ 113, 255, 124 ],
+            "align": "center",
+            "font-size": 18,
+            "text-wrap": true
+        },
+
+        "port_image": {
+            "area": [ 0.0, 0.1, 0.65, 0.65 ],
+            "area[1:1]": [  0.03, 0.1, 0.68, 0.65  ],
+            "image": "{port_info.image}",
+            "align": "midcenter"
+        },
+
+        "port_info_instruction": {
+            "area": [ 0.6, 0.1, 0.95, 0.65 ],
+            "area[1:1]": [ 0.7, 0.13, 0.95, 0.88 ],
+            "text": "Free Space: {system.free_space}\n\nPorter: {port_info.porter}\nGenres: {port_info.genres}\nDownload Size: {port_info.download_size}{if:port_info.runtime}\nRuntime: {port_info.runtime} ({port_info.runtime_status}){endif}\n\nInstruction: {port_info.instructions}",
+            "thickness": 6,
+            "border": 8,
+            "autoscroll": "marquee",
+            "scroll-speed": 60,
+            "scroll-delay-start": 1500,
+            "scroll-delay-end": 1500,
+            "font-size": 13,
+            "font-color": "general_font",
+            "text-wrap": true,
+            "parent": "element:background"
+        },
+
+        "#element:scanlinelist": {},
+
+        "#element:button_bar": {
+            "button-sound": "pipclick",
+            "button-sound-volume": 64,
+            "button-sound-alt": "pipcancel",
+            "button-sound-alt-volume": 64
+
+        }
+
+    },
+
+    "main_menu": {
+        "#element:background": {},
+
+        "#element:option_list": {
+            "align": "center",
+            "area": [ 0.22, 0.30, 0.79, 0.85 ],
+            "area[3:2]": [ 0.22, 0.30, 0.83, 0.85 ],
+            "font-size[3:2]": 22,
+            "list": [],
+            "options": [],
+            "select-fill": "selection-fill",
+            "click-sound": "scroll",
+            "click-sound-volume": 32
+
+        },
+
+        "system_time_low": {
+            "text": "PM: {system.portmaster_version}\nHM: {system.harbourmaster_version}\nSpace: {system.free_space} free / {system.total_space} total\nTime: {system.time_24hr}\nBattery: {system.battery_level}",
+            "font-size": 12,
+            "font-size[427:240]": 16,
+            "font-color": "general_font",
+            "area": [ 0.02, 0.05, 0.95, 0.95 ],
+            "align": "bottomleft"
+        },
+
+
+        "#element:scanlinemain": {},
+        "#element:button_bar": {}
+
+    },
+
+    "option_menu": {
+        "#element:background": {},
+
+        "#element:option_list": {
+            "list": [],
+            "options": [],
+            "align": "center",
+            "area": [ 0.15, 0.30, 0.89, 0.85 ],
+            "area[3:2]": [ 0.07, 0.30, 0.98, 0.85 ],
+            "area[5:3|1:1]": [ 0.13, 0.30, 0.87, 0.85 ],
+            "font-size": 19,
+            "font-size[3:2]": 22,
+            "no-select-color": "list_unselectable",
+            "select-fill": "selection-fill",
+            "inactive-select-color": "list_unselectable",
+            "click-sound": "scroll",
+            "click-sound-volume": 32
+
+        },
+
+
+        "ip": {
+            "text": "IP: {system.ip_address}",
+            "font-size": 11,
+            "font-size[427:240]": 16,
+            "font-color": "general_font",
+            "area": [ 0.02, 0.05, 0.95, 0.95 ],
+            "align": "bottomleft"
+        },
+
+        "#element:scanlinemain": {},
+        "#element:button_bar": {}
+
+    },
+
+    "themes_list": {
+        "#element:portmastermenunull": {},
+        "port_info": {
+            "parent": "port_info_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "thickness": 10,
+            "border": 8,
+            "text": "",
+            "font-size": 24,
+            "font-color": "general_font",
+            "text-wrap": true
+        },
+
+        "themes_list": {
+            "parent": "port_info_list_area",
+            "area": [ 0.05, 0.037, 1.0, 0.9 ],
+            "area[3:2]": [ 0.06, 0.0, 0.8, 0.9 ],
+            "area[1920x1152]": [ 0.10, 0.05, 0.75, 0.95 ],
+            "area[30:17]": [ 0.3, 0.05, 0.75, 0.87 ],
+            "area[1280x720|1280x800|1920x1080]": [ 0.10, 0.05, 0.75, 0.95 ],
+            "area[427:240]": [ 0.10, 0.05, 0.75, 0.87 ],
+            "border-x": 16,
+            "border-y": 22,
+            "select-fill": "selection-fill",
+            "font-size": 19,
+            "font-size[427:240]": 22,
+            "font-size[1280x720|1280x800|1920x1080]": 19,
+            "font-size[1920x1152]": 15,
+            "font-color": "list_text",
+            "select-color": "list_selected",
+            "text-clip": true,
+            "text-wrap": false,
+            "autoscroll": "slide",
+            "scroll-speed": 30,
+            "scroll-delay-start": 500,
+            "scroll-delay-end": 500,
+            "click-sound": "pipscroll",
+            "click-sound-volume": 32
+        },
+        "theme_general_info": {
+            "parent": "port_info_text_area",
+            "area": [ 0.05, 0.23, 0.95, 0.4 ],
+            "area[1280x720|1280x800|1920x1080]": [ 0.05, 0.19, 0.95, 0.36 ],
+            "area[3:2]": [ 0.05, 0.10, 0.95, 0.30 ],
+            "area[1:1]": [ 0.05, 0.18, 0.95, 0.35 ],
+            "area[1920x1152]": [ 0.13, 0.02, 0.95, 0.19 ],
+            "border-x": 4,
+            "border-y": 5,
+            "font-size": 16,
+            "font-size[1920x1152]": 11,
+            "font-size[1280x720|1280x800|1920x1080]": 11,
+            "font-color": "general_font",
+            "autoscroll": "slide",
+            "scroll-speed": 30,
+            "scroll-delay-start": 1000,
+            "scroll-delay-end": 1000,
+            "text": "Creator: {theme_info.creator}\nStatus: {theme_info.status}"
+        },
+        "theme_desc": {
+            "parent": "port_info_text_area",
+            "border-x": 16,
+            "border-y": 16,
+            "area": [ 5, 65, -5, -45 ],
+            "area[4:3]": [ 5, 118, -5, -50 ],
+            "area[3:2]": [ 5, 59, -5, -28 ],
+            "area[1280x720|1280x800|1920x1080]": [ 5, 165, -5, -100 ],
+            "area[1920x1152]": [ 0.1, 0.2, 0.9, 0.7 ],
+            "area[427:240]": [ 5, 145, -5, -50 ],
+            "area[30:17]": [ 5, 145, -5, -65 ],
+            "area[1:1]": [ 5, 165, -5, -80 ],
+            "font": "ShareTechMono-Regular.ttf",
+            "font[zh_TW]": "NotoSansTC-Regular.ttf",
+            "font[zh_CN]": "NotoSansSC-Regular.ttf",
+            "font[zh_HK]": "NotoSansHK-Regular.ttf",
+            "font[ko_KR]": "NotoSansKR-Regular.ttf",
+            "font[ja_JP]": "NotoSansJP-Regular.ttf",    
+            "font-size": 17,
+            "font-size[1920x1152]": 13,
+            "font-size[1280x720|1280x800|1920x1080]": 13,
+            "font-color": "general_font",
+            "text-wrap": true,
+            "autoscroll": "marquee",
+            "scroll-speed": 60,
+            "scroll-delay-start": 1500,
+            "scroll-delay-end": 1500,
+            "text": "{theme_info.description}"
+        },
+        "theme_name_back": {
+            "parent": "port_info_title_area",
+            "area": [ 0.1, 0.2, 0.9, 0.8 ],
+            "image": "rectanglelongbig.png",
+            "image-mode": "stretch",
+            "font-size": 22,
+            "font-color": "selection-fill",
+            "align": "center"
+
+        },
+
+        "theme_name": {
+            "parent": "port_info_title_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "text": "{theme_info.name}",
+            "font-size": 22,
+            "font-color": [113, 255, 124],
+            "align": "center"
+        },
+        "theme_image": {
+            "parent": "port_info_image_area",
+            "area": [ 0.0, 0.0, 1.0, 1.0 ],
+            "image": "{theme_info.image}"
+        },
+        "#element:scanlinelist": {},
+        "#element:button_bar": {
+            "button-sound": "pipclick",
+            "button-sound-volume": 64,
+            "button-sound-alt": "pipcancel",
+            "button-sound-alt-volume": 64
+
+        }
+
+    },
+
+    "featured_ports_list": {
+        "#element:background": {},
+
+        "option_list": {
+            "list": [],
+            "align": "center",
+            "area": [ 0.27, 0.30, 0.77, 0.85 ],
+            "text-clip": true,
+            "font-size": 25,
+            "font-color": "list_text",
+            "click-sound": "scroll",
+            "click-sound-volume": 32,
+            "select-color": "list_selected",
+            "select-fill": "selection-fill"
+        },
+
+        "featured_port_description": {
+            "text": "{featured_ports.description}",
+            "font-size": 25,
+            "align": "center",
+            "font-color": "general_font",
+            "area": [ 0.1, 0.6, 0.9, 0.9 ],
+            "text-wrap": true
+        },
+
+
+        "#element:scanlinemain": {},
+
+        "#element:button_bar": {}
+
+
+    },
+
+    "filter_list": {
+
+        "#element:background3": {
+            "blend-mode": "blend",
+            "fill": "background_fade"
+        },
+
+        "filter_list": {
+            "area": [ 0.2, 0.10, 0.8, 0.85 ],
+            "area[3:2]": [ 0.3, 0.08, 0.99, 0.8 ],
+            "area[1920x1152]": [ 0.3, 0.1, 1.0, 0.85 ],
+            "area[1280x720|1280x800|1920x1080]": [ 0.3, 0.1, 1.0, 0.85 ],
+            "area[427:240]": [ 0.3, 0.1, 1.0, 0.85 ],
+            "area[30:17]": [ 0.3, 0.1, 1.0, 0.85 ],
+            "border-x": 16,
+            "border-y": 16,
+            "font-size": 16,
+            "font-size[1920x1152]": 15,
+            "font-size[30:17]": 15,
+            "font-color": "list_text",
+            "select-color": "list_selected",
+            "list": [],
+            "align": "midleft",
+            "click-sound": "scroll",
+            "click-sound-volume": 32
+
+        },
+        "#element:button_bar": {
+            "button-sound": "pipclick",
+            "button-sound-volume": 64,
+            "button-sound-alt": "pipcancel",
+            "button-sound-alt-volume": 64
+
+        }
+    },
+    "#element:button_bar": {},
+
+    "message_window": {
+        "#element:background4": {},
+
+        "message_text": {
+            "area": [ 0.05, 0.3, 0.95, 0.8 ],
+            "thickness": 6,
+            "text-wrap": true,
+            "border": 10,
+            "font-size": 24,
+            "font-color": "general_font",
+            "align": "bottomleft",
+            "text": ""
+        },
+
+
+        "progress_bar": {
+            "area": [ 0.2, 0.88, 0.8, 0.92 ],
+            "parent": "progress_bar_back",
+            "text": "{system.progress_text}",
+            "align": "midleft",
+            "font-size": 14,
+            "font-color": "download_font",
+            "border": 2,
+            "thickness": 1
+        },
+
+        "progress_bar_amount": {
+            "area": [ 0.00, 0.00, 1.0, 1.00 ],
+            "parent": "progress_bar",
+            "text": "{system.progress_amount}",
+            "align": "midright",
+            "font-size": 14,
+            "font-color": "download_font",
+            "thickness": 1,
+            "border": 2
+        },
+
+        "progress_bar_hearts": {
+            "area": [ 0.01, 0.8, 0.99, 0.88 ],
+            "image": "hearts_{system.progress_perc_10}"
+        },
+
+
+        "#element:scanlinemain2": {},
+
+        "#element:button_bar": {}
+
+    },
+
+    "on_screen_keyboard": {
+        "#element:background": {},
+
+        "keyboard": {
+            "font-size": 30,
+            "font-color": "list_text",
+            "select-color": "list_selected",
+            "inactive-select-color": "list_text",
+            "area": [ 0.1, 0.4, 0.9, 1.0 ],
+            "barwidth": 40,
+            "list": [],
+            "options": [],
+            "align": "center"
+        },
+
+        "#element:button_bar": {}
+    },
+
+    "message_box": {
+        "#element:background4": {},
+
+        "message_text": {
+            "area": [ 0.05, 0.1, 0.95, 0.8 ],
+            "area[3:2]": [ 0.05, 0.1, 0.95, 0.9 ],
+            "thickness": 6,
+            "border": 8,
+            "font-size": 24,
+            "font-color": "general_font",
+            "align": "center",
+            "text": "",
+            "text-wrap": true
+        },
+
+        "#element:scanlinemain2": {},
+        "#element:button_bar": {}
+
+    }
+}

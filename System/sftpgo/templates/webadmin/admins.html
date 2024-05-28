@@ -1,0 +1,272 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{template "base" .}}
+
+{{define "title"}}{{.Title}}{{end}}
+
+{{define "extra_css"}}
+<link href="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/fixedHeader.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="{{.StaticURL}}/vendor/datatables/colReorder.bootstrap4.min.css" rel="stylesheet">
+{{end}}
+
+{{define "page_body"}}
+
+<div id="errorMsg" class="alert alert-warning fade show" style="display: none;" role="alert">
+    <span id="errorTxt"></span>
+    <button type="button" class="close" aria-label="Close" onclick="dismissErrorMsg();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<script type="text/javascript">
+    function dismissErrorMsg(){
+        $('#errorMsg').hide();
+    }
+</script>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">View and manage admins</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover nowrap" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Status</th>
+                        <th>Permissions</th>
+                        <th>Last login</th>
+                        <th>MFA</th>
+                        <th>Allow list</th>
+                        <th>Email</th>
+                        <th>Description</th>
+                        <th>Groups for users</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Admins}}
+                    <tr>
+                        <td>{{.ID}}</td>
+                        <td>{{.Username}}</td>
+                        <td>{{if eq .Status 1 }}Active{{else}}Inactive{{end}}</td>
+                        <td>{{.GetPermissionsAsString}}</td>
+                        <td>{{.GetLastLoginAsString}}</td>
+                        <td>{{if .Filters.TOTPConfig.Enabled }}Enabled{{else}}Disabled{{end}}</td>
+                        <td>{{.GetAllowedIPAsString}}</td>
+                        <td>{{.Email}}</td>
+                        <td>{{.Description}}</td>
+                        <td>{{.GetGroupsAsString}}</td>
+                        <td>{{.Role}}</td>
+                    </tr>
+                    {{end}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{end}}
+
+{{define "dialog"}}
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    Confirmation required
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to delete the selected admin?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                    Cancel
+                </button>
+                <a class="btn btn-warning" href="#" onclick="deleteAction()">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "extra_js"}}
+<script src="{{.StaticURL}}/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/buttons.colVis.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.responsive.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/responsive.bootstrap4.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.select.min.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/ellipsis.js"></script>
+<script src="{{.StaticURL}}/vendor/datatables/dataTables.colReorder.min.js"></script>
+<script type="text/javascript">
+
+    function deleteAction() {
+        var table = $('#dataTable').DataTable();
+        table.button('delete:name').enable(false);
+        var username = table.row({ selected: true }).data()[1];
+        var path = '{{.AdminURL}}' + "/" + fixedEncodeURIComponent(username);
+        $('#deleteModal').modal('hide');
+        $('#errorMsg').hide();
+        $.ajax({
+            url: path,
+            type: 'DELETE',
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN' : '{{.CSRFToken}}'},
+            timeout: 15000,
+            success: function (result) {
+                window.location.href = '{{.AdminsURL}}';
+            },
+            error: function ($xhr, textStatus, errorThrown) {
+                var txt = "Unable to delete the selected admin";
+                if ($xhr) {
+                    var json = $xhr.responseJSON;
+                    if (json) {
+                        if (json.message){
+                            txt += ": " + json.message;
+                        } else {
+                            txt += ": " + json.error;
+                        }
+                    }
+                }
+                $('#errorTxt').text(txt);
+                $('#errorMsg').show();
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $.fn.dataTable.ext.buttons.add = {
+            text: '<i class="fas fa-plus"></i>',
+            name: 'add',
+            titleAttr: "Add",
+            action: function (e, dt, node, config) {
+                window.location.href = '{{.AdminURL}}';
+            }
+        };
+
+        $.fn.dataTable.ext.buttons.edit = {
+            text: '<i class="fas fa-pen"></i>',
+            name: 'edit',
+            titleAttr: "Edit",
+            action: function (e, dt, node, config) {
+                var username = dt.row({ selected: true }).data()[1];
+                var path = '{{.AdminURL}}' + "/" + fixedEncodeURIComponent(username);
+                window.location.href = path;
+            },
+            enabled: false
+        };
+
+        $.fn.dataTable.ext.buttons.delete = {
+            text: '<i class="fas fa-trash"></i>',
+            name: 'delete',
+            titleAttr: "Delete",
+            action: function (e, dt, node, config) {
+                $('#deleteModal').modal('show');
+            },
+            enabled: false
+        };
+
+        var table = $('#dataTable').DataTable({
+            "select": {
+                "style": "single",
+                "blurable": true
+            },
+            "colReorder": {
+                "enable": true,
+                "fixedColumnsLeft": 2
+            },
+            "stateSave": true,
+            "stateDuration": 0,
+            "buttons": [
+                {
+                    "text": "Column visibility",
+                    "extend": "colvis",
+                    "columns": ":not(.noVis)"
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false,
+                    "className": "noVis"
+                },
+                {
+                    "targets": [1],
+                    "className": "noVis"
+                },
+                {
+                    "targets": [3],
+                    "render": $.fn.dataTable.render.ellipsis(70, true)
+                },
+                {
+                    "targets": [4],
+                    "render": $.fn.dataTable.render.datetime()
+                },
+                {
+                    "targets": [6],
+                    "render": $.fn.dataTable.render.ellipsis(60, true),
+                    "visible": false,
+                },
+                {
+                    "targets": [5,7,8,10],
+                    "visible": false,
+                },
+                {
+                    "targets": [9],
+                    "render": $.fn.dataTable.render.ellipsis(50, true),
+                    "visible": false,
+                }
+            ],
+            "scrollX": false,
+            "scrollY": false,
+            "responsive": true,
+            "order": [[1, 'asc']]
+        });
+
+        new $.fn.dataTable.FixedHeader( table );
+
+        {{if .LoggedAdmin.HasPermission "manage_admins"}}
+        table.button().add(0,'delete');
+        table.button().add(0,'edit');
+        table.button().add(0,'add');
+
+        table.buttons().container().appendTo('.col-md-6:eq(0)', table.table().container());
+
+        table.on('select deselect', function () {
+            var selectedRows = table.rows({ selected: true }).count();
+            table.button('edit:name').enable(selectedRows == 1);
+            table.button('delete:name').enable(selectedRows == 1);
+        });
+        {{end}}
+    });
+</script>
+{{end}}

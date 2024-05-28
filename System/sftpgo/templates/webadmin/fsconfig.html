@@ -1,0 +1,631 @@
+<!--
+Copyright (C) 2019-2023 Nicola Murino
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, version 3.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+{{define "fshtml"}}
+<div class="card bg-light mb-3 {{if .IsHidden}}d-none{{end}}">
+    <div class="card-header">
+        <b>Filesystem</b>
+    </div>
+    <div class="card-body pb-1">
+        <div class="form-group row">
+            <label for="idFilesystem" class="col-sm-2 col-form-label">Storage</label>
+            <div class="col-sm-10">
+                <select class="form-control selectpicker" id="idFilesystem" name="fs_provider"
+                    onchange="onFilesystemChanged(this.value)">
+                    {{ range ListFSProviders }}
+                    <option value="{{.Name}}" {{if eq . $.Provider }}selected{{end}}>{{.ShortInfo}}</option>
+                    {{end}}
+                </select>
+            </div>
+        </div>
+        {{if or .IsUserPage .IsGroupPage}}
+        <div class="form-group row">
+            <label for="idHomeDir" class="col-sm-2 col-form-label">Home Dir</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idHomeDir" name="home_dir" placeholder="Absolute path to a local directory"
+                    value="{{.DirPath}}" aria-describedby="homeDirHelpBlock">
+                <small id="homeDirHelpBlock" class="form-text text-muted">
+                    {{if not .DirPath}}{{if .HasUsersBaseDir}}Leave blank for an appropriate default{{else}}{{if .IsGroupPage}}Leave blank and the storage to "local" to not override the root filesystem{{else}}Required for local storage providers. For non-local filesystems it will store temporary files, you can leave blank for an appropriate default{{end}}{{end}}{{end}}
+                </small>
+            </div>
+        </div>
+        {{else}}
+        <div class="form-group row">
+            <label for="idMappedPath" class="col-sm-2 col-form-label">Home Dir</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idMappedPath" name="mapped_path" placeholder="Absolute path to a local directory"
+                    value="{{.DirPath}}" aria-describedby="mappedPathHelpBlock">
+                <small id="mappedPathHelpBlock" class="form-text text-muted">
+                    Required for local storage providers. For non-local filesystems it will store temporary files, you can leave blank for an appropriate default
+                </small>
+            </div>
+        </div>
+        {{end}}
+        <div class="form-group row fsconfig fsconfig-osfs">
+            <label for="idOsReadBufferSize" class="col-sm-2 col-form-label">Read buffer (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idOsReadBufferSize" name="osfs_read_buffer_size" placeholder=""
+                    value="{{.OSConfig.ReadBufferSize}}" min="0" max="10" aria-describedby="OSReadBufferSizeHelpBlock">
+                <small id="OSReadBufferSizeHelpBlock" class="form-text text-muted">
+                    Buffer size for downloads. 0 means no buffer, that's fine in most use cases.
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idOsWriteBufferSize" class="col-sm-2 col-form-label">Write buffer (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idOsWriteBufferSize" name="osfs_write_buffer_size" placeholder=""
+                    value="{{.OSConfig.WriteBufferSize}}"  min="0" max="10" aria-describedby="OSWriteBufferSizeHelpBlock">
+                <small id="OSWriteBufferSizeHelpBlock" class="form-text text-muted">
+                    Buffer size for uploads. 0 means no buffer, that's fine in most use cases.
+                </small>
+            </div>
+        </div>
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3Bucket" class="col-sm-2 col-form-label">Bucket</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3Bucket" name="s3_bucket" placeholder=""
+                    value="{{.S3Config.Bucket}}" maxlength="512">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3Region" class="col-sm-2 col-form-label">Region</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3Region" name="s3_region" placeholder=""
+                    value="{{.S3Config.Region}}" maxlength="255">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3AccessKey" class="col-sm-2 col-form-label">Access Key</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3AccessKey" name="s3_access_key" placeholder=""
+                    value="{{.S3Config.AccessKey}}" maxlength="512" spellcheck="false">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3AccessSecret" class="col-sm-2 col-form-label">Access Secret</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idS3AccessSecret" name="s3_access_secret" placeholder="" autocomplete="new-password" spellcheck="false"
+                    value="{{if .S3Config.AccessSecret.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.S3Config.AccessSecret.GetPayload}}{{end}}">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3Endpoint" class="col-sm-2 col-form-label">Endpoint</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3Endpoint" name="s3_endpoint" placeholder=""
+                    value="{{.S3Config.Endpoint}}" maxlength="512" aria-describedby="S3EndpointHelpBlock">
+                    <small id="S3EndpointHelpBlock" class="form-text text-muted">
+                        For AWS S3, leave blank to use the default endpoint for the specified region
+                    </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3PartSize" class="col-sm-2 col-form-label">UL Part Size (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3PartSize" name="s3_upload_part_size" placeholder=""
+                    value="{{.S3Config.UploadPartSize}}" aria-describedby="S3PartSizeHelpBlock">
+                <small id="S3PartSizeHelpBlock" class="form-text text-muted">
+                    The buffer size for multipart uploads. Zero means the default (5 MB). Minimum is 5
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idS3UploadConcurrency" class="col-sm-2 col-form-label">UL Concurrency</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3UploadConcurrency" name="s3_upload_concurrency"
+                    placeholder="" value="{{.S3Config.UploadConcurrency}}" min="0"
+                    aria-describedby="S3ConcurrencyHelpBlock">
+                <small id="S3ConcurrencyHelpBlock" class="form-text text-muted">
+                    How many parts are uploaded in parallel. Zero means the default (5)
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3DLPartSize" class="col-sm-2 col-form-label">DL Part Size (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3DLPartSize" name="s3_download_part_size" placeholder=""
+                    value="{{.S3Config.DownloadPartSize}}" aria-describedby="S3DLPartSizeHelpBlock">
+                <small id="S3DLPartSizeHelpBlock" class="form-text text-muted">
+                    The buffer size for multipart downloads. Zero means the default (5 MB). Minimum is 5
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idS3DownloadConcurrency" class="col-sm-2 col-form-label">DL Concurrency</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3DownloadConcurrency" name="s3_download_concurrency"
+                    placeholder="" value="{{.S3Config.DownloadConcurrency}}" min="0"
+                    aria-describedby="S3DLConcurrencyHelpBlock">
+                <small id="S3DLConcurrencyHelpBlock" class="form-text text-muted">
+                    How many parts are downloaded in parallel. Zero means the default (5)
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3UploadTimeout" class="col-sm-2 col-form-label">UL Part Timeout (secs)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3UploadTimeout" name="s3_upload_part_max_time"
+                    placeholder="" value="{{.S3Config.UploadPartMaxTime}}" min="0"
+                    aria-describedby="S3UploadTimeoutHelpBlock">
+                <small id="S3UploadTimeoutHelpBlock" class="form-text text-muted">
+                    Max time limit, in seconds, to upload a single part. 0 means no limit
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idS3DownloadTimeout" class="col-sm-2 col-form-label">DL Part Timeout (secs)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idS3DownloadTimeout" name="s3_download_part_max_time"
+                    placeholder="" value="{{.S3Config.DownloadPartMaxTime}}" min="0"
+                    aria-describedby="S3DownloadTimeoutHelpBlock">
+                <small id="S3DownloadTimeoutHelpBlock" class="form-text text-muted">
+                    Max time limit, in seconds, to download a single part. 0 means no limit
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3StorageClass" class="col-sm-2 col-form-label">Storage Class</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="idS3StorageClass" name="s3_storage_class" placeholder=""
+                    value="{{.S3Config.StorageClass}}" maxlength="255" aria-describedby="S3StorageClassHelpBlock">
+                <small id="S3StorageClassHelpBlock" class="form-text text-muted">
+                    Leave blank for default
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idS3ACL" class="col-sm-2 col-form-label">ACL</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="idS3ACL" name="s3_acl" placeholder=""
+                    value="{{.S3Config.ACL}}" maxlength="255" aria-describedby="S3ACLHelpBlock">
+                <small id="S3ACLHelpBlock" class="form-text text-muted">
+                    Leave blank for default. More <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl" target="_blank">info</a>.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3RoleARN" class="col-sm-2 col-form-label">Role ARN</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3RoleARN" name="s3_role_arn" placeholder=""
+                    value="{{.S3Config.RoleARN}}" aria-describedby="S3RoleARNHelpBlock">
+                <small id="S3RoleARNHelpBlock" class="form-text text-muted">
+                    Optional IAM Role ARN to assume
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-s3fs">
+            <label for="idS3KeyPrefix" class="col-sm-2 col-form-label">Key Prefix</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idS3KeyPrefix" name="s3_key_prefix" placeholder=""
+                    value="{{.S3Config.KeyPrefix}}" aria-describedby="S3KeyPrefixHelpBlock">
+                <small id="S3KeyPrefixHelpBlock" class="form-text text-muted">
+                    Similar to a chroot for local filesystem. Example: "somedir/subdir/".
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-s3fs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idS3ForcePathStyle" name="s3_force_path_style"
+                    {{if .S3Config.ForcePathStyle}}checked{{end}}>
+                <label for="idS3ForcePathStyle" class="form-check-label" aria-describedby="S3PathStyleHelpBlock">Use path-style addressing, i.e., "`endpoint`/BUCKET/KEY"</label>
+                <small id="S3PathStyleHelpBlock" class="form-text text-muted">
+                    It is required for some compatible S3 backends
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-gcsfs">
+            <label for="idGCSBucket" class="col-sm-2 col-form-label">Bucket</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idGCSBucket" name="gcs_bucket" placeholder=""
+                    value="{{.GCSConfig.Bucket}}" maxlength="255">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-gcsfs">
+            <label for="idGCSCredentialFile" class="col-sm-2 col-form-label">Credentials file</label>
+            <div class="col-sm-4">
+                <input type="file" class="form-control-file" id="idGCSCredentialFile" name="gcs_credential_file"
+                    aria-describedby="GCSCredentialsHelpBlock">
+                <small id="GCSCredentialsHelpBlock" class="form-text text-muted">
+                    Add or update credentials from a JSON file
+                </small>
+            </div>
+            <div class="col-sm-1"></div>
+            <label for="idGCSStorageClass" class="col-sm-2 col-form-label">Storage Class</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="idGCSStorageClass" name="gcs_storage_class" placeholder=""
+                    value="{{.GCSConfig.StorageClass}}" maxlength="255" aria-describedby="GCSStorageClassHelpBlock">
+                <small id="GCSStorageClassHelpBlock" class="form-text text-muted">
+                    Leave blank for default
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-gcsfs">
+            <label for="idGCSUploadPartSize" class="col-sm-2 col-form-label">UL Part Size (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idGCSUploadPartSize" name="gcs_upload_part_size" placeholder=""
+                    value="{{.GCSConfig.UploadPartSize}}" aria-describedby="GCSPartSizeHelpBlock">
+                <small id="GCSPartSizeHelpBlock" class="form-text text-muted">
+                    The buffer size for multipart uploads. Zero means the default (16 MB)
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idGCSUploadTimeout" class="col-sm-2 col-form-label">UL Part Timeout (secs)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idGCSUploadTimeout" name="gcs_upload_part_max_time"
+                    placeholder="" value="{{.GCSConfig.UploadPartMaxTime}}" min="0"
+                    aria-describedby="GCSUploadTimeoutHelpBlock">
+                <small id="GCSUploadTimeoutHelpBlock" class="form-text text-muted">
+                    Max time limit, in seconds, to upload a single part. 0 means the default (32 secs)
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-gcsfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idGCSAutoCredentials" name="gcs_auto_credentials"
+                    aria-describedby="GCSAutoCredentialsHelpBlock" {{if gt .GCSConfig.AutomaticCredentials 0}}checked{{end}}>
+                <label for="idGCSAutoCredentials" class="form-check-label">Automatic credentials</label>
+                <small id="GCSAutoCredentialsHelpBlock" class="form-text text-muted">
+                    Use default application credentials or credentials from environment
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-gcsfs">
+            <label for="idGCSKeyPrefix" class="col-sm-2 col-form-label">Key Prefix</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idGCSKeyPrefix" name="gcs_key_prefix" placeholder=""
+                    value="{{.GCSConfig.KeyPrefix}}" aria-describedby="GCSKeyPrefixHelpBlock">
+                <small id="GCSKeyPrefixHelpBlock" class="form-text text-muted">
+                    Similar to a chroot for local filesystem. Example: "somedir/subdir/".
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-gcsfs">
+            <label for="idGCSACL" class="col-sm-2 col-form-label">ACL</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idGCSACL" name="gcs_acl" placeholder=""
+                    value="{{.GCSConfig.ACL}}" maxlength="255" aria-describedby="GCSACLHelpBlock">
+                <small id="GCSACLHelpBlock" class="form-text text-muted">
+                    ACL for uploaded objects. Leave blank for default. For more info refer to the JSON API <a href="https://cloud.google.com/storage/docs/access-control/lists#predefined-acl" target="_blank">here</a>
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzContainer" class="col-sm-2 col-form-label">Container</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idAzContainer" name="az_container" placeholder=""
+                    value="{{.AzBlobConfig.Container}}" maxlength="512">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzAccountName" class="col-sm-2 col-form-label">Account Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idAzAccountName" name="az_account_name" placeholder=""
+                    spellcheck="false" value="{{.AzBlobConfig.AccountName}}" maxlength="512">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzAccountKey" class="col-sm-2 col-form-label">Account Key</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idAzAccountKey" name="az_account_key" placeholder="" autocomplete="new-password" spellcheck="false"
+                    value="{{if .AzBlobConfig.AccountKey.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.AzBlobConfig.AccountKey.GetPayload}}{{end}}">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzSASURL" class="col-sm-2 col-form-label">SAS URL</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idAzSASURL" name="az_sas_url" placeholder="" aria-describedby="AzSASURLHelpBlock"
+                    autocomplete="new-password" spellcheck="false" value="{{if .AzBlobConfig.SASURL.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.AzBlobConfig.SASURL.GetPayload}}{{end}}">
+                <small id="AzSASURLHelpBlock" class="form-text text-muted">
+                    Shared Access Signature URL can be used instead of account name/key
+                </small>
+            </div>
+        </div>
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzEndpoint" class="col-sm-2 col-form-label">Endpoint</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idAzEndpoint" name="az_endpoint" placeholder=""
+                    aria-describedby="AzEndpointHelpBlock" value="{{.AzBlobConfig.Endpoint}}" maxlength="512">
+                <small id="AzEndpointHelpBlock" class="form-text text-muted">
+                    Optional endpoint
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzAccessTier" class="col-sm-2 col-form-label">Access Tier</label>
+            <div class="col-sm-10">
+                <select class="form-control selectpicker" id="idAzAccessTier" name="az_access_tier">
+                    <option value="" {{if eq .AzBlobConfig.AccessTier "" }}selected{{end}}>Default</option>
+                    <option value="Hot" {{if eq .AzBlobConfig.AccessTier "Hot" }}selected{{end}}>Hot</option>
+                    <option value="Cool" {{if eq .AzBlobConfig.AccessTier "Cool" }}selected{{end}}>Cool</option>
+                    <option value="Archive" {{if eq .AzBlobConfig.AccessTier "Archive" }}selected{{end}}>Archive
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzUploadPartSize" class="col-sm-2 col-form-label">UL Part Size (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idAzUploadPartSize" name="az_upload_part_size" placeholder=""
+                    value="{{.AzBlobConfig.UploadPartSize}}" aria-describedby="AzDLPartSizeHelpBlock">
+                <small id="AzDLPartSizeHelpBlock" class="form-text text-muted">
+                    The buffer size for multipart uploads. Zero means the default (5 MB)
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idAzUploadConcurrency" class="col-sm-2 col-form-label">UL Concurrency</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idAzUploadConcurrency" name="az_upload_concurrency"
+                    placeholder="" value="{{.AzBlobConfig.UploadConcurrency}}" min="0"
+                    aria-describedby="AzULConcurrencyHelpBlock">
+                <small id="AzULConcurrencyHelpBlock" class="form-text text-muted">
+                    How many parts are uploaded in parallel. Zero means the default (5)
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzDownloadPartSize" class="col-sm-2 col-form-label">DL Part Size (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idAzDownloadPartSize" name="az_download_part_size" placeholder=""
+                    value="{{.AzBlobConfig.DownloadPartSize}}" aria-describedby="AzDLPartSizeHelpBlock">
+                <small id="AzDLPartSizeHelpBlock" class="form-text text-muted">
+                    The buffer size for multipart downloads. Zero means the default (5 MB)
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idAzDownloadConcurrency" class="col-sm-2 col-form-label">DL Concurrency</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idAzDownloadConcurrency" name="az_download_concurrency"
+                    placeholder="" value="{{.AzBlobConfig.DownloadConcurrency}}" min="0"
+                    aria-describedby="AzDLConcurrencyHelpBlock">
+                <small id="AzDLConcurrencyHelpBlock" class="form-text text-muted">
+                    How many parts are downloaded in parallel. Zero means the default (5)
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-azblobfs">
+            <label for="idAzKeyPrefix" class="col-sm-2 col-form-label">Key Prefix</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idAzKeyPrefix" name="az_key_prefix" placeholder=""
+                    value="{{.AzBlobConfig.KeyPrefix}}" aria-describedby="AzKeyPrefixHelpBlock">
+                <small id="AzKeyPrefixHelpBlock" class="form-text text-muted">
+                    Similar to a chroot for local filesystem. Example: "somedir/subdir/".
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-azblobfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idUseEmulator" name="az_use_emulator" {{if
+                    .AzBlobConfig.UseEmulator}}checked{{end}}>
+                <label for="idUseEmulator" class="form-check-label">Use Azure Blob emulator</label>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-cryptfs">
+            <label for="idCryptPassphrase" class="col-sm-2 col-form-label">Passphrase</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idCryptPassphrase" name="crypt_passphrase"
+                    placeholder="" autocomplete="new-password" aria-describedby="CryptPassphraseHelpBlock"
+                    value="{{if .CryptConfig.Passphrase.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.CryptConfig.Passphrase.GetPayload}}{{end}}">
+                <small id="CryptPassphraseHelpBlock" class="form-text text-muted">
+                    Passphrase to derive the per-object encryption key
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-cryptfs">
+            <label for="idCryptFsReadBufferSize" class="col-sm-2 col-form-label">Read buffer (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idCryptFsReadBufferSize" name="cryptfs_read_buffer_size" placeholder=""
+                    value="{{.CryptConfig.ReadBufferSize}}" min="0" max="10" aria-describedby="CryptFsReadBufferSizeHelpBlock">
+                <small id="CryptFsReadBufferSizeHelpBlock" class="form-text text-muted">
+                    Buffer size for downloads. 0 means no buffer, that's fine in most use cases.
+                </small>
+            </div>
+            <div class="col-sm-2"></div>
+            <label for="idCryptFsWriteBufferSize" class="col-sm-2 col-form-label">Write buffer (MB)</label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" id="idCryptFsWriteBufferSize" name="cryptfs_write_buffer_size" placeholder=""
+                    value="{{.CryptConfig.WriteBufferSize}}" min="0" max="10" aria-describedby="CryptFsWriteBufferSizeHelpBlock">
+                <small id="CryptFsWriteBufferSizeHelpBlock" class="form-text text-muted">
+                    Buffer size for uploads. 0 means no buffer, that's fine in most use cases.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPEndpoint" class="col-sm-2 col-form-label">Endpoint</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idSFTPEndpoint" name="sftp_endpoint" placeholder=""
+                    value="{{.SFTPConfig.Endpoint}}" maxlength="255" aria-describedby="SFTPEndpointHelpBlock">
+                <small id="SFTPEndpointHelpBlock" class="form-text text-muted">
+                    Endpoint as host:port, port is always required
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPUsername" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idSFTPUsername" name="sftp_username" placeholder=""
+                    value="{{.SFTPConfig.Username}}" maxlength="512" spellcheck="false">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idSFTPPassword" name="sftp_password" placeholder="" autocomplete="new-password" spellcheck="false"
+                    value="{{if .SFTPConfig.Password.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.SFTPConfig.Password.GetPayload}}{{end}}">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPPrivateKey" class="col-sm-2 col-form-label">Private key</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="idSFTPPrivateKey" name="sftp_private_key" spellcheck="false"
+                    rows="3">{{if .SFTPConfig.PrivateKey.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.SFTPConfig.PrivateKey.GetPayload}}{{end}}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPPassphrase" class="col-sm-2 col-form-label">Key Passphrase</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idSFTPPassphrase" name="sftp_key_passphrase" autocomplete="new-password" placeholder="" spellcheck="false"
+                    value="{{if .SFTPConfig.KeyPassphrase.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.SFTPConfig.KeyPassphrase.GetPayload}}{{end}}"
+                    aria-describedby="SFTPPassphraseHelpBlock">
+                <small id="SFTPPassphraseHelpBlock" class="form-text text-muted">
+                    Passphrase used to protect your private key, if any
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPPrefix" class="col-sm-2 col-form-label">Prefix</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idSFTPPrefix" name="sftp_prefix" placeholder=""
+                    value="{{.SFTPConfig.Prefix}}" aria-describedby="SFTPPrefixHelpBlock">
+                <small id="SFTPPrefixHelpBlock" class="form-text text-muted">
+                    Similar to a chroot for local filesystem. Example: "/somedir/subdir".
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPFingerprints" class="col-sm-2 col-form-label">Fingerprints</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="idSFTPFingerprints" name="sftp_fingerprints" rows="3"
+                    aria-describedby="SFTPFingerprintsHelpBlock">{{range .SFTPConfig.Fingerprints}}{{.}}&#010;{{end}}</textarea>
+                <small id="SFTPFingerprintsHelpBlock" class="form-text text-muted">
+                    SHA256 fingerprints to validate when connecting to the external SFTP server, one per line. If empty any host key will be accepted: this is a security risk!
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-sftpfs">
+            <label for="idSFTPUploadBufferSize" class="col-sm-2 col-form-label">Buffer size (MB)</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="idSFTPBufferSize" name="sftp_buffer_size" placeholder=""
+                    value="{{.SFTPConfig.BufferSize}}" min="0" max="16" aria-describedby="SFTPBufferHelpBlock">
+                <small id="SFTPBufferHelpBlock" class="form-text text-muted">
+                    A buffer size > 0 enables concurrent transfers
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-sftpfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idDisableConcurrentReads"
+                    name="sftp_disable_concurrent_reads" {{if .SFTPConfig.DisableCouncurrentReads}}checked{{end}}>
+                <label for="idDisableConcurrentReads" class="form-check-label">Disable concurrent reads</label>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-sftpfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idSFTPEqualityCheckMode" aria-describedby="SFTPEqualityCheckHelpBlock"
+                    name="sftp_equality_check_mode" {{if eq .SFTPConfig.EqualityCheckMode 1}}checked{{end}}>
+                <label for="idSFTPEqualityCheckMode" class="form-check-label">Relaxed equality check mode</label>
+                <small id="SFTPEqualityCheckHelpBlock" class="form-text text-muted">
+                    Enable to consider only the endpoint to determine if different configs point to the same server. By default, both the endpoint and the username must match. Renaming between different configs is allowed if they point to the same server
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-httpfs">
+            <label for="idHTTPEndpoint" class="col-sm-2 col-form-label">Endpoint</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idHTTPEndpoint" name="http_endpoint" placeholder=""
+                    value="{{.HTTPConfig.Endpoint}}" maxlength="255">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-httpfs">
+            <label for="idHTTPUsername" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="idHTTPUsername" name="http_username" placeholder="" spellcheck="false"
+                    value="{{.HTTPConfig.Username}}" maxlength="255">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-httpfs">
+            <label for="idHTTPPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idHTTPPassword" name="http_password" autocomplete="new-password" placeholder="" spellcheck="false"
+                    value="{{if .HTTPConfig.Password.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.HTTPConfig.Password.GetPayload}}{{end}}">
+            </div>
+        </div>
+
+        <div class="form-group row fsconfig fsconfig-httpfs">
+            <label for="idHTTPAPIKey" class="col-sm-2 col-form-label">API Key</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="idHTTPAPIKey" name="http_api_key" autocomplete="new-password" placeholder="" spellcheck="false"
+                    value="{{if .HTTPConfig.APIKey.IsEncrypted}}{{.RedactedSecret}}{{else}}{{.HTTPConfig.APIKey.GetPayload}}{{end}}">
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-httpfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idHTTPSkipTLSVerify"
+                    name="http_skip_tls_verify" {{if .HTTPConfig.SkipTLSVerify}}checked{{end}}>
+                <label for="idHTTPSkipTLSVerify" class="form-check-label">Skip TLS verify</label>
+            </div>
+        </div>
+
+        <div class="form-group fsconfig fsconfig-httpfs">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="idHTTPEqualityCheckMode" aria-describedby="HTTPEqualityCheckHelpBlock"
+                    name="http_equality_check_mode" {{if eq .HTTPConfig.EqualityCheckMode 1}}checked{{end}}>
+                <label for="idHTTPEqualityCheckMode" class="form-check-label">Relaxed equality check mode</label>
+                <small id="HTTPEqualityCheckHelpBlock" class="form-text text-muted">
+                    Enable to consider only the endpoint to determine if different configs point to the same server. By default, both the endpoint and the username must match. Renaming between different configs is allowed if they point to the same server
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+
+{{define "fsjs"}}
+<script type="text/javascript">
+    function onFilesystemChanged(val){
+        // each fsconfig form-group has the 'fsconfig' css class
+        // as well as a 'fsconfig-{name}' class where name is the FilesystemProvider.Name
+        // we're simply hiding all of them and then showing the ones that match the selected vfs provider
+        $('.form-group.fsconfig').hide();
+        $('.form-group.fsconfig-'+val).show();
+    }
+</script>
+{{end}}

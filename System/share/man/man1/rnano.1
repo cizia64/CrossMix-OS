@@ -1,0 +1,60 @@
+.\" Copyright (C) 2002-2007, 2014-2023 Free Software Foundation, Inc.
+.\"
+.\" This document is dual-licensed.  You may distribute and/or modify it
+.\" under the terms of either of the following licenses:
+.\"
+.\" * The GNU General Public License, as published by the Free Software
+.\"   Foundation, version 3 or (at your option) any later version.  You
+.\"   should have received a copy of the GNU General Public License
+.\"   along with this program.  If not, see
+.\"   <https://www.gnu.org/licenses/>.
+.\"
+.\" * The GNU Free Documentation License, as published by the Free
+.\"   Software Foundation, version 1.2 or (at your option) any later
+.\"   version, with no Invariant Sections, no Front-Cover Texts, and no
+.\"   Back-Cover Texts.  You should have received a copy of the GNU Free
+.\"   Documentation License along with this program.  If not, see
+.\"   <https://www.gnu.org/licenses/>.
+.\"
+.TH RNANO 1 "version 7.2" "January 2023"
+
+.SH NAME
+rnano \- a restricted nano
+
+.SH SYNOPSIS
+.B rnano
+.RI [ options "] [[+" line [, column "]]\ " file "]..."
+
+.SH DESCRIPTION
+\fBrnano\fR runs the \fBnano\fR editor in restricted mode.  This allows
+editing only the specified file or files, and doesn't allow the user
+access to the filesystem nor to a command shell.
+.sp
+In restricted mode, \fBnano\fR will:
+.IP \[bu] 2
+not allow suspending;
+.IP \[bu]
+not allow saving the current buffer under a different name;
+.IP \[bu]
+not allow inserting another file or opening a new buffer;
+.IP \[bu]
+not allow appending or prepending to any file;
+.IP \[bu]
+not make backup files nor do spell checking.
+
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Show the available command-line options and exit.
+.P
+For all existing options, see the \fBnano\fR(1) man page.
+
+.SH BUGS
+Please report bugs via
+.IR https://savannah.gnu.org/bugs/?group=nano .
+
+.SH HOMEPAGE
+.I https://nano-editor.org/
+
+.SH SEE ALSO
+.BR nano (1)
