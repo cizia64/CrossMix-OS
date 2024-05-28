@@ -1,0 +1,71 @@
+## All data is optional, but helps improve user experience.
+
+# Software Information - Information about the core software itself
+# Name displayed when the user is selecting the core:
+display_name = "Galaksija (galaxy-libretro)"
+
+# Categories that the core belongs to (optional):
+categories = "Emulator"
+
+# Name of the authors who wrote the core:
+authors = "nikp123"
+
+# Name of the core:
+corename = "galaksija"
+
+# List of extensions the core supports:
+supported_extensions = "gal"
+
+# License of the cores source code:
+license = "Public Domain"
+
+# Privacy-specific permissions needed for using the core:
+permissions = ""
+
+# Version of the core:
+display_version = "v0.1"
+
+# Hardware Information - Information about the hardware the core supports (when applicable)
+# Name of the manufacturer who produced the emulated system:
+manufacturer = "Galaksija"
+
+# Name of the system that the core targets (optional):
+# systemname = ""
+
+# ID of the primary platform the core uses. Use other core info files as guidance if possible.
+# If blank or not used, a standard core platform will be used (optional):
+# systemid = ""
+
+# The number of mandatory/optional firmware files the core needs:
+firmware_count = 3
+
+firmware0_desc = "CHRGEN.BIN (Character ROM)"
+firmware0_path = "galaksija/CHRGEN.BIN"
+firmware0_opt = "true"
+
+firmware1_desc = "ROM1.BIN (Base ROM)"
+firmware1_path = "galaksija/ROM1.BIN"
+firmware1_opt = "true"
+
+firmware2_desc = "ROM2.BIN (Extensions)"
+firmware2_path = "galaksija/ROM2.BIN"
+firmware2_opt = "true"
+
+# Libretro Features - The libretro API features the core supports. Useful for sorting cores
+savestate = "false"
+cheats = "false"
+input_descriptors = "false"
+memory_descriptors = "false"
+libretro_saves = "false"
+core_options = "false"
+core_options_version = "1.0"
+load_subsystem = "false"
+supports_no_game = "true"
+single_purpose = "false"
+hw_render = "false"
+needs_fullpath = "true"
+disk_control = "false"
+is_experimental = "true"
+
+# Descriptive text, useful for tooltips, etc.
+description = "Galaksija (Galaxy) was a low-cost home computer released in 1983 in the former Yugoslav countries as a build-it-yourself kit."

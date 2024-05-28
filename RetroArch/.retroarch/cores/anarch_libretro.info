@@ -1,0 +1,23 @@
+# Software Information
+display_name = "Anarch"
+display_version = "1.1d"
+authors = "Miloslav Číž (drummyfish)"
+categories = "Game"
+license = "CC0"
+permissions = ""
+
+# Hardware Information
+manufacturer = "N/A"
+systemname = "Anarch"
+systemid = "anarch"
+
+# Libretro Features
+supports_no_game = "true"
+single_purpose = "true"
+cheats = "false"
+libretro_saves = "false"
+needs_fullpath = "false"
+hw_render = "false"
+disk_control = "false"
+
+description = "A port of Anarch to libretro, which is a small, completely public domain, 90s-style Doom clone shooter game."

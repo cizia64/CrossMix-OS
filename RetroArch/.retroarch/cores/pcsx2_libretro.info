@@ -1,0 +1,34 @@
+# Software Information
+display_name = "Sony - PlayStation 2 (LRPS2)"
+authors = "PCSX2 Team"
+supported_extensions = "elf|iso|ciso|chd|cso|bin|cue|mdf|nrg|dump|gz|img|m3u"
+corename = "LRPS2"
+license = "GPL"
+permissions = ""
+display_version = "Git"
+categories = "Emulator"
+
+# Hardware Information
+manufacturer = "Sony"
+systemname = "Sony PlayStation 2"
+systemid = "playstation2"
+
+# Libretro Features
+database = "Sony - PlayStation 2"
+supports_no_game = "false"
+needs_fullpath = "true"
+load_subsystem = "false"
+hw_render = "true"
+required_hw_api = "Direct3D >= 11.0 | OpenGL Core >= 3.3 | OpenGL >= 3.0"
+savestate = "true"
+savestate_features = "basic"
+memory_descriptors = "false"
+
+# Firmware / BIOS
+firmware_count = 1
+firmware0_desc = "'pcsx2/bios' folder"
+firmware0_path = "pcsx2/bios"
+firmware0_opt = "false"
+notes = "[1] This only checks if the PCSX2 'bios' folder exists and is in the correct location.|[2] Because the core doesn't require any specific filename for the BIOS files,|[^] this info file cannot tell you if the content of your 'bios' folder is correct or not.|[3] Please check https://docs.libretro.com/library/pcsx2/#bios for more details."
+
+description = "A hard fork/derivative of the mature and highly-compatible PCSX2 Playstation 2 emulator to libretro. This core is a good first choice for most users as compared with the Play! core, which has lower compatibility with the PS2 library. Required BIOS files include EROM.BIN, rom1.bin, and at least one set of scph*.bin/.mec/.nvm dumps that match each region of games you wish to run. A newer BIOS than scph10000 is recommended, as this original BIOS has problems in memory card emulation and other sections."
