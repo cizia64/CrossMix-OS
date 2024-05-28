@@ -6,7 +6,7 @@ echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/usr/trimui/res/skin/bg.png" \
-  -f "/usr/trimui/res/regular.ttf" \
+  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
   -t "Building Menu..." &
@@ -37,6 +37,37 @@ if [ -f "$database_file" ]; then
   exit
 fi
 img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs"
+# ============================ Populate icons and backgrounds sets ============================
+
+BG_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/THEME##BACKGROUNDS (value)/"
+BG_imgs_directory="${img_path}/THEME##BACKGROUNDS (value)/"
+# Cleaning old list
+find "$BG_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
+rm "$BG_imgs_directory"/*.png
+
+for subdir in /mnt/SDCARD/Backgrounds/*/; do
+  subdir_name=$(basename "$subdir")
+  cp "${BG_list_directory}Default.sh" "${BG_list_directory}${subdir_name}.sh"
+
+  # Vérifier si le fichier preview.png existe
+  if [ -f "${subdir}preview.png" ]; then
+    # Copier preview.png avec le nom du sous-dossier
+    cp "${subdir}preview.png" "${BG_imgs_directory}${subdir_name}.png"
+  else
+    # Vérifier si le fichier SFC.png existe
+    if [ -f "${subdir}SFC.png" ]; then
+      cp "${subdir}SFC.png" "${BG_imgs_directory}${subdir_name}.png"
+    else
+      # Si SFC.png n'existe pas, copier le premier fichier .png trouvé dans ${subdir}Emus/
+      echo "----------------- ${subdir}"
+      first_png=$(find "${subdir}" -maxdepth 2 -type f -name "*.png" | head -n 1)
+      if [ -n "$first_png" ]; then
+        cp "$first_png" "${BG_imgs_directory}${subdir_name}.png"
+      fi
+    fi
+  fi
+
+done
 	
 # ================================================= Create a new database file =================================================
 
@@ -141,8 +172,7 @@ echo "================"
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (state)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutstate=$(echo "$disp" | sed 's/ (state)//g')
-    CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp] // 1' "/mnt/SDCARD/System/etc/systemtools.json")
-	echo "-*-*--**-*-*-*-*-*-*--*-*-*-*-XXX $CurState"
+     CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp] // 1' "/mnt/SDCARD/System/etc/crossmix.json")
 	if [ -z "$CurState" ]; then
     CurState="not set"
 fi
@@ -192,7 +222,7 @@ fi
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (value)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutvalue=$(echo "$disp" | sed 's/ (value)//g')
-    CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/systemtools.json")
+     CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
 		if [ -z "$CurState" ]; then
     CurState="not set"
 fi
