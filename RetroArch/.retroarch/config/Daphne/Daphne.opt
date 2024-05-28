@@ -1,0 +1,4 @@
+daphne_cheat = "disable"
+daphne_emulate_seek = "enable"
+daphne_invertctrl = "enable"
+daphne_useoverlaysb = "enable"

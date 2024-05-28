@@ -1,0 +1,4 @@
+race_dark_filter_level = "0"
+race_frameskip = "disabled"
+race_frameskip_threshold = "33"
+race_language = "english"

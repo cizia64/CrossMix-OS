@@ -1,0 +1,7 @@
+snes9x_2005_frameskip = "disabled"
+snes9x_2005_frameskip_threshold = "33"
+snes9x_2005_low_pass_filter = "disabled"
+snes9x_2005_low_pass_range = "60"
+snes9x_2005_overclock_cycles = "disabled"
+snes9x_2005_reduce_sprite_flicker = "disabled"
+snes9x_2005_region = "auto"

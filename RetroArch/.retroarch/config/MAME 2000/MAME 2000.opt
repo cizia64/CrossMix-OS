@@ -1,0 +1,7 @@
+mame2000-frameskip = "disabled"
+mame2000-frameskip_interval = "1"
+mame2000-frameskip_threshold = "30"
+mame2000-sample_rate = "22050"
+mame2000-show_gameinfo = "disabled"
+mame2000-skip_disclaimer = "enabled"
+mame2000-stereo = "enabled"

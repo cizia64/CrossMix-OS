@@ -1,0 +1,5 @@
+custom_viewport_width = "1024"
+custom_viewport_x = "0"
+input_overlay = "./.retroarch/overlay/NEC-PC-Engine-custom.cfg"
+video_crop_overscan = "false"
+video_scale_integer = "true"

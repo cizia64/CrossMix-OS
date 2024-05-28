@@ -1,0 +1,5 @@
+catsfc_frameskip = "disabled"
+catsfc_frameskip_threshold = "33"
+catsfc_overclock_cycles = "disabled"
+catsfc_reduce_sprite_flicker = "disabled"
+catsfc_VideoMode = "auto"

@@ -1,0 +1,7 @@
+tic80_analog_deadzone = "15"
+tic80_crop_border = "disabled"
+tic80_mouse_cursor = "disabled"
+tic80_mouse_cursor_color = "15"
+tic80_mouse_hide_delay = "5"
+tic80_pointer_device = "mouse"
+tic80_pointer_speed = "100"

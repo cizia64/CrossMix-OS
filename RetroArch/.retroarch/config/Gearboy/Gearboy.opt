@@ -1,0 +1,4 @@
+gearboy_mapper = "Auto"
+gearboy_model = "Auto"
+gearboy_palette = "Original"
+gearboy_up_down_allowed = "Disabled"

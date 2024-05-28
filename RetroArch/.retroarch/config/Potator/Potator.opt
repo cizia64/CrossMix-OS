@@ -1,0 +1,4 @@
+potator_frameskip = "disabled"
+potator_frameskip_threshold = "33"
+potator_lcd_ghosting = "0"
+potator_palette = "default"
