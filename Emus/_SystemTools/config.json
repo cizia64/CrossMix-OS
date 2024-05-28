@@ -1,0 +1,12 @@
+{
+  "label": "_System Tools",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/_SystemTools.png",
+  "launch": "launch.sh",
+  "rompath": "/mnt/SDCARD/Apps/SystemTools/Menu",
+  "imgpath": "/mnt/SDCARD/Apps/SystemTools/Menu/Imgs",
+  "useswap": 0,
+  "shortname": 1,
+  "hidebios": 0,
+  "extlist": "sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/_SystemTools.png"
+}

@@ -1,0 +1,1433 @@
+https://github.com/libretro/libretro-database/blob/master/metadat/analog/Sony%20-%20PlayStation.dat
+clrmamepro (
+	name "Sony - PlayStation"
+	description "Sony - PlayStation"
+)
+
+game (
+	comment "Ape Escape (France)"
+	analog 1
+	rom ( serial "SCES-02028" )
+)
+
+game (
+	comment "Ape Escape (Germany)"
+	analog 1
+	rom ( serial "SCES-02029" )
+)
+
+game (
+	comment "Ape Escape (Italy)"
+	analog 1
+	rom ( serial "SCES-02030" )
+)
+
+game (
+	comment "Ape Escape (USA)"
+	analog 1
+	rom ( serial "SCUS-94423" )
+)
+
+game (
+	comment "Ape Escape - La Invasion de los Monos (Spain)"
+	analog 1
+	rom ( serial "SCES-02031" )
+)
+
+game (
+	comment "Bio Hazard - Director's Cut - Dual Shock Ver. (Japan)"
+	analog 1
+	rom ( serial "SLPS-01512" )
+)
+
+game (
+	comment "Biohazard 2 - Dual Shock Ver. (Japan) (Disc 1) (Leon Hen)"
+	analog 1
+	rom ( serial "SLPS-01510" )
+)
+
+game (
+	comment "Biohazard 2 - Dual Shock Ver. (Japan) (Disc 2) (Claire Hen)"
+	analog 1
+	rom ( serial "SLPS-01511" )
+)
+
+game (
+	comment "Breath of Fire IV (Europe)"
+	analog 1
+	rom ( serial "SLES-03552" )
+)
+
+game (
+	comment "Breath of Fire IV (USA)"
+	analog 1
+	rom ( serial "SLUS-01324" )
+)
+
+game (
+	comment "Breath of Fire IV - Utsurowazaru Mono (Japan)"
+	analog 1
+	rom ( serial "SLPS-02728" )
+)
+
+game (
+	comment "Chrono Cross (Japan) (Disc 1)"
+	analog 1
+	rom ( serial "SLPM-87395" )
+)
+
+game (
+	comment "Chrono Cross (USA) (Disc 1)"
+	analog 1
+	rom ( serial "SLUS-01041" )
+)
+
+game (
+	comment "Chrono Cross (Japan) (Disc 2)"
+	analog 1
+	rom ( serial "SLPM-87396" )
+)
+
+game (
+	comment "Chrono Cross (USA) (Disc 2)"
+	analog 1
+	rom ( serial "SLUS-01080" )
+)
+
+game (
+	comment "Crash Bandicoot 2 - Cortex no Gyakushuu! (Japan)"
+	analog 1
+	rom ( serial "SCPS-10047" )
+)
+
+game (
+	comment "Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (EDC)"
+	analog 1
+	rom ( serial "SCES-00967" )
+)
+
+game (
+	comment "Crash Bandicoot 2 - Cortex Strikes Back (Europe) (En,Fr,De,Es,It) (No EDC)"
+	analog 1
+	rom ( serial "SCES-00967" )
+)
+
+game (
+	comment "Crash Bandicoot 2 - Cortex Strikes Back (USA)"
+	analog 1
+	rom ( serial "SCUS-94154" )
+)
+
+game (
+	comment "Crash Bandicoot 3 - Buttobi! Sekai Isshuu (Japan)"
+	analog 1
+	rom ( serial "SCPS-10073" )
+)
+
+game (
+	comment "Crash Bandicoot 3 - Buttobi! Sekai Isshuu (Japan) (Tentou You Taikenban)"
+	analog 1
+	rom ( serial "PAPX-90070" )
+)
+
+game (
+	comment "Crash Bandicoot 3 - Warped (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-01420" )
+)
+
+game (
+	comment "Crash Bandicoot Carnival (Japan)"
+	analog 1
+	rom ( serial "SCPS-10140" )
+)
+
+game (
+	comment "Crash Bandicoot Racing (Japan)"
+	analog 1
+	rom ( serial "SCPS-10118" )
+)
+
+game (
+	comment "Crash Bandicoot - Warped (USA)"
+	analog 1
+	rom ( serial "SCUS-94244" )
+)
+
+game (
+	comment "Crash Bash (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-02834" )
+)
+
+game (
+	comment "Crash Bash (USA)"
+	analog 1
+	rom ( serial "SCUS-94570" )
+)
+
+game (
+	comment "Crash Bash & Spyro - Year of the Dragon (USA) (Demo)"
+	analog 1
+	rom ( serial "SCUS-94654" )
+)
+
+game (
+	comment "Dance Dance Revolution (Japan)"
+	analog 1
+	rom ( serial "SLPM-86222" )
+)
+
+game (
+	comment "Dance Dance Revolution (USA)"
+	analog 1
+	rom ( serial "SLUS-01280" )
+)
+
+game (
+	comment "Dance Dance Revolution 2nd Remix (Japan)"
+	analog 1
+	rom ( serial "SLPM-86252" )
+)
+
+game (
+	comment "Dance Dance Revolution 2nd Remix - Append Club Version Vol. 1 (Japan)"
+	analog 1
+	rom ( serial "SLPM-86370" )
+)
+
+game (
+	comment "Dance Dance Revolution 3rd Mix (Japan)"
+	analog 1
+	rom ( serial "SLPM-86503" )
+)
+
+game (
+	comment "Dance Dance Revolution Konamix (USA)"
+	analog 1
+	rom ( serial "SLUS-01446" )
+)
+
+game (
+	comment "Dance Dance Revolution - Best Hits (Japan)"
+	analog 1
+	rom ( serial "SLPM-86693" )
+)
+
+game (
+	comment "Dance Dance Revolution - Disney Mix (USA)"
+	analog 1
+	rom ( serial "SLUS-01281" )
+)
+
+game (
+	comment "Dino Crisis 2 (Europe)"
+	analog 1
+	rom ( serial "SLES-03221" )
+)
+
+game (
+	comment "Dino Crisis 2 (France)"
+	analog 1
+	rom ( serial "SLES-03222" )
+)
+
+game (
+	comment "Dino Crisis 2 (Germany)"
+	analog 1
+	rom ( serial "SLES-03223" )
+)
+
+game (
+	comment "Dino Crisis 2 (Japan)"
+	analog 1
+	rom ( serial "SLPM-80573" )
+)
+
+game (
+	comment "Dino Crisis 2 (Japan) (Demo)"
+	analog 1
+	rom ( serial "SLPM-86627" )
+)
+
+game (
+	comment "Dino Crisis 2 (Spain)"
+	analog 1
+	rom ( serial "SLES-03225" )
+)
+
+game (
+	comment "Dino Crisis 2 (USA)"
+	analog 1
+	rom ( serial "SLUS-01279" )
+)
+
+game (
+	comment "Final Fantasy VIII (Europe) (Demo)"
+	analog 1
+	rom ( serial "SCED-02062" )
+)
+
+game (
+	comment "Final Fantasy VIII (France) (Demo)"
+	analog 1
+	rom ( serial "SLED-02259" )
+)
+
+game (
+	comment "Final Fantasy VIII (Europe, Australia) (Disc 1)"
+	analog 1
+	rom ( serial "SCES-02080" )
+)
+
+game (
+	comment "Final Fantasy VIII (France) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02081" )
+)
+
+game (
+	comment "Final Fantasy VIII (Germany) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02082" )
+)
+
+game (
+	comment "Final Fantasy VIII (Italy) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02083" )
+)
+
+game (
+	comment "Final Fantasy VIII (Japan) (Disc 1)"
+	analog 1
+	rom ( serial "SLPM-87384" )
+)
+
+game (
+	comment "Final Fantasy VIII (Spain) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02084" )
+)
+
+game (
+	comment "Final Fantasy VIII (USA) (Disc 1)"
+	analog 1
+	rom ( serial "SLUS-00892" )
+)
+
+game (
+	comment "Final Fantasy VIII (Europe, Australia) (Disc 2)"
+	analog 1
+	rom ( serial "SCES-12080" )
+)
+
+game (
+	comment "Final Fantasy VIII (France) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12081" )
+)
+
+game (
+	comment "Final Fantasy VIII (Germany) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12082" )
+)
+
+game (
+	comment "Final Fantasy VIII (Italy) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12083" )
+)
+
+game (
+	comment "Final Fantasy VIII (Japan) (Disc 2)"
+	analog 1
+	rom ( serial "SLPM-87385" )
+)
+
+game (
+	comment "Final Fantasy VIII (Spain) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12084" )
+)
+
+game (
+	comment "Final Fantasy VIII (USA) (Disc 2)"
+	analog 1
+	rom ( serial "SLUS-00908" )
+)
+
+game (
+	comment "Final Fantasy VIII (Europe, Australia) (Disc 3)"
+	analog 1
+	rom ( serial "SCES-22080" )
+)
+
+game (
+	comment "Final Fantasy VIII (France) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22081" )
+)
+
+game (
+	comment "Final Fantasy VIII (Germany) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22082" )
+)
+
+game (
+	comment "Final Fantasy VIII (Italy) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22083" )
+)
+
+game (
+	comment "Final Fantasy VIII (Japan) (Disc 3)"
+	analog 1
+	rom ( serial "SLPM-87386" )
+)
+
+game (
+	comment "Final Fantasy VIII (Spain) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22084" )
+)
+
+game (
+	comment "Final Fantasy VIII (USA) (Disc 3)"
+	analog 1
+	rom ( serial "SLUS-00909" )
+)
+
+game (
+	comment "Final Fantasy VIII (Europe, Australia) (Disc 4)"
+	analog 1
+	rom ( serial "SCES-32080" )
+)
+
+game (
+	comment "Final Fantasy VIII (France) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32081" )
+)
+
+game (
+	comment "Final Fantasy VIII (Germany) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32082" )
+)
+
+game (
+	comment "Final Fantasy VIII (Italy) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32083" )
+)
+
+game (
+	comment "Final Fantasy VIII (Japan) (Disc 4)"
+	analog 1
+	rom ( serial "SLPM-87387" )
+)
+
+game (
+	comment "Final Fantasy VIII (Spain) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32084" )
+)
+
+game (
+	comment "Final Fantasy VIII (USA) (Disc 4)"
+	analog 1
+	rom ( serial "SLUS-00910" )
+)
+
+game (
+	comment "Final Fantasy IX (Europe) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02965" )
+)
+
+game (
+	comment "Final Fantasy IX (France) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02966" )
+)
+
+game (
+	comment "Final Fantasy IX (Germany) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02967" )
+)
+
+game (
+	comment "Final Fantasy IX (Italy) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02968" )
+)
+
+game (
+	comment "Final Fantasy IX (Japan) (Disc 1)"
+	analog 1
+	rom ( serial "SLPS-02000" )
+)
+
+game (
+	comment "Final Fantasy IX (Spain) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02969" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 1) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-01251" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 1) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-01251" )
+)
+
+game (
+	comment "Final Fantasy IX (Europe) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12965" )
+)
+
+game (
+	comment "Final Fantasy IX (France) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12966" )
+)
+
+game (
+	comment "Final Fantasy IX (Germany) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12967" )
+)
+
+game (
+	comment "Final Fantasy IX (Italy) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12968" )
+)
+
+game (
+	comment "Final Fantasy IX (Japan) (Disc 2)"
+	analog 1
+	rom ( serial "SLPS-02001" )
+)
+
+game (
+	comment "Final Fantasy IX (Spain) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12969" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 2) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-01295" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 2) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-01295" )
+)
+
+game (
+	comment "Final Fantasy IX (Europe) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22965" )
+)
+
+game (
+	comment "Final Fantasy IX (France) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22966" )
+)
+
+game (
+	comment "Final Fantasy IX (Germany) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22967" )
+)
+
+game (
+	comment "Final Fantasy IX (Italy) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22968" )
+)
+
+game (
+	comment "Final Fantasy IX (Japan) (Disc 3)"
+	analog 1
+	rom ( serial "SLPS-02002" )
+)
+
+game (
+	comment "Final Fantasy IX (Spain) (Disc 3)"
+	analog 1
+	rom ( serial "SLES-22969" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 3) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-01296" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 3) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-01296" )
+)
+
+game (
+	comment "Final Fantasy IX (Europe) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32965" )
+)
+
+game (
+	comment "Final Fantasy IX (France) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32966" )
+)
+
+game (
+	comment "Final Fantasy IX (Germany) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32967" )
+)
+
+game (
+	comment "Final Fantasy IX (Italy) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32968" )
+)
+
+game (
+	comment "Final Fantasy IX (Japan) (Disc 4)"
+	analog 1
+	rom ( serial "SLPS-02003" )
+)
+
+game (
+	comment "Final Fantasy IX (Spain) (Disc 4)"
+	analog 1
+	rom ( serial "SLES-32969" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 4) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-01297" )
+)
+
+game (
+	comment "Final Fantasy IX (USA) (Disc 4) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-01297" )
+)
+
+game (
+	comment "Gran Turismo (Japan)"
+	analog 1
+	rom ( serial "SCPS-10045" )
+)
+
+game (
+	comment "Gran Turismo (Japan) (Demo)"
+	analog 1
+	rom ( serial "PAPX-90026" )
+)
+
+game (
+	comment "Gran Turismo (Europe) (En,Fr,De,Es,It) (EDC)"
+	analog 1
+	rom ( serial "SCES-00984" )
+)
+
+game (
+	comment "Gran Turismo (Europe) (En,Fr,De,Es,It) (No EDC)"
+	analog 1
+	rom ( serial "SCES-00984" )
+)
+
+game (
+	comment "Gran Turismo (USA) (Demo)"
+	analog 1
+	rom ( serial "SCUS-94257" )
+)
+
+game (
+	comment "Gran Turismo (USA) (v1.0)"
+	analog 1
+	rom ( serial "SCUS-94194" )
+)
+
+game (
+	comment "Gran Turismo (USA) (v1.1)"
+	analog 1
+	rom ( serial "SCUS-94194" )
+)
+
+game (
+	comment "Gran Turismo 2 (USA) (Arcade Mode) (v1.0)"
+	analog 1
+	rom ( serial "SCUS-94455" )
+)
+
+game (
+	comment "Gran Turismo 2 (USA) (Arcade Mode) (v1.1)"
+	analog 1
+	rom ( serial "SCUS-94455" )
+)
+
+game (
+	comment "Gran Turismo 2 (Europe) (En,Fr,De,Es,It) (Disc 1) (Arcade Mode)"
+	analog 1
+	rom ( serial "SCES-02380" )
+)
+
+game (
+	comment "Gran Turismo 2 (Japan) (Disc 1) (Arcade)"
+	analog 1
+	rom ( serial "SCPS-10116" )
+)
+
+game (
+	comment "Gran Turismo 2 (Europe) (En,Fr,De,Es,It) (Disc 2) (Gran Turismo Mode)"
+	analog 1
+	rom ( serial "SCES-12380" )
+)
+
+game (
+	comment "Gran Turismo 2 (Japan) (Disc 2) (Gran Turismo) (v1.0)"
+	analog 1
+	rom ( serial "SCPS-10117" )
+)
+
+game (
+	comment "Gran Turismo 2 (Japan) (Disc 2) (Gran Turismo) (v1.1)"
+	analog 1
+	rom ( serial "SCPS-10117" )
+)
+
+game (
+	comment "Gran Turismo 2 (USA) (Simulation Mode) (v1.0)"
+	analog 1
+	rom ( serial "SCUS-94488" )
+)
+
+game (
+	comment "Gran Turismo 2 (USA) (Simulation Mode) (v1.1)"
+	analog 1
+	rom ( serial "SCUS-94488" )
+)
+
+game (
+	comment "Gran Turismo 2 (USA) (Simulation Mode) (v1.2)"
+	analog 1
+	rom ( serial "SCUS-94488" )
+)
+
+game (
+	comment "Gran Turismo 2 - Music at the Speed of Sound - The Album (USA) (Bonus PlayStation Disc)"
+	analog 1
+	rom ( serial "SCUS-94588" )
+)
+
+game (
+	comment "Harvest Moon - Back to Nature (Europe) (En,De) (v1.0)"
+	analog 1
+	rom ( serial "SLES-02781" )
+)
+
+game (
+	comment "Harvest Moon - Back to Nature (Europe) (En,De) (v1.1)"
+	analog 1
+	rom ( serial "SLES-02781" )
+)
+
+game (
+	comment "Harvest Moon - Back to Nature (USA)"
+	analog 1
+	rom ( serial "SLUS-01115" )
+)
+
+game (
+	comment "Jet Moto 3 (USA)"
+	analog 1
+	rom ( serial "SCUS-94555" )
+)
+
+game (
+	comment "Metal Gear Solid (Europe) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-01370" )
+)
+
+game (
+	comment "Metal Gear Solid (France) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-01506" )
+)
+
+game (
+	comment "Metal Gear Solid (Germany) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-01507" )
+)
+
+game (
+	comment "Metal Gear Solid (Italy) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-01508" )
+)
+
+game (
+	comment "Metal Gear Solid (Japan) (En,Ja) (Disc 1)"
+	analog 1
+	rom ( serial "SLPM-86111" )
+)
+
+game (
+	comment "Metal Gear Solid (Spain) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-01734" )
+)
+
+game (
+	comment "Metal Gear Solid (USA) (Disc 1) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-00594" )
+)
+
+game (
+	comment "Metal Gear Solid (USA) (Disc 1) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-00594" )
+)
+
+game (
+	comment "Metal Gear Solid (Europe) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-11370" )
+)
+
+game (
+	comment "Metal Gear Solid (France) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-11506" )
+)
+
+game (
+	comment "Metal Gear Solid (Germany) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-11507" )
+)
+
+game (
+	comment "Metal Gear Solid (Italy) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-11508" )
+)
+
+game (
+	comment "Metal Gear Solid (Japan) (En,Ja) (Disc 2)"
+	analog 1
+	rom ( serial "SLPM-86112" )
+)
+
+game (
+	comment "Metal Gear Solid (Spain) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-11734" )
+)
+
+game (
+	comment "Metal Gear Solid (USA) (Disc 2) (v1.0)"
+	analog 1
+	rom ( serial "SLUS-00776" )
+)
+
+game (
+	comment "Metal Gear Solid (USA) (Disc 2) (v1.1)"
+	analog 1
+	rom ( serial "SLUS-00776" )
+)
+
+game (
+	comment "Metal Gear Solid Pilot Disc (Japan)"
+	analog 1
+	rom ( serial "PAPX-90044" )
+)
+
+game (
+	comment "Metal Gear Solid - Integral (Japan) (En,Ja) (Disc 1)"
+	analog 1
+	rom ( serial "SCPS-45412" )
+)
+
+game (
+	comment "Metal Gear Solid - Integral (Japan) (En,Ja) (Disc 2)"
+	analog 1
+	rom ( serial "SCPS-45413" )
+)
+
+game (
+	comment "Metal Gear Solid - Integral (Japan) (Disc 3) (VR-Disc)"
+	analog 1
+	rom ( serial "SCPS-45414" )
+)
+
+game (
+	comment "Metal Gear Solid - Special Missions (Europe)"
+	analog 1
+	rom ( serial "SLES-02136" )
+)
+
+game (
+	comment "Metal Gear Solid - VR Missions (USA)"
+	analog 1
+	rom ( serial "SLUS-00957" )
+)
+
+game (
+	comment "Metal Gear Solid - VR Missions (USA) (Demo)"
+	analog 1
+	rom ( serial "SLUS-90062" )
+)
+
+game (
+	comment "Need for Speed II (Europe) (En,Fr,De,Es,It,Sv)"
+	analog 1
+	rom ( serial "SLES-00658" )
+)
+
+game (
+	comment "Need for Speed II (USA)"
+	analog 1
+	rom ( serial "SLUS-00276" )
+)
+
+game (
+	comment "Need for Speed III - Hot Pursuit (Europe) (En,Fr,De,Es,It,Sv)"
+	analog 1
+	rom ( serial "SLES-01154" )
+)
+
+game (
+	comment "Need for Speed III - Hot Pursuit (USA)"
+	analog 1
+	rom ( serial "SLUS-00620" )
+)
+
+game (
+	comment "Need for Speed - High Stakes (Australia)"
+	analog 1
+	rom ( serial "SLES-01876" )
+)
+
+game (
+	comment "Need for Speed - High Stakes (USA)"
+	analog 1
+	rom ( serial "SLUS-00826" )
+)
+
+game (
+	comment "Need for Speed - Porsche 2000 (Europe) (En,De,Sv)"
+	analog 1
+	rom ( serial "SLES-02689" )
+)
+
+game (
+	comment "Need for Speed - Porsche 2000 (Europe) (Fr,Es,It)"
+	analog 1
+	rom ( serial "SLES-02700" )
+)
+
+game (
+	comment "Need for Speed - Porsche Unleashed (USA)"
+	analog 1
+	rom ( serial "SLUS-01104" )
+)
+
+game (
+	comment "Need for Speed - Road Challenge (Europe) (En,Sv)"
+	analog 1
+	rom ( serial "SLES-01788" )
+)
+
+game (
+	comment "Need for Speed - Road Challenge (Europe) (Fr,De)"
+	analog 1
+	rom ( serial "SLES-01789" )
+)
+
+game (
+	comment "Need for Speed - V-Rally 2 (USA)"
+	analog 1
+	rom ( serial "SLUS-01003" )
+)
+
+game (
+	comment "Over Drivin' II (Japan)"
+	analog 1
+	rom ( serial "SLPS-00895" )
+)
+
+game (
+	comment "Over Drivin' III - Hot Pursuit (Japan)"
+	analog 1
+	rom ( serial "SLPS-01593" )
+)
+
+game (
+	comment "Over Drivin' IV (Japan)"
+	analog 1
+	rom ( serial "SLPS-02099" )
+)
+
+game (
+	comment "Parasite Eve (Japan) (Disc 1)"
+	analog 1
+	rom ( serial "SLPS-01230" )
+)
+
+game (
+	comment "Parasite Eve (USA) (Disc 1)"
+	analog 1
+	rom ( serial "SLUS-00662" )
+)
+
+game (
+	comment "Parasite Eve (Japan) (Disc 2)"
+	analog 1
+	rom ( serial "SLPS-01231" )
+)
+
+game (
+	comment "Parasite Eve (USA) (Disc 2)"
+	analog 1
+	rom ( serial "SLUS-00668" )
+)
+
+game (
+	comment "Parasite Eve II (Europe) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02558" )
+)
+
+game (
+	comment "Parasite Eve II (France) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02559" )
+)
+
+game (
+	comment "Parasite Eve II (Germany) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02560" )
+)
+
+game (
+	comment "Parasite Eve II (Italy) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02562" )
+)
+
+game (
+	comment "Parasite Eve II (Japan) (Disc 1)"
+	analog 1
+	rom ( serial "SLPS-02480" )
+)
+
+game (
+	comment "Parasite Eve II (Spain) (Disc 1)"
+	analog 1
+	rom ( serial "SLES-02561" )
+)
+
+game (
+	comment "Parasite Eve II (USA) (Disc 1)"
+	analog 1
+	rom ( serial "SLUS-01042" )
+)
+
+game (
+	comment "Parasite Eve II (Europe) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12558" )
+)
+
+game (
+	comment "Parasite Eve II (France) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12559" )
+)
+
+game (
+	comment "Parasite Eve II (Germany) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12560" )
+)
+
+game (
+	comment "Parasite Eve II (Italy) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12562" )
+)
+
+game (
+	comment "Parasite Eve II (Japan) (Disc 2)"
+	analog 1
+	rom ( serial "SLPS-02481" )
+)
+
+game (
+	comment "Parasite Eve II (Spain) (Disc 2)"
+	analog 1
+	rom ( serial "SLES-12561" )
+)
+
+game (
+	comment "Parasite Eve II (USA) (Disc 2)"
+	analog 1
+	rom ( serial "SLUS-01055" )
+)
+
+game (
+	comment "Populous - The Beginning (Europe) (En,Fr,De,Es,It,Nl,Sv)"
+	analog 1
+	rom ( serial "SLES-01760" )
+)
+
+game (
+	comment "Populous - The Beginning (Japan)"
+	analog 1
+	rom ( serial "SLPS-02085" )
+)
+
+game (
+	comment "Populous - The Beginning (USA)"
+	analog 1
+	rom ( serial "SLUS-00277" )
+)
+
+game (
+	comment "Porsche Challenge (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-00409" )
+)
+
+game (
+	comment "Porsche Challenge (Japan)"
+	analog 1
+	rom ( serial "SIPS-60016" )
+)
+
+game (
+	comment "Porsche Challenge (USA) (En,Fr,Es)"
+	analog 1
+	rom ( serial "SCUS-94187" )
+)
+
+game (
+	comment "Radikal Bikers (Europe)"
+	analog 1
+	rom ( serial "SLES-01943" )
+)
+
+game (
+	comment "Resident Evil 2 - Dual Shock Ver. (USA) (Disc 1) (Leon)"
+	analog 1
+	rom ( serial "SLUS-00748" )
+)
+
+game (
+	comment "Resident Evil 2 - Dual Shock Ver. (USA) (Disc 2) (Claire)"
+	analog 1
+	rom ( serial "SLUS-00756" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Europe)"
+	analog 1
+	rom ( serial "SLES-02529" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Europe) (Demo)"
+	analog 1
+	rom ( serial "SLED-02541" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (France)"
+	analog 1
+	rom ( serial "SLES-02530" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Germany)"
+	analog 1
+	rom ( serial "SLES-02531" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Ireland)"
+	analog 1
+	rom ( serial "SLES-02698" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Italy)"
+	analog 1
+	rom ( serial "SLES-02533" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (Spain)"
+	analog 1
+	rom ( serial "SLES-02532" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (USA)"
+	analog 1
+	rom ( serial "SLUS-00923" )
+)
+
+game (
+	comment "Resident Evil 3 - Nemesis (USA) (Demo)"
+	analog 1
+	rom ( serial "SLUS-90064" )
+)
+
+game (
+	comment "Resident Evil - Director's Cut - Dual Shock Ver. (USA)"
+	analog 1
+	rom ( serial "SLUS-00747" )
+)
+
+game (
+	comment "Saltwater Sportfishing (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SLES-03753" )
+)
+
+game (
+	comment "Saltwater Sportfishing (USA)"
+	analog 1
+	rom ( serial "SLUS-01397" )
+)
+
+game (
+	comment "Spyro 2 - Gateway to Glimmer (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-02104" )
+)
+
+game (
+	comment "Spyro 2 - Ripto's Rage! (USA)"
+	analog 1
+	rom ( serial "SCUS-94425" )
+)
+
+game (
+	comment "Spyro the Dragon (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-01438" )
+)
+
+game (
+	comment "Spyro the Dragon (Japan)"
+	analog 1
+	rom ( serial "SCPS-10083" )
+)
+
+game (
+	comment "Spyro the Dragon (USA)"
+	analog 1
+	rom ( serial "SCUS-94228" )
+)
+
+game (
+	comment "Spyro the Dragon (USA) (Demo)"
+	analog 1
+	rom ( serial "SCUS-94290" )
+)
+
+game (
+	comment "Spyro - Year of the Dragon (Europe) (En,Fr,De,Es,It) (v1.0)"
+	analog 1
+	rom ( serial "SCES-02835" )
+)
+
+game (
+	comment "Spyro - Year of the Dragon (Europe) (En,Fr,De,Es,It) (v1.1)"
+	analog 1
+	rom ( serial "SCES-02835" )
+)
+
+game (
+	comment "Spyro - Year of the Dragon (USA) (v1.0)"
+	analog 1
+	rom ( serial "SCUS-94467" )
+)
+
+game (
+	comment "Spyro - Year of the Dragon (USA) (v1.1)"
+	analog 1
+	rom ( serial "SCUS-94467" )
+)
+
+game (
+	comment "Squaresoft on PlayStation 1998 Collector's CD Vol. 2 (USA) (Final Fantasy VIII Demo)"
+	analog 1
+	rom ( serial "SLUS-90029" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Europe) (Disc 1)"
+	analog 1
+	rom ( serial "SCES-02159" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Germany) (Disc 1)"
+	analog 1
+	rom ( serial "SCES-02161" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Japan) (Disc 1) (v1.0)"
+	analog 1
+	rom ( serial "SLPM-86105" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Japan) (Disc 1) (v1.1)"
+	analog 1
+	rom ( serial "SLPM-87357" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (USA) (Disc 1)"
+	analog 1
+	rom ( serial "SCUS-94421" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Europe) (Disc 2)"
+	analog 1
+	rom ( serial "SCES-12159" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Germany) (Disc 2)"
+	analog 1
+	rom ( serial "SCES-12161" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Japan) (Disc 2) (v1.0)"
+	analog 1
+	rom ( serial "SLPM-86106" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (Japan) (Disc 2) (v1.1)"
+	analog 1
+	rom ( serial "SLPM-87358" )
+)
+
+game (
+	comment "Star Ocean - The Second Story (USA) (Disc 2)"
+	analog 1
+	rom ( serial "SCUS-94422" )
+)
+
+game (
+	comment "Um Jammer Lammy (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-01753" )
+)
+
+game (
+	comment "Um Jammer Lammy (Japan)"
+	analog 1
+	rom ( serial "SCPS-18011" )
+)
+
+game (
+	comment "Um Jammer Lammy (USA)"
+	analog 1
+	rom ( serial "SCUS-94448" )
+)
+
+game (
+	comment "Um Jammer Lammy (USA) (Demo)"
+	analog 1
+	rom ( serial "SCUS-94398" )
+)
+
+game (
+	comment "V-Rally - Championship Edition 2 (Europe) (En,Fr,De)"
+	analog 1
+	rom ( serial "SLES-01907" )
+)
+
+game (
+	comment "V-Rally - Championship Edition 2 (Japan)"
+	analog 1
+	rom ( serial "SLPS-02516" )
+)
+
+game (
+	comment "Vagrant Story (Europe)"
+	analog 1
+	rom ( serial "SLES-02754" )
+)
+
+game (
+	comment "Vagrant Story (France)"
+	analog 1
+	rom ( serial "SLES-02755" )
+)
+
+game (
+	comment "Vagrant Story (Germany)"
+	analog 1
+	rom ( serial "SLES-02756" )
+)
+
+game (
+	comment "Vagrant Story (Japan)"
+	analog 1
+	rom ( serial "SLPM-87393" )
+)
+
+game (
+	comment "Vagrant Story (USA)"
+	analog 1
+	rom ( serial "SLUS-01040" )
+)
+
+game (
+	comment "WipEout 3 (USA) (Demo)"
+	analog 1
+	rom ( serial "SLUS-90063" )
+)
+
+game (
+	comment "WipEout 3 - Special Edition (Europe) (En,Fr,De,Es,It)"
+	analog 1
+	rom ( serial "SCES-02845" )
+)
