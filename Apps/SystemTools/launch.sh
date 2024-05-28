@@ -17,12 +17,11 @@ PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
 CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
-mkdir -p  /mnt/SDCARD/System/starts/
-mkdir -p  /mnt/SDCARD/System/etc
+mkdir -p /mnt/SDCARD/System/starts/
+mkdir -p /mnt/SDCARD/System/etc
 if [ ! -f "/mnt/SDCARD/System/etc/systemtools.json" ]; then
-touch /mnt/SDCARD/System/etc/systemtools.json
+  touch /mnt/SDCARD/System/etc/systemtools.json
 fi
-
 
 SubFoldersList=":"
 ####################################### For testing :
@@ -49,16 +48,16 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
   subdir_name=$(basename "$subdir")
   cp "${BG_list_directory}Default.sh" "${BG_list_directory}${subdir_name}.sh"
 
-  # Vérifier si le fichier preview.png existe
+  # Check if preview.png file exists
   if [ -f "${subdir}preview.png" ]; then
-    # Copier preview.png avec le nom du sous-dossier
+    # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${BG_imgs_directory}${subdir_name}.png"
   else
-    # Vérifier si le fichier SFC.png existe
+    # Check if the file SFC.png exists
     if [ -f "${subdir}SFC.png" ]; then
       cp "${subdir}SFC.png" "${BG_imgs_directory}${subdir_name}.png"
     else
-      # Si SFC.png n'existe pas, copier le premier fichier .png trouvé dans ${subdir}Emus/
+      # If SFC.png doesn't exist, copy the first .png file found into ${subdir}Emus/.
       echo "----------------- ${subdir}"
       first_png=$(find "${subdir}" -maxdepth 2 -type f -name "*.png" | head -n 1)
       if [ -n "$first_png" ]; then
@@ -68,7 +67,33 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
   fi
 
 done
-	
+
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/THEME##ICONS (value)/"
+ICON_imgs_directory="${img_path}/THEME##ICONS (value)/"
+# Cleaning old list
+find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
+rm "$ICON_imgs_directory"/*.png
+for subdir in /mnt/SDCARD/Icons/*/; do
+  subdir_name=$(basename "$subdir")
+  cp "${ICON_list_directory}Default.sh" "${ICON_list_directory}${subdir_name}.sh"
+  # Check if preview.png file exists
+  if [ -f "${subdir}preview.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
+  else
+    # Check if the file SFC.png exists
+    if [ -f "${subdir}Emus/SFC.png" ]; then
+      cp "${subdir}Emus/SFC.png" "${ICON_imgs_directory}${subdir_name}.png"
+    else
+      # If SFC.png doesn't exist, copy the first .png file found into ${subdir}Emus/.
+      first_png=$(find "${subdir}Emus/" -maxdepth 2 -type f -name "*.png" | head -n 1)
+      if [ -n "$first_png" ]; then
+        cp "$first_png" "${ICON_imgs_directory}${subdir_name}.png"
+      fi
+    fi
+  fi
+done
+sync
 # ================================================= Create a new database file =================================================
 
 sqlite3 "$database_file" "CREATE TABLE Menu_roms (id INTEGER PRIMARY KEY, disp TEXT, path TEXT, imgpath TEXT, type INTEGER, ppath TEXT, pinyin TEXT, cpinyin TEXT, opinyin TEXT);"
@@ -172,10 +197,10 @@ echo "================"
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (state)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutstate=$(echo "$disp" | sed 's/ (state)//g')
-     CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp] // 1' "/mnt/SDCARD/System/etc/crossmix.json")
-	if [ -z "$CurState" ]; then
-    CurState="not set"
-fi
+    CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp] // 1' "/mnt/SDCARD/System/etc/crossmix.json")
+    if [ -z "$CurState" ]; then
+      CurState="not set"
+    fi
     # ----------------------------------------------------------------------
     # Managing some exceptions : state values related to the current theme :
     if [ "$disp_withoutstate" = "CLICK" ]; then
@@ -222,10 +247,10 @@ fi
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (value)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutvalue=$(echo "$disp" | sed 's/ (value)//g')
-     CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
-		if [ -z "$CurState" ]; then
-    CurState="not set"
-fi
+    CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
+    if [ -z "$CurState" ]; then
+      CurState="not set"
+    fi
     disp_withvalue="$disp_withoutvalue ($CurState)"
     sqlite3 "$database_file" "UPDATE Menu_roms SET disp = '$disp_withvalue',pinyin = '$disp_withvalue',cpinyin = '$disp_withvalue',opinyin = '$disp_withvalue' WHERE path = '$path';"
     sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = '$disp_withvalue' WHERE ppath = '$disp';"
