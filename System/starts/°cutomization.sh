@@ -87,6 +87,10 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
 	cp "/mnt/SDCARD/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580.png"
 
+	# modifying FN cpu script (don't force slow cpu, only force high speed when FN is set to ON) (and we set it as default)
+	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/apps/fn_editor/com.trimui.cpuperformance.sh
+	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/scene/com.trimui.cpuperformance.sh
+
 	touch "/usr/trimui/fw_mod_done"
 
 	sync
