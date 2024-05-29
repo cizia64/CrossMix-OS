@@ -91,6 +91,19 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/apps/fn_editor/com.trimui.cpuperformance.sh
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/scene/com.trimui.cpuperformance.sh
 
+	# Removing duplicated app
+	rm -rf /usr/trimui/apps/zformatter_fat32/
+
+	# Sorting Themes Alphabetically
+	"/mnt/SDCARD/Apps/SystemTools/Menu/THEME/Sort Themes Alphabetically.sh" -s
+
+	# Game tab by default
+	"/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab Game.sh" -s
+
+	# Apply default CrossMix theme, sound volume, and grid view
+	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
+	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
+
 	touch "/usr/trimui/fw_mod_done"
 
 	sync
