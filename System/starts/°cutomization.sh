@@ -104,7 +104,45 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
-	touch "/usr/trimui/fw_mod_done"
+	# Flash logo
+	SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
+	TARGET_PARTITION="/dev/mmcblk0p1"
+	MOUNT_POINT="/mnt/emmcblk0p1"
 
+	echo "Mounting $TARGET_PARTITION to $MOUNT_POINT..."
+	mkdir -p $MOUNT_POINT
+	mount $TARGET_PARTITION $MOUNT_POINT
+
+	if [ $? -ne 0 ]; then
+		echo "Failed to mount $TARGET_PARTITION."
+		exit 1
+	fi
+
+	if [ -f $SOURCE_FILE ]; then
+		echo "Moving $SOURCE_FILE to $MOUNT_POINT/bootlogo.bmp..."
+		cp $SOURCE_FILE $MOUNT_POINT/bootlogo.bmp
+		sync
+		sync
+		sleep 0.3
+		sync
+	else
+		echo "Source bootlogo file does not exist."
+		echo "Unmounting $TARGET_PARTITION..."
+		umount $TARGET_PARTITION
+		rmdir $MOUNT_POINT
+		exit 1
+	fi
+
+	if [ $? -ne 0 ]; then
+		echo "Failed to move file."
+	else
+		echo "File moved successfully."
+	fi
+
+	echo "Unmounting $TARGET_PARTITION..."
+	umount $TARGET_PARTITION
+	rmdir $MOUNT_POINT
+
+	touch "/usr/trimui/fw_mod_done"
 	sync
 fi
