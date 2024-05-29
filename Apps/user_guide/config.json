@@ -1,0 +1,8 @@
+{
+"package":"com.trimui.user_manual_en",
+"label":"User Guide",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"User Manual"
+}
