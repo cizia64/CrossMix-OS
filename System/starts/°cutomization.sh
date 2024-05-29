@@ -80,6 +80,9 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 		cp "/mnt/SDCARD/trimui/res/lang/lang_pl.png" "/usr/trimui/res/skin/"
 	fi
 
+	# custom shutdown script from "Resume at Boot"
+	cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
+
 	touch "/usr/trimui/fw_mod_done"
 
 	sync
