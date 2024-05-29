@@ -83,6 +83,10 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# custom shutdown script from "Resume at Boot"
 	cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
 
+	# modifying default theme to impact all other themes (Better game image background)
+	mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
+	cp "/mnt/SDCARD/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580.png"
+
 	touch "/usr/trimui/fw_mod_done"
 
 	sync
