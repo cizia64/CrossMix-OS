@@ -1,0 +1,38 @@
+{
+    "name":"TRIMUI Retro",
+    "font":"Roboto-Light.ttf",
+    "fontascii":"Roboto-Light.ttf",
+    "fontsize":{
+        "nav_font1":32,
+        "nav_font2":24,
+        "content_font1":36,
+        "content_font2":24,
+        "content_font3":48,
+        "content_font4":72,
+        "content_font5":40,
+        "content_font6":28,
+        "stat_font1":24,
+        "menu_font1":36,
+        "popup_font1":44,
+        "popup_font2":36,
+        "popup_font3":36
+    },
+    "fontcolor":{
+        "nav_color1":"#80FFFFFF",
+        "nav_color2":"#FFFFFFFF",
+        "nav_color3":"#80FFFFFF",
+        "content_color1":"#FFFFFFFF",
+        "content_color2":"#80FFFFFF",
+        "content_color3":"#FFE537AB",
+        "content_color4":"#FFE537AB",
+        "stat_color1":"#FFFFFFFF",
+        "stat_color2":"#FFE537AB",
+        "menu_color1":"#FFFFFFFF",
+        "menu_color2":"#FFFFFFFF",
+        "popup_color1":"#FFE537AB",
+        "popup_color2":"#FFFFFFFF",
+        "popup_color3":"#FFFFFFFF",
+        "highlight_color1":"#FFE537AB",
+        "shadow_color1":"#FF000000"
+    }
+} 

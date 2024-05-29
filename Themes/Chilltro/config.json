@@ -1,0 +1,22 @@
+{
+    "name":"Chilltro",
+    "font":"HYZhengYuan-95W.ttf",
+    "fontascii":"BPreplayBold.otf",
+    "fontsize":{
+        "title":18,
+        "statbar":17,
+        "list":16
+    },
+    "fontcolor":{
+        "title":"#F0F0F0",
+        "shadow":"#000000",
+        "statbar":"#F0F0F0",
+        "list":"#F0F0F0",
+        "listsel":"#9BBC0F",
+        "iconlist":"#F0F0F0",
+        "iconlistsel":"#F0F0F0",
+        "notify":"#000000",
+        "popup":"#F0F0F0",
+        "popupsel":"#9BBC0F"
+    }
+} 
