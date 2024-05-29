@@ -1,0 +1,12 @@
+{
+  "RESUME AT BOOT": 1,
+  "SFTPGo": 0,
+  "SSH": 1,
+  "BACKGROUNDS": "Default",
+  "ICONS": "Default",
+  "START TAB": "Tab Game",
+  "LEDS": "Default",
+  "AUTO LOAD STATE": 1,
+  "OVERLAYS": "Overlays - max ratio",
+  "resume at boot": 1
+}
