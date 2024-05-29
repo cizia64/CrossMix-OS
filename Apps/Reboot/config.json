@@ -1,0 +1,7 @@
+{
+"label":"Reboot",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"Restart device"
+}

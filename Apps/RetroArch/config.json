@@ -1,0 +1,15 @@
+{
+"label":"RetroArch",
+"icon":"retroarch.png",
+"iconsmall":"",
+"iconlist":"",
+"background":"",
+"themecolor":"0000FF",
+"launch":"launch.sh",
+"rompath":"",
+"imgpath":"",
+"useswap":0,
+"shortname":0,
+"hidebios":0,
+"extlist":""
+}
