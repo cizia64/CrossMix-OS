@@ -1,0 +1,13 @@
+{
+"label":"Free Games Collection",
+"icon":"icon.png",
+"background":"bg.png",
+"themecolor":"f0b402",
+"launch":"launch.sh",
+"rompath":"./Roms",
+"imgpath":"./Imgs",
+"useswap":0,
+"shortname":0,
+"hidebios":1,
+"extlist":"gba|nes|n64|z64|smc|7z|zip|gb|md|iso|cue|sfc|nds|bin|img|chd|elf|txt"
+}
