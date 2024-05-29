@@ -146,3 +146,6 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	touch "/usr/trimui/fw_mod_done"
 	sync
 fi
+
+# Apply current led configuration
+/mnt/SDCARD/System/etc/led_config.sh &
