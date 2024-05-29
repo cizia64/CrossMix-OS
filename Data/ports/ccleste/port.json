@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "name": "cceleste.zip",
+    "items": [
+        "ccleste/",
+        "Celeste Classic.sh"
+    ],
+    "items_opt": null,
+    "attr": {
+        "title": "Celeste Classic",
+        "porter": [
+            "Bamboozler"
+        ],
+        "desc": "Celeste Classic is a C source port of the original celeste (Celeste classic).",
+        "inst": "All files are included and game is ready to play.",
+        "genres": [
+            "platformer"
+        ],
+        "image": {},
+        "rtr": true,
+        "runtime": null,
+        "reqs": [],
+        "arch": [
+            "aarch64"
+        ],
+        "exp": false
+    }
+}

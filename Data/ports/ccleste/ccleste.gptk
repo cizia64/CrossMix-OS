@@ -1,0 +1,29 @@
+
+start = esc
+
+
+up = up
+down = down
+left = left
+right = right
+
+left_analog_up = up
+left_analog_down = down
+left_analog_left = left
+left_analog_right = right
+
+b = x
+a = z
+x = e
+y = f9
+
+l1 = d
+l1  = add_shift
+l2 = d
+l2 = add_shift
+
+r1 = s
+r1 = add_shift
+r2 = s
+r2 = add_shift
+

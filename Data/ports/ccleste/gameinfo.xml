@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gameList>
+  <game>
+    <path>./Celeste Classic.sh</path>
+    <name>Celeste</name>
+    <desc>Help Madeline survive her inner demons on her journey to the top of Celeste Mountain, in this super-tight, hand-crafted platformer from the creators of multiplayer classic TowerFall.</desc>
+    <image>./ccleste/cover.png</image>
+    <releasedate>20180125T000000</releasedate>
+    <developer>Matt Makes Games</developer>
+    <publisher>Matt Makes Games</publisher>
+  </game>
+</gameList>
