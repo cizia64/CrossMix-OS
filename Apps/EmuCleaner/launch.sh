@@ -40,7 +40,7 @@ for subfolder in $EmuFolder/*/; do
 		Label=$(/mnt/SDCARD/System/bin/jq -r '.label' "$subfolder/config.json")
 		echo "--$Label--"
 
-		if ! find "$RomsFolder/$RomFolderName" '!' -name '*.db' '!' -name '*.sh' -mindepth 1 -maxdepth 1 |  read; then
+		if ! find "$RomsFolder/$RomFolderName" '!' -name '*.db' '!' -name '.gitkeep' -mindepth 1 -maxdepth 1 |  read; then
 			echo "Removing $Label emulator (no roms in $RomFolderName folder)."
 			write_entry "$Label" 0 >> $json_file
 			let NumRemoved++;

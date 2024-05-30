@@ -6,7 +6,8 @@
     -s 40 \
     -c "220,220,220" \
     -t "Sorting favorites..." &
-
+sleep 0.3
+pkill -f sdl2imgshow
 set -eu
 
 SORT=/usr/bin/sort
@@ -22,4 +23,4 @@ sync
 sync
 
 sleep 1
-pkill -f sdl2imgshow
+
