@@ -33,9 +33,8 @@ json_file="/tmp/state.json"
 # we modify the current menu position as the DB entry has changed
 jq '.list |= map(if .ppath == "SFTPGo (disabled)" then .ppath = "SFTPGo (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
-sleep 0.1
 pkill -f sdl2imgshow
-sleep 0.3
+sleep 1
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')
 echo "SFTPGo: http://$IP:8080"
 /mnt/SDCARD/System/bin/sdl2imgshow \
@@ -46,4 +45,5 @@ echo "SFTPGo: http://$IP:8080"
   -t "SFTPGo: http://$IP:8080" &
 
 sleep 4
+
 pkill -f sdl2imgshow
