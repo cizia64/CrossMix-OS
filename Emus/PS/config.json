@@ -24,6 +24,10 @@
     {
       "name": "SwanStation",
       "launch": "swanstation.sh"
+    },
+    {
+      "name": "SwanStation 16:9",
+      "launch": "swanstation_wide.sh"
     }
   ]
 }
