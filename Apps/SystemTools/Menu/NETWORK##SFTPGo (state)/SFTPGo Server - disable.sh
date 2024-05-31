@@ -15,7 +15,8 @@ fi
 
 /mnt/SDCARD/System/bin/jq '. += {"SFTPGo": 0}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-pkill sftpgo
+sed -i 's/export NETWORK_SFTPGO="Y"/export NETWORK_SFTPGO="N"/' /mnt/SDCARD/System/etc/ex_config
+pkill /mnt/SDCARD/System/sftpgo/sftpgo
 
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"

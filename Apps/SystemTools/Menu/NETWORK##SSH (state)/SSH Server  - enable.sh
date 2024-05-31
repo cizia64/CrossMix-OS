@@ -18,6 +18,7 @@ fi
 /mnt/SDCARD/System/bin/jq '. += {"SSH": 1}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
 pkill dropbear
+sed -i 's/export NETWORK_SSH="N"/export NETWORK_SSH="Y"/' /mnt/SDCARD/System/etc/ex_config
 mkdir -p /etc/dropbear
 nice -2 dropbear -R
 

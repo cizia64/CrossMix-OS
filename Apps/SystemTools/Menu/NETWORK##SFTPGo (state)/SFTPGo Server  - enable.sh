@@ -15,7 +15,8 @@ fi
 
 /mnt/SDCARD/System/bin/jq '. += {"SFTPGo": 1}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-pkill sftpgo
+sed -i 's/export NETWORK_SFTPGO="N"/export NETWORK_SFTPGO="Y"/' /mnt/SDCARD/System/etc/ex_config
+pkill /mnt/SDCARD/System/sftpgo/sftpgo
 mkdir -p /opt/sftpgo
 nice -2 /mnt/SDCARD/System/sftpgo/sftpgo serve -c /mnt/SDCARD/System/sftpgo/ >/dev/null &
 
