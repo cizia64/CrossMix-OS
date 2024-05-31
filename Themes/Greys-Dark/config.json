@@ -1,0 +1,38 @@
+{
+    "name":"Greys-Dark by tenlevels",
+    "font":"nunwen.ttf",
+    "fontascii":"nunwen.ttf",
+    "fontsize":{
+        "nav_font1":26,
+        "nav_font2":24,
+        "content_font1":28,
+        "content_font2":0,
+        "content_font3":0,
+        "content_font4":30,
+        "content_font5":28,
+        "content_font6":0,
+        "stat_font1":26,
+        "menu_font1":30,
+        "popup_font1":30,
+        "popup_font2":28,
+        "popup_font3":24
+    },
+    "fontcolor":{
+        "nav_color1":"#ff545454",
+        "nav_color2":"#FFdadada",
+        "nav_color3":"#FF848484",
+        "content_color1":"#FFdadada",
+        "content_color2":"#10101010",
+        "content_color3":"#10101010",
+        "content_color4":"#FFdadada",
+        "stat_color1":"#FF848484",
+        "stat_color2":"#FFdadada",
+        "menu_color1":"#FFdadada",
+        "menu_color2":"#FFdadada",
+        "popup_color1":"#FFdadada",
+        "popup_color2":"#FFdadada",
+        "popup_color3":"#FFdadada",
+        "highlight_color1":"#FFdadada",
+        "shadow_color1":"#10101010"
+    }
+} 
