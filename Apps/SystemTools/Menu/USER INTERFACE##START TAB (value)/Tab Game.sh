@@ -12,7 +12,7 @@ done
 
 if [ "$silent" = false ]; then
   /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/usr/trimui/res/skin/bg.png" \
+    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
     -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 50 \
     -c "220,220,220" \

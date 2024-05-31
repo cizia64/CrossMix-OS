@@ -172,7 +172,7 @@ sync
 if [ "$#" -eq 0 ]; then # when launched by GLO menu, without args.
 
   /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/usr/trimui/res/skin/bg.png" \
+    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
     -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 50 \
     -c "220,220,220" \

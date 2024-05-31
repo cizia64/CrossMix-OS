@@ -1,7 +1,7 @@
 #!/bin/sh
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/usr/trimui/res/skin/bg.png" \
+    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
     -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
     -s 40 \
     -c "220,220,220" \

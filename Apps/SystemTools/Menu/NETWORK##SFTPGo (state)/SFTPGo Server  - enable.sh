@@ -1,7 +1,7 @@
 #!/bin/sh
 
 /mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/usr/trimui/res/skin/bg.png" \
+  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
   -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
@@ -38,7 +38,7 @@ sleep 0.3
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')
 echo "SFTPGo: http://$IP:8080"
 /mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/usr/trimui/res/skin/bg.png" \
+  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
   -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 50 \
   -c "220,220,220" \
