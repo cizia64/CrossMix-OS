@@ -98,6 +98,6 @@ If you enjoy my work and want to support the countless hours/days invested, here
 
 - [![Patreon](_assets/readme/patreon.png)](https://patreon.com/Cizia)
 - [![Buy Me a Coffee](_assets/readme/bmc.png)](https://www.buymeacoffee.com/cizia)
-- [![ko-fi](_assets/ko-fi.svg)](https://ko-fi.com/H2H7YPH3H)
+- [![ko-fi](_assets/readme/ko-fi.png)](https://ko-fi.com/H2H7YPH3H)
 
 
