@@ -1,10 +1,22 @@
 #!/bin/sh
 
 ################ check min Firmware version required ################
-FW_VERSION="$(cat /etc/version)"
-CrossMix_MinFwVersion=$(cat /mnt/SDCARD/trimui/firmwares/MinFwVersion.txt)
-if [ "$(printf '%s\n' "$FW_VERSION" "$CrossMix_MinFwVersion" | sort -V | head -n1)" != "$CrossMix_MinFwVersion" ]; then
+
+CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+
+Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
+
+if [ -z "$Current_FW_Revision" ] || [ -z "$Required_FW_Revision" ]; then
+	echo "Firmware check not possible. Exiting."
+	exit 1
+fi
+
+if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 	/usr/trimui/bin/trimui_inputd & # we need input
+
+	Current_FW_Version="$(cat /etc/version)"
+	Required_FW_Version=$(sed -n '1p' "$CrossMixFWfile")
 
 	FILE="/bin/busybox"
 	LIMIT=819200
@@ -39,13 +51,13 @@ if [ "$(printf '%s\n' "$FW_VERSION" "$CrossMix_MinFwVersion" | sort -V | head -n
 	fi
 	sync
 
-	Echo "Current firmware ($FW_VERSION) must be updated to $CrossMix_MinFwVersion to support CrossMix OS v$version."
+	Echo "Current firmware ($Current_FW_Version - $Current_FW_Revision) must be updated to $Required_FW_Version - $Required_FW_Revision to support CrossMix OS v$version."
 	/mnt/SDCARD/System/bin/sdl2imgshow \
 		-i "/mnt/SDCARD/trimui/firmwares/FW_Informations.png" \
 		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-		-s 30 \
+		-s 28 \
 		-c "220,220,220" \
-		-t "Actual FW version: $FW_VERSION                                    Required FW version: $CrossMix_MinFwVersion" &
+		-t "Current FW version: $Current_FW_Version - $Current_FW_Revision                Required FW version: $Required_FW_Version - $Required_FW_Revision" &
 	sleep 2 # init input_d
 
 	button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A)
@@ -67,7 +79,7 @@ if [ "$(printf '%s\n' "$FW_VERSION" "$CrossMix_MinFwVersion" | sort -V | head -n
 			-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
 			-s 30 \
 			-c "220,220,220" \
-			-t "Please wait, copying Firmware v$CrossMix_MinFwVersion..." &
+			-t "Please wait, copying Firmware v$Required_FW_Version - $Required_FW_Revision..." &
 
 		FIRMWARE_PATH="/mnt/SDCARD/trimui/firmwares/trimui_tg5040_20240413_v1.0.4_hotfix6.7z"
 		FIRMWARE_FILE="trimui_tg5040.awimg"
@@ -93,7 +105,7 @@ if [ "$(printf '%s\n' "$FW_VERSION" "$CrossMix_MinFwVersion" | sort -V | head -n
 				-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
 				-s 30 \
 				-c "220,220,220" \
-				-t "CRC check has failed, canceling update." &
+				-t "Firmware CRC check has failed, canceling update." &
 
 			button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A)
 			pkill -f sdl2imgshow
@@ -111,6 +123,7 @@ if [ "$(printf '%s\n' "$FW_VERSION" "$CrossMix_MinFwVersion" | sort -V | head -n
 	rm -f "/mnt/SDCARD/trimui_tg5040.awimg"
 	pkill -f sdl2imgshow
 else
+	echo "Firmware version $Current_FW_Revision OK."
 	rm -f "/mnt/SDCARD/trimui_tg5040.awimg"
 
 fi
