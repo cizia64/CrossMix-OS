@@ -1,5 +1,13 @@
 #!/bin/bash
 
+silent=false
+for arg in "$@"; do
+    if [ "$arg" = "-s" ]; then
+        silent=true
+        break
+    fi
+done
+
 RomsFolder="/mnt/SDCARD/Roms"
 EmuFolder="/mnt/SDCARD/Emus"
 
@@ -7,14 +15,14 @@ json_file="/mnt/SDCARD/Emus/show.json"
 NumRemoved=0
 NumAdded=0
 
-
+if [ "$silent" = false ]; then
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "./background.jpg" \
   -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
   -s 100  \
   -c "220,0,0" \
-  -t "Cleaning..." & 
-
+  -t " " & 
+fi
 
 write_entry() {
     label="$1"
@@ -62,6 +70,7 @@ echo -ne "\n=============================\n"
 echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
 echo -ne "=============================\n\n"
 
+if [ "$silent" = false ]; then
 sleep 0.5
 pkill -f sdl2imgshow
 sleep 1
@@ -74,4 +83,7 @@ sleep 1
   -t "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." & 
 
 sleep 4
+
 pkill -f sdl2imgshow
+
+fi

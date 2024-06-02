@@ -52,7 +52,13 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
-	# Flash logo
+################ CrossMix-OS SD card Customization ################
+	# Displaying only Emulators with roms if the Emus list is not already customized
+	if [ ! -e "/mnt/SDCARD/Emus/show.json" ]; then   
+		/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
+	fi
+
+################ Flash boot logo ################
 	SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
 	TARGET_PARTITION="/dev/mmcblk0p1"
 	MOUNT_POINT="/mnt/emmcblk0p1"

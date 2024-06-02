@@ -71,6 +71,7 @@ In version 1.0.0, there are some features I'm particularly proud of, such as:
 - **Extensive work on emulator launchers and configuration**.
 - **Default customization of the OS**: custom theme, icons and backgrounds, Polish language added and many new tools.
 - **Firmware Update Wizard**: an automatic guide to help user to update if necessary.
+- **Best packs standardization**: generic launcher, game shortcuts support and images on folders.
 
 I would also like to extend a warm thank you to Kloptops for [PortMaster and his tools](https://github.com/kloptops/TRIMUI_EX) which are deeply used in CrossMix-OS.
 
