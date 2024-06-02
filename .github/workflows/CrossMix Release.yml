@@ -1,0 +1,55 @@
+name: CrossMix-OS Release
+
+permissions:
+  id-token: "write"
+  contents: "write"
+  packages: "write"
+  pull-requests: "read"
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  tagged-release:
+    name: Tagged release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get version
+        run: |
+          TAG="${{ github.ref_name }}"
+          echo "BUILD_VERSION=${TAG#v}" >> $GITHUB_ENV
+      - name: Install 7-Zip
+        run: |
+          mkdir -p /home/runner/work/CrossMix-OS/tools
+          wget https://www.7-zip.org/a/7z2406-linux-x64.tar.xz -P /home/runner/work/CrossMix-OS/tools
+          tar xvf /home/runner/work/CrossMix-OS/tools/7z2406-linux-x64.tar.xz -C /home/runner/work/CrossMix-OS/tools
+          sudo cp /home/runner/work/CrossMix-OS/tools/7zz /usr/local/bin/
+      - name: Extract RetroArch cores
+        run: |
+          find /home/runner/work/CrossMix-OS/CrossMix-OS/RetroArch/.retroarch/cores -name "*.7z" -execdir 7zz x {} \; -execdir rm {} \;
+      - name: Cleaning image...
+        run: |
+          find /home/runner/work/CrossMix-OS/CrossMix-OS -type f -name ".gitkeep" -delete
+          rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/_assets
+          rm /home/runner/work/CrossMix-OS/CrossMix-OS/LICENSE
+          rm /home/runner/work/CrossMix-OS/CrossMix-OS/README.md
+          ls -la /home/runner/work/CrossMix-OS/CrossMix-OS
+          rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.git
+          rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.github
+          ls -la /home/runner/work/CrossMix-OS/CrossMix-OS
+      - name: 7zipping release
+        run: |
+          pwd
+          7zz a "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.7z" /home/runner/work/CrossMix-OS/CrossMix-OS/.
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: "CrossMix-OS v${{ env.BUILD_VERSION }}"
+          prerelease: false
+          files: "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.7z"
+          draft: false
