@@ -2,24 +2,24 @@
 
 #pid=`ps | grep cmd_to_run | grep -v grep | sed 's/[ ]\+/ /g' | cut -d' ' -f1`
 
-	/mnt/SDCARD/System/usr/trimui/scripts/button_state.sh MENU
-	exit_code=$?
-	if [ $exit_code -eq 10 ]; then  # we don't resume if menu is pressed during boot
-		echo "=== Button MENU pressed ===" 
-		/mnt/SDCARD/System/usr/trimui/scripts/cmd_to_run_killer.sh &
-		# Short Vibration
-		echo -n 1 >/sys/class/gpio/gpio227/value
-		sleep 0.1
-		echo -n 0 >/sys/class/gpio/gpio227/value
-		sleep 0.2
-		# 3 fast red blinking
-		echo 1 >/sys/class/led_anim/effect_enable
-		echo "FF0000" >/sys/class/led_anim/effect_rgb_hex_lr
-		echo 3 >/sys/class/led_anim/effect_cycles_lr
-		echo 50 >/sys/class/led_anim/effect_duration_lr
-		echo 5 >/sys/class/led_anim/effect_lr
-		exit
-	fi
+/mnt/SDCARD/System/usr/trimui/scripts/button_state.sh MENU
+exit_code=$?
+if [ $exit_code -eq 10 ]; then # we don't resume if menu is pressed during boot
+   echo "=== Button MENU pressed ==="
+   /mnt/SDCARD/System/usr/trimui/scripts/cmd_to_run_killer.sh &
+   # Short Vibration
+   echo -n 1 >/sys/class/gpio/gpio227/value
+   sleep 0.1
+   echo -n 0 >/sys/class/gpio/gpio227/value
+   sleep 0.2
+   # 3 fast red blinking
+   echo 1 >/sys/class/led_anim/effect_enable
+   echo "FF0000" >/sys/class/led_anim/effect_rgb_hex_lr
+   echo 3 >/sys/class/led_anim/effect_cycles_lr
+   echo 50 >/sys/class/led_anim/effect_duration_lr
+   echo 5 >/sys/class/led_anim/effect_lr
+   exit
+fi
 
 set_led_color() {
    r=$1
@@ -66,30 +66,36 @@ pkill -9 preload.sh # avoid to remove /mnt/SDCARD/trimui/app/cmd_to_run.sh when 
 pkill -9 runtrimui.sh
 
 pid=$1
-
 ppid=$pid
-echo pid is $pid
-while [ "" != "$pid" ]; do
+
+echo "Initial pid: $pid"
+
+# Loop to find the last descendant process
+while [ -n "$pid" ]; do
    ppid=$pid
    pid=$(pgrep -P $ppid)
 done
 
-if [ "" != "$ppid" ]; then
+# Kill the last descendant process if it exists
+if [ -n "$ppid" ]; then
+   echo "Killing process $ppid"
    kill $ppid
 fi
 
-echo ppid $ppid quit
+# Wait while the process identified by ppid still exists
+while kill -0 $ppid 2>/dev/null; do
+   echo "Waiting for process $ppid to exit..."
+   wait $ppid 2>/dev/null
+done
 
-sleep 0.3
-# /usr/trimui/bin/sdl2play /mnt/SDCARD/trimui/res/sound/PowerOff.wav &
-# sleep 1
-# pkill -9 sdl2play
+echo "Process $ppid has exited."
+
 aplay /mnt/SDCARD/trimui/res/sound/PowerOff.wav -d 1
 
 pkill -f sdl2imgshow
 sync
 poweroff &
 
-sleep 6
+sleep 8
 /mnt/SDCARD/System/usr/trimui/scripts/cmd_to_run_killer.sh
 poweroff &
