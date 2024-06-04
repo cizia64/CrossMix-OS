@@ -21,6 +21,13 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 
 if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 
+	# add pl language
+	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
+		cp "/mnt/SDCARD/trimui/res/lang/pl.lang" "/usr/trimui/res/lang/"
+		cp "/mnt/SDCARD/trimui/res/lang/pl.lang.short" "/usr/trimui/res/lang/"
+		cp "/mnt/SDCARD/trimui/res/lang/lang_pl.png" "/usr/trimui/res/skin/"
+	fi
+
 	# custom shutdown script from "Resume at Boot"
 	cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
 
