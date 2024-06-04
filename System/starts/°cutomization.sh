@@ -35,23 +35,25 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
 
+	# Apply default CrossMix theme, sound volume, and grid view
+	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
+	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
+
+	################ CrossMix-OS SD card Customization ################
+
 	# Sorting Themes Alphabetically
 	"/mnt/SDCARD/Apps/SystemTools/Menu/THEME/Sort Themes Alphabetically.sh" -s
 
 	# Game tab by default
 	"/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab Game.sh" -s
 
-	# Apply default CrossMix theme, sound volume, and grid view
-	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
-	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
-
-################ CrossMix-OS SD card Customization ################
 	# Displaying only Emulators with roms if the Emus list is not already customized
-	if [ ! -e "/mnt/SDCARD/Emus/show.json" ]; then   
+	if [ ! -e "/mnt/SDCARD/Emus/show.json" ]; then
 		/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
 	fi
 
-################ Flash boot logo ################
+	################ Flash boot logo ################
+
 	SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
 	TARGET_PARTITION="/dev/mmcblk0p1"
 	MOUNT_POINT="/mnt/emmcblk0p1"
@@ -62,28 +64,22 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 
 	if [ $? -ne 0 ]; then
 		echo "Failed to mount $TARGET_PARTITION."
-		exit 1
 	fi
 
 	if [ -f "$SOURCE_FILE" ]; then
 		echo "Moving "$SOURCE_FILE" to $MOUNT_POINT/bootlogo.bmp..."
 		cp "$SOURCE_FILE" $MOUNT_POINT/bootlogo.bmp
+		if [ $? -ne 0 ]; then
+			echo "Failed to move bootlogo file."
+		else
+			echo "Bootlogo file moved successfully."
+		fi
 		sync
 		sync
 		sleep 0.3
 		sync
 	else
 		echo "Source bootlogo file does not exist."
-		echo "Unmounting $TARGET_PARTITION..."
-		umount $TARGET_PARTITION
-		rmdir $MOUNT_POINT
-		exit 1
-	fi
-
-	if [ $? -ne 0 ]; then
-		echo "Failed to move file."
-	else
-		echo "File moved successfully."
 	fi
 
 	echo "Unmounting $TARGET_PARTITION..."
@@ -98,4 +94,5 @@ fi
 
 # Apply current led configuration
 /mnt/SDCARD/System/etc/led_config.sh &
+
 pkill -f sdl2imgshow
