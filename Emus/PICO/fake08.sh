@@ -6,7 +6,6 @@ EMU_DIR=/mnt/SDCARD/Emus/PICO8
 
 $EMU_DIR/cpufreq.sh
 
-
 cd $RA_DIR/
 
 #disable netplay

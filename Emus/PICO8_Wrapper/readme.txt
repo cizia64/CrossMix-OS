@@ -1,7 +1,7 @@
 This is a wrapper as the target binaries are paid binaries. We don't want to promote any piracy with this release. What that means for you? You'll need to provide 2 files:
 
-- pico8_dyn
-- pico8_64 
+- pico8_64
+- pico8.dat
 
 These files need dropping in the pico/bin directory before you try to run the wrapper.
 

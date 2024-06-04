@@ -16,12 +16,16 @@
       "launch": "fake08.sh"
     },
     {
-      "name": "RETRO8",
-      "launch": "retro8.sh"
+      "name": "Pico8 Wrapper",
+      "launch": "Pico8 Wrapper.sh"
     },
     {
-      "name": "SPLORE",
-      "launch": "splore.sh"
+      "name": "Pico8 Wrapper - Splore",
+      "launch": "Pico8 Wrapper - Splore.sh"
+    },
+    {
+      "name": "RETRO8",
+      "launch": "retro8.sh"
     }
   ]
 }

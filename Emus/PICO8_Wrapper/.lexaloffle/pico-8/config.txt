@@ -30,7 +30,7 @@ foreground_sleep_ms 4 // number of milliseconds to sleep each frame. Try 10 to c
 
 background_sleep_ms 8 // number of milliseconds to sleep each frame when running in the background
 
-sessions 866 // number of times program has been run
+sessions 0 // number of times program has been run
 
 // (scancode) hold this key down and left-click to simulate right-click
 rmb_key 0 // 0 for none  226 for LALT
@@ -102,7 +102,7 @@ gif_len 8
 gif_reset_mode 0
 
 // 0 for off. 1 for auto. 2 to allow control of a cart's framerate due to host machine's cpu capacity
-host_framerate_control 1
+host_framerate_control 0
 
 // filter splore cartridges
 // 0 off   1 on (exclude cartridge tagged as 'mature' by community)
@@ -115,7 +115,7 @@ tab_width 1
 draw_tabs 0
 
 // 0 off 1 on: record the current cartridge and editor view every 3 seconds (see [appdata]/activity.log.txt)
-record_activity_log 1
+record_activity_log 0
 
 // 0 off 1 on: allow F6..F9 (alternative: ctrl 6..9)
 allow_function_keys 1
@@ -145,5 +145,4 @@ periodic_backups 20
 transform_screen 0
 
 // 0 off  > 1: colour to draw pixel grid in the gfx editor at zoom:8 and zoom:4 (16 for black)
-gfx_grid_lines 0
-
+gfx_grid_lines 16
