@@ -1,12 +1,12 @@
 #!/bin/sh
-export picodir=/mnt/SDCARD/Emus/PICO8_Wrapper
+export picodir=/mnt/SDCARD/Emus/PICO/PICO8_Wrapper
 cd $picodir
 export PATH=$PATH:$PWD/bin
 export HOME=$picodir
 export PATH=${picodir}:$PATH
 export LD_LIBRARY_PATH="$picodir/lib:/usr/lib:$LD_LIBRARY_PATH"
 
-if ! [ -f /mnt/SDCARD/Emus/PICO8_Wrapper/bin/pico8_64 ] || ! [ -f /mnt/SDCARD/Emus/PICO8_Wrapper/bin/pico8.dat ]; then
+if ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8_64 ] || ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8.dat ]; then
 	LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 	/mnt/SDCARD/System/bin/sdl2imgshow \
@@ -23,7 +23,7 @@ fi
 main() {
 	#echo 1008000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	mount --bind /mnt/SDCARD/Roms/PICO8 /mnt/SDCARD/Emus/PICO8_Wrapper/.lexaloffle/pico-8/carts
+	mount --bind /mnt/SDCARD/Roms/PICO8 /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
 	pico8_64 -preblit_scale 3 -run "$1"
 	umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts
 	echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
