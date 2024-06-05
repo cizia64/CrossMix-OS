@@ -6,6 +6,7 @@ EMU_DIR=/mnt/SDCARD/Emus/GBA
 
 $EMU_DIR/cpufreq.sh
 
+$EMU_DIR/performance.sh
 
 cd $RA_DIR/
 
