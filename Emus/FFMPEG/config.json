@@ -6,7 +6,7 @@
   "themecolor": "DDEEFF",
   "launch": "launch.sh",
   "rompath": "../../Roms/VIDEOS",
-  "imgpath": "../../Imgs/FFMPEG",
+  "imgpath": "../../Imgs/VIDEOS",
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
