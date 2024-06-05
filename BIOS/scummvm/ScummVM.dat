@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE datafile PUBLIC "-//Logiqx//DTD ROM Management Datafile//EN" "http://www.logiqx.com/Dats/datafile.dtd">
+<datafile>
+  <header>
+    <name>ScummVM</name>
+    <description>Information from ScreenScraper.fr database</description>
+    <version>1.0</version>
+    <date>12/16/2021 8:58 PM</date>
+    <author>Skraper</author>
+    <url>http://www.screenscraper.fr</url>
+  </header>
+  <game name="scummremastered">
+    <description />
+    <manufacturer />
+    <rom name="theme\scummremastered.zip" size="283227" />
+  </game>
+  <game name="scummmodern">
+    <description />
+    <manufacturer />
+    <rom name="theme\scummmodern.zip" size="283299" />
+  </game>
+  <game name="wintermute">
+    <description />
+    <manufacturer />
+    <rom name="extra\wintermute.zip" size="4057" />
+  </game>
+</datafile>

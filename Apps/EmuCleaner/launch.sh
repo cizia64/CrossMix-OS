@@ -51,7 +51,7 @@ for subfolder in $EmuFolder/*/; do
 
     # Build the find command with extensions from extlist
     if [ -z "$ExtList" ] || [ "$ExtList" = "null" ]; then
-      find_cmd="find \"$RomsFolder/$RomFolderName\" '!' -name '*.db' '!' -name '.gitkeep' -mindepth 1 -maxdepth 1"
+      find_cmd="find \"$RomsFolder/$RomFolderName\" '!' -name '*.db' '!' -name '.gitkeep' '!' -name '*.launch' -mindepth 1 -maxdepth 1"
     else
       set -- $(echo $ExtList | tr '|' ' ')
       find_cmd="find \"$RomsFolder/$RomFolderName\""
@@ -64,7 +64,7 @@ for subfolder in $EmuFolder/*/; do
           find_cmd="$find_cmd -o -iname '*.$ext'"
         fi
       done
-      find_cmd="$find_cmd -mindepth 1 -maxdepth 1"
+      find_cmd="$find_cmd '!' -name '*.launch' -mindepth 1 -maxdepth 1"
     fi
 
     # Check if the ROM folder contains any files with the specified extensions
