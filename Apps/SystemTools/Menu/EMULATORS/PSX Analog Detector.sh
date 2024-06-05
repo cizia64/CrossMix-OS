@@ -8,6 +8,10 @@ HOME=$RA_DIR/ $RA_DIR/ra64.trimui --scan=/mnt/SDCARD/Roms/PS
 analog_count="/tmp/analog_count"
 echo 0 >"$analog_count"
 
+mkdir -p "/mnt/SDCARD/RetroArch/.retroarch/config/remaps/PCSX-ReARMed"
+mkdir -p "/mnt/SDCARD/RetroArch/.retroarch/config/remaps/DuckStation"
+mkdir -p "/mnt/SDCARD/RetroArch/.retroarch/config/remaps/SwanStation"
+
 /mnt/SDCARD/System/bin/sdl2imgshow \
   -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
   -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
@@ -60,8 +64,8 @@ echo 0 >"$analog_count"
         echo 'input_libretro_device_p1 = "5"' >"$filepath"
       fi
       # ========= Swantation
-      filepath="/mnt/SDCARD/RetroArch/.retroarch/config/remaps/PCSX-ReARMed/$filename"
-      echo "Applying Dual Shock to $filename for PCSX-ReARMed"
+      filepath="/mnt/SDCARD/RetroArch/.retroarch/config/remaps/SwanStation/$filename"
+      echo "Applying Dual Shock to $filename for SwanStation"
       if [ -e "$filepath" ]; then
         configPatchFile="/tmp/$filename"
         echo 'input_libretro_device_p1 = "517"' >"$configPatchFile"
