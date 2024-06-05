@@ -32,8 +32,8 @@
   "bezel":{
     "current_bezel":0,
     "current_integer_bezel":0,
-    "bezel_path":"\/mnt\/SDCARD\/App\/pico\/res\/bezel\/standard",
-    "digit_path":"\/mnt\/SDCARD\/App\/pico\/res\/digit",
-    "bezel_int_path":"\/mnt\/SDCARD\/App\/pico\/res\/bezel\/integer_scaled"
+    "bezel_path":"\/mnt\/SDCARD\/Emus\/PICO\/PICO8_Wrapper\/res\/bezel\/standard",
+    "digit_path":"\/mnt\/SDCARD\/Emus\/PICO\/PICO8_Wrapper\/res\/digit",
+    "bezel_int_path":"\/mnt\/SDCARD\/Emus\/PICO\/PICO8_Wrapper\/res\/bezel\/integer_scaled"
   }
 }

@@ -68,11 +68,11 @@ volume 256
 
 
 // Location of pico-8's root folder
-root_path /mnt/SDCARD/Emus/PICO8_Wrapper/.lexaloffle/pico-8/carts/
+root_path /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts/
 
 
 // Location of cartridge save data
-cdata_path /mnt/SDCARD/Emus/PICO8_Wrapper/.lexaloffle/pico-8/cdata/
+cdata_path /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/cdata/
 
 
 // Specify which player index joystick control begins at (0..7)
