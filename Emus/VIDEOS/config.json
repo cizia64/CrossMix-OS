@@ -1,8 +1,8 @@
 {
-  "label": "FFMPEG",
+  "label": "VIDEOS",
   "label.ch.lang": "FF视频播放",
-  "icon": "/mnt/SDCARD/Icons/Default/Emus/FFMPEG.png",
-  "background": "/mnt/SDCARD/Backgrounds/Default/FFMPEG.png",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/VIDEOS.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/VIDEOS.png",
   "themecolor": "DDEEFF",
   "launch": "launch.sh",
   "rompath": "../../Roms/VIDEOS",
