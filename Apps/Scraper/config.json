@@ -1,0 +1,7 @@
+{
+"label":"Scraper",
+"icon":"Scraper.png",
+"iconsel":"Scraper.png",
+"launch":"launch.sh",
+"description":"Download your game covers"
+}

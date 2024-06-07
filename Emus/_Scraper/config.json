@@ -1,0 +1,12 @@
+{
+  "label": "_Scraper",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/_Scraper.png",
+  "launch": "launch.sh",
+  "rompath": "/mnt/SDCARD/Apps/Scraper/Menu",
+  "imgpath": "/mnt/SDCARD/Apps/Scraper/Menu/Imgs",
+  "useswap": 0,
+  "shortname": 1,
+  "hidebios": 0,
+  "extlist": "sh",
+  "background": "/mnt/SDCARD/Backgrounds/Default/_Scraper.png"
+}
