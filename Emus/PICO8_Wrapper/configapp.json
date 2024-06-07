@@ -1,6 +1,0 @@
-{
-	"label":	"PICO-8",
-	"icon":	"res/icon/icon.png",
-	"launch":	"script/launch.sh",
-	"description":	"Pico-8 Wrapper"
-}

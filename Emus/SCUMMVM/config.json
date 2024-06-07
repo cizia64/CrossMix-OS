@@ -1,14 +1,27 @@
 {
   "label": "SCUMMVM",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SCUMMVM.png",
-  "iconsmall": "ic-SCUMMVM-small.png",
-  "iconlist": "ic-SCUMMVM-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SCUMMVM.png",
-  "themecolor": "FFFF88",
+  "themecolor": "00D300",
   "launch": "launch.sh",
   "rompath": "../../Roms/SCUMMVM",
   "imgpath": "../../Imgs/SCUMMVM",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "extlist": "scummvm|squashfs|launch",
+  "launchlist": [
+    {
+      "name": "ScummVM 2.9      ",
+      "launch": "scummvm-2.9.sh"
+    },
+    {
+      "name": "ScummVM 2.9 (alt)",
+      "launch": "scummvm-2.9-alt.sh"
+    },
+    {
+      "name": "ScummVM 2.8      ",
+      "launch": "scummvm-2.8.sh"
+    }
+  ]
 }

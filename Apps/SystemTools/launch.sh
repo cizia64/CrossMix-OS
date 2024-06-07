@@ -197,8 +197,8 @@ echo "================"
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (state)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutstate=$(echo "$disp" | sed 's/ (state)//g')
-    CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp] // 1' "/mnt/SDCARD/System/etc/crossmix.json")
-    if [ -z "$CurState" ]; then
+    CurState=$(jq -r --arg disp "$disp_withoutstate" '.[$disp]' "/mnt/SDCARD/System/etc/crossmix.json")
+    if [ -z "$CurState" ] || [ "$CurState" = "null" ]; then
       CurState="not set"
     fi
     # ----------------------------------------------------------------------
@@ -230,7 +230,7 @@ sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND di
     fi
     # ----------------------------------------------------------------------
 
-    if [ "$CurState" -eq 1 ] || [ "$CurState" = "null" ]; then
+    if [ "$CurState" -eq 1 ]; then
       disp_withstate="$disp_withoutstate (enabled)"
     else
       disp_withstate="$disp_withoutstate (disabled)"

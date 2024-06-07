@@ -2,6 +2,7 @@
   "RESUME AT BOOT": 1,
   "SFTPGo": 0,
   "SSH": 1,
+  "TELNET": 1,
   "BACKGROUNDS": "Default",
   "ICONS": "Default",
   "START TAB": "Tab Game",

@@ -9,7 +9,7 @@ export TRIMUI_VERSION=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d
 
 export NETWORK_FIX="Y"
 export NETWORK_SSH="Y"
-export NETWORK_SFTPGO="Y"
+export NETWORK_SFTPGO="N"
 
 if [ $TRIMUI_VERSION -gt 20240401 ]; then
     # They fixed the mac address in: 20240413
