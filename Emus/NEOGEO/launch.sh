@@ -6,8 +6,8 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/NEOGEO
 cd $RA_DIR/
 
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
- cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/fbalpha2012_neogeo_libretro.so "$@"
 

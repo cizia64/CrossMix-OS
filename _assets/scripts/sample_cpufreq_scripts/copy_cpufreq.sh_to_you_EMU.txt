@@ -1,0 +1,3 @@
+Copy cpufreq.sh to Emus/XXX/cpufreq.sh for specified CPU clock range.
+
+复制 cpufreq.sh 到 Emus/XXX/cpufreq.sh, 用来指定当前模拟器的CPU频率范围.

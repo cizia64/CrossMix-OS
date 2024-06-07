@@ -17,7 +17,15 @@
       "launch": "paralleln64.sh"
     },
     {
+      "name": "ParaLLEl N64 Performance",
+      "launch": "paralleln64.sh"
+    },
+    {
       "name": "Mupen64Plus",
+      "launch": "mupen64plus.sh"
+    },
+    {
+      "name": "Mupen64Plus Performance",
       "launch": "mupen64plus.sh"
     }
   ]

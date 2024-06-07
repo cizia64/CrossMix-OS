@@ -9,7 +9,8 @@ echo "=============================================="
 echo "==================== PPSSPP  ================="
 echo "=============================================="
 
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 export HOME=/mnt/SDCARD
 export SDL_AUDIODRIVER=dsp

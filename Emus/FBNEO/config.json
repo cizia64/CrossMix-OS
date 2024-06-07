@@ -17,8 +17,16 @@
       "launch": "FBNEO.sh"
     },
     {
+      "name": "FB NEO Performance Mode",
+      "launch": "FBNEO_performance.sh"
+    },
+    {
       "name": "FB Alpha",
       "launch": "FBAlpha.sh"
+    },
+    {
+      "name": "FB Alpha Performance Mode",
+      "launch": "FBAlpha_performance.sh"
     }
   ]
 }

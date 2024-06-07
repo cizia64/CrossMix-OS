@@ -11,6 +11,7 @@ echo "==================== PPSSPP  ================="
 echo "=============================================="
 
 ./cpufreq.sh
+./cpuswitch.sh
 
 export HOME=$progdir154
 ./PPSSPPSDL "$*"

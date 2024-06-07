@@ -3,11 +3,11 @@ echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/DC
-
-$EMU_DIR/performance.sh
-$EMU_DIR/effect.sh
-
 cd $RA_DIR/
+
+$EMU_DIR/effect.sh
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 #disable netplay
 NET_PARAM=

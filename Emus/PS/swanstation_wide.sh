@@ -5,11 +5,10 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/PS
 cd $RA_DIR/
 
-$EMU_DIR/performance.sh
+$EMUDIR/performance.sh
 
 #disable netplay
 NET_PARAM=
-
 
 #!/bin/sh
 

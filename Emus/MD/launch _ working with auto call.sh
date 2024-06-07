@@ -6,6 +6,8 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/MD
 cd $RA_DIR/
 
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 RomFullPath=$1
 

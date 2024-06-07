@@ -11,5 +11,15 @@
   "imgpath": "../../Imgs/DC",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "launchlist": [
+    {
+        "name": "Flycast",
+        "launch": "launch.sh"
+    },
+    {
+        "name": "Flycast Performance Mode",
+        "launch": "launch_performance.sh"
+    }
+]
 }

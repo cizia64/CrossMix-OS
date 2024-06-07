@@ -5,6 +5,9 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/FDS
 cd $RA_DIR/
 
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
+
 echo ====================================================================
 echo $RA_DIR/.retroarch/cores/fceumm_libretro.so
 echo ====================================================================

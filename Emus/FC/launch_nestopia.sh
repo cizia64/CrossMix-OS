@@ -6,6 +6,7 @@ EMU_DIR=/mnt/SDCARD/Emus/FC
 cd $RA_DIR/
 
 $EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 echo ====================================================================
 echo $RA_DIR/.retroarch/cores/nestopia_libretro.so
