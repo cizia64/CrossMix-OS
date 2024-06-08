@@ -16,6 +16,10 @@
       "launch": "mame.sh"
     },
     {
+      "name": "MAME Performance Mode - default(0.259)",
+      "launch": "mame.sh"
+    },
+    {
       "name": "MAME (0.219)",
       "launch": "mame(0.219).sh"
     },

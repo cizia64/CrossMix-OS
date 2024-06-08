@@ -6,6 +6,7 @@ EMU_DIR=/mnt/SDCARD/Emus/MAME2003PLUS
 cd $RA_DIR/
 
 $EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
 
 #disable netplay
 NET_PARAM=

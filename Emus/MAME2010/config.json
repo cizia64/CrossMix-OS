@@ -11,5 +11,15 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "zip"
+  "extlist": "zip",
+  "launchlist": [
+    {
+        "name": "MAME 2010",
+        "launch": "launch.sh"
+    },
+    {
+        "name": "MAME 2010 Performance Mode",
+        "launch": "launch_performance.sh"
+    }
+  ]
 }

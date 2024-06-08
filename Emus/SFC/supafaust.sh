@@ -5,7 +5,7 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/SFC
 
 $EMU_DIR/cpufreq.sh
-
+$EMU_DIR/cpuswitch.sh
 
 cd $RA_DIR/
 

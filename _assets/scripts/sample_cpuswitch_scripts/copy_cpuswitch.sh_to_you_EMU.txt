@@ -1,0 +1,3 @@
+Copy cpuswitch.sh to Emus/XXX/cpuswitch.sh for specified CPU working cores count.
+
+复制 cpufreq.sh 到 Emus/XXX/cpufreq.sh, 用来指定当前模拟器的CPU开启核心数量.

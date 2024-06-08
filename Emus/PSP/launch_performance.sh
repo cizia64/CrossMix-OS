@@ -9,10 +9,8 @@ echo "=============================================="
 echo "==================== PPSSPP  ================="
 echo "=============================================="
 
-#./cpufreq.sh
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 1416000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+../performance.sh
 
 export HOME=/mnt/SDCARD/Emus/PSP
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue
-./PPSSPPSDL "$*"
+./PPSSPPSDL_gl "$*"

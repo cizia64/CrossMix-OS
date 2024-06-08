@@ -6,6 +6,9 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/INT
 cd $RA_DIR/
 
+$EMU_DIR/cpufreq.sh
+$EMU_DIR/cpuswitch.sh
+
 HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/freeintv_libretro.so "$@"
 #HOME=$RA_DIR/ $RA_DIR/retroarch -v $NET_PARAM -L $RA_DIR/.retroarch/cores/freeintv_libretro.so "$@"
 #HOME=$RA_DIR/ $RA_DIR/retroarch -v $NET_PARAM -L $EMU_DIR/freeintv_libretro.so "$@"
