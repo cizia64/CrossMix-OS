@@ -1,13 +1,24 @@
 {
-  "label": "N. NDS",
-  "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
-  "launch": "launch.sh",
-  "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
-  "themecolor": "FF8800",
-  "iconsel": "",
-  "rompath": "../../Roms/NDS",
-  "imgpath": "../../Imgs/NDS",
-  "useswap": 0,
-  "shortname": 0,
-  "hidebios": 0
+    "label": "N. NDS",
+    "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
+    "launch": "launch.sh",
+    "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
+    "themecolor":"FF8800",
+    "iconsel":"",
+    "rompath":"../../Roms/NDS",
+    "imgpath":"../../Imgs/NDS",
+    "useswap":1,
+    "shortname":1,
+    "hidebios":1,
+    "launchlist": [
+        {
+            "name": "Drastic - SDL2 MOD(凯)",
+            "launch": "launch.sh"
+        },
+        {
+            "name": "Drastic - No MOD      ",
+            "launch": "launch_original.sh"
+        }
+    ]
 }
+    
