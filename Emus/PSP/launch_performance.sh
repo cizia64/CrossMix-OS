@@ -9,8 +9,8 @@ echo "=============================================="
 echo "==================== PPSSPP  ================="
 echo "=============================================="
 
-./performance.sh
+../performance.sh
 
 export HOME=/mnt/SDCARD/Emus/PSP
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue
-./PPSSPPSDL "$*"
+./PPSSPPSDL_gl "$*"

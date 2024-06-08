@@ -9,5 +9,15 @@
   "imgpath": "../../Imgs/NDS",
   "useswap": 0,
   "shortname": 0,
-  "hidebios": 0
+  "hidebios": 0,
+  "launchlist": [
+    {
+      "name": "Drastic Layout Mod",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "Drastic",
+      "launch": "launch_original.sh"
+    }
+  ]
 }

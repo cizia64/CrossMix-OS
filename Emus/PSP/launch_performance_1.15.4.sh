@@ -10,7 +10,7 @@ echo "=============================================="
 echo "==================== PPSSPP  ================="
 echo "=============================================="
 
-./performance.sh
+../performance.sh
 
 export HOME=$progdir154
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue

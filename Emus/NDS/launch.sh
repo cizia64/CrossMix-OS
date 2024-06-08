@@ -9,8 +9,8 @@ echo "=============================================="
 echo "==================== DRASTIC  ================="
 echo "=============================================="
 
-./cpufreq.sh
-./cpuswitch.sh
+../cpufreq.sh
+../cpuswitch.sh
 
 export HOME=/mnt/SDCARD
 
