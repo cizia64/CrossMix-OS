@@ -4,11 +4,21 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/VIDEOS.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VIDEOS.png",
   "themecolor": "DDEEFF",
-  "launch": "launch.sh",
+  "launch": "mpv.sh",
   "rompath": "../../Roms/VIDEOS",
   "imgpath": "../../Imgs/VIDEOS",
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|wma|jpg|png|bmp"
+  "extlist": "mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|m3u|wma|jpg|png|bmp",
+  "launchlist": [
+    {
+      "name": "mpv",
+      "launch": "mpv.sh"
+    },
+	{
+      "name": "Libretro FFmpeg",
+      "launch": "ffmpeg.sh"
+    }
+  ]
 }

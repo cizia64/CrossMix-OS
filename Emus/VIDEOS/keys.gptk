@@ -1,0 +1,68 @@
+//Play / Pause
+start = enter
+a = enter
+b = enter
+
+//
+//x_down = leftctrl
+
+//
+//y_down = capslock
+
+//previous track
+l1 = b
+
+//
+//l2_down = a
+
+//quit
+l3_down = q
+
+//next track
+r1 = n
+
+//
+//r2_down = q
+
+//
+//r3_down = q
+
+//quit
+back_up = q
+guide = q
+
+//seek 1 minute forward
+up_down = up
+
+//seek 1 minute backward
+down_down = down
+
+//seek 5 seconds backward
+left = left
+
+//seek 5 seconds forward
+right = right
+
+//
+//left_analog_up = w
+
+//
+//left_analog_down = s
+
+//
+//left_analog_left = a
+
+//
+//left_analog_right = d
+
+//
+//right_analog_up = pageup
+
+//
+//right_analog_down = pagedown
+
+//
+//right_analog_left = [
+
+//
+//right_analog_right = ]

@@ -1,0 +1,4 @@
+ffmpeg_color_space = "auto"
+ffmpeg_fft_multisample = "1x"
+ffmpeg_fft_resolution = "320x180"
+ffmpeg_temporal_interp = "disabled"
