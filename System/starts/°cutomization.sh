@@ -21,6 +21,9 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 
 if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 
+	# Removing duplicated app
+	rm -rf /usr/trimui/apps/zformatter_fat32/
+
 	# add pl language
 	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
 		cp "/mnt/SDCARD/trimui/res/lang/pl.lang" "/usr/trimui/res/lang/"
@@ -38,9 +41,6 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# modifying FN cpu script (don't force slow cpu, only force high speed when FN is set to ON) (and we set it as default)
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/apps/fn_editor/com.trimui.cpuperformance.sh
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/scene/com.trimui.cpuperformance.sh
-
-	# Removing duplicated app
-	rm -rf /usr/trimui/apps/zformatter_fat32/
 
 	# Apply default CrossMix theme, sound volume, and grid view
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
@@ -60,41 +60,47 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	fi
 
 	################ Flash boot logo ################
+	CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+	Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+	Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
 
-	SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
-	TARGET_PARTITION="/dev/mmcblk0p1"
-	MOUNT_POINT="/mnt/emmcblk0p1"
+	if ! [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
 
-	echo "Mounting $TARGET_PARTITION to $MOUNT_POINT..."
-	mkdir -p $MOUNT_POINT
-	mount $TARGET_PARTITION $MOUNT_POINT
+		SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
+		TARGET_PARTITION="/dev/mmcblk0p1"
+		MOUNT_POINT="/mnt/emmcblk0p1"
 
-	if [ $? -ne 0 ]; then
-		echo "Failed to mount $TARGET_PARTITION."
-	fi
+		echo "Mounting $TARGET_PARTITION to $MOUNT_POINT..."
+		mkdir -p $MOUNT_POINT
+		mount $TARGET_PARTITION $MOUNT_POINT
 
-	if [ -f "$SOURCE_FILE" ]; then
-		echo "Moving "$SOURCE_FILE" to $MOUNT_POINT/bootlogo.bmp..."
-		cp "$SOURCE_FILE" $MOUNT_POINT/bootlogo.bmp
 		if [ $? -ne 0 ]; then
-			echo "Failed to move bootlogo file."
-		else
-			echo "Bootlogo file moved successfully."
+			echo "Failed to mount $TARGET_PARTITION."
 		fi
+
+		if [ -f "$SOURCE_FILE" ]; then
+			echo "Moving "$SOURCE_FILE" to $MOUNT_POINT/bootlogo.bmp..."
+			cp "$SOURCE_FILE" $MOUNT_POINT/bootlogo.bmp
+			if [ $? -ne 0 ]; then
+				echo "Failed to move bootlogo file."
+			else
+				echo "Bootlogo file moved successfully."
+			fi
+			sync
+			sync
+			sleep 0.3
+			sync
+		else
+			echo "Source bootlogo file does not exist."
+		fi
+
+		echo "Unmounting $TARGET_PARTITION..."
+		umount $TARGET_PARTITION
+		rmdir $MOUNT_POINT
+
+		touch "/usr/trimui/fw_mod_done"
 		sync
-		sync
-		sleep 0.3
-		sync
-	else
-		echo "Source bootlogo file does not exist."
 	fi
-
-	echo "Unmounting $TARGET_PARTITION..."
-	umount $TARGET_PARTITION
-	rmdir $MOUNT_POINT
-
-	touch "/usr/trimui/fw_mod_done"
-	sync
 fi
 
 ######################### CrossMix-OS at each boot #########################

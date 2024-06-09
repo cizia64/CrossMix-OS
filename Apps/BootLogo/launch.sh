@@ -1,4 +1,19 @@
 #!/bin/sh
+CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
+
+if [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
+    /mnt/SDCARD/System/bin/sdl2imgshow \
+        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
+        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+        -s 30 \
+        -c "220,220,220" \
+        -t "Not compatible with firmware superior to v1.0.4 hotfix 6" &
+    sleep 3
+    pkill -f sdl2imgshow
+    exit 1
+fi
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -9,32 +24,29 @@ rm -f ./GoBackTo_Apps.json
 cp /tmp/state.json ./GoBackTo_Apps.json
 cp ./GoTo_Bootlogo_List.json /tmp/state.json
 
-
 src_dir="/mnt/SDCARD/Apps/BootLogo/Images/"
 dest_dir="/mnt/SDCARD/Apps/BootLogo/Thumbnails/"
 find "$dest_dir" -type f -not -name "- Default Trimui.png" -exec rm -f {} \;
 sync
 
-
 /mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50  \
-  -c "220,220,220" \
-  -t "Generating thumbnails..." &
-  sleep 0.3
-  pkill -f sdl2imgshow
-
+    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
+    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+    -s 50 \
+    -c "220,220,220" \
+    -t "Generating thumbnails..." &
+sleep 0.3
+pkill -f sdl2imgshow
 
 # Rename files to start with a capital letter
 find "$src_dir" -type f -iname "*.bmp" | while read -r bmp_file; do
     filename=$(basename "$bmp_file")
     dirname=$(dirname "$bmp_file")
     new_filename="$(echo "$filename" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')"
-	# Lowercase extension
-	new_filename="$(echo "$new_filename" | sed 's/\.BMP$/.bmp/I')"  
-	# replace underscores by spaces
-	# new_filename="$(echo "$new_filename" | sed 's/_/ /g')"
+    # Lowercase extension
+    new_filename="$(echo "$new_filename" | sed 's/\.BMP$/.bmp/I')"
+    # replace underscores by spaces
+    # new_filename="$(echo "$new_filename" | sed 's/_/ /g')"
     mv "$bmp_file" "$dirname/$new_filename"
 done
 sync
@@ -52,7 +64,5 @@ sync
 rm -f "/mnt/SDCARD/Apps/BootLogo/Thumbnails/Thumbnails_cache7.db"
 echo "All conversions have been made."
 
-
 sync
 exit
-
