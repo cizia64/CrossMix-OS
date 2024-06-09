@@ -527,7 +527,7 @@ def do_device_info(hm, argv):
         website_data[device_name] = {}
 
         for cfw_name in device_data['cfw']:
-            info = {'name': cfw_name.lower(), 'version': 'N/A', 'device': device_data['device']}
+            info = {'name': cfw_name.lower(), 'version': 'N/A', 'device': device_data['device'], 'manufacturer': device_data['manufacturer']}
             harbourmaster.expand_info(info, use_old_cpu_info=True)
 
             website_data[device_name][cfw_name] = info

@@ -2,17 +2,14 @@
 
 controlfolder="/mnt/mmc/MUOS/PortMaster"
 
-if [ ! -z "$(df | grep '/mnt/sdcard')" ]; then
-  directory="/mnt/sdcard"
-else
-  directory="/mnt/mmc"
-fi
+directory=$(echo "$0" | sed 's|^\./||' | awk -F'/' '{print "/" $2 "/" $3}')
 
 export PATH="/opt/python/bin:$controlfolder/muos:$controlfolder/muos:$PATH"
 
 export LD_LIBRARY_PATH="/opt/python/lib:$LD_LIBRARY_PATH"
 ESUDO=""
 ESUDOKILL="-1" # for 351Elec and EmuELEC use "-1" (numeric one) or "-k" 
+
 if [ -d "/usr/lib32/" ]; then
   export SDL_GAMECONTROLLERCONFIG_FILE="/usr/lib32/gamecontrollerdb.txt"
 else

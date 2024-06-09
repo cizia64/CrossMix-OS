@@ -3,8 +3,15 @@
 if [ -f "/opt/graphicsmagick/activate.sh" ]; then
     source /opt/graphicsmagick/activate.sh
 
-    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f \( -iname "*.jpg" -o -iname "*.png" \) -exec sh -c 'input="{}"; output="$(echo "$input" | sed "s/\(.*\)\..*/\1/").png"; gm convert "$input" -resize "320x240>" "$output"' \;
+    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f \( -iname "*-pre.jpg" -o -iname "*-pre.png" \) -exec sh -c 'input="{}"; output="$(echo "$input" | sed "s/\(.*\)\..*/\1/").png"; gm convert "$input" -resize "320x240>" "$output"; mv -vf "$output" "$rename"; rm -fv "$input"' \;
 elif [ -e "/usr/bin/mogrify" ]; then
-    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f -iname "*.png" -exec sh -c 'mogrify -verbose -resize "320x240>" -format png "{}"' \;
-    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f -iname "*.jpg" -exec sh -c 'mogrify -verbose -resize "320x240>" -format png "{}"; rm -v "{}"' \;
+    if [ -f "/mnt/mmc/MUOS/custom-boxart.sh" ]; then
+        RESIZE_CODE='/mnt/mmc/MUOS/custom-boxart.sh "$input" "$output"'
+    else
+        RESIZE_CODE='mogrify -verbose -resize "320x240>" -format png "$input"'
+    fi
+
+    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f -iname "*-pre.png" -exec sh -c 'input="{}"; output="$(echo "$input" | sed "s/\(.*\)\..*/\1/").png"; rename="$(echo "$input" | sed "s/\(.*\)-pre\..*/\1/").png"; '"$RESIZE_CODE"'; mv -vf "$output" "$rename"; rm -fv "$input"' \;
+
+    find "/mnt/mmc/MUOS/info/catalogue/External - Ports" -type f -iname "*-pre.jpg" -exec sh -c 'input="{}"; output="$(echo "$input" | sed "s/\(.*\)\..*/\1/").png"; rename="$(echo "$input" | sed "s/\(.*\)-pre\..*/\1/").png"; '"$RESIZE_CODE"'; mv -vf "$output" "$rename"; rm -fv "$input"' \;
 fi
