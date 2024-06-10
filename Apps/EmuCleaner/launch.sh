@@ -1,6 +1,9 @@
 #!/bin/bash
 PATH="/mnt/SDCARD/System/bin:$PATH"
 
+echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
 silent=false
 for arg in "$@"; do
   if [ "$arg" = "-s" ]; then
@@ -51,7 +54,7 @@ for subfolder in $EmuFolder/*/; do
 
     # Build the find command with extensions from extlist
     if [ -z "$ExtList" ] || [ "$ExtList" = "null" ]; then
-      find_cmd="find \"$RomsFolder/$RomFolderName\" '!' -name '*.db' '!' -name '.gitkeep' '!' -name '*.launch' -mindepth 1 -maxdepth 1"
+      find_cmd="find \"$RomsFolder/$RomFolderName\" '!' -name '*.db' '!' -name '.gitkeep' '!' -name '*.launch' -mindepth 1 -maxdepth 2"
     else
       set -- $(echo $ExtList | tr '|' ' ')
       find_cmd="find \"$RomsFolder/$RomFolderName\""
