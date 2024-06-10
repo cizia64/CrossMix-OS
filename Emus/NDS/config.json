@@ -10,6 +10,7 @@
     "useswap":1,
     "shortname":1,
     "hidebios":1,
+    "extlist": "nds|zip|7z|rar",
     "launchlist": [
         {
             "name": "Drastic - SDL2 MOD(凯)",
