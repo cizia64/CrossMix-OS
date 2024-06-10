@@ -1,4 +1,8 @@
 #!/bin/sh
+
+echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
@@ -11,30 +15,37 @@ export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 sleep 0.3
 pkill -f sdl2imgshow
 
+
+
+# For faster loading we check if we have to rebuild the database
+
 show_json_path="/mnt/SDCARD/Emus/show.json"
 database_file="/mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db"
-crc_file="/mnt/SDCARD/Apps/Scraper/show_json_crc.txt"
 
-# Calculate current CRC32 of show.json (list of displayed emulators)
-current_crc=$(crc32 "$show_json_path")
-echo "Current CRC32: $current_crc"
+crc_Emus_file="/mnt/SDCARD/Apps/Scraper/show_json_crc.txt"
+crc_DB_file="/mnt/SDCARD/Apps/Scraper/current_crc_DB.txt"
 
-# Read previous CRC32 from file
-if [ -f "$crc_file" ]; then
-    previous_crc=$(cat "$crc_file")
-else
-    previous_crc=""
-fi
+# Calculate current CRC32 of show.json (list of displayed emulators) and Menu_cache7.db
+current_crc_Emus=$(crc32 "$show_json_path" | awk '{print $1}')
+current_crc_DB=$(crc32 "$database_file" | awk '{print $1}')
 
-echo "Previous CRC32: $previous_crc"
+# get previous values
+previous_crc_Emus=$(cat "$crc_Emus_file")
+previous_crc_DB=$(cat "$crc_DB_file")
 
-# If CRC32 has changed, perform operations and update CRC file
-if [ "$current_crc" != "$previous_crc" ]; then
-    echo "$current_crc" >"$crc_file"
+
+echo "Current  show.json CRC32: $current_crc_Emus      |    Current   Menu_cache7.db CRC32: $current_crc_DB"
+echo "Previous show.json CRC32: $previous_crc_Emus      |    Previous  Menu_cache7.db CRC32: $previous_crc_DB"
+
+
+
+
+# If CRC32 have changed, perform operations and update CRC file
+if [ "$current_crc_Emus" != "$previous_crc_Emus" ] || [ "$current_crc_DB" != "$previous_crc_DB" ]; then
+    
     echo "CRC32 changed. Performing operations..."
-
+    echo "$current_crc_Emus" >"$crc_Emus_file"
     rm -f "$database_file"
-
     sqlite3 "$database_file" "CREATE TABLE Menu_roms (id INTEGER PRIMARY KEY, disp TEXT, path TEXT, imgpath TEXT, type INTEGER, ppath TEXT, pinyin TEXT, cpinyin TEXT, opinyin TEXT);"
     sync
 
@@ -75,6 +86,9 @@ if [ "$current_crc" != "$previous_crc" ]; then
             fi
         fi
     done
+    crc32 "$database_file"  | awk '{print $1}' >"$crc_DB_file"
+    sync
+
 else
     echo "CRC32 has not changed. No operations performed."
 fi
