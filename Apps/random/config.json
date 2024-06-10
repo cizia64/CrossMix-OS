@@ -1,0 +1,7 @@
+{
+"label":"Random",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"Chooses Random Emulator and Rom"
+}

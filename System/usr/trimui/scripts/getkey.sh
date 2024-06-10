@@ -13,7 +13,7 @@
 
 
 # Input device location
-DEVICE_PATH="/dev/input/event3"
+export DEVICE_PATH="/dev/input/event3"
 
 # Button mapping table
 map_button() {
