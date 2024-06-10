@@ -1,10 +1,14 @@
 #!/bin/sh
 echo $0 $*
 
+PATH="/mnt/SDCARD/System/bin:$PATH"
+
 RomFullPath=$1
 RomPath=$(dirname "$1")
 RomDir=$(basename "$RomPath")
-
+Launcher=$(jq -r '.launch' "/mnt/SDCARD/Emus/$RomDir/config.json")
+LaunchPath="/mnt/SDCARD/Emus/$RomDir/$Launcher"
+		  
 extension="${RomFullPath##*.}"
 if [ "$extension" = "txt" ]; then
     RomFullPath=$(cat "$RomFullPath" | head -n 1) # Trick to have shortcuts: the real ROM filename is inside the text file
@@ -14,21 +18,21 @@ echo "**************************************************************************
 echo "RomFullPath  $RomFullPath"
 echo "RomPath      $RomPath"
 echo "RomDir       $RomDir"
-echo "EmuPath      /mnt/SDCARD/Emus/$RomDir/launch.sh"
+echo "LaunchPath   $LaunchPath"
 echo "***************************************************************************"
 
 #  Example:
 #  ***************************************************************************
-#  RomFullPath  /mnt/SDCARD/Best/Free Games Collection/./Roms/ATARI2600/Sheep It Up.zip
-#  RomPath      /mnt/SDCARD/Best/Free Games Collection/./Roms/ATARI2600
-#  RomDir       ATARI2600
-#  EmuPath      /mnt/SDCARD/Emus/ATARI2600/launch.sh
+#  RomFullPath   /mnt/SDCARD/Best/Free Games Collection/./Roms/ATARI2600/Sheep It Up.zip
+#  RomPath       /mnt/SDCARD/Best/Free Games Collection/./Roms/ATARI2600
+#  RomDir        ATARI2600
+#  LaunchPath    /mnt/SDCARD/Emus/ATARI2600/launch.sh
 #  ***************************************************************************
 
 
-if [ -f "/mnt/SDCARD/Emus/$RomDir/launch.sh" ]; then
+if [ -f "$LaunchPath" ]; then
 
-    /mnt/SDCARD/Emus/$RomDir/launch.sh "$RomFullPath"
+    "$LaunchPath" "$RomFullPath"
 
 else
 
