@@ -2,35 +2,50 @@
   "label": "PSP",
   "label.ch.lang": "PSP",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PSP.png",
-  "launch": "launch_performance.sh",
+  "launch": "launch_1.17.1_gl.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/PSP.png",
   "themecolor": "64A8BD",
   "iconsel": "",
   "rompath": "../../Roms/PSP",
   "imgpath": "../../Imgs/PSP",
-  "useswap": 0,
+  "useswap": 1,
   "shortname": 0,
   "hidebios": 0,
   "launchlist": [
     {
-      "name": "PPSSPP 1.17.1 - perf.",
-      "name.ch.lang": "PPSSPP性能模式",
-      "launch": "launch_performance.sh"
-    },
-    {
-      "name": "PPSSPP 1.17.1",
+      "name": "PPSSPP 1.17.1 - OpenGL",
       "name.ch.lang": "PPSSPP正常模式",
-      "launch": "launch.sh"
+      "launch": "launch_1.17.1_gl.sh"
     },
     {
-      "name": "PPSSPP-1.5.4 - Perf.",
-      "name.ch.lang": "PPSSPP-1.5.4性能模式",
-      "launch": "launch_performance_1.15.4.sh"
+      "name": "PPSSPP 1.17.1 - Vulkan",
+      "name.ch.lang": "PPSSPP性能模式",
+      "launch": "launch_1.17.1_vulkan.sh"
     },
     {
       "name": "PPSSPP-1.5.4",
-      "name.ch.lang": "PPSSPP-1.5.4正常模式",
+      "name.ch.lang": "PPSSPP-1.5.4性能模式",
       "launch": "launch_1.15.4.sh"
-    }
+    },
+    {
+      "name": "---------------------------",
+      "name.ch.lang": "---------------------------",
+      "launch": ""
+    },
+    {
+      "name": "PPSSPP 1.17.1 - OpenGL - Perf.",
+      "name.ch.lang": "PPSSPP正常模式 - Perf.",
+      "launch": "launch_1.17.1_gl.sh"
+    },
+	{
+      "name": "PPSSPP 1.17.1 - Vulkan - Perf.",
+      "name.ch.lang": "PPSSPP性能模式 - Perf.",
+      "launch": "launch_1.17.1_vulkan.sh"
+    },
+    {
+      "name": "PPSSPP-1.5.4 - Perf.",
+      "name.ch.lang": "PPSSPP-1.5.4性能模式 - Perf.",
+      "launch": "launch_1.15.4.sh"
+    }	
   ]
 }
