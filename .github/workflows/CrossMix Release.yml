@@ -41,15 +41,16 @@ jobs:
           rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.git
           rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.github
           ls -la /home/runner/work/CrossMix-OS/CrossMix-OS
-      - name: 7zipping release
+      - name: Zipping release
         run: |
-          pwd
-          7zz a "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.7z" /home/runner/work/CrossMix-OS/CrossMix-OS/.
+          shopt -s dotglob
+          cd /home/runner/work/CrossMix-OS/CrossMix-OS
+          zip -r "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip" ./*
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           title: "CrossMix-OS v${{ env.BUILD_VERSION }}"
           prerelease: false
-          files: "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.7z"
-          draft: false
+          files: "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip"
+          draft: true
