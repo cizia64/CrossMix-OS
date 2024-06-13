@@ -2,7 +2,9 @@ import functools
 import gettext
 import json
 import os
+import pathlib
 import shutil
+import subprocess
 
 import sdl2
 import sdl2.ext
@@ -10,6 +12,7 @@ import sdl2.ext
 import harbourmaster
 import pySDL2gui
 
+from pathlib import Path
 from loguru import logger
 
 
@@ -331,7 +334,7 @@ class BaseScene:
             output.extend(key)
             output.append(action)
 
-        print(f"-> {key_map} = {output}")
+        # print(f"-> {key_map} = {output}")
 
         self.tags['button_bar'].bar = output
 
@@ -556,6 +559,15 @@ class OptionScene(BaseScene):
                 'trimui-port-mode-toggle',
                 _("Ports Location: ") +  (self.gui.hm.cfg_data.get('trimui-port-mode', 'roms') == 'roms' and _("Roms section") or _("Ports tab")),
                 description=_("Location where ports should be installed to."))
+
+        if self.gui.hm.device['name'] == 'muOS':
+            if '/mnt/sdcard' in subprocess.getoutput(['df']):
+                MUOS_MMC_TOGGLE = Path('/mnt/mmc/MUOS/PortMaster/config/muos_mmc_master_race.txt')
+
+                self.tags['option_list'].add_option(
+                    'muos-port-mode-toggle',
+                    _("Ports Location: ") +  (MUOS_MMC_TOGGLE.is_file() and _("SD 1") or _("SD 2")),
+                    description=_("Location where ports should be installed to."))
 
         self.tags['option_list'].add_option(None, _("System"))
 
@@ -843,6 +855,35 @@ class OptionScene(BaseScene):
                         _("Ports Location: ") +  language_map[to_mode])
 
                     self.gui.hm.platform.do_move_ports()
+
+            if selected_option == 'muos-port-mode-toggle':
+                if '/mnt/sdcard' in subprocess.getoutput(['df']):
+                    MUOS_MMC_TOGGLE = Path('/mnt/mmc/MUOS/PortMaster/config/muos_mmc_master_race.txt')
+
+                    language_map = {
+                        True:  _('SDCARD 1'),
+                        False: _('SDCARD 2'),
+                        }
+
+                    if self.gui.message_box(
+                            _("Are you sure you want to manage and install ports on {to_loc}?\n\nAlready installed ports will not be moved.\nPortMaster will restart for this to take effect.").format(
+                                to_loc=language_map[(not MUOS_MMC_TOGGLE.is_file())]),
+                            want_cancel=True):
+
+                        self.gui.events.running = False
+
+                        if MUOS_MMC_TOGGLE.is_file():
+                            MUOS_MMC_TOGGLE.unlink()
+
+                        else:
+                            MUOS_MMC_TOGGLE.touch(0o644)
+
+                        if not harbourmaster.HM_TESTING:
+                            reboot_file = (harbourmaster.HM_TOOLS_DIR / "PortMaster" / ".pugwash-reboot")
+                            if not reboot_file.is_file():
+                                reboot_file.touch(0o644)
+
+                        return True
 
             if selected_option == 'runtime-manager':
                 self.gui.push_scene('runtime-manager', RuntimesScene(self.gui))

@@ -27,9 +27,9 @@ HM_PERFTEST=False
 
 ################################################################################
 ## The following code is a simplification of the PortMaster toolsloc and whichsd code.
-HM_DEFAULT_PORTS_DIR = Path("/roms/ports")
+HM_DEFAULT_PORTS_DIR   = Path("/roms/ports")
 HM_DEFAULT_SCRIPTS_DIR = Path("/roms/ports")
-HM_DEFAULT_TOOLS_DIR = Path("/roms/ports")
+HM_DEFAULT_TOOLS_DIR   = Path("/roms/ports")
 
 if 'XDG_DATA_HOME' not in os.environ:
     os.environ['XDG_DATA_HOME'] = str(Path().home() / '.local' / 'share')
@@ -62,7 +62,9 @@ elif Path("/opt/muos").is_dir():
     HM_DEFAULT_PORTS_DIR   = Path("/mnt/mmc/ports")
     HM_DEFAULT_SCRIPTS_DIR = Path("/mnt/mmc/ROMS/Ports")
 
-    if '/mnt/sdcard' in subprocess.getoutput(['df']):
+    MUOS_MMC_TOGGLE        = Path('/mnt/mmc/MUOS/PortMaster/config/muos_mmc_master_race.txt')
+
+    if not MUOS_MMC_TOGGLE.is_file() and '/mnt/sdcard' in subprocess.getoutput(['df']):
         HM_DEFAULT_PORTS_DIR   = Path("/mnt/sdcard/ports")
         HM_DEFAULT_SCRIPTS_DIR = Path("/mnt/sdcard/ROMS/Ports")
 

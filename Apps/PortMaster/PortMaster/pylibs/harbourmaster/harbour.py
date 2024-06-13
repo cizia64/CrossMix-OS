@@ -1552,6 +1552,9 @@ class HarbourMaster():
 
         self._fix_permissions()
 
+        if self.ports_dir != self.scripts_dir:
+            self._fix_permissions(self.scripts_dir)
+
         # logger.debug(port_info)
         if port_info['attr'].get('runtime', None) is not None:
             runtime_name = runtime_nicename(port_info['attr']['runtime'])

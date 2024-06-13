@@ -3,7 +3,7 @@
     "api": "PortMasterV3",
     "name": "PortMaster Multiverse",
     "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/latest/download/ports.json",
-    "last_checked": "2024-05-22T07:40:53.351021",
+    "last_checked": "2024-06-14T06:49:11.390144",
     "version": 2,
     "data": {
         "ports": [
@@ -11,6 +11,7 @@
             "gtavc.zip",
             "loderunneronline.zip",
             "soh.zip",
+            "soh2.zip",
             "smworld.zip",
             "sm.zip",
             "wipeout.zip",
@@ -40,9 +41,15 @@
             },
             "soh.zip": {
                 "name": "soh.zip",
-                "size": 18809698,
-                "md5": "8e2166dc28280c66a1a9869c27ae2528",
-                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/soh.zip"
+                "size": 19776367,
+                "md5": "732558c6abc68ace39f30ad8dfe7a4ff",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-06_1510/soh.zip"
+            },
+            "soh2.zip": {
+                "name": "soh2.zip",
+                "size": 14651833,
+                "md5": "c2d8b14bdc11c396d8f5ba21ada6846e",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-10_1032/soh2.zip"
             },
             "smworld.zip": {
                 "name": "smworld.zip",
@@ -70,15 +77,15 @@
             },
             "gameinfo.zip": {
                 "name": "gameinfo.zip",
-                "size": 2183866,
-                "md5": "c2848d2bcb267c10995595df746ae390",
-                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/gameinfo.zip"
+                "size": 2900234,
+                "md5": "bfa5554a7651c64442d69dfb3b977d41",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-10_1032/gameinfo.zip"
             },
             "images.zip": {
                 "name": "images.zip",
-                "size": 1120874,
-                "md5": "73ab8667d9226b69f2b0b66c169aa7d6",
-                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/images.zip"
+                "size": 1444043,
+                "md5": "822210609b649e44e18ada278042dd54",
+                "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-10_1032/images.zip"
             }
         },
         "info": {
@@ -246,11 +253,55 @@
                 },
                 "source": {
                     "date_added": "2024-04-10",
-                    "date_updated": "2024-04-10",
-                    "md5": "8e2166dc28280c66a1a9869c27ae2528",
-                    "size": 18809698,
-                    "release_id": "2024-04-10_1445",
-                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-04-10_1445/soh.zip"
+                    "date_updated": "2024-06-06",
+                    "md5": "732558c6abc68ace39f30ad8dfe7a4ff",
+                    "release_id": "2024-06-06_1510",
+                    "size": 19776367,
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-06_1510/soh.zip"
+                }
+            },
+            "soh2.zip": {
+                "version": 2,
+                "name": "soh2.zip",
+                "items": [
+                    "Ship of Harkinian 2.sh",
+                    "soh2"
+                ],
+                "items_opt": null,
+                "attr": {
+                    "title": "Ship of Harkinian 2",
+                    "porter": [
+                        "Jeod"
+                    ],
+                    "desc": "A source port of Majora's Mask. 2Ship2Harkinian (aka SoH2) features extensive and significant enhancements over the original game, such as improved performance, increased frame-rate, native ultra-widescreen support, and extensive mod support (especially compared to emulated versions of the original), among other features.",
+                    "inst": "Follow the guide in the readme to generate your mm.o2r file. Once created put in the ports/soh2 folder.",
+                    "genres": [
+                        "action",
+                        "adventure"
+                    ],
+                    "image": {
+                        "screenshot": "screenshot.png",
+                        "covers": [
+                            "cover.jpg"
+                        ],
+                        "thumbnail": null,
+                        "video": null
+                    },
+                    "rtr": false,
+                    "exp": false,
+                    "runtime": null,
+                    "reqs": [],
+                    "arch": [
+                        "aarch64"
+                    ]
+                },
+                "source": {
+                    "date_added": "2024-06-10",
+                    "date_updated": "2024-06-10",
+                    "md5": "c2d8b14bdc11c396d8f5ba21ada6846e",
+                    "size": 14651833,
+                    "release_id": "2024-06-10_1032",
+                    "url": "https://github.com/PortsMaster-MV/PortMaster-MV-New/releases/download/2024-06-10_1032/soh2.zip"
                 }
             },
             "smworld.zip": {

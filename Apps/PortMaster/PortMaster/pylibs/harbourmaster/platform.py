@@ -519,7 +519,7 @@ class PlatformmuOS(PlatformBase):
                         if not image_file.is_file():
                             continue
 
-                        target_file = INFO_BOX_DIR / (path_merge + image_file.suffix)
+                        target_file = INFO_BOX_DIR / (path_merge + '-pre' + image_file.suffix)
                         logger.debug(f"copying {str(image_file)} to {str(target_file)}")
                         shutil.copy(image_file, target_file)
 
@@ -531,7 +531,7 @@ class PlatformmuOS(PlatformBase):
                             screenshot_file = (image_file.parent / 'screenshot.png')
 
                         if screenshot_file:
-                            target_file = INFO_PREVIEW_DIR / (path_merge + image_file.suffix)
+                            target_file = INFO_PREVIEW_DIR / (path_merge + '-pre' + image_file.suffix)
                             logger.debug(f"copying {str(screenshot_file)} to {str(target_file)}")
                             shutil.copy(screenshot_file, target_file)
 
