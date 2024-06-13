@@ -7,19 +7,17 @@ runifnecessary() {
 	fi
 }
 
-resume_at_boot=$(/mnt/SDCARD/System/bin/jq -r '.["RESUME AT BOOT"]' "/mnt/SDCARD/System/etc/crossmix.json")
-if [ "$resume_at_boot" -eq 0 ]; then
-	rm /mnt/SDCARD/trimui/app/cmd_to_run.sh
-	echo "The value of 'RESUME AT BOOT' is 0."
-	exit 1
-fi
-
 if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
+
+	resume_at_boot=$(/mnt/SDCARD/System/bin/jq -r '.["RESUME AT BOOT"]' "/mnt/SDCARD/System/etc/crossmix.json")
+	if [ "$resume_at_boot" -eq 0 ]; then
+		rm /mnt/SDCARD/trimui/app/cmd_to_run.sh
+		echo "The value of 'RESUME AT BOOT' is 0."
+		exit 1
+	fi
 
 	UDISK_TIRMUI_DIR=/mnt/UDISK/trimui_dir
 	SDCARD_TRIMUI_DIR=/mnt/SDCARD/trimui
-
-
 
 	# set wifi
 	max_wait_ip=20
@@ -61,7 +59,7 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 	fi
 
 	export LD_LIBRARY_PATH=/usr/trimui/lib:${SDCARD_TRIMUI_DIR}/lib
-	
+
 	cd /usr/trimui/bin/
 	runifnecessary "keymon" /usr/trimui/bin/keymon
 	runifnecessary "inputd" /usr/trimui/bin/trimui_inputd
@@ -107,12 +105,11 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 
 	echo "Lets run"
 
-	
 	sleep 0.3 # delay necessary for input initialization
 	/mnt/SDCARD/System/usr/trimui/scripts/button_state.sh MENU
 	exit_code=$?
-	if [ $exit_code -eq 10 ]; then  # we don't resume if menu is pressed during boot
-		echo "=== Button MENU pressed ===" 
+	if [ $exit_code -eq 10 ]; then # we don't resume if menu is pressed during boot
+		echo "=== Button MENU pressed ==="
 		rm /mnt/SDCARD/trimui/app/cmd_to_run.sh
 		sync
 		# 3 fast blue blinking

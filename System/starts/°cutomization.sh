@@ -54,10 +54,8 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# Game tab by default
 	"/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab Game.sh" -s
 
-	# Displaying only Emulators with roms if the Emus list is not already customized
-	if [ ! -e "/mnt/SDCARD/Emus/show.json" ]; then
-		/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
-	fi
+	# Displaying only Emulators with roms
+	/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
 
 	################ Flash boot logo ################
 	CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"

@@ -3,12 +3,12 @@
   "SSH": 1,
   "TELNET": 0,
   "SFTPGo": 0,
-  "Syncthing": 0
+  "Syncthing": 0,
   "BACKGROUNDS": "Default",
   "ICONS": "Default",
   "START TAB": "Tab Game",
   "LEDS": "Default",
   "AUTO LOAD STATE": 1,
   "OVERLAYS": "Overlays - max ratio",
-  "resume at boot": 1,
+  "resume at boot": 1
 }
