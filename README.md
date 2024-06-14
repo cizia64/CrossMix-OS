@@ -44,7 +44,9 @@ All the stuffs created by CrossMix-OS are free and open source.
 - Extract all the content of the archive on the root of your SD card.
 - Then insert the SD card in your TrimUI Smart Pro and start the device.
 
-To update, the process is the same : just extract the content of the new archive on the root of your SD card, overriding all existing files.
+To update, the process is almost the same : 
+- Make a scandisk on your sd card first (as there are many bad sd cards it's always a good idea)
+- Extract the content of the new archive on the root of your SD card, overriding all existing files.
 
 Remark: CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
 
