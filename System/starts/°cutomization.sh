@@ -46,6 +46,10 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
+	# we set the customization flag
+	touch "/usr/trimui/fw_mod_done"
+	sync
+
 	################ CrossMix-OS SD card Customization ################
 
 	# Sorting Themes Alphabetically
@@ -95,9 +99,6 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 		echo "Unmounting $TARGET_PARTITION..."
 		umount $TARGET_PARTITION
 		rmdir $MOUNT_POINT
-
-		touch "/usr/trimui/fw_mod_done"
-		sync
 	fi
 fi
 
