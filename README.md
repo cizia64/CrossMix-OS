@@ -39,16 +39,21 @@ All the stuffs created by CrossMix-OS are free and open source.
 
 # Installation & Update
 
+**To make a fresh install:**
 - Format your SD card in FAT32 (use a guenuine and good quality SD card, not the stock one).
 - Download the [last release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
 - Extract all the content of the archive on the root of your SD card.
+- Copy your bios files in BIOS folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
+- Copy your own roms in `Roms` folder (or copy the `Roms` folder from stock SD card)
 - Then insert the SD card in your TrimUI Smart Pro and start the device.
 
-To update, the process is almost the same : 
+**To update**, the process is almost the same : 
 - Make a scandisk on your sd card first (as there are many bad sd cards it's always a good idea)
 - Extract the content of the new archive on the root of your SD card, overriding all existing files.
 
-Remark: CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
+**Remark:** CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
+
+**Remark:** CrossMix-OS use the firmware 1.0.4 hotfix 6 by default (no need to update it before your CrossMix installation), hotfix 9 is also supported but boot logo change is disabled.
 
 ---
 
