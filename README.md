@@ -50,7 +50,7 @@ All components of CrossMix-OS are free and open source.
 *Recommended SD card size is at least 128GB for the firmware, emulators, BIOS files and ROMs.
 
 **To update**, the process is almost the same : 
-- Run scandisk on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
+- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
 - Extract the contents of the new archive on the root of your SD card, overwriting all existing files.
 
 **Remark:** CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
