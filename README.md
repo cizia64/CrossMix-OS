@@ -41,8 +41,8 @@ All components of CrossMix-OS are free and open source.
 
 **To make a fresh install:**
 - Format your SD card in FAT32. (use a genuine, name-brand SD card and not the stock one sold with your console)*
-- Download the [last release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
-- Extract all the content of the archive on the root of your SD card.
+- Download the [latest release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
+- Extract the archive to the root of your formatted SD card.
 - Copy your BIOS files into the `BIOS` folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
 - Copy your own ROMs into the `Roms` folder (or copy the `Roms` folder from stock SD card)
 - Insert your SD card into your TrimUI Smart Pro and boot the console.
@@ -50,8 +50,8 @@ All components of CrossMix-OS are free and open source.
 *Recommended SD card size is at least 128GB for the firmware, emulators, BIOS files and ROMs.
 
 **To update**, the process is almost the same : 
-- Run scandisk on your sd card first (as there are many bad SD cards it's always a good idea)
-- Extract the content of the new archive on the root of your SD card, overwriting all existing files.
+- Run scandisk on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
+- Extract the contents of the new archive on the root of your SD card, overwriting all existing files.
 
 **Remark:** CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
 
@@ -77,7 +77,7 @@ All components of CrossMix-OS are free and open source.
 - Choose and flash your own boot logo with basic verification (file size, format, resolution).
 - Add your own logos to `SDCARD/Apps/BootLogo/Images`.  
 
-**Note: this is not compatible with firmwares after 1.0.4.6**
+**Note: this is not compatible with firmwares after 1.0.4 hotfix 6**
 
 ### Screen Recorder
 
