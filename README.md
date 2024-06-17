@@ -28,28 +28,30 @@ _Get the best from your TrimUI Smart Pro_
 
 # Introduction
 
-CrossMix-OS is based on Trimui firmware with a more advanced configuration,
+CrossMix-OS is based on TrimUI stock firmware with a more advanced configuration,
 new emulators and new tools to offer an optimal experience on your TrimUI Smart Pro.
 
-CrossMix-OS is also designed for the community, devs and creators: , it supports themes, icon packs, background packs, template for "Best" packs, overlays auto config, …
+CrossMix-OS is also designed for the community, developers and creators: it supports themes, icon packs, background packs, template for "Best" collections, overlays auto config, …
 
-All the stuffs created by CrossMix-OS are free and open source.
+All components of CrossMix-OS are free and open source.
 
 ---
 
 # Installation & Update
 
 **To make a fresh install:**
-- Format your SD card in FAT32 (use a guenuine and good quality SD card, not the stock one).
-- Download the [last release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
-- Extract all the content of the archive on the root of your SD card.
-- Copy your bios files in BIOS folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
-- Copy your own roms in `Roms` folder (or copy the `Roms` folder from stock SD card)
-- Then insert the SD card in your TrimUI Smart Pro and start the device.
+- Format your SD card in FAT32. (use a genuine, name-brand SD card and not the stock one sold with your console)*
+- Download the [latest release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
+- Extract the archive to the root of your formatted SD card.
+- Copy your BIOS files into the `BIOS` folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
+- Copy your own ROMs into the `Roms` folder (or copy the `Roms` folder from stock SD card)
+- Insert your SD card into your TrimUI Smart Pro and boot the console.
+
+*Recommended SD card size is at least 128GB for the firmware, emulators, BIOS files and ROMs.
 
 **To update**, the process is almost the same : 
-- Make a scandisk on your sd card first (as there are many bad sd cards it's always a good idea)
-- Extract the content of the new archive on the root of your SD card, overriding all existing files.
+- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
+- Extract the contents of the new archive on the root of your SD card, overwriting all existing files.
 
 **Remark:** CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
 
@@ -73,8 +75,9 @@ All the stuffs created by CrossMix-OS are free and open source.
 ### Bootlogo
 
 - Choose and flash your own boot logo with basic verification (file size, format, resolution).
-- Add your own logos to `SDCARD/Apps/BootLogo/Images`.
-- (not compatible with firmware > 1.0.4 hotfix 6)
+- Add your own logos to `SDCARD/Apps/BootLogo/Images`.  
+
+**Note: this is not compatible with firmwares after 1.0.4 hotfix 6**
 
 ### Screen Recorder
 
@@ -107,7 +110,7 @@ All the stuffs created by CrossMix-OS are free and open source.
 - **Overlays selector**: Configure your default display for all platforms.
 - **PSX Analog detector**: Detects PSX games compatible with analog sticks and sets the right controller configuration.
 
-### LEDS Section
+### LEDs Section
 
 - Configure default LED behavior (persistent after reboot).
 
@@ -233,7 +236,7 @@ Thanks to Schmurtzm for his numerous scripts, I have revised and integrated them
 - [Subfolder config override finder](https://github.com/libretro/RetroArch/issues/12021#issuecomment-2107300989) is also used in CrossMix-OS.
 
 
-I hope CrossMix-OS will become a reference among OSes based on Stock-OS and continue to improve with community support.
+I hope CrossMix-OS will become a reference among OSes based on the stock OS and continue to improve with community support.
 
 
 ## Help the CrossMix-OS project
