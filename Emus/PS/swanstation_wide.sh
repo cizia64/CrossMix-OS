@@ -45,7 +45,7 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$SWANSTATION_DIR/widescreen.opt" "$ROM_OPT"
     echo "Patch applied to $ROM_CFG"
     echo "Patch applied to $ROM_OPT"
-	HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so --appendconfig=./.retroarch/easynetplay_override.cfg "$@" 
+	HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@" 
 	
 	# cleaning
 	rm "$ROM_CFG"
