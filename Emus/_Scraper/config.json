@@ -1,12 +1,22 @@
 {
   "label": "_Scraper",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/_Scraper.png",
-  "launch": "launch.sh",
+  "launch": "screenscraper.sh",
   "rompath": "/mnt/SDCARD/Apps/Scraper/Menu",
   "imgpath": "/mnt/SDCARD/Apps/Scraper/Menu/Imgs",
   "useswap": 0,
   "shortname": 1,
   "hidebios": 0,
   "extlist": "sh",
-  "background": "/mnt/SDCARD/Backgrounds/Default/_Scraper.png"
+  "background": "/mnt/SDCARD/Backgrounds/Default/_Scraper.png",
+  "launchlist": [
+    {
+      "name": "ScreenScraper",
+      "launch": "screenscraper.sh"
+    },
+    {
+      "name": "Scraper-old (faster/only 2D box)",
+      "launch": "scraper_old.sh"
+    }
+  ]
 }
