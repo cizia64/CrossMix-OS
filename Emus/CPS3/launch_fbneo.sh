@@ -1,6 +1,6 @@
 #!/bin/sh
 RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/PGM
+EMU_DIR=/mnt/SDCARD/Emus/CPS3
 cd $RA_DIR/
 
 $EMU_DIR/cpufreq.sh
