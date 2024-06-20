@@ -108,6 +108,6 @@ if [ "$silent" = false ]; then
     -c "255,255,255" \
     -t "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." &
 
-  sleep 3.5
+  sleep 2.5
   pkill -f sdl2imgshow
 fi
