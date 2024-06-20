@@ -7,7 +7,7 @@ cd "$progdir"
 
 export LD_LIBRARY_PATH=/lib:/lib64:/usr/lib:/mnt/SDCARD/System/lib/
 
-/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -1 "Music" -c "keys.gptk" &
+/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -1 "mpv" -c "keys.gptk" &
 sleep 1
 
 echo 1 > /tmp/stay_awake
