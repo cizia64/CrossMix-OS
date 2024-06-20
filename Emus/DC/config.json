@@ -6,10 +6,20 @@
   "effectsh": "effect.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/DC.png",
   "themecolor": "FFFFFF",
-  "launch": "launch.sh",
+  "launch": "flycast.sh",
   "rompath": "../../Roms/DC",
   "imgpath": "../../Imgs/DC",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "flycast",
+      "launch": "flycast.sh"
+    },
+    {
+      "name": "flycast 16:9",
+      "launch": "flycast_wide.sh"
+    }
+  ]
 }
