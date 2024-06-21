@@ -44,7 +44,7 @@ All components of CrossMix-OS are free and open source.
 - Download the [latest release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
 - Extract the archive to the root of your formatted SD card.
 - Copy your BIOS files into the `BIOS` folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
-- Copy your own ROMs into the `Roms` folder (or copy the `Roms` folder from stock SD card)
+- Copy your own ROMs into the `Roms` folder (or copy the `Roms` folder from stock SD card, rom path changes : PPSSPP -> PSP , OPERA -> PANASONIC , PICO8 -> PICO)
 - Insert your SD card into your TrimUI Smart Pro and boot the console.
 
 *Recommended SD card size is at least 128GB for the firmware, emulators, BIOS files and ROMs.
@@ -185,6 +185,8 @@ All components of CrossMix-OS are free and open source.
 - **Device doesn't boot, black screen**: Press the power button for 10 seconds and try again. Restore the default boot logo if necessary.
 - **PSX gamepad configuration issues**: Use the "PSX Analog detector" for correct configuration.
 - **Current game is frozen**: Press Menu and Power for 3 seconds to force exit the game.
+- Retroarch configuration ovverides: CrossMix OS uses "directory overrides" everywhere. This is the best choice : in many handhelds OS it works with core overrides but this has no sense as some cores are used for multiple platforms. 
+So Directory override is a nice choice but there is an enormous limitation : when you have rom subfolders (for example "GBA/modern games") Retroarch will look for a "modern games" override instead of "GBA" override, fortunately this limitation is managed in CrossMix-OS thanks to [FolderOverrideFinder.sh created by Schmurtz](https://github.com/cizia64/CrossMix-OS/commit/49faff09c4cf30534cc722cc53a309db3a78be3b).
 
 ---
 

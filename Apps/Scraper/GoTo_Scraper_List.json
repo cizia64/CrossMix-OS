@@ -36,6 +36,6 @@
 			"currpos":	0,
 			"pagestart":	0,
 			"pageend":	5,
-			"emulaunch":	"/mnt/SDCARD/Emus/_Scraper/launch.sh"
+			"emulaunch":	"/mnt/SDCARD/Emus/_Scraper/screenscraper.sh"
 		}]
 }
