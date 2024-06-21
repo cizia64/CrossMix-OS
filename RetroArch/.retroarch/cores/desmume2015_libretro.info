@@ -41,6 +41,6 @@ firmware1_opt = "true"
 firmware2_desc = "bios9.bin (ARM9 BIOS)"
 firmware2_path = "bios9.bin"
 firmware2_opt = "true"
-notes = "(!) firmware.bin (md5): 145eaef5bd3037cbc247c213bb3da1b3|(!) bios7.bin (md5): df692a80a5b1bc90728bc3dfc76cd948|(!) bios9.bin (md5): a392174eb3e572fed6447e956bde4b25|[1] Enable 'Use External BIOS/Firmware' core option to use firmware files"
+notes = "(!) bios7.bin (md5): df692a80a5b1bc90728bc3dfc76cd948|(!) bios9.bin (md5): a392174eb3e572fed6447e956bde4b25|[1] Enable 'Use External BIOS/Firmware' core option to use firmware files"
 
 description = "A port of the mature and longstanding DeSmuME emulator for Nintendo's DS console to libretro. The core has very good compatibility and many modern features, but since this is an older snapshot (circa 2015), most users should try the up-to-date core and only fall back to this one if needed for performance reasons."

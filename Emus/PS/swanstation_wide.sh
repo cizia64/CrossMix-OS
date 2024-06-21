@@ -11,8 +11,6 @@ $EMU_DIR/performance.sh
 NET_PARAM=
 
 
-#!/bin/sh
-
 # Variable for the path to the SwanStation directory
 SWANSTATION_DIR="/mnt/SDCARD/RetroArch/.retroarch/config/SwanStation"
 
