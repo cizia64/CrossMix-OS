@@ -15,6 +15,5 @@ systemname = "Handheld Electronic"
 # Libretro Features
 supports_no_game = "false"
 database = "Handheld Electronic Game"
-savestate = "false"
 
 description = "A simulator of various Game and Watch-style handheld electronic games, ported to libretro. Unlike MAME's emulation of these games, which is based on actual emulation, these simulations were created by observing the behavior of the games and then creating new logic that acts similarly. This core is much easier to get up and running than via MAME, so it's a good first choice for playing those games."
