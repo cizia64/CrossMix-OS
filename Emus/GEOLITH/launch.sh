@@ -3,7 +3,7 @@ echo "===================================="
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
 RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/NEOGEO
+EMU_DIR=/mnt/SDCARD/Emus/GEOLITH
 cd $RA_DIR/
 
 echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 
