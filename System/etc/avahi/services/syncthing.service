@@ -1,0 +1,9 @@
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+
+<service-group>
+  <name replace-wildcards="yes">%h</name>
+  <service>
+    <type>_syncthing._tcp</type>
+    <port>8384</port>
+  </service>
+</service-group>
