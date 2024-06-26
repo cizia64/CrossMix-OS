@@ -19,6 +19,10 @@
     {
       "name": "Mupen64Plus",
       "launch": "mupen64plus.sh"
+    },
+    {
+      "name": "Mupen64Plus 16:9",
+      "launch": "mupen64plus_wide.sh"
     }
   ]
 }
