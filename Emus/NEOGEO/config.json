@@ -12,7 +12,7 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "zip|7z",
+  "extlist": "zip|7z|neo",
   "launchlist": [
     {
       "name": "FB ALPHA 2012",
@@ -20,7 +20,11 @@
     },
     {
       "name": "FB NEO",
-      "launch": "launch.sh"
+      "launch": "launch_fbneo.sh"
+    },
+    {
+      "name": "GEOLITH (.neo)",
+      "launch": "launch_geolith.sh"
     }
   ]
 }
