@@ -1,7 +1,5 @@
 #!/bin/sh
 echo $0 $*
-#!/bin/sh
-echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/N64
@@ -35,7 +33,7 @@ ROM_OPT="$MUPEN_DIR/$ROM_NAME.opt"
 # Check if the destination files exist
 if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     # Copy the configuration files with the new name
-    cp "$N64_CFG" "$N64_CFG"
+    cp "$N64_CFG" "$ROM_CFG"
     cp "$N64_OPT" "$ROM_OPT"
     echo "Copied $N64_CFG to $ROM_CFG"
     echo "Copied $N64_OPT to $ROM_OPT"
