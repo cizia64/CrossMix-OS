@@ -15,16 +15,12 @@
   "extlist": "zip|7z|neo",
   "launchlist": [
     {
-      "name": "FB ALPHA 2012",
+      "name": "FB NEO",
       "launch": "launch.sh"
     },
     {
-      "name": "FB NEO",
-      "launch": "launch_fbneo.sh"
-    },
-    {
-      "name": "GEOLITH (.neo)",
-      "launch": "launch_geolith.sh"
+      "name": "FB ALPHA 2012",
+      "launch": "launch.sh"
     }
   ]
 }
