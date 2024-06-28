@@ -1,5 +1,5 @@
 reicast_allow_service_buttons = "disabled"
-reicast_alpha_sorting = "per-triangle (normal)"
+reicast_alpha_sorting = "per-strip (fast, least accurate)"
 reicast_analog_stick_deadzone = "15%"
 reicast_anisotropic_filtering = "4"
 reicast_boot_to_bios = "disabled"
