@@ -14,10 +14,24 @@ if ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8_64 ] || ! [ -f /mnt/SDCA
 		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
 		-s 25 \
 		-c "220,220,220" \
-		-t "To use the official PICO-8, you need to add your purchased binaries (pico8_64 and pico8.dat)." &
+		-t "To use PICO-8 Wrapper, you need purchased PICO-8 binaries (add pico8_64 and pico8.dat)." &
 	sleep 5
 	pkill -f sdl2imgshow
+	exit
+else
+	if [ -f "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" ]; then
+		mv "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" "/mnt/SDCARD/Roms/PICO/° Run Splore.p8"
+		rm "/mnt/SDCARD/Roms/PICO/PICO_cache7.db"
 
+		/mnt/SDCARD/System/bin/sdl2imgshow \
+			-i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
+			-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+			-s 30 \
+			-c "220,220,220" \
+			-t "To exit PICO-8 Wrapper, press Menu + Power buttons during 3 seconds." &
+		button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" B A)
+		pkill -f sdl2imgshow
+	fi
 fi
 
 main() {
@@ -26,7 +40,6 @@ main() {
 	mount --bind /mnt/SDCARD/Roms/PICO8 /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
 	pico8_64 -splore -preblit_scale 3
 	umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts
-	echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 }
 
 main "$1"
