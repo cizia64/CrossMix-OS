@@ -24,11 +24,11 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
 
-	# add pl language
+	# add Pl language + Fr and En mods
 	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
-		cp "/mnt/SDCARD/trimui/res/lang/pl.lang" "/usr/trimui/res/lang/"
-		cp "/mnt/SDCARD/trimui/res/lang/pl.lang.short" "/usr/trimui/res/lang/"
-		cp "/mnt/SDCARD/trimui/res/lang/lang_pl.png" "/usr/trimui/res/skin/"
+		cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
+		cp "/mnt/SDCARD/trimui/res/lang/"*.short "/usr/trimui/res/lang/"
+		cp "/mnt/SDCARD/trimui/res/lang/"*.png "/usr/trimui/res/skin/"
 	fi
 
 	# custom shutdown script from "Resume at Boot"
@@ -45,7 +45,7 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# Apply default CrossMix theme, sound volume, and grid view
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
-	
+
 	# for a more clean log output (/tmp/.lastlog)
 	cd /usr/trimui/res/licenses/
 	mkdir -p mame fceux bsnes gamebatte picodrive gPsp sms temper pcsx_rearmed

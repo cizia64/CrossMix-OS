@@ -1,0 +1,23 @@
+{
+	"46":	"OK",
+	"88":	"OUVRIR",
+	"89":	"RETOUR",
+	"90":	"NAV",
+	"91":	"MENU",
+	"92":	"Continuer",
+	"93":	"Enregistrer",
+	"94":	"Lire",
+	"95":	"Volume",
+	"96":	"Quitter le jeu",
+	"97":	"Enregistrement %d/%d",
+	"98":	"Vide",
+	"99":	"Pas d’image",
+	"100":	"Échec de chargement",
+	"101":	"Échec de sauvegarde",
+	"102":	"Emplacement %d enregistré",
+	"103":  "Plein écran",
+	"104":  "Activé",
+	"105":  "Désactivé",
+	"118":  "Jeu en réseau",
+	"126":  "Menu avancé"
+}

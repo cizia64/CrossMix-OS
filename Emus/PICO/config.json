@@ -8,15 +8,15 @@
   "imgpath": "../../Imgs/PICO",
   "useswap": 1,
   "shortname": 0,
-  "extlist": "p8|png",
+  "extlist": "p8|png|launch",
   "hidebios": 1,
   "launchlist": [
     {
-      "name": "FAKE-08                     ",
+      "name": "FAKE-08                           ",
       "launch": "fake08.sh"
     },
     {
-      "name": "Pico8 Wrapper           ",
+      "name": "Pico8 Wrapper                ",
       "launch": "Pico8 Wrapper.sh"
     },
     {
@@ -24,7 +24,7 @@
       "launch": "Pico8 Wrapper - Splore.sh"
     },
     {
-      "name": "RETRO8                      ",
+      "name": "RETRO8                             ",
       "launch": "retro8.sh"
     }
   ]
