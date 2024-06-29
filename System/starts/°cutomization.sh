@@ -47,9 +47,10 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
 	# for a more clean log output (/tmp/.lastlog)
+	mkdir -p "/usr/trimui/res/licenses/"
 	cd /usr/trimui/res/licenses/
-	mkdir -p mame fceux bsnes gamebatte picodrive gPsp sms temper pcsx_rearmed
-	touch mame/COPYING mame/COPYING fceux/COPYING bsnes/LICENSE gamebatte/COPYING picodrive/COPYING gPsp/COPYING.DOC sms/license temper/COPYING pcsx_rearmed/COPYING
+	mkdir -p mame fceux bsnes gambatte picodrive gPsp sms temper pcsx_rearmed
+	touch mame/COPYING mame/COPYING fceux/COPYING bsnes/LICENSE gambatte/COPYING picodrive/COPYING gPsp/COPYING.DOC sms/license temper/COPYING pcsx_rearmed/COPYING
 
 	# we set the customization flag
 	touch "/usr/trimui/fw_mod_done"
