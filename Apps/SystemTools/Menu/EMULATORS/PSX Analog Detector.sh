@@ -6,7 +6,7 @@ echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH"
-RA_DIR=/mnt/SDCARD/RetroArch
+RA_DIR="/mnt/SDCARD/RetroArch"
 DB_NAME="/mnt/SDCARD/System/usr/trimui/scripts/Sony - PlayStation - analog/Sony - PlayStation - analog.db"
 analog_count="/tmp/analog_count"
 echo 0 >"$analog_count"
@@ -24,28 +24,39 @@ mkdir -p "$RA_DIR/.retroarch/config/remaps/SwanStation"
   -c "220,220,220" \
   -t "Detecting Dual Shock compatible games..." &
 
+# Function to apply Dual Shock remaps
+apply_dual_shock_remap() {
+  local filename="$1"
+  
+  for system in "PCSX-ReARMed" "DuckStation" "SwanStation"; do
+    local device_code="517"  # Default device code
+    
+    if [ "$system" = "DuckStation" ]; then
+      device_code="5"
+    fi
+    
+    local filepath="$RA_DIR/.retroarch/config/remaps/$system/$filename"
+    
+    echo "Applying Dual Shock to $filename for $system"
+    
+    # Apply remap
+    if [ -e "$filepath" ]; then
+      echo "input_libretro_device_p1 = \"$device_code\"" > "/tmp/$filename"
+      /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "/tmp/$filename" "$filepath"
+      rm "/tmp/$filename"
+    else
+      echo "input_libretro_device_p1 = \"$device_code\"" > "$filepath"
+    fi
+  done
+}
+
 # Step 1: Scan with RetroArch
 echo "=================================================================="
 echo "            Step 1: Scanning with RetroArch"
 echo "=================================================================="
-cd $RA_DIR
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui --appendconfig "/mnt/SDCARD/System/usr/trimui/scripts/Sony - PlayStation - analog/Sony - PlayStation - analog.cfg" --scan=/mnt/SDCARD/Roms/PS
+cd "$RA_DIR"
+HOME="$RA_DIR/" "$RA_DIR/ra64.trimui" --appendconfig "/mnt/SDCARD/System/usr/trimui/scripts/Sony - PlayStation - analog/Sony - PlayStation - analog.cfg" --scan="/mnt/SDCARD/Roms/PS"
 echo "---------------------------------"
-# Function to apply Dual Shock remaps
-apply_dual_shock_remap() {
-  local filepath="$1"
-  local device_code="$2"
-  local filename="$3"
-  echo "Applying Dual Shock to $filename for $(basename "$filepath")"
-  if [ -e "$filepath" ]; then
-    configPatchFile="/tmp/$filename"
-    echo "input_libretro_device_p1 = \"$device_code\"" >"$configPatchFile"
-    /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$configPatchFile" "$filepath"
-    rm "$configPatchFile"
-  else
-    echo "input_libretro_device_p1 = \"$device_code\"" >"$filepath"
-  fi
-}
 
 # Traverse the "Sony - PlayStation - analog.lpl" playlist file with jq
 /mnt/SDCARD/System/bin/jq -r '.items[] | .crc32, .label, .path' "$RA_DIR/.retroarch/playlists/Sony - PlayStation - analog.lpl" |
@@ -55,16 +66,17 @@ apply_dual_shock_remap() {
 
     echo "Processing: $path"
 
-    # Check if the game is already detected as Dual Shock compatible
+    # Increment game count
     count=$(cat "$analog_count")
     count=$((count + 1))
     echo "$count" >"$analog_count"
+
     filename=$(basename "$path")
     filename="${filename%.*}.rmp"
 
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$filename" "517" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/DuckStation/$filename" "5" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/SwanStation/$filename" "517" "$filename"
+    # Apply Dual Shock remaps
+    apply_dual_shock_remap "$filename"
+
     echo "---------------------------------"
   done
 
@@ -97,9 +109,7 @@ find "/mnt/SDCARD/Roms/PS" -type f \( -iname "*.vcd" -o -iname "*.pbp" -o -iname
     echo "$count" >"$analog_count"
     filename=$(basename "$romfile")
     filename="${filename%.*}.rmp"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$filename" "517" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/DuckStation/$filename" "5" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/SwanStation/$filename" "517" "$filename"
+    apply_dual_shock_remap "$filename"
   else
     echo "No match found"
   fi
@@ -139,9 +149,7 @@ find "/mnt/SDCARD/Roms/PS" -type f \( -iname "*.m3u" -o -iname "*.cue" -o -iname
     echo "$count" >"$analog_count"
     filename=$(basename "$romfile")
     filename="${filename%.*}.rmp"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$filename" "517" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/DuckStation/$filename" "5" "$filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/SwanStation/$filename" "517" "$filename"
+    apply_dual_shock_remap "$filename"
   else
     echo "No match found"
   fi
@@ -153,7 +161,6 @@ done
 echo "=================================================================="
 echo "               Step 4: M3U file detection"
 echo "=================================================================="
-
 find "/mnt/SDCARD/Roms/PS" -type f -iname "*.m3u" | while read m3ufile; do
   echo "Processing M3U: $m3ufile"
   remap_applied=false
@@ -163,9 +170,7 @@ find "/mnt/SDCARD/Roms/PS" -type f -iname "*.m3u" | while read m3ufile; do
     filename=$(basename "$romfile_path")
     filename="${filename%.*}.rmp"
     # Check if a Dual Shock remap exists for this file
-    if [ -e "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$filename" ] ||
-       [ -e "$RA_DIR/.retroarch/config/remaps/DuckStation/$filename" ] ||
-       [ -e "$RA_DIR/.retroarch/config/remaps/SwanStation/$filename" ]; then
+    if (grep -q "input_libretro_device_p1" "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$filename" 2>/dev/null); then
       remap_applied=true
       break
     fi
@@ -174,9 +179,7 @@ find "/mnt/SDCARD/Roms/PS" -type f -iname "*.m3u" | while read m3ufile; do
   if [ "$remap_applied" = true ]; then
     m3u_filename=$(basename "$m3ufile")
     m3u_filename="${m3u_filename%.*}.rmp"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/PCSX-ReARMed/$m3u_filename" "517" "$m3u_filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/DuckStation/$m3u_filename" "5" "$m3u_filename"
-    apply_dual_shock_remap "$RA_DIR/.retroarch/config/remaps/SwanStation/$m3u_filename" "517" "$m3u_filename"
+    apply_dual_shock_remap "$m3u_filename"
   fi
   
   echo "---------------------------------"
