@@ -5,11 +5,24 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/PS
 cd $RA_DIR/
 
+if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.bin" -o -iname "ps*.bin" | grep -q .; then
+    /mnt/SDCARD/System/bin/sdl2imgshow \
+        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
+        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+        -s 40 \
+        -c "220,220,220" \
+        -t "No bios found, duckstation will probably not work." &
+
+    /mnt/SDCARD/System/usr/trimui/scripts/getkey.sh
+
+    pkill -f sdl2imgshow
+
+fi
+
 $EMU_DIR/performance.sh
 
 #disable netplay
 NET_PARAM=
-
 
 # Variable for the path to the SwanStation directory
 SWANSTATION_DIR="/mnt/SDCARD/RetroArch/.retroarch/config/SwanStation"
@@ -37,25 +50,20 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     cp "$PS_OPT" "$ROM_OPT"
     echo "Copied $PS_CFG to $ROM_CFG"
     echo "Copied $PS_OPT to $ROM_OPT"
-    
+
     # Apply the configuration patches
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$SWANSTATION_DIR/widescreen.cfg" "$ROM_CFG"
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$SWANSTATION_DIR/widescreen.opt" "$ROM_OPT"
     echo "Patch applied to $ROM_CFG"
     echo "Patch applied to $ROM_OPT"
-	HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@" 
-	
-	# cleaning
-	rm "$ROM_CFG"
-	rm "$ROM_OPT"
+    HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@"
+
+    # cleaning
+    rm "$ROM_CFG"
+    rm "$ROM_OPT"
 else
     message="The following files already exist:"
     [ -f "$ROM_CFG" ] && message="$message $ROM_CFG"
     [ -f "$ROM_OPT" ] && message="$message $ROM_OPT"
     echo "$message"
 fi
-
-
-
-
-
