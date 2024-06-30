@@ -1,7 +1,7 @@
 {
     "name":"CrossMix - OS",
-    "font":"Acre.ttf",
-    "fontascii":"Acre.ttf",
+    "font":"wqy-microhei.ttf",
+    "fontascii":"wqy-microhei.ttf",
     "fontsize":{
         "nav_font1":24,
         "nav_font2":24,
