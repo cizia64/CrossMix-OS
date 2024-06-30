@@ -5,7 +5,7 @@ source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/MD
 
-/mnt/SDCARD/System/bin/batocera-settings-set -f "/mnt/SDCARD/RetroArch/.retroarch/config/Genesis Plus GX Wide/MD.cfg" input_overlay_enable \""false\""
+/mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "/mnt/SDCARD/RetroArch/.retroarch/config/Genesis Plus GX Wide/MD.cfg"  "input_overlay_enable" "false"
 
 cd $RA_DIR/
 
