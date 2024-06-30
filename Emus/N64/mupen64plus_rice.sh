@@ -19,6 +19,6 @@ export LD_LIBRARY_PATH=$PWD/libs:$EMU_DIR/libs:$LD_LIBRARY_PATH
 echo $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" 
 $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" &
 
-./mupen64plus "$*" 2>&1 > /mnt/SDCARD/mupen-log.txt
+./mupen64plus "$*" 2>&1
 
 $ESUDO kill -9 $(pidof gptokeyb)
