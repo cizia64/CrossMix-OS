@@ -41,7 +41,7 @@ Current_Theme=$(/usr/trimui/bin/systemval theme)
 Shutdown_Screen="$Current_Theme/skin/shutdown.png"
 if [ ! -f "$Shutdown_Screen" ]; then
    Shutdown_Screen="/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png"
-   Shutdown_Text="Shuting down..."
+   Shutdown_Text="Shutting down..."
 else
    Shutdown_Text=" "
 fi
