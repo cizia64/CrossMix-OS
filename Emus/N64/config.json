@@ -11,7 +11,7 @@
   "useswap": 1,
   "shortname": 0,
   "hidebios": 1,
-  "extlist": "zip|n64|z64",
+  "extlist": "zip|7z|n64|z64|v64",
   "launchlist": [
     {
       "name": "ParaLLEl N64 Libretro",
