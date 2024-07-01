@@ -10,5 +10,6 @@
   "imgpath": "../../Imgs/N64DD",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "extlist": "ndd|n64|v64|z64|zip|7z"
 }
