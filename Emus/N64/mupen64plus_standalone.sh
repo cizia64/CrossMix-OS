@@ -20,10 +20,10 @@ case "$*" in
     *.n64|*.v64|*.z64) 
         ROM_PATH="$*" 
         ;;
-    *.zip)
+    *.zip|*.7z)
         TEMP_ROM=$(mktemp)
         ROM_PATH="$TEMP_ROM"
-        unzip -p "$*" > /dev/null | tee "$ROM_PATH"
+        /mnt/SDCARD/System/bin/7zz e "$*" -so > "$TEMP_ROM"
         ;;
 esac
 
