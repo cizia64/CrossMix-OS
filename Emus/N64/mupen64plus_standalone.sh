@@ -16,9 +16,22 @@ cd $EMU_DIR/
 PATH=$PWD:$EMU_DIR:$PATH
 export LD_LIBRARY_PATH=$PWD/libs:$EMU_DIR/libs:$LD_LIBRARY_PATH
 
+case "$*" in
+    *.n64|*.v64|*.z64) 
+        ROM_PATH="$*" 
+        ;;
+    *.zip)
+        TEMP_ROM=$(mktemp)
+        ROM_PATH="$TEMP_ROM"
+        unzip -p "$*" > /dev/null | tee "$ROM_PATH"
+        ;;
+esac
+
 echo $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" 
 $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" &
 
-./mupen64plus "$*" 2>&1
+./mupen64plus "$ROM_PATH" 2>&1
+
+rm -f "$TEMP_ROM"
 
 $ESUDO kill -9 $(pidof gptokeyb)
