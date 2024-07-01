@@ -17,7 +17,7 @@ PATH=$PWD:$EMU_DIR:$PATH
 export LD_LIBRARY_PATH=$PWD/libs:$EMU_DIR/libs:$LD_LIBRARY_PATH
 
 case "$*" in
-    *.n64|*.v64|*.z64|*.ndd) 
+    *.n64|*.v64|*.z64) 
         ROM_PATH="$*" 
         ;;
     *.zip|*.7z)

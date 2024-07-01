@@ -1,0 +1,57 @@
+Mupen64Plus-UI-Console RELEASE
+------------------------------
+
+Mupen64Plus-UI-Console Front-End v2.5.9 - February 10, 2019
+-----------------------------------------------------------
+ - *** BETA RELEASE *** For Testing Only ***
+
+Mupen64Plus-UI-Console Front-End v2.5 - April 26, 2015
+------------------------------------------------------
+ - Update man page document
+ - Add application desktop file and icons
+ - Add support for loading savestate immediately on emulator startup
+ - Compile-time flag to support building ui-console as a library (used by Android frontend)
+
+Mupen64Plus-UI-Console Front-End v2.0 - July 4, 2013
+----------------------------------------------------
+ - Project files for Visual Studio 2012
+ - Makefile changes
+   - add support for PowerPC and MinGW32 builds
+   - add cross-compiling support to build Win32 executables (MXE) under Linux
+
+Mupen64Plus-UI-Console Front-End v1.99.5 - March 10, 2012
+---------------------------------------------------------
+ - New option to disable internal core speed limiter (for benchmarking)
+ - Updated Console-UI front-end for new Mupen64plus 2.0 API versioning
+ - Added config version number for UI-Console section
+ - makefile fixes and improvements
+
+Mupen64Plus-UI-Console Front-End v1.99.4 - November 22, 2010
+------------------------------------------------------------
+ - add some parameter checking for --emumode option
+ - new cheat file format from spinout182
+ - makefile fixes and improvements
+
+Mupen64Plus-UI-Console Front-End v1.99.3 - February 13, 2010
+------------------------------------------------------------
+ - New feature: command-line option --set for setting arbitrary configuration variables
+ - updated MAN pgae for all the changes made in the 2.0 re-architecture
+ - Makefile improvements:
+   - added OS type GNU/kFreeBSD
+   - add -lpthread to LIBS so that GDB will run the emulator without throwing a warning right after starting
+
+Mupen64Plus-UI-Console Front-End v1.99.2 - January 6, 2010
+------------------------------------------------------------
+ - new feature: added MSVC8 project/solution files, minor refactoring for VC compatibility
+ - Makefile improvements:
+   - throw error if OS/CPU not supported
+   - use DESTDIR in install/uninstall paths
+   - Allow user-specified CC/CXX/LD paths
+
+Mupen64Plus-UI-Console Front-End v1.99.1 - December 14, 2009
+------------------------------------------------------------
+ - Brand new Console-based front-end for Mupen64Plus 2.0
+ - New feature: R4300 Core Comparison for debugging
+ - New feature: Cheat code support from command-line
+
+
