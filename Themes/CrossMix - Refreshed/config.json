@@ -1,0 +1,38 @@
+{
+    "name":"CrossMix - Refreshed by Skylance",
+    "font":"LTWaveAlt-Regular.otf",
+    "fontascii":"LTWaveAlt-Regular.otf",
+    "fontsize":{
+        "nav_font1":32,
+        "nav_font2":24,
+        "content_font1":28,
+        "content_font2":24,
+        "content_font3":48,
+        "content_font4":72,
+        "content_font5":28,
+        "content_font6":28,
+        "stat_font1":24,
+        "menu_font1":36,
+        "popup_font1":44,
+        "popup_font2":36,
+        "popup_font3":36
+    },
+    "fontcolor":{
+        "nav_color1":"#FFFFFFFF",
+        "nav_color2":"#FFFFFFFF",
+        "nav_color3":"#FFFFFFFF",
+        "content_color1":"#FFFFFFFF",
+        "content_color2":"#03FFFFFF",
+        "content_color3":"#03FFFFFF",
+        "content_color4":"#FFFFFFFF",
+        "stat_color1":"#FFFFFFFF",
+        "stat_color2":"#FFFFFFFF",
+        "menu_color1":"#FFFFFFFF",
+        "menu_color2":"#FFFFFFFF",
+        "popup_color1":"#FFFFFFFF",
+        "popup_color2":"#FFFFFFFF",
+        "popup_color3":"#FFFFFFFF",
+        "highlight_color1":"#FFFFFFFF",
+        "shadow_color1":"#FF000000"
+    }
+} 
