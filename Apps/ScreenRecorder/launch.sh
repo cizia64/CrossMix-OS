@@ -23,29 +23,13 @@ export PATH="$sysdir/bin:$PATH"
 mkdir output
 
 if pgrep "ffmpeg" >/dev/null; then
+
   killall -2 ffmpeg
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Record stopped."  -k " " 
   
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 30 \
-    -c "220,220,220" \
-    -t "Record stopped." &
-	
-  /mnt/SDCARD/System/usr/trimui/scripts/getkey.sh
-  pkill -f sdl2imgshow
 else
 
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 30 \
-    -c "220,220,220" \
-    -t "Press any key to start recording now. Launch the app again to stop the recording." &
-	
-  /mnt/SDCARD/System/usr/trimui/scripts/getkey.sh
-  pkill -f sdl2imgshow
-
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Press any key to start recording now. Launch the app again to stop the recording." -k " " -fs 29
   launch_record &
 
 fi

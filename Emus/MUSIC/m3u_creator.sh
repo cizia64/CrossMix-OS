@@ -15,16 +15,7 @@ root_directory=$(realpath "/mnt/SDCARD/Roms/MUSIC")
 
 if [ "$mp3_directory" = "$root_directory" ]; then
   echo "The given directory is the root directory. No playlist will be created."
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 25 \
-    -c "220,220,220" \
-    -t "The given directory is the MUSIC root directory. No playlist will be created." &
-  sleep 0.3
-  pkill -f sdl2imgshow
-  sleep 1
-  sleep 2
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "The given directory is the MUSIC root directory. No playlist will be created." -fs 25 -t 3
   exit 0
 fi
 
@@ -34,14 +25,7 @@ PARENT_DIR=$(dirname "$mp3_directory")
 TARGET_PLAYLIST_FILE="$PARENT_DIR/$(basename "$mp3_directory").m3u"
 PLAYLIST_FILE="$mp3_directory/$(basename "$mp3_directory").m3u"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 25 \
-  -c "220,220,220" \
-  -t "Building playlist for $MUSIC_DIR folder." &
-sleep 0.3
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Building playlist for $MUSIC_DIR folder." -fs 25
 
 # Create the .m3u file
 echo "#EXTM3U" >"$PLAYLIST_FILE"

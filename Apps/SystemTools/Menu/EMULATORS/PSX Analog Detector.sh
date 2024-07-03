@@ -17,12 +17,7 @@ mkdir -p "$RA_DIR/.retroarch/config/remaps/DuckStation"
 mkdir -p "$RA_DIR/.retroarch/config/remaps/SwanStation"
 
 # Display an information image
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "Detecting Dual Shock compatible games..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Detecting Dual Shock compatible games..." -t 0.5
 
 # Function to apply Dual Shock remaps
 apply_dual_shock_remap() {
@@ -188,15 +183,6 @@ done
 echo "Number of successful path finds: $(cat "$analog_count")"
 
 # Display the number of compatible games detected
-pkill -f sdl2imgshow
-sleep 0.3
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "$(cat "$analog_count") analog compatible game(s) detected." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(cat "$analog_count") analog compatible game(s) detected." -t 4
 
-sleep 4
-pkill -f sdl2imgshow
 rm "$analog_count"

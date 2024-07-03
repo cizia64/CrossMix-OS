@@ -9,28 +9,13 @@ export LD_LIBRARY_PATH="$picodir/lib:/usr/lib:$LD_LIBRARY_PATH"
 if ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8_64 ] || ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8.dat ]; then
 	LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-		-s 25 \
-		-c "220,220,220" \
-		-t "To use PICO-8 Wrapper, you need purchased PICO-8 binaries (add pico8_64 and pico8.dat)." &
-	sleep 5
-	pkill -f sdl2imgshow
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "To use PICO-8 Wrapper, you need purchased PICO-8 binaries (add pico8_64 and pico8.dat)." -fs 25 -t 5
 	exit
 else
 	if [ -f "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" ]; then
 		mv "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" "/mnt/SDCARD/Roms/PICO/° Run Splore.p8"
 		rm "/mnt/SDCARD/Roms/PICO/PICO_cache7.db"
-
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
-			-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-			-s 30 \
-			-c "220,220,220" \
-			-t "To exit PICO-8 Wrapper, press Menu + Power buttons during 3 seconds." &
-		button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" B A)
-		pkill -f sdl2imgshow
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "To exit PICO-8 Wrapper, press Menu + Power buttons during 3 seconds." -k "B A"
 	fi
 fi
 

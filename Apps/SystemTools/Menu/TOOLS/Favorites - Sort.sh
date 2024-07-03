@@ -1,13 +1,6 @@
 #!/bin/sh
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 40 \
-    -c "220,220,220" \
-    -t "Sorting favorites..." &
-sleep 0.3
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Sorting favorites..."
 set -eu
 
 SORT=/usr/bin/sort

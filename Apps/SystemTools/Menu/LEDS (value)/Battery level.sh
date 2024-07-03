@@ -2,12 +2,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "Applying \"$(basename "$0" .sh)\" mode..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" mode..."
 
 output_file="/mnt/SDCARD/System/etc/led_config.sh"
 ScriptName=$(basename "$output_file")
@@ -69,4 +64,3 @@ jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("LEDS ")) t
 
 sync
 sleep 0.1
-pkill -f sdl2imgshow

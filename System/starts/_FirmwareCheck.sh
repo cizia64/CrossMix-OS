@@ -52,34 +52,14 @@ if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 	sync
 
 	Echo "Current firmware ($Current_FW_Version - $Current_FW_Revision) must be updated to $Required_FW_Version - $Required_FW_Revision to support CrossMix OS v$version."
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "/mnt/SDCARD/trimui/firmwares/FW_Informations.png" \
-		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-		-s 28 \
-		-c "220,220,220" \
-		-t "Current FW version: $Current_FW_Version - $Current_FW_Revision                Required FW version: $Required_FW_Version - $Required_FW_Revision" &
-	sleep 2 # init input_d
+	  
+	button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/trimui/firmwares/FW_Informations.png" -m "Current FW version: $Current_FW_Version - $Current_FW_Revision                Required FW version: $Required_FW_Version - $Required_FW_Revision" -fs 28 -k "A")
 
-	button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A)
-	pkill -f sdl2imgshow
-
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "/mnt/SDCARD/trimui/firmwares/FW_Update_Instructions.png" \
-		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-		-s 30 \
-		-c "220,220,220" \
-		-t " " &
-
-	button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A B)
-	pkill -f sdl2imgshow
+	button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/trimui/firmwares/FW_Update_Instructions.png" -k "A B")
 
 	if [ "$button" = "A" ]; then
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "/mnt/SDCARD/trimui/firmwares/FW_Copy.png" \
-			-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-			-s 30 \
-			-c "220,220,220" \
-			-t "Please wait, copying Firmware v$Required_FW_Version - $Required_FW_Revision..." &
+	
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/trimui/firmwares/FW_Copy.png" -m "Please wait, copying Firmware v$Required_FW_Version - $Required_FW_Revision..."
 
 		FIRMWARE_PATH="/mnt/SDCARD/trimui/firmwares/trimui_tg5040_20240413_v1.0.4_hotfix6.7z"
 		FIRMWARE_FILE="trimui_tg5040.awimg"
@@ -99,21 +79,11 @@ if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 			echo "FW CRC check passed: $EXTRACTED_CRC"
 		else
 			echo "CRC check failed: Archive CRC = $ARCHIVE_CRC, Extracted CRC = $EXTRACTED_CRC"
-			pkill -f sdl2imgshow
-			/mnt/SDCARD/System/bin/sdl2imgshow \
-				-i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
-				-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-				-s 30 \
-				-c "220,220,220" \
-				-t "Firmware CRC check has failed, canceling update." &
-
-			button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A)
-			pkill -f sdl2imgshow
+			/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Firmware CRC check has failed, canceling update." -k A
 			exit
 
 		fi
 
-		pkill -f sdl2imgshow
 		sleep 1
 		sync
 		poweroff
@@ -121,7 +91,7 @@ if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 		exit
 	fi
 	rm -f "/mnt/SDCARD/trimui_tg5040.awimg"
-	pkill -f sdl2imgshow
+	
 else
 	echo "Firmware version $Current_FW_Revision OK."
 	rm -f "/mnt/SDCARD/trimui_tg5040.awimg"

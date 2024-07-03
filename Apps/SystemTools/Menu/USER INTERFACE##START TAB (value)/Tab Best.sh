@@ -4,12 +4,7 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 rm /mnt/SDCARD/System/starts/start_tab.sh
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "$(basename "$0" .sh) by default." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(basename "$0" .sh) by default."
 
 # Menu modification to reflect the change immediately
 
@@ -35,5 +30,4 @@ fi
 
 sync
 sleep 0.1
-pkill -f sdl2imgshow
 

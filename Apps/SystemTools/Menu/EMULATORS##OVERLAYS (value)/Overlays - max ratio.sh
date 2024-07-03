@@ -2,13 +2,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-
-/mnt/SDCARD/System/bin/sdl2imgshow \
-	-i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-	-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-	-s 50 \
-	-c "220,220,220" \
-	-t "Applying \"$(basename "$0" .sh)\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 
 # Directory containing .cfg files
 cfg_dir="/mnt/SDCARD/RetroArch/.retroarch/config/"
@@ -117,4 +111,3 @@ jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("OVERLAYS "
 
 sync
 sleep 0.1
-pkill -f sdl2imgshow

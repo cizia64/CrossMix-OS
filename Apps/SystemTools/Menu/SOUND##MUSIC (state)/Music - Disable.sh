@@ -2,12 +2,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 40 \
-    -c "220,220,220" \
-    -t "Applying \"$(basename "$0" .sh)\" on current theme." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" on current theme."
 
 CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
 cd "$CurrentTheme/sound/"
@@ -31,4 +26,3 @@ jq '.list |= map(if .ppath == "MUSIC (enabled)" then .ppath = "MUSIC (disabled)"
 sync
 
 sleep 0.1
-pkill -f sdl2imgshow

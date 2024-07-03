@@ -6,16 +6,7 @@ echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 30 \
-    -c "220,220,220" \
-    -t "Loading..." &
-sleep 0.3
-pkill -f sdl2imgshow
-
-
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Loading..."
 
 # For faster loading we check if we have to rebuild the database
 

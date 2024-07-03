@@ -20,12 +20,7 @@ NumRemoved=0
 NumAdded=0
 
 if [ "$silent" = false ]; then
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "./background.jpg" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 100 \
-    -c "220,0,0" \
-    -t " " &
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background.jpg 
 fi
 
 write_entry() {
@@ -97,17 +92,5 @@ echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
 echo -ne "=============================\n\n"
 
 if [ "$silent" = false ]; then
-
-  pkill -f sdl2imgshow
-  sleep 0.3
-
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "./background-info.jpg" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 40 \
-    -c "255,255,255" \
-    -t "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." &
-
-  sleep 2.5
-  pkill -f sdl2imgshow
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background-info.jpg -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2.5
 fi

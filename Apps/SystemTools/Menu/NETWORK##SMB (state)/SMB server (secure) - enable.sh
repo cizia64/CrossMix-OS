@@ -1,11 +1,6 @@
 #!/bin/sh
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 30 \
-  -c "220,220,220" \
-  -t "Applying \"$(basename "$0" .sh)\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 
@@ -43,17 +38,7 @@ json_file="/tmp/state.json"
 # we modify the current menu position as the DB entry has changed
 jq '.list |= map(if .ppath == "SMB (disabled)" then .ppath = "SMB (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
-pkill -f sdl2imgshow
 sleep 1
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')
 echo "SMB: \\\\$IP"
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "SMB: \\\\$IP" &
-
-sleep 4
-
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "SMB: \\\\$IP" -fs 50 -t 4

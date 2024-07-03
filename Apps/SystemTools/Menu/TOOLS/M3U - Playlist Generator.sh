@@ -171,14 +171,6 @@ sync
 
 if [ "$#" -eq 0 ]; then # when launched by GLO menu, without args.
 
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "$(cat "$count_m3u") playlist files created." &
-
-  sleep 3
-  pkill -f sdl2imgshow
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(cat "$count_m3u") playlist files created." -t 3
 
 fi

@@ -13,12 +13,7 @@ CONFIG_FILE="/mnt/SDCARD/System/etc/syncthing/config.xml"
 XMLSTARLET="/mnt/SDCARD/System/bin/xml"
 ### DO NOT CHANGE THESE, USE THE OPTIONS FILE!
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 30 \
-  -c "220,220,220" \
-  -t "Applying \"$(basename "$0" .sh)\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 
@@ -65,18 +60,8 @@ sync
 json_file="/tmp/state.json"
 jq '.list |= map(if .ppath == "Syncthing (disabled)" then .ppath = "Syncthing (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
-pkill -f sdl2imgshow
 sleep 1
 
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')
 echo "Syncthing: http://$IP:8384"
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "Syncthing: http://$IP:8384" &
-
-sleep 4
-
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Syncthing: http://$IP:8384" -t 4

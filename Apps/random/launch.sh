@@ -75,17 +75,8 @@ main() {
           imgtodisplay="$imgpath"
         fi
 
-        /mnt/SDCARD/System/bin/sdl2imgshow \
-          -i "$imgtodisplay" \
-          -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-          -s 30 \
-          -c "122,122,122" \
-          -t "$disp" &
-        # sleep 0.3
-
-        button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" A B X MENU)
-        pkill -f sdl2imgshow
-
+        button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$imgtodisplay" -c "122,122,122" -m "${disp}" -k "A B X MENU")
+   
         if [ "$button" = "A" ]; then
           echo "Okay, launching the game: $disp"
 
@@ -98,13 +89,7 @@ main() {
 
           exit 0
         elif [ "$button" = "B" ] || [ "$button" = "MENU" ]; then
-          /mnt/SDCARD/System/bin/sdl2imgshow \
-            -i "$imgtodisplay" \
-            -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-            -s 30 \
-            -c "122,122,122" \
-            -t "Exiting" &
-          pkill -f sdl2imgshow
+          /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -c "122,122,122" -m "Exiting"
           exit 0
         fi
 

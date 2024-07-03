@@ -5,12 +5,7 @@ export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 script_name=$(basename "$0" .sh)
 media_type=$(echo "$script_name" | awk '{print $1}')
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 30 \
-  -c "220,220,220" \
-  -t "Applying \"$(basename "$0")\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0")\" by default..."
 
 json_file="/mnt/SDCARD/System/etc/scraper.json"
 
@@ -31,5 +26,4 @@ json_file="/tmp/state.json"
 
 jq --arg media_type "$media_type" '.list |= map(if (.ppath | index("Media Type ")) then .ppath = "Media Type (\($media_type))" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
-pkill -f sdl2imgshow
 sync

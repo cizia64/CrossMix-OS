@@ -4,14 +4,7 @@ Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '
 Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
 
 if [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
-    /mnt/SDCARD/System/bin/sdl2imgshow \
-        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-        -s 30 \
-        -c "220,220,220" \
-        -t "Not compatible with firmware superior to v1.0.4 hotfix 6" &
-    sleep 3
-    pkill -f sdl2imgshow
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Not compatible with firmware superior to v1.0.4 hotfix 6." -t 3
     exit 1
 fi
 
@@ -29,14 +22,7 @@ dest_dir="/mnt/SDCARD/Apps/BootLogo/Thumbnails/"
 find "$dest_dir" -type f -not -name "- Default Trimui.png" -exec rm -f {} \;
 sync
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "Generating thumbnails..." &
-sleep 0.3
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Generating thumbnails..." -fs 50
 
 # Rename files to start with a capital letter
 find "$src_dir" -type f -iname "*.bmp" | while read -r bmp_file; do

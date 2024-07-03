@@ -11,12 +11,7 @@ for arg in "$@"; do
 done
 
 if [ "$silent" = false ]; then
-  /mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "$(basename "$0" .sh) by default." &
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(basename "$0" .sh) by default."
 fi
 
 cat >/mnt/SDCARD/System/starts/start_tab.sh <<-EOM
@@ -58,4 +53,3 @@ fi
 
 sync
 sleep 0.1
-pkill -f sdl2imgshow

@@ -5,12 +5,7 @@ export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 script_name=$(basename "$0" .sh)
 lang_code=$(echo "$script_name" | cut -d ' ' -f 1 | cut -d '-' -f 1)
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-  -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-  -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-  -s 50 \
-  -c "220,220,220" \
-  -t "Applying \"$(basename "$0")\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0")\" by default..."
 
 json_file="/mnt/SDCARD/System/etc/scraper.json"
 
@@ -31,5 +26,4 @@ json_file="/tmp/state.json"
 
 jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("Region ")) then .ppath = "Region (\($script_name))" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
-pkill -f sdl2imgshow
 sync

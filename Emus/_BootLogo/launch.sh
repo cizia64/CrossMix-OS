@@ -43,27 +43,11 @@ if [ -f "$SOURCE_FILE" ]; then
 	################# Check if the resolution is 1280x720 #################
 	if [ "$width" -gt 1280 ] || [ "$height" -gt 720 ]; then
 		echo "The image \"$filename\" is too large. Quitting without flash."
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "$SOURCE_FILE" \
-			-f "/usr/trimui/res/regular.ttf" \
-			-s 30 \
-			-c "220,0,0" \
-			-t "Image resolution is larger than expected, exiting. (${width}x${height} instead of 1280x720)" &
-		sleep 5
-		pkill -f sdl2imgshow
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is larger than expected, exiting. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
 		exit 1
 	elif [ "$width" -lt 1280 ] || [ "$height" -lt 720 ]; then
 		echo "The image \"$filename\" is too small. Not recommended but should be OK."
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "$SOURCE_FILE" \
-			-f "/usr/trimui/res/regular.ttf" \
-			-s 30 \
-			-c "220,0,0" \
-			-t "Image resolution is smaller than expected. (${width}x${height} instead of 1280x720)" &
-		pkill -f sdl2imgshow
-		sleep 1
-		sleep 4
-
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is smaller than expected. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
 	else
 		echo "The image \"$filename\" has a resolution of 1280x720. Let's continue !"
 	fi
@@ -75,14 +59,7 @@ if [ -f "$SOURCE_FILE" ]; then
 	else
 		echo "\"$filename\" is not a BMP image. Quitting without flash."
 		sync
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "$SOURCE_FILE" \
-			-f "/usr/trimui/res/regular.ttf" \
-			-s 30 \
-			-c "220,0,0" \
-			-t "Image is not a real .bmp file, check the format and convert it." &
-		sleep 5
-		pkill -f sdl2imgshow
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -c "220,0,0" -m "Image is not a real .bmp file, check the format and convert it." -t 5 -c "220,0,0"
 		exit 1
 	fi
 
@@ -95,15 +72,7 @@ if [ -f "$SOURCE_FILE" ]; then
 		echo "\"$filename\" has size less than 6MB. Let's continue !"
 	else
 		echo "\"$filename\" exceeds 6MB. Quitting without flash."
-		/mnt/SDCARD/System/bin/sdl2imgshow \
-			-i "$SOURCE_FILE" \
-			-f "/usr/trimui/res/regular.ttf" \
-			-s 30 \
-			-c "220,0,0" \
-			-t "Image file is too big (6MB maximum)" &
-		sleep 5
-		pkill -f sdl2imgshow
-		exit 1
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image file is too big (6MB maximum)" -t 6 -c "220,0,0"
 	fi
 
 	################# Flashing logo #################
@@ -112,30 +81,16 @@ if [ -f "$SOURCE_FILE" ]; then
 	mkdir -p $MOUNT_POINT
 	mount $TARGET_PARTITION $MOUNT_POINT
 
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "$SOURCE_FILE" \
-		-f "/usr/trimui/res/regular.ttf" \
-		-s 100 \
-		-c "220,0,0" \
-		-t "Flashing logo..." &
 
-	sleep 3
-
-	pkill -f sdl2imgshow
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flashing logo..." -fs 100 -t 2.5
 
 	cp "$SOURCE_FILE" "$MOUNT_POINT/bootlogo.bmp"
 	cp /mnt/SDCARD/Apps/BootLogo/GoBackTo_Apps.json /tmp/state.json
 	sync
 
 	################# End of flash #################
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "$SOURCE_FILE" \
-		-f "/usr/trimui/res/regular.ttf" \
-		-s 100 \
-		-c "0,220,0" \
-		-t "Flash done !" &
-	sleep 0.5
-	pkill -f sdl2imgshow
+	
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flash done !" -c "0,220,0" -t 0.5
 
 else
 	echo "Source file does not exist."

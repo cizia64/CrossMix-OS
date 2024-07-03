@@ -2,12 +2,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "Applying \"$(basename "$0" .sh)\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 
@@ -29,4 +24,3 @@ jq '.list |= map(if .ppath == "RESUME AT BOOT (enabled)" then .ppath = "RESUME A
 sync
 
 sleep 0.1
-pkill -f sdl2imgshow

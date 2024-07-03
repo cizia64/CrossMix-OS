@@ -9,27 +9,11 @@ mp3_directory=$(realpath "$mp3_directory")
 
 if [ "$mp3_directory" = "/mnt/SDCARD/Roms/MUSIC" ]; then
     echo "The given directory is the root directory. Please create a subfolder."
-    /mnt/SDCARD/System/bin/sdl2imgshow \
-        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-        -s 25 \
-        -c "220,220,220" \
-        -t "The given directory is the MUSIC root directory. Please create a dedicated subfolder." &
-    sleep 0.3
-    pkill -f sdl2imgshow
-    sleep 1
-    sleep 2
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "The given directory is the MUSIC root directory. Please create a dedicated subfolder." -fs 25 -t 3
     exit 0
 fi
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 25 \
-    -c "220,220,220" \
-    -t "Cover extraction. Please wait..." &
-sleep 0.3
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Cover extraction. Please wait..." -fs 25
 
 # Directories
 # mp3_directory="/mnt/SDCARD/Roms/MUSIC" #debug

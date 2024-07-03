@@ -46,12 +46,7 @@ else
    Shutdown_Text=" "
 fi
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-   -i "$Shutdown_Screen" \
-   -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-   -s 100 \
-   -c "220,220,220" \
-   -t "$Shutdown_Text" &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Shutdown_Screen" -m "$Shutdown_Text" -fs 100
 
 echo 1 >/sys/class/led_anim/effect_enable
 echo "FF0000" >/sys/class/led_anim/effect_rgb_hex_lr
@@ -92,7 +87,6 @@ echo "Process $ppid has exited."
 
 aplay /mnt/SDCARD/trimui/res/sound/PowerOff.wav -d 1
 
-pkill -f sdl2imgshow
 sync
 poweroff &
 

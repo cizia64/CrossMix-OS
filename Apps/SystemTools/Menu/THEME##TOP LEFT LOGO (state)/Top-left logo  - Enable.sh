@@ -2,12 +2,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 50 \
-    -c "220,220,220" \
-    -t "Applying \"$(basename "$0" .sh)\" by default..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 
 CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
 cd "$CurrentTheme/skin/"
@@ -39,4 +34,3 @@ json_file="/tmp/state.json"
 jq '.list |= map(if .ppath == "TOP LEFT LOGO (disabled)" then .ppath = "TOP LEFT LOGO (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
 
 sleep 0.1
-pkill -f sdl2imgshow

@@ -21,15 +21,9 @@ if [ "$romName" = "° Import ScummVM Games.launch" ]; then
 	if [ ! -f "$Current_bg" ]; then
 		Current_bg="/mnt/SDCARD/trimui/res/skin/transparent.png"
 	fi
-	/mnt/SDCARD/System/bin/sdl2imgshow \
-		-i "$Current_bg" \
-		-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-		-s 30 \
-		-c "220,220,220" \
-		-t "Importing ScummVM games." &
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "Importing ScummVM games."
 	sh "$Rom"
 	sleep 0.3
-	pkill -f sdl2imgshow
 	exit
 fi
 

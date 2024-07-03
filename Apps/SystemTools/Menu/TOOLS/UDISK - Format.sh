@@ -2,36 +2,16 @@
 
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 25 \
-    -c "220,220,220" \
-    -t "UDISK formating: press A to continue, B to cancel." &
-sleep 1
-pkill -f sdl2imgshow
 
-button=$("/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" B A)
+button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "UDISK formating: press A to continue, B to cancel." -fs 25 -k "A B")
 
 if [ "$button" = "B" ]; then
     echo "UDISK formating canceled"
-    /mnt/SDCARD/System/bin/sdl2imgshow \
-        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-        -s 25 \
-        -c "220,220,220" \
-        -t "UDISK formating: canceled." &
-    sleep 0.5
-    pkill -f sdl2imgshow
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "UDISK formating: canceled." -t 0.5
     exit
 fi
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 25 \
-    -c "220,220,220" \
-    -t "UDISK formating..." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "UDISK formating..." -fs 25
 
 LOG_FILE="/mnt/SDCARD/Apps/SystemTools/Logs/UDISK - Format.log"
 UDISK_DEV="/dev/by-name/UDISK"
@@ -111,16 +91,8 @@ fi
 sync
 
 sleep 0.3
-pkill -f sdl2imgshow
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 25 \
-    -c "220,220,220" \
-    -t "Rebooting..." &
-sleep 2
-pkill -f sdl2imgshow
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Rebooting..." -t 2
 
 reboot &
 

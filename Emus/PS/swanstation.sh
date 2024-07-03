@@ -6,17 +6,7 @@ EMU_DIR=/mnt/SDCARD/Emus/PS
 cd $RA_DIR/
 
 if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.bin" -o -iname "ps*.bin" | grep -q .; then
-    /mnt/SDCARD/System/bin/sdl2imgshow \
-        -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-exit.png" \
-        -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-        -s 40 \
-        -c "220,220,220" \
-        -t "No bios found, duckstation will probably not work." &
-
-    /mnt/SDCARD/System/usr/trimui/scripts/getkey.sh
-
-    pkill -f sdl2imgshow
-
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "No bios found, SwanStation will probably not work." -k " "
 fi
 
 $EMU_DIR/performance.sh

@@ -49,14 +49,7 @@ cleanup() {
     rm "$temp_file"
     # Display a spash screen only if -s argument is not specified
     if [ "$silent" = false ]; then
-        /mnt/SDCARD/System/bin/sdl2imgshow \
-            -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-            -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-            -s 50 \
-            -c "220,220,220" \
-            -t "Alphabetical sorting complete." &
-        sleep 0.1
-        pkill -f sdl2imgshow
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Alphabetical sorting complete."
     fi
 }
 

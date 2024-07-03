@@ -10,12 +10,7 @@ fi
 ################ CrossMix-OS Version Splashscreen ################
 
 version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
-/mnt/SDCARD/System/bin/sdl2imgshow \
-	-i "$Current_bg" \
-	-f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-	-s 30 \
-	-c "220,220,220" \
-	-t "CrossMix OS v$version" &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "CrossMix OS v$version"
 
 ################ CrossMix-OS internal storage Customization ################
 
@@ -112,5 +107,3 @@ fi
 
 # Apply current led configuration
 /mnt/SDCARD/System/etc/led_config.sh &
-
-pkill -f sdl2imgshow

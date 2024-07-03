@@ -1,12 +1,7 @@
 #!/bin/sh
 echo $0 $*
 
-/mnt/SDCARD/System/bin/sdl2imgshow \
-    -i "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" \
-    -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-    -s 40 \
-    -c "220,220,220" \
-    -t "$(basename "$0" .sh)." &
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(basename "$0" .sh)." -fs 40
 
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
@@ -151,5 +146,4 @@ for db_dir in "$database_dir"/*; do
     fi
 done
 sleep 0.1
-pkill -f sdl2imgshow
 sync
