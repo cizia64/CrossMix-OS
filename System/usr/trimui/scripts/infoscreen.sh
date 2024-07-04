@@ -68,13 +68,13 @@ font_file="/mnt/SDCARD/System/resources/DejaVuSans.ttf"
 font_size=35
 color="220,220,220"
 
-# CrossMix_Theme=$(basename "$(/usr/trimui/bin/systemval theme)")
-CrossMix_Theme=$(/mnt/SDCARD/System/bin/jq -r '.["THEME PACK"]' "/mnt/SDCARD/System/etc/crossmix.json")
+# CrossMix_Style=$(basename "$(/usr/trimui/bin/systemval theme)")
+CrossMix_Style=$(/mnt/SDCARD/System/bin/jq -r '.["CROSSMIX STYLE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 
 # Determine font path : by default we take the one from the current theme
-Current_font=$(/mnt/SDCARD/System/bin/jq -r '.["font"]' "/mnt/SDCARD/Themes/$CrossMix_Theme/config.json")
-if [ -f "/mnt/SDCARD/Themes/$CrossMix_Theme/$Current_font" ]; then
-    font_file="/mnt/SDCARD/Themes/$CrossMix_Theme/$Current_font"
+Current_font=$(/mnt/SDCARD/System/bin/jq -r '.["font"]' "/mnt/SDCARD/Themes/$CrossMix_Style/config.json")
+if [ -f "/mnt/SDCARD/Themes/$CrossMix_Style/$Current_font" ]; then
+    font_file="/mnt/SDCARD/Themes/$CrossMix_Style/$Current_font"
 fi
 
 # Display usage if no parameters or -h is specified
@@ -130,7 +130,7 @@ determine_image_path() {
         base_path=$(dirname "$image_name")
 
         # Check if themed image exists
-        themed_image="$base_path/theme_$CrossMix_Theme/$(basename "$image_name")"
+        themed_image="$base_path/style_$CrossMix_Style/$(basename "$image_name")"
         if [ -f "$themed_image" ]; then
             echo "$themed_image"
             return
@@ -141,7 +141,7 @@ determine_image_path() {
     fi
 
     # Check if themed image exists
-    themed_image="$base_path/theme_$CrossMix_Theme/$image_name"
+    themed_image="$base_path/style_$CrossMix_Style/$image_name"
     if [ -f "$themed_image" ]; then
         echo "$themed_image"
         return

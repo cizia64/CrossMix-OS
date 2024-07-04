@@ -3,7 +3,7 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 
 # Update theme pack in CrossMix configuration
-jq --arg packname "$packname" '.["THEME PACK"] = $packname' /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
+jq --arg packname "$packname" --arg style "$style" '.["THEME PACK"] = $packname | .["CROSSMIX STYLE"] = $style' /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
 
 # Apply theme
 if [ -d "/mnt/SDCARD/Themes/${theme}" ]; then

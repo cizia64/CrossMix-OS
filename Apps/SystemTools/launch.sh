@@ -8,7 +8,7 @@ PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
 CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
-CrossMix_Theme=$(/mnt/SDCARD/System/bin/jq -r '.["CrossMix Theme"]' "/mnt/SDCARD/System/etc/crossmix.json")
+CrossMix_Style=$(/mnt/SDCARD/System/bin/jq -r '.["CROSSMIX STYLE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 mkdir -p /mnt/SDCARD/System/starts/
 mkdir -p /mnt/SDCARD/System/etc
 if [ ! -f "/mnt/SDCARD/System/etc/systemtools.json" ]; then
@@ -47,8 +47,8 @@ if [ -f "$database_file" ]; then
   exit
 fi
 
-if [ -d "/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Theme" ]; then
-	img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Theme"
+if [ -d "/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Style" ]; then
+	img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Style"
 else
 	img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs"
 fi
@@ -68,9 +68,9 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
 
   # Check if preview.png file exists
   
-  if [ -f "${subdir}preview_$CrossMix_Theme.png" ]; then
-    # Copy themed preview_$CrossMix_Theme.png with subfolder name
-    cp "${subdir}preview_$CrossMix_Theme.png" "${BG_imgs_directory}${subdir_name}.png"
+  if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
+    # Copy themed preview_$CrossMix_Style.png with subfolder name
+    cp "${subdir}preview_$CrossMix_Style.png" "${BG_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${BG_imgs_directory}${subdir_name}.png"
@@ -99,7 +99,7 @@ for subdir in /mnt/SDCARD/Icons/*/; do
   subdir_name=$(basename "$subdir")
   cp "${ICON_list_directory}Default.sh" "${ICON_list_directory}${subdir_name}.sh"
   # Check if preview.png file exists
-  if [ -f "${subdir}preview_$CrossMix_Theme.png" ]; then
+  if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then
@@ -129,7 +129,7 @@ for subdir in /mnt/SDCARD/Themes/*/; do
   subdir_name=$(basename "$subdir")
   cp "${THEME_list_directory}Default.sh" "${THEME_list_directory}${subdir_name}.sh"
   # Check if preview.png file exists
-  if [ -f "${subdir}preview_$CrossMix_Theme.png" ]; then
+  if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then

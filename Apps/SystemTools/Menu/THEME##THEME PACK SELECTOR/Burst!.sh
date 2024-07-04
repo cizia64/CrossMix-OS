@@ -1,15 +1,18 @@
 ###########################################   THEME PACK CONFIGURATION   ###########################################
 
-# packname: used for system icon, for apps assets such as infoscreen, system tools, user guide, Windows SD card icon
-# theme: used to apply theme but also for SDL2image font
+# packname: Just a name to identify the current Theme Pack
+# style: 2 styles available: "Default" and "CrossMix - Refreshed",
+#        used for apps assets such as infoscreen, system tools, user guide, firmware wizard or Windows SD card icon.
+# theme: Used to apply theme but also for infoscreen.sh font
 # bootlogo: Pick a bootlogo file from "Apps/BootLogo/Images/"
-# icon: name of the folder which contains the desired icon collection
-# background: name of the folder which contains the desired background collection
-# emulabels: choose if you want to display Emulators labels or not / option not available currently
+# icon: Name of the folder which contains the desired icon collection
+# background: Name of the folder which contains the desired background collection
+# emulabels: Choose if you want to display Emulators labels or not / option not available currently
 
-packname="CrossMix - Refreshed"
-theme="CrossMix - Refreshed"
-bootlogo="CrossMix - Refreshed.bmp"
+packname="Burst!"
+style="CrossMix - Refreshed"
+theme="Burst!"
+bootlogo="Burst!.bmp"
 icon="Burst!"
 background="Burst!"
 
