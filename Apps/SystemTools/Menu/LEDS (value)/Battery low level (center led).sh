@@ -9,38 +9,25 @@ ScriptName=$(basename "$output_file")
 
 LedLoop() {
     cat <<'EOF'
- sleep 2
-#!/bin/sh
-cpu_temp_file="/sys/class/thermal/thermal_zone0/temp"
-set_led_color() {
-    r=$1
-    g=$2
-    b=$3
-    valstr=`printf "%02X%02X%02X" $r $g $b`
-    echo "$valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr "\
-         "$valstr $valstr $valstr $valstr $valstr $valstr $valstr " > /sys/class/led_anim/frame_hex
-}
+battery_capacity_file="/sys/devices/platform/soc/7081400.s_twi/i2c-6/6-0034/axp2202-bat-power-supply.0/power_supply/axp2202-battery/capacity"
+
 while true; do
-    cpu_temp=$(cat $cpu_temp_file)
-    cpu_temp=$((cpu_temp / 1000)) 
-    if [ $cpu_temp -le 40 ]; then
-        set_led_color 0 255 0  # Green
-    elif [ $cpu_temp -le 45 ]; then
-        set_led_color 127 255 0  # Chartreuse Green
-    elif [ $cpu_temp -le 50 ]; then
-        set_led_color 255 255 0  # Yellow
-    elif [ $cpu_temp -le 55 ]; then
-        set_led_color 255 165 0  # Orange
-    elif [ $cpu_temp -le 60 ]; then
-        set_led_color 255 140 0  # Dark Orange
-    elif [ $cpu_temp -le 65 ]; then
-        set_led_color 255 69 0  # Red Orange
-    elif [ $cpu_temp -le 70 ]; then
-        set_led_color 255 20 0  # Vermilion
+    battery_level=$(cat $battery_capacity_file)
+
+    if [ "$battery_level" -lt 10 ]; then
+        echo 1 >/sys/class/led_anim/effect_enable
+        echo FF0000 >/sys/class/led_anim/effect_rgb_hex_m
+        echo 60 >/sys/class/led_anim/effect_cycles_m
+        echo 1000 >/sys/class/led_anim/effect_duration_m
+        echo 3 >/sys/class/led_anim/effect_m
     else
-        set_led_color 255 0 0  # Red
+        echo 1 >/sys/class/led_anim/effect_enable
+        echo 000000 >/sys/class/led_anim/effect_rgb_hex_m
+        echo 1000 >/sys/class/led_anim/effect_duration_m
+        echo 3 >/sys/class/led_anim/effect_m
     fi
-    sleep 5
+
+    sleep 60
 done
 
 

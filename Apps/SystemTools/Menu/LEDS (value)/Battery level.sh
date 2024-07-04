@@ -17,7 +17,7 @@ set_led_color() {
     b=$3
     valstr=`printf "%02X%02X%02X" $r $g $b`
     echo "$valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr $valstr "\
-         "$valstr $valstr $valstr $valstr $valstr $valstr $valstr" > /sys/class/led_anim/frame_hex
+         "$valstr $valstr $valstr $valstr $valstr $valstr $valstr " > /sys/class/led_anim/frame_hex
 }
 while true; do
     battery_level=$(cat $battery_capacity_file)
