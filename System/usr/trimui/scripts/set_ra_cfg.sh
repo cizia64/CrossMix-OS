@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 config_file="$1"
 shift 1
@@ -24,7 +24,7 @@ while [ "$#" -ge 2 ]; do
     # Check if the key already exists in the file
     if grep -q "^[[:space:]]*$key[[:space:]]*=" "$config_file"; then
         # If the key exists, adjust the format with a space before the equals sign and quotes around the value
-        sed -i 's/^[[:space:]]*'"$key"'[[:space:]]*=[[:space:]]*".*"/'"$key"' = "'"$formatted_value"'"/' "$config_file"
+        sed -i "s|^[[:space:]]*$key[[:space:]]*=.*|$key = \"$formatted_value\"|" "$config_file"
     else
         # If the key does not exist, add a new line with the correct format (space before the equals sign and quotes)
         echo "$key = \"$formatted_value\"" >> "$config_file"

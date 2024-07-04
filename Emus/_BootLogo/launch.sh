@@ -12,15 +12,19 @@ exec >>$LOG_FILE 2>&1
 echo "===================================="
 date +'%Y-%m-%d %H:%M:%S'
 echo "===================================="
-filename=$(basename "$*")
+silent=0
+input_file="$1"
+filename=$(basename "$input_file")
+extension="${filename##*.}"
 filename="${filename%.*}"
-SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/${filename}.bmp"
-TARGET_PARTITION="/dev/mmcblk0p1"
-MOUNT_POINT="/mnt/emmcblk0p1"
 
-
-cp "$SOURCE_FILE" "/tmp/bootlogo.bmp"
-sync
+# Manage 2 cases : bmp directly in parameter to this script or from the BootLogo app
+if [ "$extension" = "bmp" ]; then
+    SOURCE_FILE="$input_file"
+    silent=1
+else
+    SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/${filename}.bmp"
+fi
 
 
 if [ $? -ne 0 ]; then
@@ -43,11 +47,11 @@ if [ -f "$SOURCE_FILE" ]; then
 	################# Check if the resolution is 1280x720 #################
 	if [ "$width" -gt 1280 ] || [ "$height" -gt 720 ]; then
 		echo "The image \"$filename\" is too large. Quitting without flash."
-		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is larger than expected, exiting. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
+		[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is larger than expected, exiting. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
 		exit 1
 	elif [ "$width" -lt 1280 ] || [ "$height" -lt 720 ]; then
 		echo "The image \"$filename\" is too small. Not recommended but should be OK."
-		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is smaller than expected. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
+		[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image resolution is smaller than expected. (${width}x${height} instead of 1280x720)" -t 5 -c "220,0,0"
 	else
 		echo "The image \"$filename\" has a resolution of 1280x720. Let's continue !"
 	fi
@@ -59,7 +63,7 @@ if [ -f "$SOURCE_FILE" ]; then
 	else
 		echo "\"$filename\" is not a BMP image. Quitting without flash."
 		sync
-		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -c "220,0,0" -m "Image is not a real .bmp file, check the format and convert it." -t 5 -c "220,0,0"
+		[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -c "220,0,0" -m "Image is not a real .bmp file, check the format and convert it." -t 5 -c "220,0,0"
 		exit 1
 	fi
 
@@ -72,7 +76,7 @@ if [ -f "$SOURCE_FILE" ]; then
 		echo "\"$filename\" has size less than 6MB. Let's continue !"
 	else
 		echo "\"$filename\" exceeds 6MB. Quitting without flash."
-		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image file is too big (6MB maximum)" -t 6 -c "220,0,0"
+		[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Image file is too big (6MB maximum)" -t 6 -c "220,0,0"
 	fi
 
 	################# Flashing logo #################
@@ -82,15 +86,29 @@ if [ -f "$SOURCE_FILE" ]; then
 	mount $TARGET_PARTITION $MOUNT_POINT
 
 
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flashing logo..." -fs 100 -t 2.5
+	[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flashing logo..." -fs 100 -t 2.5
 
 	cp "$SOURCE_FILE" "$MOUNT_POINT/bootlogo.bmp"
-	cp /mnt/SDCARD/Apps/BootLogo/GoBackTo_Apps.json /tmp/state.json
+	if [ $? -ne 0 ]; then
+		echo "Failed to move bootlogo file."
+	else
+		echo "Bootlogo file moved successfully."
+	fi
+	sync
+	if ! cmp -s "$SOURCE_FILE" "$MOUNT_POINT/bootlogo.bmp"; then
+		# The flashed file is different from the source, we restore the default logo
+		rm "$MOUNT_POINT/bootlogo.bmp"
+		cp "/mnt/SDCARD/Apps/BootLogo/Images/- Default Trimui.bmp" "$MOUNT_POINT/bootlogo.bmp"
+	fi
+	sync
+	sleep 0.5
+	sync
+	[ "$silent" -eq 0 ] && cp /mnt/SDCARD/Apps/BootLogo/GoBackTo_Apps.json /tmp/state.json
 	sync
 
 	################# End of flash #################
 	
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flash done !" -c "0,220,0" -t 0.5
+	[ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flash done !" -c "0,220,0" -fs 100 -t 0.5
 
 else
 	echo "Source file does not exist."
@@ -111,6 +129,8 @@ rmdir $MOUNT_POINT
 echo "Script completed."
 
 # we don't memorize System Tools scripts in recent list
-recentlist=/mnt/SDCARD/Roms/recentlist.json
-sed -i '/_BootLogo\/launch.sh/d' $recentlist
+if [ "$silent" -eq 0 ]; then
+	recentlist=/mnt/SDCARD/Roms/recentlist.json
+	sed -i '/_BootLogo\/launch.sh/d' $recentlist
+fi
 sync

@@ -69,7 +69,7 @@ font_size=35
 color="220,220,220"
 
 # CrossMix_Theme=$(basename "$(/usr/trimui/bin/systemval theme)")
-CrossMix_Theme=$(/mnt/SDCARD/System/bin/jq -r '.["CrossMix Theme"]' "/mnt/SDCARD/System/etc/crossmix.json")
+CrossMix_Theme=$(/mnt/SDCARD/System/bin/jq -r '.["THEME PACK"]' "/mnt/SDCARD/System/etc/crossmix.json")
 
 # Determine font path : by default we take the one from the current theme
 Current_font=$(/mnt/SDCARD/System/bin/jq -r '.["font"]' "/mnt/SDCARD/Themes/$CrossMix_Theme/config.json")

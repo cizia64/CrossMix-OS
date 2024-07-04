@@ -56,8 +56,8 @@ fi
 
 # ============================ Populate icons and backgrounds sets ============================
 
-BG_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/THEME##BACKGROUNDS (value)/"
-BG_imgs_directory="${img_path}/THEME##BACKGROUNDS (value)/"
+BG_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##BACKGROUNDS (value)/"
+BG_imgs_directory="${img_path}/ADVANCED SETTINGS##BACKGROUNDS (value)/"
 # Cleaning old list
 find "$BG_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
 rm "$BG_imgs_directory"/*.png
@@ -90,8 +90,8 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
 
 done
 
-ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/THEME##ICONS (value)/"
-ICON_imgs_directory="${img_path}/THEME##ICONS (value)/"
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/"
+ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##ICONS (value)/"
 # Cleaning old list
 find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
 rm "$ICON_imgs_directory"/*.png
@@ -118,6 +118,29 @@ for subdir in /mnt/SDCARD/Icons/*/; do
     fi
   fi
 done
+
+
+THEME_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/"
+THEME_imgs_directory="${img_path}/ADVANCED SETTINGS##THEMES (value)/"
+# Cleaning old list
+find "$THEME_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
+rm "$THEME_imgs_directory"/*.png
+for subdir in /mnt/SDCARD/Themes/*/; do
+  subdir_name=$(basename "$subdir")
+  cp "${THEME_list_directory}Default.sh" "${THEME_list_directory}${subdir_name}.sh"
+  # Check if preview.png file exists
+  if [ -f "${subdir}preview_$CrossMix_Theme.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
+  elif [ -f "${subdir}preview.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
+  else
+      cp "${subdir}/bg.png" "${THEME_imgs_directory}${subdir_name}.png"
+  fi
+done
+
+
 sync
 # ================================================= Create a new database file =================================================
 

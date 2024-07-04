@@ -68,38 +68,8 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
 
 	if ! [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
-
 		SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
-		TARGET_PARTITION="/dev/mmcblk0p1"
-		MOUNT_POINT="/mnt/emmcblk0p1"
-
-		echo "Mounting $TARGET_PARTITION to $MOUNT_POINT..."
-		mkdir -p $MOUNT_POINT
-		mount $TARGET_PARTITION $MOUNT_POINT
-
-		if [ $? -ne 0 ]; then
-			echo "Failed to mount $TARGET_PARTITION."
-		fi
-
-		if [ -f "$SOURCE_FILE" ]; then
-			echo "Moving "$SOURCE_FILE" to $MOUNT_POINT/bootlogo.bmp..."
-			cp "$SOURCE_FILE" $MOUNT_POINT/bootlogo.bmp
-			if [ $? -ne 0 ]; then
-				echo "Failed to move bootlogo file."
-			else
-				echo "Bootlogo file moved successfully."
-			fi
-			sync
-			sync
-			sleep 0.3
-			sync
-		else
-			echo "Source bootlogo file does not exist."
-		fi
-
-		echo "Unmounting $TARGET_PARTITION..."
-		umount $TARGET_PARTITION
-		rmdir $MOUNT_POINT
+		"/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$SOURCE_FILE"
 	fi
 fi
 
