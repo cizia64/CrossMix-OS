@@ -23,13 +23,22 @@ export PATH="$sysdir/bin:$PATH"
 mkdir output
 
 if pgrep "ffmpeg" >/dev/null; then
-
   killall -2 ffmpeg
-  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Record stopped."  -k " " 
-  
+  pkill -f "thd_ScreenRecorder.conf"
+  aplay /mnt/SDCARD/Apps/ScreenRecorder/stopped.wav -d 1 &
+  if ! [ "$1" = "-NoUI" ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Record stopped." -k " "
+  fi
+
 else
 
-  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Press any key to start recording now. Launch the app again to stop the recording." -k " " -fs 29
-  launch_record &
-
+  button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Press A to start recording, B to cancel. L1 + R1 to stop the recording." -k "A B" -fs 29)
+  if [ "$button" = "B" ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Record canceled." -t 1
+    exit
+  else
+    launch_record &
+    sleep 1
+    /mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/Apps/ScreenRecorder/thd_ScreenRecorder.conf /dev/input/event* &
+  fi
 fi
