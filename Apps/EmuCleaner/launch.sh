@@ -92,5 +92,5 @@ echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
 echo -ne "=============================\n\n"
 
 if [ "$silent" = false ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background-info.jpg -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2.5
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background-info.jpg -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2
 fi
