@@ -27,16 +27,7 @@ nmbd -D --configfile="${CONFIGFILE}"
 echo -e "trimui\ntrimui\n" | smbpasswd -s -a root -c ${CONFIGFILE}
 
 # we modify the DB entries to reflect the current state
-
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'SMB (enabled)',pinyin = 'SMB (enabled)',cpinyin = 'SMB (enabled)',opinyin = 'SMB (enabled)' WHERE disp = 'SMB (disabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'SMB (enabled)' WHERE ppath = 'SMB (disabled)';"
-sync
-json_file="/tmp/state.json"
-
-# we modify the current menu position as the DB entry has changed
-jq '.list |= map(if .ppath == "SMB (disabled)" then .ppath = "SMB (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "SMB" "enabled"
 
 sleep 1
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')

@@ -50,22 +50,7 @@ if [ ! -f "$json_file" ]; then
 fi
 /mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"EMU LABELS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-# Update the SQLite database
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-sqlite3 "$database_file" <<EOF
-UPDATE Menu_roms SET disp = 'EMULATOR LABELS ($script_name)', pinyin = 'EMULATOR LABELS ($script_name)', cpinyin = 'EMULATOR LABELS ($script_name)', opinyin = 'EMULATOR LABELS ($script_name)' WHERE disp LIKE 'EMULATOR LABELS (%)';
-UPDATE Menu_roms SET ppath = 'EMULATOR LABELS ($script_name)' WHERE ppath LIKE 'EMULATOR LABELS (%)';
-EOF
-
-# Update the state.json file if it exists
-json_file="/tmp/state.json"
-if [ -f "$json_file" ]; then
-  /mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("EMULATOR LABELS ")) then .ppath = "EMULATOR LABELS (\($script_name))" else . end)' "$json_file" > "$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-fi
-
-# Synchronize the filesystem
-sync
-sleep 0.1
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "EMULATOR LABELS" "$script_name"
 
 # Labels have changed so the Emulator selection must be done again:
 /mnt/SDCARD/Apps/EmuCleaner/launch.sh -s

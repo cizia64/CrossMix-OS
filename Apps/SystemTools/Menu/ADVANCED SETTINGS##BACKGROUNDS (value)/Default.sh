@@ -18,13 +18,4 @@ if [ ! -f "$json_file" ]; then
 fi
 /mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"BACKGROUNDS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'BACKGROUNDS ($script_name)',pinyin = 'BACKGROUNDS ($script_name)',cpinyin = 'BACKGROUNDS ($script_name)',opinyin = 'BACKGROUNDS ($script_name)' WHERE disp LIKE 'BACKGROUNDS (%)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'BACKGROUNDS ($script_name)' WHERE ppath LIKE 'BACKGROUNDS (%)';"
-json_file="/tmp/state.json"
-
-jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("BACKGROUNDS ")) then .ppath = "BACKGROUNDS (\($script_name))" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
-sleep 0.1
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "BACKGROUNDS" "$script_name"

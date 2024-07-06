@@ -15,14 +15,5 @@ fi
 pkill dropbear
 sed -i 's/export NETWORK_SSH="Y"/export NETWORK_SSH="N"/' /mnt/SDCARD/System/etc/ex_config
 
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'SSH (disabled)',pinyin = 'SSH (disabled)',cpinyin = 'SSH (disabled)',opinyin = 'SSH (disabled)' WHERE disp = 'SSH (enabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'SSH (disabled)' WHERE ppath = 'SSH (enabled)';"
-json_file="/tmp/state.json"
-
-jq '.list |= map(if .ppath == "SSH (enabled)" then .ppath = "SSH (disabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
-
-sleep 0.1
+# we modify the DB entries to reflect the current state
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "SSH" "disabled"

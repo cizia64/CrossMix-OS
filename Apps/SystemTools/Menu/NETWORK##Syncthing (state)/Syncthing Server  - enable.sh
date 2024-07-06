@@ -49,16 +49,7 @@ sync
 /mnt/SDCARD/System/bin/syncthing serve --no-restart --no-upgrade --config="$CONFIGPATH" --data="$CONFIGPATH/data" &
 
 # we modify the DB entries to reflect the current state
-
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'Syncthing (enabled)',pinyin = 'Syncthing (enabled)',cpinyin = 'Syncthing (enabled)',opinyin = 'Syncthing (enabled)' WHERE disp = 'Syncthing (disabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'Syncthing (enabled)' WHERE ppath = 'Syncthing (disabled)';"
-sync
-
-# we modify the current menu position as the DB entry has changed
-json_file="/tmp/state.json"
-jq '.list |= map(if .ppath == "Syncthing (disabled)" then .ppath = "Syncthing (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "Syncthing" "enabled"
 
 sleep 1
 

@@ -16,14 +16,4 @@ fi
 /mnt/SDCARD/System/bin/jq --arg lang_code "$lang_code" '.Screenscraper_Region = $lang_code' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
 # we modify the DB entries to reflect the current state
-
-database_file="/mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'Region ($script_name)',pinyin = 'Region ($script_name)',cpinyin = 'Region ($script_name)',opinyin = 'Region ($script_name)' WHERE disp LIKE 'Region (%)';"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'Region ($script_name)' WHERE ppath LIKE 'Region (%)';"
-json_file="/tmp/state.json"
-
-jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("Region ")) then .ppath = "Region (\($script_name))" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "Region" "$script_name"

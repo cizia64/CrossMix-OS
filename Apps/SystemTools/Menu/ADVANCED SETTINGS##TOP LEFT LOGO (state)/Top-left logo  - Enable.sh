@@ -21,16 +21,5 @@ fi
 
 sync
 
-# we modify the DB entries to reflect the current state
-
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'TOP LEFT LOGO (enabled)',pinyin = 'TOP LEFT LOGO (enabled)',cpinyin = 'TOP LEFT LOGO (enabled)',opinyin = 'TOP LEFT LOGO (enabled)' WHERE disp = 'TOP LEFT LOGO (disabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'TOP LEFT LOGO (enabled)' WHERE ppath = 'TOP LEFT LOGO (disabled)';"
-sync
-json_file="/tmp/state.json"
-
-# we modify the current menu position as the DB entry has changed
-jq '.list |= map(if .ppath == "TOP LEFT LOGO (disabled)" then .ppath = "TOP LEFT LOGO (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sleep 0.1
+# Menu modification to reflect the change immediately
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "TOP LEFT LOGO" "enabled"

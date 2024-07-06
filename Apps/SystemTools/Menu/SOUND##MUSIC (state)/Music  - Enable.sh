@@ -9,15 +9,4 @@ cd "$CurrentTheme/sound/"
 mv ./bgm-off.mp3 ./bgm.mp3
 
 # we modify the DB entries to reflect the current state
-
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'MUSIC (enabled)',pinyin = 'MUSIC (enabled)',cpinyin = 'MUSIC (enabled)',opinyin = 'MUSIC (enabled)' WHERE disp = 'MUSIC (disabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'MUSIC (enabled)' WHERE ppath = 'MUSIC (disabled)';"
-sync
-json_file="/tmp/state.json"
-
-# we modify the current menu position as the DB entry has changed
-jq '.list |= map(if .ppath == "MUSIC (disabled)" then .ppath = "MUSIC (enabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sleep 0.1
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "MUSIC" "enabled"

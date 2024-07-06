@@ -78,13 +78,4 @@ if [ ! -f "$json_file" ]; then
 fi
 /mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"OVERLAYS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'OVERLAYS ($script_name)',pinyin = 'OVERLAYS ($script_name)',cpinyin = 'OVERLAYS ($script_name)',opinyin = 'OVERLAYS ($script_name)' WHERE disp LIKE 'OVERLAYS (%)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'OVERLAYS ($script_name)' WHERE ppath LIKE 'OVERLAYS (%)';"
-json_file="/tmp/state.json"
-
-jq --arg script_name "$script_name" '.list |= map(if (.ppath | index("OVERLAYS ")) then .ppath = "OVERLAYS (\($script_name))" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
-sleep 0.1
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "OVERLAYS" "$script_name"

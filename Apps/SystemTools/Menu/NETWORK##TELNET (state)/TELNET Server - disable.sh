@@ -15,14 +15,5 @@ fi
 pkill telnetd
 
 
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'TELNET (disabled)',pinyin = 'TELNET (disabled)',cpinyin = 'TELNET (disabled)',opinyin = 'TELNET (disabled)' WHERE disp = 'TELNET (enabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'TELNET (disabled)' WHERE ppath = 'TELNET (enabled)';"
-json_file="/tmp/state.json"
-
-jq '.list |= map(if .ppath == "TELNET (enabled)" then .ppath = "TELNET (disabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
-
-sleep 0.1
+# we modify the DB entries to reflect the current state
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "TELNET" "disabled"

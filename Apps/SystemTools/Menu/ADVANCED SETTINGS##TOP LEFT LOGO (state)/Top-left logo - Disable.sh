@@ -24,20 +24,4 @@ fi
 sync
 
 # Menu modification to reflect the change immediately
-
-json_file="/mnt/SDCARD/System/etc/crossmix.json"
-if [ ! -f "$json_file" ]; then
-    echo "{}" >"$json_file"
-fi
-
-database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
-
-sqlite3 "$database_file" "UPDATE Menu_roms SET disp = 'TOP LEFT LOGO (disabled)',pinyin = 'TOP LEFT LOGO (disabled)',cpinyin = 'TOP LEFT LOGO (disabled)',opinyin = 'TOP LEFT LOGO (disabled)' WHERE disp = 'TOP LEFT LOGO (enabled)';"
-sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = 'TOP LEFT LOGO (disabled)' WHERE ppath = 'TOP LEFT LOGO (enabled)';"
-json_file="/tmp/state.json"
-
-jq '.list |= map(if .ppath == "TOP LEFT LOGO (enabled)" then .ppath = "TOP LEFT LOGO (disabled)" else . end)' "$json_file" >"$json_file.tmp" && mv "$json_file.tmp" "$json_file"
-
-sync
-
-sleep 0.1
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "TOP LEFT LOGO" "disabled"
