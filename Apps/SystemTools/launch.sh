@@ -14,6 +14,7 @@ mkdir -p /mnt/SDCARD/System/etc
 if [ ! -f "/mnt/SDCARD/System/etc/crossmix.json" ]; then
   touch "/mnt/SDCARD/System/etc/crossmix.json"
 fi
+sync
 
 ####################################### For testing :
 # rm "$database_file"
@@ -32,7 +33,17 @@ if [ "$rebuildmenu" = true ]; then
   sync
   LaunchMessage="Building Menu..."
 else
-  LaunchMessage="Loading..."
+	 LaunchMessage="Loading..."
+	 
+	contains_hashes=$(sqlite3 "$database_file" "SELECT COUNT(*) FROM Menu_roms WHERE disp LIKE '%##%';")
+	# If any 'disp' field contains '##', delete the database
+	if [ "$contains_hashes" -gt 0 ]; then
+		rm -f "$database_file"
+		echo "Corrupted System Tools database, re-building..."
+		LaunchMessage="Re-Building Menu..."
+	fi
+
+ 
 fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$LaunchMessage"

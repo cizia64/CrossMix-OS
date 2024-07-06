@@ -28,8 +28,13 @@ previous_crc_DB=$(cat "$crc_DB_file")
 echo "Current  show.json CRC32: $current_crc_Emus      |    Current   Menu_cache7.db CRC32: $current_crc_DB"
 echo "Previous show.json CRC32: $previous_crc_Emus     |    Previous  Menu_cache7.db CRC32: $previous_crc_DB"
 
-
-
+sync
+contains_hashes=$(sqlite3 "$database_file" "SELECT COUNT(*) FROM Menu_roms WHERE disp LIKE '%##%';")
+# If any 'disp' field contains '##', delete the database
+if [ "$contains_hashes" -gt 0 ]; then
+	rm -f "$database_file"
+	echo "Corrupted Ssraper database, re-building..."
+fi
 
 # If CRC32 have changed, perform operations and update CRC file
 if [ "$current_crc_Emus" != "$previous_crc_Emus" ] || [ "$current_crc_DB" != "$previous_crc_DB" ]; then
