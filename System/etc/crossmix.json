@@ -1,17 +1,18 @@
 {
   "THEME PACK": "CrossMix - OS",
-  "RESUME AT BOOT": 1,
+  "CROSSMIX STYLE": "Default",
+  "EMU LABELS": "Default",
+  "BACKGROUNDS": "Default",
+  "ICONS": "Default",
+  "START TAB": "Tab 4",
+  "LEDS": "Default",
   "SSH": 1,
   "TELNET": 0,
   "SFTPGo": 0,
   "Syncthing": 0,
   "SMB": 0,
   "SMB_secure": 0,
-  "BACKGROUNDS": "Default",
-  "ICONS": "Default",
-  "START TAB": "Tab Game",
-  "LEDS": "Default",
-  "AUTO LOAD STATE": 1,
   "OVERLAYS": "Overlays - max ratio",
-  "resume at boot": 1
+  "RESUME AT BOOT": 1,
+  "AUTO LOAD STATE": 1
 }

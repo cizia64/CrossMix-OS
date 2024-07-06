@@ -12,6 +12,7 @@ for arg in "$@"; do
   fi
 done
 
+EmuCleanerPath="$(dirname "$0")/"
 RomsFolder="/mnt/SDCARD/Roms"
 EmuFolder="/mnt/SDCARD/Emus"
 json_file="/mnt/SDCARD/Emus/show.json"
@@ -20,7 +21,7 @@ NumRemoved=0
 NumAdded=0
 
 if [ "$silent" = false ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background.jpg 
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background.jpg"
 fi
 
 write_entry() {
@@ -82,8 +83,10 @@ sed -i '$ s/,$//' $json_file
 echo "]" >>$json_file
 sync
 
-# Refresh Emus list
-jq '(.list[].tabstate[] | select(has("pagestart"))).pagestart = 0 | (.list[].tabstate[] | select(has("pageend"))).pageend = 7' /tmp/state.json >/tmp/state.tmp && mv /tmp/state.tmp /tmp/state.json
+if [ "$silent" = false ]; then
+	# Refresh Emus list
+	jq '(.list[].tabstate[] | select(has("pagestart"))).pagestart = 0 | (.list[].tabstate[] | select(has("pageend"))).pageend = 7' /tmp/state.json >/tmp/state.tmp && mv /tmp/state.tmp /tmp/state.json
+fi
 
 sync
 
@@ -92,5 +95,5 @@ echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
 echo -ne "=============================\n\n"
 
 if [ "$silent" = false ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i ./background-info.jpg -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background-info.jpg" -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2.5
 fi

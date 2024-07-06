@@ -68,13 +68,13 @@ font_file="/mnt/SDCARD/System/resources/DejaVuSans.ttf"
 font_size=35
 color="220,220,220"
 
-# CrossMix_Style=$(basename "$(/usr/trimui/bin/systemval theme)")
+Current_Theme=$(basename "$(/usr/trimui/bin/systemval theme)")
 CrossMix_Style=$(/mnt/SDCARD/System/bin/jq -r '.["CROSSMIX STYLE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 
 # Determine font path : by default we take the one from the current theme
-Current_font=$(/mnt/SDCARD/System/bin/jq -r '.["font"]' "/mnt/SDCARD/Themes/$CrossMix_Style/config.json")
-if [ -f "/mnt/SDCARD/Themes/$CrossMix_Style/$Current_font" ]; then
-    font_file="/mnt/SDCARD/Themes/$CrossMix_Style/$Current_font"
+Current_font=$(/mnt/SDCARD/System/bin/jq -r '.["font"]' "/mnt/SDCARD/Themes/$Current_Theme/config.json")
+if [ -f "/mnt/SDCARD/Themes/$Current_Theme/$Current_font" ]; then
+    font_file="/mnt/SDCARD/Themes/$Current_Theme/$Current_font"
 fi
 
 # Display usage if no parameters or -h is specified

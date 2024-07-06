@@ -11,8 +11,8 @@ CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
 CrossMix_Style=$(/mnt/SDCARD/System/bin/jq -r '.["CROSSMIX STYLE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 mkdir -p /mnt/SDCARD/System/starts/
 mkdir -p /mnt/SDCARD/System/etc
-if [ ! -f "/mnt/SDCARD/System/etc/systemtools.json" ]; then
-  touch /mnt/SDCARD/System/etc/systemtools.json
+if [ ! -f "/mnt/SDCARD/System/etc/crossmix.json" ]; then
+  touch "/mnt/SDCARD/System/etc/crossmix.json"
 fi
 
 ####################################### For testing :
