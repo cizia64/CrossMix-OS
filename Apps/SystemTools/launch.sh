@@ -48,13 +48,12 @@ if [ -f "$database_file" ]; then
 fi
 
 if [ -d "/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Style" ]; then
-	img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Style"
+  img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs_$CrossMix_Style"
 else
-	img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs"
+  img_path="/mnt/SDCARD/Apps/SystemTools/Menu/Imgs"
 fi
 
-
-# ============================ Populate icons and backgrounds sets ============================
+# =========================================== Populate icons, backgrounds and themes sets ============================================
 
 BG_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##BACKGROUNDS (value)/"
 BG_imgs_directory="${img_path}/ADVANCED SETTINGS##BACKGROUNDS (value)/"
@@ -67,7 +66,7 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
   cp "${BG_list_directory}Default.sh" "${BG_list_directory}${subdir_name}.sh"
 
   # Check if preview.png file exists
-  
+
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy themed preview_$CrossMix_Style.png with subfolder name
     cp "${subdir}preview_$CrossMix_Style.png" "${BG_imgs_directory}${subdir_name}.png"
@@ -119,7 +118,6 @@ for subdir in /mnt/SDCARD/Icons/*/; do
   fi
 done
 
-
 THEME_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/"
 THEME_imgs_directory="${img_path}/ADVANCED SETTINGS##THEMES (value)/"
 # Cleaning old list
@@ -127,6 +125,9 @@ find "$THEME_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm 
 rm "$THEME_imgs_directory"/*.png
 for subdir in /mnt/SDCARD/Themes/*/; do
   subdir_name=$(basename "$subdir")
+  if [ "$subdir_name" = "CrossMix - OS" ]; then
+    continue
+  fi
   cp "${THEME_list_directory}Default.sh" "${THEME_list_directory}${subdir_name}.sh"
   # Check if preview.png file exists
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
@@ -136,13 +137,12 @@ for subdir in /mnt/SDCARD/Themes/*/; do
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
   else
-      cp "${subdir}/bg.png" "${THEME_imgs_directory}${subdir_name}.png"
+    cp "${subdir}/bg.png" "${THEME_imgs_directory}${subdir_name}.png"
   fi
 done
 
-
 sync
-# ================================================= Create a new database file =================================================
+# ==================================================== Create a new database file ====================================================
 
 sqlite3 "$database_file" "CREATE TABLE Menu_roms (id INTEGER PRIMARY KEY, disp TEXT, path TEXT, imgpath TEXT, type INTEGER, ppath TEXT, pinyin TEXT, cpinyin TEXT, opinyin TEXT);"
 sync
@@ -295,7 +295,12 @@ sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND di
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (value)' ;" |
   while IFS='|' read -r disp path; do
     disp_withoutvalue=$(echo "$disp" | sed 's/ (value)//g')
-    CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
+    if [ "$disp_withoutvalue" = "THEMES" ]; then
+      CurState=$(basename "$CurrentTheme")
+    else
+      CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
+    fi
+
     if [ -z "$CurState" ]; then
       CurState="not set"
     fi

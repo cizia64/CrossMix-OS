@@ -9,13 +9,13 @@
 # emulabels: Choose if you want to display Emulators labels or not.
 #        use the label script name from "Apps\SystemTools\Menu\ADVANCED SETTINGS##EMULATOR LABELS (value)" (without extension).
 
-packname="Pokedex"
-style="CrossMix - Refreshed"
-theme="Pokedex - Blue"
-bootlogo="Pokedex - Blue.bmp"
-icon="Pokedex (Flow)"
-background="No Backgrounds"
-emulabels="No names"
+packname="CrossMix - Tronkyfran"
+style="Default"
+theme="CrossMix - OS"
+bootlogo="- CrossMix-OS.bmp"
+icon="Default"
+background="Tronkyfran"
+emulabels="Default"
 
 ####################################################################################################################
 

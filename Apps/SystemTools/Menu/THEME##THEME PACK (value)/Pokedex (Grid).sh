@@ -9,7 +9,7 @@
 # emulabels: Choose if you want to display Emulators labels or not.
 #        use the label script name from "Apps\SystemTools\Menu\ADVANCED SETTINGS##EMULATOR LABELS (value)" (without extension).
 
-packname="Pokedex"
+packname="Pokedex (Grid)"
 style="CrossMix - Refreshed"
 theme="Pokedex - Blue"
 bootlogo="Pokedex - Blue.bmp"

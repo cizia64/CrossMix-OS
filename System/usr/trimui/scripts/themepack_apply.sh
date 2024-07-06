@@ -1,13 +1,16 @@
 #!/bin/sh
 
-PATH="/mnt/SDCARD/System/bin:$PATH"
+# Export necessary environment variables
+export PATH="/mnt/SDCARD/System/bin:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 # Update theme pack in CrossMix configuration
 if [ -n "$packname" ] && [ -n "$style" ]; then
     jq --arg packname "$packname" --arg style "$style" '.["THEME PACK"] = $packname | .["CROSSMIX STYLE"] = $style' /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
 else
 	echo "packname and style variables are not defined."
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "packname and style variables are not defined." -c red -t 3
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "packname and style variables are not defined." -c red -t 4
+	exit
 fi
 
 # Apply theme
@@ -24,7 +27,7 @@ fi
 # Apply boot logo
 if [ -n "$bootlogo" ]; then
     if [ -f "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo" ]; then
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo" -m "Flashing logo..." -fs 100 -t 2.5 -c green
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo" -m "Flashing logo..." -fs 100 -c green -t 0.5
         "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo"
     else
         echo "BootLogo Apps/BootLogo/Images/$bootlogo does not exist."
@@ -73,3 +76,10 @@ fi
 
 # Sync filesystem
 sync
+
+#---------------------------------------------------------------------------
+
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "THEME PACK" "$packname"
+
+
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" applied" -t3
