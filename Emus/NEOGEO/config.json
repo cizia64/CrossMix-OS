@@ -12,5 +12,15 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "neo|zip|7z"
+  "extlist": "zip|7z|neo",
+  "launchlist": [
+    {
+      "name": "FB NEO",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "FB ALPHA 2012",
+      "launch": "launch.sh"
+    }
+  ]
 }
