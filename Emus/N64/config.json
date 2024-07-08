@@ -5,7 +5,7 @@
   "iconlist": "ic-n64-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/N64.png",
   "themecolor": "FFFF88",
-  "launch": "mupen64plus_standalone.sh",
+  "launch": "paralleln64.sh",
   "rompath": "../../Roms/N64",
   "imgpath": "../../Imgs/N64",
   "useswap": 1,
