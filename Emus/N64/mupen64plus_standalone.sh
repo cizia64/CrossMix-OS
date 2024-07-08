@@ -2,7 +2,7 @@
 echo $0 $*
 
 EMU_DIR=/mnt/SDCARD/Emus/N64/mupen64plus
-CONFDIR="$EMU_DIR/.config/"
+CONFDIR="/mnt/SDCARD/Emus/N64"
 export XDG_CONFIG_HOME="$CONFDIR"
 export XDG_DATA_HOME="$CONFDIR"
 export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
@@ -13,9 +13,15 @@ export LD_LIBRARY_PATH=$EMU_DIR:$EMU_DIR/libs:$LD_LIBRARY_PATH
 cd "$EMU_DIR"
 VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Rice") # We detect the performance mode from the label which have been selected in launcher menu
 if [ -n "$VideoPlugin" ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$CONFDIR/mupen64plus/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-rice.so"
+    /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-rice.so"
 else
-    /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$CONFDIR/mupen64plus/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-glide64mk2.so"
+    VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "glide64mk2 - wide") # We detect the performance mode from the label which have been selected in launcher menu
+    if [ -n "$VideoPlugin" ]; then
+        /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "aspect" "1"
+    else
+        /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "aspect" "0"
+    fi
+    /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-glide64mk2.so"
 fi
 
 case "$*" in
