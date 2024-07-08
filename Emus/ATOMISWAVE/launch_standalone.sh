@@ -10,4 +10,7 @@ $EMU_DIR/effect.sh
 cd "$FLYCAST_DIR"
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:lib
+export FLYCAST_DATA_DIR="$FLYCAST_DIR/data/"
+export FLYCAST_CONFIG_DIR="$FLYCAST_DIR/config/"
+
 ./flycast "$@"
