@@ -15,11 +15,11 @@
   "extlist": "zip",
   "launchlist": [
     {
-      "name": "FB ALPHA 2012",
+      "name": "FB Alpha 2012",
       "launch": "launch.sh"
     },
     {
-      "name": "FB NEO",
+      "name": "FBNeo",
       "launch": "launch_fbneo.sh"
     }
   ]
