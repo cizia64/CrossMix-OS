@@ -1,5 +1,8 @@
 #!/bin/sh
 
+rm /mnt/SDCARD/Apps/PortMaster/PortMaster/._*
+rm /mnt/SDCARD/Apps/PortMaster/PortMaster/config/._*
+
 controlfolder="/mnt/SDCARD/Apps/PortMaster/PortMaster"
 
 source /mnt/SDCARD/System/etc/ex_config

@@ -33,22 +33,24 @@ if [ "$rebuildmenu" = true ]; then
   sync
   LaunchMessage="Building Menu..."
 else
-	 LaunchMessage="Loading..."
-	 
-	contains_hashes=$(sqlite3 "$database_file" "SELECT COUNT(*) FROM Menu_roms WHERE disp LIKE '%##%';")
-	# If any 'disp' field contains '##', delete the database
-	if [ "$contains_hashes" -gt 0 ]; then
-		rm -f "$database_file"
-		echo "Corrupted System Tools database, re-building..."
-		LaunchMessage="Re-Building Menu..."
-	fi
 
- 
+  if [ -f "$database_file" ]; then
+    contains_hashes=$(sqlite3 "$database_file" "SELECT COUNT(*) FROM Menu_roms WHERE disp LIKE '%##%';")
+    # If any 'disp' field contains '##', delete the database
+    if [ "$contains_hashes" -gt 0 ]; then
+      rm -f "$database_file"
+      echo "Corrupted System Tools database, re-building..."
+      LaunchMessage="Re-Building Menu..."
+    else
+      LaunchMessage="Loading..."
+    fi
+  else
+    LaunchMessage="Building Menu..."
+  fi
+
 fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$LaunchMessage"
-
-SubFoldersList=":"
 
 cp /mnt/SDCARD/Apps/SystemTools/GoTo_SystemTools_List.json /tmp/state.json
 sync
@@ -65,6 +67,9 @@ else
 fi
 
 # =========================================== Populate icons, backgrounds and themes sets ============================================
+
+# We remove dot files from Mac OS
+find /mnt/SDCARD/Apps/SystemTools -name '._*' -exec rm '{}' \;
 
 BG_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##BACKGROUNDS (value)/"
 BG_imgs_directory="${img_path}/ADVANCED SETTINGS##BACKGROUNDS (value)/"
