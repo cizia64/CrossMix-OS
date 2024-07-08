@@ -18,7 +18,7 @@
       "launch": "flycast.sh"
     },
     {
-      "name": "Flycast (16:9)",
+      "name": "Flycast (Libretro) (16:9)",
       "launch": "flycast_wide.sh"
     },
     {
