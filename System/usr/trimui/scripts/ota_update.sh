@@ -38,4 +38,5 @@ get_release_info() {
 
 get_release_info
 check_connection
+sleep 2
 run_bootstrap

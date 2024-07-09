@@ -1,7 +1,17 @@
 #!/bin/sh
 
 echo $0 $*
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+TARGET_PARTITION="/dev/mmcblk0p1"
+MOUNT_POINT="/mnt/emmcblk0p1"
+CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
 
+if [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Bootlogo flash is not compatible with firmware superior to v1.0.4 hotfix 6." -t 3
+    exit 1
+fi
 
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:/mnt/SDCARD/System/bin/imagemagick/lib64:$LD_LIBRARY_PATH"
 export MAGICK_CODER_MODULE_PATH="/mnt/SDCARD/System/bin/imagemagick/lib64/ImageMagick-6.9.10/modules-Q16/coders/"
@@ -113,12 +123,6 @@ if [ -f "$SOURCE_FILE" ]; then
 else
 	echo "Source file does not exist."
 	exit 1
-fi
-
-if [ $? -ne 0 ]; then
-	echo "Failed to move file."
-else
-	echo "File moved successfully."
 fi
 
 echo "Unmounting $TARGET_PARTITION..."
