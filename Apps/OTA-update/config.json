@@ -1,0 +1,7 @@
+{
+"label":"OTA update",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"Update CrossMix from internet."
+}
