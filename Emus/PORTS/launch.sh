@@ -3,9 +3,9 @@
 source /mnt/SDCARD/System/etc/ex_config
 EMU_DIR="/mnt/SDCARD/Emus/PORTS"
 
-if grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -q "High Performance"; then
+if grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -iq "High Performance"; then
     CPU_PROFILE=performance
-elif grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -q "Battery Saver"; then
+elif grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -iq "Battery Saver"; then
     CPU_PROFILE=powersave
 else
     CPU_PROFILE=balanced
