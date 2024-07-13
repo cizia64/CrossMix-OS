@@ -1,0 +1,2 @@
+11 binary from launchppa unstable
+10.2 9.2 binary from Celion.  https://github.com/Cebion/love2d_aarch64.git

@@ -1,0 +1,23 @@
+{
+"label":"LOVE",
+"icon":"ic-LOVE.png",
+"background":"bg.png",
+"themecolor":"EC7063",
+"launch":"launch.sh",
+"rompath":"../../Roms/LOVE",
+"imgpath":"../../Imgs/LOVE",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"zip|love|exe",
+"launchlist": [
+        {
+            "name": "LOVE",
+            "launch": "launch.sh"
+        },
+        {
+            "name": "LOVE (with log file)",
+            "launch": "launch_log.sh"
+        }
+    ]
+}
