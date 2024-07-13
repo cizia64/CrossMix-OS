@@ -1,0 +1,6 @@
+{
+"label":"Safe ShutDown",
+"icon":"ic-POFF.png",
+"launch":"launch.sh",
+"description":"Safe Shut Down/Power Off."
+}
