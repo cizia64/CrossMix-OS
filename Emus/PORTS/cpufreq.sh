@@ -2,13 +2,13 @@
 
 case "$1" in 
     performance)
-        MINFREQ=1008000
-        MAXFREQ=2000000
-        GOVERNOR="ondemand"
+        MINFREQ=408000 # filler
+        MAXFREQ=1800000
+        GOVERNOR="performance"
         ;;
     balanced)
         MINFREQ=600000
-        MAXFREQ=1416000
+        MAXFREQ=1608000
         GOVERNOR="ondemand"
         ;;
     powersave)
