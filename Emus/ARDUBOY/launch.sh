@@ -9,10 +9,10 @@ cd $RA_DIR/
 #disable netplay
 NET_PARAM=
 
-if grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -iq "Ardens"; then
-    CORE_FILE="$RA_DIR/.retroarch/cores/ardens_libretro.so"
-else
+if grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -iq "Arduous"; then
     CORE_FILE="$RA_DIR/.retroarch/cores/arduous_libretro.so"
+else
+    CORE_FILE="$RA_DIR/.retroarch/cores/ardens_libretro.so"
 fi
 
 HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L "$CORE_FILE" "$@"
