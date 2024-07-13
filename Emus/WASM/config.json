@@ -1,0 +1,13 @@
+{
+"label":"WASM-4",
+"icon":"ic-WASM.png",
+"background":"bg.png",
+"themecolor":"00FF00",
+"launch":"launch.sh",
+"rompath":"../../Roms/WASM",
+"imgpath":"../../Imgs/WASM",
+"useswap":1,
+"shortname":0,
+"extlist":"zip|wasm",
+"hidebios":1
+}

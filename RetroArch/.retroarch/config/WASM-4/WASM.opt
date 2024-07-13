@@ -1,0 +1,3 @@
+wasm4_audio_type = "callback"
+wasm4_pixel_type = "xrgb8888"
+wasm4_touchscreen_hold_frames = "10"
