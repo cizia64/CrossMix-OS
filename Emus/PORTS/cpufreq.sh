@@ -13,7 +13,7 @@ case "$1" in
         ;;
     powersave)
         MINFREQ=408000
-        MAXFREQ=1008000
+        MAXFREQ=1200000
         GOVERNOR="conservative"
         ;;
 esac
