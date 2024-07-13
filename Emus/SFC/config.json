@@ -26,6 +26,10 @@
     {
       "name": "Beetle Supafaust",
       "launch": "supafaust.sh"
+    },
+    {
+      "name": "ChimeraSNES",
+      "launch": "chimerasnes.sh"
     }
   ]
 }
