@@ -15,7 +15,7 @@ VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Ric
 if [ -n "$VideoPlugin" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-rice.so"
 else
-    VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "glide64mk2 - wide") # We detect the performance mode from the label which have been selected in launcher menu
+    VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "glide64mk2 - 16:9") # We detect the performance mode from the label which have been selected in launcher menu
     if [ -n "$VideoPlugin" ]; then
         /mnt/SDCARD/System/usr/trimui/scripts/set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "aspect" "1"
     else
