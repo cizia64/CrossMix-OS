@@ -26,6 +26,10 @@
     {
       "name": "TGB DUAL",
       "launch": "tgbdual.sh"
+    },
+    {
+      "name": "DOUBLECHERRYGB",
+      "launch": "dcgb.sh"
     }
   ]
 }
