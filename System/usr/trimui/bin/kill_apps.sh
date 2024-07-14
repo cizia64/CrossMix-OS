@@ -92,7 +92,7 @@ echo "Process $ppid has exited."
 aplay /mnt/SDCARD/trimui/res/sound/PowerOff.wav -d 1
 
 sync
-poweroff &
+/mnt/SDCARD/System/bin/shutdown
 
 sleep 8
 /mnt/SDCARD/System/usr/trimui/scripts/cmd_to_run_killer.sh
