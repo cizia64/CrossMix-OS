@@ -17,7 +17,7 @@ LOG_FILE="/mnt/SDCARD/Apps/SystemTools/Logs/UDISK - Format.log"
 UDISK_DEV="/dev/by-name/UDISK"
 UDISK_MOUNT="/mnt/UDISK"
 SOURCE_DIR="/mnt/UDISK"
-BACKUP_DIR="/mnt/SDCARD/Apps/SystemTools/Ressources/UDISK_Backup"
+BACKUP_DIR="/mnt/SDCARD/Apps/SystemTools/Resources/UDISK_Backup"
 DEST_DIR="/mnt/UDISK"
 FILES="joypad.config joypad_right.config system.json"
 
@@ -81,7 +81,7 @@ else
     echo "Failed to remove usb_storage from /usr/trimui/apps."
 fi
 
-unzip /mnt/SDCARD/Apps/SystemTools/Ressources/usb_storage.zip -d /usr/trimui/apps/
+unzip /mnt/SDCARD/Apps/SystemTools/Resources/usb_storage.zip -d /usr/trimui/apps/
 if [ $? -eq 0 ]; then
     echo "Successfully copied usb_storage to /usr/trimui/apps."
 else
