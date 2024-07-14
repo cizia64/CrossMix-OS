@@ -14,12 +14,16 @@
   "hidebios": 1,
   "launchlist": [
     {
-      "name": "flycast",
+      "name": "Flycast (Libretro)",
       "launch": "flycast.sh"
     },
     {
-      "name": "flycast 16:9",
+      "name": "Flycast (Libretro) (16:9)",
       "launch": "flycast_wide.sh"
+    },
+    {
+      "name": "Flycast (Standalone)",
+      "launch": "flycast_standalone.sh"
     }
   ]
 }
