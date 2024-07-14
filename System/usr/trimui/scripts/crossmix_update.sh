@@ -141,25 +141,12 @@ cp -r "$BCK_DIR/RetroArch/.retroarch/saves/"* "/mnt/SDCARD/RetroArch/.retroarch/
 cp -r "$BCK_DIR/RetroArch/.retroarch/states/"* "/mnt/SDCARD/RetroArch/.retroarch/states/"
 
 # Restore PPSSPP 1.15.4 standalone saves and savestates
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/"
-
-# Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path = 1.0.0)
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"*.dat "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
-cp "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/GAME/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"
-
-# Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path > 1.1.0)
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"*.dat "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"
+cp -r "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"
+cp -r "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"
+cp "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/SYSTEM/"*.dat "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"
+cp "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/Cheats/"
+cp -r "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/GAME/"* "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/GAME/"
+cp -r "$BCK_DIR/Emus/PSP/**/.config/ppsspp/PSP/TEXTURES/"* "/mnt/SDCARD/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"
 
 # Restore Drastic saves and savestates
 cp -r "$BCK_DIR/Emus/NDS/drastic/savestates/"* "/mnt/SDCARD/Emus/NDS/drastic/savestates/"

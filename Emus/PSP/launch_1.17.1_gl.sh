@@ -1,8 +1,10 @@
 #!/bin/sh
-echo $0 $*
-progdir=`dirname "$0"`
-progdir171=$progdir/PPSSPP_1.17.1
-cd "$progdir171"
+
+echo "$0 $*"
+progdir=$(dirname "$0")
+
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}"$progdir"
+export HOME="$progdir"
 
 echo "=============================================="
 echo "==================== PPSSPP  ================="
@@ -21,10 +23,9 @@ if [ -n "$performance" ]; then
 fi
 
 # We set the Backend to OpenGL
-config_file="/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini"
+config_file="$progdir/.config/ppsspp/PSP/SYSTEM/ppsspp174.ini"
 sed -i '/^\[Graphics\]$/,/^\[/ s/GraphicsBackend = .*/GraphicsBackend = 0/' "$config_file"
 
-export HOME=$progdir171
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue
-./PPSSPPSDL_gl "$*"
+./PPSSPPSDL174_gl --config="$config_file" "$*"
 

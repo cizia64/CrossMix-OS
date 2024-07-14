@@ -1,9 +1,11 @@
 #!/bin/sh
-echo $0 $*
-progdir=`dirname "$0"`
-progdir154=$progdir/PPSSPP_1.15.4
-cd "$progdir154"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$progdir154
+
+echo "$0 $*"
+progdir=$(dirname "$0")
+
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}"$progdir"
+export HOME="$progdir"
+
 echo "=============================================="
 echo "==================== PPSSPP  ================="
 echo "=============================================="
@@ -23,7 +25,5 @@ if [ -n "$performance" ]; then
 fi
 
 
-export HOME=$progdir154
-./PPSSPPSDL "$*"
-
+"$progdir"/PPSSPPSDL --config=./.config/ppsspp/PSP/SYSTEM/ppsspp154.ini "$*"
 echo "*************************************************************"
