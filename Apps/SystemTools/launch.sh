@@ -146,7 +146,7 @@ for subdir in /mnt/SDCARD/Themes/*/; do
   # Check if preview.png file exists
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
-    cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
+    cp "${subdir}preview_$CrossMix_Style.png" "${THEME_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${THEME_imgs_directory}${subdir_name}.png"
