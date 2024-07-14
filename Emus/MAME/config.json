@@ -21,7 +21,7 @@
     },
     {
       "name": "MAME 2003 PLUS (0.78)",
-      "launch": "mame2003plus,sh"
+      "launch": "mame2003plus.sh"
     },
     {
       "name": "MAME 2010 (0.139)",
