@@ -1,17 +1,17 @@
 #!/bin/sh
 
 case "$1" in 
-    performance)
+    "High Performance")
         MINFREQ=408000 # filler
         MAXFREQ=1800000
         GOVERNOR="performance"
         ;;
-    balanced)
+    "Balanced")
         MINFREQ=600000
         MAXFREQ=1608000
         GOVERNOR="ondemand"
         ;;
-    powersave)
+    "Battery Saver")
         MINFREQ=408000
         MAXFREQ=1200000
         GOVERNOR="conservative"
