@@ -12,24 +12,36 @@
   "hidebios": 1,
   "launchlist": [
     {
-      "name": "MAME - default(0.259)",
-      "launch": "mame.sh"
-    },
-    {
-      "name": "MAME (0.219)",
-      "launch": "mame(0.219).sh"
-    },
-    {
-      "name": "MAME2000",
+      "name": "MAME 2000 (0.37b5)",
       "launch": "mame2000.sh"
     },
     {
-      "name": "MAME2015",
+      "name": "MAME 2003 (0.78)",
+      "launch": "mame2003.sh"
+    },
+    {
+      "name": "MAME 2003 PLUS (0.78)",
+      "launch": "mame2003plus,sh"
+    },
+    {
+      "name": "MAME 2010 (0.139)",
+      "launch": "mame2010.sh"
+    },
+    {
+      "name": "MAME 2015 (0.160)",
       "launch": "mame2015.sh"
     },
     {
-      "name": "MAME2016",
+      "name": "MAME 2016 (0.174)",
       "launch": "mame2016.sh"
+    },
+    {
+      "name": "MAME (0.219)",
+      "launch": "mame219.sh"
+    },
+    {
+      "name": "MAME (0.259 - current)",
+      "launch": "mame.sh"
     }
   ]
 }
