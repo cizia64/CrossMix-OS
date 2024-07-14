@@ -13,9 +13,9 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "CrossMix OS v$version"
 
 ################ CrossMix-OS internal storage Customization ################
+FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
 
-if [ ! -e "/usr/trimui/fw_mod_done" ]; then
-
+if [ "$version" != "$FW_patched_version" ]; then
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
 
@@ -26,8 +26,13 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 		cp "/mnt/SDCARD/trimui/res/lang/"*.png "/usr/trimui/res/skin/"
 	fi
 
-	# custom shutdown script from "Resume at Boot"
+	# custom shutdown script for "Resume at Boot"
 	cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
+	chmod a+x "/usr/trimui/bin/kill_apps.sh"
+
+	# custom shutdown script, will be called by MainUI
+	cp "/mnt/SDCARD/System/bin/shutdown" "/usr/bin/poweroff"
+	chmod a+x "/usr/bin/poweroff"
 
 	# modifying default theme to impact all other themes (Better game image background)
 	mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
@@ -41,8 +46,12 @@ if [ ! -e "/usr/trimui/fw_mod_done" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
+	# be sure that the PortMaster python install will be triggered
+	rm "/mnt/SDCARD/System/bin/python3"
+
 	# we set the customization flag
-	touch "/usr/trimui/fw_mod_done"
+	rm "/usr/trimui/fw_mod_done"
+	echo $version >/usr/trimui/crossmix-version.txt
 	sync
 
 	################ CrossMix-OS SD card Customization ################
