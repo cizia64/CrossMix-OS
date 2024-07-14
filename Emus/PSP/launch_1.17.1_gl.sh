@@ -23,9 +23,9 @@ if [ -n "$performance" ]; then
 fi
 
 # We set the Backend to OpenGL
-config_file="$progdir/.config/ppsspp/PSP/SYSTEM/ppsspp174.ini"
+config_file="$progdir/.config/ppsspp/PSP/SYSTEM/ppsspp171.ini"
 sed -i '/^\[Graphics\]$/,/^\[/ s/GraphicsBackend = .*/GraphicsBackend = 0/' "$config_file"
 
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue
-./PPSSPPSDL174_gl --config="$config_file" "$*"
+"$progdir"/PPSSPPSDL171_gl --config="$config_file" "$*"
 

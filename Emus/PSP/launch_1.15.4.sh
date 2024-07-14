@@ -25,5 +25,5 @@ if [ -n "$performance" ]; then
 fi
 
 
-"$progdir"/PPSSPPSDL --config=./.config/ppsspp/PSP/SYSTEM/ppsspp154.ini "$*"
+"$progdir"/PPSSPPSDL154 --config="$progdir"/.config/ppsspp/PSP/SYSTEM/ppsspp154.ini "$*"
 echo "*************************************************************"

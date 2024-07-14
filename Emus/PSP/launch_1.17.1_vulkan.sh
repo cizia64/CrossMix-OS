@@ -1,4 +1,5 @@
 #!/bin/sh
+
 echo "$0 $*"
 progdir=$(dirname "$0")
 
@@ -22,8 +23,8 @@ if [ -n "$performance" ]; then
 fi
 
 # We set the Backend to Vulkan
-config_file="$progdir/.config/ppsspp/PSP/SYSTEM/ppsspp174.ini"
+config_file="$progdir/.config/ppsspp/PSP/SYSTEM/ppsspp171.ini"
 sed -i '/^\[Graphics\]$/,/^\[/ s/GraphicsBackend = .*/GraphicsBackend = 3/' "$config_file"
 
 #export SDL_AUDIODRIVER=dsp   //disable 20231031 for sound suspend issue
-"$progdir"/PPSSPPSDL174_vulkan --config="$config_file" "$*"
+"$progdir"/PPSSPPSDL171_vulkan --config="$config_file" "$*"
