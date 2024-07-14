@@ -41,6 +41,7 @@ jobs:
           rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.git
           rm -rf /home/runner/work/CrossMix-OS/CrossMix-OS/.github
           ls -la /home/runner/work/CrossMix-OS/CrossMix-OS
+          /usr/local/bin/7zz a /home/runner/work/CrossMix-OS/CrossMix-OS/RetroArch/default_config.7z /home/runner/work/CrossMix-OS/CrossMix-OS/RetroArch/retroarch.cfg /home/runner/work/CrossMix-OS/CrossMix-OS/RetroArch/.retroarch/config/*
       - name: Zipping release
         run: |
           shopt -s dotglob
