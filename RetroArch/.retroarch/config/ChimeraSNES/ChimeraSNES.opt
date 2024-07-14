@@ -1,0 +1,6 @@
+chimerasnes_bsx_bios = "skip"
+chimerasnes_frameskip = "disabled"
+chimerasnes_frameskip_threshold = "33"
+chimerasnes_overclock_cycles = "disabled"
+chimerasnes_overclock_superfx = "10 MHz (SNES clock, Default)"
+chimerasnes_reduce_sprite_flicker = "disabled"

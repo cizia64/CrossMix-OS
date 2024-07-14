@@ -6,7 +6,7 @@
   "launch": "snes9x.sh",
   "rompath": "../../Roms/SFC",
   "imgpath": "../../Imgs/SFC",
-  "useswap": 1,
+  "useswap": 0,
   "shortname": 0,
   "extlist": "sfc|smc|fig|bs|st|zip|7z",
   "hidebios": 1,
