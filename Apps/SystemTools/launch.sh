@@ -35,6 +35,7 @@ if [ "$rebuildmenu" = true ]; then
 else
 
   if [ -f "$database_file" ]; then
+
     contains_hashes=$(sqlite3 "$database_file" "SELECT COUNT(*) FROM Menu_roms WHERE disp LIKE '%##%';")
     # If any 'disp' field contains '##', delete the database
     if [ "$contains_hashes" -gt 0 ]; then
@@ -141,10 +142,7 @@ find "$THEME_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm 
 rm "$THEME_imgs_directory"/*.png
 for subdir in /mnt/SDCARD/Themes/*/; do
   subdir_name=$(basename "$subdir")
-  if [ "$subdir_name" = "CrossMix - OS" ]; then
-    continue
-  fi
-  cp "${THEME_list_directory}Default.sh" "${THEME_list_directory}${subdir_name}.sh"
+
   # Check if preview.png file exists
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
@@ -155,6 +153,13 @@ for subdir in /mnt/SDCARD/Themes/*/; do
   else
     cp "${subdir}/bg.png" "${THEME_imgs_directory}${subdir_name}.png"
   fi
+
+  if [ "$subdir_name" = "CrossMix - OS" ]; then
+    mv "${THEME_imgs_directory}${subdir_name}.png" "${THEME_imgs_directory}Default.png"
+    continue
+  fi
+  cp "${THEME_list_directory}Default.sh" "${THEME_list_directory}${subdir_name}.sh"
+
 done
 
 sync
