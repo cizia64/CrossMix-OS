@@ -5,7 +5,7 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/PORTS.png",
   "themecolor": "61A8DD",
-  "launch": "launch_balanced.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/PORTS",
   "imgpath": "../../Imgs/PORTS",
   "useswap": 1,
@@ -15,15 +15,15 @@
     "launchlist": [
         {
             "name": "Battery Saver",
-            "launch": "launch_batterysaver.sh"
+            "launch": "launch.sh"
         },
         {
             "name": "Balanced",
-            "launch": "launch_balanced.sh"
+            "launch": "launch.sh"
         },
         {
             "name": "High Performance",
-            "launch": "launch_performance.sh"
+            "launch": "launch.sh"
         }
     ]
 }
