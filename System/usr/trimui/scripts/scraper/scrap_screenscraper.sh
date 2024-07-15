@@ -7,7 +7,7 @@ if [ -z "$1" ]; then
 fi
 
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
-PATH="/mnt/SDCARD/System/bin:$PATH"
+export PATH="/mnt/SDCARD/System/bin:$PATH"
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 
@@ -269,7 +269,7 @@ else
 fi
 
 
-if ! pgrep "text_viewer"  && [ "$ScrapeInBackground" = "false" ]; then
+if ! pgrep "text_viewer" >/dev/null  && [ "$ScrapeInBackground" = "false" ]; then
 	NONE='\033[00m'
 	RED='\033[01;31m'
 	GREEN='\033[01;32m'
@@ -347,11 +347,11 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
 	! -path '*/Imgs/*' ! -path '*/.game_config/*' $find_filter $romfilter"); do
 
 	
-if ! pgrep "getkey" >/dev/null && [ "$ScrapeInBackground" = "false" ]; then    # we're not in background scraping and B have been pressed, we display terminate the scraping task
+if pgrep "text_viewer" >/dev/null  && ! pgrep "getkey" >/dev/null && [ "$ScrapeInBackground" = "false" ]; then    # we're not in background scraping and B have been pressed, we display terminate the scraping task
     break
 fi	
 
-
+echo "-------------------------------------------------------------------------"
     gameIDSS=""
     url=""
     let romcount++
@@ -447,7 +447,7 @@ fi
 											else 8 end) |
 									.[0].url' | head -n 1)
 
-        if [ -z "$MediaURL" ]; then
+        if [ -z "$MediaURL" ] || [ "$MediaURL" = "null" ]; then
             echo -e "${YELLOW}Game matches but no media found!${NONE}"
             let Scrap_Fail++
             continue
@@ -478,7 +478,7 @@ fi
         #pngscale "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png"
 
     fi
-echo "-------------------------------------------------------------------------"
+
     #####################################################################################################################################
     #   saveMetadata=false
 
