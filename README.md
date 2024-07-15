@@ -39,7 +39,7 @@ All components of CrossMix-OS are free and open source.
 
 # Installation & Update
 
-**To make a fresh install:**
+## **To make a fresh install:**
 - Format your SD card in FAT32. (use a genuine, name-brand SD card and not the stock one sold with your console)*
 - Download the [latest release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
 - Extract the archive to the root of your formatted SD card.
@@ -47,11 +47,45 @@ All components of CrossMix-OS are free and open source.
 - Copy your own ROMs into the `Roms` folder (or copy the `Roms` folder from stock SD card, rom path changes : PPSSPP -> PSP , OPERA -> PANASONIC , PICO8 -> PICO)
 - Insert your SD card into your TrimUI Smart Pro and boot the console.
 
-*Recommended SD card size is at least 128GB for the firmware, emulators, BIOS files and ROMs.
 
-**To update**, the process is almost the same : 
+## **To update from a previous CrossMix Version**
 - Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
-- Extract the contents of the new archive on the root of your SD card, overwriting all existing files.
+- Copy the archive "CrossMix-OS_v1.x.x.zip" (not decompressed) on SD card root
+- update the file `_FirmwareCheck.sh` located in `System/starts` with the new version from the archive "CrossMix-OS_v1.x.x.zip" or [from here](https://raw.githubusercontent.com/cizia64/CrossMix-OS/main/System/starts/_FirmwareCheck.sh)], that's all.
+- At reboot the update will be automatically installed
+
+Notes about the automatic update:
+The following folders are not modified during the update: 
+- SDCARD/Data
+- SDCARD/BIOS
+- SDCARD/Best
+- SDCARD/Imgs
+- SDCARD/Roms
+The automatic update process will move your previous files in "SDCARD/_Updates" folder. You'll also find the migration log in this directory.
+The saves/savestates from Retroarch, PPSSPP, Drastic are automatically copied from the backup to the new installation.
+
+## **To migrate from an another OS version (Stock/Tomato)**
+
+You can't just override the files to have a good result. Do not use the stock SD card (otherwise you'll have corruption of filesystem very often and loosing files). 
+This procedure is to migrate to CrossMix on a guenuine SD card which is already used for another OS. The process is similar with a separate/dedicated SD card except that you copy the stock files from the other SD card instead of "\_Mybackup" folder.
+
+
+* make a scandisk on your SD card (important because many SD card filesystem are already partially corrupted before installing)
+* create a folder called "\_Mybackup" for example and put all your existing files/folders in it. You now have only one folders on your SD card.
+* extract the CrossMix archive on your SD card root.
+* copy your BIOS files into the BIOS folder (on stock SD card copy it from `/_Mybackup/RetroArch/.retroarch/system to BIOS folder` to `/BIOS`)
+* move Roms folders **but don't import roms folders which are not coming from CrossMix** ! Some name are different: PPSSPP -> PSP , OPERA -> PANASONIC , PICO8 -> PICO (so for example copy the content of `_Mybackup/Roms/PPSSPP/*` in `Roms/PSP`)
+* Insert your SD card into your TrimUI Smart Pro and boot the console.
+* Refresh roms
+
+**About saves and save states:**
+
+* The save states made with the in game menu are contained in Roms folder, most of them should work directly except if the core is different: in this case the content folder will not have the same name.
+* if you really need some save and save states from Retroarch the paths have changed for a more clean organization. It's probably easier to make a save with the in game menu before migrate to CrossMix, otherwise the migration is manual: the base folder is the same (`RetroArch\.retroarch\saves` and `RetroArch\.retroarch\states`) but on CrossMix it is `RetroArch\.retroarch\saves\**RomFolderName**\**Corename**` .
+
+For example : `RetroArch\.retroarch\saves\001 Donkey Kong Land.srm` wil go into : `RetroArch\.retroarch\saves\GB\Gambatte`
+
+## Remarks
 
 **Remark:** CrossMix-OS doesn't require any firmware update before installation: it will guide you to update it if required, just let yourself be guided on the first boot.
 
@@ -64,9 +98,8 @@ All components of CrossMix-OS are free and open source.
 ### Scraper
 
 - Automatically download all the box arts for a platform.
-- based on sselph/scraper.
+- based on [screenscraper from Schmurtz](https://github.com/schmurtzm/TrimUI-Smart-Pro/tree/main/Scraper)] & sselph/scraper.
 
-  
 ### EmuCleaner
 
 - Automatically displays emulators with present ROMs and hides others.
@@ -202,13 +235,14 @@ So Directory override is a nice choice but there is an enormous limitation : whe
 
 # Special Thanks
 
+- **cobalt** : For his numerous contributions to the project.
 - **Christian_Haitian**: For all his work on aarch64 architecture, ports, and cores.
-- **PortMaster Team** and particularly kloptops: For the TrimUI version and his tools.
-- **Schmurtz**: System Tools app and invaluable help and advice.
+- **PortMaster Team** and **kloptops**: For the TrimUI version and his tools.
+- **Schmurtz**: System Tools and Scraper apps and invaluable help and advice.
 - **Djware**: Many [TrimUI apps](https://github.com/djware/TrimUITools).
 - **TenLevels & Skylance**: For their work on themes.
 - **Onion Team**:  For their work on Onion-OS, a real source of inspiration for CrossMix-OS.
-- **cobalt** & **kx230** : For their daily advices and contributions.
+- **kx230**, **tomato**, **Nevrdid** : For their daily advices and contributions.
 - **TrimUI Community**: contributions from many members of the TrimUI community!
 
 ---
@@ -236,6 +270,7 @@ Thanks to Schmurtzm for his numerous scripts, I have revised and integrated them
 - [System Tools](https://github.com/schmurtzm/TrimUI-Smart-Pro/tree/main/SystemTools): An app to centralize different apps/scripts in one place.
 - [Resume at Boot](https://github.com/schmurtzm/TrimUI-Smart-Pro/tree/main/ResumeAtBoot): A set of scripts to add a resume game on startup feature.
 - [Subfolder config override finder](https://github.com/libretro/RetroArch/issues/12021#issuecomment-2107300989) is also used in CrossMix-OS.
+- [Scraper](https://github.com/schmurtzm/TrimUI-Smart-Pro/tree/main/Scraper): an app to automatically download boxarts.
 
 
 I hope CrossMix-OS will become a reference among OSes based on the stock OS and continue to improve with community support.
