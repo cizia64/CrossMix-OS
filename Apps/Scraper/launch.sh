@@ -16,6 +16,14 @@ database_file="/mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db"
 crc_Emus_file="/mnt/SDCARD/Apps/Scraper/show_json_crc.txt"
 crc_DB_file="/mnt/SDCARD/Apps/Scraper/current_crc_DB.txt"
 
+if [ ! -f "$show_json_path" ]; then
+  /mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
+  rm "$database_file"
+  rm "$crc_Emus_file"
+  sync
+fi
+
+
 # Calculate current CRC32 of show.json (list of displayed emulators) and Menu_cache7.db
 current_crc_Emus=$(crc32 "$show_json_path" | awk '{print $1}')
 current_crc_DB=$(crc32 "$database_file" | awk '{print $1}')

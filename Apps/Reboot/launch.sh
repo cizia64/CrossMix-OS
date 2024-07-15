@@ -7,4 +7,4 @@ fi
 
 sync
 sleep  0.3
-reboot
+/mnt/SDCARD/System/bin/shutdown -r

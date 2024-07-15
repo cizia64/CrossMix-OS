@@ -43,7 +43,16 @@ if [ "$version" != "$FW_patched_version" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/scene/com.trimui.cpuperformance.sh
 
 	# Apply default CrossMix theme, sound volume, and grid view
+	if [ ! -f /mnt/UDISK/system.json ]; then
+		cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
+	else
+		/usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
+		/usr/trimui/bin/systemval menustylel1 1
+		/usr/trimui/bin/systemval bgmvol 10
+	fi
+
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
+
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
 	# we set the customization flag

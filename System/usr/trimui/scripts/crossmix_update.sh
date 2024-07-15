@@ -22,7 +22,6 @@ if [ -z "$initial_version" ]; then
 fi
 update_version=$(echo "$UPDATE_FILE" | awk -F'_v|\.zip' '{print $2}')
 
-
 # infoscreen.sh -m "test OK." -t 1
 cp /mnt/SDCARD/System/bin/7zz /tmp
 rm -rf "/mnt/SDCARD/System Volume Information"
@@ -38,24 +37,30 @@ fi
 mkdir -p "$BCK_DIR"
 sync
 
-LOG_FILE="/mnt/SDCARD/_Updates/CrossMix_v$update_version_$timestamp.log"
+LOG_FILE="/mnt/SDCARD/_Updates/CrossMix_v${update_version}_${timestamp}.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
 echo "=========================================================================================="
-echo "==============  Updating CrossMix-OS v$initial_version to v$update_version  =============="
-
+echo "       ==============  Updating CrossMix-OS v$initial_version to v$update_version  =============="
 
 check_available_space() {
-echo "=========================================================================================="
-echo "       ==============  Checking available space on the SD Card  =============="
+  echo "=========================================================================================="
+  echo "       ==============  Checking available space on the SD Card  =============="
   # Available space in MB
   mount_point=$(mount | grep -m 1 '/mnt/SDCARD' | awk '{print $1}')
   available_space=$(df -m $mount_point | awk 'NR==2{print $4}')
-echo "Available space: $available_space MB"
+  echo "Available space: $available_space MB"
   # Check available space
   if [ "$available_space" -lt "4000" ]; then
     echo -e "${RED}Available space is insufficient on SD card${NC}\n"
-	echo "CrossMix-OS update requires 4 GB of free space. Exiting."
+    echo "CrossMix-OS update requires 4 GB of free space. Shutdown now."
+    sleep 10
+    if [ -f /mnt/SDCARD/System/bin/shutdown ]; then
+      /mnt/SDCARD/System/bin/shutdown
+    else
+      poweroff &
+    fi
+    sleep 30
     # infoscreen.sh -m "CrossMix-OS update requires 4 GB of free space." -t 5
     exit 1
   fi
@@ -73,7 +78,6 @@ move_items() {
   /mnt/SDCARD/_Updates
   $UPDATE_FILE
   "
-  
 
   for item in /mnt/SDCARD/*; do
     excluded=0
@@ -130,7 +134,6 @@ else
   echo -ne "${RED}CrossMix v$update_version extraction encountered errors.${NC}\n"
   # infoscreen.sh -m "CrossMix v$update_version extraction encountered errors." -t 5
 fi
-
 
 echo "=========================================================================================="
 echo "            ==============  Restore saves and savestates... =============="
@@ -221,12 +224,16 @@ rm /mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db
 echo "=========================================================================================="
 echo "       ==============  Installation completed, rebooting in 10 seconds... =============="
 
-echo ondemand > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 1008000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo 1008000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo 1008000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo 1008000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 rm /tmp/stay_awake
 sync
 sleep 10
 
-reboot & 
+if [ -f /mnt/SDCARD/System/bin/shutdown ]; then
+  /mnt/SDCARD/System/bin/shutdown -r
+else
+  reboot &
+fi
 sleep 30

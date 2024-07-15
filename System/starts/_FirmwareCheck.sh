@@ -19,7 +19,7 @@ if [ -n "$UPDATE_FILE" ]; then
 	if [ "$(echo "$update_version" | tr -d '.')" -gt "$(echo "$initial_version" | tr -d '.')" ]; then
 		echo "The CrossMix update file (v$update_version) is greater than the current version installed ($initial_version)."
 
-		if [ ! -f "/mnt/SDCARD/trimui/res/crossmix-os/bg_info.png" ] ||
+		if [ ! -f "/mnt/SDCARD/trimui/res/crossmix-os/bg-info.png" ] ||
 			[ ! -f "/mnt/SDCARD/System/bin/sdl2imgshow" ] ||
 			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/crossmix_update.sh" ] ||
 			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" ] ||
