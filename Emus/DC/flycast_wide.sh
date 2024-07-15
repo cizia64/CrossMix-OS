@@ -6,6 +6,7 @@ EMU_DIR=/mnt/SDCARD/Emus/DC
 cd $RA_DIR/
 
 $EMU_DIR/cpufreq.sh
+$EMU_DIR/effect.sh
 
 #disable netplay
 NET_PARAM=
