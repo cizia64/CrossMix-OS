@@ -46,9 +46,6 @@ if [ "$version" != "$FW_patched_version" ]; then
 	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
 
-	# be sure that the PortMaster python install will be triggered
-	rm "/mnt/SDCARD/System/bin/python3"
-
 	# we set the customization flag
 	rm "/usr/trimui/fw_mod_done"
 	echo $version >/usr/trimui/crossmix-version.txt
