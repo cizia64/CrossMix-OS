@@ -43,7 +43,7 @@ if [ -n "$UPDATE_FILE" ]; then
 			cp /mnt/SDCARD/System/bin/text_viewer /tmp
 			# cp /mnt/SDCARD/Apps/Terminal/SimpleTerminal /tmp
 
-			infoscreen.sh -m "Updating CrossMix to v$update_version."
+			infoscreen.sh -m "Updating CrossMix to v$update_version." -t 1
 			pkill -9 preload.sh
 			pkill -9 runtrimui.sh
 			/mnt/SDCARD/System/bin/text_viewer -s "/tmp/crossmix_update.sh" -f 25 -t "                            CrossMix-OS Update v$update_version                                      "
