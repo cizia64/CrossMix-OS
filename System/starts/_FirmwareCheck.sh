@@ -54,7 +54,6 @@ if [ -n "$UPDATE_FILE" ]; then
 	fi
 else
 	echo "No CrossMix update file found."
-	exit
 fi
 
 ################ check min Firmware version required ################
