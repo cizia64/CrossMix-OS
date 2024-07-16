@@ -35,5 +35,5 @@ sync
 
 ######################################################
 
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/mnt/SDCARD/System/lib"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH"
 /bin/sh "$@"
