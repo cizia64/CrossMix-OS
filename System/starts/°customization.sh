@@ -31,8 +31,8 @@ if [ "$version" != "$FW_patched_version" ]; then
 	chmod a+x "/usr/trimui/bin/kill_apps.sh"
 
 	# custom shutdown script, will be called by MainUI
-	cp "/mnt/SDCARD/System/bin/shutdown" "/usr/bin/poweroff"
-	chmod a+x "/usr/bin/poweroff"
+	# cp "/mnt/SDCARD/System/bin/shutdown" "/usr/bin/poweroff"
+	# chmod a+x "/usr/bin/poweroff"
 
 	# modifying default theme to impact all other themes (Better game image background)
 	mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
@@ -51,9 +51,8 @@ if [ "$version" != "$FW_patched_version" ]; then
 		/usr/trimui/bin/systemval bgmvol 10
 	fi
 
-	cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
-
-	# sed -i "s|\"theme\":.*|\"theme\": \"/mnt/SDCARD/Themes/CrossMix - OS/\",|" "$system_json"
+	# modifying performance mode for Moonlight
+	sed -i '/^\.\/moonlightui/i echo performance > \/sys\/devices\/system\/cpu\/cpu0\/cpufreq\/scaling_governor\necho 1500000 > \/sys\/devices\/system\/cpu\/cpu0\/cpufreq\/scaling_min_freq' /usr/trimui/apps/moonlight/launch.sh
 
 	# we set the customization flag
 	rm "/usr/trimui/fw_mod_done"
