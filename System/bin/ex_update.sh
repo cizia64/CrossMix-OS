@@ -51,10 +51,6 @@ if [ ! -f /roms/ports/PortMaster/control.txt ] && [ -f /mnt/SDCARD/Apps/PortMast
     cp /mnt/SDCARD/Apps/PortMaster/PortMaster/control.txt /roms/ports/PortMaster/control.txt
 fi
 
-if [ -f /mnt/SDCARD/Apps/launch.sh ]; then
-    # Fix launcher
-    mv -fv /mnt/SDCARD/Apps/launch.sh /mnt/SDCARD/Apps/PortMaster/launch.sh
-fi
 
 if [ -f "/mnt/SDCARD/Apps/PortMaster/PortMaster/.trimui-refresh" ]; then
   rm -f "/mnt/SDCARD/Apps/PortMaster/PortMaster/.trimui-refresh"

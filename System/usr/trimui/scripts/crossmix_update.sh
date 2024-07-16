@@ -143,7 +143,8 @@ sync
 echo "=========================================================================================="
 echo "    ==============  Decompressing new CrossMix archive, please wait... =============="
 # Install CrossMix new version
-echo "CrossMix arhive decompression lasts at least 4 minutes"
+echo "CrossMix archive decompression lasts at least 4 minutes."
+echo -e "\n\n     !!!!!! Please be patient  !!!!!! \n\n"
 /tmp/7zz x -aoa "$UPDATE_FILE" -o"/mnt/SDCARD"
 sync
 
@@ -192,9 +193,10 @@ restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backu
 restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"     "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
 
 # Restore previous recordings
-restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/" "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
+restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/"      "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
 
-
+# Restore PortMaster squashfs images
+restore_files "PortMaster squashfs images"      "$BCK_DIR/Apps/PortMaster/PortMaster/libs/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/libs/" "*"
 
 
 
