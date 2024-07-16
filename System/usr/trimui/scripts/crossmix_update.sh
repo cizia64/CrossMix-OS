@@ -37,6 +37,27 @@ fi
 mkdir -p "$BCK_DIR"
 sync
 
+restore_files() {
+    NAME="$1"
+    SRC_DIR="$2"
+    DEST_DIR="$3"
+    FILE_PATTERN="$4"
+
+    if [ -z "$FILE_PATTERN" ]; then
+        FILE_PATTERN="*"
+    fi
+        echo "--------------------------------------------"
+    if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
+		echo -e "$NAME: restoring files...\n"
+        mkdir -p "$DEST_DIR"
+        /mnt/SDCARD/System/bin/rsync --stats -av --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
+        sync
+    else
+        echo "$NAME: No files to restore."
+    fi
+}
+
+
 LOG_FILE="/mnt/SDCARD/_Updates/CrossMix_v${update_version}_${timestamp}.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
@@ -137,51 +158,56 @@ fi
 
 echo "=========================================================================================="
 echo "            ==============  Restore saves and savestates... =============="
-# Restore files from backup
 
 # Restore saves and savestates from Retroarch
-cp -r "$BCK_DIR/RetroArch/.retroarch/saves/"* "/mnt/SDCARD/RetroArch/.retroarch/saves/"
-cp -r "$BCK_DIR/RetroArch/.retroarch/states/"* "/mnt/SDCARD/RetroArch/.retroarch/states/"
+restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/SAVEDATA" "*"
+restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/states/" "/mnt/SDCARD/RetroArch/.retroarch/states/" "*"
 
 # Restore PPSSPP 1.15.4 standalone saves and savestates
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/"*_ppsspp.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/"
+restore_files "PPSSPP 1.15.4 saves"             "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"      "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/" "*"
+restore_files "PPSSPP 1.15.4 savestates"        "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/"  "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
+restore_files "PPSSPP 1.15.4 cheats"            "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/"        "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/Cheats/" "*.ini"
+restore_files "PPSSPP 1.15.4 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/"        "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path = 1.0.0)
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"*.dat "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
-cp "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/GAME/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"
-cp -r "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"
-cp "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"*_ppsspp.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
+restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/" "*"
+restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"   "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
+restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*.dat"
+restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/Cheats/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/" "*.ini"
+restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/GAME/"           "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/" "*"
+restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/" "*"
+restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path > 1.1.0)
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"*.dat "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"*.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"
-cp -r "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"* "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"
-cp "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"*_ppsspp.ini "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"
+restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"     "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/" "*"
+restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
+restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*.dat"
+restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/" "*.ini"
+restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/" "*"
+restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"     "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/" "*"
+restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore Drastic saves and savestates
-cp -r "$BCK_DIR/Emus/NDS/drastic/savestates/"* "/mnt/SDCARD/Emus/NDS/drastic/savestates/"
-cp -r "$BCK_DIR/Emus/NDS/drastic/backup/"* "/mnt/SDCARD/Emus/NDS/drastic/backup/"
+restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"         "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
+restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"     "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
 
 # Restore previous recordings
-cp "$BCK_DIR/Apps/ScreenRecorder/output/"*.mp4 "/mnt/SDCARD/Apps/ScreenRecorder/output/"
+restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/" "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
+
+
+
+
 
 repair_rom_path() {
   local src_path=$1
   local dest_path=$2
 
   if [ -d "$src_path" ]; then
-    mkdir -p "$dest_path"
-    mv "$src_path"/* "$dest_path/"
-    rm "$dest_path/"*.db
+    if [ "$(ls -A "$src_path")" ]; then
+      mkdir -p "$dest_path"
+      mv "$src_path"/* "$dest_path/"
+      rm "$dest_path/"*.db
+    fi
     rmdir "$src_path"
   fi
 }
