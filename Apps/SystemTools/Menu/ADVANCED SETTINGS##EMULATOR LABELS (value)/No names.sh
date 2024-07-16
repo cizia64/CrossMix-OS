@@ -28,7 +28,7 @@ for dir in /mnt/SDCARD/Emus/*/; do
   config_file="${dir}config.json"
   if [ -f "$config_file" ]; then
     # Check if the folder is in the database
-    crossmix_name=$(sqlite3 "$db_path" "SELECT crossmix_name FROM systems WHERE crossmix_foldername = '$folder_name'")
+    crossmix_name=$(sqlite3 "$db_path" "SELECT crossmix_name FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
     if [ -n "$crossmix_name" ]; then
       # Generate a string with the current number of spaces
       spaces=$(printf "%*s" $counter "")

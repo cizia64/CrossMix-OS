@@ -21,10 +21,11 @@ for dir in /mnt/SDCARD/Emus/*/; do
     echo "Skipping $folder_name"
     continue
   fi
+  
   config_file="${dir}config.json"
   if [ -f "$config_file" ]; then
     # Retrieve the trimui_name_full_EU from the database
-    trimui_name_full_EU=$(sqlite3 "$db_path" "SELECT trimui_name_full_EU FROM systems WHERE crossmix_foldername = '$folder_name'")
+    trimui_name_full_EU=$(sqlite3 "$db_path" "SELECT trimui_name_full_EU FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
     if [ -n "$trimui_name_full_EU" ]; then
       # Update the label value in the JSON file
       /mnt/SDCARD/System/bin/jq --arg new_label "$trimui_name_full_EU" '.label = $new_label' "$config_file" >/tmp/tmp_config.json && mv /tmp/tmp_config.json "$config_file"
@@ -44,5 +45,5 @@ fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "EMULATOR LABELS" "$script_name"
 
-# Labels has changed so the Emulator selection must be done again:
+# Labels have changed so the Emulator selection must be done again:
 /mnt/SDCARD/Apps/EmuCleaner/launch.sh -s

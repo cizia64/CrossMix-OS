@@ -25,7 +25,7 @@ for dir in /mnt/SDCARD/Emus/*/; do
   config_file="${dir}config.json"
   if [ -f "$config_file" ]; then
     # Retrieve the trimui_name_short_US from the database
-    trimui_name_short_US=$(sqlite3 "$db_path" "SELECT trimui_name_short_US FROM systems WHERE crossmix_foldername = '$folder_name'")
+    trimui_name_short_US=$(sqlite3 "$db_path" "SELECT trimui_name_short_US FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
     if [ -n "$trimui_name_short_US" ]; then
       # Update the label value in the JSON file
       /mnt/SDCARD/System/bin/jq --arg new_label "$trimui_name_short_US" '.label = $new_label' "$config_file" > /tmp/tmp_config.json && mv /tmp/tmp_config.json "$config_file"

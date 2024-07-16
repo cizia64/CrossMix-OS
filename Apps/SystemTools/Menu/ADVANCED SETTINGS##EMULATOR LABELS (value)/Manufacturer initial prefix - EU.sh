@@ -24,18 +24,18 @@ for dir in /mnt/SDCARD/Emus/*/; do
   
   config_file="${dir}config.json"
   if [ -f "$config_file" ]; then
-    # Retrieve the manufacturer and trimui_name_short_US from the database
-    manufacturer=$(sqlite3 "$db_path" "SELECT manufacturer FROM systems WHERE crossmix_foldername = '$folder_name'")
-    trimui_name_short_US=$(sqlite3 "$db_path" "SELECT trimui_name_short_EU FROM systems WHERE crossmix_foldername = '$folder_name'")
-    if [ -n "$manufacturer" ] && [ -n "$trimui_name_short_US" ]; then
+    # Retrieve the manufacturer and trimui_name_short_EU from the database
+    manufacturer=$(sqlite3 "$db_path" "SELECT manufacturer FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
+    trimui_name_short_EU=$(sqlite3 "$db_path" "SELECT trimui_name_short_EU FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
+    if [ -n "$manufacturer" ] && [ -n "$trimui_name_short_EU" ]; then
       # Construct the crossmix_name
       first_three_letters=$(echo "$manufacturer" | cut -c1-3)
-      crossmix_name="$first_three_letters. $trimui_name_short_US"
+      crossmix_name="$first_three_letters. $trimui_name_short_EU"
       # Update the label value in the JSON file
       /mnt/SDCARD/System/bin/jq --arg new_label "$crossmix_name" '.label = $new_label' "$config_file" > /tmp/tmp_config.json && mv /tmp/tmp_config.json "$config_file"
       echo "Updated label in $folder_name to \"$crossmix_name\""
     else
-      echo "No manufacturer or trimui_name_short_US found for folder $folder_name"
+      echo "No manufacturer or trimui_name_short_EU found for folder $folder_name"
     fi
   fi
 done

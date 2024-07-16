@@ -13,25 +13,28 @@ script_name=$(basename "$0" .sh)
 # Path to the SQLite database
 db_path="/mnt/SDCARD/System/usr/trimui/scripts/emulators_list.db"
 
-# Iterate over all config.json files in /mnt/SDCARD/Emus/ and set the label from the database
-find /mnt/SDCARD/Emus/ -type d -exec sh -c '
-  for dir do
+# Iterate over all directories in /mnt/SDCARD/Emus/
+for dir in /mnt/SDCARD/Emus/*/; do
+  folder_name=$(basename "$dir")
+  # Skip directories starting with an underscore
+  if [[ "$folder_name" == _* ]]; then
+    echo "Skipping $folder_name"
+    continue
+  fi
   
-    config_file="$dir/config.json"
-    if [ -f "$config_file" ]; then
-      folder_name=$(basename "$dir")
-      # Retrieve the crossmix_name from the database
-      crossmix_name=$(sqlite3 '"$db_path"' "SELECT crossmix_name FROM systems WHERE crossmix_foldername = \"$folder_name\"")
-      if [ -n "$crossmix_name" ]; then
-        # Update the label value in the JSON file
-        /mnt/SDCARD/System/bin/jq --arg new_label "$crossmix_name" ".label = \$new_label" "$config_file" > /tmp/tmp_config.json && mv /tmp/tmp_config.json "$config_file"
-        echo "Updated label in $folder_name to $crossmix_name"
-      else
-        echo "No crossmix_name found for folder $folder_name"
-      fi
+  config_file="${dir}config.json"
+  if [ -f "$config_file" ]; then
+    # Retrieve the crossmix_name from the database
+    crossmix_name=$(sqlite3 "$db_path" "SELECT crossmix_name FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
+    if [ -n "$crossmix_name" ]; then
+      # Update the label value in the JSON file
+      /mnt/SDCARD/System/bin/jq --arg new_label "$crossmix_name" '.label = $new_label' "$config_file" >/tmp/tmp_config.json && mv /tmp/tmp_config.json "$config_file"
+      echo "Updated label in $folder_name to \"$crossmix_name\""
+    else
+      echo "No crossmix_name found for folder $folder_name"
     fi
-  done
-' sh {} +
+  fi
+done
 
 # Check for the existence of crossmix.json and update it
 json_file="/mnt/SDCARD/System/etc/crossmix.json"

@@ -25,8 +25,8 @@ for dir in /mnt/SDCARD/Emus/*/; do
   config_file="${dir}config.json"
   if [ -f "$config_file" ]; then
     # Retrieve the manufacturer and trimui_name_short_US from the database
-    manufacturer=$(sqlite3 "$db_path" "SELECT manufacturer FROM systems WHERE crossmix_foldername = '$folder_name'")
-    trimui_name_short_US=$(sqlite3 "$db_path" "SELECT trimui_name_short_US FROM systems WHERE crossmix_foldername = '$folder_name'")
+    manufacturer=$(sqlite3 "$db_path" "SELECT manufacturer FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
+    trimui_name_short_US=$(sqlite3 "$db_path" "SELECT trimui_name_short_US FROM systems WHERE crossmix_foldername = '$folder_name' LIMIT 1")
     if [ -n "$manufacturer" ] && [ -n "$trimui_name_short_US" ]; then
       # Construct the crossmix_name
       first_three_letters=$(echo "$manufacturer" | cut -c1-3)
