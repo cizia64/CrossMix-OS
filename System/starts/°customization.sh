@@ -25,6 +25,9 @@ if [ "$version" != "$FW_patched_version" ]; then
 	rm -rf /swapfile
 	mv /bin/busybox.bak /mnt/SDCARD/System/bin 2>/dev/null
 	cp "/mnt/SDCARD/trimui/res/skin/bg.png" "/usr/trimui/res/skin/"
+	
+	# Increase alsa sound buffer
+	cp "/mnt/SDCARD/System/usr/trimui/etc/asound.conf" "/etc/asound.conf"
 
 	# add Pl language + Fr and En mods
 	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
