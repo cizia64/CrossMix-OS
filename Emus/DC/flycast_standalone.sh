@@ -1,6 +1,6 @@
 #!/bin/sh
 echo $0 $*
-#source /mnt/SDCARD/System/usr/trimui/scripts/FolderOverrideFinder.sh
+
 EMU_DIR=/mnt/SDCARD/Emus/DC
 
 $EMU_DIR/cpufreq.sh
