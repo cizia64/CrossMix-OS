@@ -46,7 +46,7 @@ restore_files() {
     if [ -z "$FILE_PATTERN" ]; then
         FILE_PATTERN="*"
     fi
-        echo "--------------------------------------------"
+        echo "------------------------------------------------------------------------------------"
     if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
 		echo -e "$NAME: restoring files...\n"
         mkdir -p "$DEST_DIR"
@@ -137,7 +137,7 @@ echo "Destination directory: $BCK_DIR"
 move_items
 
 # No BIOS should be here... but just in case
-mv "$BCK_DIR/RetroArch/.retroarch/system/"* "/mnt/SDCARD/BIOS" 2>&1
+mv "$BCK_DIR/RetroArch/.retroarch/system/"* "/mnt/SDCARD/BIOS" 2>/dev/null
 sync
 
 echo "=========================================================================================="
@@ -161,7 +161,7 @@ echo "==========================================================================
 echo "            ==============  Restore saves and savestates... =============="
 
 # Restore saves and savestates from Retroarch
-restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/SAVEDATA" "*"
+restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
 restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/states/" "/mnt/SDCARD/RetroArch/.retroarch/states/" "*"
 
 # Restore PPSSPP 1.15.4 standalone saves and savestates

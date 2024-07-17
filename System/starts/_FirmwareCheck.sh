@@ -144,6 +144,7 @@ if [ -n "$UPDATE_FILE" ]; then
 			[ ! -f "/mnt/SDCARD/System/bin/sdl2imgshow" ] ||
 			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/crossmix_update.sh" ] ||
 			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" ] ||
+			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh" ] ||
 			[ ! -f "/mnt/SDCARD/System/usr/trimui/scripts/evtest" ]; then
 			echo "One or more required files are missing."
 			/mnt/SDCARD/System/bin/7zz -aoa x "$UPDATE_FILE" \
