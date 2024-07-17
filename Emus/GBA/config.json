@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/GBA.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/GBA.png",
   "themecolor": "FF00FF",
-  "launch": "launch.sh",
+  "launch": "mgba.sh",
   "rompath": "../../Roms/GBA",
   "imgpath": "../../Imgs/GBA",
   "useswap": 0,

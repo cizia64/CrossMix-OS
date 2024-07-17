@@ -22,6 +22,10 @@
     {
       "name": "QUICKNES",
       "launch": "quicknes.sh"
+    },
+    {
+      "name": "MESEN",
+      "launch": "mesen.sh"
     }
   ]
 }
