@@ -74,14 +74,22 @@ if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 	Current_FW_Version="$(cat /etc/version)"
 	Required_FW_Version=$(sed -n '1p' "$CrossMixFWfile")
 
-	FILE="/bin/busybox"
-	LIMIT=819200
-	FILESIZE=$(ls -l "$FILE" | awk '{print $5}')
 	# Install new busybox from PortMaster, credits : https://github.com/kloptops/TRIMUI_EX
 
-	if [ "$FILESIZE" -lt "$LIMIT" ]; then
-		cp -vf /bin/busybox /bin/busybox.bak
-		cp -vf /mnt/SDCARD/System/usr/trimui/scripts/busybox /bin/busybox
+	Current_busybox_crc=$(crc32 "/bin/busybox" | awk '{print $1}')
+	target_busybox_crc=$(crc32 "/mnt/SDCARD/System/usr/trimui/scripts/busybox" | awk '{print $1}')
+
+	if [ "$Current_busybox_crc" != "$target_busybox_crc" ]; then
+
+		# make some place
+		rm -rf /usr/trimui/apps/zformatter_fat32/
+		rm -rf /usr/trimui/res/sound/bgm2.mp3
+		swapoff -a
+		rm -rf /swapfile
+		cp "/mnt/SDCARD/trimui/res/skin/bg.png" "/usr/trimui/res/skin/"
+
+		cp -vf /bin/busybox /mnt/SDCARD/System/bin/busybox.bak
+		/mnt/SDCARD/System/bin/rsync /mnt/SDCARD/System/usr/trimui/scripts/busybox /bin/busybox
 		ln -vs "/bin/busybox" "/bin/bash"
 
 		# Create missing busybox commands

@@ -19,6 +19,13 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
 
+	# making some place in root fs
+	rm -rf /usr/trimui/res/sound/bgm2.mp3
+	swapoff -a
+	rm -rf /swapfile
+	mv /bin/busybox.bak /mnt/SDCARD/System/bin 2>/dev/null
+	cp "/mnt/SDCARD/trimui/res/skin/bg.png" "/usr/trimui/res/skin/"
+
 	# add Pl language + Fr and En mods
 	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
 		cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
@@ -35,7 +42,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# chmod a+x "/usr/bin/poweroff"
 
 	# modifying default theme to impact all other themes (Better game image background)
-	mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
+	# mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
 	cp "/mnt/SDCARD/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580.png"
 
 	# modifying FN cpu script (don't force slow cpu, only force high speed when FN is set to ON) (and we set it as default)
@@ -52,8 +59,10 @@ if [ "$version" != "$FW_patched_version" ]; then
 	fi
 
 	# modifying performance mode for Moonlight
-	sed -i '/^\.\/moonlightui/i echo performance > \/sys\/devices\/system\/cpu\/cpu0\/cpufreq\/scaling_governor\necho 1500000 > \/sys\/devices\/system\/cpu\/cpu0\/cpufreq\/scaling_min_freq' /usr/trimui/apps/moonlight/launch.sh
 
+	if ! grep -qF "performance" "/usr/trimui/apps/moonlight/launch.sh"; then
+		sed -i 's|^\./moonlightui|echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor\necho 1608000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n\./moonlightui|' /usr/trimui/apps/moonlight/launch.sh
+	fi
 	# we set the customization flag
 	rm "/usr/trimui/fw_mod_done"
 	echo $version >/usr/trimui/crossmix-version.txt

@@ -28,8 +28,8 @@ mkdir -p /etc/ssl/certs/
 cp -vf "$UPDATE_DIR/ca-certificates.crt" /etc/ssl/certs/
 
 # Install new busybox
-cp -vf /bin/busybox /bin/busybox.bak
-cp -vf "$UPDATE_DIR/busybox" /bin/busybox
+cp -vf /bin/busybox /mnt/SDCARD/System/bin/busybox.bak
+/mnt/SDCARD/System/bin/rsync /mnt/SDCARD/System/usr/trimui/scripts/busybox /bin/busybox
 
 ln -vs "/bin/busybox" "/bin/bash"
 
