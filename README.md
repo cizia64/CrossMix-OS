@@ -61,8 +61,10 @@ The following folders are not modified during the update:
 - SDCARD/Best
 - SDCARD/Imgs
 - SDCARD/Roms
+
 The automatic update process will move your previous files in "SDCARD/_Updates" folder. You'll also find the migration log in this directory.
 The saves/savestates from Retroarch, PPSSPP, Drastic are automatically copied from the backup to the new installation.
+After an update, it is recommended to keep this "_Updates" folder for some time. Once you have spent some time on CrossMix and verified that all your saves are functional, you can delete this "_update" directory to free up storage space on your SD card.
 
 ## **To migrate from an another OS version (Stock/Tomato)**
 
