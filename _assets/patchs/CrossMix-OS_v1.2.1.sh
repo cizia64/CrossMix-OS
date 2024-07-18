@@ -18,6 +18,23 @@ if [ "$Current_asound_conf" = "d6a69715" ]; then
 	exit
 fi
 
+rm -rf /usr/trimui/res/sound/bgm2.mp3
+swapoff -a
+rm -rf /swapfile
+
+minspace=$((20 * 1024)) # 20 MB
+rootfs_space=$(df / | awk 'NR==2 {print $4}')
+
+if [ "$rootfs_space" -lt "$minspace" ]; then
+	echo -ne "${RED}Error: Available space on internal storage is less than 20 MB${NC}\n"
+	echo "Free up some space on rootFS / internal storage then try again."
+	sleep 6
+	exit 1
+else
+	echo -e "${GREEN}Available space on / is sufficient: ${rootfs_space} KB${NONE}"
+fi
+sleep 1
+
 GITHUB_REPOSITORY=cizia64/CrossMix-OS
 version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 url="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/_assets/patchs/CrossMix-OS_v$version.zip"
@@ -35,7 +52,7 @@ if [ -f "/tmp/CrossMix-OS_v$version.zip" ]; then
 	if [ $? -eq 0 ]; then
 		echo -e "${GREEN}Patch v$version successful. Rebooting now${NC}"
 		rm "/tmp/CrossMix-OS_v$version.zip"
-		sleep 5
+		sleep 6
 		if [ -f /mnt/SDCARD/System/bin/shutdown ]; then
 			/mnt/SDCARD/System/bin/shutdown -r
 		else
