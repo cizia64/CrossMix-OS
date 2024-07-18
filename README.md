@@ -40,7 +40,7 @@ All components of CrossMix-OS are free and open source.
 # Installation & Update
 
 ## **To make a fresh install:**
-- Format your SD card in FAT32. (use a genuine, name-brand SD card and not the stock one sold with your console)*
+- Format your SD card in FAT32. (⚠ use a genuine, name-brand SD card and not the stock one sold with your console)*
 - Download the [latest release of CrossMix-OS](https://github.com/cizia64/CrossMix-OS/releases/latest) (in the "assets", at the bottom of the release page, look for "CrossMix-OS_v1.x.x.zip")
 - Extract the archive to the root of your formatted SD card.
 - Copy your BIOS files into the `BIOS` folder (on stock SD card copy it from `RetroArch/.retroarch/system` to `BIOS` folder)
@@ -49,12 +49,15 @@ All components of CrossMix-OS are free and open source.
 
 
 ## **To update from a previous CrossMix Version**
-- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors)
+- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors) (⚠ use a genuine, name-brand SD card and not the stock one sold with your console)
 - Copy the archive "CrossMix-OS_v1.x.x.zip" (not decompressed) on SD card root
-- update the file `_FirmwareCheck.sh` located in `System/starts` with the new version from the archive "CrossMix-OS_v1.x.x.zip" or [from here](https://raw.githubusercontent.com/cizia64/CrossMix-OS/main/System/starts/_FirmwareCheck.sh)], that's all.
+- ⚠ Update the file `_FirmwareCheck.sh` located in `System/starts` with the new version from the archive "CrossMix-OS_v1.x.x.zip" or [from here](https://raw.githubusercontent.com/cizia64/CrossMix-OS/main/System/starts/_FirmwareCheck.sh)⚠.
 - At reboot the update will be automatically installed
 
-Notes about the automatic update:
+### Notes about the automatic update:
+
+The decompression time is around 4 minutes with a good SD card (it can be longer depending the SD quality).
+
 The following folders are not modified during the update: 
 - SDCARD/Data
 - SDCARD/BIOS
@@ -63,7 +66,9 @@ The following folders are not modified during the update:
 - SDCARD/Roms
 
 The automatic update process will move your previous files in "SDCARD/_Updates" folder. You'll also find the migration log in this directory.
+
 The saves/savestates from Retroarch, PPSSPP, Drastic are automatically copied from the backup to the new installation.
+
 After an update, it is recommended to keep this "_Updates" folder for some time. Once you have spent some time on CrossMix and verified that all your saves are functional, you can delete this "_update" directory to free up storage space on your SD card.
 
 ## **To migrate from an another OS version (Stock/Tomato)**
