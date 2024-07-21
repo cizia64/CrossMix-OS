@@ -1,10 +1,10 @@
 {
-  "label": "SEGA DC",
-  "icon": "/mnt/SDCARD/Icons/Default/Emus/DC.png",
+  "label": "                        ",
+  "icon": "/mnt/SDCARD/Icons/Burst!/Emus/DC.png",
   "iconsmall": "ic-dc-small.png",
   "iconlist": "ic-dc-list.png",
   "effectsh": "effect.sh",
-  "background": "/mnt/SDCARD/Backgrounds/Default/DC.png",
+  "background": "/mnt/SDCARD/Backgrounds/Burst!/DC.png",
   "themecolor": "FFFFFF",
   "launch": "flycast.sh",
   "rompath": "../../Roms/DC",
@@ -23,6 +23,10 @@
     },
     {
       "name": "Flycast (Standalone)",
+      "launch": "flycast_standalone.sh"
+    },
+    {
+      "name": "Flycast (KMFD Xtreme)",
       "launch": "flycast_standalone.sh"
     }
   ]
