@@ -2,34 +2,26 @@
 
 export PATH="$PATH:/mnt/SDCARD/System/usr/trimui/scripts"
 export HOME="/mnt/SDCARD/RetroArch"
+export TOOL_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS##STANDALONES RETROACHIEVEMENTS/"
 
-button=$(infoscreen.sh -m "You will login to retroachievements with ppsspp standalone.\n\
-This require that you have already setup your username and password in retroarch\n\
-Press A to continue, B to cancel operation." -k "A B" -fs 30)
-
-if [ "$button" = "B" ]; then
-    exit 0
-fi
-
-if ! ping -q -c 1 -W 1 retroachievements.org > /dev/null; then
-    infoscreen.sh -m "No network connection! Please connect to the internet first." -k "A B START MENU" -fs 30
-    exit 1
+if ! ping -q -c 1 -W 1 retroachievements.org >/dev/null; then
+	infoscreen.sh -m "No network connection! Please connect to the internet first." -k "A B START MENU" -fs 30
+	exit 1
 fi
 
 mkdir -p /mnt/SDCARD/tmp
 cd /mnt/SDCARD/tmp
 
-
 ConfigFile="./retroarch.cfg"
 
 cp /mnt/SDCARD/RetroArch/retroarch.cfg "$ConfigFile"
 
-Username=$(grep "^cheevos_username" "$ConfigFile"| cut -d '"' -f 2)
+Username=$(grep "^cheevos_username" "$ConfigFile" | cut -d '"' -f 2)
 Password=$(grep "^cheevos_password" "$ConfigFile" | cut -d '"' -f 2)
 
 if [ -z "$Username" ] || [ -z "$Password" ]; then
-	infoscreen.sh -m "Username or password not found! Please set them in RetroArch app first." -k "A B START MENU" -fs 30
-	exit 1
+	infoscreen.sh -m "Username or password not found! Please please connect retroarch first." -k "A B START MENU" -fs 30
+    exit 0
 fi
 
 sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "$ConfigFile"
@@ -40,7 +32,7 @@ sleep 5
 pkill -f ra64.trimui
 sleep 5
 
-Token=$(grep "^cheevos_token" "$ConfigFile"| cut -d '"' -f 2)
+Token=$(grep "^cheevos_token" "$ConfigFile" | cut -d '"' -f 2)
 
 if [ -z "$Token" ]; then
 	infoscreen.sh -m "Failed to get cheevos token! Please check your username and password." -k "A B START MENU" -fs 30
@@ -53,7 +45,7 @@ echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppss
 
 rm -rf .retroarch
 rm -f content_*
-rm -f $ConfigFile
+mv "$ConfigFile" /mnt/SDCARD/RetroArch/retroarch.cfg
 
 infoscreen.sh -m "RetroAchievements credentials set successfully for PPSSPP!" -k "A B START MENU" -fs 30
 
