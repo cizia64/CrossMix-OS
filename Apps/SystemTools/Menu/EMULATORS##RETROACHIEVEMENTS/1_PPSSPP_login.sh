@@ -45,7 +45,7 @@ echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppss
 
 rm -rf .retroarch
 rm -f content_*
-mv "$ConfigFile" /mnt/SDCARD/RetroArch/retroarch.cfg
+rm -f retroarch.cfg
 
 infoscreen.sh -m "RetroAchievements credentials set successfully for PPSSPP!" -k "A B START MENU" -fs 30
 
