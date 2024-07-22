@@ -39,11 +39,6 @@ write_entry() {
 for subfolder in "$EmuFolder"/*/; do
   # Skip folders that start with an underscore
 
-  subfolder_name="$(basename "$subfolder")"
-  if [ "$(basename "$subfolder" | cut -c1)" = "_" ]; then
-    continue
-  fi
-
   if [ -f "$subfolder/config.json" ]; then
     # Retrieve multiple values with a single jq command
     IFS="|" read -r rompath label extlist <<EOF
@@ -60,6 +55,13 @@ EOF
       ;;
     esac
 
+    subfolder_name="$(basename "$subfolder")"
+    if [ "$(echo "$subfolder_name" | cut -c1)" = "_" ]; then
+      echo "Removing $label emulator (!! Exception for \"$subfolder_name\" !!)."
+      write_entry "$label" 0
+      continue
+    fi
+
     # Construct the find command based on extlist
     if [ -z "$extlist" ] || [ "$extlist" = "null" ]; then
       find_cmd="find \"$RomPath\" -type f ! -name '*.db' ! -name '.gitkeep' ! -name '*.launch' -mindepth 1 -maxdepth 2"
@@ -69,11 +71,11 @@ EOF
     fi
 
     if eval "$find_cmd -print -quit" | grep -q .; then
-      echo "Adding $label emulator (roms found in $subfolder_name folder)."
+      echo "Adding $label emulator (roms found in \"$subfolder_name\" folder)."
       write_entry "$label" 1
       NumAdded=$((NumAdded + 1))
     else
-      echo "Removing $label emulator (! no roms in $subfolder_name folder !)."
+      echo "Removing $label emulator (!! no roms in \"$subfolder_name\" folder !!)."
       write_entry "$label" 0
       NumRemoved=$((NumRemoved + 1))
     fi
@@ -93,7 +95,7 @@ fi
 sync
 
 echo -ne "\n=============================\n"
-echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
+echo -ne "${NumAdded} displayed emulator(s)\n${NumRemoved} hidden emulator(s)\n"
 echo -ne "=============================\n\n"
 
 if [ "$silent" = false ]; then
