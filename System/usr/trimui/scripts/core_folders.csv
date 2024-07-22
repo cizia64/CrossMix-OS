@@ -14,6 +14,7 @@ chailove_libretro.so;ChaiLove;
 craft_libretro.so;Craft;
 crocods_libretro.so;crocods;
 daphne_libretro.so;Daphne;
+km_daphne_xtreme_libretro.so;Daphne Xtreme;
 desmume2015_libretro.so;DeSmuME 2015;
 dinothawr_libretro.so;Dinothawr;
 dosbox_libretro.so;DOSBox;
