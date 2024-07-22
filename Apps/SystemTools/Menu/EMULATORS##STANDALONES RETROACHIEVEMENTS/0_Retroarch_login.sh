@@ -19,7 +19,10 @@ fi
 
 infoscreen.sh -m "Terminal will open to set your credentials. Press X to open keyboard and L to shift." -k "A B START MENU" -fs 30
 
-cat <<'EOF' >/tmp/tmp.sh
+pipe=/tmp/fifo
+mkfifo "$pipe"
+(
+	cat <<'EOF'
 #!/usr/bin/env sh
 
 escape_string() {
@@ -38,7 +41,7 @@ Password=$(escape_string "$tmp")
 sed -i "s/^cheevos_password.*/cheevos_password = \"$Password\"/" "$ConfigFile"
 exit 0
 EOF
-chmod +x /tmp/tmp.sh
+) >"$pipe" &
 
-/mnt/SDCARD/Apps/Terminal/SimpleTerminal -e "/tmp/tmp.sh"
-rm -f /tmp/tmp.sh
+/mnt/SDCARD/Apps/Terminal/SimpleTerminal -e "sh $pipe"
+rm -f $pipe
