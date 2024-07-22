@@ -15,6 +15,7 @@ Current_asound_conf=$(crc32 "/etc/asound.conf" | awk '{print $1}')
 
 if [ "$Current_asound_conf" = "d6a69715" ]; then
 	echo -e "${GREEN}Patch not necessary or already applied.${NC}"
+	sleep 3
 	exit
 fi
 

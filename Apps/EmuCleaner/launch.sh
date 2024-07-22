@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 PATH="/mnt/SDCARD/System/bin:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
+# Configuring CPU performance
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 1416000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
@@ -13,7 +15,6 @@ for arg in "$@"; do
 done
 
 EmuCleanerPath="$(dirname "$0")/"
-RomsFolder="/mnt/SDCARD/Roms"
 EmuFolder="/mnt/SDCARD/Emus"
 json_file="/mnt/SDCARD/Emus/show.json"
 
@@ -21,71 +22,72 @@ NumRemoved=0
 NumAdded=0
 
 if [ "$silent" = false ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background.jpg"
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background.jpg"
 fi
 
+# Initialize an empty string to store JSON entries
+json_entries=""
+
 write_entry() {
-  label="$1"
-  show="$2"
-  echo "{"
-  echo -e "\t\"label\": \"$label\","
-  echo -e "\t\"show\": $show"
-  echo "},"
+  local label="$1"
+  local show="$2"
+  entry=$(printf '{"label": "%s", "show": %d},' "$label" "$show")
+  json_entries="$json_entries$entry"
 }
 
-echo "[" >$json_file
+# Check if some emulators must be hidden from /mnt/SDCARD/Emus
+for subfolder in "$EmuFolder"/*/; do
+  # Skip folders that start with an underscore
 
-# We check if some emulators must be hidden from /mnt/SDCARD/Emus
-for subfolder in $EmuFolder/*/; do
-  # Check if the config.json file exists
+  subfolder_name="$(basename "$subfolder")"
+  if [ "$(basename "$subfolder" | cut -c1)" = "_" ]; then
+    continue
+  fi
+
   if [ -f "$subfolder/config.json" ]; then
-    # Extract the rompath, label, and extlist from the config.json using jq
-    RomPath=$(jq -r '.rompath' "$subfolder/config.json")
-    RomFolderName=$(basename "$RomPath")
+    # Retrieve multiple values with a single jq command
+    IFS="|" read -r rompath label extlist <<EOF
+$(jq -r '. | "\(.rompath)|\(.label)|\(.extlist)"' "$subfolder/config.json")
+EOF
 
-    Label=$(jq -r '.label' "$subfolder/config.json")
-    ExtList=$(jq -r '.extlist' "$subfolder/config.json")
+    # Convert rompath to an absolute path if it is relative
+    case "$rompath" in
+    /*) # Absolute path, use as is
+      RomPath="$rompath"
+      ;;
+    *) # Relative path, convert to absolute
+      RomPath=$(realpath "$subfolder/$rompath")
+      ;;
+    esac
 
-    echo "--$Label--"
-
-    # Build the find command with extensions from extlist
-    if [ -z "$ExtList" ] || [ "$ExtList" = "null" ]; then
-      find_cmd="find \"$RomsFolder/$RomFolderName\" '!' -name '*.db' '!' -name '.gitkeep' '!' -name '*.launch' -mindepth 1 -maxdepth 2"
+    # Construct the find command based on extlist
+    if [ -z "$extlist" ] || [ "$extlist" = "null" ]; then
+      find_cmd="find \"$RomPath\" -type f ! -name '*.db' ! -name '.gitkeep' ! -name '*.launch' -mindepth 1 -maxdepth 2"
     else
-      set -- $(echo $ExtList | tr '|' ' ')
-      find_cmd="find \"$RomsFolder/$RomFolderName\""
-      first=1
-      for ext in "$@"; do
-        if [ $first -eq 1 ]; then
-          find_cmd="$find_cmd -iname '*.$ext'"
-          first=0
-        else
-          find_cmd="$find_cmd -o -iname '*.$ext'"
-        fi
-      done
-      find_cmd="$find_cmd '!' -name '*.launch' -mindepth 1 -maxdepth 2"
+      exts=$(echo "$extlist" | tr '|' ' ')
+      find_cmd="find \"$RomPath\" -type f \( $(printf " -iname '*.%s' -o" $exts | sed 's/ -o$//') \) ! -name '*.launch' -mindepth 1 -maxdepth 2"
     fi
 
-    # Check if the ROM folder contains any files with the specified extensions
-    if ! eval "$find_cmd | read"; then
-      echo "Removing $Label emulator (no roms in $RomFolderName folder)."
-      write_entry "$Label" 0 >>$json_file
-      NumRemoved=$((NumRemoved + 1))
-    else
-      echo "Adding $Label emulator (roms found in $RomFolderName folder)."
-      write_entry "$Label" 1 >>$json_file
+    if eval "$find_cmd -print -quit" | grep -q .; then
+      echo "Adding $label emulator (roms found in $subfolder_name folder)."
+      write_entry "$label" 1
       NumAdded=$((NumAdded + 1))
+    else
+      echo "Removing $label emulator (! no roms in $subfolder_name folder !)."
+      write_entry "$label" 0
+      NumRemoved=$((NumRemoved + 1))
     fi
   fi
 done
 
-sed -i '$ s/,$//' $json_file
-echo "]" >>$json_file
+# Remove the trailing comma and format with jq
+json_content=$(echo "[${json_entries%,}]" | jq '.')
+
+echo "$json_content" >"$json_file"
 sync
 
 if [ "$silent" = false ]; then
-	# Refresh Emus list
-	jq '(.list[].tabstate[] | select(has("pagestart"))).pagestart = 0 | (.list[].tabstate[] | select(has("pageend"))).pageend = 7' /tmp/state.json >/tmp/state.tmp && mv /tmp/state.tmp /tmp/state.json
+  jq '(.list[].tabstate[] | select(has("pagestart"))).pagestart = 0 | (.list[].tabstate[] | select(has("pageend"))).pageend = 7' /tmp/state.json >/tmp/state.tmp && mv /tmp/state.tmp /tmp/state.json
 fi
 
 sync
@@ -95,5 +97,5 @@ echo -ne "${NumRemoved} hidden emulator(s)\n${NumAdded} displayed emulator(s)\n"
 echo -ne "=============================\n\n"
 
 if [ "$silent" = false ]; then
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background-info.jpg" -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2.5
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background-info.jpg" -m "${NumAdded} displayed emulator(s).      ${NumRemoved} hidden emulator(s)." -t 2.5
 fi
