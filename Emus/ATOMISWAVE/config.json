@@ -6,7 +6,7 @@
   "effectsh": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/ATOMISWAVE.png",
   "themecolor": "FFFFFF",
-  "launch": "launch.sh",
+  "launch": "flycast.sh",
   "rompath": "../../Roms/ATOMISWAVE",
   "imgpath": "../../Imgs/ATOMISWAVE",
   "useswap": 1,
@@ -15,11 +15,11 @@
   "launchlist": [
     {
       "name": "Flycast (Libretro)",
-      "launch": "launch.sh"
+      "launch": "flycast.sh"
     },
     {
       "name": "Flycast (Standalone)",
-      "launch": "launch_standalone.sh"
+      "launch": "flycast_standalone.sh"
     }
   ]
 }
