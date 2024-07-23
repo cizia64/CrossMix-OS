@@ -1,4 +1,6 @@
 #!/bin/sh
+source /mnt/SDCARD/System/usr/trimui/scripts/launchers/common_launcher.sh
+cpufreq.sh conservative 0 6
 
 # Check the number of arguments
 if [ $# -ne 1 ]; then
@@ -15,7 +17,7 @@ root_directory=$(realpath "/mnt/SDCARD/Roms/MUSIC")
 
 if [ "$mp3_directory" = "$root_directory" ]; then
   echo "The given directory is the root directory. No playlist will be created."
-  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "The given directory is the MUSIC root directory. No playlist will be created." -fs 25 -t 3
+  infoscreen.sh -m "The given directory is the MUSIC root directory. No playlist will be created." -fs 25 -t 3
   exit 0
 fi
 
@@ -25,7 +27,7 @@ PARENT_DIR=$(dirname "$mp3_directory")
 TARGET_PLAYLIST_FILE="$PARENT_DIR/$(basename "$mp3_directory").m3u"
 PLAYLIST_FILE="$mp3_directory/$(basename "$mp3_directory").m3u"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Building playlist for $MUSIC_DIR folder." -fs 25
+infoscreen.sh -m "Building playlist for $MUSIC_DIR folder." -fs 25
 
 # Create the .m3u file
 echo "#EXTM3U" >"$PLAYLIST_FILE"
@@ -41,7 +43,7 @@ done
 sync
 sleep 1
 sync
-/mnt/SDCARD/Emus/MUSIC/cover_extract.sh "$1"
+./cover_extract.sh "$1"
 sync
 mv "$PLAYLIST_FILE" "$TARGET_PLAYLIST_FILE"
 rm /mnt/SDCARD/Roms/MUSIC/MUSIC_cache7.db

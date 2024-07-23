@@ -14,11 +14,11 @@
   "launchlist": [
     {
       "name": "FB ALPHA 2012",
-      "launch": "launch.sh"
+      "launch": "fba.sh"
     },
     {
       "name": "FB NEO",
-      "launch": "launch_fbneo.sh"
+      "launch": "fbneo.sh"
     }
   ]
 }

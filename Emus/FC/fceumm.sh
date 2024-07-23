@@ -1,15 +1,9 @@
 #!/bin/sh
-echo $0 $*
-source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/FC
-
-$EMU_DIR/cpufreq.sh
-
-
-cd $RA_DIR/
+source /mnt/SDCARD/System/usr/trimui/scripts/lauchers/common_launcher.sh
+cpufreq.sh ondemand 1 6
 
 #disable netplay
 NET_PARAM=
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/fceumm_libretro.so "$@"
+cd "$RA_DIR"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/fceumm_libretro.so "$@"

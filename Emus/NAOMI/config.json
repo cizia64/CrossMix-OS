@@ -15,11 +15,11 @@
   "launchlist": [
     {
       "name": "Flycast (Libretro)",
-      "launch": "launch.sh"
+      "launch": "flycast.sh"
     },
     {
       "name": "Flycast (Standalone)",
-      "launch": "launch_standalone.sh"
+      "launch": "flycast_standalone.sh"
     }
   ]
 }

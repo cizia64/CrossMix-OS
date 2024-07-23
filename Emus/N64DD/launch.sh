@@ -1,20 +1,19 @@
 #!/bin/sh
 
-echo $0 $*
+source /mnt/SDCARD/System/usr/trimui/scripts/launchers/common_launcher.sh
+cpufreq.sh ondemand 5 7
 
-EMU_DIR=/mnt/SDCARD/Emus/N64/mupen64plus
-CONFDIR="$EMU_DIR/conf/"
-mkdir -p "$EMU_DIR/conf"
+cd mnt/SDCARD/Emus/N64/mupen64plus
+
+CONFDIR="$PWD/conf/"
+mkdir -p conf
 export XDG_CONFIG_HOME="$CONFDIR"
 export XDG_DATA_HOME="$CONFDIR"
 export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
 
-./performance.sh
-PWD=$PWD
-cd $EMU_DIR/
 
-PATH=$PWD:$EMU_DIR:$PATH
-export LD_LIBRARY_PATH=$PWD/libs:$EMU_DIR/libs:$LD_LIBRARY_PATH
+PATH=$PWD:$PATH
+export LD_LIBRARY_PATH="$PWD/libs:$LD_LIBRARY_PATH"
 
 case "$*" in
     *.n64|*.v64|*.z64|*.ndd) 
@@ -23,12 +22,12 @@ case "$*" in
     *.zip|*.7z)
         TEMP_ROM=$(mktemp)
         ROM_PATH="$TEMP_ROM"
-        /mnt/SDCARD/System/bin/7zz e "$*" -so > "$TEMP_ROM"
+        7zz e "$*" -so > "$TEMP_ROM"
         ;;
 esac
 
-echo $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" 
-$EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" &
+echo gptokeyb -k mupen64plus -c "./defkeys.gptk" 
+/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb -k mupen64plus -c "./defkeys.gptk" &
 
 ./mupen64plus "$ROM_PATH" 2>&1
 

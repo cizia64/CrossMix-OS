@@ -1,19 +1,19 @@
 #!/bin/sh
-echo $0 $*
-progdir=$(dirname "$0")
+source /mnt/SDCARD/System/usr/trimui/scripts/launchers/common_launcher.sh
+cpufreq.sh conservative 0 6
+
 mp3_directory=$(dirname "$1")
 
-tkdir=/mnt/SDCARD/Apps/ScreencapTK
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/trimui/lib/:$tkdir/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/SDCARD/Apps/ScreencapTK/lib
 mp3_directory=$(realpath "$mp3_directory")
 
 if [ "$mp3_directory" = "/mnt/SDCARD/Roms/MUSIC" ]; then
     echo "The given directory is the root directory. Please create a subfolder."
-    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "The given directory is the MUSIC root directory. Please create a dedicated subfolder." -fs 25 -t 3
+    infoscreen.sh -m "The given directory is the MUSIC root directory. Please create a dedicated subfolder." -fs 25 -t 3
     exit 0
 fi
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Cover extraction. Please wait..." -fs 25
+infoscreen.sh -m "Cover extraction. Please wait..." -fs 25
 
 # Directories
 # mp3_directory="/mnt/SDCARD/Roms/MUSIC" #debug

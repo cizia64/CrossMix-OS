@@ -5,7 +5,7 @@
   "iconlist": "ic-n64-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/N64.png",
   "themecolor": "FFFF88",
-  "launch": "paralleln64.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/N64",
   "imgpath": "../../Imgs/N64",
   "useswap": 1,
@@ -18,15 +18,15 @@
       "launch": ""
     },
     {
-      "name": "ParaLLEl N64                                 ",
+      "name": "ParaLLEl N64",
       "launch": "paralleln64.sh"
     },
     {
-      "name": "Mupen64Plus                                 ",
+      "name": "Mupen64Plus",
       "launch": "mupen64plus.sh"
     },
     {
-      "name": "Mupen64Plus (16:9)                      ",
+      "name": "Mupen64Plus (16:9)",
       "launch": "mupen64plus_wide.sh"
     },
     {
@@ -34,7 +34,7 @@
       "launch": ""
     },
     {
-      "name": "Mupen64Plus (glide64mk2)           ",
+      "name": "Mupen64Plus (glide64mk2)",
       "launch": "mupen64plus_standalone.sh"
     },
     {
@@ -42,7 +42,7 @@
       "launch": "mupen64plus_standalone.sh"
     },
     {
-      "name": "Mupen64Plus (Rice)                       ",
+      "name": "Mupen64Plus (Rice)",
       "launch": "mupen64plus_standalone.sh"
     }
   ]

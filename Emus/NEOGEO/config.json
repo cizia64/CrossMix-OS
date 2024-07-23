@@ -5,7 +5,7 @@
   "iconlist": "ic-neogeo-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/NEOGEO.png",
   "themecolor": "FFD200",
-  "launch": "launch.sh",
+  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
   "rompath": "../../Roms/NEOGEO",
   "imgpath": "../../Imgs/NEOGEO",
   "gamelist": "../../Roms/NEOGEO/gamelist.xml",
@@ -16,11 +16,11 @@
   "launchlist": [
     {
       "name": "FB NEO",
-      "launch": "launch.sh"
+      "launch": "finalburn.sh"
     },
     {
       "name": "FB ALPHA 2012",
-      "launch": "launch.sh"
+      "launch": "finalburn.sh"
     }
   ]
 }

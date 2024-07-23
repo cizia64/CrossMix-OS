@@ -1,16 +1,15 @@
 #!/bin/sh
-echo $0 $*
+source /mnt/SDCARD/System/usr/trimui/scripts/launchers/common_launcher.sh
+cpufreq.sh performance 7 7
 
-EMU_DIR=/mnt/SDCARD/Emus/DC
+./effect.sh
 
-$EMU_DIR/cpufreq.sh
-$EMU_DIR/effect.sh
 
-cd "$EMU_DIR/flycast"
+cd flycast
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LS_LIBRARY_PARH:}lib
 export FLYCAST_BIOS_DIR="/mnt/SDCARD/BIOS/dc/"
 export FLYCAST_DATA_DIR=$FLYCAST_BIOS_DIR
-export FLYCAST_CONFIG_DIR="$EMU_DIR/flycast/config/"
+export FLYCAST_CONFIG_DIR="$PWD/config/"
 
 ./flycast "$@"

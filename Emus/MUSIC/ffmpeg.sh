@@ -1,8 +1,6 @@
 #!/bin/sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/VIDEOS
-cd $RA_DIR/
+source /mnt/SDCARD/System/usr/trimui/scripts/launchers/common_launcher.sh
+cpufreq.sh conservative 0 6
 
-$EMU_DIR/cpufreq.sh
-
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -L $RA_DIR/.retroarch/cores/ffmpeg_libretro.so "$@"
+cd "$RA_DIR"
+HOME="$PWD" ./ra64.trimui -L .retroarch/cores/ffmpeg_libretro.so "$@"
