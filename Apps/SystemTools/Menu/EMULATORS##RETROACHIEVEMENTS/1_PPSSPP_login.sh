@@ -5,7 +5,7 @@ export HOME="/mnt/SDCARD/RetroArch"
 export TOOL_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS##STANDALONES RETROACHIEVEMENTS/"
 
 if ! ping -q -c 1 -W 1 retroachievements.org >/dev/null; then
-	infoscreen.sh -m "No network connection! Please connect to the internet first." -k "A B START MENU" -fs 30
+	infoscreen.sh -m "No network connection! Please connect to the internet first." -k "A B START MENU" -fs 22
 	exit 1
 fi
 
@@ -20,13 +20,13 @@ Username=$(grep "^cheevos_username" "$ConfigFile" | cut -d '"' -f 2)
 Password=$(grep "^cheevos_password" "$ConfigFile" | cut -d '"' -f 2)
 
 if [ -z "$Username" ] || [ -z "$Password" ]; then
-	infoscreen.sh -m "Username or password not found! Please please connect retroarch first." -k "A B START MENU" -fs 30
-    exit 0
+	infoscreen.sh -m "Username or password not found! Please please connect retroarch first." -k "A B START MENU" -fs 22
+	exit 0
 fi
 
 sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "$ConfigFile"
 
-infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 15
+infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 22
 $HOME/ra64.trimui -L "$HOME/.retroarch/cores/mgba_libretro.so" -c "$ConfigFile" "/mnt/SDCARD/Best/Free Games Collection/Roms/GBA/SpaceTwins.zip" &
 sleep 5
 pkill -f ra64.trimui
@@ -35,7 +35,7 @@ sleep 5
 Token=$(grep "^cheevos_token" "$ConfigFile" | cut -d '"' -f 2)
 
 if [ -z "$Token" ]; then
-	infoscreen.sh -m "Failed to get cheevos token! Please check your username and password." -k "A B START MENU" -fs 30
+	infoscreen.sh -m "Failed to get cheevos token! Please check your username and password." -k "A B START MENU" -fs 22
 	exit 1
 fi
 
@@ -47,6 +47,6 @@ rm -rf .retroarch
 rm -f content_*
 rm -f retroarch.cfg
 
-infoscreen.sh -m "RetroAchievements credentials set successfully for PPSSPP!" -k "A B START MENU" -fs 30
+infoscreen.sh -m "RetroAchievements credentials set successfully for PPSSPP!" -k "A B START MENU" -fs 22
 
 exit 0

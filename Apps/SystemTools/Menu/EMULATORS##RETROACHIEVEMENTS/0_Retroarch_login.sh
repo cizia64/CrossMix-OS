@@ -10,14 +10,14 @@ if [ -n "$Username" ]; then
 	button=$(
 		infoscreen.sh -m "Username $Username is already set.\
 Do you want to onverwrite it?\
-A: Yes; B: No" -k "A B" -fs 30
+A: Yes; B: No" -k "A B" -fs 22
 	)
 	if [ "$button" = "B" ]; then
 		exit 0
 	fi
 fi
 
-infoscreen.sh -m "Terminal will open to set your credentials. Press X to open keyboard and L to shift." -k "A B START MENU" -fs 30
+infoscreen.sh -m "Terminal will open to set your credentials. Press X to open keyboard and L to shift." -k "A B START MENU" -fs 22
 
 pipe=/tmp/fifo
 mkfifo "$pipe"
