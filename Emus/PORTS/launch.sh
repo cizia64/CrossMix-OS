@@ -5,6 +5,9 @@ EMU_DIR="/mnt/SDCARD/Emus/PORTS"
 
 selected_option=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
 
+if [ -z "$selected_option" ]; then
+    selected_option="Balanced"
+fi
 $EMU_DIR/cpufreq.sh "$selected_option"
 
 PORTS_DIR=/mnt/SDCARD/Roms/PORTS
