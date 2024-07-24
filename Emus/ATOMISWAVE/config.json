@@ -6,7 +6,7 @@
   "effectsh": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/ATOMISWAVE.png",
   "themecolor": "FFFFFF",
-  "launch": "flycast.sh",
+  "launch": "launcher.sh",
   "rompath": "../../Roms/ATOMISWAVE",
   "imgpath": "../../Imgs/ATOMISWAVE",
   "useswap": 1,

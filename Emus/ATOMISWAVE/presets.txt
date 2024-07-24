@@ -1,1 +1,1 @@
-default=flycast.sh
+default=Flycast (Libretro)
