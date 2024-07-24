@@ -1,49 +1,68 @@
 #!/usr/bin/env sh
 
-export PATH="/mnt/SDCARD/System/usr/trimui/scripts/${PATH:+:$PATH}"
+pkill -STOP -f "MainUI"
+
+export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:${PATH:+:$PATH}"
+export LD_LIBRARY_PATH="/usr/trimui/lib:${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 EMU_DIR=$(dirname "$0")
 GAME=$(basename "$1")
 
-# Check if the user started holding L2
-button_state.sh L2
+select_launcher() {
+	i=-1
+	button=$(infoscreen.sh -k "A B L R" -fs 18 -m "Select the launcher you want to use. Press A to select, B to cancel, L1 to go to the previous launcher and R1 to go to the next launcher.")
+	while :; do
+		case $button in
+		A)
+			name=$(jq -r ".launchlist[$i].name" "$EMU_DIR/config.json")
+			echo "$name"
+			return
+			;;
+		B)
+			pkill -CONT -f "MainUI"
+			exit 0
+			;;
+		L)
+			i=$((i - 1))
+			[ $i -lt 0 ] && i=$(jq '.launchlist | length - 1' "$EMU_DIR/config.json")
+			;;
+		R)
+			i=$((i + 1))
+			[ $i -ge "$(jq '.launchlist | length' "$EMU_DIR/config.json")" ] && i=0
+			;;
+		esac
+		name=$(jq -r ".launchlist[$i].name" "$EMU_DIR/config.json")
+		launch=$(jq -r ".launchlist[$i].launch" "$EMU_DIR/config.json")
+		if [ -z "$launch" ]; then
+			continue
+		fi
+		# Display the actual launcher name and get the user input.
+		button=$(infoscreen.sh -k "A B L R" -fs 18 -m "Launcher: $name")
+	done
+}
+
+# Press R2 to set a new game's default launcher.
+button_state.sh R
 if [ $? -eq 10 ]; then
-    # Search for a game saved launcher.
-	Game_launcher=$(grep -i "$GAME" "$EMU_DIR/presets.txt" | cut -d'=' -f2)
+	Launcher_name=$(select_launcher)
+	echo "$GAME=$Launcher_name" >>"$EMU_DIR/presets.txt"
+else
+	# Press L2 to start a game with a saved launcher.
+	button_state.sh L
+	if [ $? -eq 10 ]; then
+		# Search for a game saved launcher.
+		Launcher_name=$(grep -i "$GAME" "$EMU_DIR/presets.txt" | cut -d'=' -f2)
 
-    # Set a new saved launcher.
-	if [ -z "$Game_launcher" ]; then
-		pipe=/tmp/launcher.fifo
-		mkfifo $pipe
-
-		i=1
-
-		for file in launch_*.sh; do
-			echo "echo \"$i: $file\"" >>$pipe
-            i=$((i + 1))
-		done
-		(
-			cat <<'EOF'
-echo -e "\tSelect the launcher you want to use:"
-read -r tmp
-echo "$tmp" >/tmp/launcher.fifo
-exit
-EOF
-		) >>$pipe &
-
-		/mnt/SDCARD/Apps/Terminal/SimpleTerminal -e "sh /tmp/launcher.fifo"
-
-        # Recuperate the selected launcher from fifo.
-		select=$(cat /tmp/launcher.fifo)
-        rm -f /tmp/launcher.fifo
-
-		Game_launcher=$(ls launch_*.sh | sed -n "$select p")
-		echo "$GAME=$Game_launcher" >>"$EMU_DIR/presets.txt"
+		# If the game's launcher is not saved, select a new one.
+		if [ -z "$Launcher_name" ]; then
+			Launcher_name=$(select_launcher)
+			echo "$GAME=$Launcher_name" >>"$EMU_DIR/presets.txt"
+		fi
+	else
+		# Default launcher.
+		Launcher_name=$(grep -i default "$EMU_DIR/presets.txt" | cut -d'=' -f2)
 	fi
-    # Start game's launcher
-	"$EMU_DIR"/"$Game_launcher" "$GAME"
-	exit 0
 fi
-
-# Start default launcher.
-$(grep -i default "$EMU_DIR/presets.txt" | cut -d'=' -f2) "$GAME"
+Launcher_command=$(jq -r --arg name "$Launcher_name" '.launchlist[] | select(.name == $name) | .launch' "$EMU_DIR/config.json")
+name="$Launcher_name" "$EMU_DIR"/"$Launcher_command" "$@"
+pkill -CONT -f "MainUI"
 exit 0
