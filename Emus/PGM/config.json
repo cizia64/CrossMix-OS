@@ -4,7 +4,7 @@
   "iconsel": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/PGM.png",
   "themecolor": "FAF792",
-  "launch": "launch.sh",
+  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
   "rompath": "../../Roms/PGM",
   "imgpath": "../../Imgs/PGM",
   "useswap": 1,

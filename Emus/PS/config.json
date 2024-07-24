@@ -5,7 +5,7 @@
   "iconlist": "ic-PS-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PS.png",
   "themecolor": "00FF00",
-  "launch": "pcsx.sh",
+  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
   "rompath": "../../Roms/PS",
   "imgpath": "../../Imgs/PS",
   "useswap": 1,
