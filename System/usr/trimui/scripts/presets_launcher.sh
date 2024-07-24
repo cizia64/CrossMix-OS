@@ -4,8 +4,16 @@ pkill -STOP -f "MainUI" # Pause the MainUI process to get infoscreen.sh working.
 
 export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:${PATH:+:$PATH}"
 export LD_LIBRARY_PATH="/usr/trimui/lib:${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-EMU_DIR=$(dirname "$0")
+# find in $1 the parent folder just after Roms/ one
 GAME=$(basename "$1")
+parent_folder=""
+for folder in $(echo "$1" | tr '/' '\n'); do
+    if [ "$parent_folder" = "Roms" ]; then
+        EMU_DIR="/mnt/SDCARD/Emus/$folder"
+        break
+    fi
+    parent_folder="$folder"
+done
 
 select_launcher() {
 	i=-1

@@ -2,7 +2,7 @@
   "label": "PSP",
   "label.ch.lang": "PSP",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PSP.png",
-  "launch": "launcher.sh",
+  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/PSP.png",
   "themecolor": "64A8BD",
   "iconsel": "",
