@@ -49,7 +49,7 @@ All components of CrossMix-OS are free and open source.
 
 
 ## **To update from a previous CrossMix Version**
-- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors) (⚠ use a genuine, name-brand SD card and not the stock one sold with your console)
+- Run chkdsk/fsck on your SD card first (as there are many bad SD cards, it's always a good idea to check for errors) (use a genuine, name-brand SD card and not the stock one sold with your console)
 - Copy the archive "CrossMix-OS_v1.x.x.zip" (not decompressed) on SD card root
 - ⚠ Update the file `_FirmwareCheck.sh` located in `System/starts` with the new version from the archive "CrossMix-OS_v1.x.x.zip" or [from here](https://raw.githubusercontent.com/cizia64/CrossMix-OS/main/System/starts/_FirmwareCheck.sh)⚠.
 - At reboot the update will be automatically installed
