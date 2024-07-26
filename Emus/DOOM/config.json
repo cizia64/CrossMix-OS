@@ -10,6 +10,6 @@
   "imgpath": "../../Imgs/DOOM",
   "useswap": 1,
   "shortname": 0,
-  "extlist": "wad|iwad|pwad|zip",
+  "extlist": "wad|iwad|pwad|7z|zip",
   "hidebios": 1
 }
