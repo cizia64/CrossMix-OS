@@ -4,7 +4,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/VIDEOS.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VIDEOS.png",
   "themecolor": "DDEEFF",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/VIDEOS",
   "imgpath": "../../Imgs/VIDEOS",
   "useswap": 1,

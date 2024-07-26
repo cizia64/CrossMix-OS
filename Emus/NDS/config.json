@@ -1,7 +1,7 @@
 {
   "label": "N. NDS",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
   "themecolor": "FF8800",
   "iconsel": "",
@@ -14,11 +14,11 @@
   "launchlist": [
     {
       "name": "Drastic - SDL2 MOD(凯)",
-      "launch": "launch.sh"
+      "launch": "drastic.sh"
     },
     {
       "name": "Drastic - No MOD      ",
-      "launch": "launch_original.sh"
+      "launch": "drastic_no-mod.sh"
     }
   ]
 }

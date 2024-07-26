@@ -6,7 +6,7 @@
   "effectsh": "effect.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/NAOMI.png",
   "themecolor": "FFFFFF",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/NAOMI",
   "imgpath": "../../Imgs/NAOMI",
   "useswap": 1,
@@ -15,11 +15,11 @@
   "launchlist": [
     {
       "name": "Flycast (Libretro)",
-      "launch": "launch.sh"
+      "launch": "flycast.sh"
     },
     {
       "name": "Flycast (Standalone)",
-      "launch": "launch_standalone.sh"
+      "launch": "flycast_standalone.sh"
     }
   ]
 }

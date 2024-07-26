@@ -6,7 +6,7 @@
   "background": "/mnt/SDCARD/Backgrounds/Default/CPS3.png",
   "themecolor": "FF4400",
   "effectsh": "effect.sh",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/CPS3",
   "imgpath": "../../Imgs/CPS3",
   "useswap": 1,
@@ -16,11 +16,11 @@
   "launchlist": [
     {
       "name": "FB Alpha 2012",
-      "launch": "launch.sh"
+      "launch": "fba.sh"
     },
     {
       "name": "FBNeo",
-      "launch": "launch_fbneo.sh"
+      "launch": "fbneo.sh"
     }
   ]
 }

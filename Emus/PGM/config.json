@@ -4,7 +4,7 @@
   "iconsel": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/PGM.png",
   "themecolor": "FAF792",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/PGM",
   "imgpath": "../../Imgs/PGM",
   "useswap": 1,
@@ -14,11 +14,11 @@
   "launchlist": [
     {
       "name": "FB ALPHA 2012",
-      "launch": "launch.sh"
+      "launch": "fba.sh"
     },
     {
       "name": "FB NEO",
-      "launch": "launch_fbneo.sh"
+      "launch": "fbneo.sh"
     }
   ]
 }

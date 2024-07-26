@@ -1,8 +1,12 @@
 #!/bin/sh
 echo $0 $*
 
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+
 EMU_DIR=/mnt/SDCARD/Emus/ATOMISWAVE
 FLYCAST_DIR=/mnt/SDCARD/Emus/DC/flycast
+
+source /mnt/SDCARD/System/usr/trimui/scripts/save_launcher.sh "$EMU_DIR" "$@"
 
 $EMU_DIR/cpufreq.sh
 $EMU_DIR/effect.sh

@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SCUMMVM.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SCUMMVM.png",
   "themecolor": "00D300",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/SCUMMVM",
   "imgpath": "../../Imgs/SCUMMVM",
   "useswap": 1,

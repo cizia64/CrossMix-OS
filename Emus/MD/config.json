@@ -5,7 +5,7 @@
   "iconlist": "ic-MD-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MD.png",
   "themecolor": "0088CF",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/MD",
   "imgpath": "../../Imgs/MD",
   "useswap": 0,

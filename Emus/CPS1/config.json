@@ -5,7 +5,7 @@
   "iconlist": "ic-cps1-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/CPS1.png",
   "themecolor": "0000FF",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/CPS1",
   "imgpath": "../../Imgs/CPS1",
   "useswap": 1,
@@ -15,11 +15,11 @@
   "launchlist": [
     {
       "name": "FB Alpha 2012",
-      "launch": "launch.sh"
+      "launch": "fba.sh"
     },
     {
       "name": "FBNeo",
-      "launch": "launch_fbneo.sh"
+      "launch": "fbneo.sh"
     }
   ]
 }

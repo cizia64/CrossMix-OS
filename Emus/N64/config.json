@@ -5,7 +5,7 @@
   "iconlist": "ic-n64-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/N64.png",
   "themecolor": "FFFF88",
-  "launch": "/mnt/SDCARD/System/usr/trimui/scripts/presets_launcher.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/N64",
   "imgpath": "../../Imgs/N64",
   "useswap": 1,
