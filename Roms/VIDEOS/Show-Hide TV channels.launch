@@ -1,0 +1,15 @@
+#!/bin/sh
+
+button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Press A to show TV channels, B to hide TV channels." -k "A B")
+
+if [ "$button" = "A" ]; then
+    mv /mnt/SDCARD/Roms/VIDEOS/TV/* /mnt/SDCARD/Roms/VIDEOS/
+elif [ "$button" = "B" ]; then
+    for dir in /mnt/SDCARD/Roms/VIDEOS/TV\ -*/; do
+        if [ -d "$dir" ]; then
+            mv "$dir" /mnt/SDCARD/Roms/VIDEOS/TV/
+        fi
+    done
+fi
+
+rm /mnt/SDCARD/Roms/VIDEOS/VIDEOS_cache7.db
