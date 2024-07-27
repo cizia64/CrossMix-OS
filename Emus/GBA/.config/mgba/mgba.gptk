@@ -1,0 +1,10 @@
+l2 = p # Pause/Resume
+l2 = add_ctrl
+
+r2 = tab # Speedup
+r2 = add_shift
+
+x = f1 # Save state
+x = add_shift
+
+y = f1 # Load state
