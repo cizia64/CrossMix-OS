@@ -6,7 +6,6 @@ EMU_DIR=/mnt/SDCARD/Emus/GBA
 
 $EMU_DIR/cpufreq.sh
 
-
 cd $RA_DIR/
 
 #disable netplay
