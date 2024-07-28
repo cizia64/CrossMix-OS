@@ -30,6 +30,10 @@
     {
       "name": "MAME2016",
       "launch": "mame2016.sh"
+    },
+    {
+        "name": "advmame",
+        "launch": "advmame.sh"
     }
   ]
 }
