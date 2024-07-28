@@ -17,7 +17,7 @@ A: Yes; B: No" -k "A B" -fs 22
 	fi
 fi
 
-infoscreen.sh -m "Terminal will open to set your credentials. Press X to open keyboard and L to shift." -k "A B START MENU" -fs 22
+infoscreen.sh -m "Terminal will open to set your credentials. Keybinds: Y-Keyboard; L-Shift; Start-Validate; Menu-Exit" -k "A B START MENU" -fs 22
 
 pipe=/tmp/fifo
 mkfifo "$pipe"
