@@ -1,8 +1,56 @@
+display_vsync no
+display_magnify 2
+
+sound_latency 0.10
+sound_normalize no
+
+device_alsa_device sdl
+device_joystick sdl
+device_keyboard sdl
+device_video sdl
+
+device_video_clock 74.5 / 44.77 / 59.86
+device_video_modeline ATSC-720-60p 74.25 1280 1320 1376 1650 720 722 728 750 +hsync +vsync
+
+ui_fontsize 17
+
+input_map[coin1] joystick_button[0,6]
+input_map[start1] joystick_button[0,7]
+input_map[ui_configure] joystick_button[0,8]
+input_map[ui_select] joystick_button[0,1]
+
+vertical/display_ror yes
+vertical/display_flipx yes
+vertical/display_flipy yes
+
+vertical/input_map[p1_down] joystick_digital[0,0,3,right]
+vertical/input_map[p1_up] joystick_digital[0,0,3,left]
+vertical/input_map[p1_left] joystick_digital[0,0,4,down]
+vertical/input_map[p1_right] joystick_digital[0,0,4,up]
+
+vertical/input_map[p1_button1] joystick_button[0,1]
+vertical/input_map[p1_button2] joystick_button[0,3]
+vertical/input_map[p1_button3] joystick_button[0,0]
+vertical/input_map[p1_button4] joystick_button[0,2]
+
+
+
+dir_artwork .advance/artwork:/usr/local/share/advance/artwork
+dir_diff .advance/diff
+dir_hi .advance/hi
+dir_image .advance/image:/usr/local/share/advance/image
+dir_inp .advance/inp
+dir_memcard .advance/memcard
+dir_nvram .advance/nvram
+dir_rom .advance/rom:/mnt/SDCARD/Roms/MAME2003PLUS
+dir_sample .advance/sample:/usr/local/share/advance/sample
+dir_snap .advance/snap
+dir_sta .advance/sta
+
 config save_at_exit
 debug_crash no
 debug_rawsound no
 debug_speedmark no
-device_alsa_device sdl
 device_alsa_mixer channel
 device_color_bgr15 yes
 device_color_bgr16 yes
@@ -14,8 +62,6 @@ device_color_yuy2 yes
 device_dpi_pclock_low 31250000
 device_fb_fastset no
 device_hdmi_pclock_low 0
-device_joystick raw
-device_keyboard sdl
 device_mouse auto
 device_raw_firstkeyhack no
 device_raw_mousedev[0] auto
@@ -28,7 +74,6 @@ device_raw_mousetype[2] pnp
 device_raw_mousetype[3] pnp
 device_sdl_samples 512
 device_sound auto
-device_video sdl
 device_video_cursor auto
 device_video_doublescan yes
 device_video_fastchange no
@@ -36,17 +81,6 @@ device_video_interlace yes
 device_video_output overlay
 device_video_overlaysize auto
 device_video_singlescan yes
-dir_artwork .advance/artwork:/usr/local/share/advance/artwork
-dir_diff .advance/diff
-dir_hi .advance/hi
-dir_image .advance/image:/usr/local/share/advance/image
-dir_inp .advance/inp
-dir_memcard .advance/memcard
-dir_nvram .advance/nvram
-dir_rom .advance/rom:/mnt/SDCARD/Roms/MAME2003PLUS
-dir_sample .advance/sample:/usr/local/share/advance/sample
-dir_snap .advance/snap
-dir_sta .advance/sta
 display_adjust none
 display_antialias yes
 display_artwork_backdrop yes
@@ -67,7 +101,6 @@ display_frameskip auto
 display_gamma 1
 display_intensity 1.5
 display_interlaceeffect none
-display_magnify yes
 display_magnifysize 640
 display_mode auto
 display_pausebrightness 1
@@ -77,21 +110,14 @@ display_restore yes
 display_rgbeffect none
 display_rol no
 display_ror no
-vertical/display_ror yes
-vertical/input_map[p1_up] keyboard[0,right]
-vertical/input_map[p1_down] keyboard[0,left]
-vertical/input_map[p1_left] keyboard[0,up]
-vertical/input_map[p1_right] keyboard[0,down]
 display_scanlines no
 display_skipcolumns auto
 display_skiplines auto
 display_translucency yes
-display_vsync yes
 include 
 input_hotkey yes
 input_idleexit 0
 input_map[bill1] auto
-input_map[coin1] auto
 input_map[coin2] auto
 input_map[coin3] auto
 input_map[coin4] auto
@@ -868,7 +894,7 @@ input_map[p8_trackbally] auto
 input_map[p8_up] auto
 input_map[safequit] auto
 input_map[service] auto
-input_map[service_coin1] joystick_button[0,6]
+input_map[service_coin1] auto
 input_map[service_coin2] auto
 input_map[service_coin3] auto
 input_map[service_coin4] auto
@@ -876,7 +902,6 @@ input_map[service_coin5] auto
 input_map[service_coin6] auto
 input_map[service_coin7] auto
 input_map[service_coin8] auto
-input_map[start1] joystick_button[0,7]
 input_map[start2] auto
 input_map[start3] auto
 input_map[start4] auto
@@ -888,7 +913,6 @@ input_map[tilt] auto
 input_map[ui_add_cheat] auto
 input_map[ui_cancel] auto
 input_map[ui_cocktail] auto
-input_map[ui_configure] joystick_button[0,8]
 input_map[ui_delete_cheat] auto
 input_map[ui_down] auto
 input_map[ui_edit_cheat] auto
@@ -914,7 +938,6 @@ input_map[ui_reset_machine] auto
 input_map[ui_right] auto
 input_map[ui_save_cheat] auto
 input_map[ui_save_state] auto
-input_map[ui_select] joystick_button[0,1]
 input_map[ui_show_fps] auto
 input_map[ui_show_gfx] auto
 input_map[ui_show_profiler] auto
@@ -990,9 +1013,7 @@ sound_adjust auto
 sound_equalizer_highvolume 0
 sound_equalizer_lowvolume 0
 sound_equalizer_midvolume 0
-sound_latency 0.10
 sound_mode auto
-sound_normalize no
 sound_samplerate 44100
 sound_samples yes
 sound_volume -3
@@ -1010,11 +1031,8 @@ ui_color[interface] 000000 ffffff
 ui_color[select] 000000 afffff
 ui_color[tag] 247ef0 ffffff
 ui_font auto
-ui_fontsize 17
 ui_helpimage auto
 ui_translucency 0.8
 vector_aux_renderer none
 vector_aux_renderer_dual_display yes
 vector_aux_renderer_port /dev/ttyACM0
-device_video_clock 74.5 / 44.77 / 59.86
-device_video_modeline ATSC-720-60p 74.25 1280 1320 1376 1650 720 722 728 750 +hsync +vsync
