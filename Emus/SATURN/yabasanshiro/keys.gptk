@@ -1,5 +1,4 @@
 // yabasanshiro menu navigation
-guide = esc
 right_analog_up = mouse_movement_up
 right_analog_down = mouse_movement_down
 right_analog_left = mouse_movement_left
