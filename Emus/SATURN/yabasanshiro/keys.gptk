@@ -7,5 +7,4 @@ deadzone_mode = scaled_radial
 deadzone = 2000
 deadzone_scale = 8
 deadzone_delay = 16 ## An alias for mouse delay
-l2 = mouse_right
 r2 = mouse_left
