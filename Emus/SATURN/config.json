@@ -13,12 +13,24 @@
   "hidebios": 1,
   "launchlist": [
     {
-      "name": "Yabasanshiro (Libretro)",
+      "name": "-----------  libretro  -----------",
+      "launch": ""
+    },
+    {
+      "name": "Yabasanshiro",
       "launch": "launch.sh"
     },
     {
-      "name": "Yabasanshiro (Standalone)",
+      "name": "-----------  standalone  -----------",
+      "launch": ""
+    },
+    {
+      "name": "Yabasanshiro (Real BIOS)",
+      "launch": "standalone.sh"
+    },
+    {
+      "name": "Yabasanshiro (HLE BIOS)",
       "launch": "standalone.sh"
     }
-  ]
+  ] 
 }
