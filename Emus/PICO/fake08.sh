@@ -18,4 +18,4 @@ NET_PARAM=
 
 cd /mnt/SDCARD/RetroArch
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/fake08_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/fake08_libretro.so "$@"

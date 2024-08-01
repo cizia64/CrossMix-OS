@@ -12,4 +12,4 @@ cd /mnt/SDCARD/RetroArch
 #disable netplay
 NET_PARAM=
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/flycast_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/flycast_libretro.so "$@"

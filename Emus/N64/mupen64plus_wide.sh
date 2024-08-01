@@ -47,7 +47,7 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
 
 	cd -
 
-	HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/mupen64plus_libretro.so "$@"
+	HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/mupen64plus_libretro.so "$@"
 	# cleaning
 	rm "$ROM_CFG"
 	rm "$ROM_OPT"

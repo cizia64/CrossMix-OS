@@ -13,4 +13,4 @@ source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 NET_PARAM=
 
 cd /mnt/SDCARD/RetroArch
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/mame_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/mame_libretro.so "$@"

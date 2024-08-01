@@ -10,4 +10,4 @@ NET_PARAM=
 
 cd /mnt/SDCARD/RetroArch
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/mupen64plus_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/mupen64plus_libretro.so "$@"

@@ -12,4 +12,4 @@ cd /mnt/SDCARD/RetroArch
 	"$PWD/.retroarch/config/Genesis Plus GX Wide/MD.cfg" \
 	"input_overlay_enable" "false"
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/genesis_plus_gx_wide_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/genesis_plus_gx_wide_libretro.so "$@"

@@ -21,7 +21,7 @@ case "$@" in
         ;;
 esac
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L "$CORE_PATH" "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L "$CORE_PATH" "$@"
 
 #HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/fbalpha2012_neogeo_libretro.so "$@"
 

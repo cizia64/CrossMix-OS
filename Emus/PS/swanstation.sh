@@ -14,4 +14,4 @@ fi
 #disable netplay
 NET_PARAM=
 
-HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/swanstation_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/swanstation_libretro.so "$@"

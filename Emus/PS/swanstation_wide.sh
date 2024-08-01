@@ -47,7 +47,7 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
 	echo "Patch applied to $ROM_OPT"
 
 	cd -
-	HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/swanstation_libretro.so "$@"
+	HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/swanstation_libretro.so "$@"
 
 	# cleaning
 	rm "$ROM_CFG"
