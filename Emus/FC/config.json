@@ -26,6 +26,10 @@
     {
       "name": "MESEN",
       "launch": "mesen.sh"
+    },
+    {
+      "name": "bnes",
+      "launch": "bnes.sh"
     }
   ]
 }

@@ -4,7 +4,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/VIDEOS.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VIDEOS.png",
   "themecolor": "DDEEFF",
-  "launch": "launch.sh",
+  "launch": "mpv.sh",
   "rompath": "../../Roms/VIDEOS",
   "imgpath": "../../Imgs/VIDEOS",
   "useswap": 1,
@@ -16,7 +16,7 @@
       "name": "mpv",
       "launch": "mpv.sh"
     },
-    {
+	{
       "name": "Libretro FFmpeg",
       "launch": "ffmpeg.sh"
     }

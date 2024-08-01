@@ -1,15 +1,13 @@
 #!/bin/sh
 echo $0 $*
+cd "$(dirname "$0")"
+
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/DC
-
-$EMU_DIR/cpufreq.sh
-$EMU_DIR/effect.sh
-
-cd $RA_DIR/
+./cpufreq.sh
+./effect.sh
 
 #disable netplay
 NET_PARAM=
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/flycast_libretro.so "$@"
+cd /mnt/SDCARD/RetroArch
+HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/flycast_libretro.so "$@"

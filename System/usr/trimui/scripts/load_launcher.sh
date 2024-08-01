@@ -23,4 +23,4 @@ Launcher_command=$(jq -r --arg name "$Launcher_name" \
 echo "load_launcher.sh : $Launcher_name dowork 0x" >>/tmp/log/messages
 "$EMU_DIR"/"$Launcher_command" "$@"
 pkill -CONT -f "MainUI"
-exit 0
+exit 0``

@@ -4,7 +4,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/MUSIC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MUSIC.png",
   "themecolor": "DDEEFF",
-  "launch": "launch.sh",
+  "launch": "mpv.sh",
   "rompath": "../../Roms/MUSIC",
   "imgpath": "../../Imgs/MUSIC",
   "useswap": 0,

@@ -1,12 +1,11 @@
 #!/bin/sh
 echo $0 $*
+cd "$(dirname "$0")"
+
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/SCUMMVM
 
 Rom="$@"
 RomPath=$(dirname "$1")
-RomDir=$(basename "$RomPath")
 romName=$(basename "$@")
 romNameNoExtension=${romName%.*}
 
@@ -27,11 +26,10 @@ if [ "$romName" = "° Import ScummVM Games.launch" ]; then
 	exit
 fi
 
-$EMU_DIR/performance.sh
-
-cd $RA_DIR/
+./cpufreq.sh
 
 #disable netplay
 NET_PARAM=
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/scummvm_libretro-2.9.so "$@"
+cd /mnt/SDCARD/RetroArch
+HOME="$PWD" ./ra64.trimui -v "$NET_PARAM" -L .retroarch/cores/scummvm_libretro-2.9.so "$@"

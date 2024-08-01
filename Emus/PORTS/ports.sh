@@ -1,14 +1,15 @@
 #!/bin/sh
 
-source /mnt/SDCARD/System/etc/ex_config
-EMU_DIR="/mnt/SDCARD/Emus/PORTS"
+cd "$(dirname "$0")"
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 
 selected_option=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
+./cpufreq.sh "$selected_option"
 
-$EMU_DIR/cpufreq.sh "$selected_option"
+source /mnt/SDCARD/System/etc/ex_config
 
-PORTS_DIR=/mnt/SDCARD/Roms/PORTS
-cd "$PORTS_DIR"
+
+cd /mnt/SDCARD/Roms/PORTS
 
 ################ Fix for TSP controls ################
 
@@ -35,5 +36,5 @@ sync
 
 ######################################################
 
-export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 /bin/sh "$@"

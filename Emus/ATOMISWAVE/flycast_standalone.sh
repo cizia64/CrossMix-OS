@@ -1,21 +1,18 @@
 #!/bin/sh
 echo $0 $*
 
+cd "$(dirname "$0")"
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 
-EMU_DIR=/mnt/SDCARD/Emus/ATOMISWAVE
-FLYCAST_DIR=/mnt/SDCARD/Emus/DC/flycast
+./cpufreq.sh
+./effect.sh
 
-source /mnt/SDCARD/System/usr/trimui/scripts/save_launcher.sh "$EMU_DIR" "$@"
 
-$EMU_DIR/cpufreq.sh
-$EMU_DIR/effect.sh
+cd /mnt/SDCARD/Emus/DC/flycast
 
-cd "$FLYCAST_DIR"
-
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}:lib
 export FLYCAST_BIOS_DIR="/mnt/SDCARD/BIOS/dc/"
-export FLYCAST_DATA_DIR=$FLYCAST_BIOS_DIR
-export FLYCAST_CONFIG_DIR="$FLYCAST_DIR/config/"
+export FLYCAST_DATA_DIR="$FLYCAST_BIOS_DIR"
+export FLYCAST_CONFIG_DIR="$PWD/config/"
 
 ./flycast "$@"
