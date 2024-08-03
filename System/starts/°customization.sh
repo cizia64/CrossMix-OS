@@ -39,6 +39,10 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# custom shutdown script for "Resume at Boot"
 	cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
 	chmod a+x "/usr/trimui/bin/kill_apps.sh"
+	
+	# fix retroarch path for PortMaster
+	cp "/mnt/SDCARD/System/usr/trimui/bin/retroarch" "/usr/bin/retroarch"
+	chmod a+x "/usr/trimui/bin/retroarch"
 
 	# custom shutdown script, will be called by MainUI
 	# cp "/mnt/SDCARD/System/bin/shutdown" "/usr/bin/poweroff"
