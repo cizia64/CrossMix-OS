@@ -42,7 +42,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	
 	# fix retroarch path for PortMaster
 	cp "/mnt/SDCARD/System/usr/trimui/bin/retroarch" "/usr/bin/retroarch"
-	chmod a+x "/usr/trimui/bin/retroarch"
+	chmod a+x "/usr/bin/retroarch"
 
 	# custom shutdown script, will be called by MainUI
 	# cp "/mnt/SDCARD/System/bin/shutdown" "/usr/bin/poweroff"
