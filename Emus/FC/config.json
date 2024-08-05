@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/FC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/FC.png",
   "themecolor": "00FF88",
-  "launch": "fceumm.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/FC",
   "imgpath": "../../Imgs/FC",
   "useswap": 1,
@@ -26,6 +26,10 @@
     {
       "name": "MESEN",
       "launch": "mesen.sh"
+    },
+    {
+      "name": "bnes",
+      "launch": "bnes.sh"
     }
   ]
 }

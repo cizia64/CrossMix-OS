@@ -6,7 +6,7 @@
   "effectsh": "effect.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/DC.png",
   "themecolor": "FFFFFF",
-  "launch": "flycast.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/DC",
   "imgpath": "../../Imgs/DC",
   "useswap": 1,

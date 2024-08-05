@@ -16,11 +16,11 @@
   "launchlist": [
     {
       "name": "FB NEO",
-      "launch": "launch.sh"
+      "launch": "finalburn.sh"
     },
     {
       "name": "FB ALPHA 2012",
-      "launch": "launch.sh"
+      "launch": "finalburn.sh"
     }
   ]
 }

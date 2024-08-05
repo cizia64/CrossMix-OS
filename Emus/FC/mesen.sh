@@ -1,20 +1,13 @@
 #!/bin/sh
 echo $0 $*
 
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 2000000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-     
+cd "$(dirname "$0")"
 
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/FC
-
-$EMU_DIR/cpufreq.sh
-
-
-cd $RA_DIR/
+./cpufreq.sh
 
 #disable netplay
 NET_PARAM=
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/mesen_libretro.so "$@"
+cd /mnt/SDCARD/RetroArch
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/mesen_libretro.so "$@"

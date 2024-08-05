@@ -1,16 +1,15 @@
 #!/bin/sh
 echo $0 $*
-progdir=`dirname "$0"`/drastic
-cd $progdir
+cd "$(dirname "$0")"
 
-
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+./performance.sh
 
 echo "=============================================="
 echo "==================== DRASTIC ================="
 echo "=============================================="
 
-../performance.sh
+cd drastic
 
-export HOME="$progdir"
 #export SDL_AUDIODRIVER=dsp
-./drastic "$*"
+HOME="$PWD" ./drastic "$*"

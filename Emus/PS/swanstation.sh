@@ -1,17 +1,17 @@
 #!/bin/sh
 echo $0 $*
+cd "$(dirname "$0")"
+
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/PS
-cd $RA_DIR/
+./cpufreq.sh Performance
+
+cd /mnt/SDCARD/RetroArch
 
 if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.bin" -o -iname "ps*.bin" | grep -q .; then
 	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "No bios found, SwanStation will probably not work." -k " "
 fi
 
-$EMU_DIR/performance.sh
-
 #disable netplay
 NET_PARAM=
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/swanstation_libretro.so "$@"

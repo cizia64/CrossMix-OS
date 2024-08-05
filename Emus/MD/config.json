@@ -5,7 +5,7 @@
   "iconlist": "ic-MD-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MD.png",
   "themecolor": "0088CF",
-  "launch": "picodrive.sh",
+  "launch": "launch.sh",
   "rompath": "../../Roms/MD",
   "imgpath": "../../Imgs/MD",
   "useswap": 0,
@@ -15,7 +15,7 @@
   "launchlist": [
     {
       "name": "PicoDrive",
-      "launch": "launch.sh"
+      "launch": "picodrive.sh"
     },
     {
       "name": "GenesisPlusGX",

@@ -1,11 +1,11 @@
 #!/bin/sh
 echo "===================================="
 echo $0 $*
+cd "$(dirname "$0")"
+
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/MD
-cd $RA_DIR/
+./cpufreq.sh
 
-$EMU_DIR/cpufreq.sh
+cd /mnt/SDCARD/RetroArch
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/picodrive_libretro.so "$@"
+HOME="$PWD" ./ra64.trimui -v $NET_PARAM -L .retroarch/cores/picodrive_libretro.so "$@"
