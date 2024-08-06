@@ -9,7 +9,8 @@ DEVICENAME=Trimui\ Smart\ Pro
 
 CONFIGPATH=/mnt/SDCARD/System/etc/syncthing
 DEFAULTFOLDER=/mnt/SDCARD/syncthing
-CONFIG_FILE="/mnt/SDCARD/System/etc/syncthing/config.xml"
+CONFIG_FILE="$CONFIGPATH/config.xml"
+SYNCTHING=/mnt/SDCARD/System/bin/syncthing
 XMLSTARLET="/mnt/SDCARD/System/bin/xml"
 ### DO NOT CHANGE THESE, USE THE OPTIONS FILE!
 
@@ -23,10 +24,10 @@ fi
 
 /mnt/SDCARD/System/bin/jq '. += {"Syncthing": 1}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-pkill /mnt/SDCARD/System/bin/syncthing
-if ! [ -f /mnt/SDCARD/System/bin/syncthing/config.xml ]; then
+pkill $SYNCTHING
+if ! [ -f $CONFIG_FILE ]; then
   mkdir -p "$CONFIGPATH/data"
-  /mnt/SDCARD/System/bin/syncthing generate --no-default-folder --gui-user="$SYNCUSER" --gui-password="$SYNCPASS" --config="$CONFIGPATH"
+  $SYNCTHING generate --no-default-folder --gui-user="$SYNCUSER" --gui-password="$SYNCPASS" --config="$CONFIGPATH"
   sync
   sleep 2
 
@@ -46,7 +47,7 @@ if ! [ -f /mnt/SDCARD/System/bin/syncthing/config.xml ]; then
 fi
 sleep 0.5
 sync
-/mnt/SDCARD/System/bin/syncthing serve --no-restart --no-upgrade --config="$CONFIGPATH" --data="$CONFIGPATH/data" &
+$SYNCTHING serve --no-restart --no-upgrade --config="$CONFIGPATH" --data="$CONFIGPATH/data" &
 
 # we modify the DB entries to reflect the current state
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "Syncthing" "enabled"
