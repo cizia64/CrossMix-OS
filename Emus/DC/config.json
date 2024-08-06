@@ -24,6 +24,10 @@
     {
       "name": "Flycast (Standalone)",
       "launch": "flycast_standalone.sh"
+    },
+    {
+      "name": "Flycast (KMFD Xtreme)",
+      "launch": "flycast_standalone.sh"
     }
   ]
 }
