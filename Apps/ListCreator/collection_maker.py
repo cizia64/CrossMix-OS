@@ -89,7 +89,8 @@ def main():
 
     for file in files:
         filename = os.path.basename(file)
-        with open(filename, "w") as f:
+        filename_txt = os.path.splitext(filename)[0] + ".txt"
+        with open(filename_txt, "w") as f:
             f.write(file)
     print("Collection created")
 
