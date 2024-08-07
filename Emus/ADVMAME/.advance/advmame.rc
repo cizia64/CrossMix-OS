@@ -42,7 +42,7 @@ dir_image .advance/image:/usr/local/share/advance/image
 dir_inp .advance/inp
 dir_memcard .advance/memcard
 dir_nvram .advance/nvram
-dir_rom .advance/rom:/mnt/SDCARD/Roms/MAME2003PLUS
+dir_rom .advance/rom:/mnt/SDCARD/Roms/ADVMAME
 dir_sample .advance/sample:/usr/local/share/advance/sample
 dir_snap .advance/snap
 dir_sta .advance/sta

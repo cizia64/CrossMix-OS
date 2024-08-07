@@ -5,7 +5,7 @@
   "iconlist": "ic-mame-plus-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/ADVMAME.png",
   "themecolor": "00CCFF",
-  "launch": "launch.sh",
+  "launch": "advmame.sh",
   "rompath": "../../Roms/ADVMAME",
   "imgpath": "../../Imgs/ADVMAME",
   "useswap": 1,
