@@ -1,3 +1,11 @@
+a = \"
+b = \"
+l1 = \"
+r1 = \"
+start = \"
+select = \"
+
+
 l2 = p # Pause/Resume
 l2 = add_ctrl
 
