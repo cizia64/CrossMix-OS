@@ -1,0 +1,15 @@
+{
+  "label": "ADV. MAME",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ADVMAME.png",
+  "iconsmall": "ic-mame-plus-small.png",
+  "iconlist": "ic-mame-plus-list.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ADVMAME.png",
+  "themecolor": "00CCFF",
+  "launch": "launch.sh",
+  "rompath": "../../Roms/ADVMAME",
+  "imgpath": "../../Imgs/ADVMAME",
+  "useswap": 1,
+  "shortname": 1,
+  "hidebios": 1,
+  "extlist": "zip",
+}

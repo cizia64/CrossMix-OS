@@ -12,14 +12,4 @@
   "shortname": 1,
   "hidebios": 1,
   "extlist": "zip",
-  "launchlist": [
-    {
-        "name": "default",
-        "launch": "launch.sh"
-    },
-    {
-        "name": "advmame",
-        "launch": "advmame.sh"
-    }
-  ]
 }
