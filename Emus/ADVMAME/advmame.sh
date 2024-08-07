@@ -1,12 +1,11 @@
 #!/bin/sh
 echo $0 $*
 
+cd "$(dirname "$0")"
 
-export HOME=/mnt/SDCARD/Emus/ADVMAME
-export PATH="/mnt/SDCARD/System/bin${PATH:+:$PATH}"
-export LD_LIBRARY_PATH="$HOME/lib:/mnt/SDCARD/System/lib:/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="$PWD/lib:/mnt/SDCARD/System/lib:/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-$HOME/cpufreq.sh
+./cpufreq.sh
 
 Gamefile=$(basename "$@")
-advmame "${Gamefile%.*}"
+HOME="$PWD" ./advmame "${Gamefile%.*}"
