@@ -1,8 +1,8 @@
 {
   "label": "ADV. MAME",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/ADVMAME.png",
-  "iconsmall": "ic-mame-plus-small.png",
-  "iconlist": "ic-mame-plus-list.png",
+  "iconsmall": "ic-advmame-small.png",
+  "iconlist": "ic-advmame-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/ADVMAME.png",
   "themecolor": "00CCFF",
   "launch": "advmame.sh",
