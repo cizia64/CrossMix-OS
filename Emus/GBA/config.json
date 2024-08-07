@@ -28,8 +28,8 @@
       "launch": "vbanext.sh"
     },
     {
-       "name": "mGBA - Strandalone",
-       "launch": "mgba_stand.sh"
+       "name": "mGBA - Standalone",
+       "launch": "mgba_standalone.sh"
     }
   ]
 }

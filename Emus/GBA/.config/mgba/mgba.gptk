@@ -19,7 +19,7 @@ r2 = add_shift
 [controls:hotkey]
 overlay = clear
 
-l1 = f1 # Save state
-l1 = add_shift
+r2 = f1 # Save state
+r2 = add_shift
 
-r1 = f1 # Load state
+l2 = f1 # Load state
