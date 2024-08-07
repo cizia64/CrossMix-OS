@@ -7,8 +7,8 @@ export XDG_CONFIG_HOME="$EMU_DIR/.config"
 
 $EMU_DIR/cpufreq.sh
 
-/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb "mgba" -k "mgba" -c "/mnt/SDCARD/Emus/GBA/.config/mgba/mgba.gptk" &
+/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 "mgba" -k "mgba" -c "/mnt/SDCARD/Emus/GBA/.config/mgba/mgba.gptk" &
 sleep 0.3
 
 $EMU_DIR/mgba "$@" 
-kill gptokeyb
+kill gptokeyb2
