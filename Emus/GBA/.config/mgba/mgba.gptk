@@ -5,6 +5,10 @@ r1 = \"
 start = \"
 select = \"
 
+select = hold_state hotkey              
+
+x = z
+y = x
 
 l2 = p # Pause/Resume
 l2 = add_ctrl
@@ -12,7 +16,10 @@ l2 = add_ctrl
 r2 = tab # Speedup
 r2 = add_shift
 
-x = f1 # Save state
-x = add_shift
+[controls:hotkey]
+overlay = clear
 
-y = f1 # Load state
+l1 = f1 # Save state
+l1 = add_shift
+
+r1 = f1 # Load state
