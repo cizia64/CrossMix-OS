@@ -1,0 +1,7 @@
+{
+    "label":	"ListCreator",
+    "icon":	"ListCreator.png",
+    "launch":	"launch.sh",
+    "description":	"Collection maker"
+}
+
