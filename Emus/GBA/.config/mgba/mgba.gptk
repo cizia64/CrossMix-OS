@@ -1,0 +1,25 @@
+a = \"
+b = \"
+l1 = \"
+r1 = \"
+start = \"
+select = \"
+
+select = hold_state hotkey              
+
+x = z
+y = x
+
+l2 = p # Pause/Resume
+l2 = add_ctrl
+
+r2 = tab # Speedup
+r2 = add_shift
+
+[controls:hotkey]
+overlay = clear
+
+r2 = f1 # Save state
+r2 = add_shift
+
+l2 = f1 # Load state
