@@ -82,6 +82,7 @@ infoscreen.sh -m "STEP 2: Token generation..." -k "A B START MENU" -fs 22
 mkdir -p /mnt/SDCARD/tmp
 cd /mnt/SDCARD/tmp
 
+sed -i 's/^cheevos_enable =.*/cheevos_enable = "true"/' "$ConfigFile"
 cp $ConfigFile .
 ConfigFile="./retroarch.cfg"
 
@@ -91,7 +92,6 @@ if ! ping -q -c 1 -W 1 retroachievements.org >/dev/null; then
 fi
 
 sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "$ConfigFile"
-sed -i 's/^cheevos_enable =.*/cheevos_enable = "true"/' "$ConfigFile"
 
 infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 22
 $HOME/ra64.trimui -L "$HOME/.retroarch/cores/mgba_libretro.so" -c "$ConfigFile" "/mnt/SDCARD/Best/Free Games Collection/Roms/GBA/SpaceTwins.zip" &
@@ -110,10 +110,12 @@ fi
 ### Apply credentials to all emulators
 
 # PPSSPP 1.17.1
+sed -i "s/^AchievementsEnable =.*/AchievementsEnable = True/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
 sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
 echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
 
 # Flycast
+sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
 sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
 sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
 
@@ -121,6 +123,6 @@ rm -rf .retroarch
 rm -f content_*
 rm -f retroarch.cfg
 
-infoscreen.sh -m "RetroAchievements connections done." -k "A B START MENU" -fs 22
+infoscreen.sh -m "RetroAchievements connected and enabled in RA, PPSSPP and Flycast." -k "A B START MENU" -fs 22
 
 exit 0
