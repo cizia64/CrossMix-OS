@@ -115,9 +115,9 @@ sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/
 echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
 
 # Flycast
-sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
-sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
-sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/Flycast/config/emu.cfg
+sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
 
 rm -rf .retroarch
 rm -f content_*
