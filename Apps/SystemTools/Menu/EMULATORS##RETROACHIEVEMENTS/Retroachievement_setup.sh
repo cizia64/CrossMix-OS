@@ -1,14 +1,19 @@
 #!/usr/bin/env sh
 
-############################################################################################################
-
 export PATH="$PATH:/mnt/SDCARD/System/usr/trimui/scripts"
 export HOME="/mnt/SDCARD/RetroArch"
 export TOOL_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS##STANDALONES RETROACHIEVEMENTS/"
-ConfigFile="/mnt/SDCARD/RetroArch/retroarch.cfg"
+
+RA_Config="/mnt/SDCARD/RetroArch/retroarch.cfg"
+Username=$(grep "^cheevos_username" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
+Password=$(grep "^cheevos_password" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
 
 ############################################################################################################
 #### Functions ####
+
+escape_string() {
+	echo -n "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/'\''/\\'\''/g; s/ /\\ /g'
+}
 
 connectRetroarch() {
 
@@ -41,19 +46,53 @@ EOF
 	/mnt/SDCARD/Apps/Terminal/SimpleTerminal -e "sh $pipe; rm -f $pipe" &
 	while [ -e "$pipe" ]; do sleep 1; done
 	pkill SimpleTerminal
+	Username=$(grep "^cheevos_username" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
+	Password=$(grep "^cheevos_password" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
 
 }
 
+generate_token() {
+	sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "retroarch.cfg"
+
+	infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 22
+	$HOME/ra64.trimui -L "$HOME/.retroarch/cores/mgba_libretro.so" -c "retroarch.cfg" "/mnt/SDCARD/Best/Free Games Collection/Roms/GBA/SpaceTwins.zip" &
+	sleep 5
+	pkill -f ra64.trimui
+	sleep 5
+
+	grep "^cheevos_token" "retroarch.cfg" | cut -d '"' -f 2
+}
+
+set_credentials() {
+	Username=$(escape_string "$1")
+	Token="$2"
+
+	# PPSSPP 1.17.1
+	sed -i "s/^AchievementsEnable =.*/AchievementsEnable = True/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
+	sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
+	echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
+
+	# Flycast
+	sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+	sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+	sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+
+	infoscreen.sh -m "RetroAchievements connected and enabled in RA, PPSSPP and Flycast." -k "A B START MENU" -fs 22
+}
+
+cleanup() {
+	rm -rf .retroarch
+	rm -f content_*
+	rm -f retroarch.cfg
+}
+
 ############################################################################################################
+### MAIN ###
 
-infoscreen.sh -m "STEP 1: Verification of RetroArch settings" -k "A B START MENU" -fs 22
-
-Username=$(grep "^cheevos_username" "$ConfigFile" | cut -d '"' -f 2)
-Password=$(grep "^cheevos_password" "$ConfigFile" | cut -d '"' -f 2)
+infoscreen.sh -m "STEP 1: Verification of RetroArch settings. Press A to start." -k "A B START MENU" -fs 22
 
 # Allow user to change credentials
 if [ -n "$Username" ]; then
-
 	button=$(
 		infoscreen.sh -m "Username $Username is already set. Overwrite it? A: Yes; B: No" -k "A B" -fs 22
 	)
@@ -61,68 +100,42 @@ if [ -n "$Username" ]; then
 		connectRetroarch
 	fi
 fi
-Username=$(grep "^cheevos_username" "$ConfigFile" | cut -d '"' -f 2)
-Password=$(grep "^cheevos_password" "$ConfigFile" | cut -d '"' -f 2)
+
 # Check if credentials are set
-if [ -z "$Username" ] || [ -z "$Password" ]; then
+while [ -z "$Username" ] || [ -z "$Password" ]; do
 	button=$(infoscreen.sh -m "RetroArch is not connected. Connect? A: Yes; B: No" -k "A B" -fs 22)
 	if [ "$button" = "A" ]; then
 		connectRetroarch
 	else
 		exit 0
 	fi
-fi
-Username=$(grep "^cheevos_username" "$ConfigFile" | cut -d '"' -f 2)
-Password=$(grep "^cheevos_password" "$ConfigFile" | cut -d '"' -f 2)
+done
 
 ############################################################################################################
-
-infoscreen.sh -m "STEP 2: Token generation..." -k "A B START MENU" -fs 22
-
-mkdir -p /mnt/SDCARD/tmp
-cd /mnt/SDCARD/tmp
-
-sed -i 's/^cheevos_enable =.*/cheevos_enable = "true"/' "$ConfigFile"
-cp $ConfigFile .
-ConfigFile="./retroarch.cfg"
 
 if ! ping -q -c 1 -W 1 retroachievements.org >/dev/null; then
 	infoscreen.sh -m "No network connection! Please connect to the internet first." -k "A B START MENU" -fs 22
 	exit 1
 fi
 
-sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "$ConfigFile"
+infoscreen.sh -m "STEP 2: Token generation. Press A to start." -k "A B START MENU" -fs 22
 
-infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 22
-$HOME/ra64.trimui -L "$HOME/.retroarch/cores/mgba_libretro.so" -c "$ConfigFile" "/mnt/SDCARD/Best/Free Games Collection/Roms/GBA/SpaceTwins.zip" &
-sleep 5
-pkill -f ra64.trimui
-sleep 5
+mkdir -p /mnt/SDCARD/tmp
+cd /mnt/SDCARD/tmp
 
-Token=$(grep "^cheevos_token" "$ConfigFile" | cut -d '"' -f 2)
+sed -i 's/^cheevos_enable =.*/cheevos_enable = "true"/' "$RA_Config"
+cp "$RA_Config" .
+
+Token=$(generate_token)
 
 if [ -z "$Token" ]; then
 	infoscreen.sh -m "Failed to get cheevos token! Restart the script to change credentials." -k "A B START MENU" -fs 22
-	exit 1
+	cleanup
+    exit 1
 fi
-
 ############################################################################################################
 ### Apply credentials to all emulators
 
-# PPSSPP 1.17.1
-sed -i "s/^AchievementsEnable =.*/AchievementsEnable = True/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
-sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
-echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
-
-# Flycast
-sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
-sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
-sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
-
-rm -rf .retroarch
-rm -f content_*
-rm -f retroarch.cfg
-
-infoscreen.sh -m "RetroAchievements connected and enabled in RA, PPSSPP and Flycast." -k "A B START MENU" -fs 22
-
+set_credentials "$Username" "$Token"
+cleanup
 exit 0
