@@ -19,20 +19,13 @@ def get_files(folder):
                 files.append(linux_path)
     return files
 
-def add_selected_files(folders):
-    all_files = []
-    for f in folders:
-        folder_files = get_files(f)
-        terminal_menu = TerminalMenu(folder_files,
-            multi_select=True,
-            show_multi_select_hint=True)
-        selected_files = terminal_menu.show()
-        if selected_files is None:
-            continue
-        for file in selected_files:
-            all_files.append(folder_files[file])
-
-    return all_files
+def add_selected_files(folder):
+    folder_files = get_files(folder)
+    terminal_menu = TerminalMenu(folder_files,
+        multi_select=True,
+        show_multi_select_hint=True)
+    selected_files = terminal_menu.show()
+    return [folder_files[index] for index in selected_files]
 
 
 def get_selected_folders():
@@ -60,6 +53,9 @@ def create_collection_dir(collection_name):
             sys.exit()
     else:
         os.mkdir(collection_name)
+    if not os.path.exists("launch.sh"):
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+        os.cp(os.path.join(script_dir, "collection_launcher.sh"), "launch.sh" )
 
 def main():
     parser = argparse.ArgumentParser(description="Create a collection of ROM files.")
@@ -82,16 +78,19 @@ def main():
         print("No folders selected. Exiting.")
         sys.exit()
 
-    files = add_selected_files(folders)
-
     collection_path = os.path.join(coll_dir, collection_name)
-    os.chdir(collection_path)
-
-    for file in files:
-        filename = os.path.basename(file)
-        filename_txt = os.path.splitext(filename)[0] + ".txt"
-        with open(filename_txt, "w") as f:
-            f.write(file)
+    for folder in folders:
+        files = add_selected_files(folder)
+        if not files:
+            continue
+        os.chdir(collection_path)
+        os.mkdir(folder)
+        os.chdir(folder)
+        for file in files:
+            filename = os.path.basename(file)
+            filename_txt = os.path.splitext(filename)[0] + ".txt"
+            with open(filename_txt, "w") as f:
+                f.write(file)
     print("Collection created")
 
 if __name__ == "__main__":
