@@ -4,6 +4,7 @@ import os
 import sys
 import shutil
 import argparse
+import json
 
 
 from simple_term_menu import TerminalMenu
@@ -25,6 +26,8 @@ def add_selected_files(folder):
         multi_select=True,
         show_multi_select_hint=True)
     selected_files = terminal_menu.show()
+    if selected_files is None:
+        return []
     return [folder_files[index] for index in selected_files]
 
 
@@ -53,9 +56,17 @@ def create_collection_dir(collection_name):
             sys.exit()
     else:
         os.mkdir(collection_name)
-    if not os.path.exists("launch.sh"):
-        script_dir = os.path.dirname(os.path.realpath(__file__))
-        os.cp(os.path.join(script_dir, "collection_launcher.sh"), "launch.sh" )
+    os.chdir(collection_name)
+    os.mkdir("Roms")
+    os.mkdir("Imgs")
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    shutil.copyfile(os.path.join(script_dir, "collection_launcher.sh"), "launch.sh" )
+    config=os.path.join(script_dir, "collection_config.json")
+    with open(config, 'r') as file:
+        data = json.load(file)
+    data["label"] = collection_name
+    with open('config.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
 def main():
     parser = argparse.ArgumentParser(description="Create a collection of ROM files.")
@@ -70,20 +81,21 @@ def main():
     os.chdir(coll_dir)
     collection_name = input("Enter the collection name: ")
     create_collection_dir(collection_name)
+    collection_path = os.path.join(coll_dir, collection_name)
 
     os.chdir(roms_dir)
-
     folders = get_selected_folders()
     if not folders:
         print("No folders selected. Exiting.")
         sys.exit()
 
-    collection_path = os.path.join(coll_dir, collection_name)
     for folder in folders:
+        os.chdir(roms_dir)
         files = add_selected_files(folder)
         if not files:
             continue
-        os.chdir(collection_path)
+        roms_path = os.path.join(collection_path, "Roms")
+        os.chdir(roms_path)
         os.mkdir(folder)
         os.chdir(folder)
         for file in files:
