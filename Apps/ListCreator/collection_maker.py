@@ -22,7 +22,8 @@ def get_files(folder):
 
 def add_selected_files(folder):
     folder_files = get_files(folder)
-    terminal_menu = TerminalMenu(folder_files,
+    files_names = [os.path.basename(file) for file in folder_files]
+    terminal_menu = TerminalMenu(files_names,
         multi_select=True,
         show_multi_select_hint=True)
     selected_files = terminal_menu.show()
@@ -31,11 +32,18 @@ def add_selected_files(folder):
     return [folder_files[index] for index in selected_files]
 
 
+def listdir_nohidden(path):
+    for f in os.listdir(path):
+        if not f.startswith('.'):
+            yield f
+
 def get_selected_folders():
-    folders = []
+    all_folders = []
     for root, dirs, file in os.walk("."):
-        folders = dirs
+        all_folders = dirs
         break
+    folders = [folder for folder in all_folders if listdir_nohidden(folder)]
+
 
     terminal_menu = TerminalMenu(folders,
         multi_select=True,
@@ -71,10 +79,12 @@ def create_collection_dir(collection_name):
 def main():
     parser = argparse.ArgumentParser(description="Create a collection of ROM files.")
     parser.add_argument("Roms_dir", type=str, help="Directory containing the ROMs.")
+    parser.add_argument("Imgs_dir", type=str, help="Directory containing the images.")
     parser.add_argument("Collection_dir", type=str, help="Directory to store the collection.")
     args = parser.parse_args()
     # check if the user has provided the path to the roms directory
     roms_dir = os.path.realpath(args.Roms_dir)
+    imgs_dir = os.path.realpath(args.Imgs_dir)
     coll_dir = os.path.realpath(args.Collection_dir)
 
 
@@ -89,20 +99,23 @@ def main():
         print("No folders selected. Exiting.")
         sys.exit()
 
+    dest_imgs_path = os.path.join(collection_path, "Imgs")
     for folder in folders:
         os.chdir(roms_dir)
         files = add_selected_files(folder)
         if not files:
             continue
-        roms_path = os.path.join(collection_path, "Roms")
-        os.chdir(roms_path)
-        os.mkdir(folder)
-        os.chdir(folder)
+        dest_roms_path = os.path.join(collection_path, "Roms", folder)
+        os.mkdir(dest_roms_path)
+        os.chdir(dest_roms_path)
         for file in files:
             filename = os.path.basename(file)
-            filename_txt = os.path.splitext(filename)[0] + ".txt"
-            with open(filename_txt, "w") as f:
+            basename = os.path.splitext(filename)[0]
+            with open(os.path.join(dest_roms_path, basename + ".txt"), "w") as f:
                 f.write(file)
+            src_img = os.path.join(imgs_dir, folder, basename + ".png")
+            if os.path.exists(src_img): 
+                shutil.copyfile(src_img, os.path.join(dest_imgs_path, basename + ".png"))
     print("Collection created")
 
 if __name__ == "__main__":
