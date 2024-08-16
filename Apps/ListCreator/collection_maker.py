@@ -32,17 +32,18 @@ def add_selected_files(folder):
     return [folder_files[index] for index in selected_files]
 
 
-def listdir_nohidden(path):
+def dir_not_empty(path):
     for f in os.listdir(path):
         if not f.startswith('.'):
-            yield f
+            return True
+    return False
 
 def get_selected_folders():
     all_folders = []
     for root, dirs, file in os.walk("."):
         all_folders = dirs
         break
-    folders = [folder for folder in all_folders if listdir_nohidden(folder)]
+    folders = [folder for folder in all_folders if dir_not_empty(folder)]
 
 
     terminal_menu = TerminalMenu(folders,
