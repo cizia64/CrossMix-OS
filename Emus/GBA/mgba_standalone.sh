@@ -11,6 +11,4 @@ $EMU_DIR/cpufreq.sh
 sleep 0.3
 
 $EMU_DIR/mgba "$@" 
-kill -9 $(pidof gptokeyb)
-
-
+kill -9 $(pidof gptokeyb2)
