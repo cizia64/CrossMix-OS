@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/INTELLIVISION.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/INTELLIVISION.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/INTELLIVISION",
   "imgpath": "../../Imgs/INTELLIVISION",
   "useswap": 0,

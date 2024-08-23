@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/LUTRO.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/LUTRO.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/LUTRO",
   "imgpath": "../../Imgs/LUTRO",
   "useswap": 0,

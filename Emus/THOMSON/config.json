@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/THOMSON.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/THOMSON.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/THOMSON",
   "imgpath": "../../Imgs/THOMSON",
   "useswap": 0,

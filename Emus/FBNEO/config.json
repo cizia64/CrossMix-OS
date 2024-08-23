@@ -4,7 +4,7 @@
   "iconsel": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/FBNEO.png",
   "themecolor": "EC7063",
-  "launch": "FBNEO.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/FBNEO",
   "imgpath": "../../Imgs/FBNEO",
   "useswap": 1,

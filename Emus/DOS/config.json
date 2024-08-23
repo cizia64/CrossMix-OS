@@ -5,7 +5,7 @@
   "iconlist": "ic-dos-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/DOS.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/DOS",
   "imgpath": "../../Imgs/DOS",
   "useswap": 1,
