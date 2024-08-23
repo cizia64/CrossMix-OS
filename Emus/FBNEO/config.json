@@ -13,8 +13,12 @@
   "extlist": "zip",
   "launchlist": [
     {
-      "name": "FB NEO",
+      "name": "FB Neo",
       "launch": "FBNEO.sh"
+    },
+    {
+      "name": "FB Neo Xtreme Amped",
+      "launch": "FBNeoXtremeAmped.sh"
     },
     {
       "name": "FB Alpha",
