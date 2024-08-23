@@ -2,6 +2,7 @@
 #echo "===================================="
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 1 7
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/LUTRO
 cd $RA_DIR/

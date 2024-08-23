@@ -1,11 +1,12 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh performance 7 7
+
 echo $0 $*
 
 EMU_DIR=/mnt/SDCARD/Emus/ATOMISWAVE
 FLYCAST_DIR=/mnt/SDCARD/Emus/DC/flycast
 
-$EMU_DIR/cpufreq.sh
 $EMU_DIR/effect.sh
 
 cd "$FLYCAST_DIR"

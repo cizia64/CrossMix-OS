@@ -1,10 +1,10 @@
 #!/bin/sh
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 0 6
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/PICO8
 
-$EMU_DIR/cpufreq.sh
 
 
 Rom="$@"

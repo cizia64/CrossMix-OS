@@ -1,11 +1,11 @@
 #!/bin/sh
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh performance 7 7
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/DC
 cd $RA_DIR/
 
-$EMU_DIR/cpufreq.sh
 $EMU_DIR/effect.sh
 
 #disable netplay
