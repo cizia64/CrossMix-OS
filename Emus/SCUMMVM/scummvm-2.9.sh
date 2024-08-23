@@ -1,6 +1,7 @@
 #!/bin/sh
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 5 7
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/SCUMMVM
 
@@ -27,7 +28,6 @@ if [ "$romName" = "° Import ScummVM Games.launch" ]; then
 	exit
 fi
 
-$EMU_DIR/performance.sh
 
 cd $RA_DIR/
 

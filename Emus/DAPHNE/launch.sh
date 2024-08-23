@@ -1,14 +1,13 @@
 #!/bin/sh
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 1 7
 
 RA_DIR=/mnt/SDCARD/RetroArch
 progdir=$(dirname "$0")
 romdir=$(dirname "$1")
 romname=$(basename "$1")
 romNameNoExtension=${romname%.*}
-
-$EMU_DIR/performance.sh
 
 
 #disable netplay
