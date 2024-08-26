@@ -9,6 +9,8 @@ FAV_FILE=favourite2.json
 
 cd $ROMS_DIR
 cp $FAV_FILE $FAV_FILE.bak
+
+sed -i 's/^{.*,"label/{"label/' $FAV_FILE
 $SORT $FAV_FILE >$FAV_FILE.tmp
 mv $FAV_FILE.tmp $FAV_FILE
 sync
@@ -16,4 +18,3 @@ sync
 sync
 
 sleep 1
-
