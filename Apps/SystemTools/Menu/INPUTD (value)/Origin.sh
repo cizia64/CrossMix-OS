@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 cd "$(dirname "$0")"
 
- source .switcher.sh
+source "$(pwd)/.switcher.sh"

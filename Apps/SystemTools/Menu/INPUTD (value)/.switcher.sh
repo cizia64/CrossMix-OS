@@ -34,16 +34,16 @@ ln -s "$bin_dir$new_inputd" "$bin_dir/trimui_inputd"
 
 # Menu modification to reflect the change immediately
 
-# update crossmix.json configuration file
+# Update crossmix.json configuration file
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
 	echo "{}" >"$json_file"
 fi
-jq --arg script_name "$script_name" '. += {"Inputd": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
+jq --arg script_name "$script_name" '. += {"INPUTD": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
 export PATH="/mnt/SDCARD/System/usr/trimui/scripts/"
 
-# update database of "System Tools" database
+# Update database of "System Tools" database
 mainui_state_update.sh "Inputd" "$script_name"
 
 infoscreen.sh -m "You must reboot the device to apply the changes." -fs 22 -k "A B START SELECT"
