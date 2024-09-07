@@ -5,7 +5,7 @@
   "iconlist": "ic-WSC-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/WSC.png",
   "themecolor": "3C4593",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/WSC",
   "imgpath": "../../Imgs/WSC",
   "useswap": 0,

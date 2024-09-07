@@ -5,7 +5,7 @@
   "iconlist": "ic-GG-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/GG.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/GG",
   "imgpath": "../../Imgs/GG",
   "useswap": 1,

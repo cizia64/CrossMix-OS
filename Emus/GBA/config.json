@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/GBA.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/GBA.png",
   "themecolor": "FF00FF",
-  "launch": "mgba.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/GBA",
   "imgpath": "../../Imgs/GBA",
   "useswap": 0,
@@ -28,8 +28,8 @@
       "launch": "vbanext.sh"
     },
     {
-       "name": "mGBA - Standalone",
-       "launch": "mgba_standalone.sh"
+      "name": "mGBA - Standalone",
+      "launch": "mgba_standalone.sh"
     }
   ]
 }

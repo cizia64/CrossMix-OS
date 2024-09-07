@@ -5,7 +5,7 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/SFCMSU.png",
   "themecolor": "FF0000",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SFCMSU",
   "imgpath": "../../Imgs/SFCMSU",
   "useswap": 0,

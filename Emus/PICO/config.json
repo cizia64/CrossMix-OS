@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PICO.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PICO.png",
   "themecolor": "00FF88",
-  "launch": "fake08.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PICO",
   "imgpath": "../../Imgs/PICO",
   "useswap": 1,

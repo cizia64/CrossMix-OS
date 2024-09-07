@@ -5,7 +5,7 @@
   "iconlist": "ic-mame-plus-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MAME2010.png",
   "themecolor": "00CCFF",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/MAME2010",
   "imgpath": "../../Imgs/MAME2010",
   "useswap": 1,

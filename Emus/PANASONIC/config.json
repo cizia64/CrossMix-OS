@@ -5,7 +5,7 @@
   "iconlist": "ic-OPERA-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PANASONIC.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PANASONIC",
   "imgpath": "../../Imgs/PANASONIC",
   "useswap": 1,

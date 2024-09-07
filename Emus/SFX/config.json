@@ -5,7 +5,7 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/SFX.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SFX",
   "imgpath": "../../Imgs/SFX",
   "useswap": 1,

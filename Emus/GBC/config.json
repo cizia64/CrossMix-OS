@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/GBC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/GBC.png",
   "themecolor": "00FF88",
-  "launch": "gambatte.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/GBC",
   "imgpath": "../../Imgs/GBC",
   "useswap": 1,

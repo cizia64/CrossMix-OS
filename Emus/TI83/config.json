@@ -5,7 +5,7 @@
   "iconlist": "ic-cps1-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/TI83.png",
   "themecolor": "0000FF",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/TI83",
   "imgpath": "../../Imgs/TI83",
   "useswap": 1,

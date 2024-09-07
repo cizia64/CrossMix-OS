@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PCECD.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PCECD.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PCECD",
   "imgpath": "../../Imgs/PCECD",
   "useswap": 0,

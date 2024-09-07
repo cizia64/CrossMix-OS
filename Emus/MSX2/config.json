@@ -5,7 +5,7 @@
   "iconlist": "ic-MSX-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MSX2.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/MSX2",
   "imgpath": "../../Imgs/MSX2",
   "useswap": 1,

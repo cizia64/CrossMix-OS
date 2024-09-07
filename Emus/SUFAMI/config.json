@@ -5,7 +5,7 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/SUFAMI.png",
   "themecolor": "FF0000",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SUFAMI",
   "imgpath": "../../Imgs/SUFAMI",
   "useswap": 0,

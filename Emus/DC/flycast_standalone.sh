@@ -1,4 +1,5 @@
 #!/bin/sh
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 echo $0 $*
 
 EMU_DIR=/mnt/SDCARD/Emus/DC
