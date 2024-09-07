@@ -29,7 +29,10 @@ elif [ $max_id -lt $min_id ] || [ $max_id -gt 8 ]; then
 	exit 1
 fi
 
-echo "Setting CPU frequency to $governor, $(id_to_freq $min_id) - $(id_to_freq $max_id) KHz."
+min_freq=$(id_to_freq $min_id)
+max_freq=$(id_to_freq $max_id)
+
+echo "Setting CPU frequency to $governor, $min_freq - $max_freq kHz."
 echo $governor >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo $(id_to_freq $min_id) >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo $(id_to_freq $max_id) >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo $min_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo $max_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
