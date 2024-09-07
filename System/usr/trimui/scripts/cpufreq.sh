@@ -18,7 +18,7 @@ id_to_freq() {
 	esac
 }
 
-if [ "$governor" != "ondemand" ] && [ "$governor" != "performance" ] && [ "$governor" != "powersave" ] && [ "$governor" != "conservative" ]; then
+if [ "$governor" != "interactive" ] && [ "$governor" != "ondemand" ] && [ "$governor" != "performance" ] && [ "$governor" != "powersave" ] && [ "$governor" != "conservative" ]; then
 	echo "cpufreq.sh: Invalid governor."
 	exit 1
 elif [ $min_id -lt 0 ] || [ $min_id -gt 8 ]; then
@@ -29,6 +29,7 @@ elif [ $max_id -lt 0 ] || [ $max_id -gt 8 ]; then
 	exit 1
 fi
 
+echo "Setting CPU frequency to $governor, $(id_to_freq $min_id) - $(id_to_freq $max_id) KHz."
 echo $governor >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo $(id_to_freq $min_id) >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 echo $(id_to_freq $max_id) >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
