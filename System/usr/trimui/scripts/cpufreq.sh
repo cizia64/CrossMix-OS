@@ -24,7 +24,7 @@ if [ "$governor" != "interactive" ] && [ "$governor" != "ondemand" ] && [ "$gove
 elif [ $min_id -lt 0 ] || [ $min_id -gt 8 ]; then
 	echo "cpufreq.sh: Invalid min frequency id."
 	exit 1
-elif [ $max_id -lt 0 ] || [ $max_id -gt 8 ]; then
+elif [ $max_id -lt $min_id ] || [ $max_id -gt 8 ]; then
 	echo "cpufreq.sh: Invalid max frequency id."
 	exit 1
 fi
