@@ -1,7 +1,7 @@
 {
   "label": "Daphne",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/DAPHNE.png",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/DAPHNE/roms",
   "imgpath": "../../Imgs/DAPHNE",
   "useswap": 1,

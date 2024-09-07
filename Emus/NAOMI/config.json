@@ -6,7 +6,7 @@
   "effectsh": "effect.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/NAOMI.png",
   "themecolor": "FFFFFF",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/NAOMI",
   "imgpath": "../../Imgs/NAOMI",
   "useswap": 1,

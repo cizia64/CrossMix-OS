@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/NGC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/NGC.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/NGC",
   "imgpath": "../../Imgs/NGC",
   "useswap": 0,

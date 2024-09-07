@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/AMIGACD.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/AMIGACD.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/AMIGACD",
   "imgpath": "../../Imgs/AMIGACD",
   "useswap": 0,

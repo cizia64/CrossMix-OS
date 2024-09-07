@@ -1,15 +1,13 @@
 #!/bin/sh
 echo $0 $*
 
-echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 2000000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
      
 
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 1 6
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/FC
 
-$EMU_DIR/cpufreq.sh
 
 
 cd $RA_DIR/

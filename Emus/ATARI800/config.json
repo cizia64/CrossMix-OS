@@ -5,7 +5,7 @@
   "iconlist": "ic-atari2600-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/ATARI800.png",
   "themecolor": "AF7AC5",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/ATARI800",
   "imgpath": "../../Imgs/ATARI800",
   "useswap": 0,

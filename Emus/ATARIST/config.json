@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/ATARIST.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/ATARIST.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/ATARIST",
   "imgpath": "../../Imgs/ATARIST",
   "useswap": 0,

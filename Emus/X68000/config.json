@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/X68000.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/X68000.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/X68000",
   "imgpath": "../../Imgs/X68000",
   "useswap": 0,

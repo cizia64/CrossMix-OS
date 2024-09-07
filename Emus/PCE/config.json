@@ -5,7 +5,7 @@
   "iconlist": "ic-PCE-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PCE.png",
   "themecolor": "EA483F",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PCE",
   "imgpath": "../../Imgs/PCE",
   "useswap": 0,

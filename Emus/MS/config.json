@@ -4,7 +4,7 @@
   "iconsel": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/MS.png",
   "themecolor": "740009",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/MS",
   "imgpath": "../../Imgs/MS",
   "useswap": 0,

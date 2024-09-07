@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/MAME.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MAME.png",
   "themecolor": "00FF88",
-  "launch": "mame.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/MAME",
   "imgpath": "../../Imgs/MAME",
   "useswap": 1,

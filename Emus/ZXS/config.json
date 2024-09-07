@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/ZXS.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/ZXS.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/ZXS",
   "imgpath": "../../Imgs/ZXS",
   "useswap": 0,
