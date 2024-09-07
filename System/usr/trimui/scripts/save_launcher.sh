@@ -1,22 +1,24 @@
 GAME=$(basename "$1")
 
-# Save launcher as default for the game
-button_state.sh L
-if [ $? -eq 10 ]; then
-	Launcher_name=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
-	sed -i "/^$GAME/d" presets.txt
-	echo "$GAME=$Launcher_name" >>presets.txt
-else
+save_launcher() {
+	[ -z "$1" ] && set default
 
-	# Save launcher as default one
-	button_state.sh R
-	if [ $? -eq 10 ]; then
-		Launcher_name=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
-		if [ ! -f presets.txt ]; then
-			touch presets.txt
-		else
-			sed -i "/^default=/d" presets.txt
-		fi
+	Launcher_name=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
+
+	if [ ! -f presets.txt ]; then
+		echo "$1=$Launcher_name" >presets.txt
+	elif grep -q "^$1=" presets.txt &>/dev/null; then
+		sed -i "s/^$1=.*/$1=$Launcher_name/" presets.txt
+	elif [ "$1" = default ]; then
 		sed -i "1idefault=$Launcher_name" presets.txt
+	else
+		echo "$1=$Launcher_name" >>presets.txt
 	fi
-fi
+}
+
+button_state.sh L
+[ $? -eq 10 ] && save_launcher "$GAME"
+
+# Save launcher as default one
+button_state.sh R
+[ $? -eq 10 ] && save_launcher
