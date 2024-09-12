@@ -20,9 +20,8 @@ else
 fi
 
 main() {
-	#echo 1008000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 	echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	mount --bind /mnt/SDCARD/Roms/PICO8 /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
+	mount --bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
 	pico8_64 -splore -preblit_scale 3
 	umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts
 }
