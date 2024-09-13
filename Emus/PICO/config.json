@@ -1,7 +1,7 @@
 {
   "label": "PICO-8",
-  "icon": "/mnt/SDCARD/Icons/Default/Emus/PICO.png",
-  "background": "/mnt/SDCARD/Backgrounds/Default/PICO.png",
+  "icon": "/mnt/SDCARD/Icons/Greys-Dark/Emus/PICO.png",
+  "background": "/mnt/SDCARD/Backgrounds/Greys-Dark/PICO.png",
   "themecolor": "00FF88",
   "launch": "fake08.sh",
   "rompath": "../../Roms/PICO",
@@ -22,6 +22,10 @@
     {
       "name": "Pico8 Wrapper - Splore",
       "launch": "Pico8 Wrapper - Splore.sh"
+    },
+    {
+      "name": "Pico8 Wrapper - Poom",
+      "launch": "P8_Wrapper_Poom.sh"
     },
     {
       "name": "RETRO8                             ",
