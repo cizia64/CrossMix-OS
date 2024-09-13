@@ -26,6 +26,10 @@
     {
       "name": "VBA Next",
       "launch": "vbanext.sh"
+    },
+    {
+       "name": "mGBA - Standalone",
+       "launch": "mgba_standalone.sh"
     }
   ]
 }

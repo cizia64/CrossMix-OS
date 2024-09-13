@@ -134,7 +134,7 @@ if [ -n "$UPDATE_FILE" ]; then
 		rootfs_space=$(df / | awk 'NR==2 {print $4}')
 		if [ "$rootfs_space" -lt "$minspace" ]; then
 			echo "Error: Available space on internal storage is less than 20 MB"
-			infoscreen.sh -m "CrossMix-OS update v$update_version found. No enough space on internal storage to udpate." -k "A B START MENU" -fs 30
+			infoscreen.sh -m "CrossMix-OS update v$update_version found. Not enough space on internal storage to update." -k "A B START MENU" -fs 30
 			exit 1
 		else
 			echo "Available space on / is sufficient: ${rootfs_space} KB"
