@@ -1,6 +1,15 @@
 #!/usr/bin/env sh
 
-sed -i 's/^{.*,"label/{"label/' /mnt/SDCARD/Roms/favourite2.json
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Fixing favorites..."
+set -eu
+
+ROMS_DIR=/mnt/SDCARD/Roms
+FAV_FILE=favourite2.json
+
+cd $ROMS_DIR
+cp $FAV_FILE $FAV_FILE.unfixed
+
+sed -i 's/^{.*,"label/{"label/' "$FAV_FILE"
 awk '{
   match ($0, /sublabel":"([^"]*)"/, sublabel)
   match ($0, /rompath":"([^"]*)"/, rompath)
@@ -9,5 +18,8 @@ awk '{
     gsub(/sublabel":"[^"]*"/, "sublabel\":\"" emudir[1] "\"")
   }
   print
-}' /mnt/SDCARD/Roms/favourite2.json >/tmp/favourite2.json
-mv /tmp/favourite2.json /mnt/SDCARD/Roms/favourite2.json
+}' $FAV_FILE >favourite2_fixed.json
+mv favourite2_fixed.json $FAV_FILE
+
+sync
+sleep 1
