@@ -25,8 +25,8 @@ sys_sha1=$(sha1sum "$bin_dir/$new_inputd")
 card_sha1=$(sha1sum "$res_dir/$new_inputd")
 
 # Copy the new inputd to the bin directory
-if [ ! -f "$bin_dir/$new_inputd" ] || [ "$sys_sha1" != "$expected_sha1" ]; then
-	if [ "$card_sha1" != "$expected_sha1" ]; then
+if [ ! -f "$bin_dir/$new_inputd" ] || [ "${sys_sha1%% *}" != "$expected_sha1" ]; then
+	if [ "${card_sha1%% *}" != "$expected_sha1" ]; then
 		infoscreen.sh -m "The file $new_inputd is missing or corrupted." -fs 22 -k "A B START SELECT"
 		exit 1
 	fi
