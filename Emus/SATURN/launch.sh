@@ -4,7 +4,7 @@ source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/SATURN
 
-$EMU_DIR/performance.sh
+$EMU_DIR/cpufreq.sh
 
 cd $RA_DIR/
 

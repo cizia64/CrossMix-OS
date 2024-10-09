@@ -9,7 +9,7 @@ echo "=============================================="
 echo "==================== DRASTIC ================="
 echo "=============================================="
 
-../performance.sh
+../cpufreq.sh
 
 export HOME="$progdir"
 #export SDL_AUDIODRIVER=dsp

@@ -9,7 +9,7 @@ if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.b
 	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "No bios found, DuckStation will probably not work." -k " "
 fi
 
-$EMU_DIR/performance.sh
+$EMU_DIR/cpufreq.sh
 
 #disable netplay
 NET_PARAM=

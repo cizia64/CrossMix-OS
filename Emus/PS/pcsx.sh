@@ -5,6 +5,7 @@ RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/PS
 cd $RA_DIR/
 
+$EMU_DIR/cpufreq.sh
 
 #disable netplay
 NET_PARAM=

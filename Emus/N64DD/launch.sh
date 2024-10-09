@@ -9,7 +9,7 @@ export XDG_CONFIG_HOME="$CONFDIR"
 export XDG_DATA_HOME="$CONFDIR"
 export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
 
-./performance.sh
+./cpufreq.sh
 PWD=$PWD
 cd $EMU_DIR/
 
