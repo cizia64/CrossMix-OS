@@ -27,7 +27,7 @@ if [ "$romName" = "° Import ScummVM Games.launch" ]; then
 	exit
 fi
 
-$EMU_DIR/performance.sh
+$EMU_DIR/cpufreq.sh
 
 cd $RA_DIR/
 

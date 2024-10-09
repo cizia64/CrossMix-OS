@@ -37,7 +37,7 @@ case "$*" in
     ;;
 esac
 
-../performance.sh
+../cpufreq.sh
 
 /mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -c "./defkeys.gptk" &
 sleep 0.3
