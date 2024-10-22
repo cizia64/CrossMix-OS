@@ -1,5 +1,5 @@
 stella_console = "auto"
-stella_crop_hoverscan = "disabled"
+stella_crop_hoverscan = "enabled"
 stella_filter = "disabled"
 stella_ntsc_aspect = "par"
 stella_paddle_analog_sensitivity = "20"
