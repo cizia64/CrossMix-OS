@@ -15,7 +15,7 @@
   "launchlist": [
     {
       "name": "PicoDrive",
-      "launch": "launch.sh"
+      "launch": "picodrive.sh"
     },
     {
       "name": "GenesisPlusGX",
