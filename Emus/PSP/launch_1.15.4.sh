@@ -1,4 +1,5 @@
 #!/bin/sh
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 echo $0 $*
 progdir=`dirname "$0"`
 progdir154=$progdir/PPSSPP_1.15.4

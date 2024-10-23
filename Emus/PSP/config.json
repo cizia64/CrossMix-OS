@@ -2,7 +2,7 @@
   "label": "PSP",
   "label.ch.lang": "PSP",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PSP.png",
-  "launch": "launch_1.17.1_gl.sh",
+  "launch": "default.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/PSP.png",
   "themecolor": "64A8BD",
   "iconsel": "",
@@ -37,7 +37,7 @@
       "name.ch.lang": "PPSSPP正常模式 - Perf.",
       "launch": "launch_1.17.1_gl.sh"
     },
-	{
+    {
       "name": "PPSSPP 1.17.1 - Vulkan - Perf.",
       "name.ch.lang": "PPSSPP性能模式 - Perf.",
       "launch": "launch_1.17.1_vulkan.sh"
@@ -46,6 +46,6 @@
       "name": "PPSSPP-1.5.4 - Perf.",
       "name.ch.lang": "PPSSPP-1.5.4性能模式 - Perf.",
       "launch": "launch_1.15.4.sh"
-    }	
+    }
   ]
 }

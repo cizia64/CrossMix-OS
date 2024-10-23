@@ -4,7 +4,7 @@
   "background": "/mnt/SDCARD/Backgrounds/Default/OPENBOR.png",
   "iconsmall": "ic-openbor.png",
   "iconlist": "ic-openbor.png",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/OPENBOR",
   "imgpath": "../../Imgs/OPENBOR",
   "useswap": 1,

@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/FDS.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/FDS.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/FDS",
   "imgpath": "../../Imgs/FDS",
   "useswap": 0,

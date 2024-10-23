@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SFC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SFC.png",
   "themecolor": "00FF88",
-  "launch": "snes9x.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SFC",
   "imgpath": "../../Imgs/SFC",
   "useswap": 0,

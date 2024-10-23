@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SGB.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SGB.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SGB",
   "imgpath": "../../Imgs/SGB",
   "useswap": 0,

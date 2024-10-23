@@ -5,7 +5,7 @@
   "iconlist": "ic-cps1-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/PC88.png",
   "themecolor": "0000FF",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PC88",
   "imgpath": "../../Imgs/PC88",
   "useswap": 1,

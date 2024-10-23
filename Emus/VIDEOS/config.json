@@ -16,7 +16,7 @@
       "name": "mpv",
       "launch": "mpv.sh"
     },
-	{
+    {
       "name": "Libretro FFmpeg",
       "launch": "ffmpeg.sh"
     }

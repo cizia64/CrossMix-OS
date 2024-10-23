@@ -1,7 +1,7 @@
 {
   "label": "PSPMINIS",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/PSPMINIS.png",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/PSPMINIS.png",
   "themecolor": "64A8BD",
   "iconsel": "",

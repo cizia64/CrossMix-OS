@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SEGA32X.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SEGA32X.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SEGA32X",
   "imgpath": "../../Imgs/SEGA32X",
   "useswap": 0,

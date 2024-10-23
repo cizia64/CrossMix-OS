@@ -5,7 +5,7 @@
   "iconlist": "ic-AMIGA-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/AMIGA.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/AMIGA",
   "imgpath": "../../Imgs/AMIGA",
   "useswap": 1,
