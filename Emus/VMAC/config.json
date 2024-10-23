@@ -5,7 +5,7 @@
   "iconlist": "ic-C64-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VMAC.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/VMAC",
   "imgpath": "../../Imgs/VMAC",
   "useswap": 1,

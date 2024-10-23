@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/VIDEOPAC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VIDEOPAC.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/VIDEOPAC",
   "imgpath": "../../Imgs/VIDEOPAC",
   "useswap": 0,

@@ -1,7 +1,7 @@
 {
     "label": "N. NDS",
     "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
-    "launch": "launch.sh",
+    "launch": "default.sh",
     "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
     "themecolor":"FF8800",
     "iconsel":"",

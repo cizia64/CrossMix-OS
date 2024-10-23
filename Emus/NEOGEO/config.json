@@ -5,7 +5,7 @@
   "iconlist": "ic-neogeo-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/NEOGEO.png",
   "themecolor": "FFD200",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/NEOGEO",
   "imgpath": "../../Imgs/NEOGEO",
   "gamelist": "../../Roms/NEOGEO/gamelist.xml",

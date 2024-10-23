@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/VECTREX.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/VECTREX.png",
   "iconsel": "",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/VECTREX",
   "imgpath": "../../Imgs/VECTREX",
   "useswap": 0,
