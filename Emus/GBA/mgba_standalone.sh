@@ -1,6 +1,6 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-cpufreq.sh conservative 0 6
+cpufreq.sh ondemand 2 6
 
 echo $0 $*
 
