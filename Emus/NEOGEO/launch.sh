@@ -2,12 +2,11 @@
 echo "===================================="
 echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 2 6
 RA_DIR=/mnt/SDCARD/RetroArch
 EMU_DIR=/mnt/SDCARD/Emus/NEOGEO
 cd $RA_DIR/
 
-echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 1800000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
 case "$@" in
     *.neo) CORE_PATH=$RA_DIR/.retroarch/cores/geolith_libretro.so ;; # fall back to geolith for terraonion .neo

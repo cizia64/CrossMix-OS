@@ -1,5 +1,7 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 0 6
+
 export picodir=/mnt/SDCARD/Emus/PICO/PICO8_Wrapper
 cd $picodir
 export PATH=$PATH:$PWD/bin
