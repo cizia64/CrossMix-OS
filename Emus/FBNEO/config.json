@@ -17,6 +17,10 @@
       "launch": "FBNEO.sh"
     },
     {
+      "name": "FB NEO (Tate)",
+      "launch": "FBNEO_tate.sh"
+    },
+    {
       "name": "FB Alpha",
       "launch": "FBAlpha.sh"
     }
