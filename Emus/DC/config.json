@@ -22,12 +22,12 @@
       "launch": "flycast_wide.sh"
     },
     {
-      "name": "Flycast (Standalone)",
-      "launch": "flycast_standalone.sh"
+      "name": "Flycast - v2.4 (Standalone)",
+      "launch": "flycast_standalone_v2.4.sh"
     },
     {
-      "name": "Flycast - Old Ver. (Standalone)",
-      "launch": "flycast_standalone_old.sh"
+      "name": "Flycast - v1.0 (Standalone)",
+      "launch": "flycast_standalone_v1.0.sh"
     }
   ]
 }
