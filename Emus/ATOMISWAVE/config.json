@@ -20,6 +20,10 @@
     {
       "name": "Flycast (Standalone)",
       "launch": "launch_standalone.sh"
+    },
+    {
+      "name": "Flycast - Old Ver. (Standalone)",
+      "launch": "flycast_standalone_old.sh"
     }
   ]
 }
