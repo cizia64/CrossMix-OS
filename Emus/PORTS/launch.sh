@@ -1,24 +1,21 @@
 #!/bin/sh
-
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 source /mnt/SDCARD/System/etc/ex_config
-EMU_DIR="/mnt/SDCARD/Emus/PORTS"
 
 selected_mode=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
 case "$selected_mode" in
 "High Performance")
-	cpufreq.sh performance 0 7
+	cpufreq.sh performance 2 7
 	;;
 "Battery Saver")
-	cpufreq.sh conservative 0 4
+	cpufreq.sh conservative 2 4
 	;;
 *)
-	cpufreq.sh ondemand 1 6
+	cpufreq.sh ondemand 2 6
 	;;
 esac
 
-PORTS_DIR=/mnt/SDCARD/Roms/PORTS
-cd "$PORTS_DIR"
+cd /mnt/SDCARD/Roms/PORTS
 
 ################ Fix for TSP controls ################
 

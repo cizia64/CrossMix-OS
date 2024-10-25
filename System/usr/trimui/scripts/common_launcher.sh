@@ -1,3 +1,6 @@
+echo "===================="
+echo "$0 $*"
+
 #Find the Emulator directory (first Emus/ subdirectory)
 EMU_DIR="$(echo "$0" | sed -E 's|\(.*Emus/[^/]*\)/.*|\1|')"
 PM_DIR="/mnt/SDCARD/Apps/PortMaster/PortMaster"

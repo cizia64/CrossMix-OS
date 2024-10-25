@@ -1,18 +1,9 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-cpufreq.sh ondemand 1 6
+cpufreq.sh ondemand 4 7
 
-echo $0 $*
-progdir=`dirname "$0"`/drastic
-cd $progdir
+# cwd is EMU_DIR
+cd drastic
 
-
-
-echo "=============================================="
-echo "==================== DRASTIC ================="
-echo "=============================================="
-
-
-export HOME="$progdir"
 #export SDL_AUDIODRIVER=dsp
-./drastic "$*"
+HOME=$PWD ./drastic "$*"

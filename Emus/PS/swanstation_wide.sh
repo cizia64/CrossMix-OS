@@ -1,18 +1,12 @@
 #!/bin/sh
-echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cpufreq.sh ondemand 5 7
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/PS
+
 cd $RA_DIR/
 
 if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.bin" -o -iname "ps*.bin" | grep -q .; then
     /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "No bios found, SwanStation will probably not work." -k " "
 fi
-
-
-#disable netplay
-NET_PARAM=
 
 # Variable for the path to the SwanStation directory
 SWANSTATION_DIR="/mnt/SDCARD/RetroArch/.retroarch/config/SwanStation"
@@ -46,7 +40,7 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$SWANSTATION_DIR/widescreen.opt" "$ROM_OPT"
     echo "Patch applied to $ROM_CFG"
     echo "Patch applied to $ROM_OPT"
-    HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v $NET_PARAM -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@"
+    HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@"
 
     # cleaning
     rm "$ROM_CFG"

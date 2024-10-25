@@ -1,6 +1,6 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-cpufreq.sh ondemand 0 6
+cpufreq.sh ondemand 3 6
 
 export picodir=/mnt/SDCARD/Emus/PICO/PICO8_Wrapper
 cd $picodir
@@ -22,11 +22,6 @@ else
 	fi
 fi
 
-main() {
-	echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	mount --bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
-	pico8_64 -splore -preblit_scale 3
-	umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts
-}
-
-main "$1"
+mount --bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
+pico8_64 -splore -preblit_scale 3
+umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts

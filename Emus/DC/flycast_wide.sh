@@ -1,16 +1,8 @@
 #!/bin/sh
-echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cpufreq.sh performance 7 7
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/DC
+
 cd $RA_DIR/
-
-$EMU_DIR/effect.sh
-
-#disable netplay
-NET_PARAM=
-
 
 # Variable for the path to the Flycast directory
 FLYCAST_DIR="/mnt/SDCARD/RetroArch/.retroarch/config/Flycast"

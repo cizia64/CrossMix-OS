@@ -1,14 +1,8 @@
 #!/bin/sh
-echo $0 $*
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-cpufreq.sh ondemand 5 7
-RA_DIR=/mnt/SDCARD/RetroArch
-EMU_DIR=/mnt/SDCARD/Emus/N64
+cpufreq.sh ondemand 4 7
+
 cd $RA_DIR/
-
-
-#disable netplay
-NET_PARAM=
 
 # Variable for the path to the Mupen64Plus directory
 MUPEN_DIR="/mnt/SDCARD/RetroArch/.retroarch/config/Mupen64Plus GLES2"
@@ -44,6 +38,7 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$MUPEN_DIR/widescreen.opt" "$ROM_OPT"
     echo "Patch applied to $ROM_CFG"
     echo "Patch applied to $ROM_OPT"
+
     HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/mupen64plus_libretro.so "$@"
     # cleaning
     rm "$ROM_CFG"
