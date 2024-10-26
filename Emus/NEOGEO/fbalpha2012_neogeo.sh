@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ "${1#*.}" = neo ]; then $(dirname "$0")/geolith.sh "$1"; exit 0; fi
+if [ "${1##*.}" = neo ]; then $(dirname "$0")/geolith.sh "$1"; exit 0; fi
 
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cpufreq.sh 2 6
