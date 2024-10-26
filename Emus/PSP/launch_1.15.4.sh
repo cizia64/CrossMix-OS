@@ -1,15 +1,8 @@
 #!/bin/sh
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
-echo $0 $*
-progdir=`dirname "$0"`
-progdir154=$progdir/PPSSPP_1.15.4
-cd "$progdir154"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$progdir154
-echo "=============================================="
-echo "==================== PPSSPP  ================="
-echo "=============================================="
 
-
+# cwd is EMU_DIR
+cd PPSSPP_1.15.4
 
 performance=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Perf.")
 if [ -z "$performance" ]; then
@@ -18,8 +11,4 @@ else
     cpufreq.sh ondemand 3 6
 fi
 
-
-export HOME=$progdir154
-./PPSSPPSDL "$*"
-
-echo "*************************************************************"
+HOME=$PWD ./PPSSPPSDL "$*"

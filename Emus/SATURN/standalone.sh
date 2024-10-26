@@ -1,13 +1,11 @@
 #!/bin/sh
-source /mnt/SDCARD/System/usr/trimui/common_launcher.sh
-
-echo $0 $*
-EMU_DIR=/mnt/SDCARD/Emus/SATURN
-
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cpufreq.sh performance 7 7
 
-cd $EMU_DIR/yabasanshiro
-export HOME="$EMU_DIR/yabasanshiro"
+# cwd is EMU_DIR
+cd yabasanshiro
+
+export HOME="$PWD"
 
 if grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -iq "(HLE BIOS)"; then
     BIOS_FILE=""
