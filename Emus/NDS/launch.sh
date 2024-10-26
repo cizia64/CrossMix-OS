@@ -4,6 +4,7 @@ cpufreq.sh ondemand 4 7
 
 # cwd is EMU_DIR
 cd drastic
+export HOME="$PWD"
 
 LAUNCHER=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1)
 
