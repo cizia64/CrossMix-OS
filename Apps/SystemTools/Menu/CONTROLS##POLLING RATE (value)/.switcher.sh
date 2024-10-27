@@ -19,4 +19,6 @@ jq --arg script_name "$script_name" '. += {"POLLING RATE": $script_name}' "$json
 # update database of "System Tools" database
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "POLLING RATE" "$script_name"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "You must reboot the device to apply the changes." -fs 22 -k "A B START SELECT"
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "MainUI restarting, please wait..." -fs 22 -k "A B START SELECT"
+pkill trimui_inputd
+pkill -KILL MainUI
