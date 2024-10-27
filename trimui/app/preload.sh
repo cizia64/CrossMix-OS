@@ -1,8 +1,17 @@
 #!/bin/sh
 
+UDISK_TIRMUI_DIR=/mnt/UDISK/trimui_dir
+SDCARD_TRIMUI_DIR=/mnt/SDCARD/trimui
+export LD_LIBRARY_PATH=/usr/trimui/lib:${SDCARD_TRIMUI_DIR}/lib
+
+SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$SWAP_AB_enabled" -eq 1 ]; then
+  touch /var/trimui_inputd/swap_ab
+fi
+
 runifnecessary() {
-	a=$(pgrep $1)
-	if [ "$a" == "" ]; then
+	a=$(pgrep "$1")
+	if [ "$a" = "" ]; then
 		$2 &
 	fi
 }
@@ -15,9 +24,6 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 		echo "The value of 'RESUME AT BOOT' is 0."
 		exit 1
 	fi
-
-	UDISK_TIRMUI_DIR=/mnt/UDISK/trimui_dir
-	SDCARD_TRIMUI_DIR=/mnt/SDCARD/trimui
 
 	# set wifi
 	max_wait_ip=20
@@ -57,8 +63,6 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 		echo "img mounted" >>/tmp/imgrun.log
 		udiskOK=1
 	fi
-
-	export LD_LIBRARY_PATH=/usr/trimui/lib:${SDCARD_TRIMUI_DIR}/lib
 
 	cd /usr/trimui/bin/
 	runifnecessary "keymon" /usr/trimui/bin/keymon
