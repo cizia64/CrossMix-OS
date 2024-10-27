@@ -43,11 +43,9 @@ exit 0
 EOF
 	) >"$pipe" &
 
-  touch /var/trimui_inputd/sticks_disabled
-	/mnt/SDCARD/Apps/Terminal/SimpleTerminal -e "sh $pipe; rm -f $pipe" &
+	/mnt/SDCARD/Apps/Terminal/launch.sh -e "sh $pipe; rm -f $pipe" &
 	while [ -e "$pipe" ]; do sleep 1; done
 	pkill SimpleTerminal
-  rm -f /var/trimui_inputd/sticks_disabled
 	Username=$(grep "^cheevos_username" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
 	Password=$(grep "^cheevos_password" "$RA_Config" | sed -n 's/^[^"]*"\(.*\)".*$/\1/p')
 
