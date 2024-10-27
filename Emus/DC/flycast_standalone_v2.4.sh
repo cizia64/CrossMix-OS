@@ -7,8 +7,8 @@ cd flycast_v2.4
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/mnt/SDCARD/Emus/DC/flycast_v1.0/lib"
 export FLYCAST_BIOS_DIR="/mnt/SDCARD/BIOS/dc/"
-export FLYCAST_DATA_DIR="$PWD/flycast/"
-export FLYCAST_CONFIG_DIR="$EMU_DIR/flycast_v2.4/config/"
+export FLYCAST_DATA_DIR="$FLYCAST_BIOS_DIR/flycast/"
+export FLYCAST_CONFIG_DIR="$PWD/config/"
 export HOME="$PWD"
 export XDG_DATA_HOME="$FLYCAST_BIOS_DIR/flycast/"
 export XDG_CONFIG_HOME="$PWD/config/"
