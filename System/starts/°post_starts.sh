@@ -4,9 +4,8 @@ export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/usr
 # Swap A B
 SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ "$SWAP_AB_enabled" -eq 1 ]; then
+  mkdir -p /var/trimui_inputd
   touch /var/trimui_inputd/swap_ab
-else
-  rm -f /var/trimui_inputd/swap_ab
 fi
 
 # Telnet service

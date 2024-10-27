@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+PATH="/mnt/SDCARD/System/bin:$PATH"
+LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+
 script_name=$(basename "$0" .sh)
 bin_dir="/usr/trimui/bin/"
 

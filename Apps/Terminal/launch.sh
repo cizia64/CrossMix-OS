@@ -1,10 +1,14 @@
 #!/bin/bash
 
-# Fix slowdown caused by inputd.v2
+# Fix slowdown caused by moded inputd
 touch /var/trimui_inputd/sticks_disabled
 
-progdir=$(dirname "$0")
-cd $progdir
- ./SimpleTerminal
+if [ "$#" -gt 0 ]; then
+ /mnt/SDCARD/Apps/Terminal/SimpleTerminal "$@"
+else
+  progdir=$(dirname "$0")
+  cd $progdir
+  ./SimpleTerminal
+fi
 
 rm /var/trimui_inputd/sticks_disabled
