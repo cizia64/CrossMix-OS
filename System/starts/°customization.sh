@@ -16,6 +16,41 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
 
 if [ "$version" != "$FW_patched_version" ]; then
+
+  # trimui_inputd update
+
+  Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+  Max_FW_Revision="20240503"
+
+  if [ "$Current_FW_Revision" -le "$Max_FW_Revision" ]; then 
+
+      Sha_expected_1ms=21b1f3e38ca856e973970fec9fa4c17286ab7e85
+      Sha_expected_8ms=398f160580207e239a45759cd5f7df8f3d587248
+      Sha_expected_16ms=11ceb2d5bb46eaa7e1880d4db6c756d6a77658f6
+      Sha_1ms=$(sha1sum /mnt/SDCARD/System/resource/trimui_inputd/1ms | cut -d ' ' -f 1)
+      Sha_8ms=$(sha1sum /mnt/SDCARD/System/resource/trimui_inputd/8ms | cut -d ' ' -f 1)
+      Sha_16ms=$(sha1sum /mnt/SDCARD/System/resource/trimui_inputd/16s | cut -d ' ' -f 1)
+      if [ "$Sha_expected_1ms" = "$Sha_1ms" ] && [ "$Sha_expected_8ms" = "$Sha_8ms" ] &&
+        [ "$Sha_expected_16ms" = "$Sha_16ms" ]; then
+
+          if [ ! -f /usr/trimui/bin/trimui_inputd.bak ]; then
+              mv /usr/trimui/bin/trimui_inputd /usr/trimui/bin/trimui_inputd.bak
+          fi
+          cp /mnt/SDCARD/System/resource/trimui_inputd/1ms /usr/trimui/bin/trimui_inputd.1ms
+          cp /mnt/SDCARD/System/resource/trimui_inputd/8ms /usr/trimui/bin/trimui_inputd.8ms
+          cp /mnt/SDCARD/System/resource/trimui_inputd/16ms /usr/trimui/bin/trimui_inputd.16ms
+          cp /mnt/SDCARD/System/resource/trimui_inputd/16ms /usr/trimui/bin/trimui_inputd
+          cp /mnt/SDCARD/System/resource/preload.sh /usr/trimui/bin/preload.sh
+      else
+          /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Not able to update trimui_inputd, a new one is missing or corrupted"
+      fi
+
+  else
+
+      echo "recent firmware: trimui_inputd will not be updated"
+
+  fi
+
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
 
