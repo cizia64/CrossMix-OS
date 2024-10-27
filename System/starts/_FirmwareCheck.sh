@@ -1,5 +1,21 @@
 #!/bin/sh
 
+################ check if inputd update is required #################
+
+Latest_inputd_version=2
+#Latest_sha1=...
+Installed_inputd_version=$(cat /usr/trimui/bin/inputd_version.txt || echo 1)
+if [  "$Installed_inputd_version" -lt "$Latest_inputd_version" ]; then
+  # TODO checksum sdcard file
+  if [ ! -L /usr/trimui/bin/trimui_inputd ]; then
+    mv /usr/trimui/bin/trimui_inputd /usr/trimui/bin/trimui_inputd.v$Installed_inputd_version
+  else
+    rm /usr/trimui/bin/trimui_inputd
+  fi
+  cp /mnt/SDCARD/System/resource/trimui_inputd /usr/trimui/bin/trimui_inputd
+  echo $Latest_inputd_version > /usr/trimui/bin/inputd_version.txt
+fi
+
 ################ check min Firmware version required ################
 
 CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
@@ -177,3 +193,4 @@ if [ -n "$UPDATE_FILE" ]; then
 else
 	echo "No CrossMix update file found."
 fi
+

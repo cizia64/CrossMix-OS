@@ -164,6 +164,8 @@ image=$(determine_image_path "$image")
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
+touch /var/trimui_inputd/sticks_disabled
+
 # Run the sdl2imgshow command
 /mnt/SDCARD/System/bin/sdl2imgshow \
     -i "$image" \
@@ -199,4 +201,6 @@ else
 fi
 
 pkill -f sdl2imgshow
+
+rm /var/trimui_inputd/sticks_disabled
 # echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor

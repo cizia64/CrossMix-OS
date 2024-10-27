@@ -1,6 +1,13 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
+# Swap A B
+SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$SWAP_AB_enabled" -eq 1 ]; then
+  touch /var/trimui_inputd/swap_ab
+else
+  rm -f /var/trimui_inputd/swap_ab
+fi
 
 # Telnet service
 TELNET_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["TELNET"]' "/mnt/SDCARD/System/etc/crossmix.json")
