@@ -4,10 +4,11 @@ display_magnify 2
 sound_latency 0.10
 sound_normalize no
 
-device_alsa_device sdl
 device_joystick raw
 device_keyboard sdl
 device_video sdl
+device_sound sdl
+device_alsa_device auto
 
 device_video_clock 74.5 / 44.77 / 59.86
 device_video_modeline ATSC-720-60p 74.25 1280 1320 1376 1650 720 722 728 750 +hsync +vsync

@@ -16,11 +16,11 @@
   [
     {
       "name": "AdvanceMame 4.0",
-      "launch": "./advmame.sh"
+      "launch": "advmame.sh"
     },
     {
       "name": "AdvanceMame 3.10",
-      "launch": "./advmame310.sh"
+      "launch": "advmame310.sh"
     }
   ]
 }
