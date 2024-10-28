@@ -6,4 +6,4 @@ export LD_LIBRARY_PATH="$PWD/lib:/mnt/SDCARD/System/lib:/usr/lib${LD_LIBRARY_PAT
 
 Gamedir=$(dirname "$@")
 Gamefile=$(basename "$@")
-HOME="$PWD" ./advmame -dir_rom "$Gamedir" "${Gamefile%.*}"
+HOME="$PWD" ./advmame4 -dir_rom "$Gamedir" "${Gamefile%.*}"
