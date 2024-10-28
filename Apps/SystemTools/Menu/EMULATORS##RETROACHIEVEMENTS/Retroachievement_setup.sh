@@ -61,9 +61,9 @@ set_credentials() {
 	echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
 
 	# Flycast
-	sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
-	sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
-	sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/flycast/config/emu.cfg
+	sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg
+	sed -i "s/^UserName =.*/UserName = $Username/" /mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg
+	sed -i "s/^Token =.*/Token = $Token/" /mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg
 
 	infoscreen.sh -m "RetroAchievements connected and enabled in RA, PPSSPP and Flycast." -k "A B START MENU" -fs 22
 }
