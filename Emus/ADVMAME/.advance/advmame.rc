@@ -1,8 +1,11 @@
 display_vsync no
 display_magnify 2
+display_resize fractional
+display_resizeeffect auto
 
 sound_latency 0.10
 sound_normalize no
+sound_mode auto
 
 device_joystick raw
 device_keyboard sdl
@@ -36,15 +39,34 @@ input_map[p1_down] joystick_digital[trimui_player1,3,1,0] or joystick_digital[tr
 input_map[p1_left] joystick_digital[trimui_player1,3,0,1] or joystick_digital[trimui_player1,0,0,1]
 input_map[p1_right] joystick_digital[trimui_player1,3,0,0] or  joystick_digital[trimui_player1,0,0,0]
 
+input_map[p1_doubleleft_up] joystick_digital[trimui_player1,0,1,1]
+input_map[p1_doubleleft_down] joystick_digital[trimui_player1,0,1,0]
+input_map[p1_doubleleft_left] joystick_digital[trimui_player1,0,0,1]
+input_map[p1_doubleleft_right] joystick_digital[trimui_player1,0,0,0]
+input_map[p1_doubleright_up] joystick_digital[trimui_player1,2,0,1]
+input_map[p1_doubleright_down] joystick_digital[trimui_player1,2,0,0]
+input_map[p1_doubleright_left] joystick_digital[trimui_player1,1,1,1]
+input_map[p1_doubleright_right] joystick_digital[trimui_player1,1,1,0]
+
 vertical/input_map[p1_down] joystick_digital[trimui_player1,3,0,0] or  joystick_digital[trimui_player1,1,1,0]
 vertical/input_map[p1_up] joystick_digital[trimui_player1,3,0,1] or joystick_digital[trimui_player1,1,1,1]
 vertical/input_map[p1_left] joystick_digital[trimui_player1,3,1,0] or joystick_digital[trimui_player1,2,0,0]
 vertical/input_map[p1_right] joystick_digital[trimui_player1,3,1,1] or joystick_digital[trimui_player1,2,0,1]
 
+vertical/input_map[p1_doubleleft_up] joystick_digital[trimui_player1,0,0,1]
+vertical/input_map[p1_doubleleft_down] joystick_digital[trimui_player1,0,0,0]
+vertical/input_map[p1_doubleleft_left] joystick_digital[trimui_player1,0,1,0]
+vertical/input_map[p1_doubleleft_right] joystick_digital[trimui_player1,0,1,1]
+vertical/input_map[p1_doubleright_up] joystick_digital[trimui_player1,1,1,1]
+vertical/input_map[p1_doubleright_down] joystick_digital[trimui_player1,1,1,0]
+vertical/input_map[p1_doubleright_left] joystick_digital[trimui_player1,2,0,0]
+vertical/input_map[p1_doubleright_right] joystick_digital[trimui_player1,2,0,1]
+
 input_map[p1_button1] joystick_button[trimui_player1,button1]
 input_map[p1_button2] joystick_button[trimui_player1,button2]
 input_map[p1_button3] joystick_button[trimui_player1,button4]
 input_map[p1_button4] joystick_button[trimui_player1,button3]
+
 vertical/input_map[p1_button1] joystick_button[trimui_player1,button2]
 vertical/input_map[p1_button2] joystick_button[trimui_player1,button4]
 vertical/input_map[p1_button3] joystick_button[trimui_player1,button1]
@@ -53,17 +75,17 @@ vertical/input_map[p1_button4] joystick_button[trimui_player1,button3]
 input_map[p1_button5] joystick_button[trimui_player1,button5]
 input_map[p1_button6] joystick_button[trimui_player1,button6]
 
-dir_artwork .advance/artwork:/usr/local/share/advance/artwork
-dir_diff .advance/diff
-dir_hi .advance/hi
-dir_image .advance/image:/usr/local/share/advance/image
-dir_inp .advance/inp
-dir_memcard .advance/memcard
-dir_nvram .advance/nvram
-dir_rom .advance/rom:/mnt/SDCARD/Roms/ADVMAME
-dir_sample .advance/sample:/usr/local/share/advance/sample
-dir_snap .advance/snap
-dir_sta .advance/sta
+dir_artwork artwork
+dir_diff diff
+dir_hi hi
+dir_image /mnt/SDCARD/Imgs/ADVMAME
+dir_inp inp
+dir_memcard memcard
+dir_nvram nvram
+dir_rom /mnt/SDCARD/Roms/ADVMAME
+dir_sample sample
+dir_snap snap
+dir_sta sta
 
 device_color_bgr15 no
 device_color_bgr16 yes
@@ -92,7 +114,6 @@ device_raw_mousetype[1] pnp
 device_raw_mousetype[2] pnp
 device_raw_mousetype[3] pnp
 device_sdl_samples 512
-device_sound auto
 device_video_cursor auto
 device_video_doublescan yes
 device_video_fastchange no
@@ -123,8 +144,6 @@ display_interlaceeffect none
 display_magnifysize 640
 display_mode auto
 display_pausebrightness 1
-display_resize fractional
-display_resizeeffect auto
 display_restore yes
 display_rgbeffect none
 display_rol no
@@ -491,7 +510,6 @@ sound_adjust auto
 sound_equalizer_highvolume 0
 sound_equalizer_lowvolume 0
 sound_equalizer_midvolume 0
-sound_mode auto
 sound_samplerate 44100
 sound_samples yes
 sound_volume -3
@@ -514,4 +532,4 @@ ui_translucency 0.8
 vector_aux_renderer none
 vector_aux_renderer_dual_display yes
 vector_aux_renderer_port /dev/ttyACM0
-esprade/input_map[p1_down] joystick_digital[trimui_player1,3,0,0] or joystick_digital[trimui_player1,1,1,0]
+baluba/input_map[p1_down] joystick_digital[trimui_player1,3,0,0] or joystick_digital[trimui_player1,1,1,0]

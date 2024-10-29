@@ -11,16 +11,5 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "zip",
-  "launchlist":
-  [
-    {
-      "name": "AdvanceMame 4.0",
-      "launch": "advmame.sh"
-    },
-    {
-      "name": "AdvanceMame 3.10",
-      "launch": "advmame310.sh"
-    }
-  ]
+  "extlist": "zip"
 }
