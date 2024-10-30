@@ -9,7 +9,7 @@ export XDG_DATA_HOME="$CONFDIR"
 export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
 
 PATH=$EMU_DIR:$PATH
-export LD_LIBRARY_PATH=$EMU_DIR:$EMU_DIR/libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$PM_DIR:$EMU_DIR:$LD_LIBRARY_PATH
 
 cd "$EMU_DIR"
 VideoPlugin=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Rice") # We detect the performance mode from the label which have been selected in launcher menu
@@ -37,7 +37,7 @@ case "$*" in
 esac
 
 
-/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -c "./defkeys.gptk" &
+/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -1 mupen64plus -c "./defkeys.gptk" &
 sleep 0.3
 
 HOME="$EMU_DIR" ./mupen64plus "$ROM_PATH"
