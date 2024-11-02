@@ -5,7 +5,7 @@
   "iconlist": "ic-neogeo-32-n.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/NEOGEO.png",
   "themecolor": "FFD200",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/NEOGEO",
   "imgpath": "../../Imgs/NEOGEO",
   "gamelist": "../../Roms/NEOGEO/gamelist.xml",
@@ -15,12 +15,16 @@
   "extlist": "zip|7z|neo",
   "launchlist": [
     {
-      "name": "FB NEO",
-      "launch": "launch.sh"
+      "name": "FBNEO",
+      "launch": "fbneo.sh"
     },
     {
-      "name": "FB ALPHA 2012",
-      "launch": "launch.sh"
+      "name": "FBA2012 Neogeo",
+      "launch": "fbalpha2012_neogeo.sh"
+    },
+    { 
+      "name": "Geolith",
+      "launch": "geolith.sh"
     }
   ]
 }

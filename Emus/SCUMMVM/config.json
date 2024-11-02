@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/SCUMMVM.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/SCUMMVM.png",
   "themecolor": "00D300",
-  "launch": "scummvm-2.8.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SCUMMVM",
   "imgpath": "../../Imgs/SCUMMVM",
   "useswap": 1,

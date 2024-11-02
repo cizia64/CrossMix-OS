@@ -4,7 +4,7 @@
   "iconsel": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/PGM.png",
   "themecolor": "FAF792",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PGM",
   "imgpath": "../../Imgs/PGM",
   "useswap": 1,

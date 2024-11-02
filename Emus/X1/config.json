@@ -5,7 +5,7 @@
   "iconlist": "ic-X1-list.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/X1.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/X1",
   "imgpath": "../../Imgs/X1",
   "useswap": 1,

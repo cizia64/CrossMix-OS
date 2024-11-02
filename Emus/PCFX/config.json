@@ -5,7 +5,7 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/PCFX.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/PCFX",
   "imgpath": "../../Imgs/PCFX",
   "useswap": 1,

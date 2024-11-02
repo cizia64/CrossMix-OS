@@ -1,16 +1,10 @@
 #!/bin/sh
-echo $0 $*
-progdir=`dirname "$0"`/drastic
-cd $progdir
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 4 7
 
+# cwd is EMU_DIR
+cd drastic
+export HOME="$PWD"
 
-
-echo "=============================================="
-echo "==================== DRASTIC ================="
-echo "=============================================="
-
-../performance.sh
-
-export HOME="$progdir"
 #export SDL_AUDIODRIVER=dsp
 ./drastic "$*"

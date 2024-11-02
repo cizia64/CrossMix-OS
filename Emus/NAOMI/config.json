@@ -6,7 +6,7 @@
   "effectsh": "effect.sh",
   "background": "/mnt/SDCARD/Backgrounds/Default/NAOMI.png",
   "themecolor": "FFFFFF",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/NAOMI",
   "imgpath": "../../Imgs/NAOMI",
   "useswap": 1,
@@ -18,8 +18,12 @@
       "launch": "launch.sh"
     },
     {
-      "name": "Flycast (Standalone)",
-      "launch": "launch_standalone.sh"
+      "name": "Flycast - v2.4 (Standalone)",
+      "launch": "flycast_standalone_v2.4.sh"
+    },
+    {
+      "name": "Flycast - v1.0 (Standalone)",
+      "launch": "flycast_standalone_v1.0.sh"
     }
   ]
 }

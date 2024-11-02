@@ -1,7 +1,7 @@
 {
     "label": "N. NDS",
     "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
-    "launch": "launch.sh",
+    "launch": "default.sh",
     "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
     "themecolor":"FF8800",
     "iconsel":"",
@@ -13,13 +13,20 @@
     "extlist": "nds|zip|7z|rar",
     "launchlist": [
         {
-            "name": "Drastic - SDL2 MOD(凯)",
+            "name": "Drastic (Overlay + Bilinear)",
             "launch": "launch.sh"
         },
         {
-            "name": "Drastic - No MOD      ",
-            "launch": "launch_original.sh"
+            "name": "Drastic (Overlay + Nearest)",
+            "launch": "launch.sh"
+        },
+        {
+            "name": "Drastic (No Overlay + Bilinear)",
+            "launch": "launch.sh"
+        },
+        {
+            "name": "Drastic (No Overlay + Nearest)",
+            "launch": "launch.sh"
         }
     ]
 }
-    

@@ -5,10 +5,32 @@
   "iconlist": "",
   "background": "/mnt/SDCARD/Backgrounds/Default/SATURN.png",
   "themecolor": "FFFF88",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/SATURN",
   "imgpath": "../../Imgs/SATURN",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "-----------  libretro  -----------",
+      "launch": ""
+    },
+    {
+      "name": "Yabasanshiro",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "-----------  standalone  -----------",
+      "launch": ""
+    },
+    {
+      "name": "Yabasanshiro (Real BIOS)",
+      "launch": "standalone.sh"
+    },
+    {
+      "name": "Yabasanshiro (HLE BIOS)",
+      "launch": "standalone.sh"
+    }
+  ] 
 }

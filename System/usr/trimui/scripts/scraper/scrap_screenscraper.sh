@@ -344,14 +344,16 @@ set -f
 
 for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
 	! -name '.*' ! -name '*.xml' ! -name '*.miyoocmd' ! -name '*.cfg' ! -name '*.db' \
-	! -path '*/Imgs/*' ! -path '*/.game_config/*' $find_filter $romfilter"); do
+    ! -name '*.png' ! -name '*.state' ! -name '*.srm' \
+    ! -path '*/Imgs/*' ! -path '*/.game_config/*' \
+    $find_filter $romfilter"); do
 
-	
-if pgrep "text_viewer" >/dev/null  && ! pgrep "getkey" >/dev/null && [ "$ScrapeInBackground" = "false" ]; then    # we're not in background scraping and B have been pressed, we display terminate the scraping task
-    break
-fi	
+        
+    if pgrep "text_viewer" >/dev/null  && ! pgrep "getkey" >/dev/null && [ "$ScrapeInBackground" = "false" ]; then    # we're not in background scraping and B have been pressed, we display terminate the scraping task
+        break
+    fi	
 
-echo "-------------------------------------------------------------------------"
+    echo "-------------------------------------------------------------------------"
     gameIDSS=""
     url=""
     let romcount++

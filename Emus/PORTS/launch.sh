@@ -1,17 +1,21 @@
 #!/bin/sh
-
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 source /mnt/SDCARD/System/etc/ex_config
-EMU_DIR="/mnt/SDCARD/Emus/PORTS"
 
-selected_option=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
+selected_mode=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
+case "$selected_mode" in
+"High Performance")
+	cpufreq.sh performance 2 7
+	;;
+"Battery Saver")
+	cpufreq.sh conservative 2 4
+	;;
+*)
+	cpufreq.sh ondemand 2 6
+	;;
+esac
 
-if [ -z "$selected_option" ]; then
-    selected_option="Balanced"
-fi
-$EMU_DIR/cpufreq.sh "$selected_option"
-
-PORTS_DIR=/mnt/SDCARD/Roms/PORTS
-cd "$PORTS_DIR"
+cd /mnt/SDCARD/Roms/PORTS
 
 ################ Fix for TSP controls ################
 
@@ -20,8 +24,8 @@ LINE_TO_ADD="sleep 0.3 # For TSP only, do not move/modify this line."
 
 # Check if the line already exists
 if ! grep -q "$LINE_TO_ADD" "$FILE"; then
-    # Use awk to insert the line after the target line only if it doesn't already exist
-    awk -v line="$LINE_TO_ADD" '
+	# Use awk to insert the line after the target line only if it doesn't already exist
+	awk -v line="$LINE_TO_ADD" '
     BEGIN { line_inserted = 0 }
     /^[[:space:]]*\$GPTOKEYB[[:space:]]*.*&[[:space:]]*$/ {
         print $0

@@ -163,13 +163,11 @@ if [ -n "$UPDATE_FILE" ]; then
 
 			cp /mnt/SDCARD/System/usr/trimui/scripts/crossmix_update.sh /tmp
 			cp /mnt/SDCARD/System/bin/text_viewer /tmp
-			# cp /mnt/SDCARD/Apps/Terminal/SimpleTerminal /tmp
 
 			infoscreen.sh -m "Updating CrossMix to v$update_version." -t 1
 			pkill -9 preload.sh
 			pkill -9 runtrimui.sh
 			/mnt/SDCARD/System/bin/text_viewer -s "/tmp/crossmix_update.sh" -f 25 -t "                            CrossMix-OS Update v$update_version                                      "
-			# /tmp/SimpleTerminal -e /tmp/crossmix_update.sh
 		fi
 	else
 		echo "The CrossMix update version ($update_version) is not greater than the current version ($initial_version)."
@@ -177,3 +175,4 @@ if [ -n "$UPDATE_FILE" ]; then
 else
 	echo "No CrossMix update file found."
 fi
+

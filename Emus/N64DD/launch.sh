@@ -1,6 +1,6 @@
 #!/bin/sh
-
-echo $0 $*
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
+cpufreq.sh ondemand 5 7
 
 EMU_DIR=/mnt/SDCARD/Emus/N64/mupen64plus
 CONFDIR="$EMU_DIR/conf/"
@@ -9,8 +9,6 @@ export XDG_CONFIG_HOME="$CONFDIR"
 export XDG_DATA_HOME="$CONFDIR"
 export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
 
-./performance.sh
-PWD=$PWD
 cd $EMU_DIR/
 
 PATH=$PWD:$EMU_DIR:$PATH

@@ -6,7 +6,7 @@
   "background": "/mnt/SDCARD/Backgrounds/Default/CPS3.png",
   "themecolor": "FF4400",
   "effectsh": "effect.sh",
-  "launch": "launch.sh",
+  "launch": "default.sh",
   "rompath": "../../Roms/CPS3",
   "imgpath": "../../Imgs/CPS3",
   "useswap": 1,
