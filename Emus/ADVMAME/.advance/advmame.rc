@@ -1,5 +1,5 @@
 display_vsync no
-display_magnify 2
+display_magnify 1
 display_resize fractional
 display_resizeeffect auto
 
@@ -16,7 +16,7 @@ device_alsa_device auto
 device_video_clock 74.5 / 44.77 / 59.86
 device_video_modeline ATSC-720-60p 74.25 1280 1320 1376 1650 720 722 728 750 +hsync +vsync
 
-ui_fontsize 17
+ui_fontsize 22
 
 input_map[start1] joystick_button[trimui_player1,button8]
 input_map[coin1] joystick_button[trimui_player1,button7]
@@ -78,7 +78,7 @@ input_map[p1_button6] joystick_button[trimui_player1,button6]
 dir_artwork artwork
 dir_diff diff
 dir_hi hi
-dir_image /mnt/SDCARD/Imgs/ADVMAME
+dir_image /mnt/SDCARD/Roms/ADVMAME
 dir_inp inp
 dir_memcard memcard
 dir_nvram nvram
@@ -466,7 +466,7 @@ misc_hiscorefile hiscore.dat
 misc_lang none
 misc_languagefile english.lng
 misc_mutedemo no
-misc_quiet no
+misc_quiet yes
 misc_safequit yes
 misc_smp yes
 misc_timetorun 0
@@ -523,9 +523,9 @@ ui_color[help_p1] 000000 ffff00
 ui_color[help_p2] 000000 00ff00
 ui_color[help_p3] 000000 ff0000
 ui_color[help_p4] 000000 00ffff
-ui_color[interface] 000000 ffffff
-ui_color[select] 000000 afffff
-ui_color[tag] 247ef0 ffffff
+ui_color[interface] 7f7f7f 000000
+ui_color[select] ffffff ff0000
+ui_color[tag] 00ff00 000000
 ui_font auto
 ui_helpimage auto
 ui_translucency 0.8
