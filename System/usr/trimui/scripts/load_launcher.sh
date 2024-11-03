@@ -32,7 +32,7 @@ if [ -z "$Launcher_name" ]; then
 	else
     # Else use launch.sh as fallback
 		Launcher_name=Unique
-		Launcher_command="$EMU_DIR/launch.sh"
+		Launcher_command="launch.sh"
 	fi
 fi
 
