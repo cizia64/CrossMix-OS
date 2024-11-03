@@ -1,10 +1,16 @@
-
-l1_hk = f12
-l2_hk = f7
-r2_hk = f5
-a_hk = f11
-b_hk = f10
-x_hk = p
-y_hk = m
-
+[controls]
+overlay = clear
 guide = esc
+
+select = hold_state hotkey              
+
+[controls:hotkey]
+overlay = clear
+
+l1 = f12
+l2 = f7
+r2 = f5
+a = f11
+b = f10
+x = p
+y = m
