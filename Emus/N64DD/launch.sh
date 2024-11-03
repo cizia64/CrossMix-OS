@@ -2,16 +2,14 @@
 source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cpufreq.sh ondemand 5 7
 
-EMU_DIR=/mnt/SDCARD/Emus/N64/mupen64plus
-CONFDIR="$EMU_DIR/conf/"
-mkdir -p "$EMU_DIR/conf"
-export XDG_CONFIG_HOME="$CONFDIR"
-export XDG_DATA_HOME="$CONFDIR"
-export FRT_NO_EXIT_SHORTCUTS=FRT_NO_EXIT_SHORTCUTS
+cd /mnt/SDCARD/Emus/N64
+export XDG_CONFIG_HOME="$PWD"
+export XDG_DATA_HOME="$PWD"
 
-cd $EMU_DIR/
+cd mupen64plus
+EMU_DIR="$PWD"
 
-PATH=$PWD:$EMU_DIR:$PATH
+
 export LD_LIBRARY_PATH="$PM_DIR:$EMU_DIR:$LD_LIBRARY_PATH"
 
 case "$*" in
@@ -21,15 +19,14 @@ case "$*" in
     *.zip|*.7z)
         TEMP_ROM=$(mktemp)
         ROM_PATH="$TEMP_ROM"
-        /mnt/SDCARD/System/bin/7zz e "$*" -so > "$TEMP_ROM"
+        7zz e "$*" -so > "$TEMP_ROM"
         ;;
 esac
 
-echo $EMU_DIR/gptokeyb -k mupen64plus -c "./defkeys.gptk" 
-$EMU_DIR/gptokeyb2 -k mupen64plus -c "./defkeys.gptk" &
+$PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 
-./mupen64plus "$ROM_PATH" 2>&1
+HOME=$EMU_DIR ./mupen64plus "$ROM_PATH" 2>&1
 
 rm -f "$TEMP_ROM"
 
-$ESUDO kill -9 $(pidof gptokeyb2)
+kill -9 $(pidof gptokeyb2)
