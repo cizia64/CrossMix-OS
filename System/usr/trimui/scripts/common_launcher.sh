@@ -17,6 +17,7 @@ if grep -q ra64.trimui "$0"; then
     source $dir/FolderOverrideFinder.sh
 
     ra_audio_switcher.sh
+    touch /var/trimui_inputd/ra_hotkey
 fi
 
 cd "$EMU_DIR"
