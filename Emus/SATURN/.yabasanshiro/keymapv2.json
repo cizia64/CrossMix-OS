@@ -1,24 +1,14 @@
 {
   "0_Xbox 360 Controller_030003f05e0400008e02000014010000": {
     "a": {
-      "id": 0,
+      "id": 1,
       "type": "button",
       "value": 1
-    },
-    "analogl": {
-      "id": 0,
-      "type": "axis",
-      "value": -1
     },
     "analogleft": {
       "id": 4,
       "type": "axis",
       "value": 0
-    },
-    "analogr": {
-      "id": 0,
-      "type": "axis",
-      "value": 1
     },
     "analogright": {
       "id": 5,
@@ -28,20 +18,20 @@
     "analogx": {
       "id": 0,
       "type": "axis",
-      "value": -1
+      "value": 0
     },
     "analogy": {
       "id": 1,
       "type": "axis",
-      "value": -1
+      "value": 0
     },
     "b": {
-      "id": 1,
+      "id": 0,
       "type": "button",
       "value": 1
     },
     "c": {
-      "id": 2,
+      "id": 5,
       "type": "button",
       "value": 1
     },
@@ -71,9 +61,9 @@
       "value": 2
     },
     "select": {
-      "id": -1,
-      "type": "",
-      "value": -999
+      "id": 8,
+      "type": "button",
+      "value": 1
     },
     "start": {
       "id": 7,
@@ -91,12 +81,12 @@
       "value": 1
     },
     "y": {
-      "id": 4,
+      "id": 2,
       "type": "button",
       "value": 1
     },
     "z": {
-      "id": 5,
+      "id": 4,
       "type": "button",
       "value": 1
     }
