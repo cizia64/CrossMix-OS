@@ -40,5 +40,11 @@ if [ "$smb_enabled" -eq 1 ]; then
 
 fi
 
+# Tailscale service
+Tailscale_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["Tailscale"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$Tailscale_enabled" -eq 1 ]; then
+	/mnt/SDCARD/System/bin/tailscaled &
+fi
+
 # Avahi (DNS name) service
 /usr/sbin/avahi-daemon --file=/mnt/SDCARD/System/etc/avahi/avahi-daemon.conf  --no-drop-root -D
