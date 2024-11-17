@@ -34,5 +34,10 @@ max_freq=$(id_to_freq $max_id)
 
 echo "Setting CPU frequency to $governor, $min_freq - $max_freq kHz."
 echo $governor >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo $min_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-echo $max_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+if [ $min_freq -gt "$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq)" ]; then
+    echo $max_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    echo $min_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+else
+    echo $min_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    echo $max_freq >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+fi
