@@ -1,23 +1,20 @@
-GAME=$(basename "$1")
-
 save_launcher() {
-	[ -z "$1" ] && set default
+    Emu_cfg="$EMU_DIR/launchers.cfg"
+    Launcher_name=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
 
-	Launcher_name=$(grep "dowork 0x" "/tmp/log/messages" | tail -n 1 | sed -e 's/.*: \(.*\) dowork 0x.*/\1/')
-
-	if [ ! -f presets.txt ]; then
-		echo "$1=$Launcher_name" >presets.txt
-	elif grep -q "^$1=" presets.txt &>/dev/null; then
-		sed -i "s/^$1=.*/$1=$Launcher_name/" presets.txt
-	elif [ "$1" = default ]; then
-		sed -i "1idefault=$Launcher_name" presets.txt
-	else
-		echo "$1=$Launcher_name" >>presets.txt
-	fi
+    if [ -n "$1" ]; then
+        GAME=$(basename "$1")
+        Cfg_dir="$ROM_DIR/.games_config"
+        mkdir -p "$Cfg_dir"
+        Game_cfg="$Cfg_dir/${GAME%.*}.cfg"
+        echo "launcher=$Launcher_name" >"$Game_cfg"
+    else
+        echo "default_launcher=$Launcher_name" >"$Emu_cfg"
+    fi
 }
 
 button_state.sh L
-[ $? -eq 10 ] && save_launcher "$GAME"
+[ $? -eq 10 ] && save_launcher "$1"
 
 # Save launcher as default one
 button_state.sh R
