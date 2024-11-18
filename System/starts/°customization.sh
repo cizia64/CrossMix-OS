@@ -24,9 +24,9 @@ if [ "$version" != "$FW_patched_version" ]; then
 
   if [ "$Current_FW_Revision" -le "$Max_FW_Revision" ]; then 
 
-      Sha_expected_1ms=21b1f3e38ca856e973970fec9fa4c17286ab7e85
-      Sha_expected_8ms=398f160580207e239a45759cd5f7df8f3d587248
-      Sha_expected_16ms=11ceb2d5bb46eaa7e1880d4db6c756d6a77658f6
+      Sha_expected_1ms=c90b9fa722d745a7e827f38dbd409d3cd1ba56f5
+      Sha_expected_8ms=3f1b81d668c3f7de2cc0458502326a732d3cb0b2
+      Sha_expected_16ms=356b41b0be9d00f361e45303f41f5f1f337e6efc
       Sha_1ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/1ms | cut -d ' ' -f 1)
       Sha_8ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/8ms | cut -d ' ' -f 1)
       Sha_16ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/16s | cut -d ' ' -f 1)
