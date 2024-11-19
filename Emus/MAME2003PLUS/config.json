@@ -11,5 +11,15 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "zip"
+  "extlist": "zip",
+  "launchlist": [
+    {
+      "name": "MAME 2003-Plus",
+      "launch": "MAME2003-Plus.sh"
+    },
+    {
+      "name": "MAME 2003-Xtreme",
+      "launch": "MAME2003-Xtreme.sh"
+    }
+  ]
 }
