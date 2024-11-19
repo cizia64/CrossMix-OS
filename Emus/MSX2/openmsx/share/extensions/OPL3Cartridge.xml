@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>OPL3 Cartridge</name>
+    <manufacturer>Luciano Sturaro</manufacturer>
+    <code/>
+    <release_year>2004</release_year>
+    <description>Yamaha OPL3 based sound expansion, version 1. This is the older version without MSX-Audio BIOS.</description>
+    <type>sound expansion</type>
+  </info>
+  <devices>
+    <OPL3Cartridge id="OPL3 Cartridge">
+      <io base="0xC0" num="4"/>
+      <sound>
+        <volume>12000</volume>
+      </sound>
+    </OPL3Cartridge>
+  </devices>
+</msxconfig>

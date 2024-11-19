@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>2DD Micro Floppydisk Drive</name>
+    <manufacturer>Sony</manufacturer>
+    <code>HBD-F1</code>
+    <release_year>1985</release_year>
+    <description>External Double Sided Double Density 3.5" disk drive.</description>
+    <type>external disk drive</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <WD2793 id="Sony HBD-F1 diskROM/FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <motor_off_timeout_ms>4000</motor_off_timeout_ms>
+          <mem base="0x4000" size="0x4000"/>
+          <rom>
+            <sha1>e067ce2b444ec7a3dd45d9e2df4b34c1ba732872</sha1>
+            <filename>hbd-f1.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

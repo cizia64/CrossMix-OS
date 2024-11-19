@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>C-BIOS</manufacturer>
+    <code>MSX2+ BR</code>
+    <release_year>2010</release_year>
+    <description>An MSX2+ machine using C-BIOS, with MSX-MUSIC, and Brazillian style settings like 60Hz interrupt frequency.</description>
+    <type>MSX2+</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <primary slot="0">
+      <ROM id="C-BIOS Main ROM">
+        <mem base="0x0000" size="0x8000"/>
+        <rom>
+          <sha1>73f5f868193a9c8ecc7614ce4f454b4329b9e1b9</sha1>
+          <filename>cbios_main_msx2+_br.rom</filename>
+        </rom>
+      </ROM>
+
+      <ROM id="C-BIOS Logo ROM">
+        <mem base="0x8000" size="0x4000"/>
+        <rom>
+          <sha1>db2635ef7e3f8589518dca65f2e3b515edc5372d</sha1>
+          <filename>cbios_logo_msx2+.rom</filename>
+        </rom>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="C-BIOS Sub ROM">
+          <mem base="0x0000" size="0x4000"/>
+          <rom>
+            <sha1>2fcb40413e7d373f0f2dbdc815ce18746ddf3684</sha1>
+            <filename>cbios_sub.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <MSX-MUSIC id="C-BIOS MSX-MUSIC">
+          <mem base="0x4000" size="0x4000"/>
+          <io base="0x7C" num="2" type="O"/>
+          <rom>
+            <sha1>5c5eb001e6a1fe29edb7abd428a3967bb388e5db</sha1>
+            <filename>cbios_music.rom</filename>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+          </sound>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>512</size>
+        </MemoryMapper>
+      </secondary>
+
+    </primary>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <key_ghosting>false</key_ghosting>
+      <keyboard_type>int</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+      <version>V9958</version>
+      <vram>128</vram>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+    </PSG>
+
+    <RTC id="Real time clock">
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+      <sramname>cbios-msx2+_br.cmos</sramname>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <ResetStatusRegister id="Reset Status register">
+      <io base="0xF4" num="1"/>
+      <inverted>true</inverted>
+    </ResetStatusRegister>
+
+  </devices>
+
+</msxconfig>

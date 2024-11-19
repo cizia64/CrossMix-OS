@@ -1,0 +1,32 @@
+This directory contains a so-called "Boosted" MSXturboR configuration. It has
+the following features:
+
+- based on Panasonic FS-A1GT (most complete MSXturboR), which includes:
+  - R800
+  - Kanji ROM
+  - MSX-MUSIC
+  - PCM
+  - MSX-MIDI
+  - firmware
+- three external slots, slot B and C are in a sub slot (2-0 and 2-1)
+- 2048 kB memory mapper (in slot 3-3)
+- 2 disk drives
+- V9958 VDP with 192 kB VRAM
+- SCC+ in slot 2-0
+- MSX Audio
+- MoonSound with 640 kB sample RAM
+- GFX9000 with Video9000
+- 512 kB MegaRAM in slot 2-2
+- BASIC Compiler (MSX-BASIC Kun)
+- Built in IDE interface with 100MB harddisk and CD-ROM
+
+This configuration needs the following ROMs:
+- fs-a1gt_kanjifont.rom, fs-a1gt_firmware.rom: same as needed for the
+  Panasonic FS-A1GT machine
+- phc-70fd2_basickun.rom: same as needed for the basic compiler in the Sanyo
+  PHC-70FD2
+- yrw801.rom: same as needed for the MoonSound extension
+
+You can make this configuration the default by changing the 'default_machine'
+setting from the console. See the Setup Guide and User's Manual sections of the
+manual.

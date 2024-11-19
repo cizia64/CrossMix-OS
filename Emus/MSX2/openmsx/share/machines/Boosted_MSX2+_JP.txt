@@ -1,0 +1,29 @@
+This directory contains a so-called "Boosted" MSX2+ configuration. It has the
+following features:
+
+- based on Panasonic FS-A1WSX (most complete MSX2+), which includes:
+  - Kanji ROM
+  - MSX-MUSIC
+  - firmware
+- three external slots, slot B and C are in a sub slot (2-0 and 2-1)
+- 2048 kB memory mapper (in slot 3-0)
+- 2 disk drives
+- V9958 VDP with 192 kB VRAM
+- SCC+ in slot 2-3
+- MSX Audio
+- MoonSound with 640 kB sample RAM
+- GFX9000 with Video9000
+- 512 kB MegaRAM in slot 2-2
+- BASIC Compiler (MSX-BASIC Kun)
+
+This configuration needs the following ROMs:
+- fs-a1wsx_kanjifont.rom, fs-a1wsx_basic-bios2p.rom, fs-a1wsx_fmbasic.rom,
+  fs-a1wsx_msx2psub.rom, fs-a1wsx_kanjibasic.rom, fs-a1wsx_disk.rom,
+  fs-a1wsx_firmware.rom: same as needed for the Panasonic FS-A1WSX machine
+- phc-70fd2_basickun.rom: same as needed for the basic compiler in the Sanyo
+  PHC-70FD2
+- yrw801.rom: same as needed for the MoonSound extension
+
+You can make this configuration the default by changing the 'default_machine'
+setting from the console. See the Setup Guide and User's Manual sections of the
+manual.

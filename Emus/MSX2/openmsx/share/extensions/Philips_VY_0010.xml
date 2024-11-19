@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM "msxconfig2.dtd">
+<msxconfig>
+  <info>
+    <name>3.5" Disk Drive</name>
+    <manufacturer>Philips</manufacturer>
+    <code>VY-0010</code>
+    <release_year>1985</release_year>
+    <description>External Single Sided Double Density 3.5" disk drive.</description>
+    <type>external disk drive</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <WD2793 id="Philips VY 0010 diskROM/FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <mem base="0x0000" size="0x10000"/> <!-- Verified: mirroring on all pages! -->
+          <singlesided/>
+          <rom>
+            <sha1>adb90803ba6fd25df35d10ac0d90da23f1b9c164</sha1> <!-- marked as JVC..? -->
+            <sha1>4a55eb07e1ab8b847e230854e2e26e48983982a6</sha1> <!-- same as previous, FDC registers differ -->
+            <sha1>8924e3e11eb1c8c1edcb7efa63c26d2bdc142473</sha1> <!-- marked as VG8245..? v. 1.05-->
+            <filename>vy0010.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

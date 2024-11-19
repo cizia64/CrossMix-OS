@@ -1,0 +1,21 @@
+# Unicode values are mapped to controller 1.
+# The keypad from controller 2 seems to be barely used.
+#
+#format: <UNICODE>, <ROW><COL>, <MODIFIERS>
+# <UNICODE>: hexadecimal unicode number or DEADKEY<N>
+# <ROW>: row in keyboard matrix (0-5)
+# <COL>: column in keyboard matrix (0-7)
+# <MODIFIERS>: not relevant for ColecoVision
+#
+0023, 33,             # #
+002a, 32,             # *
+0030, 20,             # 0
+0031, 21,             # 1
+0032, 22,             # 2
+0033, 23,             # 3
+0034, 24,             # 4
+0035, 25,             # 5
+0036, 26,             # 6
+0037, 27,             # 7
+0038, 30,             # 8
+0039, 31,             # 9

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>MSX Music System</name>
+    <manufacturer>Toshiba</manufacturer>
+    <code>HX-MU900</code>
+    <release_year>1986</release_year>
+    <description>Toshiba's Yamaha Y8950 MSX-AUDIO cartridge.</description>
+    <type>sound expansion</type>
+  </info>
+  <devices>
+    <MSX-AUDIO id="Toshiba HX-MU900 MSX-Audio">
+      <io base="0xC0" num="2"/>
+      <type>Toshiba</type>
+      <sound>
+        <volume>12000</volume>
+      </sound>
+      <sampleram>0</sampleram>
+    </MSX-AUDIO>
+
+    <primary slot="any">
+      <secondary slot="any">
+        <ROM id="Toshiba HX-MU900 firmware">
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>0d246b0e3edc63803fcce861ea07eadf29dc488c</sha1>
+            <filename>hx-mu900.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

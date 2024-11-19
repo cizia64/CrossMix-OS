@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM "msxconfig2.dtd">
+<msxconfig>
+  <info>
+    <name>Micro Floppydisk Unit</name>
+    <manufacturer>Toshiba</manufacturer>
+    <code>HX-F101PE</code>
+    <release_year>1985</release_year>
+    <description>External Single Sided Double Density 3.5" disk drive.</description>
+    <type>external disk drive</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <WD2793 id="Toshiba HX-F101PE diskROM/FDC">
+          <connectionstyle>Toshiba</connectionstyle>
+          <mem base="0x4000" size="0x4000"/> <!-- No mirroring at all. -->
+          <singlesided/>
+          <rom>
+            <sha1>b88c507720a0617a27141c329755de1a48b89deb</sha1> <!-- marked as TSDFDD00104Apr85 -->
+            <filename>hx-f101pe.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

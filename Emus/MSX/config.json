@@ -3,12 +3,46 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/MSX.png",
   "iconsmall": "ic-MSX-small.png",
   "iconlist": "ic-MSX-list.png",
-  "background": "/mnt/SDCARD/Backgrounds/Default/MSX.png",
+  "background": "/mnt/SDCARD/Backgrounds/No Backgrounds/MSX.png",
   "themecolor": "FFFF88",
   "launch": "launch.sh",
   "rompath": "../../Roms/MSX",
   "imgpath": "../../Imgs/MSX",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "launchlist": [
+    {
+      "name": "---  Libretro  ---",
+      "launch": ""
+    },
+    {
+      "name": "Bluemsx",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "--- Standalone  ---",
+      "launch": ""
+    },
+    {
+      "name": "openMsx (MSX1 C-Bios)",
+      "launch": "openmsx.sh"
+    },
+    {
+      "name": "openMsx (MSX2+ C-Bios )",
+      "launch": "../MSX2/openmsx.sh"
+    },
+    {
+      "name": "openMsx (MSX2+ MSX-Bios)",
+      "launch": "../MSX2/openmsx_msx2plus.sh"
+    },
+    {
+      "name": "openMsx (MSX turbo R MSX-Bios)",
+      "launch": "../MSX2/openmsx_turbor.sh"
+    },
+    {
+      "name": "openMsx Guide & Support",
+      "launch": "../MSX2/openmsx_support.sh"
+    }
+  ]
 }

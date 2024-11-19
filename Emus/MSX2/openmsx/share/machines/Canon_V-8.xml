@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Canon</manufacturer>
+    <code>V-8</code>
+    <release_year></release_year>
+    <description>Very compact and rather minimal MSX1 machine</description>
+    <type>MSX</type>
+  </info>
+
+  <!-- Based on serial 131844, thanks to Ricardo Jurczyk Pinheiro
+       and serial 125424, thanks to Werner Kai
+  both:
+  Z80 scf: 01C529ED01D429C (dunno)
+  Z80 cpl: 3AFF12D7 (standard)
+  Z80 out (c), 0: 0 (MSX)
+  PSG pin 6/7 quirk: C (YES)
+  
+  pics of 125424 reveal:
+  has S3527 MSX-ENGINE
+  Z80: NEC D780C-1
+  VDP: TMS9118NL
+  no printerport
+
+  -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9118</version> <!-- NO effect of 4k/16k switch, no latch, HAS clones, HAS screen 2 mirrored mode, HAS mode 3 mixed mode -->
+      <io base="0x98" num="8"/> <!-- S-3527 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-3527 MSX-ENGINE -->
+      <keyboardlayout>jis</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0xC000" size="0x4000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>v-8_basic-bios1.rom</filename>
+          <sha1>97f9a0b45ee4b34d87ca3f163df32e1f48b0f09c</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+  </devices>
+
+</msxconfig>

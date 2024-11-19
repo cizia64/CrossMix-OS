@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Casio</manufacturer>
+    <code>PV-16</code>
+    <release_year>1984</release_year>
+    <description>Cheap gaming MSX, with joystick buttons and bad keyboard and no printer port.</description>
+    <type>MSX</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+  <!-- CPU: NEC probably, like MX-10 scf: 01C529ED -->
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9118</version> <!-- probably (like MX-10), NO effect of 4k/16k switch, no latch, HAS clones, HAS screen 2 mirrored mode, HAS mode 3 mixed mode -->
+      <io base="0x98" num="2"/> <!-- no mirroring of VDP ports! -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0xC000" size="0x4000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>pv-16_basic-bios1.rom</filename>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+  </devices>
+
+</msxconfig>

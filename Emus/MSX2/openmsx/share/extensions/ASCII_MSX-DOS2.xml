@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Japanese MSX-DOS2</name>
+    <manufacturer>ASCII</manufacturer>
+    <code/>
+    <release_year>1988</release_year>
+    <description>MSX-DOS2 cartridge with 256kB memory mapper and kanji BASIC.</description>
+    <type>OS ROM + memory expansion</type>
+  </info>
+  <devices>
+    <primary slot="any">
+
+      <secondary slot="3">
+        <ROM id="MSXDOS2 ROM">
+          <mem base="0x4000" size="0x04000"/>
+          <rom>
+            <sha1>42f4e3360eb134857b0efa82c1abedf342680124</sha1>
+            <filename>ascii_msxdos22.rom</filename>
+          </rom>
+          <mappertype>MSXDOS2</mappertype>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <MemoryMapper id="256kB Memory Mapper">
+          <mem base="0x0000" size="0x10000"/>
+          <size>256</size>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="2">
+        <ROM id="KANJI BASIC ROM">
+          <mem base="0x4000" size="0x04000"/>
+          <rom>
+            <sha1>42f4e3360eb134857b0efa82c1abedf342680124</sha1>
+            <filename>ascii_msxdos22.rom</filename>
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+        </ROM>
+      </secondary>
+
+    </primary>
+  </devices>
+</msxconfig>

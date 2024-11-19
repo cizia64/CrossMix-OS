@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM "msxconfig2.dtd">
+<msxconfig>
+  <info>
+    <name>Micro Floppydisk Drive</name>
+    <manufacturer>Sony</manufacturer>
+    <code>HBD-50</code>
+    <release_year>1985</release_year>
+    <description>External Single Sided Double Density 3.5" disk drive.</description>
+    <type>external disk drive</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <WD2793 id="Sony HBD-50 diskROM/FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <motor_off_timeout_ms>4000</motor_off_timeout_ms>
+          <mem base="0x0000" size="0x10000"/>
+          <!-- Verified on a real Sony HBD-50: FDC registers are visible
+               in all 4 pages, rom only in page 1. This is handled internally
+               in the WD2793 device -->
+          <singlesided/>
+          <rom>
+            <sha1>ab57b4c8e5d47c2a39031c2057b97d2d10546582</sha1>
+            <sha1>2144036d6573d666143e890e5413956bfe8f66c5</sha1>
+            <filename>hbd-50.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

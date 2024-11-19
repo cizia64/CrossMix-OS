@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Sanyo</manufacturer>
+    <code>MPC-10/Wavy10</code>
+    <release_year>?</release_year>
+    <description>A simple Japanese MSX1 machine</description>
+    <type>MSX</type>
+  </info>
+
+  <!-- Thanks to Werner Kai for the details!
+       Based on serial number 10219293
+       CPU is a NEC
+
+       missing: light pen controller
+  -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9918A</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>mpc-10_basic-bios1.rom</filename>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1> <!-- ROM dump by Werner Kai -->
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+        <RAM id="Main RAM">
+          <mem base="0x8000" size="0x8000"/>
+        </RAM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <!-- Note: this connector is actually a non-standard expansion connector on the back -->
+    <primary external="true" slot="2"/>
+
+  </devices>
+
+</msxconfig>

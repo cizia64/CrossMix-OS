@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Yamaha</manufacturer>
+    <code>CX11</code>
+    <release_year>1985</release_year>
+    <description>"Music Computer"</description>
+    <type>MSX</type>
+  </info>
+
+<!--
+     Information given by Alexandre Souza, from machine with serial 001070.
+     MSX-ENGINE: X3527
+     CPU: SHARP LH0080A
+     TV-Encoder: LVA510
+
+     There is RGB out, as well as CVBS and RF.
+
+     Unlike the other machines like this one (CX5MII and family) it does not
+     have a mini-slot and not even a place on the motherboard for it.
+
+     See also http://tabajara-labs.blogspot.com/2018/07/a-transformacao-do-yamaha-cx-11-para.html
+
+     Serial number of the SFG-01 unit: 1018276
+-->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="8" type="O"/> <!-- S-3527 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-3527 mirrors -->
+      <version>V9938</version>
+      <vram>16</vram>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-3527 MSX-ENGINE -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0x8000" size="0x8000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1>
+          <filename>cx11_basic-bios1.rom</filename>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+    <!-- Note that this device can be plugged out. What is left is not a
+    standard MSX cartridgeslot, but a 60 pins card edge connector, carrying all
+    MSX cartridgeslot signals. -->
+      <YamahaSFG id="Yamaha SFG-01">
+        <mem base="0x0000" size="0x10000"/>
+        <sound>
+          <volume>30000</volume>
+        </sound>
+        <rom>
+          <sha1>49a1750c10e407293af6bce27a02e99307ceba12</sha1>
+          <filename>sfg-01.rom</filename>
+        </rom>
+      </YamahaSFG>
+    </primary>
+
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>GFX9000</name>
+    <manufacturer>Sunrise</manufacturer>
+    <code/>
+    <release_year>1994</release_year>
+    <description>Yamaha V9990 based graphics expansion.</description>
+    <type>graphics expansion</type>
+  </info>
+  <devices>
+    <V9990 id="Sunrise GFX9000">
+      <io base="0x60" num="0x10"/>
+    </V9990>
+  </devices>
+</msxconfig>

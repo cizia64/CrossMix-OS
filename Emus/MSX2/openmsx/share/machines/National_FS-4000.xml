@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>National</manufacturer>
+    <code>FS-4000</code>
+    <release_year>1985</release_year>
+    <description/>
+    <type>MSX</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>fs-4000_kanjifont.rom</filename>
+        <sha1>9ed3ab6d893632b9246e91b412cd5db519e7586b</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9128</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>fs-4000_basic-bios1.rom</filename>
+          <sha1>df48902f5f12af8867ae1a87f255145f0e5e0774</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Word">
+          <rom>
+            <filename>fs-4000_msxword.rom</filename>
+            <sha1>931d6318774bd495a32ec3dabf8d0edfc9913324</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Kanji Driver">
+          <rom>
+            <filename>fs-4000_kanjibasic.rom</filename>
+            <sha1>77bd67d5d10d459d343e79eafcd8e17eb0f209dd</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3"/>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

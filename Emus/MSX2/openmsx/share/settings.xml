@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE settings SYSTEM 'settings.dtd'>
+<settings>
+	<!--
+	You can edit this file to provide your users with initial settings
+	that are different from the openMSX defaults.
+	-->
+  <settings>
+    <setting id="joystick1_config">LEFT L_hat0 RIGHT R_hat0 UP U_hat0 DOWN D_hat0 B {button0} A {button1}</setting>
+  </settings>
+  <bindings>
+    <bind key="joy1 button8 down">main_menu_toggle</bind>
+    <bind key="joy1 button7 down">toggle_osd_keyboard</bind>
+    <bind key="joy1 button6 down">toggle_freq</bind>
+    <bind key="joy1 button5 down">savestate</bind>
+    <bind key="joy1 button4 down">loadstate</bind>
+    <bind key="joy1 button3 down">set renshaturbo 0</bind>
+    <bind key="joy1 button2 down">set renshaturbo 100</bind>
+    <bind key="joy1 axis2 32767">toggle_fps</bind>
+    <bind key="joy1 axis5 32767">toggle_fps</bind>
+  </bindings>
+</settings>

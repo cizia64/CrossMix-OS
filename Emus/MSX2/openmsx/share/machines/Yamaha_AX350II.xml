@@ -1,0 +1,164 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Yamaha</manufacturer>
+    <code>AX350II</code>
+    <release_year>1987?</release_year>
+    <description>Arabic MSX2 sold by Al Alamiah.</description>
+    <type>MSX2</type>
+  </info>
+
+  <!--
+       From Alexandre Souza's machine:
+       CPU: Zilog Z0840004PSC
+       VDP: V9938
+       MSX-ENGINE: S1985
+  -->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <mem base="0x0000" size="0x8000"/>
+          <rom>
+            <sha1>35195ab67c289a0b470883464df66bc6ea5b00d3</sha1> <!-- verified by dhau and Alexandre -->
+            <filename>ax350ii_basic-bios2.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="Arabic ROM">
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>f8cd4c05083decfc098cff077e055a4ae1e91a73</sha1> <!-- on dhau's and Alexandre's machine -->
+            <!-- <sha1>2c9600c6e0025fee10d249e97448ecaa37e38c42</sha1> - TODO: CHECK! Unreliable source. -->
+            <filename>ax350ii_arabic.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <ROM id="Sakhr Word Processor">
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>3a74e73b94d066b0187feb743c5eceddf0c61c2b</sha1> <!-- on dhau's and Alexandre's machine -->
+       <!-- <sha1>4b4508131dca6d811694ae6379f41364c477de58</sha1> this is from an unreliable source-->
+            <filename>ax350ii_swp.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <!-- 
+      This ROM fragment seems to be part of the program "Sakhr Files". It
+      doesn't show up on MSXMEM. The code doesn't seem to be used/run; so it's
+      probably some kind of error. Alexandre dumped this slot and only then
+      it was discovered.
+      See also: https://www.generation-msx.nl/software/al-alamiah/sahkr-files/release/1954/
+      -->
+      <secondary slot="3">
+        <ROM id="Sakhr Files fragment">
+          <mem base="0x8000" size="0x4000"/>
+          <rom>
+            <sha1>688c1e790034205c36489ee90f2e9099bf6316ef</sha1> <!-- on Alexandre's machine -->
+            <filename>ax350ii_sakhrfilespart.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="Painter">
+          <mem base="0x0000" size="0x10000"/>
+          <rom>
+            <sha1>ace202e87337fbc54fea21e22c0b3af0abe6f4ae</sha1>  <!-- Verified by Alexandre -->
+            <filename>ax350ii_painter.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX2 subROM">
+          <mem base="0x0000" size="0x4000"/>
+          <rom>
+            <sha1>ebb76f9061e875365023523607db610f2eda1d26</sha1> <!-- verified by dhau and Alexandre -->
+            <filename>ax350ii_msx2sub.rom</filename>
+          </rom>
+        </ROM>
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>National</connectionstyle>
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>358e69f427390041b5aa28018550a88f996bddb6</sha1> <!-- on dhau's machine; same on Alexandre's (but different register values) -->
+            <filename>ax350ii_disk.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+
+      <secondary slot="2"> <!-- Confirmed by dhau/Alexandre -->
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>128</size>
+        </MemoryMapper>
+      </secondary>
+
+    </primary>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>int</keyboard_type> <!-- Should be Arabic? -->
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+      <version>V9938</version>
+      <vram>128</vram>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+      <sramname>ax350ii.cmos</sramname>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,177 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Panasonic</manufacturer>
+    <code>FS-A1WX</code>
+    <release_year>1988</release_year>
+    <description/>
+    <type>MSX2+</type>
+  </info>
+
+  <RenShaTurbo>
+    <min_ints>47</min_ints>
+    <max_ints>221</max_ints>
+  </RenShaTurbo>
+
+  <MapperReadBackBits>2</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <mem base="0x0000" size="0x8000"/>
+          <rom>
+            <sha1>e90f80a61d94c617850c415e12ad70ac41e66bb7</sha1> <!-- confirmed on Luc's machine -->
+            <filename>fs-a1wx_basic-bios2p.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <MSX-MUSIC-WX id="MSX Music">
+          <mem base="0x4000" size="0x4000"/>
+          <io base="0x7C" num="2" type="O"/>
+          <rom>
+            <sha1>aad42ba4289b33d8eed225d42cea930b7fc5c228</sha1>
+            <sha1>6354ccc5c100b1c558c9395fa8c00784d2e9b0a3</sha1> <!-- on Luc's machine the last 16 bytes are 0xFC and not 0xFF -->
+            <filename>fs-a1wx_fmbasic.rom</filename>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+        </MSX-MUSIC>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>64</size>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <mem base="0x0000" size="0x4000"/>
+          <rom>
+            <sha1>fe0254cbfc11405b79e7c86c7769bd6322b04995</sha1> <!-- confirmed on Luc's machine -->
+            <filename>fs-a1wx_msx2psub.rom</filename>
+          </rom>
+        </ROM>
+        <ROM id="MSX Kanji Driver with BASIC">
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>1ef3956f7f918873fb9b031339bba45d1e5e5878</sha1> <!-- confirmed on Luc's machine -->
+            <filename>fs-a1wx_kanjibasic.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF8</io_regs>
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>bb59c849898d46a23fdbd0cc04ab35088e74a18d</sha1>
+            <filename>fs-a1wx_disk.rom</filename>
+          </rom>
+          <drives>1</drives>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="FS-A1WX">
+          <mem base="0x0000" size="0x10000"/>
+          <rom>
+            <sha1>d37ab4bd2bfddd8c97476cbe7347ae581a6f2972</sha1>
+            <filename>fs-a1wx_firmware.rom</filename>
+          </rom>
+          <mappertype>PANASONIC</mappertype>
+          <sramsize>16</sramsize>
+          <sram-mirrored>true</sram-mirrored>
+          <sramname>fs-a1wx.sram</sramname>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <Kanji id="Kanji ROM">
+      <io base="0xD8" num="4"/>
+      <rom>
+        <sha1>5aff2d9b6efc723bc395b0f96f0adfa83cc54a49</sha1>
+        <filename>fs-a1wx_kanjifont.rom</filename>
+      </rom>
+    </Kanji>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <has_yesno_keys>true</has_yesno_keys>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+      <version>V9958</version>
+      <vram>128</vram>
+    </VDP>
+
+    <PSG id="psg">
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <keyboardlayout>JIS</keyboardlayout>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+      <sramname>fs-a1wx.cmos</sramname>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <ResetStatusRegister id="Reset Status register">
+      <io base="0xF4" num="1"/>
+      <inverted>true</inverted>
+    </ResetStatusRegister>
+
+    <Matsushita id="Matsushita">
+      <sramname>fs-a1wx_matsushita.sram</sramname>
+      <device idref="VDP"/>
+      <hasturbo>true</hasturbo>
+    </Matsushita>
+
+    <T9769 id="T9769">
+      <subtype>B</subtype>
+    </T9769>
+
+  </devices>
+
+</msxconfig>

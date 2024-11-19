@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Panasonic</manufacturer>
+    <code>FS-A1MK2</code>
+    <release_year>1987</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>fs-a1mk2.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>fs-a1mk2_basic-bios2.rom</filename>
+          <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <MemoryMapper id="Main RAM">
+          <size>64</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>fs-a1mk2_msx2sub.rom</filename>
+            <sha1>0fbd45ef3dd7bb82d4c31f1947884f411f1ca344</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="A1 Cockpit 1">
+          <rom>
+            <filename>fs-a1mk2_cockpit1.rom</filename>
+            <sha1>2752cd89754c05abdf7c23cba132d38e3ef0f27d</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <ROM id="A1 Cockpit 2">
+          <rom>
+            <filename>fs-a1mk2_cockpit2.rom</filename>
+            <sha1>e194d290ebfa4595ce0349ea2fc15442508485b0</sha1>
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="A1 Cockpit 3">
+          <rom>
+            <filename>fs-a1mk2_cockpit3.rom</filename>
+            <sha1>a3f4e2e4934074925d775afe30ac72f150ede543</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>MoonSound</name>
+    <manufacturer>Sunrise</manufacturer>
+    <code/>
+    <release_year>1995</release_year>
+    <description>Yamaha OPL4 based sound expansion with wavetable.</description>
+    <type>sound expansion</type>
+  </info>
+  <devices>
+    <MoonSound id="Sunrise MoonSound">
+      <io base="0x7e" num="2"/>
+      <io base="0xc4" num="4"/>
+      <rom>
+        <sha1>32760893ce06dbe3930627755ba065cc3d8ec6ca</sha1>
+        <filename>yrw801.rom</filename>
+      </rom>
+      <sound>
+        <volume>17000</volume>
+      </sound>
+      <sampleram>640</sampleram>
+    </MoonSound>
+  </devices>
+</msxconfig>

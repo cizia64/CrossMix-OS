@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Coleco</manufacturer>
+    <code>ColecoVision with SGM</code>
+    <release_year>1982</release_year>
+    <description>Game console with hardware similar to MSX, with built in Super Game Module</description>
+    <type>Coleco</type>
+  </info>
+
+  <slotmap>
+    <map page="0" slot="0"/>
+    <map page="1" slot="0"/>
+    <map page="2" slot="1"/>
+    <map page="3" slot="1"/>
+  </slotmap>
+
+  <devices>
+
+    <VDP id="VDP">
+      <version>TMS9928A</version>
+      <irq_connected>nmi</irq_connected>
+      <io base="0xA0" num="0x20"/>
+    </VDP>
+
+    <SNPSG id="PSG">
+      <type>SN76489AN</type>
+      <io base="0xE0" num="0x20" type="O"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+    </SNPSG>
+
+    <ColecoJoystick id="joysticks">
+      <io base="0x80" num="0x20" type="O"/>
+      <io base="0xC0" num="0x20" type="O"/>
+      <io base="0xE0" num="0x20" type="I"/>
+      <has_keypad>true</has_keypad>
+      <key_ghosting>false</key_ghosting>
+    </ColecoJoystick>
+
+    <primary slot="0">
+      <!-- to fit SGM into the openMSX structure, there is a special
+           SGM device that takes over slot 0. It includes the Coleco's
+           Main RAM! -->
+      <SuperGameModule id="Super Game Module">
+        <mem base="0x0000" size="0x8000"/>
+        <initialContent encoding="hex">00</initialContent>
+        <sound>
+          <volume>21000</volume>
+        </sound>
+        <rom>
+          <filename>COLECO.ROM</filename>
+          <sha1>45bedc4cbdeac66c7df59e9e599195c778d86a92</sha1>
+        </rom>
+      </SuperGameModule>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+  </devices>
+
+</msxconfig>
