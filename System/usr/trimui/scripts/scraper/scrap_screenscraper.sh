@@ -368,7 +368,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     romNameTrimmed="${romNameTrimmed//"&"/}"
     romNameTrimmed="${romNameTrimmed/"Disc "/}"
     romNameTrimmed="${romNameTrimmed/"Rev "/}"
-    romNameTrimmed="$(echo "$romNameTrimmed" | sed -e 's/ ([^()]*)//g' -e 's/ [[A-z0-9!+]*]//g' -e 's/([^()]*)//g' -e 's/[[A-z0-9!+]*]//g')"
+    romNameTrimmed="$(echo "$romNameTrimmed" | sed -e 's/ \[.*\]//g' -e 's/ ([^()]*)//g' -e 's/ [[A-z0-9!+]*]//g' -e 's/([^()]*)//g' -e 's/[[A-z0-9!+]*]//g')"
     romNameTrimmed="${romNameTrimmed//" - "/"%20"}"
     romNameTrimmed="${romNameTrimmed/"-"/"%20"}"
     romNameTrimmed="${romNameTrimmed//" "/"%20"}"
