@@ -3,7 +3,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/MSX.png",
   "iconsmall": "ic-MSX-small.png",
   "iconlist": "ic-MSX-list.png",
-  "background": "/mnt/SDCARD/Backgrounds/No Backgrounds/MSX.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/MSX.png",
   "themecolor": "FFFF88",
   "launch": "launch.sh",
   "rompath": "../../Roms/MSX",
