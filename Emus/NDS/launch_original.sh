@@ -7,4 +7,5 @@ cd drastic
 export HOME="$PWD"
 
 #export SDL_AUDIODRIVER=dsp
-./drastic "$*"
+./drastic "$*" &
+activities add "$1" $!

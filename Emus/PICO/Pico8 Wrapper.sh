@@ -15,5 +15,6 @@ if ! [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8_64 ] || ! [ -f /mnt/SDCA
 fi
 
 mount --bind /mnt/SDCARD/Roms/PICO8 /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
-pico8_64 -preblit_scale 3 -run "$1"
+pico8_64 -preblit_scale 3 -run "$1" &
+activities add "$1" $!
 umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts

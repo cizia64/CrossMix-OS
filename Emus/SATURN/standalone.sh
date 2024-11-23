@@ -18,4 +18,5 @@ else
     fi
 fi
 
-./yabasanshiro -r 3 -i "$@" -b "$BIOS_FILE"
+./yabasanshiro -r 3 -i "$@" -b "$BIOS_FILE" &
+activities add "$1" $!

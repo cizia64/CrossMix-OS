@@ -8,5 +8,6 @@ export XDG_CONFIG_HOME="$EMU_DIR/.config"
 /mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 "mgba" -k "mgba" -c "/mnt/SDCARD/Emus/GBA/.config/mgba/mgba.gptk" &
 sleep 0.3
 
-$EMU_DIR/mgba "$@" 
+$EMU_DIR/mgba "$@" &
+activities add "$1" $!
 kill -9 $(pidof gptokeyb2)

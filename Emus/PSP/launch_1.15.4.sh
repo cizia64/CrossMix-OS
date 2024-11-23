@@ -11,4 +11,5 @@ else
     cpufreq.sh ondemand 3 6
 fi
 
-HOME=$PWD ./PPSSPPSDL "$*"
+HOME=$PWD ./PPSSPPSDL "$*" &
+activities add "$1" $!
