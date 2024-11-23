@@ -16,4 +16,5 @@ if [ -f "/tmp/cmd_to_run.sh" ] && ! grep -q "dowork 0x" "/tmp/cmd_to_run.sh"; th
     sed -i "1s|^|echo \"$performance\" > /tmp/log/messages\n|" "/tmp/cmd_to_run.sh"
 fi
 
-HOME=$PWD ./PPSSPPSDL "$*"
+HOME=$PWD ./PPSSPPSDL "$*" &
+activities add "$1" $!

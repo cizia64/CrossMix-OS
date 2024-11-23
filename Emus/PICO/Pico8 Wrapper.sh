@@ -32,13 +32,17 @@ fi
 if [ "$romNameNoExtension" = "° Run Splore" ]; then
 	mkdir -p /mnt/SDCARD/Roms/PICO/splore
 	mount --bind /mnt/SDCARD/Roms/PICO/splore /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts
-	pico8_64 -splore -preblit_scale 3
+
+	pico8_64 -splore -preblit_scale 3 &
+    activities add "$1" $!
+
 	/mnt/SDCARD/System/bin/rsync --stats -av --ignore-existing --include="*/" --include="*.png" --exclude="*" "/mnt/SDCARD/Roms/PICO/splore/" "/mnt/SDCARD/Imgs/PICO/" &
 	/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "PICO"
 	umount /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts
 	sync
 else
-	pico8_64 -preblit_scale 3 -run "$1"
+	pico8_64 -preblit_scale 3 -run "$1" &
+    activities add "$1" $!
 fi
 
 kill -9 $(pidof thd)

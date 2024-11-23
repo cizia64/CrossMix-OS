@@ -27,7 +27,8 @@ esac
 
 HOTKEY=guide $PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 
-HOME=$EMU_DIR ./mupen64plus "$ROM_PATH" 2>&1
+HOME=$EMU_DIR ./mupen64plus "$ROM_PATH" 2>&1 &
+activities add "$1" $!
 
 rm -f "$TEMP_ROM"
 

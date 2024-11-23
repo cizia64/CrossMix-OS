@@ -9,4 +9,5 @@ if ! find "/mnt/SDCARD/BIOS" -maxdepth 1 -iname "scph*" -o -iname "psxonpsp660.b
 fi
 
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/duckstation_libretro.so "$@"
+HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/duckstation_libretro.so "$@" &
+activities add "$1" $!

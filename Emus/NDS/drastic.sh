@@ -21,8 +21,9 @@ fi
 
 if echo "$LAUNCHER" | grep -iq "Nearest"; then
     echo "Using nearest neighbour scaling"
-    ./drastic_nn "$*"
+    ./drastic_nn "$*" &
 else
     echo "Using bilinear scaling"
-    ./drastic "$*"
+    ./drastic "$*" &
 fi
+activities add "$1" $!

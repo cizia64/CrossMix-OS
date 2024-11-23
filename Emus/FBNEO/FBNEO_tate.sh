@@ -10,6 +10,7 @@ cp "$remap_dir/tate.rmp" "$remap_dir/$Gamename.rmp"
 
 cd "$RA_DIR"
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/fbneo_libretro.so "$1" --appendconfig "$cfg_override"
+HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/fbneo_libretro.so "$1" --appendconfig "$cfg_override" &
+activities add "$1" $!
 
 rm "$remap_dir/$Gamename.rmp"
