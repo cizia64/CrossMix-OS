@@ -1,0 +1,325 @@
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	margin:0;
+	background:url('bg.png') #222;
+	color:white;
+}
+
+a {
+	color:orange;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+
+#container {
+	border:1px solid grey;
+	width:800px;
+	margin:0 auto;
+	padding:10px;
+	margin-top:115px;
+}
+
+#chatLog {
+	padding:5px;
+	border:1px solid black;
+}
+
+#chatLog p {
+	margin:0;
+}
+
+.event {
+	color:#999;
+}
+
+.warning{
+	font-weight:bold;
+	color:#CCC;
+}
+
+#header {
+	width:100%;
+	height:82px;
+	border-bottom:1px solid #666;
+	background-color:#111;
+	padding:0;
+	margin-bottom:5px;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:0;
+}
+
+#tabs {
+	position:fixed;
+	top:83px;
+	left:0;
+	height:19px;
+	width:100%;
+	border-bottom:1px solid #666;
+	background-color:#333;
+	z-index:0;
+}
+
+#tabs ul {
+	margin:0;
+	padding:0;
+}
+
+#tabs li {
+	list-style-type: none;
+	list-style-image: none;
+	display:inline;
+	margin:0;
+	padding:0;
+	border-right:1px solid #aaa;
+	padding-right:5px;
+	padding-left:3px;
+}
+
+#coverart {
+	width:85px;
+	height:80px;
+	float:left;
+	margin-left:4px;
+}
+
+#trackinfo {
+	float:left;
+	height:56px;
+	width:62%;
+	font-size:14px;
+	/*border:1px solid red;*/
+	text-align:left;
+	color:white;
+}
+
+#progressbar {
+	width:217px;
+	height:20px;
+	margin-top:6px;
+	margin-left:1px;
+	padding-right:0;
+	border-top:1px solid #333;
+	border-left:1px solid #333;
+	border-bottom:1px solid #AAA;
+	border-right:1px solid #AAA;
+	-float:right;
+	text-align:right;
+	background-color:#444;
+}
+
+#progressmarker {
+	width:50%;
+	height:100%;
+	border-right:3px solid #9AE;
+	background-color:#67A;
+	float:left;
+}
+
+#time {
+	margin-right:3px;
+	float:right;
+	color:white;
+}
+
+#controls {
+	float:right;
+	margin-top:5px;
+	margin-right:5px;
+}
+
+#controls > #buttons {
+	width:100%;
+	height:40px;
+}
+
+.button {
+	width:40px;
+	height:34px;
+	background-color:#666;
+	border-top:1px solid #CCC;
+	border-left:1px solid #CCC;
+	border-bottom:1px solid #444;
+	border-right:1px solid #444;
+	float:left;
+	text-align:center;
+	margin-left:2px;
+	cursor:pointer;
+}
+
+.button-pressed {
+	width:40px;
+	height:34px;
+	background-color:#666;
+	border-top:1px solid #444;
+	border-left:1px solid #444;
+	border-bottom:1px solid #CCC;
+	border-right:1px solid #CCC;
+	float:left;
+	text-align:center;
+	margin-left:2px;
+	cursor:pointer;
+}
+
+div.tab {
+	margin:0;
+	border-left:1px solid #333;
+	border-top:1px solid #333;
+	border-right:1px solid #111;
+	border-bottom:1px solid #111;
+	background-color:#222;
+	position:absolute;
+	top:122px;
+	bottom:0px;
+	width:94%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	padding:0px;
+	overflow-x:hidden;
+}
+
+div.tab div.controls div {
+	padding:5px;
+}
+
+ul.tabmenu {
+	position:absolute;
+	top:90px;
+	margin:0;
+	height:12px;
+	width:80%;
+	z-index:1;
+	cursor:default;
+}
+
+ul.tabmenu li.act {
+	font-size:11px;
+	text-align:center;
+	display:inline;
+	list-style:none;
+	border-left:1px solid #333;
+	border-top:1px solid #333;
+	border-right:1px solid #111;
+	background-color:#222;
+	z-index:1;
+	padding:10px;
+	height:12px;
+	width:120px;
+	float:left;
+	margin-right:5px;
+}
+
+ul.tabmenu li.ina {
+	font-size:11px;
+	text-align:center;
+	display:inline;
+	list-style:none;
+	border-left:1px solid #222;
+	border-top:1px solid #222;
+	border-right:1px solid #000;
+	background-color:#111;
+	z-index:0;
+	padding:10px;
+	height:11px;
+	width:120px;
+	float:left;
+	margin-right:5px;
+}
+
+div.tabmenu {
+	text-align:left;
+	height:12px;
+	width:100%;
+}
+
+#playlisttable, #filebrowsertable, #medialibbrowsertable {
+	table-layout:fixed;
+	position:absolute;
+	top:0; left:0; right:0px;
+	width:100%;
+}
+
+#playlisttable tr,td, #filebrowsertable tr,td, #medialibbrowsertable tr,td {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+#playlisttable td div, #filebrowsertable td div, #medialibbrowsertable td div {
+	border:0;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	display:block;
+	height:20px;
+	max-height:20px;
+}
+
+#plscrollbar, #fbscrollbar, #mbscrollbar {
+	overflow-y:auto;
+	overflow-x:hidden;
+	width:10px;
+	position:absolute;
+	top:0; right:0; bottom:10px;
+}
+
+#plscrolldummy, #fbscrolldummy, #mbscrolldummy {
+	height:10px;
+	width:1px;
+}
+
+#loginbox {
+	background-color:#333;
+	border:1px solid #666;
+	padding:10px;
+	position:absolute;
+	top:40%; left:40%;
+	width:20%;
+	height:130px;
+	text-align:center;
+	display:none;
+}
+
+#loginbox h2 {
+	margin:2px;
+}
+
+.controls {
+	width:100%;
+	height:35px;
+}
+
+table, tr, td {
+	border:0;
+	padding:0;
+	margin:0;
+}
+
+.icon {
+	color:white;
+}
+
+.icon:hover {
+	color:white;
+	text-decoration:none;
+}
+
+.playmode {
+	background-color:#444;
+	border:1px solid #666;
+	height:34px;
+	width:220px;
+	margin-left:5px;
+	float:left;
+}
+
+.playmode .button {
+	height:20px;
+}
+
+.playmode .button-pressed {
+	height:20px;
+}

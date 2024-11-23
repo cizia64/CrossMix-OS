@@ -1,0 +1,53 @@
+[controls]
+
+back = backspace
+start = enter
+guide = rightalt
+
+a = b
+b = a add_ctrl
+x = y
+y = x
+
+l1 = delete
+l2 = insert
+r1 = pagedown
+r2 = pageup
+
+
+up = up
+down = down
+left = left
+right = right
+
+left_analog_up = z
+left_analog_down = s
+left_analog_left = q
+left_analog_right = d
+
+
+
+// guide = hold_state hotkey              
+// 
+// [controls:hotkey]
+// overlay = clear
+// 
+// r1 = f12
+// 
+
+// Map modifier buttons to Right Thumbstick for convenience
+//  right_analog_up = x
+//  right_analog_up = add_alt
+//  
+//  right_analog_down = b
+//  right_analog_down = add_alt
+//  
+//  
+//  right_analog_left = y
+//  right_analog_left = add_alt
+//  
+//  right_analog_right = a
+//  right_analog_right = add_alt
+//  
+//  r3 = rightalt
+
