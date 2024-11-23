@@ -17,6 +17,6 @@
     <bind key="joy1 button3 down">set renshaturbo 0</bind>
     <bind key="joy1 button2 down">set renshaturbo 100</bind>
     <bind key="joy1 axis2 32767">toggle_fps</bind>
-    <bind key="joy1 axis5 32767">toggle_fps</bind>
+    <bind key="joy1 axis5 32767">toggle_battery_level</bind>
   </bindings>
 </settings>

@@ -29,7 +29,7 @@ register_lazy "_osd_menu.tcl" {
 	do_menu_open prepare_menu_list menu_close_all select_menu_item drop_handler}
 register_lazy "_osd_nemesis.tcl" toggle_nemesis_1_shield
 register_lazy "_osd_widgets.tcl" {
-	toggle_fps msx_init msx_update box text_box create_power_bar
+	toggle_fps toggle_battery_level msx_init msx_update box text_box create_power_bar
 	update_power_bar hide_power_bar volume_control}
 register_lazy "_psg_log.tcl" psg_log
 register_lazy "_psg_profile.tcl" psg_profile

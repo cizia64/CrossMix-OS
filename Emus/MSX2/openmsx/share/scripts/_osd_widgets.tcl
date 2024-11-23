@@ -109,6 +109,35 @@ proc toggle_fps {} {
 	return ""
 }
 
+variable bat_after
+
+proc toggle_battery_level {} {
+	variable bat_after
+	if {[info exists bat_after]} {
+		after cancel $osd_widgets::bat_after
+		osd destroy bat_viewer
+		unset bat_after
+	} else {
+		osd create rectangle bat_viewer -x 270 -y 5 -z 0 -w 45 -h 20 -rgba 0x00000080
+		osd create text bat_viewer.text -x 5 -y 3 -z 1 -rgba 0xffffffff
+		proc bat_refresh {} {
+			variable bat_after
+			set batteryfile "/sys/class/power_supply/axp2202-battery/capacity"
+			set fp [open $batteryfile r]
+			set battery_level [string trim [read $fp]]
+			close $fp
+			if {$battery_level < 100} {
+				osd configure bat_viewer.text -text [format " %.0f%%" $battery_level]
+			} else {
+				osd configure bat_viewer.text -text [format "%.0f%%" $battery_level]
+			}
+			set bat_after [after realtime 1 [namespace code bat_refresh]]
+		}
+		bat_refresh
+	}
+	return ""
+}
+
 set_help_text osd_widgets::text_box\
 {The 'osd_widgets::text_box' widget supports the same properties as a 'rectangle' widget with the following additions:
  -text: defines the text to be printed, can have multiple lines (separated by 'new line' characters).
@@ -242,6 +271,7 @@ proc volume_control {incr_val} {
 
 # only export stuff that is useful in other scripts or for the console user
 namespace export toggle_fps
+namespace export toggle_battery_level
 namespace export msx_init
 namespace export msx_update
 namespace export box
@@ -255,4 +285,5 @@ namespace export volume_control
 
 # only import stuff to global that is useful outside of scripts (i.e. for the console user)
 namespace import osd_widgets::toggle_fps
+namespace import osd_widgets::toggle_battery_level
 namespace import osd_widgets::volume_control
