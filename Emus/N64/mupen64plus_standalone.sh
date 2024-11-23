@@ -38,7 +38,8 @@ esac
 $PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 sleep 0.3
 
-HOME=$EMU_DIR ./mupen64plus "$ROM_PATH"
+HOME=$EMU_DIR ./mupen64plus "$ROM_PATH" &
+activities add "$1" $!
 
 rm -f "$TEMP_ROM"
 

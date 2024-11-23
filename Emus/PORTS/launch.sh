@@ -43,4 +43,5 @@ sync
 ######################################################
 
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH"
-/bin/sh "$@"
+/bin/sh "$@" &
+activities add "$1" $!

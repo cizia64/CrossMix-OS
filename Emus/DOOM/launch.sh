@@ -7,6 +7,7 @@ cpufreq.sh ondemand 2 6
 RomPath=$(dirname "$1")
 RomDir=$(basename "$RomPath")
 
+<<<<<<< HEAD
 if [ $RomDir = GZDoom ]; then
 
 	IwadFile=$1
@@ -67,3 +68,5 @@ else
 
 	HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/prboom_libretro.so "$@"
 fi
+HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/prboom_libretro.so "$@" &
+activities add "$1" $!

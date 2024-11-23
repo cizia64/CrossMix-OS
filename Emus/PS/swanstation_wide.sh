@@ -40,7 +40,8 @@ if [ ! -f "$ROM_CFG" ] && [ ! -f "$ROM_OPT" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$SWANSTATION_DIR/widescreen.opt" "$ROM_OPT"
     echo "Patch applied to $ROM_CFG"
     echo "Patch applied to $ROM_OPT"
-    HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@"
+    HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/swanstation_libretro.so "$@" &
+    activities add "$1" $!
 
     # cleaning
     rm "$ROM_CFG"
