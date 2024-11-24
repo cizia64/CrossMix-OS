@@ -40,13 +40,30 @@ if [ "$smb_enabled" -eq 1 ]; then
 
 fi
 
-# VNC service
-VNC_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["VNC"]' "/mnt/SDCARD/System/etc/crossmix.json")
-if [ "$VNC_enabled" -eq 1 ]; then
+VNC_wait_for_MainUI() {
+	timeout=10
+	elapsed=0
+	while ! pgrep -x "MainUI" >/dev/null; do
+		sleep 0.5
+		elapsed=$(echo "$elapsed + 0.5" | bc)
+		if (($(echo "$elapsed >= $timeout" | bc))); then
+			echo "Error: MainUI did not start within $timeout seconds."
+			return 1
+		fi
+	done
+	echo "MainUI started."
 	touch /tmp/dummy.ini
 	/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -c /tmp/dummy.ini &
 	sleep 0.5
-	vncserver -k /dev/input/event3 &
+	vncserver -k /dev/input/event4 &
+	return 0
+}
+
+# VNC service
+VNC_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["VNC"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$VNC_enabled" -eq 1 ]; then
+	# Run the function in the background
+	VNC_wait_for_MainUI &
 fi
 
 # Avahi (DNS name) service
