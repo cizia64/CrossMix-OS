@@ -689,7 +689,7 @@ proc create_main_menu {} {
 			 text-color 0x303030ff
 	         post-spacing 2
 	         selectable false }
-	lappend items { text "Pocket Penguin - 1.1"
+	lappend items { text "Pocket Penguin - 1.2"
 	         font-size 10
 			 text-color 0x505050ff
 	         post-spacing 4
