@@ -31,7 +31,7 @@ ProgramInfo=Mod+A
 ProgramInfoOkay=A
 
 # File browser mappings:
-#FileBrowserDirUp=Left
+FileBrowserDirUp=B
 FileBrowserChDir=A.
 
 FileBrowserPlayFile=A
