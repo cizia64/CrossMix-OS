@@ -11,6 +11,12 @@ export LD_LIBRARY_PATH="/usr/trimui/lib:/mnt/SDCARD/System/lib${LD_LIBRARY_PATH:
 
 dir=/mnt/SDCARD/System/usr/trimui/scripts
 
+button_state.sh MENU
+if [ $? -eq 10 ]; then
+    activities gui "$1"
+    exit 0
+fi
+
 if grep -q ra64.trimui "$0"; then
     RA_DIR="/mnt/SDCARD/RetroArch"
     export PATH=$PATH:$RA_DIR
