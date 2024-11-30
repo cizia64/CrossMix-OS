@@ -9,6 +9,8 @@ if [ "$file_extension" = "sh" ]; then
 	exit 0
 fi
 
+echo 1 >/tmp/stay_awake
+
 echo "Scraping target: $1"
 log_file="/mnt/SDCARD/Apps/Scraper/scraper.log"
 
@@ -67,3 +69,5 @@ done
 recentlist="/mnt/SDCARD/Roms/recentlist.json"
 sed -i '1d' "$recentlist"
 sync
+
+rm /tmp/stay_awake
