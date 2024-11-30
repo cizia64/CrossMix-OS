@@ -1,0 +1,8 @@
+{
+"label":"Ebook Reader",
+"label.ch.lang":"电子书阅读器",
+"icon":"icon.png",
+"iconsel":"icon.png",
+"launch":"launch.sh",
+"description":"PixelReader v0.6"
+}
