@@ -334,6 +334,8 @@ fi
 # for debugging
 # echo "Final find_filter: $find_filter"
 
+# avoid sleep mode during scraping
+echo 1 >/tmp/stay_awake
 
 # =================
 #this is a trick to manage spaces from find command, do not move, indent or modify
@@ -509,6 +511,8 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     #TODO : get manual
 
 done
+
+rm /tmp/stay_awake
 
 echo -e "\n=========================================================================================="
 echo -e "\n--------------------------"

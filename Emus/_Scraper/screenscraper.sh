@@ -1,15 +1,14 @@
 #!/bin/sh
 echo $0 $*
-
 PATH="/mnt/SDCARD/System/bin:$PATH"
+
+CurrentSelection=$(basename "$1" | sed 's/\.[^.]*$//')
 
 file_extension="${1##*.}"
 if [ "$file_extension" = "sh" ]; then
 	"$1"
 	exit 0
 fi
-
-echo 1 >/tmp/stay_awake
 
 echo "Scraping target: $1"
 log_file="/mnt/SDCARD/Apps/Scraper/scraper.log"
@@ -34,11 +33,16 @@ if [ -f "$ScraperConfigFile" ]; then
 			aplay "/mnt/SDCARD/trimui/res/sound/Background Scraping Finished.wav"
 		}
 
-		/mnt/SDCARD/System/usr/trimui/scripts/scraper/scrap_screenscraper.sh "$1" >$log_file 2>&1 &
-		SCRAP_PID=$!
+		if [ "$CurrentSelection" = "° Scrape all" ]; then
+			"/mnt/SDCARD/Apps/Scraper/Menu/° Scrape all.launch" >$log_file 2>&1 &
+			SCRAP_PID=$!
+		else
+			/mnt/SDCARD/System/usr/trimui/scripts/scraper/scrap_screenscraper.sh "$1" >$log_file 2>&1 &
+			SCRAP_PID=$!
+		fi
 
 		play_sound_after_scraping $SCRAP_PID &
-		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-stop-exit.png -m "$1 scraping launched in background." -t 3
+		/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-stop-exit.png -m "$CurrentSelection scraping launched in background." -t 3
 		exit
 	fi
 fi
@@ -46,8 +50,11 @@ fi
 
 "/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh" B &
 
-/mnt/SDCARD/System/bin/text_viewer -s "/mnt/SDCARD/System/usr/trimui/scripts/scraper/scrap_screenscraper.sh $1" -f 25 -t "                            ScreenScraper by Schmurtz.                     (Press B to stop)"
-
+if [ "$CurrentSelection" = "° Scrape all" ]; then
+	/mnt/SDCARD/System/bin/text_viewer -s "'/mnt/SDCARD/Apps/Scraper/Menu/° Scrape all.launch'" -f 25 -t "                            ScreenScraper by Schmurtz.                     (Press B to stop)"
+else
+	/mnt/SDCARD/System/bin/text_viewer -s "/mnt/SDCARD/System/usr/trimui/scripts/scraper/scrap_screenscraper.sh $1" -f 25 -t "                            ScreenScraper by Schmurtz.                     (Press B to stop)"
+fi
 # Check if the scraping process is running
 scraping_running() {
 	pgrep -f "text_viewer" >/dev/null
@@ -69,5 +76,3 @@ done
 recentlist="/mnt/SDCARD/Roms/recentlist.json"
 sed -i '1d' "$recentlist"
 sync
-
-rm /tmp/stay_awake
