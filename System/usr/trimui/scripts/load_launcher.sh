@@ -1,7 +1,7 @@
 export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:${PATH:+:$PATH}"
 export LD_LIBRARY_PATH="/usr/trimui/lib:${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-if [ "${EMU_DIR%%/*}" == "PSP"]
+if [ "${EMU_DIR##*/}" == "PSP"]
     source "$EMU_DIR/search_preset.sh"
 fi
 
