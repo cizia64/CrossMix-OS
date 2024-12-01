@@ -7,6 +7,7 @@ cd "$progdir"
 
 export LD_LIBRARY_PATH=/lib:/lib64:/usr/lib:/mnt/SDCARD/System/lib/:/mnt/SDCARD/Apps/PortMaster/PortMaster:LD_LIBRARY_PATH
 
+cd "$progdir"
 /mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -1 "mpv" -c "keys.gptk" &
 sleep 0.4
 

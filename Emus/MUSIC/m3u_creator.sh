@@ -20,7 +20,8 @@ if [ "$mp3_directory" = "$root_directory" ]; then
 fi
 
 # Name of the .m3u file in the parent directory
-MUSIC_DIR=$(basename "$(dirname "$1")")
+# MUSIC_DIR=$(basename "$(dirname "$1")")
+MUSIC_DIR="$mp3_directory"
 PARENT_DIR=$(dirname "$mp3_directory")
 TARGET_PLAYLIST_FILE="$PARENT_DIR/$(basename "$mp3_directory").m3u"
 PLAYLIST_FILE="$mp3_directory/$(basename "$mp3_directory").m3u"
@@ -28,7 +29,8 @@ PLAYLIST_FILE="$mp3_directory/$(basename "$mp3_directory").m3u"
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Building playlist for $MUSIC_DIR folder." -fs 25
 
 # Create the .m3u file
-echo "#EXTM3U" >"$PLAYLIST_FILE"
+# echo "#EXTM3U" >"$PLAYLIST_FILE"
+rm "$PLAYLIST_FILE"
 
 # Iterate through .mp3 files in the given directory and add them to the .m3u file
 find "$mp3_directory" -type f -name "*.mp3" | while read -r MP3_FILE; do

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<script src="script.js"></script>
+		<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
+		<title>Gmu Music Player</title>
+		<link rel="icon" type="image/png" href="gmu.png" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<div id="coverart"><img src="gmu.png" width="80" height="80" alt="Gmu" /></div>
+				<div id="trackinfo">
+					<table>
+						<tr><th>Title</th><td id="ti-title">---</td></tr>
+						<tr><th>Artist</th><td id="ti-artist">---</td></tr>
+						<tr><th>Album</th><td id="ti-album">---</td></tr>
+						<tr><th>Track</th><td id="ti-track">--/--</td></tr>
+					</table>
+				</div>
+				<div id="controls">
+					<div id="buttons">
+						<div id="btn-prev" class="button"><img src="icon_prev.png" width="32" height="32" alt="Previous" /></div>
+						<div id="btn-play" class="button"><img src="icon_play.png" width="32" height="32" alt="Play" /></div>
+						<div id="btn-pause" class="button"><img src="icon_pause.png" width="32" height="32" alt="Pause" /></div>
+						<div id="btn-stop" class="button"><img src="icon_stop.png" width="32" height="32" alt="Stop" /></div>
+						<div id="btn-next" class="button"><img src="icon_next.png" width="32" height="32" alt="Next" /></div>
+					</div>
+					<div id="progressbar">
+						<div id="progressmarker"></div>
+						<div id="time">0:00</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="tabmenu">
+				<ul class="tabmenu">
+					<li class="ina tabitem" id="tfb">File Browser</li>
+					<li class="act tabitem" id="tmb">Medialib</li>
+					<li class="ina tabitem" id="tpl">Playlist</li>
+					<li class="ina tabitem" id="tlo">Log</li>
+				</ul>
+			</div>
+			<div class="tab" id="fb" style="display:none; overflow:hidden;">
+				<div id="fbx" style="overflow:hidden; height:100%;">
+					<table id="filebrowsertable" class="list"></table>
+					<div id="fbscrollbar">
+						<div id="fbscrolldummy"> </div>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="mb" style="display:none; overflow:hidden;">
+				<table style="width:100%; height:100%; margin:0; padding:0; cell-spacing:0; border:0;">
+					<tr><td style="height:35px;">
+						<div class="controls">
+							<a href="javascript:mlib_browse('artist');">Artists</a>
+						</div>
+					</td></tr>
+					<tr><td style="height:100%;">
+						<div id="mbx" style="overflow:hidden; width:100%; height:100%; border:0; margin:0; padding:0;">
+							<div style="position:relative; height:100%; overflow:hidden;">
+								<table id="medialibbrowsertable" class="list"></table>
+								<div id="mbscrollbar">
+									<div id="mbscrolldummy"> </div>
+								</div>
+							</div>
+						</div>
+					</td></tr>
+				</table>
+			</div>
+			<div class="tab" id="pl" style="overflow:hidden;">
+				<table style="width:100%; height:100%; margin:0; padding:0; cell-spacing:0; border:0;">
+					<tr><td style="height:35px;">
+						<div class="controls">
+							<div id="btn-pl-clear" class="button">Clear</div>
+							<div class="playmode">
+								<div id="btn-pm-continue" class="button">Cont</div>
+								<div id="btn-pm-random" class="button">RND</div>
+								<div id="btn-pm-repeat" class="button">RepA</div>
+								<div id="btn-pm-repeat-track" class="button">Rep1</div>
+							</div>
+						</div>
+					</td></tr>
+					<tr><td style="height:100%;">
+						<div id="plx" style="overflow:hidden; width:100%; height:100%; border:0; margin:0; padding:0;">
+							<div style="position:relative; height:100%; overflow:hidden;">
+								<table id="playlisttable" class="list"></table>
+								<div id="plscrollbar">
+									<div id="plscrolldummy"> </div>
+								</div>
+							</div>
+						</div>
+					</td></tr>
+				</table>
+			</div>
+			<div class="tab" id="lo" style="display:none; overflow:auto;">
+				<div id="log">
+					Log
+				</div>
+			</div>
+		</div>
+
+		<div id="loginbox">
+			<h2>Gmu Login</h2>
+			<p>Enter password to connect.</p>
+			<form method="post">
+				<input type="password" id="password" name="password" />
+				<input type="submit" id="btn-login" name="login" value="Login" />
+			</form>
+		</div>
+	</body>
+</html>
+

@@ -4,7 +4,7 @@
   "icon": "/mnt/SDCARD/Icons/Default/Emus/MUSIC.png",
   "background": "/mnt/SDCARD/Backgrounds/Default/MUSIC.png",
   "themecolor": "DDEEFF",
-  "launch": "mpv.sh",
+  "launch": "gmu.sh",
   "rompath": "../../Roms/MUSIC",
   "imgpath": "../../Imgs/MUSIC",
   "useswap": 0,
@@ -13,12 +13,24 @@
   "extlist": "mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|m3u|wma|jpg|png|bmp|flac|ogg",
   "launchlist": [
     {
+      "name": "GMU Player",
+      "launch": "gmu.sh"
+    },
+    {
+      "name": "GMU Player (all current folder)",
+      "launch": "gmu.sh"
+    },
+    {
       "name": "mpv with album cover",
       "launch": "mpv.sh"
     },
     {
       "name": "mpv with visualization",
       "launch": "mpv_visualisation.sh"
+    },
+    {
+      "name": "mpv (background)",
+      "launch": "mpv_background.sh"
     },
     {
       "name": "Libretro ffmpeg",
