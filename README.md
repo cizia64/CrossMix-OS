@@ -115,7 +115,7 @@ I have more ideas and improvements for this project, and you might have some too
 
 Contribute to this repo by making a Pull Request. If you have an improvement to propose and don't know how to use GitHub, send me a message!
 
-Feel free to reach out to me to report bugs, request features, or just chat on **[Discord](https://discord.gg/Jd2azKX)** or on **[Github Issues](https://github.com/cizia64/CrossMix-OS/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)**
+Feel free to reach out to me to report bugs, request features, or just chat on **[Discord](https://discord.gg/Jd2azKX)** or on **[GitHub Issues](https://github.com/cizia64/CrossMix-OS/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)**
 
 If you enjoy my work and want to support the countless hours/days invested, here are my sponsors:
 
