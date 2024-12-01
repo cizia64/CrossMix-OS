@@ -15,6 +15,10 @@ if [ "$extension" = "txt" ]; then
     RomFullPath=$(cat "$RomFullPath" | head -n 1) # Trick to have shortcuts: the real ROM filename is inside the text file
 fi
 
+if [ "$extension" = "launch" ]; then
+    source "$RomFullPath"
+fi
+
 echo "***************************************************************************"
 echo "RomFullPath  $RomFullPath"
 echo "RomPath      $RomPath"

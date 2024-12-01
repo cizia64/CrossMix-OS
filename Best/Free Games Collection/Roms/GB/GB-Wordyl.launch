@@ -1,0 +1,54 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=./lib:/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH
+export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
+
+
+# Function to determine the image path
+determine_image_path() {
+    image_name="$1"
+    base_path="/mnt/SDCARD/trimui/res/crossmix-os"
+
+    # Check if image is a full path
+    if [ -f "$image_name" ]; then
+        base_path=$(dirname "$image_name")
+
+        # Check if themed image exists
+        themed_image="$base_path/style_$CrossMix_Style/$(basename "$image_name")"
+        if [ -f "$themed_image" ]; then
+            echo "$themed_image"
+            return
+        fi
+
+        echo "$image_name"
+        return
+    fi
+
+    # Check if themed image exists
+    themed_image="$base_path/style_$CrossMix_Style/$image_name"
+    if [ -f "$themed_image" ]; then
+        echo "$themed_image"
+        return
+    fi
+
+    # Check if image is in the base path
+    if [ -f "$base_path/$image_name" ]; then
+        echo "$base_path/$image_name"
+        return
+    fi
+
+    # Default image
+    echo "$base_path/bg-info.png"
+}
+
+# Determine the actual image path
+image=$(determine_image_path "bg-plain.png")
+
+
+selector_output=$(selector  -t "Select a language" -i "$image" -c "Cornish (kw)" "Catalan (ca)" "Deutsch (de)" "English (en)" "Espanol (es)" "Francais (fr)" "Italiano (it)" "Nederlands (nl)" "Latin (la)" "Portugues Brasileiro (pt-br)")
+selector_output="${selector_output#*: }"
+
+language=$(echo "$selector_output" | sed -n 's/.*(\(.*\)).*/\1/p')
+
+RomFullPath="/mnt/SDCARD/Best/Free Games Collection/Roms/GB/GB-Wordyl/gb-wordyl_1.0.5_mbc5_$language.gb"
+
