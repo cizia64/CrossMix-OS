@@ -1,11 +1,11 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
-export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/usr/trimui/lib:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/mnt/SDCARD/Apps/PortMaster/PortMaster:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 # Swap A B
 SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ "$SWAP_AB_enabled" -eq 1 ]; then
-  mkdir -p /var/trimui_inputd
-  touch /var/trimui_inputd/swap_ab
+	mkdir -p /var/trimui_inputd
+	touch /var/trimui_inputd/swap_ab
 fi
 
 # Telnet service
@@ -40,5 +40,31 @@ if [ "$smb_enabled" -eq 1 ]; then
 
 fi
 
+VNC_wait_for_MainUI() {
+	timeout=10
+	elapsed=0
+	while ! pgrep -x "MainUI" >/dev/null; do
+		sleep 0.5
+		elapsed=$(echo "$elapsed + 0.5" | bc)
+		if (($(echo "$elapsed >= $timeout" | bc))); then
+			echo "Error: MainUI did not start within $timeout seconds."
+			return 1
+		fi
+	done
+	echo "MainUI started."
+	touch /tmp/dummy.ini
+	/mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -c /tmp/dummy.ini &
+	sleep 0.5
+	vncserver -k /dev/input/event4 &
+	return 0
+}
+
+# VNC service
+VNC_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["VNC"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$VNC_enabled" -eq 1 ]; then
+	# Run the function in the background
+	VNC_wait_for_MainUI &
+fi
+
 # Avahi (DNS name) service
-/usr/sbin/avahi-daemon --file=/mnt/SDCARD/System/etc/avahi/avahi-daemon.conf  --no-drop-root -D
+/usr/sbin/avahi-daemon --file=/mnt/SDCARD/System/etc/avahi/avahi-daemon.conf --no-drop-root -D
