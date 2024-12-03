@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## THIS FIXES ROCKNIX AND JELOS
+
+source $controlfolder/device_info.txt
+source $controlfolder/funcs.txt
+
+GPTOKEYB2="$ESUDO env LD_PRELOAD=$controlfolder/libinterpose.${DEVICE_ARCH}.so $controlfolder/gptokeyb2 $ESUDOKILL"
+GPTOKEYB="$ESUDO $controlfolder/gptokeyb $ESUDOKILL"
+
+[ -f "${controlfolder}/mod_${CFW_NAME}.txt" ] && source "${controlfolder}/mod_${CFW_NAME}.txt"

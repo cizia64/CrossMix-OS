@@ -7,6 +7,7 @@ if [[ -z "$1" ]]; then
   exit -1
 fi
 
+MAPPERDIR="$(dirname "$0")"
 CONTROLLER_DB="$1"
 if [[ ! -f "${CONTROLLER_DB}" ]]; then
   echo "File ${CONTROLLER_DB} does not exist."
@@ -16,7 +17,50 @@ fi
 # Where the emulationstation configuration file is
 ES_CONFIG="${HOME}/.config/emulationstation/es_input.cfg"
 
+if [ -f "${HOME}/configs/emulationstation/es_input.cfg" ]; then
+  # Batocera / Knulli
+  ES_CONFIG="${HOME}/configs/emulationstation/es_input.cfg"
+fi
+
 # -- Helper function --
+# Pre Map
+function pre_map {
+  INPUT_NAME=$1
+  TYPE=$2
+  ID=$3
+  VALUE=$4
+
+  map_x_result=""
+  INVERT_VALUE=""
+  if [ "$VALUE" = "-1" ]; then
+    INVERT_VALUE="1"
+  elif [ "$VALUE" = "1" ]; then
+    INVERT_VALUE="-1"
+  fi
+
+  case "${INPUT_NAME}" in
+    "joystick1left")
+      map "leftanalogleft" "$TYPE" "$ID" "$VALUE"
+      map "leftanalogright" "$TYPE" "$ID" "$INVERT_VALUE"
+      ;;
+    "joystick1up")
+      map "leftanalogup" "$TYPE" "$ID" "$VALUE"
+      map "leftanalogdown" "$TYPE" "$ID" "$INVERT_VALUE"
+      ;;
+    "joystick2left")
+      map "rightanalogleft" "$TYPE" "$ID" "$VALUE"
+      map "rightanalogright" "$TYPE" "$ID" "$INVERT_VALUE"
+      ;;
+    "joystick2up")
+      map "rightanalogup" "$TYPE" "$ID" "$VALUE"
+      map "rightanalogdown" "$TYPE" "$ID" "$INVERT_VALUE"
+      ;;
+    *)
+      map "$INPUT_NAME" "$TYPE" "$ID" "$VALUE"
+      ;;
+  esac
+}
+
 # Map the actual button/hat/axis
 function map {
   INPUT_NAME=$1
@@ -24,19 +68,21 @@ function map {
   ID=$3
   VALUE=$4
 
-  map_x_result=""
   case "${INPUT_NAME}" in
     "b")                TR_NAME="a";;
     "a")                TR_NAME="b";;
     "y")                TR_NAME="x";;
     "x")                TR_NAME="y";;
     "hotkeyenable")     TR_NAME="guide";;
+    "hotkey")           TR_NAME="guide";;
     "up")               TR_NAME="dpup";;
     "down")             TR_NAME="dpdown";;
     "left")             TR_NAME="dpleft";;
     "right")            TR_NAME="dpright";;
     "leftshoulder")     TR_NAME="leftshoulder";;
+    "l2")               TR_NAME="leftshoulder";;
     "leftthumb")        TR_NAME="leftstick";;
+    "l3")               TR_NAME="leftstick";;
     "lefttrigger")      TR_NAME="lefttrigger";;
     "rightshoulder")    TR_NAME="rightshoulder";;
     "rightthumb")       TR_NAME="rightstick";;
@@ -57,6 +103,8 @@ function map {
       ;;
   esac
 
+  echo "${INPUT_NAME} -> ${TR_NAME}"
+
   case "${TYPE}" in
   "axis")
     if (( $VALUE < 0 )); then
@@ -65,23 +113,24 @@ function map {
       # Most (save for a few misbehaved children...) triggers are [0, 1] instead of [-1, 1]
       # Shitty workaround for an emulationstation issue
       if [[ $INPUT_NAME =~ .*"trigger" ]]; then
-        map_x_result="${TR_NAME}:${map_x_result}a${ID},"
+        map_x_result="${TR_NAME}:${map_x_result}a${ID},$map_x_result"
       else
-        map_x_result="${TR_NAME}:${map_x_result}+a${ID},"
+        map_x_result="${TR_NAME}:${map_x_result}+a${ID},$map_x_result"
       fi
     fi
     ;;
   "button")
-    map_x_result="${TR_NAME}:${map_x_result}b${ID},"
+    map_x_result="${TR_NAME}:${map_x_result}b${ID},$map_x_result"
     ;;
   "hat")
-    map_x_result="${TR_NAME}:${map_x_result}h${ID}.${VALUE},"
+    map_x_result="${TR_NAME}:${map_x_result}h${ID}.${VALUE},$map_x_result"
     ;;
   *)
     echo "Invalid entry ${TYPE}"
     ;;
   esac
 }
+
 
 function get_map_suffix {
   map_suffix="platform:Linux,"
@@ -92,7 +141,7 @@ function get_map_prefix {
 }
 
 # query controllers mapped in emulationstation, ignore devices without a GUID
-ES_QUERY="$(xmlstarlet sel -T -t -m "inputList/inputConfig[@deviceGUID!='']" -n -v "concat(@deviceName,';',@deviceGUID)" $ES_CONFIG)"
+ES_QUERY="$($MAPPERDIR/xmlstarlet sel -T -t -m "inputList/inputConfig[@deviceGUID!='']" -n -v "concat(@deviceName,';',@deviceGUID)" $ES_CONFIG)"
 printf "\n# Custom Entries\n" >> "${CONTROLLER_DB}"
 
 echo "## ES Dev Mapper ##"
@@ -106,12 +155,12 @@ while IFS=";" read -r NAME GUID; do
   # Check if GUID exists in gamecontrollerdb.txt
   if [ -z "$(fgrep -- ${GUID} "${CONTROLLER_DB}")" ]; then
     # Query this specific GUID on the mappings
-    MAPPING_CFG=$(xmlstarlet sel -T -t -m "//inputConfig[@deviceGUID = '${GUID}']/input" -n -v "concat(@name,';',@type,';',@id,';',@value)" $ES_CONFIG)
+    MAPPING_CFG=$($MAPPERDIR/xmlstarlet sel -T -t -m "//inputConfig[@deviceGUID = '${GUID}']/input" -n -v "concat(@name,';',@type,';',@id,';',@value)" $ES_CONFIG)
 
     MAPPING=""
     while IFS=";" read -r -e INPUT_NAME TYPE ID VALUE; do
       # Map the controller
-      map "${INPUT_NAME}" "${TYPE}" "${ID}" "${VALUE}"
+      pre_map "${INPUT_NAME}" "${TYPE}" "${ID}" "${VALUE}"
 
       # Only concatenate valid mappings
       if [[ ! -z ${map_x_result} ]]; then
