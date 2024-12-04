@@ -87,7 +87,6 @@ download_file() {
   fi
 }
 
-
 echo -e "\n${YELLOW}Checking runtime files integrity...${NONE}"
 echo "-----------------------------------"
 
@@ -103,7 +102,7 @@ jq -r 'keys[]' "$CONFIG_FILE" | while read -r file; do
 
   local_file="$LOCAL_DIR/$file"
   if [ ! -f "$local_file" ]; then
-    echo -e "  $file ${RED}missing${NC}"
+    echo -e "  $file  ${RED}missing${NC}"
     echo "$file" >>"$MISSING_FILES"
     continue
   fi
@@ -149,5 +148,11 @@ rm -f "$MISSING_FILES" "$INVALID_FILES"
 echo -e "\n${YELLOW}All operations completed.${NC}"
 echo "-------------------------"
 
-
-
+if ! pgrep -f "portmaster_fix.sh" >/dev/null; then
+  if pgrep "SimpleTerminal" >/dev/null; then
+    echo -e "${PURPLE}Exiting in 10 seconds...${NONE}\n"
+    sleep 15
+    echo "exiting"
+    killall -2 SimpleTerminal
+  fi
+fi
