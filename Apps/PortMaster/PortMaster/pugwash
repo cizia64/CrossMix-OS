@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 ## -- BEGIN PORTMASTER INFO --
-PORTMASTER_VERSION = '2024.06.09-1108'
-PORTMASTER_RELEASE_CHANNEL = 'beta'
+PORTMASTER_VERSION = '2024.11.27-0232'
+PORTMASTER_RELEASE_CHANNEL = 'stable'
 ## -- END PORTMASTER INFO --
 
 PORTMASTER_MIN_VERSION = '2024-04-14-0000'
@@ -140,7 +140,9 @@ ALL_LANGUAGES = {
     "pl_PL": _("Polish"),
     "pt_PT": _("Portuguese (Portugal)"),
     "pt_BR": _("Portuguese (Brazil)"),
+    # "ro_RO": _("Romanian"),
     "ru_RU": _("Russian"),
+    "sv_SE": _("Swedish"),
     "uk_UA": _("Ukrainian"),
     "zh_CN": _("Chinese Simplified"),
     }
@@ -517,6 +519,7 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
         logger.info(f"TTF DLL: {sdl2.sdlttf.get_dll_file()}, {nice_version(sdl2.sdlttf.TTF_Linked_Version()[0])}")
         logger.info(f"IMG DLL: {sdl2.sdlimage.get_dll_file()}, {nice_version(sdl2.sdlimage.IMG_Linked_Version()[0])}")
         logger.info(f"MIX DLL: {sdl2.sdlmixer.get_dll_file()}, {nice_version(sdl2.sdlmixer.Mix_Linked_Version()[0])}")
+        logger.info(f"HM_TESTING: {harbourmaster.HM_TESTING}")
 
         # Load controller.
         count = sdl2.SDL_NumJoysticks()
@@ -540,14 +543,14 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
         capabilities = harbourmaster.device_info()
 
         if sdl2.video.SDL_GetCurrentDisplayMode(0, display_mode) != 0:
-            print("Failed to get display mode:", sdl2.SDL_GetError())
+            logger.error("Failed to get display mode:", sdl2.SDL_GetError())
             self.display_width, self.display_height = capabilities['resolution']
 
         else:
             self.display_width = display_mode.w
             self.display_height = display_mode.h
             # Print the display width and height
-            print(f"Display size: {self.display_width}x{self.display_height}")
+            logger.info(f"Display size: {self.display_width}x{self.display_height}")
 
         if harbourmaster.HM_TESTING:
             capabilities = harbourmaster.device_info()
@@ -563,6 +566,7 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
                 # 'ogs'
                 # 'ogu'
                 # 'x55'
+                # 'ace'
                 )
 
             if not pretend_device:
@@ -588,6 +592,7 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
         capabilities['capabilities'].append(CURRENT_LANG)
 
         logger.info(capabilities)
+        print(capabilities)
 
         # Create the window
         if harbourmaster.HM_TESTING:
@@ -698,11 +703,25 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
 
         return cfg_data
 
+    def save_config(self, cfg_data):
+        cfg_dir = harbourmaster.HM_TOOLS_DIR / "PortMaster"
+        cfg_file = cfg_dir / "config" / "config.json"
+
+        if self.hm is None:
+            with open(cfg_file, 'w') as fh:
+                json.dump(cfg_data, fh, indent=4)
+
+        else:
+            self.hm.save_config()
+
     ## Loop stuff.
     def run(self):
         if self.hm is not None:
             if self.hm.platform.WANT_XBOX_FIX:
                 self.events.fix_xbox_mode()
+
+            if self.hm.platform_name in ('retrodeck', ):
+                self.events.fix_retrodeck_mode()
 
             self.SWAP_BUTTONS = self.hm.platform.WANT_SWAP_BUTTONS
 
@@ -762,6 +781,7 @@ class PortMasterGUI(pySDL2gui.GUI, harbourmaster.Callback):
                 Path("/sys/class/power_supply/battery/capacity"),
                 Path("/sys/class/power_supply/axp2202-battery/capacity"),
                 Path("/sys/class/power_supply/BAT1/capacity"),
+                Path("/sys/class/power_supply/qcom-battery/capacity"),
                 ]
 
             for battery_file in battery_paths:

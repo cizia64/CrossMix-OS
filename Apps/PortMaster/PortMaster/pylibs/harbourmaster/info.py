@@ -32,6 +32,7 @@ PORT_INFO_ATTR_ATTRS = {
     'rtr': False,
     'exp': False,
     'runtime': None,
+    'min_glibc': "",
     'reqs': [],
     'arch': [],
     }
