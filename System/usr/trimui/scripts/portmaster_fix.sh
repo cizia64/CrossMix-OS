@@ -14,7 +14,7 @@ UNDERLINE='\033[4m'
 BLINK='\x1b[5m'
 
 if pgrep "SimpleTerminal" >/dev/null; then
-	clear
+    clear
 fi
 
 timestamp=$(date +'%Y%m%d-%Hh%M')
@@ -24,6 +24,61 @@ exec > >(tee -a "$LOG_FILE") 2>&1
 
 echo -e "\n==== PortMaster Fix started at $timestamp ==="
 
+########################################### Functions ###########################################
+
+download_file() {
+    local url="$1"
+    local output="$2"
+
+    # echo -e "Downloading from: $url..."
+    wget -q "$url" -O "$output"
+    if [ $? -eq 0 ] && [ -s "$output" ]; then
+        echo -e "$(basename "$output") ${GREEN}Download OK${NONE}"
+        return 0
+    else
+        echo -e "$(basename "$output") ${RED}Download KO${NONE}"
+        rm -f "$output"
+        return 1
+    fi
+}
+
+verify_md5() {
+    local filePath="$1"
+    local fileName=$(basename "$filePath")
+    local md5_file="$2"
+    $(basename "$file")
+
+    echo -e "${YELLOW}Checking integrity of $fileName...${NONE}"
+    if [ -f "$md5_file" ]; then
+        md5sum -c "$md5_file" >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            echo -e "$fileName ${GREEN}integrity OK.${NONE}"
+            return 0
+        else
+            echo -e "$fileName ${RED}integrity KO.${NONE}"
+            return 1
+        fi
+    else
+        echo -e "${RED}MD5 file not found: $md5_file${NONE}"
+        return 1
+    fi
+}
+
+extract_archive() {
+    local archive_path="$1"
+    local archive_filename=$(basename "$archive_path")
+    local output_dir="$2"
+
+    echo -e "${YELLOW}Extracting $archive_filename to $output_dir...${NONE}"
+    /mnt/SDCARD/System/bin/7zz x -aoa "$archive_path" -o"$output_dir"
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Extraction of $archive_filename successful.${NONE}"
+        sleep 3
+    else
+        echo -e "${RED}Extraction of $archive_filename failed.${NONE}"
+    fi
+}
+
 ########################################### Internal Storage disk space check ###########################################
 
 echo -e "\n${YELLOW}Checking internal storage space...${NONE}"
@@ -32,18 +87,18 @@ minspace=$((20 * 1024)) # 20 MB
 rootfs_space=$(df / | awk 'NR==2 {print $4}')
 
 if [ "$rootfs_space" -lt "$minspace" ]; then
-	# Cleaning root
-	for f in /*; do if [ -f "$f" ] && [ ! "$f" == "/device_info_TrimUI_TrimUI Smart Pro.txt" ] && [ ! "$f" == "/rdinit" ] && [ ! "$f" == "/worldmap.dat" ]; then rm $f; fi; done
-	rootfs_space=$(df / | awk 'NR==2 {print $4}')
-	if [ "$rootfs_space" -lt "$minspace" ]; then
-		echo -ne "${RED}Error: Available space on internal storage is less than 20 MB${NONE}\n"
-		echo "Free up some space on rootFS / internal storage then try again."
-		echo "The easiest way is to flash your firmware again."
-		sleep 10
-		exit 1
-	fi
+    # Cleaning root
+    for f in /*; do if [ -f "$f" ] && [ ! "$f" == "/device_info_TrimUI_TrimUI Smart Pro.txt" ] && [ ! "$f" == "/rdinit" ] && [ ! "$f" == "/worldmap.dat" ]; then rm $f; fi; done
+    rootfs_space=$(df / | awk 'NR==2 {print $4}')
+    if [ "$rootfs_space" -lt "$minspace" ]; then
+        echo -ne "${RED}Error: Available space on internal storage is less than 20 MB${NONE}\n"
+        echo "Free up some space on rootFS / internal storage then try again."
+        echo "The easiest way is to flash your firmware again."
+        sleep 10
+        exit 1
+    fi
 else
-	echo -e "${GREEN}Available space on internal storage is sufficient: ${rootfs_space} KB${NONE}"
+    echo -e "${GREEN}Available space on internal storage is sufficient: ${rootfs_space} KB${NONE}"
 fi
 sleep 1
 
@@ -52,17 +107,17 @@ sleep 1
 echo -e "\n${YELLOW}Checking internet connection...${NONE}"
 echo "-------------------------------"
 if /mnt/SDCARD/System/bin/wget -q --spider https://github.com >/dev/null; then
-	echo -e "${GREEN}OK${NONE}"
+    echo -e "${GREEN}OK${NONE}"
 else
-	echo -e "${RED}FAIL$\nError: https://github.com not reachable.${NONE}\n!!! Check your wifi connection !!!\n"
-	echo -e "It is possible to use this script without Wifi."
-	echo -e "However for best results please enable wifi on your device.\n"
-	echo -e "Press A to continue. B to quit the fix script."
-	button=$(/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh "A B" 2>/dev/null)
-	if [ "$button" = "B" ]; then
-		echo exiting
-		killall -2 SimpleTerminal
-	fi
+    echo -e "${RED}FAIL$\nError: https://github.com not reachable.${NONE}\n!!! Check your wifi connection !!!\n"
+    echo -e "It is possible to use this script without Wifi."
+    echo -e "However for best results please enable wifi on your device.\n"
+    echo -e "Press A to continue. B to quit the fix script."
+    button=$(/mnt/SDCARD/System/usr/trimui/scripts/getkey.sh "A B" 2>/dev/null)
+    if [ "$button" = "B" ]; then
+        echo exiting
+        killall -2 SimpleTerminal
+    fi
 fi
 
 ########################################### Check SD card filesystem state ###########################################
@@ -72,50 +127,53 @@ echo "----------------------------------------"
 # check disk integrity
 mount_point=$(mount | grep -m 1 '/mnt/SDCARD' | awk '{print $1}')
 echo -ne "\n" \
-	"Please wait during FAT file system integrity check.\n" \
-	"Issues should be fixed automatically.\n" \
-	"The process can be long:\n" \
-	"about 2 minutes for 128GB SD card\n\n"
+    "Please wait during FAT file system integrity check.\n" \
+    "Issues should be fixed automatically.\n" \
+    "The process can be long:\n" \
+    "about 2 minutes for 128GB SD card\n\n"
 
 /mnt/SDCARD/System/bin/fsck.fat -a $mount_point 2>&1 | awk 'NR > 3'
 
 ########################################### Check portmaster fix file integrity ###########################################
 
+# Main script
 echo -e "\n${YELLOW}Checking PortMaster Fix file integrity...${NONE}"
-echo "--------------------------------------------"
+echo "-----------------------------------------"
 
-# check integrity of restore file
-PortMaster_FixAchive="/mnt/SDCARD/System/updates/portmaster_fix.7z"
-PortMaster_FixAchive_CRC=$(crc32 "$PortMaster_FixAchive" | awk '{print $1}')
+# Variables
+PM_FixArchive="/mnt/SDCARD/System/updates/portmaster_fix.7z"
+PM_FixArchive_MD5="/mnt/SDCARD/System/updates/portmaster_fix.7z.md5"
+PM_FixArchive_URL="https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/_assets/resources/portmaster_fix.7z"
+PM_FixArchive_MD5_URL="https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/_assets/resources/portmaster_fix.7z.md5"
+TEMP_FILE="/tmp/portmaster_fix.7z.md5"
 
-if [ "$PortMaster_FixAchive_CRC" = "e8efc05d" ]; then
-	echo -e "${GREEN}PortMaster archive is OK.${NONE}"
-	sleep 2
-	echo "Extracting..."
-	/mnt/SDCARD/System/bin/7zz x -aoa "$PortMaster_FixAchive" -o"/mnt/SDCARD"
+# Step 1: Download the remote MD5 file
+echo -e "\n${YELLOW}Updating md5 checksum file...${NONE}"
+if ! download_file "$PM_FixArchive_MD5_URL" "$TEMP_FILE"; then
+    echo "Using local MD5 file copy instead."
 else
-	rm "$PortMaster_FixAchive"
-	sync
-	echo "PortMaster archive is corrupted."
-	echo "Downloading PortMaster archive..."
-	url="https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/_assets/ressources/portmaster_fix.7z"
-	wget -q -O "$PortMaster_FixAchive" "$url"
+    mv "$TEMP_FILE" "$PM_FixArchive_MD5"
+fi
 
-	if [ $? -ne 0 ]; then
-		echo -e "  \"portmaster_fix.7z\" ${RED}download KO${NC}"
-		rm -f "$local_file"
-	else
-		echo -e "  \"portmaster_fix.7z\" ${GREEN}download OK${NC}"
-		echo "Extracting..."
-		/mnt/SDCARD/System/bin/7zz x -aoa "$PortMaster_FixAchive" -o"/mnt/SDCARD"
-		if [ $? -eq 0 ]; then
-			echo -e "${GREEN}PortMaster extraction successful.${NONE}"
-			sleep 3
-		else
-			echo -ne "${RED}PortMaster extraction failed.${NONE}\n"
-		fi
-	fi
-
+# Step 2: Verify the integrity of the target file
+if verify_md5 "$PM_FixArchive" "$PM_FixArchive_MD5"; then
+    extract_archive "$PM_FixArchive" "/mnt/SDCARD"
+else
+    echo -e "${RED}PortMaster archive is corrupted.${NONE}"
+    echo -e "Attempting to download a fresh copy..."
+    if download_file "$PM_FixArchive_URL" "$PM_FixArchive"; then
+        if verify_md5 "$PM_FixArchive" "$PM_FixArchive_MD5"; then
+            extract_archive "$PM_FixArchive" "/mnt/SDCARD"
+        else
+            echo -e "${RED}Downloaded archive is also corrupted. Exiting.${NONE}"
+            exit 1
+        fi
+    else
+        echo -e "${RED}Failed to download PortMaster archive.${NONE}"
+        echo -e "Exiting."
+        sleep 5
+        exit 1
+    fi
 fi
 
 sync
@@ -125,31 +183,40 @@ sync
 echo -e "\n${YELLOW}Checking Python archive integrity...${NONE}"
 echo "------------------------------------"
 
-# check integrity of python file
+# Variables
 Python_Archive="/mnt/SDCARD/System/updates/update_001/python.zip"
-Python_Archive_CRC=$(crc32 "$Python_Archive" | awk '{print $1}')
+Python_Archive_MD5="/mnt/SDCARD/System/updates/update_001/python.zip.md5"
+Python_Archive_URL="https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/_assets/resources/python.zip"
+Python_Archive_MD5_URL="https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/_assets/resources/python.zip.md5"
+TEMP_FILE="/tmp/python.zip.md5"
 
-if [ "$Python_Archive_CRC" = "ffbe30be" ]; then
-	echo -e "${GREEN}Python archive is OK.${NONE}"
-	sleep 3
+# Step 1: Download the remote MD5 file
+echo -e "\n${YELLOW}Updating md5 checksum file...${NONE}"
+if ! download_file "$Python_Archive_URL" "$TEMP_FILE"; then
+    echo "Using local MD5 file copy instead."
 else
-	echo -e "${RED}Python archive integrity is KO.${NONE}"
-	rm "$Python_Archive"
-	sync
-	echo "Downloading Python archive..."
-	url="https://github.com/kloptops/TRIMUI_EX/raw/refs/heads/main/System/updates/update_001/python.zip"
-
-	wget -q -O "$Python_Archive" "$url"
-
-	if [ $? -ne 0 ]; then
-		echo -e "  \"Python archive\" ${RED}download KO${NC}"
-		rm -f "$local_file"
-	else
-		echo -e "  \"Python archive\" ${GREEN}download OK${NC}"
-	fi
-
+    mv "$TEMP_FILE" "$Python_Archive_MD5"
 fi
 
+# Step 2: Verify the integrity of the target file
+if ! verify_md5 "$Python_Archive" "$Python_Archive_MD5"; then
+    echo -e "${RED}Python archive is corrupted. Attempting to download a fresh copy...${NONE}"
+    if download_file "$Python_Archive_URL" "$Python_Archive"; then
+        if ! verify_md5 "$Python_Archive" "$Python_Archive_MD5"; then
+            echo -e "${RED}Downloaded archive is also corrupted. Exiting.${NONE}"
+            exit 1
+        fi
+    else
+        echo -e "${RED}Failed to download Python archive.${NONE}"
+        echo -e "Exiting."
+        sleep 5
+        exit 1
+    fi
+fi
+
+sync
+
+exit
 ########################################### Run standard PortMaster installation ###########################################
 
 echo -e "\n${YELLOW}Running standard PortMaster installation...${NONE}"
@@ -197,10 +264,10 @@ echo -e "\n${YELLOW}PortMaster fix finished.${NONE}"
 echo "------------------------"
 
 if pgrep "SimpleTerminal" >/dev/null; then
-	echo -e "${PURPLE}Exiting in 10 seconds...${NONE}\n"
-	echo "Logs will be avaible in"
-	echo "/SDCARD/System/updates/portmaster_fix_$timestamp.log"
-	sleep 15
-	echo "exiting"
-	killall -2 SimpleTerminal
+    echo -e "${PURPLE}Exiting in 10 seconds...${NONE}\n"
+    echo "Logs will be avaible in"
+    echo "/SDCARD/System/updates/portmaster_fix_$timestamp.log"
+    sleep 15
+    echo "exiting"
+    killall -2 SimpleTerminal
 fi
