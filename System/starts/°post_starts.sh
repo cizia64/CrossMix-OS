@@ -40,6 +40,14 @@ if [ "$smb_enabled" -eq 1 ]; then
 
 fi
 
+# Tailscale service
+Tailscale_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["Tailscale"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$Tailscale_enabled" -eq 1 ]; then
+	export STATE_DIRECTORY=/mnt/SDCARD/System/etc/tailscale
+	/mnt/SDCARD/System/bin/tailscaled --state="/mnt/SDCARD/System/etc/tailscale/tailscaled.state" &
+fi
+
+
 VNC_wait_for_MainUI() {
 	timeout=10
 	elapsed=0
