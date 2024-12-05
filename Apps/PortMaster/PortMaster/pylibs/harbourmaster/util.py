@@ -51,9 +51,14 @@ def json_safe_load(*args):
 
 
 def fetch(url):
-    r = requests.get(url, timeout=20)
-    if r.status_code != 200:
-        logger.error(f"Failed to download {url!r}: {r.status_code}")
+    try:
+        r = requests.get(url, timeout=20)
+        if r.status_code != 200:
+            logger.error(f"Failed to download {url!r}: {r.status_code}")
+            return None
+
+    except requests.exceptions.ConnectionError as err:
+        logger.error(f"Failed to download {url!r}: {err}")
         return None
 
     return r
@@ -187,6 +192,9 @@ def load_pm_signature(file_name):
                 if 'PORTMASTER:' not in line:
                     continue
 
+                if ',' not in line.split(':', 1)[1]:
+                    continue
+
                 return [
                     item.strip()
                     for item in line.split(':', 1)[1].strip().split(',', 1)]
@@ -201,6 +209,7 @@ def load_pm_signature(file_name):
         return None
 
     return None
+
 
 def add_pm_signature(file_name, info):
     ## Adds the portmaster signature to a bash script.
@@ -370,6 +379,14 @@ def download(file_name, file_url, md5_source=None, md5_result=None, callback=Non
             if callback is not None:
                 callback.progress(_("Downloading file."), length, total_length, 'data')
 
+    except CancelEvent as err:
+        if file_name.is_file():
+            file_name.unlink()
+
+        logger.error(f"Requests error: {err}")
+
+        raise
+
     except requests.RequestException as err:
         if file_name.is_file():
             file_name.unlink()
@@ -458,6 +475,7 @@ def get_dict_list(base_dict, key):
 
     return result
 
+
 def remove_dict_list(base_dict, key, value):
     if key not in base_dict:
         return
@@ -477,6 +495,7 @@ def remove_dict_list(base_dict, key, value):
 
         elif len(result) == 1:
             base_dict[key] = result[0]
+
 
 def get_path_fs(path):
     """

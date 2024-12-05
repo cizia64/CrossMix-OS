@@ -56,6 +56,7 @@ gw_libretro.so;Game & Watch;
 handy_libretro.so;Handy;
 hatari_libretro.so;Hatari;
 imageviewer_libretro.so;image display;
+km_mame2003_xtreme_amped_libretro.so;MAME 2003-Xtreme;
 libfceumm.so;
 libmgba.so;
 lowresnx_libretro.so;LowRes NX;

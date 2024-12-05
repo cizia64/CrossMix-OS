@@ -1,0 +1,39 @@
+#!/bin/sh
+PATH="/mnt/SDCARD/System/bin:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+show_json_path="/mnt/SDCARD/Emus/show.json"
+
+contains() {
+    case "$labels_string" in
+    *"$1"*) return 0 ;;
+    *) return 1 ;;
+    esac
+}
+
+labels=$(jq -r '.[] | select(.show == 1) | .label' "$show_json_path" | tr '\n' '|')
+labels_string=$(echo "$labels")
+
+for dir in /mnt/SDCARD/Emus/*/; do
+    config_json_path="${dir}config.json"
+    subdir=$(basename "$dir")
+
+    if [[ "$subdir" == _* ]]; then
+        continue
+    fi
+    case "$subdir" in
+    MUSIC | VIDEOS | CANNONBALL | CAVESTORY | CHAILOVE | DINOTHAWR | DOOM | ENTERPRISE | FLASHBACK | PGM | TI83 | TYRQUAKE | VIDEOTON | VMAC | XRICK)
+        continue
+        ;;
+    esac
+
+    if [ -f "$config_json_path" ]; then
+        config_label=$(jq -r '.label' "$config_json_path")
+        if contains "$config_label"; then
+            rompath=$(jq -r '.rompath' "$config_json_path")
+            rom_folder=$(basename "$rompath")
+            echo "Scraping ROM Folder: $rom_folder"
+            /mnt/SDCARD/System/usr/trimui/scripts/scraper/scrap_screenscraper.sh "$rom_folder"
+            sync
+        fi
+    fi
+done

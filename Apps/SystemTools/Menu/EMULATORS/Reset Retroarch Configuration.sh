@@ -11,6 +11,6 @@ fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Restoring Retroarch configuration..."
 
-unzip -o /mnt/SDCARD/RetroArch/default_config.7z -d /mnt/SDCARD/
+/mnt/SDCARD/System/bin/7zz x -aoa /mnt/SDCARD/RetroArch/default_config.7z -o/mnt/SDCARD/
 
 sleep 0.1

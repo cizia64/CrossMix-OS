@@ -13,6 +13,7 @@
   "SMB": 0,
   "SMB_secure": 0,
   "Tailscale": 0,
+  "VNC": 0,
   "OVERLAYS": "Overlays - max ratio",
   "RESUME AT BOOT": 1,
   "AUTO LOAD STATE": 1

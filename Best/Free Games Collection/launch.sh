@@ -6,12 +6,17 @@ PATH="/mnt/SDCARD/System/bin:$PATH"
 RomFullPath=$1
 RomPath=$(dirname "$1")
 RomDir=$(basename "$RomPath")
-Launcher=$(jq -r '.launch' "/mnt/SDCARD/Emus/$RomDir/config.json")
+Config="/mnt/SDCARD/Emus/$RomDir/config.json"
+Launcher=$(jq -r '.launch' "$Config")
 LaunchPath="/mnt/SDCARD/Emus/$RomDir/$Launcher"
-		  
+
 extension="${RomFullPath##*.}"
 if [ "$extension" = "txt" ]; then
     RomFullPath=$(cat "$RomFullPath" | head -n 1) # Trick to have shortcuts: the real ROM filename is inside the text file
+fi
+
+if [ "$extension" = "launch" ]; then
+    source "$RomFullPath"
 fi
 
 echo "***************************************************************************"
@@ -29,8 +34,22 @@ echo "**************************************************************************
 #  LaunchPath    /mnt/SDCARD/Emus/ATARI2600/launch.sh
 #  ***************************************************************************
 
-
 if [ -f "$LaunchPath" ]; then
+
+    # Launcher selector
+    /mnt/SDCARD/System/usr/trimui/scripts/button_state.sh X
+    if [ $? -eq 10 ] && jq -e ".launchlist" "$Config"; then
+        selected=$(jq -c '.launchlist[] | .name' "$Config" | xargs selector -t "$RomDir launchers: " -c)
+        if echo "$selected" | grep -q "You selected: "; then
+            Launcher_name="${selected#*: }"
+            Launcher=$(jq -r --arg name "$Launcher_name" \
+                '.launchlist[] | select(.name == $name) | .launch' "$Config")
+            if [ -n "$Launcher" ]; then
+                echo "collection launcher: $Launcher_name dowork 0x" >>/tmp/log/messages
+                LaunchPath=/mnt/SDCARD/Emus/$RomDir/$Launcher
+            fi
+        fi
+    fi
 
     "$LaunchPath" "$RomFullPath"
 
@@ -43,7 +62,7 @@ else
     ARCADE)
         core="mame2003_plus_libretro.so"
         ;;
-    # PS)
+        # PS)
         # core="duckstation_libretro.so"
         # ;;
     *) ;;

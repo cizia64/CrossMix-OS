@@ -8,6 +8,7 @@ SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["SWAP A B"]' "/mnt/SDCARD/Syst
 if [ "$SWAP_AB_enabled" -eq 1 ]; then
   touch /var/trimui_inputd/swap_ab
 fi
+rm -f /var/trimui_inputd/ra_hotkey
 
 runifnecessary() {
 	a=$(pgrep "$1")

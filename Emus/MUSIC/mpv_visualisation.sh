@@ -5,7 +5,7 @@ homedir=$(dirname "$1")
 
 cd "$progdir"
 
-export LD_LIBRARY_PATH=/lib:/lib64:/usr/lib:/mnt/SDCARD/System/lib/
+export LD_LIBRARY_PATH=/lib:/lib64:/usr/lib:/mnt/SDCARD/System/lib/:/mnt/SDCARD/Apps/PortMaster/PortMaster:LD_LIBRARY_PATH
 
 /mnt/SDCARD/Apps/PortMaster/PortMaster/gptokeyb2 -1 "mpv" -c "keys.gptk" &
 sleep 0.4

@@ -45,6 +45,9 @@ class PlatformBase():
         'genre': 'genre',
         }
 
+    XML_ELEMENT_CALLBACK = {
+        }
+
     XML_PATH_FIX = [
         'image',
         ]
@@ -148,6 +151,8 @@ class PlatformBase():
                     # Create a new game element
                     gamelist_update = ET.SubElement(gamelist_root, 'game')
 
+                logger.info(f'{path_merge}: ')
+
                 for child in gameinfo_element:
                     # Check if the child element is in the predefined list
                     if child.tag in self.XML_ELEMENT_MAP:
@@ -165,6 +170,17 @@ class PlatformBase():
 
                         else:
                             gamelist_element.text = child.text
+
+                for child in gameinfo_element:
+                    if child.tag in self.XML_ELEMENT_CALLBACK:
+                        if FIX_PATH and child.tag in self.XML_PATH_FIX:
+                            new_path = child.text.strip()
+                            if new_path.startswith('./'):
+                                new_path = new_path[2:]
+
+                            child.text = str(self.hm.ports_dir / new_path)
+
+                        self.XML_ELEMENT_CALLBACK[child.tag](path_merge, gamelist_update, child)
 
             if hasattr(ET, 'indent'):
                 ET.indent(gamelist_root, space="  ", level=0)
@@ -330,7 +346,7 @@ class PlatformJELOS(PlatformBase):
 
 
 class PlatformROCKNIX(PlatformJELOS):
-    ...
+    ES_NAME = 'weston'
 
 
 class PlatformBatocera(PlatformBase):
@@ -361,8 +377,8 @@ class PlatformBatocera(PlatformBase):
 
     def loaded(self):
         self.WANT_SWAP_BUTTONS = not self.get_invert_buttons_value()
-        if self.WANT_SWAP_BUTTONS:
-            self.WANT_XBOX_FIX = not self.WANT_XBOX_FIX
+        # if self.WANT_SWAP_BUTTONS:
+            # self.WANT_XBOX_FIX = not self.WANT_XBOX_FIX
 
     def gamelist_file(self):
         return self.hm.ports_dir / 'gamelist.xml'
@@ -391,8 +407,29 @@ class PlatformBatocera(PlatformBase):
         TASK_SET.touch()
 
 
+class PlatformREGLinux(PlatformBatocera):
+    ...
+
+
 class PlatformKnulli(PlatformBatocera):
     WANT_XBOX_FIX = True
+
+    def portmaster_install(self):
+        """
+        Move files into place.
+        """
+        TL_DIR = self.hm.tools_dir / "PortMaster"
+        BC_DIR = TL_DIR / "knulli"
+
+        # ACTIVATE THE CONTROL
+        logger.debug(f'Copy {BC_DIR / "control.txt"} -> {TL_DIR / "control.txt"}')
+        shutil.copy(BC_DIR / "control.txt", TL_DIR / "control.txt")
+
+        TASK_SET = TL_DIR / "tasksetter"
+        if TASK_SET.is_file():
+            TASK_SET.unlink()
+
+        TASK_SET.touch()
 
 
 class PlatformArkOS(PlatformGCD_PortMaster, PlatformBase):
@@ -423,9 +460,91 @@ class PlatformEmuELEC(PlatformGCD_PortMaster, PlatformBase):
 class PlatformRetroDECK(PlatformBase):
     MOVE_PM_BASH = False
     ES_NAME = 'es-de'
+    RD_CONFIG = None
+
+    XML_ELEMENT_MAP = {
+        'path': 'path',
+        'name': 'name',
+        'desc': 'desc',
+        'releasedate': 'releasedate',
+        'developer': 'developer',
+        'publisher': 'publisher',
+        'players': 'players',
+        'genre': 'genre',
+        }
+
+    def __init__(self, hm):
+        super().__init__(hm)
+
+        self.XML_ELEMENT_CALLBACK = {
+            'image': self.esde_image_copy_majigger,
+            }
+
+    def get_rdconfig(self):
+        if self.RD_CONFIG is None:
+            rdconfig = {}
+
+            rdconfig_file=Path("/var/config/retrodeck/retrodeck.cfg")
+            if not rdconfig_file.is_file():
+                rdconfig_file=(Path.home() / ".var/app/net.retrodeck.retrodeck/config/retrodeck/retrodeck.cfg")
+
+            rdconfig['rdhome'] = None
+            rdconfig['roms_folder'] = None
+            rdconfig['ports_folder'] = None
+
+            with open(rdconfig_file, 'r') as fh:
+                for line in fh:
+                    line = line.strip()
+
+                    if line.startswith('rdhome='):
+                        rdconfig['rdhome'] = Path(line.split('=', 1)[-1])
+
+                    if '_folder=' in line:
+                        folder_name, folder_value = line.split('=', 1)
+                        rdconfig[folder_name] = Path(folder_value)
+
+            if rdconfig['rdhome'] is None:
+                logger.error(f"Unable to find the rdhome variable in {rdconfig_file}.")
+                return None
+
+            if rdconfig['roms_folder'] is None:
+                rdconfig['roms_folder'] = rdconfig['rdhome'] / "roms"
+
+            if rdconfig['ports_folder'] is None:
+                rdconfig['ports_folder'] = rdconfig['rdhome'] / "PortMaster"
+
+            self.RD_CONFIG = rdconfig
+
+            logger.info(f"RD_CONFIG: {rdconfig}")
+
+        return self.RD_CONFIG
+
+    def esde_image_copy_majigger(self, port_script, game_element, image_element):
+        rdconfig = self.get_rdconfig()
+        if rdconfig is None:
+            return None
+
+        IMG_DIR = rdconfig['rdhome'] / 'ES-DE' / 'downloaded_media' / 'portmaster' / 'screenshots'
+        # IMG_DIR = rdconfig['rdhome'] / 'downloaded_media' / 'portmaster' / 'miximages'
+
+        IMG_DIR.mkdir(parents=True, exist_ok=True)
+
+        SRC_IMAGE = Path(image_element.text)
+        DST_IMAGE = IMG_DIR / (Path(port_script).stem + SRC_IMAGE.suffix)
+
+        logger.info(f"COPY: {SRC_IMAGE} -> {DST_IMAGE}")
+        shutil.copy(SRC_IMAGE, DST_IMAGE)
 
     def gamelist_file(self):
-        return self.hm.ports_dir / 'gamelist.xml'
+        rdconfig = self.get_rdconfig()
+        if rdconfig is None:
+            return None
+
+        gamelists_dir = rdconfig['rdhome'] / 'ES-DE' / 'gamelists' / 'portmaster'
+
+        gamelists_dir.mkdir(parents=True, exist_ok=True)
+
+        return gamelists_dir / 'gamelist.xml'
 
     def first_run(self):
         self.portmaster_install()
@@ -437,21 +556,22 @@ class PlatformRetroDECK(PlatformBase):
 
         RD_DIR = self.hm.tools_dir / "PortMaster" / "retrodeck"
         PM_DIR = self.hm.tools_dir / "PortMaster"
+        SC_DIR = self.hm.scripts_dir
 
         # ACTIVATE THE RetroDECK CONTROL
         logger.debug(f'Copy {RD_DIR / "control.txt"} -> {PM_DIR / "control.txt"}')
         shutil.copy(RD_DIR / "control.txt", PM_DIR / "control.txt")
 
-        CONTROL_HACK = Path(Path.home() / ".var/app/net.retrodeck.retrodeck/data/PortMaster/")
-        if not CONTROL_HACK.parent.is_dir():
-            CONTROL_HACK.parent.mkdir(parents=True)
-        
-        logger.debug(f'Copy {RD_DIR / "control.txt"} -> {CONTROL_HACK}')
-        shutil.copy(RD_DIR / "control.txt", CONTROL_HACK)
-
         # PEBKAC RD
         logger.debug(f'Move {RD_DIR / "PortMaster.txt"} -> {PM_DIR / "PortMaster.sh"}')
         shutil.copy(RD_DIR / "PortMaster.txt", PM_DIR / "PortMaster.sh")
+
+        logger.debug(f'Move {RD_DIR / "PortMaster.txt"} -> {SC_DIR / "PortMaster.sh"}')
+        if (SC_DIR / "PortMaster.sh").is_symlink():
+            # XARGONNNNNNNN
+            (SC_DIR / "PortMaster.sh").unlink()
+
+        shutil.copy(RD_DIR / "PortMaster.txt", SC_DIR / "PortMaster.sh")
 
         TASK_SET = Path(self.hm.tools_dir / "PortMaster" / "tasksetter")
         if TASK_SET.is_file():
@@ -482,7 +602,10 @@ class PlatformmuOS(PlatformBase):
                 Path("/usr/bin/magick").is_file())):
             return
 
-        INFO_CATALOG = Path("/mnt/mmc/MUOS/info/catalogue/External - Ports")
+        INFO_CATALOG = Path("/run/muos/storage/info/catalogue/External - Ports")
+        if not INFO_CATALOG.exists():
+            INFO_CATALOG = Path("/mnt/mmc/MUOS/info/catalogue/External - Ports")
+
         INFO_BOX_DIR     = INFO_CATALOG / "box"
         INFO_PREVIEW_DIR = INFO_CATALOG / "preview"
         INFO_TEXT_DIR    = INFO_CATALOG / "text"
@@ -848,6 +971,7 @@ HM_PLATFORMS = {
     'jelos':     PlatformJELOS,
     'rocknix':   PlatformROCKNIX,
     'batocera':  PlatformBatocera,
+    'reglinux':  PlatformREGLinux,
     'knulli':    PlatformKnulli,
     'muos':      PlatformmuOS,
     'trimui':    PlatformTrimUI,

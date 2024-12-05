@@ -9,5 +9,5 @@
 "useswap":0,
 "shortname":0,
 "hidebios":1,
-"extlist":"gba|nes|n64|z64|smc|7z|zip|gb|md|iso|cue|sfc|nds|bin|img|chd|elf|txt"
+"extlist":"gba|nes|n64|z64|smc|7z|zip|gb|md|iso|cue|sfc|nds|bin|img|chd|elf|txt|launch"
 }

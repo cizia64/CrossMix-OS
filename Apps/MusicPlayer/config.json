@@ -1,0 +1,6 @@
+{
+    "label": "Music Player",
+    "icon": "icon.png",
+    "launch": "launch.sh",
+    "description": "Gmu Music Player"
+}

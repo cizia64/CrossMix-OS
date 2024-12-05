@@ -3,6 +3,7 @@ echo "$0 $*"
 
 #Find the Emulator directory (first Emus/ subdirectory)
 EMU_DIR="$(echo "$0" | sed -E 's|(.*Emus/[^/]+)/.*|\1|')"
+ROM_DIR="$(echo "$1" | sed -E 's|(.*Roms/[^/]+)/.*|\1|')"
 PM_DIR="/mnt/SDCARD/Apps/PortMaster/PortMaster"
 
 export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:$PM_DIR:${PATH:+:$PATH}"
@@ -17,6 +18,7 @@ if grep -q ra64.trimui "$0"; then
     source $dir/FolderOverrideFinder.sh
 
     ra_audio_switcher.sh
+    touch /var/trimui_inputd/ra_hotkey
 fi
 
 cd "$EMU_DIR"

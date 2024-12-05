@@ -982,7 +982,12 @@ class PortMasterV3(BaseSource):
             return None
 
         if temp_dir is None:
-            temp_dir = self.hm.temp_dir
+            file_size = self._data[port_name]['size']
+
+            if file_size > HM_MAX_TEMP_SIZE:
+                temp_dir = self.hm.ports_dir
+            else:
+                temp_dir = self.hm.temp_dir
 
         md5_result[0] = self._data[port_name]['md5']
         zip_file = download(temp_dir / port_name, self._data[port_name]['url'], self._data[port_name]['md5'], callback=self.hm.callback)

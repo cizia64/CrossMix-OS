@@ -28,6 +28,10 @@
       "launch": "vbanext.sh"
     },
     {
+      "name": "Meteor",
+      "launch": "meteor.sh"
+    },
+    {
       "name": "mGBA - Standalone",
       "launch": "mgba_standalone.sh"
     }
