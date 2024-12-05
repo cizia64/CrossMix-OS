@@ -212,7 +212,7 @@ TEMP_FILE="/tmp/python.zip.md5"
 
 # Step 1: Download the remote MD5 file
 echo -e "\n${YELLOW}Updating md5 checksum file...${NONE}"
-if ! download_file "$Python_Archive_URL" "$TEMP_FILE"; then
+if ! download_file "$Python_Archive_MD5_URL" "$TEMP_FILE"; then
     echo "Using local MD5 file copy instead."
 else
     mv "$TEMP_FILE" "$Python_Archive_MD5"
