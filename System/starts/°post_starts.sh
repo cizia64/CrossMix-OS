@@ -43,7 +43,8 @@ fi
 # Tailscale service
 Tailscale_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["Tailscale"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ "$Tailscale_enabled" -eq 1 ]; then
-	/mnt/SDCARD/System/bin/tailscaled &
+	export STATE_DIRECTORY=/mnt/SDCARD/System/etc/tailscale
+	/mnt/SDCARD/System/bin/tailscaled --state="/mnt/SDCARD/System/etc/tailscale/tailscaled.state" &
 fi
 
 

@@ -11,7 +11,12 @@ fi
 /mnt/SDCARD/System/bin/jq '. += {"Tailscale": 0}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 sync
 
-pkill /mnt/SDCARD/System/bin/tailscaled
+TAILSCALED="/mnt/SDCARD/System/bin/tailscaled"
+TAILSCALE="/mnt/SDCARD/System/bin/tailscaled"
+$TAILSCALE down
+pkill -9 "$TAILSCALED"
+pkill -9 "$TAILSCALE"
+
 
 # we modify the DB entries to reflect the current state
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "Tailscale" "disabled"
