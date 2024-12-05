@@ -30,6 +30,7 @@ else
 fi
 
 if [ ! -f "$TAILSCALE" ] || [ ! -f "$TAILSCALED" ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Downloading Tailscale binaries..."
     wget -q -O /tmp/tailscale.7z "$URL"
     if [ $? -eq 0 ]; then
         /mnt/SDCARD/System/bin/7zz x /tmp/tailscale.7z -o"/mnt/SDCARD" -y
