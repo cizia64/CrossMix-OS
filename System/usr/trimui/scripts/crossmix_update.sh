@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# Colors
-# RED='\033[1;31m'
-# GREEN='\033[1;32m'
-# YELLOW='\033[1;33m'
-# BLUE='\033[1;34m'
-# NC='\033[0m' # No Color
+# we run this script from memory
+if [ "$0" != "sh" ]; then
+    script_content=$(cat "$0")
+    echo "$script_content" | sh
+    exit 0
+fi
 
 export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
@@ -22,7 +22,6 @@ if [ -z "$initial_version" ]; then
 fi
 update_version=$(echo "$UPDATE_FILE" | awk -F'_v|\.zip' '{print $2}')
 
-# infoscreen.sh -m "test OK." -t 1
 cp /mnt/SDCARD/System/bin/7zz /tmp
 rm -rf "/mnt/SDCARD/System Volume Information"
 echo 1 >/tmp/stay_awake
@@ -38,11 +37,16 @@ mkdir -p "$BCK_DIR"
 sync
 
 restore_files() {
+	# Copy with overwrite
     NAME="$1"
     SRC_DIR="$2"
     DEST_DIR="$3"
     FILE_PATTERN="$4"
-
+	OPTION="$5"
+	
+    if [ "$OPTION" = "No_Overwrite" ]; then
+        OPTION="--ignore-existing"
+    fi
     if [ -z "$FILE_PATTERN" ]; then
         FILE_PATTERN="*"
     fi
@@ -50,7 +54,7 @@ restore_files() {
     if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
 		echo -e "$NAME: restoring files...\n"
         mkdir -p "$DEST_DIR"
-        /mnt/SDCARD/System/bin/rsync --stats -av --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
+        /mnt/SDCARD/System/bin/rsync --stats -av $OPTION --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
         sync
     else
         echo "$NAME: No files to restore."
@@ -115,13 +119,33 @@ move_items() {
     fi
   done
 
-  readme_text="This folder contains a backup of previous CrossMix files.\n
+  readme_text="This folder contains a backup of previous CrossMix v$initial_version files.\n
 Normally, all saves and save states have been migrated during the automated update process.\n
-After an update, it is recommended to keep this folder for some time. Once you have spent some time on CrossMix and verified that all your saves are functional, you can delete this \"_update\" directory to free up storage space on your SD card."
+After an update, it is recommended to keep this folder for some time. Once you have spent some time on CrossMix and verified that all your saves and settings are functional, you can delete this \"_update\" directory to free up storage space on your SD card."
 
   echo -e "$readme_text" >"/mnt/SDCARD/_Updates/ReadMe.txt"
   sync
 }
+
+# Function to copy specified keys from a RetroArch configuration file to another
+extract_keys() {
+    local keys="$1"            # Space-separated list of keys
+    local source_file="$2"     # Source configuration file
+    local target_file="$3"     # Target file to save the extracted keys
+
+    local temp_file=$(mktemp)
+
+    for key in $keys; do
+        grep "^$key" "$source_file" >> "$temp_file"
+    done
+
+    /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$temp_file" "$target_file"
+
+    echo "The following keys have been exported to $target_file:"
+    echo "$keys"
+}
+
+
 
 check_available_space
 
@@ -161,8 +185,23 @@ echo "==========================================================================
 echo "            ==============  Restore saves and savestates... =============="
 
 # Restore saves and savestates from Retroarch
-restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
-restore_files "Retroarch saves and savestates"  "$BCK_DIR/RetroArch/.retroarch/states/" "/mnt/SDCARD/RetroArch/.retroarch/states/" "*"
+restore_files "Retroarch saves"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
+restore_files "Retroarch savestates"  "$BCK_DIR/RetroArch/.retroarch/states/" "/mnt/SDCARD/RetroArch/.retroarch/states/" "*"
+restore_files "Retroarch cheats"  "$BCK_DIR/RetroArch/.retroarch/cheats/" "/mnt/SDCARD/RetroArch/.retroarch/cheats/" "*"
+restore_files "Retroarch database"  "$BCK_DIR/RetroArch/.retroarch/database/" "/mnt/SDCARD/RetroArch/.retroarch/database/" "*"
+restore_files "Retroarch filters"  "$BCK_DIR/RetroArch/.retroarch/filters/" "/mnt/SDCARD/RetroArch/.retroarch/filters/" "*" No_Overwrite
+restore_files "Retroarch playlists"  "$BCK_DIR/RetroArch/.retroarch/playlists/" "/mnt/SDCARD/RetroArch/.retroarch/playlists/" "*"
+restore_files "Retroarch screenshots"  "$BCK_DIR/RetroArch/.retroarch/screenshots/" "/mnt/SDCARD/RetroArch/.retroarch/screenshots/" "*"
+restore_files "Retroarch shaders"  "$BCK_DIR/RetroArch/.retroarch/shaders/" "/mnt/SDCARD/RetroArch/.retroarch/shaders/" "*" No_Overwrite
+restore_files "Retroarch thumbnails"  "$BCK_DIR/RetroArch/.retroarch/thumbnails/" "/mnt/SDCARD/RetroArch/.retroarch/thumbnails/" "*"
+
+
+# Restore Retroarch settings
+SOURCE_FILE="$BCK_DIR/RetroArch/retroarch.cfg"
+TARGET_FILE="/mnt/SDCARD/RetroArch/retroarch.cfg"
+KEYS="cheevos_username cheevos_password cheevos_token cheevos_enable"
+
+extract_keys "$KEYS" "$SOURCE_FILE" "$TARGET_FILE"
 
 # Restore PPSSPP 1.15.4 standalone saves and savestates
 restore_files "PPSSPP 1.15.4 saves"             "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/"      "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SAVEDATA/" "*"
@@ -192,11 +231,54 @@ restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1
 restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"         "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
 restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"     "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
 
+# DC Standalone RetroAchievements
+SOURCE_FILE="$BCK_DIR/Emus/DC/flycast_v2.4/config/emu.cfg"
+TARGET_FILE="/mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg"
+KEYS="Enabled HardcoreMode UserName Token"
+extract_keys "$KEYS" "$SOURCE_FILE" "$TARGET_FILE"
+
+# DC BIOS files new location
+restore_files "Restore DC BIOS files"           "$BCK_DIR/BIOS/dc/" "/mnt/SDCARD/BIOS/dc/flycast/" "*.bin"
+
+# Restore PICO-8 binaries
+restore_files "Restore PICO-8 binaries"         "$BCK_DIR/Emus/PICO/PICO8_Wrapper/bin/" "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/" "*"
+
+# PortMaster themes and runtimes
+restore_files "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/" "*"
+restore_files "Restore PortMaster runtimes"      "$BCK_DIR/Apps/PortMaster/PortMaster/libs/"  "/mnt/SDCARD/Apps/PortMaster/PortMaster/libs/" "*"
+
 # Restore previous recordings
 restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/"      "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
 
-# Restore PortMaster squashfs images
-restore_files "PortMaster squashfs images"      "$BCK_DIR/Apps/PortMaster/PortMaster/libs/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/libs/" "*"
+# Restore Tailscale configuration
+restore_files "Restore Tailscale configuration" "$BCK_DIR/System/etc/tailscale/" "/mnt/SDCARD/System/etc/tailscale" "*"
+
+# Restore Syncthings configuration
+restore_files "Restore Syncthings configuration" "$BCK_DIR/System/etc/syncthing/" "/mnt/SDCARD/System/etc/syncthing" "*"
+
+# Ebook Reader
+restore_files "Restore Ebooks"                   "$BCK_DIR/Apps/EbookReader/.mreader_store/" "/mnt/SDCARD/Apps/EbookReader/.mreader_store/" "*"
+restore_files "Restore Ebook Reader settings"    "$BCK_DIR/Apps/EbookReader/Books/"          "/mnt/SDCARD/Apps/EbookReader/Books/"          "*"
+
+# Music Player
+restore_files "Restore Music Player current playlist"  "$BCK_DIR/Apps/MusicPlayer/.local/" "/mnt/SDCARD/Apps/MusicPlayer/.local/" "*"
+
+# Additional libs
+restore_files "Restore additional libs"          "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" "*" No_Overwrite
+
+# Restore CrossMix settings
+jq -s '.[1] * .[0]' $BCK_DIR/System/etc/crossmix.json /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /mnt/SDCARD/System/etc/crossmix.json
+
+# Restore Scraper settings
+jq -s '.[1] * .[0]' $BCK_DIR/System/etc/scraper.json /mnt/SDCARD/System/etc/scraper.json > /tmp/crossmix.json && mv /mnt/SDCARD/System/etc/crossmix.json
+
+# restore user additional themes, icons, Backgrounds
+restore_files "Restore Themes"                   "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
+restore_files "Restore Backgrounds"              "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
+restore_files "Restore Icons"                    "$BCK_DIR/Icons/"       "/mnt/SDCARD/Icons/"       "*" No_Overwrite
+
+
+
 
 
 
