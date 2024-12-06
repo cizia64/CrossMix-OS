@@ -238,6 +238,7 @@ if [ -f "$ScraperConfigFile" ]; then
     userSS=$(echo "$config" | jq -r '.screenscraper_username')
     passSS=$(echo "$config" | jq -r '.screenscraper_password')
     ScrapeInBackground=$(echo "$config" | jq -r '.ScrapeInBackground')
+    ForceScrape=$(echo "$config" | jq -r '.ForceScrape')
     u=$(echo -n KUZE433CLBLHSZCIOB2AU=== | base32 -d | base64 -d)
     p=$(echo -n KZEFMTCTIRBHMWJQN55GKSCRGFKGOPJ5BI====== | base32 -d | base64 -d)
 
@@ -377,7 +378,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
 
     #echo $romNameTrimmed # for debugging
 
-    if [ -f "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" ]; then
+    if [ -f "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" ] && [ "$ForceScrape" != "true" ]; then
         echo -e "${YELLOW}already Scraped !${NONE}"
         let Scrap_notrequired++
 
