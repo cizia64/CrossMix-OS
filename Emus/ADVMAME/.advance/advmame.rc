@@ -21,14 +21,14 @@ ui_fontsize 22
 input_map[start1] joystick_button[trimui_player1,button8]
 input_map[coin1] joystick_button[trimui_player1,button7]
 input_map[ui_select] joystick_button[trimui_player1,button2]
-input_map[ui_configure] joystick_button[trimui_player1,button9]
+input_map[ui_configure] joystick_button[trimui_player1,button9] joystick_button[trimui_player1,button7]
 input_map[ui_pause] joystick_digital[trimui_player1,1,0,1]
 input_map[ui_show_fps] joystick_digital[trimui_player1,2,1,1]
 input_map[ui_up] joystick_digital[trimui_player1,3,1,1]
 input_map[ui_down] joystick_digital[trimui_player1,3,1,0]
 input_map[ui_left] joystick_digital[trimui_player1,3,0,1]
 input_map[ui_right] joystick_digital[trimui_player1,3,0,0]
-input_map[ui_cancel] joystick_button[trimui_player1,button7] joystick_button[trimui_player1,button8]
+input_map[ui_cancel] joystick_button[trimui_player1,button9] joystick_button[trimui_player1,button8]
 
 vertical/display_ror yes
 vertical/display_flipx yes
