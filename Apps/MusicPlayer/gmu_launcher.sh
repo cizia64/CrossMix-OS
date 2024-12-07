@@ -10,7 +10,7 @@ cd /mnt/SDCARD/Apps/MusicPlayer
 sleep 0.4
 
 # To support LCD switch-Off key combination
-/mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/Apps/MusicPlayer/ahk.conf /dev/input/event3 &
+/mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/Apps/MusicPlayer/thd.conf /dev/input/event3 &
 
 echo 1 >/tmp/stay_awake
 HOME=/mnt/SDCARD/Apps/MusicPlayer /mnt/SDCARD/Apps/MusicPlayer/gmu.bin -c gmu.settings.conf
