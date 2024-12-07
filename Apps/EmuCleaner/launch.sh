@@ -25,6 +25,14 @@ if [ "$silent" = false ]; then
   /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$EmuCleanerPath/background.jpg"
 fi
 
+# We show PICO-8 Splore if the required binaries are present
+if [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8_64 ] && [ -f /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/pico8.dat ]; then
+  if [ -f "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" ]; then
+    mv "/mnt/SDCARD/Roms/PICO/° Run Splore.launch" "/mnt/SDCARD/Roms/PICO/° Run Splore.p8"
+    rm "/mnt/SDCARD/Roms/PICO/PICO_cache7.db"
+  fi
+fi
+
 # Initialize an empty string to store JSON entries
 json_entries=""
 
