@@ -33,7 +33,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 		Sha_expected_16ms=356b41b0be9d00f361e45303f41f5f1f337e6efc
 		Sha_1ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/1ms | cut -d ' ' -f 1)
 		Sha_8ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/8ms | cut -d ' ' -f 1)
-		Sha_16ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/16s | cut -d ' ' -f 1)
+		Sha_16ms=$(sha1sum /mnt/SDCARD/System/resources/trimui_inputd/16ms | cut -d ' ' -f 1)
 		if [ "$Sha_expected_1ms" = "$Sha_1ms" ] && [ "$Sha_expected_8ms" = "$Sha_8ms" ] &&
 			[ "$Sha_expected_16ms" = "$Sha_16ms" ]; then
 
