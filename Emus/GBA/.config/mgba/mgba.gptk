@@ -5,7 +5,7 @@ r1 = \"
 start = \"
 select = \"
 
-select = hold_state hotkey              
+guide = hold_state hotkey              
 
 x = z
 y = x
