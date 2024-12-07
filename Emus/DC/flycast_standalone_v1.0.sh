@@ -15,4 +15,5 @@ export XDG_CONFIG_HOME="$PWD/config/"
 
 mkdir -p "$FLYCAST_BIOS_DIR/flycast"
 
-./flycast "$@"
+./flycast "$@" &
+activities add "$1" $!

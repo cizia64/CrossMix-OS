@@ -27,4 +27,5 @@ fi
 
 cd $RA_DIR/
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/scummvm_libretro-2.9.so "$@"
+HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/scummvm_libretro-2.9.so "$@" &
+activities add "$1" $!

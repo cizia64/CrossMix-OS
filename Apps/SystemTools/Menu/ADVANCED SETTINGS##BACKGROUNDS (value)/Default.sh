@@ -12,6 +12,8 @@ find /mnt/SDCARD/Emus/ -name "config.json" -exec sh -c '
     /mnt/SDCARD/System/bin/jq --arg new_icon "$bg_path" ".background=\"$bg_path\"" "{}"  > /tmp/tmp_config.json && mv /tmp/tmp_config.json "{}"
 ' sh "$script_name" {} \;
 
+sed -iE 's/^backgrounds_theme=.*$/backgrounds_theme='"$script_name" /mnt/SDCARD/Apps/Activities/data/config.ini
+
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
     echo "{}" >"$json_file"

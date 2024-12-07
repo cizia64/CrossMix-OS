@@ -18,6 +18,7 @@ if [ -n "$theme" ]; then
     if [ -d "/mnt/SDCARD/Themes/${theme}" ]; then
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"${theme}\" theme." -t 1
         /usr/trimui/bin/systemval "theme" "/mnt/SDCARD/Themes/${theme}/"
+        sed -iE 's/^skins_theme=.*$/skins_theme='"$theme" /mnt/SDCARD/Apps/Activities/data/config.ini
     else
         echo "Theme directory Themes/${theme} does not exist."
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"${theme}\" theme directory does not exist !!" -c red -t 3

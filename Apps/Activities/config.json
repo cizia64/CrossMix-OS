@@ -1,0 +1,6 @@
+{
+    "label":	"Activities",
+    "icon":	"icon.png",
+    "launch":	"launch.sh",
+    "description":	"Activities GUI"
+}

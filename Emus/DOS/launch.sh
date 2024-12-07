@@ -4,4 +4,5 @@ cpufreq.sh ondemand 2 7
 
 cd $RA_DIR/
 
-HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/dosbox_pure_libretro.so "$@"
+HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/dosbox_pure_libretro.so "$@" &
+activities add "$1" $!
