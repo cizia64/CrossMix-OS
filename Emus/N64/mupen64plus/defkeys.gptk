@@ -1,12 +1,12 @@
 [controls]
 overlay = clear
-guide = esc
 
 guide = hold_state hotkey              
 
 [controls:hotkey]
 overlay = clear
 
+start = esc
 l1 = f12
 l2 = f7
 r2 = f5
