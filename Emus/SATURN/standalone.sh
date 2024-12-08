@@ -13,6 +13,7 @@ else
     BIOS_FILE="/mnt/SDCARD/BIOS/saturn_bios.bin"
     if [ ! -f "$BIOS_FILE" ]; then
         echo "BIOS file not found, falling back to HLE BIOS"
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "No bios found, Yabasanshiro will use HLE (less compatible)." -k " "
     else
         echo "Using real Saturn BIOS"
     fi
