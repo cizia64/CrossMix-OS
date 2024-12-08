@@ -1,6 +1,7 @@
 #!/bin/sh
 echo $0 $*
-PATH="/mnt/SDCARD/System/bin:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+export PATH="/mnt/SDCARD/System/bin:$PATH"
 
 CurrentSelection=$(basename "$1" | sed 's/\.[^.]*$//')
 
