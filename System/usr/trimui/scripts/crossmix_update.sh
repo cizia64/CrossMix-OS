@@ -1,23 +1,30 @@
 #!/bin/sh
 
 # we run this script from memory
-script_dir=$(dirname "$(realpath "$0")")
-if [ "$script_dir" != "/tmp" ]; then
-  if [ "$0" != "sh" ]; then
-    script_content=$(cat "$0")
-    echo "$script_content" | sh
-    exit 0
-  fi
-fi
+
 
 export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo 1800000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1608000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
 # Find the update file
 UPDATE_FILE=$(find /mnt/SDCARD -maxdepth 1 -name "CrossMix-OS_v*.zip" -print -quit)
+
+if [ -n "$UPDATE_FILE" ]; then
+  script_dir=$(dirname "$(realpath "$0")")
+  if [ "$script_dir" != "/tmp" ]; then
+    /mnt/SDCARD/System/bin/7zz e "$UPDATE_FILE" "System/usr/trimui/scripts/crossmix_update.sh" -o/tmp -y
+    chmod a+x "/tmp/crossmix_update.sh"
+    sh "/tmp/crossmix_update.sh"
+    exit
+  fi
+else
+  echo "No update file found"
+  exit
+fi
+
 
 initial_version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 if [ -z "$initial_version" ]; then
@@ -155,7 +162,7 @@ check_available_space
 echo "=========================================================================================="
 echo "          ==============  Checking filesystem integrity... =============="
 # Check the filesystem
-fsck.fat -r -w -a $mount_point | awk 'NR > 3'
+fsck.fat -r -w -a $mount_point 2>&1 | awk 'NR > 3'
 
 echo "=========================================================================================="
 echo "          ==============  Creating backup of old files... =============="
