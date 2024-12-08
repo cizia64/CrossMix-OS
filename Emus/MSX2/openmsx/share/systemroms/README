@@ -1,0 +1,3 @@
+This directory is the default file pool for system ROMs. If you put your system
+ROMs here, openMSX will find them if they have the right sha1 sum, i.e. if they
+are exactly the right ROMs. The file name is irrelevant.

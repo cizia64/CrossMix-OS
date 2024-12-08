@@ -1,0 +1,3 @@
+This directory contains the definitions of extension-hardware, which you can
+insert in your MSX machines. Use the ext command in the console or the -ext
+command line option to do this.

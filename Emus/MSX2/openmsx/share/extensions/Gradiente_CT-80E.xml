@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <name>Cartão 80 Colunas</name>
+    <manufacturer>Gradiente</manufacturer>
+    <code>CT-80E</code>
+    <release_year>1987</release_year>
+    <description>Gradiente 80 columns expansion cartridge</description>
+    <type>graphics expansion</type>
+  </info>
+
+  <devices>
+    <VDP id="Gradiente CT-80E">
+      <version>V9938</version>
+      <vram>16</vram>
+      <io base="0x88" num="4" type="O"/>
+      <io base="0x88" num="2" type="I"/>
+      <irq_connected>false</irq_connected>
+    </VDP>
+    <primary slot="any">
+      <secondary slot="any">
+        <ROM id="Gradiente CT-80E">
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <sha1>e89eb87f295a2c93688265c4f6f25a9ccb4e3697</sha1>
+            <filename>ct-80e.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

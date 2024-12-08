@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Sanyo</manufacturer>
+    <code>PHC-28S</code>
+    <release_year>1984?</release_year>
+    <description>French MSX with only 16kB of RAM: Ordinateur Personnel</description>
+    <type>MSX</type>
+  </info>
+
+  <CassettePort/>
+
+  <!-- Z80: 01C529ED -->
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>gb</keyboard_type> <!-- Yes, English keyboard, on a French machine! -->
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks> <!-- not tested :( -->
+      <graph_locks>false</graph_locks> <!-- not tested :( -->
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9929A</version> <!-- HAS 4k/16k effect, no address latch, HAS sprite clones, has screen 2 mirrored mode, has mode 3 mixed mode -->
+      <io base="0x98" num="2"/>
+      <saturation>100</saturation> <!-- TMS9x2x and RGB output -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0xC000" size="0x4000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>phc-28s_basic-bios1.rom</filename>
+          <sha1>b1cce60ef61c058f5e42ef7ac635018d1a431168</sha1> <!-- Data from Jetze's machine -->
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <!-- Note: this connector is actually a non-standard expansion connector on the back -->
+    <primary external="true" slot="3"/>
+
+  </devices>
+
+</msxconfig>
