@@ -117,7 +117,7 @@ cp "$RA_Config" .
 sed -i 's/^config_save_on_exit.*/config_save_on_exit = "true"/' "retroarch.cfg"
 
 infoscreen.sh -m "A game will start and close to generate your token, please wait. Press A to continue." -k "A B START MENU" -fs 22
-$HOME/ra64.trimui -L "$HOME/.retroarch/cores/mgba_libretro.so" -c "retroarch.cfg" "$(dirname "$0")/.Sheep It Up.zip" &
+$HOME/ra64.trimui -L "$HOME/.retroarch/cores/stella2014_libretro.so" -c "retroarch.cfg" "$(dirname "$0")/.Sheep It Up.zip" &
 sleep 5
 pkill -f ra64.trimui
 sleep 5

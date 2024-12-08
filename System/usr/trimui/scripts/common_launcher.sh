@@ -10,6 +10,7 @@ export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:$PM_D
 export LD_LIBRARY_PATH="/usr/trimui/lib:/mnt/SDCARD/System/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
 dir=/mnt/SDCARD/System/usr/trimui/scripts
+source $dir/save_launcher.sh
 
 if grep -q ra64.trimui "$0"; then
     RA_DIR="/mnt/SDCARD/RetroArch"
@@ -20,6 +21,4 @@ if grep -q ra64.trimui "$0"; then
     ra_audio_switcher.sh
     touch /var/trimui_inputd/ra_hotkey
 fi
-
 cd "$EMU_DIR"
-source $dir/save_launcher.sh
