@@ -14,19 +14,19 @@
     "launchlist": [
         {
             "name": "Drastic (Overlay + Bilinear)",
-            "launch": "launch.sh"
+            "launch": "drastic.sh"
         },
         {
             "name": "Drastic (Overlay + Nearest)",
-            "launch": "launch.sh"
+            "launch": "drastic.sh"
         },
         {
             "name": "Drastic (No Overlay + Bilinear)",
-            "launch": "launch.sh"
+            "launch": "drastic.sh"
         },
         {
             "name": "Drastic (No Overlay + Nearest)",
-            "launch": "launch.sh"
+            "launch": "drastic.sh"
         }
     ]
 }

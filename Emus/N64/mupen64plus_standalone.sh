@@ -35,7 +35,7 @@ case "$*" in
 esac
 
 
-$PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
+HOTKEY=guide $PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 sleep 0.3
 
 HOME=$EMU_DIR ./mupen64plus "$ROM_PATH"

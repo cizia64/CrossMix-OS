@@ -23,7 +23,7 @@ case "$*" in
         ;;
 esac
 
-$PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
+HOTKEY=guide $PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 
 HOME=$EMU_DIR ./mupen64plus "$ROM_PATH" 2>&1
 
