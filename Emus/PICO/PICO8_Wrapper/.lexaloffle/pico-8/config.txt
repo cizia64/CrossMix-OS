@@ -68,7 +68,7 @@ volume 256
 
 
 // Location of pico-8's root folder
-root_path /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts/
+root_path /mnt/SDCARD/Roms/PICO/
 
 
 // Location of cartridge save data

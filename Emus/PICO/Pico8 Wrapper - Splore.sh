@@ -24,8 +24,12 @@ fi
 # To support MENU + START exit shortcut
 /mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/cfg/thd.conf /dev/input/event3 &
 
-mount --bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/carts
+mount --bind /mnt/SDCARD/Roms/PICO/splore /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts
 pico8_64 -splore -preblit_scale 3
 
+/mnt/SDCARD/System/bin/rsync --stats -av --ignore-existing --include="*/" --include="*.png" --exclude="*" "/mnt/SDCARD/Roms/PICO/splore/" "/mnt/SDCARD/Imgs/PICO/" &
+rm -f /mnt/SDCARD/Roms/PICO/PICO_cache7.db
 kill -9 $(pidof thd)
-umount /mnt/SDCARD/Apps/pico/.lexaloffle/pico-8/carts
+umount /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts
+
+sync

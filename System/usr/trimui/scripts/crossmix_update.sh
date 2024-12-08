@@ -240,8 +240,9 @@ extract_keys "$KEYS" "$SOURCE_FILE" "$TARGET_FILE"
 # DC BIOS files new location
 restore_files "Restore DC BIOS files"           "$BCK_DIR/BIOS/dc/" "/mnt/SDCARD/BIOS/dc/flycast/" "*.bin"
 
-# Restore PICO-8 binaries
+# Restore PICO-8 binaries & Splore BBS games
 restore_files "Restore PICO-8 binaries"         "$BCK_DIR/Emus/PICO/PICO8_Wrapper/bin/" "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/" "*"
+restore_files "Restore PICO-8 Splore games"     "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts" "/mnt/SDCARD/Roms/PICO/splore" "*"
 
 # PortMaster themes and runtimes
 restore_files "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/" "*"
