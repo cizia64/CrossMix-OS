@@ -87,6 +87,11 @@ EOF
       write_entry "$label" 0
       NumRemoved=$((NumRemoved + 1))
     fi
+	
+    if [ -f "$RomPath/${subfolder_name}_cache7.db" ] && [ ! -s "$RomPath/${subfolder_name}_cache7.db" ]; then
+        rm "$RomPath/${subfolder_name}_cache7.db"
+    fi
+
   fi
 done
 
