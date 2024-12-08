@@ -18,7 +18,7 @@
     },
     {
       "name": "Yabasanshiro",
-      "launch": "launch.sh"
+      "launch": "yabasanshiro.sh"
     },
     {
       "name": "-----------  standalone  -----------",
@@ -26,11 +26,11 @@
     },
     {
       "name": "Yabasanshiro (Real BIOS)",
-      "launch": "standalone.sh"
+      "launch": "yabasanshiro_standalone.sh"
     },
     {
       "name": "Yabasanshiro (HLE BIOS)",
-      "launch": "standalone.sh"
+      "launch": "yabasanshiro_standalone.sh"
     }
   ] 
 }

@@ -14,6 +14,10 @@
   "hidebios": 1,
   "launchlist": [
     {
+      "name": "--------------  libretro  --------------",
+      "launch": ""
+    },
+    {
       "name": "Flycast (Libretro)",
       "launch": "flycast.sh"
     },
@@ -22,12 +26,16 @@
       "launch": "flycast_wide.sh"
     },
     {
-      "name": "Flycast - v2.4 (Standalone)",
-      "launch": "flycast_standalone_v2.4.sh"
+      "name": "-------------  standalone  -------------",
+      "launch": ""
     },
     {
-      "name": "Flycast - v1.0 (Standalone)",
+      "name": "Flycast - v1.0 (Fast)",
       "launch": "flycast_standalone_v1.0.sh"
+    },
+    {
+      "name": "Flycast - v2.4 (RetroAchievem.)",
+      "launch": "flycast_standalone_v2.4.sh"
     }
   ]
 }
