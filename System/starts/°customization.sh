@@ -105,7 +105,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	fi
 
 	# fix potential bad asound configuration
-		sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
+	sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
 
 	# Apply default CrossMix theme, sound volume, and grid view
 	if [ ! "$CrossMix_Update" ]; then
@@ -116,6 +116,10 @@ if [ "$version" != "$FW_patched_version" ]; then
 			/usr/trimui/bin/systemval menustylel1 1
 			/usr/trimui/bin/systemval bgmvol 10
 		fi
+	fi
+
+	if [ "$Current_Theme" = "../res/" ]; then
+		/usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
 	fi
 
 	# modifying performance mode for Moonlight

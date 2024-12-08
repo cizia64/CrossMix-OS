@@ -1,10 +1,13 @@
 #!/bin/sh
 
 # we run this script from memory
-if [ "$0" != "sh" ]; then
+script_dir=$(dirname "$(realpath "$0")")
+if [ "$script_dir" != "/tmp" ]; then
+  if [ "$0" != "sh" ]; then
     script_content=$(cat "$0")
     echo "$script_content" | sh
     exit 0
+  fi
 fi
 
 export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
@@ -152,7 +155,7 @@ check_available_space
 echo "=========================================================================================="
 echo "          ==============  Checking filesystem integrity... =============="
 # Check the filesystem
-fsck.fat -r -w -a $mount_point
+fsck.fat -r -w -a $mount_point | awk 'NR > 3'
 
 echo "=========================================================================================="
 echo "          ==============  Creating backup of old files... =============="
@@ -240,8 +243,9 @@ extract_keys "$KEYS" "$SOURCE_FILE" "$TARGET_FILE"
 # DC BIOS files new location
 restore_files "Restore DC BIOS files"           "$BCK_DIR/BIOS/dc/" "/mnt/SDCARD/BIOS/dc/flycast/" "*.bin"
 
-# Restore PICO-8 binaries
+# Restore PICO-8 binaries & Splore BBS games
 restore_files "Restore PICO-8 binaries"         "$BCK_DIR/Emus/PICO/PICO8_Wrapper/bin/" "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/bin/" "*"
+restore_files "Restore PICO-8 Splore games"     "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts" "/mnt/SDCARD/Roms/PICO/splore" "*"
 
 # PortMaster themes and runtimes
 restore_files "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/" "*"
@@ -263,14 +267,19 @@ restore_files "Restore Ebook Reader settings"    "$BCK_DIR/Apps/EbookReader/Book
 # Music Player
 restore_files "Restore Music Player current playlist"  "$BCK_DIR/Apps/MusicPlayer/.local/" "/mnt/SDCARD/Apps/MusicPlayer/.local/" "*"
 
-# Additional libs
-restore_files "Restore additional libs"          "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" "*" No_Overwrite
+# Additional user libs
+restore_files "Restore additional libs" "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" "*" "--ignore-existing --dirs"
+
+# Additional user bin files
+restore_files "Restore additional bin files" "$BCK_DIR/System/bin/" "/mnt/SDCARD/System/bin/" "*" "--ignore-existing"
 
 # Restore CrossMix settings
-jq -s '.[1] * .[0]' $BCK_DIR/System/etc/crossmix.json /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /mnt/SDCARD/System/etc/crossmix.json
+jq -s '.[1] * .[0]' $BCK_DIR/System/etc/crossmix.json /mnt/SDCARD/System/etc/crossmix.json >/tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
+sync
 
 # Restore Scraper settings
-jq -s '.[1] * .[0]' $BCK_DIR/System/etc/scraper.json /mnt/SDCARD/System/etc/scraper.json > /tmp/crossmix.json && mv /mnt/SDCARD/System/etc/crossmix.json
+jq -s '.[1] * .[0]' $BCK_DIR/System/etc/scraper.json /mnt/SDCARD/System/etc/scraper.json >/tmp/scraper.json && mv /tmp/scraper.json /mnt/SDCARD/System/etc/scraper.json
+sync
 
 # restore user additional themes, icons, Backgrounds
 restore_files "Restore Themes"                   "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
