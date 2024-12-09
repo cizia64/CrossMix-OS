@@ -24,6 +24,7 @@ fi
 # To support MENU + START exit shortcut
 /mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/cfg/thd.conf /dev/input/event3 &
 
+mkdir -p /mnt/SDCARD/Roms/PICO/splore
 mount --bind /mnt/SDCARD/Roms/PICO/splore /mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts
 pico8_64 -splore -preblit_scale 3
 
