@@ -9,10 +9,9 @@ romName=$(basename "$@")
 romNameNoExtension=${romName%.*}
 
 if [ "$romNameNoExtension" = "° Run Splore" ]; then
-	sh "/mnt/SDCARD/Emus/PICO/Pico8 Wrapper - Splore.sh"
+	sh "/mnt/SDCARD/Emus/PICO/Pico8 Wrapper.sh" "$@"
 	exit
 fi
-
 
 cd $RA_DIR/
 

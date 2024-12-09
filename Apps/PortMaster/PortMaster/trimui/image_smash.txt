@@ -10,5 +10,5 @@ if [ -f "/mnt/SDCARD/System/bin/gm" ]; then
 fi
 
 if [ -f /mnt/SDCARD/Roms/PORTS/PORTS_cache7.db ]; then
-    rm -f /mnt/SDCARD/Roms/PORTS/PORTS_cache7.db
+    /mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "PORTS"
 fi

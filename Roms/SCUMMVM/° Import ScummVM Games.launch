@@ -109,7 +109,7 @@ main() {
     sync
 
     # Reset rom list and cache
-    /mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "$romdir"
+    /mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "SCUMMVM"
 }
 
 save_shortcut() {

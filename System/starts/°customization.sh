@@ -96,7 +96,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# modifying FN cpu script (don't force slow cpu, only force high speed when FN is set to ON) (and we set it as default)
 	cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/apps/fn_editor/com.trimui.cpuperformance.sh
 
-	if [ "$CrossMix_Update" ]; then
+	if [ "$CrossMix_Update" = "1" ]; then
 		if [ -f /usr/trimui/scene/com.trimui.cpuperformance.sh ]; then
 			cp /mnt/SDCARD/System/usr/trimui/res/apps/fn_editor/com.trimui.cpuperformance.sh /usr/trimui/scene/com.trimui.cpuperformance.sh
 		fi
@@ -108,7 +108,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
 
 	# Apply default CrossMix theme, sound volume, and grid view
-	if [ ! "$CrossMix_Update" ]; then
+	if [ "$CrossMix_Update" = "0" ]; then
 		if [ ! -f /mnt/UDISK/system.json ]; then
 			cp /mnt/SDCARD/System/usr/trimui/scripts/MainUI_default_system.json /mnt/UDISK/system.json
 		else
@@ -138,7 +138,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	"/mnt/SDCARD/Apps/SystemTools/Menu/THEME/Sort Themes Alphabetically.sh" -s
 
 	# Game tab by default
-	if [ ! "$CrossMix_Update" ]; then
+	if [ "$CrossMix_Update" = "0" ]; then
 		"/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab Game.sh" -s
 	fi
 
@@ -146,7 +146,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 	/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
 
 	################ Flash boot logo ################
-	if [ ! "$CrossMix_Update" ]; then
+	if [ "$CrossMix_Update" = "0" ]; then
 		CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
 		Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
 		Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")

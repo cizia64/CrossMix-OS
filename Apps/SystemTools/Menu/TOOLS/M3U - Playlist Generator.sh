@@ -166,7 +166,7 @@ for dir in $DIR_LIST; do
   fi
 done
 
-rm "/mnt/SDCARD/Roms/PS/PS_cache7.db"
+/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "PS"
 sync
 
 if [ "$#" -eq 0 ]; then # when launched by GLO menu, without args.

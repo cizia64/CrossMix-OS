@@ -153,21 +153,19 @@ if [ -n "$UPDATE_FILE" ]; then
 				-i"!System/lib/*" \
 				-i"!System/resources/*" \
 				-i"!System/usr/trimui/scripts/*" \
-				-i"!Apps/Terminal/*" \
 				-i"!trimui/res/crossmix-os/*"
 			sync
 		fi
 
 		button=$(infoscreen.sh -m "CrossMix-OS update v$update_version found. Press A to install, B to cancel." -k "A B")
 		if [ "$button" = "A" ]; then
-
-			cp /mnt/SDCARD/System/usr/trimui/scripts/crossmix_update.sh /tmp
+			/mnt/SDCARD/System/bin/7zz e "$UPDATE_FILE" "System/usr/trimui/scripts/crossmix_update.sh" -o/tmp -y
+			chmod a+x "/tmp/crossmix_update.sh"
 			cp /mnt/SDCARD/System/bin/text_viewer /tmp
-
-			infoscreen.sh -m "Updating CrossMix to v$update_version." -t 1
+			infoscreen.sh -m "Updating CrossMix to v$update_version" -t 1
 			pkill -9 preload.sh
 			pkill -9 runtrimui.sh
-			/mnt/SDCARD/System/bin/text_viewer -s "/tmp/crossmix_update.sh" -f 25 -t "                            CrossMix-OS Update v$update_version                                      "
+			/tmp/text_viewer -s "/tmp/crossmix_update.sh" -f 25 -t "                            CrossMix-OS Update v$update_version                                      "
 		fi
 	else
 		echo "The CrossMix update version ($update_version) is not greater than the current version ($initial_version)."

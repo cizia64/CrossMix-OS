@@ -13,7 +13,7 @@
   "hidebios": 1,
   "launchlist": [
     {
-      "name": "-----------  libretro  -----------",
+      "name": "--------------    libretro    --------------",
       "launch": ""
     },
     {
@@ -21,7 +21,7 @@
       "launch": "yabasanshiro.sh"
     },
     {
-      "name": "-----------  standalone  -----------",
+      "name": "-------------  standalone  -------------",
       "launch": ""
     },
     {

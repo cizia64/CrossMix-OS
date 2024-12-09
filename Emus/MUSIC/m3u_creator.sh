@@ -46,6 +46,6 @@ sync
 /mnt/SDCARD/Emus/MUSIC/cover_extract.sh "$1"
 sync
 mv "$PLAYLIST_FILE" "$TARGET_PLAYLIST_FILE"
-rm /mnt/SDCARD/Roms/MUSIC/MUSIC_cache7.db
+/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "MUSIC"
 sync
 echo "The file $(basename "$mp3_directory").m3u has been created in $PARENT_DIR."
