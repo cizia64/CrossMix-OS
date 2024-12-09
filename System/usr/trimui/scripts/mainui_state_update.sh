@@ -21,7 +21,7 @@ mainui_state_update() {
     fi
 
     # Update the SQLite database
-    if grep -q "_SystemTools" /tmp/state.json; then
+    if pgrep -f "/SystemTools/Menu/"; then
         database_file="/mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db"
     else
         database_file="/mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db"
