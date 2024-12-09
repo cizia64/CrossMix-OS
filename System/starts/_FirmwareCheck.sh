@@ -153,7 +153,6 @@ if [ -n "$UPDATE_FILE" ]; then
 				-i"!System/lib/*" \
 				-i"!System/resources/*" \
 				-i"!System/usr/trimui/scripts/*" \
-				# -i"!Apps/Terminal/*" \
 				-i"!trimui/res/crossmix-os/*"
 			sync
 		fi
