@@ -1,16 +1,58 @@
 #!/bin/sh
-romdir="$1"
+export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:$PM_DIR:${PATH:+:$PATH}"
+export LD_LIBRARY_PATH="/usr/trimui/lib:/mnt/SDCARD/System/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
-current_state="$(echo "$(cat /tmp/state.json)
-" | tac)"
-echo "$current_state" \
-    | sed "1,/\"currpos\"/s/:\s*[0-9]*,/:\t0,/" \
-    | sed "1,/\"pagestart\"/s/:\s*[0-9]*,/:\t0,/" \
-    | sed "1,/\"pageend\"/s/:\s*[0-9]*,/:\t5,/" \
-    | tac > /tmp/state.json
+# Check if the RomDir parameter is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <RomDir or FullPath>"
+    exit 1
+fi
 
-current_idx="$(cat /mnt/romwinidx.json | awk -v search="$romdir" '$0 ~ search{n=4}; n {n--; next}; 1')"
-echo "$current_idx" > /mnt/romwinidx.json
+InputPath="$1"
+JsonFile="/mnt/romwinidx.json"
 
+# Determine if InputPath is a directory name or full path
+if [ -d "$InputPath" ]; then
+    RomDir="$InputPath"
+    RomDirBase="$(basename "$RomDir")"
+else
+    RomDir="/mnt/SDCARD/Roms/$InputPath"
+    RomDirBase=$InputPath
+fi
 
-rm -f "$romdir/$(basename "$romdir")_cache7.db" 2> /dev/null
+# Check if the JSON file exists
+if [ ! -f "$JsonFile" ]; then
+    echo "Error: The file $JsonFile does not exist."
+    exit 1
+fi
+
+# Modify the JSON file using jq
+tmpfile=$(mktemp)
+jq --arg RomDirBase "$RomDirBase" '
+    .list |= map(
+        if (.rompath | contains($RomDirBase)) then
+            .end = (.start + 5)
+        else
+            .
+        end
+    )
+' "$JsonFile" >"$tmpfile"
+
+# Check if jq succeeded
+if [ $? -eq 0 ]; then
+    mv "$tmpfile" "$JsonFile"
+    echo "Successfully updated rompaths containing \"$RomDir\" or \"$RomDirBase\"."
+else
+    echo "Error: Failed to update the JSON file."
+    rm -f "$tmpfile"
+    exit 1
+fi
+
+# Remove cache file if it exists
+CacheFile="$RomDir/${RomDirBase}_cache7.db"
+if [ -f "$CacheFile" ]; then
+    rm -f "$CacheFile"
+    echo "Removed cache file: $CacheFile"
+else
+    echo "No cache file found for $RomDir."
+fi
