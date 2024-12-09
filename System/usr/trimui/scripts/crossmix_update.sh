@@ -275,7 +275,7 @@ restore_files "Restore Ebook Reader settings"    "$BCK_DIR/Apps/EbookReader/Book
 restore_files "Restore Music Player current playlist"  "$BCK_DIR/Apps/MusicPlayer/.local/" "/mnt/SDCARD/Apps/MusicPlayer/.local/" "*"
 
 # Additional user libs
-restore_files "Restore additional libs" "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" "*" "--ignore-existing --dirs"
+/mnt/SDCARD/System/bin/rsync  -f"- */" -f"+ *"  -av  "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" --ignore-existing
 
 # Additional user bin files
 restore_files "Restore additional bin files" "$BCK_DIR/System/bin/" "/mnt/SDCARD/System/bin/" "*" "--ignore-existing"
