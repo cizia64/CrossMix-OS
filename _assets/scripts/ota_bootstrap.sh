@@ -33,6 +33,7 @@ if [ "$missing_files" -eq 1 ]; then
     download_file "ota_update.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/usr/trimui/scripts/ota_update.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
     download_file "launch.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Apps/OTA-update/launch.sh" -f "/mnt/SDCARD/Apps/OTA-update/launch.sh"
     download_file "keys.gptk" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Apps/OTA-update/keys.gptk" -f "/mnt/SDCARD/Apps/OTA-update/keys.gptk"
+    download_file "Terminal launch.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Apps/Terminal/launch.sh" -f "/mnt/SDCARD/Apps/Terminal/launch.sh"
     download_file "shellect.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/usr/trimui/scripts/shellect.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
     download_file "update_common.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/usr/trimui/scripts/update_common.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
     sync
