@@ -1,42 +1,45 @@
 #!/bin/sh
-
-export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
-# Repository name :
-GITHUB_REPOSITORY=cizia64/CrossMix-OS
-
-# Colors
-RED='\033[1;31m'
-GREEN='\033[1;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[1;34m'
-NC='\033[0m' # No Color
-
-clear
-
-check_connection() {
-	echo -n "Checking internet connection... "
-	if /mnt/SDCARD/System/bin/wget -q --spider https://github.com >/dev/null; then
-		echo -e "${GREEN}OK${NC}"
-	else
-		echo -e "${RED}FAIL${NC}\nError: https://github.com not reachable.\nCheck your wifi connection."
-		echo -ne "${YELLOW}"
-		sleep 5
-		killall -2 SimpleTerminal
-	fi
-}
+source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 
 run_bootstrap() {
 	curl -k -s https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/_assets/scripts/ota_bootstrap.sh | sh
 }
-get_release_info() {
-	Current_Version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
-	echo -ne "\n\n" \
-		"${BLUE}======= Installed Version ========${NC}\n" \
-		" Version: $Current_Version \n" \
-		"${BLUE}==================================${NC}\n"
+
+Upgrade_UpdateScripts() {
+	download_file "crossmix_update.sh" "https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/System/usr/trimui/scripts/crossmix_update.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
+	download_file "update_ota_release.sh" "https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/System/usr/trimui/scripts/update_ota_release.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
+	download_file "update_common.sh" "https://raw.githubusercontent.com/cizia64/CrossMix-OS/refs/heads/main/System/usr/trimui/scripts/update_common.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts/"
 }
 
-get_release_info
-check_connection
-sleep 2
-run_bootstrap
+main() {
+	check_connection
+	clear
+	Upgrade_UpdateScripts
+	sleep 3
+	run_bootstrap
+	clear
+
+	echo -e "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n" >>"$updatedir/ota_release.log"
+	echo -e "${timestamp}\n" >>"$updatedir/ota_release.log"
+	/mnt/SDCARD/System/usr/trimui/scripts/update_ota_release.sh | tee -a "$updatedir/ota_release.log"
+
+	# if there is no release to apply, we check if there is hotfix for this version
+	if grep -q -E "^(no release|user cancel)$" "/tmp/ota_release_result"; then # "no release", "user cancel", "download failed", "success"
+		url="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/_assets/hotfixes/CrossMix-OS_v$version.sh"
+
+		if /mnt/SDCARD/System/bin/wget -q --spider "$url"; then
+
+			echo -e "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n" >>"$updatedir/ota_hotfix.log"
+			echo -e "${timestamp}\n" >>"$updatedir/ota_hotfix.log"
+			curl -k -s "$url" | sh | tee -a "$updatedir/ota_hotfix.log"
+
+		else
+			echo -e "No hotfix available for CrossMix v$version.\n"
+		fi
+	fi
+	sleep 2
+	killall -2 SimpleTerminal
+
+}
+
+main

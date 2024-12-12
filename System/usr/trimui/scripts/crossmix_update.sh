@@ -1,14 +1,11 @@
 #!/bin/sh
-
-# we run this script from memory
-
-
-export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
-export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 1608000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
+
+main() {
 # Find the update file
 UPDATE_FILE=$(find /mnt/SDCARD -maxdepth 1 -name "CrossMix-OS_v*.zip" -print -quit)
 
@@ -26,9 +23,8 @@ else
 fi
 
 
-initial_version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
-if [ -z "$initial_version" ]; then
-  initial_version="x"
+if [ -z "$Local_CrossMixVersion" ]; then
+  Local_CrossMixVersion="x"
 fi
 update_version=$(echo "$UPDATE_FILE" | awk -F'_v|\.zip' '{print $2}')
 
@@ -37,8 +33,8 @@ rm -rf "/mnt/SDCARD/System Volume Information"
 echo 1 >/tmp/stay_awake
 
 # Create backup directory
-BCK_DIR="/mnt/SDCARD/_Updates/Backup_CrossMix_v$initial_version"
-timestamp=$(date +'%Y%m%d-%Hh%M')
+BCK_DIR="/mnt/SDCARD/_Updates/Backup_CrossMix_v$Local_CrossMixVersion"
+
 
 if [ -d "$BCK_DIR" ]; then
   BCK_DIR="${BCK_DIR}_$timestamp"
@@ -46,126 +42,23 @@ fi
 mkdir -p "$BCK_DIR"
 sync
 
-restore_files() {
-	# Copy with overwrite
-    NAME="$1"
-    SRC_DIR="$2"
-    DEST_DIR="$3"
-    FILE_PATTERN="$4"
-	OPTION="$5"
-	
-    if [ "$OPTION" = "No_Overwrite" ]; then
-        OPTION="--ignore-existing"
-    fi
-    if [ -z "$FILE_PATTERN" ]; then
-        FILE_PATTERN="*"
-    fi
-        echo "------------------------------------------------------------------------------------"
-    if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
-		echo -e "$NAME: restoring files...\n"
-        mkdir -p "$DEST_DIR"
-        /mnt/SDCARD/System/bin/rsync --stats -av $OPTION --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
-        sync
-    else
-        echo "$NAME: No files to restore."
-    fi
-}
-
-
 LOG_FILE="/mnt/SDCARD/_Updates/CrossMix_v${update_version}_${timestamp}.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
-echo "=========================================================================================="
-echo "       ==============  Updating CrossMix-OS v$initial_version to v$update_version  =============="
+# echo "==============  Updating CrossMix-OS v$Local_CrossMixVersion to v$update_version  =============="
+echo "${BLUE}======  Updating CrossMix-OS v$Local_CrossMixVersion to v$update_version  ======{NC}"
 
-check_available_space() {
-  echo "=========================================================================================="
-  echo "       ==============  Checking available space on the SD Card  =============="
-  # Available space in MB
-  mount_point=$(mount | grep -m 1 '/mnt/SDCARD' | awk '{print $1}')
-  available_space=$(df -m $mount_point | awk 'NR==2{print $4}')
-  echo "Available space: $available_space MB"
-  # Check available space
-  if [ "$available_space" -lt "4000" ]; then
-    echo -e "${RED}Available space is insufficient on SD card${NC}\n"
-    echo "CrossMix-OS update requires 4 GB of free space. Shutdown now."
-    sleep 10
-    if [ -f /mnt/SDCARD/System/bin/shutdown ]; then
-      /mnt/SDCARD/System/bin/shutdown
-    else
-      poweroff &
+check_available_space "5000"
+    if [ $? -eq 1 ]; then
+        echo -ne "${YELLOW}"
+        read -n 1 -s -r -p "Press A to exit"
+        exit 3
     fi
-    sleep 30
-    # infoscreen.sh -m "CrossMix-OS update requires 4 GB of free space." -t 5
-    exit 1
-  fi
-}
 
-# Function to move files and directories
-move_items() {
-  # List of directories to exclude
-  EXCLUDE_DIRS="
-  /mnt/SDCARD/Data
-  /mnt/SDCARD/BIOS
-  /mnt/SDCARD/Best
-  /mnt/SDCARD/Imgs
-  /mnt/SDCARD/Roms
-  /mnt/SDCARD/_Updates
-  $UPDATE_FILE
-  "
+check_filesystem
 
-  for item in /mnt/SDCARD/*; do
-    excluded=0
-    for excl in $EXCLUDE_DIRS; do
-      if echo "$item" | grep -q "$excl"; then
-        excluded=1
-        break
-      fi
-    done
+echo "${BLUE}==============          Creating backup of old files...           =============={NC}"
 
-    if [ $excluded -eq 0 ]; then
-      mv "$item" "$BCK_DIR/"
-      sync
-    fi
-  done
-
-  readme_text="This folder contains a backup of previous CrossMix v$initial_version files.\n
-Normally, all saves and save states have been migrated during the automated update process.\n
-After an update, it is recommended to keep this folder for some time. Once you have spent some time on CrossMix and verified that all your saves and settings are functional, you can delete this \"_update\" directory to free up storage space on your SD card."
-
-  echo -e "$readme_text" >"/mnt/SDCARD/_Updates/ReadMe.txt"
-  sync
-}
-
-# Function to copy specified keys from a RetroArch configuration file to another
-extract_keys() {
-    local keys="$1"            # Space-separated list of keys
-    local source_file="$2"     # Source configuration file
-    local target_file="$3"     # Target file to save the extracted keys
-
-    local temp_file=$(mktemp)
-
-    for key in $keys; do
-        grep "^$key" "$source_file" >> "$temp_file"
-    done
-
-    /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$temp_file" "$target_file"
-
-    echo "The following keys have been exported to $target_file:"
-    echo "$keys"
-}
-
-
-
-check_available_space
-
-echo "=========================================================================================="
-echo "          ==============  Checking filesystem integrity... =============="
-# Check the filesystem
-fsck.fat -r -w -a $mount_point 2>&1 | awk 'NR > 3'
-
-echo "=========================================================================================="
-echo "          ==============  Creating backup of old files... =============="
 echo "Destination directory: $BCK_DIR"
 # Execute the move_items function
 move_items
@@ -174,8 +67,7 @@ move_items
 mv "$BCK_DIR/RetroArch/.retroarch/system/"* "/mnt/SDCARD/BIOS" 2>/dev/null
 sync
 
-echo "=========================================================================================="
-echo "    ==============  Decompressing new CrossMix archive, please wait... =============="
+echo "${BLUE}=============  Decompressing new CrossMix archive, please wait...  ============={NC}"
 # Install CrossMix new version
 echo "CrossMix archive decompression lasts at least 4 minutes."
 echo -e "\n\n     !!!!!! Please be patient  !!!!!! \n\n"
@@ -191,8 +83,7 @@ else
   # infoscreen.sh -m "CrossMix v$update_version extraction encountered errors." -t 5
 fi
 
-echo "=========================================================================================="
-echo "            ==============  Restore saves and savestates... =============="
+echo "${BLUE}=====================  Restoring saves and savestates...  ====================={NC}"
 
 # Restore saves and savestates from Retroarch
 restore_files "Retroarch saves"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
@@ -293,27 +184,8 @@ restore_files "Restore Themes"                   "$BCK_DIR/Backgrounds/" "/mnt/S
 restore_files "Restore Backgrounds"              "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
 restore_files "Restore Icons"                    "$BCK_DIR/Icons/"       "/mnt/SDCARD/Icons/"       "*" No_Overwrite
 
+echo "${BLUE}======================  Fix potential bad Roms folders... ======================{NC}"
 
-
-
-
-
-repair_rom_path() {
-  local src_path=$1
-  local dest_path=$2
-
-  if [ -d "$src_path" ]; then
-    if [ "$(ls -A "$src_path")" ]; then
-      mkdir -p "$dest_path"
-      mv "$src_path"/* "$dest_path/"
-      rm "$dest_path/"*.db
-    fi
-    rmdir "$src_path"
-  fi
-}
-
-echo "=========================================================================================="
-echo "          ==============  Fix potential bad Roms folders... =============="
 repair_rom_path "/mnt/SDCARD/Roms/PPSSPP" "/mnt/SDCARD/Roms/PSP"
 repair_rom_path "/mnt/SDCARD/Roms/3DO" "/mnt/SDCARD/Roms/PANASONIC"
 repair_rom_path "/mnt/SDCARD/Roms/OPERA" "/mnt/SDCARD/Roms/PANASONIC"
@@ -350,8 +222,8 @@ rm "/mnt/SDCARD/System/bin/python3"
 rm /mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db
 rm /mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db
 
-echo "=========================================================================================="
-echo "       ==============  Installation completed, rebooting in 10 seconds... =============="
+echo "${BLUE}============== Installation completed, rebooting in 10 seconds... =============={NC}"
+
 
 echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 echo 1008000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
@@ -366,3 +238,104 @@ else
   reboot &
 fi
 sleep 30
+
+}
+
+
+restore_files() {
+	# Copy with overwrite
+    NAME="$1"
+    SRC_DIR="$2"
+    DEST_DIR="$3"
+    FILE_PATTERN="$4"
+	OPTION="$5"
+	
+    if [ "$OPTION" = "No_Overwrite" ]; then
+        OPTION="--ignore-existing"
+    fi
+    if [ -z "$FILE_PATTERN" ]; then
+        FILE_PATTERN="*"
+    fi
+        echo "------------------------------------------------------------------------------"
+    if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
+		echo -e "$NAME: restoring files...\n"
+        mkdir -p "$DEST_DIR"
+        /mnt/SDCARD/System/bin/rsync --stats -av $OPTION --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
+        sync
+    else
+        echo "$NAME: No files to restore."
+    fi
+}
+
+
+# Function to move files and directories
+move_items() {
+  # List of directories to exclude
+  EXCLUDE_DIRS="
+  /mnt/SDCARD/Data
+  /mnt/SDCARD/BIOS
+  /mnt/SDCARD/Best
+  /mnt/SDCARD/Imgs
+  /mnt/SDCARD/Roms
+  /mnt/SDCARD/_Updates
+  $UPDATE_FILE
+  "
+
+  for item in /mnt/SDCARD/*; do
+    excluded=0
+    for excl in $EXCLUDE_DIRS; do
+      if echo "$item" | grep -q "$excl"; then
+        excluded=1
+        break
+      fi
+    done
+
+    if [ $excluded -eq 0 ]; then
+      mv "$item" "$BCK_DIR/"
+      sync
+    fi
+  done
+
+  readme_text="This folder contains a backup of previous CrossMix v$Local_CrossMixVersion files.\n
+Normally, all saves and save states have been migrated during the automated update process.\n
+After an update, it is recommended to keep this folder for some time. Once you have spent some time on CrossMix and verified that all your saves and settings are functional, you can delete this \"_update\" directory to free up storage space on your SD card."
+
+  echo -e "$readme_text" >"/mnt/SDCARD/_Updates/ReadMe.txt"
+  sync
+}
+
+# Function to copy specified keys from a RetroArch configuration file to another
+extract_keys() {
+    local keys="$1"            # Space-separated list of keys
+    local source_file="$2"     # Source configuration file
+    local target_file="$3"     # Target file to save the extracted keys
+
+    local temp_file=$(mktemp)
+
+    for key in $keys; do
+        grep "^$key" "$source_file" >> "$temp_file"
+    done
+
+    /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$temp_file" "$target_file"
+
+    echo "The following keys have been exported to $target_file:"
+    echo "$keys"
+}
+
+
+repair_rom_path() {
+  local src_path=$1
+  local dest_path=$2
+
+  if [ -d "$src_path" ]; then
+    if [ "$(ls -A "$src_path")" ]; then
+      mkdir -p "$dest_path"
+      mv "$src_path"/* "$dest_path/"
+      rm "$dest_path/"*.db
+    fi
+    rmdir "$src_path"
+  fi
+}
+
+
+main
