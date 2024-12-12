@@ -16,7 +16,7 @@ main() {
 	clear
 	Upgrade_UpdateScripts
 	sleep 3
-	# run_bootstrap
+	run_bootstrap
 	clear
 
 	echo -e "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n" >>"$updatedir/ota_release.log"
