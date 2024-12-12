@@ -25,7 +25,7 @@ main() {
 
 	# if there is no release to apply, we check if there is hotfix for this version
 	if grep -q -E "^(no release|user cancel)$" "/tmp/ota_release_result"; then # "no release", "user cancel", "download failed", "success"
-		url="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/_assets/hotfixes/CrossMix-OS_v$version.sh"
+		url="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/_assets/hotfixes/CrossMix-OS_v$Local_CrossMixVersion.sh"
 
 		if /mnt/SDCARD/System/bin/wget -q --spider "$url"; then
 
@@ -34,7 +34,7 @@ main() {
 			curl -k -s "$url" | sh | tee -a "$updatedir/ota_hotfix.log"
 
 		else
-			echo -e "No hotfix available for CrossMix v$version.\n"
+			echo -e "No hotfix available for CrossMix v$Local_CrossMixVersion.\n"
 		fi
 	fi
 	sleep 2
