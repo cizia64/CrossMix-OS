@@ -42,6 +42,10 @@ add_line_to_recentlist() {
 
 # Main function
 main() {
+  if [ -f "./random_manual.png" ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "./random_manual.png" -k " "
+    mv ./random_manual.png ./random_manual_done.png
+  fi
   presented_games_file="/tmp/presented_games.txt"
   consecutive_misses=0
 
@@ -76,7 +80,7 @@ main() {
         fi
 
         button=$(/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$imgtodisplay" -c "122,122,122" -m "${disp}" -k "A B X MENU")
-   
+
         if [ "$button" = "A" ]; then
           echo "Okay, launching the game: $disp"
 
