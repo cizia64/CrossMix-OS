@@ -22,12 +22,12 @@ mkdir -p /var/cache/samba /var/log/samba /var/lock/subsys /var/run/samba /var/ru
 sync
 sleep 0.3
 
+wsddn --user root --unixd --smb-conf /mnt/SDCARD/System/etc/samba --log-level 0
 smbd -s ${CONFIGFILE} -D
 nmbd -D --configfile="${CONFIGFILE}"
 
 # we modify the DB entries to reflect the current state
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "SMB" "enabled"
-
 
 sleep 1
 IP=$(ip route get 1 2>/dev/null | awk '{print $NF;exit}')

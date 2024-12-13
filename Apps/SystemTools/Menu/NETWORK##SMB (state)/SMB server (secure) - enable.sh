@@ -22,6 +22,7 @@ mkdir -p /var/cache/samba /var/log/samba /var/lock/subsys /var/run/samba /var/ru
 sync
 sleep 0.3
 
+wsddn --user root --unixd --smb-conf /mnt/SDCARD/System/etc/samba --log-level 0
 smbd -s ${CONFIGFILE} -D
 nmbd -D --configfile="${CONFIGFILE}"
 echo -e "trimui\ntrimui\n" | smbpasswd -s -a root -c ${CONFIGFILE}

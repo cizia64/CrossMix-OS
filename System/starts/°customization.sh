@@ -162,3 +162,5 @@ fi
 
 # Apply current led configuration
 /mnt/SDCARD/System/etc/led_config.sh &
+
+hostname "TSP"
