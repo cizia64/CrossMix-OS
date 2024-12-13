@@ -35,6 +35,7 @@ if [ "$smb_enabled" -eq 1 ]; then
 		CONFIGFILE="/mnt/SDCARD/System/etc/samba/smb.conf"
 	fi
 
+	wsddn --user root --unixd --smb-conf /mnt/SDCARD/System/etc/samba --log-level 0
 	smbd -s ${CONFIGFILE} -D
 	nmbd -D --configfile="${CONFIGFILE}"
 
@@ -46,7 +47,6 @@ if [ "$Tailscale_enabled" -eq 1 ]; then
 	export STATE_DIRECTORY=/mnt/SDCARD/System/etc/tailscale
 	/mnt/SDCARD/System/bin/tailscaled --state="/mnt/SDCARD/System/etc/tailscale/tailscaled.state" &
 fi
-
 
 VNC_wait_for_MainUI() {
 	timeout=10

@@ -13,6 +13,7 @@ fi
 
 /mnt/SDCARD/System/bin/jq '. += {"SMB": 0}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
+kill -9 $(pidof wsddn)
 kill -9 $(pidof smbd)
 kill -9 $(pidof nmbd)
 
