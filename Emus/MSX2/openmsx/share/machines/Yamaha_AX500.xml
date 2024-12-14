@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Yamaha</manufacturer>
+    <code>AX500</code>
+    <release_year>1986</release_year>
+    <description>Arabic MSX2 sold by Al Alamiah.</description>
+    <type>MSX2</type>
+  </info>
+
+  <!-- Based on the machine of Hashem Khalifa with serial 1001170.
+
+  Case not opened. Info from service manual and software tests.
+
+  backside: RGB out, video (yellow RCA), audio (white RCA)
+  frontside: power button, keyboard, joystick 1 and 2, reset button, 2 diskdrives (2DD)
+
+  CPU: LH0080A (according to service manual)
+  MSX-ENGINE: S1985 (YM-3814)
+  FDC: MB8877M, with SED9420-CAC (SEIKO) data separator
+
+  Z80 scf: 01C529ED01D429FC (dunno)
+  Z80 cpl: 3AFF12D7 (standard)
+  Z80 out (c),0: 0 (MSX)
+  PSG pin 6/7 quirk: C (YES)
+  PSGmask: AY8910-like.
+
+  SHIFT+GRAPH+0 in KEYMATRIX.BAS only shows 3 zeroes (ghosting protection)
+  keypad is on row 9/10
+  star-like shaped key left of RETURN key is DEAD key
+  CODE key toggles LED on CODE key. (Locking?) But not in International mode.
+
+
+  -->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <S1985 id="S1985">
+      <sramname>ax500_s1985.sram</sramname>
+    </S1985>
+
+    <primary slot="0">
+
+    <secondary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <mem base="0x0000" size="0x8000"/>
+        <rom>
+          <sha1>dd1b577ea3ea69de84a68d311261392881f9eac3</sha1>
+          <filename>ax500_basic-bios2.rom</filename>
+        </rom>
+      </ROM>
+    </secondary>
+
+    <secondary slot="1">
+      <ROM id="Arabic BASIC">
+        <mem base="0x4000" size="0x8000"/>
+        <rom>
+          <sha1>92bac0b2995f54f0eebf167cd447361a6a4923eb</sha1>
+          <filename>ax500_arabic.rom</filename>
+        </rom>
+      </ROM>
+    </secondary>
+
+    <secondary slot="2">
+      <ROM id="Arabic Word Processor">
+        <mem base="0x4000" size="0x8000"/>
+        <rom>
+          <sha1>8674d000a52ec01fd80c8cb7cbaa66d4c3ca5cf7</sha1>
+          <filename>ax500_swp.rom</filename>
+        </rom>
+      </ROM>
+    </secondary>
+
+    <secondary slot="3">
+      <ROM id="Sakhr Files">
+        <mem base="0x0000" size="0xC000"/>
+        <rom>
+          <sha1>8e889999ecec302f05d3bd0a0f127b489fcf3739</sha1>
+          <filename>ax500_sakhr_files.rom</filename>
+        </rom>
+      </ROM>
+    </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="Painter & Graphic BIOS">
+          <mem base="0x0000" size="0x10000"/>
+          <rom>
+            <sha1>80872d997d18e1a633e70b9da35a0d28113073e5</sha1>
+            <filename>ax500_painter.rom</filename>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX2 subROM">
+          <mem base="0x0000" size="0x4000"/>
+          <rom>
+            <sha1>7f86af13e81259a0db8f70d8a7e026fb918ee652</sha1>
+            <filename>ax500_msx2sub.rom</filename>
+          </rom>
+        </ROM>
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>National</connectionstyle>
+          <mem base="0x4000" size="0x8000"/> <!-- Registers appear also on BF80-BFBF -->
+          <rom>
+            <sha1>a953bef071b603d6280bdf7ab6249c2e6f1a4cd8</sha1>
+            <filename>ax500_disk.rom</filename>
+          </rom>
+          <drives>2</drives>
+        </WD2793>
+      </secondary>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <initialContent encoding="gz-base64">eJztwQEBAAAAASD/TzNElQAAbwoA3Bnqa/hq</initialContent> <!-- Pattern: 2kB 0x00, then 2kB 0xFF etc. -->
+          <size>256</size>
+        </MemoryMapper>
+      </secondary>
+
+      <!-- Note that this is not a standard MSX cartridgeslot, but a 60 pins card
+      edge connector, carrying all MSX cartridgeslot signals. It is made to
+      connect the Yamaha SFG-01/05 and other "units" with the same connector. As
+      openMSX doesn't model this, we just make it available as an MSX cartridge
+      slot here. -->
+     <secondary external="true" slot="3"/>
+
+    </primary>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>int</keyboard_type> <!-- Should be Arabic? -->
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks> <!-- not sure, doesn't seem to matter in international BASIC and has no effect in Arabic basic -->
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+      <version>V9938</version>
+      <vram>128</vram>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- due to S1985, but mask is like AY8910... -->
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+      <sramname>ax500.cmos</sramname>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+  </devices>
+
+</msxconfig>

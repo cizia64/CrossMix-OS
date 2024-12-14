@@ -1,0 +1,145 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Victor</manufacturer>
+    <code>HC-95A</code>
+    <release_year>1988</release_year>
+    <description>A top notch MSX2, but note: superimpose and turbo mode are not yet implemented!</description>
+    <type>MSX2</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>hc-95a_kanjifont.rom</filename>
+        <sha1>db03211b7db46899df41db2b1dfbec972109a967</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>50on</keyboardlayout>
+      <type>YM2149</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>hc-95a.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>hc-95a_normal_basic-bios2.rom</filename>
+            <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>hc-95a_normal_msx2sub.rom</filename>
+            <sha1>b8e30d604d319d511cbfbc61e5d8c38fbb9c5a33</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <MSX-RS232 id="MSX RS-232">
+          <rom>
+            <filename>hc-95a.rom</filename> <!-- both RS-232C and system control ROM (trigger menu with ESC while booting) -->
+            <sha1>caeffdd654394726c8c0824b21af7ff51c0b1031</sha1>
+          </rom>
+          <io base="0x80" num="8"/>
+          <mem base="0x4000" size="0x3FF8"/>
+        </MSX-RS232>
+        <!-- NOTE: the FDC registers at 0x7FF8-0x7FFC
+             are visible in both slot 0-1 and slot 3. -->
+        <Mirror id="FDC registers">
+          <mem base="0x7FF8" size="5"/>
+          <ps>3</ps>
+        </Mirror>
+
+        <VictorHC9xSystemControl id="System control">
+          <mem base="0x7FFD" size="1"/>
+        </VictorHC9xSystemControl>
+
+      </secondary>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>256</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="3">
+
+      <WD2793 id="Memory Mapped FDC"> <!-- see http://usbsecretbase.michikusa.jp/hc-95/fdc.html -->
+        <connectionstyle>Victor</connectionstyle>
+        <mem base="0x4000" size="0x3FFD"/>
+        <broken_fdc_read>false</broken_fdc_read>
+        <rom>
+          <filename>hc-95a_normal_disk.rom</filename>
+          <sha1>a7a34671bddb48fa6c74182e2977f9129558ec32</sha1>
+        </rom>
+        <drives>2</drives>
+      </WD2793>
+
+      <!-- NOTE: the system control register at 0x7FFD
+           is visible in both slot 0-1 and slot 3. -->
+      <Mirror id="System control register">
+        <mem base="0x7FFD" size="1"/>
+        <ps>0</ps>
+        <ss>1</ss>
+      </Mirror>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

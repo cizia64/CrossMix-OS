@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Data Cartridge 4KBytes</name>
+    <manufacturer>Sony</manufacturer>
+    <code>HBI-55</code>
+    <release_year>1984</release_year>
+    <description>SRAM data cartridge.</description>
+    <type>SRAM cartridge</type>
+  </info>
+  <devices>
+    <HBI55 id="Sony HBI-55">
+      <io base="0xB0" num="4"/>
+      <sramname>HBI-55.sram</sramname>
+    </HBI55>
+  </devices>
+</msxconfig>
