@@ -1,0 +1,10 @@
+{
+"label":"MTP USB",
+"label.ch.lang":"USB读卡模式",
+"icon":"usb_icon.png",
+"iconsmall":"usb_icon.png",
+"iconlist":"usb_icon.png",
+"launch":"launch.sh",
+"description":"TRIMUI SmartPro USB MTP Mode",
+"description.ch.lang":"TRIMUI SmartPro MTP USB读卡器模式(SD)"
+}
