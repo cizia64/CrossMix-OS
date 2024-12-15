@@ -1,23 +1,20 @@
 #!/bin/sh
 
-if ! read -r device < /etc/trimui_device.txt; then
+if ! read -r current_device < /etc/trimui_device.txt; then
     display=$(fbset | grep ^mode | cut -d "\"" -f 2)
     if [ "$display" = "1280x720-64" ]; then
-        device="tsp"
+        current_device="tsp"
     else
-        device="brick"
+        current_device="brick"
     fi
-    echo -n $device >/etc/trimui_device.txt
+    echo -n $current_device >/etc/trimui_device.txt
 fi
 
-read -r last_device < /mnt/SDCARD/System/etc/current_device.txt &&
-    echo -n $last_device >/mnt/SDCARD/System/etc/last_device.txt
-echo -n $device >/mnt/SDCARD/System/etc/current_device.txt
-if [ "$device" != "$last_device" ]; then
+read -r last_device </mnt/SDCARD/System/etc/last_device.txt
+if [ "$current_device" != "$last_device" ]; then
+    echo -n $current_device >/mnt/SDCARD/System/etc/last_device.txt
     touch /tmp/device_changed
-else
-    rm -f /tmp/device_changed
-fi
+fi 
 
 
 ################ check min Firmware version required ################

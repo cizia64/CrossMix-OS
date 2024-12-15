@@ -4,13 +4,13 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 script_name=$(basename "$0" .sh)
 if [ "$script_name" = "inputd_switcher" ]; then
-    polling_rate=$(/mnt/SDCARD/System/bin/jq -r '["POLLING_RATE"]' "/mnt/SDCARD/System/etc/crossmix.json")
+    polling_rate=$(/mnt/SDCARD/System/bin/jq -r '.["POLLING RATE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 else
     polling_rate=$script_name
 fi
 bin_dir="/mnt/SDCARD/trimui/app"
 
-read -r device < /mnt/SDCARD/System/etc/current_device.txt
+read -r device < /etc/trimui_device.txt
 if [ "$device" = "brick" ]; then
     cp /usr/trimui/bin/trimui_inputd $bin_dir/trimui_inputd
     [ "$script_name" != "inputd_switcher" ] && infoscreen -m "Feature not supported yet on brick"
@@ -51,6 +51,6 @@ jq --arg polling_rate "$polling_rate" '. += {"POLLING RATE": $polling_rate}' "$j
 # update database of "System Tools" database
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "POLLING RATE" "$polling_rate"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying $(basename "$0" .sh) polling rate..." -t 1
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying $polling_rate polling rate..." -t 1
 pkill trimui_inputd
 pkill -KILL MainUI
