@@ -1,3 +1,3 @@
 #!/bin/sh
 
-source "$(dirname "$0")"/.switcher.sh
+source /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh

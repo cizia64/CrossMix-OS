@@ -3,30 +3,28 @@ PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 script_name=$(basename "$0" .sh)
+if [ "$script_name" = "inputd_switcher" ]; then
+    scrip_name=$(/mnt/SDCARD/System/bin/jq -r '["POLLING_RATE"]' "/mnt/SDCARD/System/etc/crossmix.json")
+fi
 bin_dir="/mnt/SDCARD/trimui/app"
 
-display=$(fbset | grep ^mode | cut -d "\"" -f 2)
-if [ "$display" != "1280x720-64" ]; then
-    device="brick"
-    infoscreen -m "Feature not supported yet on brick"
+device="$(cat /mnt/SDCARD/System/usr/trimui/current_device.txt)"
+if [ "$device" = "brick" ]; then
+    rm -rf /mnt/SDCARD/trimui/app/trimui_inputd
+    [ "$script_name" != "inputd_switcher" ] && infoscreen -m "Feature not supported yet on brick"
     exit 1
-else
-    device="tsp"
 fi
 inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
 
 case "$script_name" in
 "1ms")
     Sha_expected=c90b9fa722d745a7e827f38dbd409d3cd1ba56f5
-    break
     ;;
 "8ms")
     Sha_expected=3f1b81d668c3f7de2cc0458502326a732d3cb0b2
-    break
     ;;
 "16ms")
     Sha_expected=356b41b0be9d00f361e45303f41f5f1f337e6efc
-    break
     ;;
 esac
 

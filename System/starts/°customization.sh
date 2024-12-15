@@ -25,23 +25,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 	Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
 
-    display=$(fbset | grep ^mode | cut -d "\"" -f 2)
-    if [ "$display" != "1280x720-64" ]; then
-        device="brick"
-    else
-        device="tsp"
-        Sha_expected=356b41b0be9d00f361e45303f41f5f1f337e6efc
-
-        inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
-        Sha=$(sha1sum "$inputd_src_dir/16ms" | cut -d ' ' -f 1)
-        if [ "$Sha_expected" = "$Sha" ]; then
-            cp -f "$inputd_src_dir/16ms" /mnt/SDCARD/trimui/app/trimui_inputd
-            chmod +x /mnt/SDCARD/trimui/app/trimui_inputd
-        else
-            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Inputd mod failed: $inputd_src_dir/16ms is corrupted."
-        fi
-        cp /mnt/SDCARD/System/resources/preload.sh /usr/trimui/bin/preload.sh
-    fi
+    cp /mnt/SDCARD/System/resources/preload.sh /usr/trimui/bin/preload.sh
 
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/

@@ -1,6 +1,24 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/mnt/SDCARD/Apps/PortMaster/PortMaster:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
+if ! device="$(cat /etc/trimui_device.txt)"; then
+    display=$(fbset | grep ^mode | cut -d "\"" -f 2)
+    if [ "$display" = "1280x720-64" ]; then
+        device="tsp"
+    else
+        device="brick"
+    fi
+    echo $device >/etc/trimui_device.txt
+fi
+
+previous_device="$(cat /mnt/SDCARD/System/usr/trimui/current_device.txt)" &&
+    echo $previous_device >/mnt/SDCARD/System/usr/trimui/previous_device.txt
+echo $device >/mnt/SDCARD/System/usr/trimui/current_device.txt
+
+if [ "$device" != "$previous_device" ] || [ ! -f /mnt/SDCARD/trimui/app/trimui_inputd ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
+fi
+
 # Swap A B
 SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ "$SWAP_AB_enabled" -eq 1 ]; then

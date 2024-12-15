@@ -16,5 +16,6 @@
   "VNC": 0,
   "OVERLAYS": "Overlays - max ratio",
   "RESUME AT BOOT": 1,
-  "AUTO LOAD STATE": 1
+  "AUTO LOAD STATE": 1,
+  "POLLING RATE": "16ms"
 }
