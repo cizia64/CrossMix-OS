@@ -146,7 +146,7 @@ restore_files "Restore PICO-8 binaries"         "$BCK_DIR/Emus/PICO/PICO8_Wrappe
 restore_files "Restore PICO-8 Splore games"     "/mnt/SDCARD/Emus/PICO/PICO8_Wrapper/.lexaloffle/pico-8/bbs/carts" "/mnt/SDCARD/Roms/PICO/splore" "*"
 
 # PortMaster themes and runtimes
-restore_files "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/" "*"
+move_without_replace "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/"
 restore_files "Restore PortMaster runtimes"      "$BCK_DIR/Apps/PortMaster/PortMaster/libs/"  "/mnt/SDCARD/Apps/PortMaster/PortMaster/libs/" "*"
 
 # Restore previous recordings
@@ -159,30 +159,39 @@ restore_files "Restore Tailscale configuration" "$BCK_DIR/System/etc/tailscale/"
 restore_files "Restore Syncthings configuration" "$BCK_DIR/System/etc/syncthing/" "/mnt/SDCARD/System/etc/syncthing" "*"
 
 # Ebook Reader
-restore_files "Restore Ebooks"                   "$BCK_DIR/Apps/EbookReader/.mreader_store/" "/mnt/SDCARD/Apps/EbookReader/.mreader_store/" "*"
+move_without_replace "Restore Ebooks"            "$BCK_DIR/Apps/EbookReader/.mreader_store/" "/mnt/SDCARD/Apps/EbookReader/.mreader_store/"
 restore_files "Restore Ebook Reader settings"    "$BCK_DIR/Apps/EbookReader/Books/"          "/mnt/SDCARD/Apps/EbookReader/Books/"          "*"
 
 # Music Player
 restore_files "Restore Music Player current playlist"  "$BCK_DIR/Apps/MusicPlayer/.local/" "/mnt/SDCARD/Apps/MusicPlayer/.local/" "*"
 
-# Additional user libs
+# Additional user libs (without sub directories)
 /mnt/SDCARD/System/bin/rsync  -f"- */" -f"+ *"  -av  "$BCK_DIR/System/lib/" "/mnt/SDCARD/System/lib/" --ignore-existing
 
-# Additional user bin files
+# Additional user bin files (with sub directories)
 restore_files "Restore additional bin files" "$BCK_DIR/System/bin/" "/mnt/SDCARD/System/bin/" "*" "--ignore-existing"
 
 # Restore CrossMix settings
 jq -s '.[1] * .[0]' $BCK_DIR/System/etc/crossmix.json /mnt/SDCARD/System/etc/crossmix.json >/tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
 sync
 
+# Restore current Retroarch overlay setting
+echo "${BLUE}=====================  Restoring Overlays/Ratio settings...  ====================={NC}"
+
+overlay_setting=$(/mnt/SDCARD/System/bin/jq -r '.["OVERLAYS"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ ! "$overlay_setting" = "Overlays - max ratio" ]; then
+  "/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS##OVERLAYS (value)/$overlay_setting.sh" -s
+fi
+
+
 # Restore Scraper settings
 jq -s '.[1] * .[0]' $BCK_DIR/System/etc/scraper.json /mnt/SDCARD/System/etc/scraper.json >/tmp/scraper.json && mv /tmp/scraper.json /mnt/SDCARD/System/etc/scraper.json
 sync
 
 # restore user additional themes, icons, Backgrounds
-restore_files "Restore Themes"                   "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
-restore_files "Restore Backgrounds"              "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/" "*" No_Overwrite
-restore_files "Restore Icons"                    "$BCK_DIR/Icons/"       "/mnt/SDCARD/Icons/"       "*" No_Overwrite
+move_without_replace "Restore Themes"                   "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/"
+move_without_replace "Restore Backgrounds"              "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/"
+move_without_replace "Restore Icons"                    "$BCK_DIR/Icons/"       "/mnt/SDCARD/Icons/"
 
 echo "${BLUE}======================  Fix potential bad Roms folders... ======================{NC}"
 
@@ -243,30 +252,51 @@ sleep 30
 
 
 restore_files() {
-	# Copy with overwrite
-    NAME="$1"
-    SRC_DIR="$2"
-    DEST_DIR="$3"
-    FILE_PATTERN="$4"
-	OPTION="$5"
-	
-    if [ "$OPTION" = "No_Overwrite" ]; then
-        OPTION="--ignore-existing"
-    fi
-    if [ -z "$FILE_PATTERN" ]; then
-        FILE_PATTERN="*"
-    fi
-        echo "------------------------------------------------------------------------------"
-    if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
-		echo -e "$NAME: restoring files...\n"
-        mkdir -p "$DEST_DIR"
-        /mnt/SDCARD/System/bin/rsync --stats -av $OPTION --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DEST_DIR/"
-        sync
-    else
-        echo "$NAME: No files to restore."
-    fi
+  # Copy with overwrite
+  local NAME="$1"
+  local SRC_DIR="$2"
+  local DST_DIR="$3"
+  local FILE_PATTERN="$4"
+  local OPTION="$5"
+
+  if [ "$OPTION" = "No_Overwrite" ]; then
+    OPTION="--ignore-existing"
+  fi
+  if [ -z "$FILE_PATTERN" ]; then
+    FILE_PATTERN="*"
+  fi
+  echo "------------------------------------------------------------------------------"
+  if [ -n "$(find "$SRC_DIR" -mindepth 1 -name "$FILE_PATTERN" -print -quit 2>/dev/null)" ]; then
+    echo -e "$NAME: restoring files...\n"
+    mkdir -p "$DST_DIR"
+    /mnt/SDCARD/System/bin/rsync --stats -av $OPTION --include="*/" --include="$FILE_PATTERN" --exclude="*" "$SRC_DIR/" "$DST_DIR/"
+    sync
+  else
+    echo "$NAME: No files to restore."
+  fi
 }
 
+move_without_replace() {
+  local NAME="$1"
+  local SRC_DIR="$2"
+  local DST_DIR="$3"
+
+  [ -d "$SRC_DIR" ] || {
+    echo "Source directory $SRC_DIR missing."
+    return 1
+  }
+  mkdir -p "$DST_DIR"
+
+  echo "------------------------------------------------------------------------------"
+
+  echo -e "$NAME: moving files...\n"
+
+  for item in "$SRC_DIR"/*; do
+    [ -e "$item" ] || continue
+    item_name=$(basename "$item")
+    [ -e "$DST_DIR/$item_name" ] || mv "$item" "$DST_DIR/"
+  done
+}
 
 # Function to move files and directories
 move_items() {
@@ -306,22 +336,21 @@ After an update, it is recommended to keep this folder for some time. Once you h
 
 # Function to copy specified keys from a RetroArch configuration file to another
 extract_keys() {
-    local keys="$1"            # Space-separated list of keys
-    local source_file="$2"     # Source configuration file
-    local target_file="$3"     # Target file to save the extracted keys
+  local keys="$1"        # Space-separated list of keys
+  local source_file="$2" # Source configuration file
+  local target_file="$3" # Target file to save the extracted keys
 
-    local temp_file=$(mktemp)
+  local temp_file=$(mktemp)
 
-    for key in $keys; do
-        grep "^$key" "$source_file" >> "$temp_file"
-    done
+  for key in $keys; do
+    grep "^$key" "$source_file" >>"$temp_file"
+  done
 
-    /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$temp_file" "$target_file"
+  /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$temp_file" "$target_file"
 
-    echo "The following keys have been exported to $target_file:"
-    echo "$keys"
+  echo "The following keys have been exported to $target_file:"
+  echo "$keys"
 }
-
 
 repair_rom_path() {
   local src_path=$1
@@ -336,6 +365,5 @@ repair_rom_path() {
     rmdir "$src_path"
   fi
 }
-
 
 main
