@@ -67,7 +67,6 @@ while IFS= read -r -d '' cfg_file; do
 
 		/mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$configPatchFile" "$cfg_file" &
 
-		# rm "$configPatchFile"
 		sync
 		found_count=$((found_count + 1))
 	fi
