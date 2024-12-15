@@ -25,6 +25,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 	Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
 
+    /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
     cp /mnt/SDCARD/System/resources/preload.sh /usr/trimui/bin/preload.sh
 
 	# Removing duplicated app
