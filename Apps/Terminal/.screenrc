@@ -1,1 +1,10 @@
 startup_message off
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce on
+
+#F3 to scroll up (L2)
+bindkey "^[OR" eval "copy" "stuff ^b"
+
+#F4 to scroll up (R2)
+bindkey "^[OS" eval "copy" "stuff ^f"
