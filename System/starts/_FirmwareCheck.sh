@@ -1,5 +1,22 @@
 #!/bin/sh
 
+if ! read -r current_device < /etc/trimui_device.txt; then
+    display=$(fbset | grep ^mode | cut -d "\"" -f 2)
+    if [ "$display" = "1280x720-64" ]; then
+        current_device="tsp"
+    else
+        current_device="brick"
+    fi
+    echo -n $current_device >/etc/trimui_device.txt
+fi
+
+read -r last_device </mnt/SDCARD/System/etc/last_device.txt
+if [ "$current_device" != "$last_device" ]; then
+    echo -n $current_device >/mnt/SDCARD/System/etc/last_device.txt
+    touch /tmp/device_changed
+fi 
+
+
 ################ check min Firmware version required ################
 
 CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
