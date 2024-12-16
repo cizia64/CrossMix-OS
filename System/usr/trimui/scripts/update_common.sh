@@ -98,6 +98,7 @@ check_filesystem() {
             "The process can be long:\n" \
             "about 2 minutes for 128GB SD card\n\n"
 
+        mount_point=$(mount | grep -m 1 '/mnt/SDCARD' | awk '{print $1}')
         /mnt/SDCARD/System/bin/fsck.fat -a $mount_point 2>&1 | awk 'NR > 3'
         echo "$current_date" >/mnt/SDCARD/System/updates/last_fsck.txt
         if ls /mnt/SDCARD/FSCK*.REC 1>/dev/null 2>&1; then
