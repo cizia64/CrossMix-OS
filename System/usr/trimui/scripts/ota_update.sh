@@ -34,7 +34,12 @@ main() {
 			curl -k -s "$url" | sh | tee -a "$updatedir/ota_hotfix.log"
 
 		else
+			clear
+			echo -ne "${PURPLE}Retrieving hotfix information.. ${NC}"
+			echo -ne "${GREEN}DONE${NC}\n\n\n"
 			echo -e "No hotfix available for CrossMix v$Local_CrossMixVersion.\n"
+			echo -ne "${YELLOW}"
+			read -n 1 -s -r -p "Press A to exit"
 		fi
 	fi
 	sleep 2
