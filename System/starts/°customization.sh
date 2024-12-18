@@ -40,6 +40,10 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 	# Increase alsa sound buffer
 	# cp "/mnt/SDCARD/System/usr/trimui/etc/asound.conf" "/etc/asound.conf"
+	
+	# USB Storage app update
+	rm "/usr/trimui/apps/usb_storage/"*.png
+	cp "/mnt/SDCARD/System/resources/usb_storage/"* "/usr/trimui/apps/usb_storage/"
 
 	# add language files
 	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
