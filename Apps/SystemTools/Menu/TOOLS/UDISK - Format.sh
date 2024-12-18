@@ -74,20 +74,6 @@ done
 
 echo "File restoration completed."
 
-rm -r /usr/trimui/apps/usb_storage
-if [ $? -eq 0 ]; then
-    echo "Successfully removed usb_storage from /usr/trimui/apps."
-else
-    echo "Failed to remove usb_storage from /usr/trimui/apps."
-fi
-
-unzip /mnt/SDCARD/Apps/SystemTools/Resources/usb_storage.zip -d /usr/trimui/apps/
-if [ $? -eq 0 ]; then
-    echo "Successfully copied usb_storage to /usr/trimui/apps."
-else
-    echo "Failed to copy usb_storage to /usr/trimui/apps."
-fi
-
 sync
 
 sleep 0.3

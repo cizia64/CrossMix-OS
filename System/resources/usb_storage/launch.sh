@@ -5,6 +5,29 @@ echo "=============================================="
 echo "============== USB Storage Mode  ============="
 echo "=============================================="
 
+configure_usb_gadget() {
+
+	GADGET_PATH="/sys/kernel/config/usb_gadget/g1"
+	DEV_EMMC="/dev/by-name/UDISK"
+
+	if [ ! -d "$GADGET_PATH" ]; then
+		mkdir -p "$GADGET_PATH"
+	fi
+
+	MASS_STORAGE_PATH="$GADGET_PATH/functions/mass_storage.usb0"
+
+	if [ ! -d "$MASS_STORAGE_PATH" ]; then
+		mkdir -p "$MASS_STORAGE_PATH"
+	fi
+
+	echo "Configuring Lun for eMMC..."
+	if [ ! -d "$MASS_STORAGE_PATH/Lun.1" ]; then
+		mkdir -p "$MASS_STORAGE_PATH/Lun.1"
+	fi
+	echo $DEV_EMMC >"$MASS_STORAGE_PATH/Lun.1/file"
+	sync
+}
+
 task_killer() {
 	r=0
 	for p in $1; do
@@ -43,6 +66,11 @@ if [ "$0" = "/tmp/usb_storage.sh" ]; then
 	sleep 0.1
 	kill_hooked_tasks /mnt/SDCARD -9
 	sync
+
+	TYPE=$(blkid /dev/by-name/UDISK | awk -F 'TYPE="' '{print $2}' | cut -d '"' -f 1)
+	if [ "$TYPE" = "vfat" ]; then
+		configure_usb_gadget
+	fi
 
 	# un-mount
 	umount /rom /overlay
