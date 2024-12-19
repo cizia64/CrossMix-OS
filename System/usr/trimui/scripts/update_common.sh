@@ -1,6 +1,12 @@
 #!/bin/sh
+UPDATE_VERSION=1.0.0
 export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+
+if [ "$1" == "-v" ]; then
+    echo -n $UPDATE_VERSION
+    exit
+fi
 
 RED='\033[1;31m'
 GREEN='\033[1;32m'
