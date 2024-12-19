@@ -1,14 +1,7 @@
 #!/bin/bash
 
-# Fix slowdown caused by moded inputd
-touch /var/trimui_inputd/sticks_disabled
-
-if [ "$#" -gt 0 ]; then
- /mnt/SDCARD/Apps/Terminal/SimpleTerminal "$@"
-else
-  progdir=$(dirname "$0")
-  cd $progdir
-  ./SimpleTerminal
-fi
-
-rm /var/trimui_inputd/sticks_disabled
+progdir=$(dirname "$0")
+export LD_LIBRARY_PATH="$progdir/lib:$LD_LIBRARY_PATH"
+display=$(fbset | grep ^mode | cut -d "\"" -f 2)
+[ "$display" != "1280x720-64" ] && BRICK_FLAG="-d brick"
+$progdir/TermSP -k $BRICK_FLAG -e "$progdir/screen" -c "$progdir/.screenrc" "$@"
