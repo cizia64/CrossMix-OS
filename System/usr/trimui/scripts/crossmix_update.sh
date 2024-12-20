@@ -149,12 +149,6 @@ restore_files "Saturn saves"                   "$BCK_DIR/Emus/SATURN/.yabasanshi
 # Restore GZDoom standalone saves
 restore_files "GZDoom saves"                   "$BCK_DIR/Emus/DOOM/GZDoom/.config/gzdoom/"           "/mnt/SDCARD/Emus/DOOM/GZDoom/.config/gzdoom/" "*" "--exclude=*.pk3"
 
-
-
-# Restore Drastic saves and savestates
-restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"         "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
-restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"     "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
-
 # DC Standalone RetroAchievements
 SOURCE_FILE="$BCK_DIR/Emus/DC/flycast_v2.4/config/emu.cfg"
 TARGET_FILE="/mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg"
