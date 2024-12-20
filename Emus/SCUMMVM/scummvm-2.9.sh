@@ -9,7 +9,7 @@ romNameNoExtension=${romName%.*}
 
 if [ "$romName" = "° Run ScummVM.launch" ]; then
 	mv "$Rom" "$RomPath/$romNameNoExtension.squashfs"
-	rm "/mnt/SDCARD/Roms/SCUMMVM/SCUMMVM_cache7.db"
+	/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "SCUMMVM"
 fi
 
 if [ "$romName" = "° Import ScummVM Games.launch" ]; then

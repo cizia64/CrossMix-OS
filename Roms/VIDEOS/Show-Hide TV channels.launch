@@ -11,5 +11,6 @@ elif [ "$button" = "B" ]; then
         fi
     done
 fi
+sync
 
-rm /mnt/SDCARD/Roms/VIDEOS/VIDEOS_cache7.db
+/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "VIDEOS"

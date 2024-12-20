@@ -265,7 +265,7 @@ repair_rom_path "/mnt/SDCARD/Roms/NES" "/mnt/SDCARD/Roms/FC"
 repair_rom_path "/mnt/SDCARD/Roms/MEGADRIVE" "/mnt/SDCARD/Roms/MD"
 repair_rom_path "/mnt/SDCARD/Roms/GENESIS" "/mnt/SDCARD/Roms/MD"
 repair_rom_path "/mnt/SDCARD/Roms/DS" "/mnt/SDCARD/Roms/NDS"
-rm "/mnt/SDCARD/Roms/PSP/PSP_cache7.db"
+/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "PSP"
 
 # Move ScummVM games to "GAMES" subfolder
 for item in /mnt/SDCARD/Roms/SCUMMVM/*; do
