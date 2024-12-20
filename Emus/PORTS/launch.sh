@@ -15,6 +15,10 @@ case "$selected_mode" in
 	;;
 esac
 
+if [ -f "/tmp/cmd_to_run.sh" ] && ! grep -q "dowork 0x" "/tmp/cmd_to_run.sh"; then
+    sed -i "1s|^|echo \": $selected_mode dowork 0x24a00e60\" > /tmp/log/messages\n|" "/tmp/cmd_to_run.sh"
+fi
+
 cd /mnt/SDCARD/Roms/PORTS
 
 ################ Fix for TSP controls ################

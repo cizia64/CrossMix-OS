@@ -13,6 +13,10 @@ if ! echo "$LAUNCHER" | grep -iq "No Overlay"; then
     export LD_PRELOAD="./libSDL2-2.0.so.0.2600.1"
 fi
 
+if [ -f "/tmp/cmd_to_run.sh" ] && ! grep -q "dowork 0x" "/tmp/cmd_to_run.sh"; then
+    sed -i "1s|^|echo \"$LAUNCHER\" > /tmp/log/messages\n|" "/tmp/cmd_to_run.sh"
+fi
+
 #export SDL_AUDIODRIVER=dsp
 
 if echo "$LAUNCHER" | grep -iq "Nearest"; then

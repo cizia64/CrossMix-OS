@@ -23,6 +23,10 @@ else
     fi
 fi
 
+if [ -f "/tmp/cmd_to_run.sh" ] && ! grep -q "dowork 0x" "/tmp/cmd_to_run.sh"; then
+    sed -i "1s|^|echo \"$Launcher\" > /tmp/log/messages\n|" "/tmp/cmd_to_run.sh"
+fi
+
 case "$*" in
 *.n64 | *.v64 | *.z64)
     ROM_PATH="$*"
@@ -33,7 +37,6 @@ case "$*" in
     7zz e "$*" -so >"$TEMP_ROM"
     ;;
 esac
-
 
 HOTKEY=guide $PM_DIR/gptokeyb2 -c "./defkeys.gptk" &
 sleep 0.3
