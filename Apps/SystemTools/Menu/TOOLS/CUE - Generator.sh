@@ -5,7 +5,7 @@ count=0
 if [ $# -gt 0 ]; then
     targets="$1"
 else
-    targets="PS SEGACD NEOCD PCE PCFX AMIGA"
+    targets="PS SEGACD NEOCD PCE PCFX AMIGA SATURN"
 fi
 
 cd "$rootdir"
