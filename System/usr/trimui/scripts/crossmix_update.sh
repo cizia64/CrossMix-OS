@@ -128,6 +128,29 @@ restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1
 restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"     "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/" "*"
 restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
+# Restore Drastic standalone saves and savestates
+restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"             "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
+restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"         "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
+
+# Restore Mupen standalone saves and savestates
+restore_files "Mupen saves"                     "$BCK_DIR/Emus/N64/mupen64plus/save/"           "/mnt/SDCARD/Emus/N64/mupen64plus/save/" "*"
+
+# Restore mGBA standalone savestates (saves are in Roms folder)
+restore_files "mGBA saves"                     "$BCK_DIR/Emus/GBA/.config/mgba/savestates/"           "/mnt/SDCARD/Emus/GBA/.config/mgba/savestates/" "*"
+
+# Restore AdvanceMame standalone savestates
+restore_files "AdvanceMame saves"              "$BCK_DIR/Emus/ADVMAME/.advance/sta/"           "/mnt/SDCARD/Emus/ADVMAME/.advance/sta/" "*"
+
+# Restore Saturn / yabasanshiro standalone savestates
+restore_files "Saturn saves"                   "$BCK_DIR/Emus/SATURN/.yabasanshiro/"           "/mnt/SDCARD/Emus/SATURN/.yabasanshiro/" "*" "--exclude=keymapv2.json"
+
+# Dreamcast saves are located in BIOS folder -> nothing to do
+
+# Restore GZDoom standalone saves
+restore_files "GZDoom saves"                   "$BCK_DIR/Emus/DOOM/GZDoom/.config/gzdoom/"           "/mnt/SDCARD/Emus/DOOM/GZDoom/.config/gzdoom/" "*" "--exclude=*.pk3"
+
+
+
 # Restore Drastic saves and savestates
 restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"         "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
 restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/savestates/"     "/mnt/SDCARD/Emus/NDS/drastic/savestates/" "*"
