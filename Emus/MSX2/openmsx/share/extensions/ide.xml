@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Sunrise ATA-IDE</name>
+    <manufacturer>Sunrise</manufacturer>
+    <code/>
+    <release_year>1995</release_year>
+    <description>ATA-IDE interface with hard disk.</description>
+    <type>external hard disk</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <SunriseIDE id="Sunrise IDE">
+          <mem base="0x0000" size="0x10000"/>
+          <rom>
+            <filename>ide250.dat</filename>
+            <sha1>93e41c7d479bc90c1d1f6d081af20fd9924b8ada</sha1>
+            <sha1>1c79c8fcfd661394f91be94b218955c84cabd742</sha1> <!-- SHA1 of ide240.dat, for backwards compatiblity -->
+            <sha1>51a1467d73d26c91aab7923e3be66490daaffdee</sha1> <!-- SHA1 of ide221.dat, for backwards compatibility -->
+          </rom>
+          <master>
+            <type>IDEHD</type>
+            <filename>hd.dsk</filename>
+            <size>100</size>
+          </master>
+          <slave>
+            <type>IDECDROM</type>
+          </slave>
+        </SunriseIDE>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

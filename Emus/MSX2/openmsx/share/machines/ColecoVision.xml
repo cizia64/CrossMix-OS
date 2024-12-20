@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Coleco</manufacturer>
+    <code>ColecoVision</code>
+    <release_year>1982</release_year>
+    <description>Game console with hardware similar to MSX.</description>
+    <type>Coleco</type>
+  </info>
+
+  <slotmap>
+    <map page="0" slot="0"/>
+    <map page="1" slot="0"/>
+    <map page="2" slot="1"/>
+    <map page="3" slot="1"/>
+  </slotmap>
+
+  <devices>
+
+    <VDP id="VDP">
+      <version>TMS9928A</version>
+      <irq_connected>nmi</irq_connected>
+      <io base="0xA0" num="0x20"/>
+    </VDP>
+
+    <SNPSG id="PSG">
+      <type>SN76489AN</type>
+      <io base="0xE0" num="0x20" type="O"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+    </SNPSG>
+
+    <ColecoJoystick id="joysticks">
+      <io base="0x80" num="0x20" type="O"/>
+      <io base="0xC0" num="0x20" type="O"/>
+      <io base="0xE0" num="0x20" type="I"/>
+      <has_keypad>true</has_keypad>
+      <key_ghosting>false</key_ghosting>
+    </ColecoJoystick>
+
+    <primary slot="0">
+      <ROM id="BIOS ROM">
+        <mem base="0x0000" size="0x2000"/>
+        <rom>
+          <filename>COLECO.ROM</filename>
+          <sha1>45bedc4cbdeac66c7df59e9e599195c778d86a92</sha1>
+        </rom>
+      </ROM>
+      <RAM id="Main RAM">
+        <mem base="0x6000" size="0x2000"/>
+        <size>1024</size>
+        <initialContent encoding="hex">00</initialContent>
+      </RAM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+  </devices>
+
+</msxconfig>

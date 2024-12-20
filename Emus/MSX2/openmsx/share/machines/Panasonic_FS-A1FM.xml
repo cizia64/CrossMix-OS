@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Panasonic</manufacturer>
+    <code>FS-A1FM</code>
+    <release_year>1987</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>fs-a1fm_kanjifont.rom</filename>
+        <sha1>5e872d5853698731a0ed22fb72dbcdfd59cd19c3</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <Kanji12 id="Kanji ROM 12X12">
+      <rom>
+        <filename>fs-a1fm_kanjifont12.rom</filename>
+        <sha1>a7a23dc01314e88381eee88b4878b39931ab4818</sha1>
+      </rom>
+    </Kanji12>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>fs-a1fm.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <T9769 id="T9769">
+      <subtype></subtype>
+    </T9769>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>fs-a1fm_basic-bios2.rom</filename>
+          <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <MemoryMapper id="Main RAM">
+          <size>64</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>fs-a1fm_msx2sub.rom</filename>
+            <sha1>d552319a19814494e3016de4b8f010e8f7b97e02</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="Modem ROM">
+          <mappertype>FSA1FM1</mappertype>
+          <sramname>fs-a1fm_modem.sram</sramname>
+          <rom>
+            <filename>fs-a1fm_firmware.rom</filename>
+            <sha1>f89e3d8f3b6855c29d71d3149cc762e0f6918ad5</sha1> <!-- 1MB -->
+            <sha1>716952eab41077f18e6835d11caad6761b17d400</sha1> <!-- 2MB -->
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF8</io_regs>
+          <drives>1</drives>
+          <rom>
+            <filename>fs-a1fm_disk.rom</filename>
+            <sha1>141e61cc8e0e51382e508fbd77a34b778a4f8444</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="FS-A1FM">
+          <mappertype>FSA1FM2</mappertype>
+          <sramname>fs-a1fm.sram</sramname>
+          <rom>
+            <filename>fs-a1fm_firmware.rom</filename>
+            <sha1>f89e3d8f3b6855c29d71d3149cc762e0f6918ad5</sha1> <!-- 1MB -->
+            <sha1>716952eab41077f18e6835d11caad6761b17d400</sha1> <!-- 2MB -->
+          </rom>
+          <mem base="0x0000" size="0x10000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>MIDI Interface 3</name>
+    <manufacturer>M. Fujimoto</manufacturer>
+    <release_year>1995</release_year>
+    <description>MIDI interface using the same UART and I/O ports as the
+      turboR GT internal MIDI, but without MSX-MIDI BIOS ROM.</description>
+    <type>MIDI cartridge</type>
+  </info>
+  <devices>
+    <MSX-MIDI id="MIDI Interface 3">
+      <io base="0xE8" num="8"/>
+    </MSX-MIDI>
+  </devices>
+</msxconfig>

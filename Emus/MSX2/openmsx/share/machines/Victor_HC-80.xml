@@ -1,0 +1,121 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+<!-- config according to the info from Daniele
+     Based on machine with serial 14011845.
+
+     CPU: SHARP LH0080A
+     MSX-ENGINE: S3527
+     3 JVC ROMs
+
+     Z80 out:(c),0: 0 (MSX)
+
+     Labeled as "AV PERSONAL COMPUTER"
+     2 CARTRIDGE SLOTS
+     CRT OUTPUT RGB/COMPOSITE/RF
+     ROM48KB+16KB RAM64KB+128KB
+-->
+
+  <info>
+    <manufacturer>Victor</manufacturer>
+    <code>HC-80</code>
+    <release_year></release_year>
+    <description>An MSX2 with firmware.</description>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected> <!-- not tested yet -->
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-3527 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-3527 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- In S3527 -->
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>hc-80.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <RAM id="Main RAM 1">
+          <mem base="0x8000" size="0x8000"/>
+        </RAM>
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>hc-80_basic-bios2.rom</filename>
+            <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>hc-80_msx2sub.rom</filename>
+            <sha1>b8e30d604d319d511cbfbc61e5d8c38fbb9c5a33</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM 2">
+          <mem base="0x0000" size="0x8000"/>
+        </RAM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+      <ROM id="firmware">
+       <rom>
+         <filename>hc-80_firmware.rom</filename>
+         <sha1>7f498db2f431b9c0b42dac1c7ca46a236b780228</sha1>
+       </rom>
+       <mem base="0x8000" size="0x4000"/>
+     </ROM>
+    </primary>
+
+  </devices>
+
+</msxconfig>

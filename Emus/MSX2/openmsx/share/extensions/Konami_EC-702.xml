@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Kanji ROM Cartridge</name>
+    <manufacturer>Konami</manufacturer>
+    <code>EC-702</code>
+    <release_year>1985</release_year>
+    <description>Kanji ROM cartridge.</description>
+    <type>kanji font expansion</type>
+  </info>
+  <devices>
+    <Kanji id="EC-702 Kanji ROM">
+      <rom>
+        <filename>ec-702_kanjifont.rom</filename>
+        <sha1>fc71561a64f73da0e0043d256f67fd18d7fc3a7f</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+  </devices>
+</msxconfig>

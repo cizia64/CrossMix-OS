@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Beer IDE</name>
+    <manufacturer>SOLiD</manufacturer>
+    <code/>
+    <release_year>1995</release_year>
+    <description>ATA-IDE interface with hard disk.</description>
+    <type>external hard disk</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <BeerIDE id="Beer IDE">
+          <io base="0x30" num="4"/>
+          <mem base="0x4000" size="0x4000"/>
+          <rom>
+            <filename>hddrom.rom</filename>
+            <sha1>5a14ac0a1cce3ceebdcd66c42b2d5c975d45b755</sha1> <!-- firmware 1.9RC1 -->
+            <sha1>11bd12a95142185d18659ccf74748fc1bb20c60d</sha1> <!-- firmware 1.8 -->
+            <sha1>e92f47bd8320f94b8f7ae1943b31316002075ffb</sha1> <!-- firmware 1.8 from Hans Otten's site-->
+          </rom>
+          <idedevice>
+            <type>IDEHD</type>
+            <filename>hd.dsk</filename>
+            <size>170</size>
+          </idedevice>
+        </BeerIDE>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>
