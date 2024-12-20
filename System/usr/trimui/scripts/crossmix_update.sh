@@ -183,6 +183,60 @@ if [ ! "$overlay_setting" = "Overlays - max ratio" ]; then
   "/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS##OVERLAYS (value)/$overlay_setting.sh" -s
 fi
 
+# Restore current Theme settings
+echo "${BLUE}=====================  Restoring theme settings...  ====================={NC}"
+
+json_file="/mnt/SDCARD/System/etc/crossmix.json"
+theme_pack=$(jq -r '."THEME PACK"' "$json_file")
+crossmix_style=$(jq -r '."CROSSMIX STYLE"' "$json_file")
+icons=$(jq -r '."ICONS"' "$json_file")
+backgrounds=$(jq -r '."BACKGROUNDS"' "$json_file")
+emu_labels=$(jq -r '."EMU LABELS"' "$json_file")
+current_theme=$(/usr/trimui/bin/systemval theme)
+current_theme=$(basename "$current_theme")
+
+# we create a temporary theme pack with previous settings and we apply it
+output_file="/tmp/${theme_pack}.sh"
+cat <<EOF > "$output_file"
+packname="$theme_pack"
+style="$crossmix_style"
+theme="$current_theme"
+icon="$icons"
+background="$backgrounds"
+emulabels="$emu_labels"
+
+. /mnt/SDCARD/System/usr/trimui/scripts/themepack_apply.sh
+EOF
+
+touch "/tmp/infoscreen_disabled"
+chmod a+x "$output_file"
+"$output_file" "/SystemTools/Menu/" # fake parameter to force mainui_state_update.sh to use the System Tool database
+
+
+# Restore click sound current state
+click_off="$BCK_DIR/Themes/$current_theme/sound/click-off.wav"
+click="$BCK_DIR/Themes/$current_theme/sound/click.wav"
+if [[ -f "$click_off" && ! -f "$click" ]]; then
+	"/mnt/SDCARD/Apps/SystemTools/Menu/SOUND##CLICK (state)/Click sound - Disable.sh"
+fi
+
+# Restore background music current state
+bgm_off="$BCK_DIR/Themes/$current_theme/sound/bgm-off.mp3"
+bgm="$BCK_DIR/Themes/$current_theme/sound/bgm.mp3"
+if [[ -f "$bgm_off" && ! -f "$bgm" ]]; then
+	"/mnt/SDCARD/Apps/SystemTools/Menu/SOUND##MUSIC (state)/Music - Disable.sh"
+fi
+
+# Restore top left logo current state
+logo_off="$BCK_DIR/Themes/$current_theme/skin/nav-logo-off.png"
+logo="$BCK_DIR/Themes/$current_theme/skin/nav-logo.png"
+if [[ -f "$logo_off" && ! -f "$logo" ]]; then
+	"/mnt/SDCARD/Apps/SystemTools/Menu/Imgs/ADVANCED SETTINGS##TOP LEFT LOGO (state)/Top-left logo - Disable.png"
+fi
+
+
+rm "/tmp/infoscreen_disabled"
+
 
 # Restore Scraper settings
 jq -s '.[1] * .[0]' $BCK_DIR/System/etc/scraper.json /mnt/SDCARD/System/etc/scraper.json >/tmp/scraper.json && mv /tmp/scraper.json /mnt/SDCARD/System/etc/scraper.json
@@ -211,6 +265,7 @@ repair_rom_path "/mnt/SDCARD/Roms/NES" "/mnt/SDCARD/Roms/FC"
 repair_rom_path "/mnt/SDCARD/Roms/MEGADRIVE" "/mnt/SDCARD/Roms/MD"
 repair_rom_path "/mnt/SDCARD/Roms/GENESIS" "/mnt/SDCARD/Roms/MD"
 repair_rom_path "/mnt/SDCARD/Roms/DS" "/mnt/SDCARD/Roms/NDS"
+rm "/mnt/SDCARD/Roms/PSP/PSP_cache7.db"
 
 # Move ScummVM games to "GAMES" subfolder
 for item in /mnt/SDCARD/Roms/SCUMMVM/*; do

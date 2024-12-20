@@ -1,5 +1,7 @@
 #!/bin/sh
-# echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+if [ -f "/tmp/infoscreen_disabled" ]; then
+    exit
+fi
 
 # Function to display usage
 usage() {
@@ -38,12 +40,11 @@ color_to_rgb() {
     esac
 }
 
-
 # Function to check if a value is a number (integer or floating-point)
 is_number() {
     case "$1" in
-        ''|*[!0-9.]*|*.*.*) return 1 ;;  # Not a number
-        *) return 0 ;;                    # Is a number
+    '' | *[!0-9.]* | *.*.*) return 1 ;; # Not a number
+    *) return 0 ;;                      # Is a number
     esac
 }
 
@@ -88,38 +89,51 @@ fi
 # Parse command-line arguments
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        -h) usage ;;
-        -i) image="$2"; shift 2 ;;
-        -k)
-            validate_keys "$2"
-            if [ $? -eq 0 ]; then
-                wait_keys="$2"
-            fi
-            shift 2 ;;
-        -t)
-            if is_number "$2"; then
-                timer="$2"
-            else
-                echo "Invalid timer: $2. Using default."
-            fi
-            shift 2 ;;
-        -m) message="${2:- }"; shift 2 ;;
-        -ff)
-            if [ -f "$2" ]; then
-                font_file="$2"
-            else
-                echo "Font file $2 does not exist. Using default."
-            fi
-            shift 2 ;;
-        -fs)
-            if [ "$2" -eq "$2" ] 2>/dev/null; then
-                font_size="$2"
-            else
-                echo "Invalid font size: $2. Using default."
-            fi
-            shift 2 ;;
-        -c) color=$(color_to_rgb "$2"); shift 2 ;;
-        *) shift ;;
+    -h) usage ;;
+    -i)
+        image="$2"
+        shift 2
+        ;;
+    -k)
+        validate_keys "$2"
+        if [ $? -eq 0 ]; then
+            wait_keys="$2"
+        fi
+        shift 2
+        ;;
+    -t)
+        if is_number "$2"; then
+            timer="$2"
+        else
+            echo "Invalid timer: $2. Using default."
+        fi
+        shift 2
+        ;;
+    -m)
+        message="${2:- }"
+        shift 2
+        ;;
+    -ff)
+        if [ -f "$2" ]; then
+            font_file="$2"
+        else
+            echo "Font file $2 does not exist. Using default."
+        fi
+        shift 2
+        ;;
+    -fs)
+        if [ "$2" -eq "$2" ] 2>/dev/null; then
+            font_size="$2"
+        else
+            echo "Invalid font size: $2. Using default."
+        fi
+        shift 2
+        ;;
+    -c)
+        color=$(color_to_rgb "$2")
+        shift 2
+        ;;
+    *) shift ;;
     esac
 done
 
@@ -181,14 +195,13 @@ touch /var/trimui_inputd/sticks_disabled
 # Function to handle the timer
 handle_timer() {
     if [ -n "$timer" ]; then
-	sleep 1
+        sleep 1
         sleep "$timer"
         for pid in $(pgrep -f getkey.sh); do pkill -TERM -P $pid; done
     fi
 }
 
 # Start the timer and key wait handlers concurrently
-
 
 if [ -n "$wait_keys" ]; then
     handle_timer &
@@ -200,7 +213,7 @@ if [ -n "$wait_keys" ]; then
     echo "$button"
     kill -9 $handle_timer_pid 2>/dev/null
 else
-        handle_timer
+    handle_timer
 fi
 
 pkill -f sdl2imgshow

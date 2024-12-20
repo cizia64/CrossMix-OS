@@ -47,6 +47,7 @@ if [ ! "$currentUpdatePack" = "$onlineUpdatePack" ] || [ "$missing_files" -eq 1 
     download_file "keys.gptk" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Apps/OTA-update/keys.gptk" -f "/mnt/SDCARD/Apps/OTA-update/keys.gptk"
     download_file "Terminal launch.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Apps/Terminal/launch.sh" -f "/mnt/SDCARD/Apps/Terminal/launch.sh"
     download_file "shellect.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/usr/trimui/scripts/shellect.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts"
+    download_file "infoscreen.sh" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/usr/trimui/scripts/infoscreen.sh" -d "/mnt/SDCARD/System/usr/trimui/scripts"
     sync
     /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Update scripts upgraded, please launch OTA update again." -t 5
     killall -2 SimpleTerminal
