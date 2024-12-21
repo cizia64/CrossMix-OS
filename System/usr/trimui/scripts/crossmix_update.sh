@@ -256,6 +256,8 @@ if [[ -f "$logo_off" && ! -f "$logo" ]]; then
 	"/mnt/SDCARD/Apps/SystemTools/Menu/Imgs/ADVANCED SETTINGS##TOP LEFT LOGO (state)/Top-left logo - Disable.png"
 fi
 
+# repair favorite paths if the launchers have changed
+"/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/Favorites - Fix No Emus.sh"
 
 rm "/tmp/infoscreen_disabled"
 
