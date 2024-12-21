@@ -12,6 +12,8 @@ EMU_DIR="$PWD"
 
 export LD_LIBRARY_PATH="$PM_DIR:$EMU_DIR:$LD_LIBRARY_PATH"
 
+[ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ] && fb_disable_transparency
+
 case "$*" in
     *.n64|*.v64|*.z64|*.ndd) 
         ROM_PATH="$*" 

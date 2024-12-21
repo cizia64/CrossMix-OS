@@ -15,6 +15,7 @@ Launcher=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1)
 if echo "$Launcher" | grep -q "Rice"; then
     set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-rice.so"
 else
+    [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ] && fb_disable_transparency
     set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "VideoPlugin" "mupen64plus-video-glide64mk2.so"
     if echo "$Launcher" | grep -q "16:9"; then
         set_ra_cfg.sh "$EMU_DIR/mupen64plus.cfg" "aspect" "1"
