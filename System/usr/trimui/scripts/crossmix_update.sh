@@ -1,4 +1,11 @@
 #!/bin/sh
+
+UPDATE_FILE=$(find /mnt/SDCARD -maxdepth 1 -name "CrossMix-OS_v*.zip" -print -quit)
+
+if [ ! -f /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh ]; then 
+  /mnt/SDCARD/System/bin/7zz e "$UPDATE_FILE" "System/usr/trimui/scripts/update_common.sh" -o/mnt/SDCARD/System/usr/trimui/scripts -y
+fi 
+
 source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -7,8 +14,6 @@ echo 1608000 >/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
 
 main() {
 # Find the update file
-UPDATE_FILE=$(find /mnt/SDCARD -maxdepth 1 -name "CrossMix-OS_v*.zip" -print -quit)
-
 if [ -n "$UPDATE_FILE" ]; then
   script_dir=$(dirname "$(realpath "$0")")
   if [ "$script_dir" != "/tmp" ]; then
