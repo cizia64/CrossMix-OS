@@ -120,6 +120,14 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# Displaying only Emulators with roms
 	/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
 
+    # Fix pre-1.3 favorites:
+    awk '{
+        match(launch, /launch":"(.*Emus\/[^\/]+)\//, emu_path)
+        gsub(/launch":"[^"]*"/, "launch\":\"" emu_path[1] "/default.sh\"")
+        print
+    }' /mnt/SDCARD/Roms/favorite2.json > tmp
+    mv tmp /mnt/SDCARD/Roms/favorite2.json
+
 	################ Flash boot logo ################
 	if [ "$CrossMix_Update" = "0" ]; then
 		CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
