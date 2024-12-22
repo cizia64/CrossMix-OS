@@ -67,6 +67,11 @@ if [ "$0" = "/tmp/usb_storage.sh" ]; then
 	kill_hooked_tasks /mnt/SDCARD -9
 	sync
 
+	if ! pgrep "trimui_inputd" >/dev/null; then
+		/usr/trimui/bin/trimui_inputd &
+		sleep 0.5
+	fi
+
 	TYPE=$(blkid /dev/by-name/UDISK | awk -F 'TYPE="' '{print $2}' | cut -d '"' -f 1)
 	if [ "$TYPE" = "vfat" ]; then
 		configure_usb_gadget
