@@ -11,7 +11,7 @@
   "useswap": 1,
   "shortname": 0,
   "hidebios": 1,
-  "extlist": "iso|cue|mds|m3u|ccd|zip",
+  "extlist": "iso|cue|mds|m3u|ccd|chd|zip",
   "launchlist": [
     {
       "name": "--------------    libretro    --------------",
