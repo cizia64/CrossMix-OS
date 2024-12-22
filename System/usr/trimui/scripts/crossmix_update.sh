@@ -57,7 +57,7 @@ LOG_FILE="/mnt/SDCARD/_Updates/CrossMix_v${update_version}_${timestamp}.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
 # echo "==============  Updating CrossMix-OS v$Local_CrossMixVersion to v$update_version  =============="
-echo "${BLUE}======  Updating CrossMix-OS v$Local_CrossMixVersion to v$update_version  ======{NC}"
+echo "${BLUE}======  Updating CrossMix-OS v$Local_CrossMixVersion to v$update_version  ======${NC}"
 
 check_available_space "5000"
     if [ $? -eq 1 ]; then
@@ -68,7 +68,7 @@ check_available_space "5000"
 
 check_filesystem
 
-echo "${BLUE}==============          Creating backup of old files...           =============={NC}"
+echo "${BLUE}==============          Creating backup of old files...           ==============${NC}"
 
 echo "Destination directory: $BCK_DIR"
 # Execute the move_items function
@@ -78,7 +78,7 @@ move_items
 mv "$BCK_DIR/RetroArch/.retroarch/system/"* "/mnt/SDCARD/BIOS" 2>/dev/null
 sync
 
-echo "${BLUE}=============  Decompressing new CrossMix archive, please wait...  ============={NC}"
+echo "${BLUE}=============  Decompressing new CrossMix archive, please wait...  =============${NC}"
 # Install CrossMix new version
 echo "CrossMix archive decompression lasts at least 4 minutes."
 echo -e "\n\n     !!!!!! Please be patient  !!!!!! \n\n"
@@ -94,7 +94,7 @@ else
   # infoscreen.sh -m "CrossMix v$update_version extraction encountered errors." -t 5
 fi
 
-echo "${BLUE}=====================  Restoring saves and savestates...  ====================={NC}"
+echo "${BLUE}=====================  Restoring saves and savestates...  =====================${NC}"
 
 # Restore saves and savestates from Retroarch
 restore_files "Retroarch saves"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
@@ -204,7 +204,7 @@ jq -s '.[1] * .[0]' $BCK_DIR/System/etc/crossmix.json /mnt/SDCARD/System/etc/cro
 sync
 
 # Restore current Retroarch overlay setting
-echo "${BLUE}=====================  Restoring Overlays/Ratio settings...  ====================={NC}"
+echo "${BLUE}=====================  Restoring Overlays/Ratio settings...  =====================${NC}"
 
 overlay_setting=$(/mnt/SDCARD/System/bin/jq -r '.["OVERLAYS"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ ! "$overlay_setting" = "Overlays - max ratio" ]; then
@@ -212,7 +212,7 @@ if [ ! "$overlay_setting" = "Overlays - max ratio" ]; then
 fi
 
 # Restore current Theme settings
-echo "${BLUE}=====================  Restoring theme settings...  ====================={NC}"
+echo "${BLUE}=====================  Restoring theme settings...  =====================${NC}"
 
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
 theme_pack=$(jq -r '."THEME PACK"' "$json_file")
@@ -277,7 +277,7 @@ move_without_replace "Restore Themes"                   "$BCK_DIR/Backgrounds/" 
 move_without_replace "Restore Backgrounds"              "$BCK_DIR/Backgrounds/" "/mnt/SDCARD/Backgrounds/"
 move_without_replace "Restore Icons"                    "$BCK_DIR/Icons/"       "/mnt/SDCARD/Icons/"
 
-echo "${BLUE}======================  Fix potential bad Roms folders... ======================{NC}"
+echo "${BLUE}======================  Fix potential bad Roms folders... ======================${NC}"
 
 repair_rom_path "/mnt/SDCARD/Roms/PPSSPP" "/mnt/SDCARD/Roms/PSP"
 repair_rom_path "/mnt/SDCARD/Roms/3DO" "/mnt/SDCARD/Roms/PANASONIC"
@@ -316,7 +316,7 @@ rm "/mnt/SDCARD/System/bin/python3"
 rm /mnt/SDCARD/Apps/SystemTools/Menu/Menu_cache7.db
 rm /mnt/SDCARD/Apps/Scraper/Menu/Menu_cache7.db
 
-echo "${BLUE}============== Installation completed, rebooting in 10 seconds... =============={NC}"
+echo "${BLUE}============== Installation completed, rebooting in 10 seconds... ==============${NC}"
 
 
 echo ondemand >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
