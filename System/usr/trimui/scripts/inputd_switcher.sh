@@ -23,13 +23,13 @@ inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
 
 case "$polling_rate" in
 "1ms")
-    Sha_expected=c90b9fa722d745a7e827f38dbd409d3cd1ba56f5
+    Sha_expected=93454518ccacd4d3ffe22b0811cae0ac3c00a714
     ;;
 "8ms")
-    Sha_expected=3f1b81d668c3f7de2cc0458502326a732d3cb0b2
+    Sha_expected=306d1693d4da4257eb0b7bcf13ec113019b87e69
     ;;
 "16ms")
-    Sha_expected=356b41b0be9d00f361e45303f41f5f1f337e6efc
+    Sha_expected=1f15184d75911c115bac9fc7cab8d79d4f311bf4
     ;;
 esac
 
