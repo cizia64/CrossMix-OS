@@ -23,6 +23,7 @@ main() {
     fi
 
     get_hotfix_info
+    sleep 8
     if [ $? -eq 1 ]; then
         echo -ne "${YELLOW}"
         read -n 1 -s -r -p "Press A to exit"
@@ -107,7 +108,7 @@ get_hotfix_info() {
         " Size:    ${Hotfix_size} \n" \
         " Date:    $Remote_HotfixDate \n" \
         " URL:     $hotfix_fileUrl \n" \
-		" Description:\n$Remote_HotfixDesc \n" \
+        " Description:\n$Remote_HotfixDesc \n" \
         "${BLUE}==================================${NC}\n\n\n\n"
 
     if [ "$(echo "$Remote_HotfixVersion" | tr -d '.')" -gt "$(echo "$Local_HotfixVersion" | tr -d '.')" ]; then
@@ -129,13 +130,13 @@ get_hotfix_info() {
 apply_update() {
 
     echo -e "\n${BLUE}================== Applying Hotfix ==================${NC}\n"
-	
-	# USB Storage app update
+
+    # USB Storage app update
     download_file "USB storage app fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/System/resources/usb_storage/launch.sh" -d "/mnt/SDCARD/System/resources/usb_storage"
     rm "/usr/trimui/apps/usb_storage/"*.png
     cp "/mnt/SDCARD/System/resources/usb_storage/"* "/usr/trimui/apps/usb_storage/"
 
-	# Saturn ext list fix
+    # Saturn ext list fix
     download_file "Saturn ext list fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/SATURN/config.json" -d "/mnt/SDCARD/Emus/SATURN"
 
     sleep 5
