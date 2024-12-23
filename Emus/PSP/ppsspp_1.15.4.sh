@@ -6,7 +6,7 @@ export LD_LIBRARY_PATH="/usr/trimui/lib" # "/mnt/SDCARD/System/lib" = segfault
 cd PPSSPP_1.15.4
 
 performance=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Perf.")
-if [ -z "$performance" ]; then
+if [ -n "$performance" ]; then
     cpufreq.sh ondemand 3 8
 else
     cpufreq.sh ondemand 3 6

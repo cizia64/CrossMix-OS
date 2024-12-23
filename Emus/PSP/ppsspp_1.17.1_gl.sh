@@ -5,7 +5,7 @@ source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 cd PPSSPP_1.17.1
 
 performance=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "Perf.") # We detect the performance mode from the label which have been selected in launcher menu
-if [ -z "$performance" ]; then
+if [ -n "$performance" ]; then
     cpufreq.sh ondemand 3 8
 else
     cpufreq.sh ondemand 3 6
