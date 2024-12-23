@@ -138,6 +138,7 @@ apply_update() {
 
     # Saturn ext list fix
     download_file "Saturn ext list fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/SATURN/config.json" -d "/mnt/SDCARD/Emus/SATURN"
+    rm "/mnt/SDCARD/Roms/SATURN/SATURN_cache7.db"
 
     sleep 5
 }
