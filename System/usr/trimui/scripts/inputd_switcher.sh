@@ -12,11 +12,6 @@ fi
 bin_dir="/mnt/SDCARD/trimui/app"
 
 read -r device < /etc/trimui_device.txt
-if [ "$device" = "brick" ]; then
-    cp /usr/trimui/bin/trimui_inputd $bin_dir/trimui_inputd
-    [ "$script_name" != "inputd_switcher" ] && infoscreen -m "Feature not supported yet on brick"
-    exit 1
-fi
 
 inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
 [ -f "$inputd_src_dir/$polling_rate" ] || polling_rate=16ms
