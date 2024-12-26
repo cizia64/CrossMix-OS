@@ -134,6 +134,18 @@ if [ "$version" != "$FW_patched_version" ]; then
 	fi
 fi
 
+######################### Device Type customization #########################
+
+if [ -f "/tmp/device_changed" ]; then
+
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "Switching to $current_device device. "
+
+	#manage different RA versions
+	cp "/mnt/SDCARD/RetroArch/ra64.trimui_$current_device" /mnt/SDCARD/RetroArch/ra64.trimui
+
+fi
+sync
+
 ######################### CrossMix-OS at each boot #########################
 
 # Apply current led configuration
