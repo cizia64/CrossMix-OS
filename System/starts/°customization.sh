@@ -7,13 +7,14 @@ if [ ! -f "$Current_bg" ]; then
 	Current_bg="/mnt/SDCARD/trimui/res/skin/transparent.png"
 fi
 
+read -r current_device </etc/trimui_device.txt
 ################ CrossMix-OS Version Splashscreen ################
 
-version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
+read -r version </mnt/SDCARD/System/usr/trimui/crossmix-version.txt
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "CrossMix OS v$version"
 
 ################ CrossMix-OS internal storage Customization ################
-FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
+read -r FW_patched_version </usr/trimui/crossmix-version.txt
 
 if [ "$version" != "$FW_patched_version" ]; then
 
@@ -25,8 +26,8 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 	Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
 
-    /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
-    cp /mnt/SDCARD/System/resources/preload.sh /usr/trimui/bin/preload.sh
+	/mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
+	cp /mnt/SDCARD/System/resources/preload.sh /usr/trimui/bin/preload.sh
 
 	# Removing duplicated app
 	rm -rf /usr/trimui/apps/zformatter_fat32/
@@ -40,7 +41,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 	# Increase alsa sound buffer
 	# cp "/mnt/SDCARD/System/usr/trimui/etc/asound.conf" "/etc/asound.conf"
-	
+
 	# USB Storage app update
 	rm "/usr/trimui/apps/usb_storage/"*.png
 	cp "/mnt/SDCARD/System/resources/usb_storage/"* "/usr/trimui/apps/usb_storage/"
@@ -138,4 +139,4 @@ fi
 # Apply current led configuration
 /mnt/SDCARD/System/etc/led_config.sh &
 
-hostname "TSP"
+hostname=$(echo "$current_device" | tr 'a-z' 'A-Z')
