@@ -140,11 +140,54 @@ if [ -f "/tmp/device_changed" ]; then
 
 	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "Switching to $current_device device. "
 
-	#manage different RA versions
+	# manage different RA versions
 	cp "/mnt/SDCARD/RetroArch/ra64.trimui_$current_device" /mnt/SDCARD/RetroArch/ra64.trimui
 
+	# manage theme differences
+	themes_dir="/mnt/SDCARD/Themes"
+
+	for theme_folder in "$themes_dir"/*; do
+		if [ -d "$theme_folder" ]; then
+			themePath="$theme_folder/skin"
+			last_device_themePath="$themePath/$last_device"
+			current_device_themePath="$themePath/$current_device"
+
+			# backup and remove previous custom iotesting buttons
+			if [ -f "$themePath/iotesting-key-A.png" ]; then
+				if [ -f "$last_device_themePath/iotesting-key-A.png" ]; then
+					rm "$themePath/iotesting-key-*.png"
+				else
+					mkdir -p "$last_device_themePath"
+					mv "$themePath/iotesting-key-*.png" "$last_device_themePath/"
+				fi
+			fi
+			# backup and remove previous custom iotesting background
+			if [ -f "$themePath/bg-iotesting.png" ]; then
+				if [ -f "$last_device_themePath/bg-iotesting.png" ]; then
+					rm "$themePath/bg-iotesting.png"
+				else
+					mkdir -p "$last_device_themePath"
+					mv "$themePath/bg-iotesting.png" "$last_device_themePath/"
+				fi
+			fi
+			#  backup and remove previous custom wifi keyboard keys
+			if [ -f "$themePath/bg-wifi-button-01-selected.png" ]; then
+				if [ -f "$last_device_themePath/bg-wifi-button-01-selected.png" ]; then
+					rm "$themePath/bg-wifi-button-*.png"
+				else
+					mkdir -p "$last_device_themePath"
+					mv "$themePath/bg-wifi-button-*.png" "$last_device_themePath/"
+				fi
+			fi
+			# Apply current device custom skin items
+			if [ -d "$current_device_themePath" ]; then
+				cp -r "$current_device_themePath/"* "$themePath/"
+				echo "Copied skin contents from $current_device_themePath to $themePath"
+			fi
+		fi
+	done
+	sync
 fi
-sync
 
 ######################### CrossMix-OS at each boot #########################
 
