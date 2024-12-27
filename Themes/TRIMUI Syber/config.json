@@ -1,0 +1,38 @@
+{
+    "name":"TRIMUI Syber",
+    "font":"msyh.ttf",
+    "fontascii":"msyh.ttf",
+    "fontsize":{
+        "nav_font1":32,
+        "nav_font2":32,
+        "content_font1":36,
+        "content_font2":24,
+        "content_font3":48,
+        "content_font4":72,
+        "content_font5":40,
+        "content_font6":28,
+        "stat_font1":32,
+        "menu_font1":36,
+        "popup_font1":44,
+        "popup_font2":36,
+        "popup_font3":36
+    },
+    "fontcolor":{
+        "nav_color1":"#80FFFFFF",
+        "nav_color2":"#FFFFFFFF",
+        "nav_color3":"#80FFFFFF",
+        "content_color1":"#FFFFFFFF",
+        "content_color2":"#80FFFFFF",
+        "content_color3":"#FFFFA400",
+        "content_color4":"#FFFFA400",
+        "stat_color1":"#FFFFFFFF",
+        "stat_color2":"#FFFFA400",
+        "menu_color1":"#FFFFFFFF",
+        "menu_color2":"#FFFFFFFF",
+        "popup_color1":"#FFFFA400",
+        "popup_color2":"#FFFFFFFF",
+        "popup_color3":"#FFFFFFFF",
+        "highlight_color1":"#FFFFA400",
+        "shadow_color1":"#FF000000"
+    }
+} 
