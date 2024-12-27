@@ -138,6 +138,7 @@ fi
 
 if [ -f "/tmp/device_changed" ]; then
 
+	read -r last_device </tmp/device_changed
 	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "Switching to $current_device device. "
 
 	# manage different RA versions

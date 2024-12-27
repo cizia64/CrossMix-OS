@@ -11,6 +11,7 @@ CurrentTheme=$(/mnt/SDCARD/System/bin/jq -r .theme /mnt/UDISK/system.json)
 CrossMix_Style=$(/mnt/SDCARD/System/bin/jq -r '.["CROSSMIX STYLE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 mkdir -p /mnt/SDCARD/System/starts/
 mkdir -p /mnt/SDCARD/System/etc
+read -r current_device </etc/trimui_device.txt
 if [ ! -f "/mnt/SDCARD/System/etc/crossmix.json" ]; then
   touch "/mnt/SDCARD/System/etc/crossmix.json"
 fi
@@ -53,8 +54,7 @@ fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$LaunchMessage"
 
-cp /mnt/SDCARD/Apps/SystemTools/GoTo_SystemTools_List.json /tmp/state.json
-sync
+cp /mnt/SDCARD/Apps/SystemTools/GoTo_SystemTools_List_$current_device.json /tmp/state.json
 
 # We re-create the database only if it doesn't exist...
 if [ -f "$database_file" ]; then
@@ -173,26 +173,28 @@ sync
 search_path="/mnt/SDCARD/Apps/SystemTools/Menu/"
 
 for folder in "$search_path"/*/; do
-  # Extract the folder name
-  folder_name=$(basename "$folder")
+  if ! [ -f "$folder/.no_$current_device" ]; then
+    # Extract the folder name
+    folder_name=$(basename "$folder")
 
-  # Check if the folder starts with "Imgs" directory
-  if [ "${folder_name#Imgs}" != "$folder_name" ]; then
-    # Skip the "Imgs" directory
-    continue
+    # Check if the folder starts with "Imgs" directory
+    if [ "${folder_name#Imgs}" != "$folder_name" ]; then
+      # Skip the "Imgs" directory
+      continue
+    fi
+
+    if [ "${subfolder%/}" = "${search_path%/}" ]; then
+      ppath="."
+    else
+      ppath="${subfolder##*/}"
+      folder_escaped=$(echo "$folder_name" | sed "s/'/''/g")
+    fi
+
+    # Create an entry for the folder as if it were a game
+    subfolder_query="INSERT INTO Menu_roms (disp, path, imgpath, type, ppath, pinyin, cpinyin, opinyin) VALUES (\"$folder_escaped\", \"$folder\", \"${img_path}/${folder_name}.png\", 1, \".\", \"$folder_escaped\", \"$folder_escaped\", \"$folder_escaped\")"
+    sqlite3 "$database_file" "$subfolder_query"
+    sync
   fi
-
-  if [ "${subfolder%/}" = "${search_path%/}" ]; then
-    ppath="."
-  else
-    ppath="${subfolder##*/}"
-    folder_escaped=$(echo "$folder_name" | sed "s/'/''/g")
-  fi
-
-  # Create an entry for the folder as if it were a game
-  subfolder_query="INSERT INTO Menu_roms (disp, path, imgpath, type, ppath, pinyin, cpinyin, opinyin) VALUES (\"$folder_escaped\", \"$folder\", \"${img_path}/${folder_name}.png\", 1, \".\", \"$folder_escaped\", \"$folder_escaped\", \"$folder_escaped\")"
-  sqlite3 "$database_file" "$subfolder_query"
-  sync
 done
 
 # ================================================= Create script items in database =================================================
@@ -216,24 +218,27 @@ find "$search_path" -mindepth 1 -maxdepth 2 -type f -name "*.sh" | while read -r
 
   # Determine the subfolder (ppath)
   subfolder=$(dirname "$file")
-  if [ "${subfolder%/}" = "${search_path%/}" ]; then
-    ppath="."
-  else
-    ppath="${subfolder##*/}"
+
+  if ! [ -f "$subfolder/.${filename_without_ext}.no_$current_device" ]; then
+
+    if [ "${subfolder%/}" = "${search_path%/}" ]; then
+      ppath="."
+    else
+      ppath="${subfolder##*/}"
+    fi
+
+    # Set the imgpath with the subfolder "Imgs"
+    imgpath="$img_path/$(basename "$subfolder")/${filename%.*}.png"
+
+    # Prepare the SQLite query with double quotes around the filename, ppath, and imgpath
+    query="INSERT INTO Menu_roms (disp, path, imgpath, type, ppath, pinyin, cpinyin, opinyin) VALUES (\"$escaped_filename\", \"$file\", \"$imgpath\", 0, \"$ppath\", \"$escaped_filename\", \"$escaped_filename\", \"$escaped_filename\")"
+
+    # Execute the query using sqlite3
+    sqlite3 "$database_file" "$query"
+    sync
+
+    echo "Entry created for file: $file"
   fi
-
-  # Set the imgpath with the subfolder "Imgs"
-  imgpath="$img_path/$(basename "$subfolder")/${filename%.*}.png"
-
-  # Prepare the SQLite query with double quotes around the filename, ppath, and imgpath
-  query="INSERT INTO Menu_roms (disp, path, imgpath, type, ppath, pinyin, cpinyin, opinyin) VALUES (\"$escaped_filename\", \"$file\", \"$imgpath\", 0, \"$ppath\", \"$escaped_filename\", \"$escaped_filename\", \"$escaped_filename\")"
-
-  # Execute the query using sqlite3
-  sqlite3 "$database_file" "$query"
-  sync
-
-  echo "Entry created for file: $file"
-
 done
 
 sync
