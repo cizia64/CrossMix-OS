@@ -13,7 +13,7 @@ fi
 read -r last_device </mnt/SDCARD/System/etc/last_device.txt
 if [ "$current_device" != "$last_device" ]; then
     echo -n $current_device >/mnt/SDCARD/System/etc/last_device.txt
-    touch /tmp/device_changed
+    echo -n $last_device >/tmp/device_changed
 fi 
 
 
