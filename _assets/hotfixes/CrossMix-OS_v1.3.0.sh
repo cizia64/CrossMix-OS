@@ -2,9 +2,9 @@
 source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 cmd=$1
 ############### This section must be updated manually at each script update ###############
-Remote_HotfixVersion="1.3.0.1"
-Remote_HotfixDate="2024-12-23"
-Remote_HotfixDesc="- Fix USB Storage App exit\n- Fix Saturn extlist (chd not displayed in rom list)"
+Remote_HotfixVersion="1.3.0.2"
+Remote_HotfixDate="2024-12-28"
+Remote_HotfixDesc="- Fix USB Storage App exit\n- Fix Saturn extlist (chd not displayed in rom list)\n- Fix PPSSPP performance mode."
 ###########################################################################################
 
 main() {
@@ -139,6 +139,11 @@ apply_update() {
     # Saturn ext list fix
     download_file "Saturn ext list fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/SATURN/config.json" -d "/mnt/SDCARD/Emus/SATURN"
     rm "/mnt/SDCARD/Roms/SATURN/SATURN_cache7.db"
+
+    # ppsspp inverted normal/performance mode 
+    download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.15.4.sh" -d "/mnt/SDCARD/Emus/PSP"
+    download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.17.1_gl.sh" -d "/mnt/SDCARD/Emus/PSP"
+    download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.17.1_vulkan.sh" -d "/mnt/SDCARD/Emus/PSP"
 
     sleep 5
 }
