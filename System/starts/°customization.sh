@@ -144,6 +144,15 @@ if [ -f "/tmp/device_changed" ]; then
 	# manage different RA versions
 	cp "/mnt/SDCARD/RetroArch/ra64.trimui_$current_device" /mnt/SDCARD/RetroArch/ra64.trimui
 
+    #Change mupen64plus standalone resolution
+    if [ "$current_device" = "brick" ]; then
+        sed -i 's/^ScreenWidth=.*$/ScreenWidth=1024'
+        sed -i 's/^ScreenHeight=.*$/ScreenHeight=768'
+    else
+        sed -i 's/^ScreenWidth=.*$/ScreenWidth=1280'
+        sed -i 's/^ScreenHeight=.*$/ScreenHeight=720'
+    fi
+
 	# manage theme differences
 	themes_dir="/mnt/SDCARD/Themes"
 
