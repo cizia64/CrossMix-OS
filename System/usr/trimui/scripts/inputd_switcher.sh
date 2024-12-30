@@ -16,17 +16,31 @@ read -r device < /etc/trimui_device.txt
 inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
 [ -f "$inputd_src_dir/$polling_rate" ] || polling_rate=16ms
 
-case "$polling_rate" in
-"1ms")
-    Sha_expected=93454518ccacd4d3ffe22b0811cae0ac3c00a714
-    ;;
-"8ms")
-    Sha_expected=306d1693d4da4257eb0b7bcf13ec113019b87e69
-    ;;
-"16ms")
-    Sha_expected=1f15184d75911c115bac9fc7cab8d79d4f311bf4
-    ;;
-esac
+if [ "$device" = "tsp" ]; then
+    case "$polling_rate" in
+    "1ms")
+        Sha_expected=93454518ccacd4d3ffe22b0811cae0ac3c00a714
+        ;;
+    "8ms")
+        Sha_expected=306d1693d4da4257eb0b7bcf13ec113019b87e69
+        ;;
+    "16ms")
+        Sha_expected=1f15184d75911c115bac9fc7cab8d79d4f311bf4
+        ;;
+    esac
+elif [ "$device" = "brick" ]; then
+    case "$polling_rate" in
+    "1ms")
+        Sha_expected=064c4938cd5ddc309dad022b3927a9dbe978d33e
+        ;;
+    "8ms")
+        Sha_expected=5762c86ca818e18ee82def56e594a59373bf2f51
+        ;;
+    "16ms")
+        Sha_expected=0bc5eae5939dcc2b95501494c813348b7f70cbc0
+        ;;
+    esac
+fi
 
 Sha=$(sha1sum "$inputd_src_dir/$polling_rate" | cut -d ' ' -f 1)
 if [ "$Sha_expected" = "$Sha" ]; then
