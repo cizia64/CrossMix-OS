@@ -7,7 +7,7 @@ cpufreq.sh performance 7 7
 export HOME="$PWD"
 
 choice=$(grep -i "dowork 0x" "/tmp/log/messages" | tail -n 1 | grep -i "(HLE BIOS)")
-if [ -z "$choice" ]; then
+if [ -n "$choice" ]; then
     BIOS_FILE=""
     echo "Using Yabasanshiro HLE BIOS"
 else
