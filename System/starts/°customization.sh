@@ -153,6 +153,8 @@ if [ -f "/tmp/device_changed" ]; then
         sed -i 's/^ScreenHeight=.*$/ScreenHeight=720'
     fi
 
+    /mnt/SDCARD/System/usr/trimui/scripts/overlays_switcher.sh
+
 	# manage theme differences
 	themes_dir="/mnt/SDCARD/Themes"
 
