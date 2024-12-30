@@ -36,6 +36,7 @@ else
     infoscreen -m "Inputd switch failed: new inputd is corrupted."
     exit 1
 fi
+sync
 
 # Menu modification to reflect the change immediately
 
