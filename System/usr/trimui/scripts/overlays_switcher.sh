@@ -1,13 +1,17 @@
 #!/bin/sh
 
+PATH="/mnt/SDCARD/System/bin:$PATH"
+LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 script_name="$(basename "$0" .sh)"
 if [ "$script_name" = "overlays_switcher" ]; then
     script_name=$(/mnt/SDCARD/System/bin/jq -r '.["OVERLAYS"]' "/mnt/SDCARD/System/etc/crossmix.json")
+else
+    [ "$1" != "-s" ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 fi
 
-ratio=$(echo "${script_name#.*- }" | tr ' ' '-')
-display=$(fbset | grep ^mode | cut -d "\"" -f 2 | cut -d "-" -f 1)
-if [ "${script_name% -.*}" = "Overlays" ]; then
+ratio=$(echo "${script_name#*- }" | tr ' ' '-')
+display="$(/usr/sbin/fbset | grep ^mode | cut -d "\"" -f 2 | cut -d "-" -f 1)"
+if [ "${script_name% -*}" = "Overlays" ]; then
     # Directory to create new files
     overlay_dir="/mnt/SDCARD/RetroArch/.retroarch/overlay/$display"
     if [ "$ratio" = "max-ratio" ]; then
@@ -34,40 +38,40 @@ while IFS= read -r -d '' cfg_file; do
 
 	# If aspect_ratio_index exists, it's a special configuration, we skip to the next file (except if the ratio is 22 which is the default ratio "core provided")
 	aspect_ratio_index=$(/mnt/SDCARD/System/usr/trimui/scripts/get_ra_cfg.sh "$cfg_file" "aspect_ratio_index")
+
 	if [ "$aspect_ratio_index" = 22 ] || [ "$aspect_ratio_index" = 24 ]; then
 		echo "Skipping file (special configuration): $cfg_file"
 		skip_count=$((skip_count + 1))
 	else
+        # Extract the prefix of the file name (without the .cfg extension)
+        prefix=$(basename "$cfg_file" .cfg)
+        prefix=${prefix// /_}
 
-		# Extract the prefix of the file name (without the .cfg extension)
-		prefix=$(basename "$cfg_file" .cfg)
-		prefix=${prefix// /_}
-
-		configPatchFile=$(mktemp -p /tmp/patches)
+        configPatchFile=$(mktemp -p /tmp/patches)
         used_ratio=$ratio
         if [ -z "$overlay_dir" ]; then
             echo 'input_overlay_enable = "false"' >"$configPatchFile"
         else
-            echo 'input_overlay_enable = "true"' >"$configPatchFile"
             if [ -e "$overlay_dir/${prefix}_$ratio.png" ]; then
-                echo "input_overlay = \"./.retroarch/overlay/${prefix}_max-$ratio.cfg\"" >"$configPatchFile"
+                echo "input_overlay = \"$overlay_dir/${prefix}_$ratio.cfg\"" >"$configPatchFile"
                 found_count=$((found_count + 1))
                 echo "File created for $prefix: $configPatchFile"
             elif [ -e "$overlay_dir/${prefix}_$alt_ratio.png" ]; then # as fallback if the overlay with pixel-perfect exists then we take this one
-                echo "input_overlay = \"./.retroarch/overlay/${prefix}_$alt_ratio.cfg\"" >"$configPatchFile"
+                echo "input_overlay = \"$overlay_dir/${prefix}_$alt_ratio.cfg\"" >"$configPatchFile"
                 used_ratio=$alt_ratio
                 alt_count=$((alt_count + 1))
                 echo "Alternative pixel-perfect file created for $prefix: $configPatchFile"
             elif [ -e "$overlay_dir/${prefix}_custom.png" ]; then # as fallback if the overlay with _custom exists then we take this one
-                echo "input_overlay = \"./.retroarch/overlay/${prefix}_custom.cfg\"" >"$configPatchFile"
+                echo "input_overlay = \"$overlay_dir/${prefix}_custom.cfg\"" >"$configPatchFile"
                 used_ratio=pixel-perfect
                 alt_count=$((alt_count + 1))
                 echo "Alternative custom file created for $prefix: $configPatchFile"
             else # no fallback available, we force the overlay even if it doesn't exist
-                echo "input_overlay = \"./.retroarch/overlay/${prefix}_$ratio.cfg\"" >"$configPatchFile"
+                echo "input_overlay = \"$overlay_dir/${prefix}_$ratio.cfg\"" >"$configPatchFile"
                 notfound_count=$((notfound_count + 1))
                 echo "No overlay image found for $prefix: $configPatchFile"
             fi
+            echo 'input_overlay_enable = "true"' >>"$configPatchFile"
         fi
         if [ "$used_ratio" = "pixel-perfect" ]; then
             echo 'video_scale_integer = "true"' >>"$configPatchFile"
@@ -81,23 +85,23 @@ while IFS= read -r -d '' cfg_file; do
             echo 'aspect_ratio_index = "22"' >>"$configPatchFile"
         fi
 
-		sync
 
-		/mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$configPatchFile" "$cfg_file" &
+        /mnt/SDCARD/System/usr/trimui/scripts/patch_ra_cfg.sh "$configPatchFile" "$cfg_file" &
+        found_count=$((found_count + 1))
 
-		sync
-		found_count=$((found_count + 1))
-	fi
-
-	# Increment the count of .cfg files found
-	cfg_count=$((cfg_count + 1))
+    fi
+    # Increment the count of .cfg files found
+    cfg_count=$((cfg_count + 1))
 
 	# Display a message for each created file
 	# echo "Patch file created for $prefix: $configPatchFile"
 
 done < <(find "$cfg_dir" -type f -name '*.cfg' ! -path "*VecX*" -print0)
-
+while pgrep patch_ra_cfg.sh; do
+    sleep 1
+done
 sync
+
 # Display the total number of .cfg files found
 echo -e "-----------------------------"
 echo "Total number of .cfg files found: $cfg_count"
