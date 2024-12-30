@@ -24,4 +24,5 @@ if [ -f "/tmp/cmd_to_run.sh" ] && ! grep -q "dowork 0x" "/tmp/cmd_to_run.sh"; th
     sed -i "1s|^|echo \"$choice\" > /tmp/log/messages\n|" "/tmp/cmd_to_run.sh"
 fi
 
-./yabasanshiro -r 3 -i "$@" -b "$BIOS_FILE"
+./yabasanshiro -r 3 -i "$@" -b "$BIOS_FILE" &
+activities add "$1" $!
