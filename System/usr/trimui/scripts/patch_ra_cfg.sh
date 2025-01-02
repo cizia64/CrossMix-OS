@@ -4,7 +4,6 @@
 PATCH_FILE="$1"
 TARGET_FILE="${2:-/mnt/SDCARD/RetroArch/retroarch.cfg}"
 
-
 # Check if the files exist
 for file in "$PATCH_FILE" "$TARGET_FILE"; do
     if [ ! -f "$file" ]; then
@@ -15,78 +14,45 @@ done
 
 # Ensure the patch file ends with a newline
 if [ "$(tail -c1 "$PATCH_FILE")" != "" ]; then
-    echo >> "$patch"
+    echo >> "$PATCH_FILE"
 fi
 
-# Function to escape special characters for sed
-escape_sed() {
-    echo "$1" | sed -e 's/[&/|]/\\&/g'
-}
+# Create a temporary file for the patched target
+TMP_FILE=$(mktemp)
 
+# Use awk to process the files
+awk -F= -v OFS="=" -v patch="$PATCH_FILE" '
+    BEGIN {
+        # Read the patch file into a map
+        while ((getline < patch) > 0) {
+            if ($1 ~ /^[[:space:]]*$/ || $1 ~ /^#/) continue; # Skip empty lines or comments
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "", $1); # Trim spaces
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2); # Trim spaces
+            patch_map[$1] = $2; # Store key-value pairs
+        }
+        close(patch);
+    }
+    {
+        key = $1;
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", key); # Trim spaces
+        if (key in patch_map) {
+            # Update existing key with patched value
+            $2 = patch_map[key];
+            delete patch_map[key]; # Mark key as processed
+        }
+        print $1, $2;
+    }
+    END {
+        # Append remaining keys from the patch file
+        for (key in patch_map) {
+            print key, patch_map[key];
+        }
+    }
+' "$TARGET_FILE" > "$TMP_FILE"
 
-# Apply patch modifications to the configuration file
-count=0
+# Replace the target file with the updated content
+mv "$TMP_FILE" "$TARGET_FILE"
 
-# Read each key/value pair from the patch.cfg file
-while IFS='=' read -r key patch_value; do
-    # Skip empty lines or comments
-    [ -z "$key" ] && continue
-    Fulline="$key=$patch_value"
-    key=$(echo "$key" | sed 's/^ *//;s/ *$//')
-    patch_value=$(echo "$patch_value" | sed 's/^ *//;s/ *$//')
-	# patch_value==$(escape_sed "$patch_value")
-
-    # Escape the key for grep and sed
-    escaped_key=$(escape_sed "$key")
-
-    # Check if the key already exists in the target file
-    if grep -q "^$escaped_key[ ]*=" "$TARGET_FILE"; then
-        # Extract the existing line
-        line=$(grep "^$escaped_key[ ]*=" "$TARGET_FILE")
-
-        # Preserve spaces around the `=` and quotes if present
-        echo "$line" | grep -q ' =' && spaces_before_equals=" " || spaces_before_equals=""
-        echo "$line" | grep -q '= ' && spaces_after_equals=" " || spaces_after_equals=""
-
-        if echo "$line" | grep -q '"'; then
-            # Syntax with quotes
-            # formatted_value="\"$(echo "$patch_value" | sed 's/^\"//;s/\"$//')\""
-            formatted_value="$patch_value"
-        else
-            # Syntax without quotes
-            formatted_value=$(echo "$patch_value" | sed 's/^\"//;s/\"$//')
-        fi
-
-        # Replace in the target file with the preserved syntax
-sed -i "s|^$escaped_key[ ]*=.*|$key$spaces_before_equals=$spaces_after_equals$formatted_value|" "$TARGET_FILE"
-    elif grep -m1 '=' "$TARGET_FILE"; then
-        # If the key is not found, take a random line containing an `=`
-        line=$(grep -m1 '=' "$TARGET_FILE")
-
-        # Preserve spaces around the `=` and quotes if present
-        echo "$line" | grep -q ' =' && spaces_before_equals=" " || spaces_before_equals=""
-        echo "$line" | grep -q '= ' && spaces_after_equals=" " || spaces_after_equals=""
-
-        if echo "$line" | grep -q '"'; then
-            # Syntax with quotes
-            # formatted_value="\"$(echo "$patch_value" | sed 's/^\"//;s/\"$//')\""
-            formatted_value="$patch_value"
-        else
-            # Syntax without quotes
-            formatted_value=$(echo "$patch_value" | sed 's/^\"//;s/\"$//')
-			formatted_value="$patch_value"
-        fi
-
-        # Add the key/value with the format found
-        echo "$key$spaces_before_equals=$spaces_after_equals$formatted_value" >> "$TARGET_FILE"
-    else
-        # If no line contains a `=`, add a new line with the default format
-        echo "$Fulline" >> "$TARGET_FILE"
-    fi
-	count=$((count + 1))
-done < "$PATCH_FILE"
-
-echo "$count lines patched for $(basename "$(dirname "$TARGET_FILE")")/$(basename "$TARGET_FILE")"
-
-# [ "$1" != "-d" ] && rm "$PATCH_FILE"
-sync 
+# Output summary
+echo "Patched $(wc -l < "$PATCH_FILE") lines in $(basename "$TARGET_FILE")."
+sync
