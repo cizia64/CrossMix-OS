@@ -145,12 +145,13 @@ if [ -f "/tmp/device_changed" ]; then
 	cp "/mnt/SDCARD/RetroArch/ra64.trimui_$current_device" /mnt/SDCARD/RetroArch/ra64.trimui
 
     #Change mupen64plus standalone resolution
+    n64_conf=/mnt/SDCARD/Emus/N64/mupen64plus/mupen64plus.cfg
     if [ "$current_device" = "brick" ]; then
-        sed -i 's/^ScreenWidth=.*$/ScreenWidth=1024'
-        sed -i 's/^ScreenHeight=.*$/ScreenHeight=768'
+        sed -i 's/^ScreenWidth =.*$/ScreenWidth = 1024' $n64_conf
+        sed -i 's/^ScreenHeight =.*$/ScreenHeight = 768' $n64_conf
     else
-        sed -i 's/^ScreenWidth=.*$/ScreenWidth=1280'
-        sed -i 's/^ScreenHeight=.*$/ScreenHeight=720'
+        sed -i 's/^ScreenWidth =.*$/ScreenWidth = 1280' $n64_conf
+        sed -i 's/^ScreenHeight =.*$/ScreenHeight = 720' $n64_conf
     fi
 
     /mnt/SDCARD/System/usr/trimui/scripts/overlays_switcher.sh
