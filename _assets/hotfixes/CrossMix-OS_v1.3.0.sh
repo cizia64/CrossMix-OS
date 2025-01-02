@@ -2,9 +2,9 @@
 source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 cmd=$1
 ############### This section must be updated manually at each script update ###############
-Remote_HotfixVersion="1.3.0.2"
-Remote_HotfixDate="2024-12-28"
-Remote_HotfixDesc="- Fix USB Storage App exit\n- Fix Saturn extlist (chd not displayed in rom list)\n- Fix PPSSPP performance mode."
+Remote_HotfixVersion="1.3.0.3"
+Remote_HotfixDate="2025-01-02"
+Remote_HotfixDesc="- Fix USB Storage App exit\n- Fix Saturn extlist (chd not displayed in rom list)\n- Fix PPSSPP performance mode\n- Fix Saturn launcher inverted"
 ###########################################################################################
 
 main() {
@@ -144,6 +144,9 @@ apply_update() {
     download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.15.4.sh" -d "/mnt/SDCARD/Emus/PSP"
     download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.17.1_gl.sh" -d "/mnt/SDCARD/Emus/PSP"
     download_file "PPSSPP perf mode fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/PSP/ppsspp_1.17.1_vulkan.sh" -d "/mnt/SDCARD/Emus/PSP"
+
+    # Saturn launcher inverted
+    download_file "Saturn launcher inverted fix" "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/refs/heads/main/Emus/SATURN/yabasanshiro_standalone.sh" -d "/mnt/SDCARD/Emus/SATURN"
 
     sleep 5
 }
