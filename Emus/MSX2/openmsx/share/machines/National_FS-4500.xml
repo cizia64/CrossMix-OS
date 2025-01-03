@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>National</manufacturer>
+    <code>FS-4500</code>
+    <release_year>1986</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Matsushita id="Matsushita">
+      <sramname>fs-4500_matsushita.sram</sramname>
+    </Matsushita>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>fs-4500_kanjifont.rom</filename>
+        <sha1>9ed3ab6d893632b9246e91b412cd5db519e7586b</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <S1985 id="S1985">
+      <sramname>fs-4500_s1985.sram</sramname>
+    </S1985>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-1985 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-1985 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-1985 MSX-ENGINE -->
+      <keyboardlayout>JIS</keyboardlayout>
+      <!-- Also found in 50on layout -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>fs-4500.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>fs-4500_basic-bios2.rom</filename>
+            <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>fs-4500_msx2sub.rom</filename>
+            <sha1>b8e30d604d319d511cbfbc61e5d8c38fbb9c5a33</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <Bunsetsu id="MSX Bunsetsu Henkan">
+          <rom id="bunsetsu">
+            <filename>fs-4500_msxbunse.rom</filename>
+            <sha1>e89ea1e8e583392e2dd9debb8a4b6a162f58ba91</sha1>
+          </rom>
+          <rom id="jisyo">
+            <filename>fs-4500_msxbudic.rom</filename>
+            <sha1>1ebb06062428fcdc66808a03761818db2bba3c73</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </Bunsetsu>
+        <ROM id="Word Font">
+          <rom>
+            <filename>fs-4500_wordfont.rom</filename>
+            <sha1>3ce8e35790eb4689b21e14c7ecdd4b63943ee158</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="MSX Jusho">
+          <rom>
+            <filename>fs-4500_msxjusho.rom</filename>
+            <sha1>6442c1c5cece64c6dae90cc6ae3675f070d93e06</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Word 1">
+          <rom>
+            <filename>fs-4500_msxword1.rom</filename>
+            <sha1>3f047469b62d93904005a0ea29092e892724ce0b</sha1>
+          </rom>
+          <mem base="0x0000" size="0xC000"/>
+        </ROM>
+        <ROM id="MSX Kanji Driver 1">
+          <rom>
+            <filename>fs-4500_kanjibasic1.rom</filename>
+            <sha1>df07e89fa0b1c7874f9cdf184c136f964fea4ff4</sha1>
+          </rom>
+          <mem base="0xC000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Word 2">
+          <rom>
+            <filename>fs-4500_msxword2.rom</filename>
+            <sha1>4c8ea05c09b40c41888fa18db065575a317fda16</sha1>
+          </rom>
+          <mem base="0x0000" size="0xC000"/>
+        </ROM>
+        <ROM id="MSX Kanji Driver 2">
+          <rom>
+            <filename>fs-4500_kanjibasic2.rom</filename>
+            <sha1>c63db26660da96af56f8a7d3ea18544b9ae5a37c</sha1>
+          </rom>
+          <mem base="0xC000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3"/>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

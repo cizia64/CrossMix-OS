@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Sony</manufacturer>
+    <code>HB-75P</code>
+    <release_year>1983</release_year>
+    <description/>
+    <type>MSX</type>
+  </info>
+
+<!-- 
+Information from serial 444434 (http://bilgisayarlarim.com/Sony/HB-75P):
+CPU: NEC D780C-1
+PPI: NEC D8255AC-5
+PSG: Yamaha YM2149F
+-->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>gb</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9929A</version>
+      <io base="0x98" num="2"/>
+      <saturation>100</saturation> <!-- TMS9x2x and RGB output -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- probably there are also series with AY8910 -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>hb-75p_basic-bios1.rom</filename>
+          <sha1>8963fc041975f31dc2ab1019cfdd4967999de53e</sha1> <!-- Confirmed on Sjoerd Lammertsma's machine -->
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+      <ROM id="Personal Data Bank">
+        <rom>
+          <filename>hb-75p_firmware.rom</filename>
+          <sha1>b262aedc71b445303f84efe5e865cbb71fd7d952</sha1> <!-- Confirmed on Sjoerd Lammertsma's machine -->
+        </rom>
+        <mem base="0x8000" size="0x4000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2">
+      <RAM id="Main RAM">
+        <mem base="0x0000" size="0x10000"/>
+      </RAM>
+    </primary>
+
+    <primary external="true" slot="3"/>
+
+  </devices>
+
+</msxconfig>

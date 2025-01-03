@@ -1,0 +1,159 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Philips</manufacturer>
+    <code>NMS 8245</code>
+    <release_year>1986</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>int</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-3527 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-3527 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-3527 MSX-ENGINE -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>nms_8245.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>NMS8245SystemROM1.08.bin</filename>
+          <sha1>cc57c1dcd7249ea9f8e2547244592e7d97308ed0</sha1> <!-- EPROM dump by Erik Luppes -->
+          <window base="0x0000" size="0x8000"/>
+        </rom>
+        <rom>
+          <filename>NMS8245SystemROM1.06.bin</filename>
+          <sha1>b746192dc333eaf2a725a44777303808a3649d63</sha1> <!-- EPROM dump by Erik Luppes -->
+          <window base="0x0000" size="0x8000"/>
+        </rom>
+        <rom>
+          <filename>NMS8245SystemROM1.05.bin</filename>
+          <sha1>816ceb21088b116ec34be0ff869d02222b525e58</sha1> <!-- maskROM dump by FRS -->
+          <window base="0x0000" size="0x8000"/>
+        </rom>
+        <rom>
+          <filename>nms8245_basic-bios2.rom</filename>
+          <sha1>6103b39f1e38d1aa2d84b1c3219c44f1abb5436e</sha1> <!-- verified on Manuel's 8245/00, same as 1.08, 1.06 and 1.05 EPROM dump -->
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>NMS8245SystemROM1.08.bin</filename>
+            <sha1>cc57c1dcd7249ea9f8e2547244592e7d97308ed0</sha1> <!-- EPROM dump by Erik Luppes -->
+            <window base="0x8000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>NMS8245SystemROM1.06.bin</filename>
+            <sha1>b746192dc333eaf2a725a44777303808a3649d63</sha1> <!-- EPROM dump by Erik Luppes -->
+            <window base="0x8000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>NMS8245SystemROM1.05.bin</filename>
+            <sha1>816ceb21088b116ec34be0ff869d02222b525e58</sha1> <!-- maskROM dump by FRS -->
+            <window base="0x8000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>nms8245_msx2sub.rom</filename>
+            <sha1>5c1f9c7fb655e43d38e5dd1fcc6b942b2ff68b02</sha1> <!-- verified by Manuel's 8245/00, same as 1.05 and 1.06 EPROM -->
+            <sha1>e7905d16d2ccd57a013c122dc432106cd59ef52c</sha1> <!-- same as 1.08 EPROM dump -->
+          </rom>
+          <mem base="0x0000" size="0x4000"/> <!-- Note: NO mirroring at all! -->
+        </ROM>
+      </secondary>
+
+      <secondary slot="1"/>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>128</size>
+          <initialContent encoding="gz-base64">eNpj+M8wouEI9z4DAJBx/wE=</initialContent> <!-- (chr(0) + chr(255)) * 128 + (chr(255)+ chr(0)) * 128), also seen is 00FF -->
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="3">
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <mem base="0x4000" size="0x8000"/>
+          <!-- Verified on real 8245: rom only visible in page1, FDC registers
+               in both page 1 and 2. This is different from a 8250! -->
+          <drives>1</drives>
+          <rom>
+            <filename>NMS8245SystemROM1.08.bin</filename>
+            <sha1>cc57c1dcd7249ea9f8e2547244592e7d97308ed0</sha1> <!-- EPROM dump by Erik Luppes -->
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>NMS8245SystemROM1.06.bin</filename>
+            <sha1>b746192dc333eaf2a725a44777303808a3649d63</sha1> <!-- EPROM dump by Erik Luppes -->
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>NMS8245SystemROM1.05.bin</filename>
+            <sha1>7e6a267e1a3e075dcdad3669b651b1050f6375ac</sha1> <!-- maskROM dump by FRS -->
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>nms8245_disk.rom</filename>
+            <sha1>b484c8fa4549b79cff976001ac4beb19abf7cfb5</sha1> <!-- marked NMS 8245 1.06, so this is probably the same as the 1.06 EPROM (with modified registers) -->
+            <sha1>c3f3ca454d66a0bc791f1d4b60e6857b44eb8755</sha1> <!-- marked NMS 8250 1.08, so this is probably the same as the 1.08 EPROM (with modified registers) -->
+          </rom>
+        </WD2793>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

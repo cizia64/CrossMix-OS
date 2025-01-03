@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Version Up Adapter MSX BASIC Vev. 2.0</name>
+    <manufacturer>Neos</manufacturer>
+    <code>MA-20 (R)</code>
+    <release_year>1985</release_year>
+    <description>MSX1 to MSX2 expansion kit, clock chip part.</description>
+  </info>
+  <devices>
+    <RTC id="Real time clock">
+      <sramname>ma-20r.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+    <primary slot="any">
+      <secondary slot="any">
+        <ROM id="MA-20 MSX2 BIOS and BASIC">
+          <mem base="0x0000" size="0x8000"/>
+          <rom>
+            <sha1>2a3d953a423fa513f0d26a8bf0bd50664688868c</sha1>
+            <filename>NEOSC.ROM</filename>
+          </rom>
+        </ROM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>
