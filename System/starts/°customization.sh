@@ -159,45 +159,27 @@ if [ -f "/tmp/device_changed" ]; then
 	# manage theme differences
 	themes_dir="/mnt/SDCARD/Themes"
 
-	for theme_folder in "$themes_dir"/*; do
-		if [ -d "$theme_folder" ]; then
+	for theme_folder in "$themes_dir"/*/; do
 			themePath="$theme_folder/skin"
 			last_device_themePath="$themePath/$last_device"
 			current_device_themePath="$themePath/$current_device"
 
-			# backup and remove previous custom iotesting buttons
-			if [ -f "$themePath/iotesting-key-A.png" ]; then
-				if [ -f "$last_device_themePath/iotesting-key-A.png" ]; then
-					rm "$themePath/iotesting-key-*.png"
-				else
-					mkdir -p "$last_device_themePath"
-					mv "$themePath/iotesting-key-*.png" "$last_device_themePath/"
-				fi
-			fi
-			# backup and remove previous custom iotesting background
-			if [ -f "$themePath/bg-iotesting.png" ]; then
-				if [ -f "$last_device_themePath/bg-iotesting.png" ]; then
-					rm "$themePath/bg-iotesting.png"
-				else
-					mkdir -p "$last_device_themePath"
-					mv "$themePath/bg-iotesting.png" "$last_device_themePath/"
-				fi
-			fi
-			#  backup and remove previous custom wifi keyboard keys
-			if [ -f "$themePath/bg-wifi-button-01-selected.png" ]; then
-				if [ -f "$last_device_themePath/bg-wifi-button-01-selected.png" ]; then
-					rm "$themePath/bg-wifi-button-*.png"
-				else
-					mkdir -p "$last_device_themePath"
-					mv "$themePath/bg-wifi-button-*.png" "$last_device_themePath/"
-				fi
-			fi
-			# Apply current device custom skin items
-			if [ -d "$current_device_themePath" ]; then
-				cp -r "$current_device_themePath/"* "$themePath/"
-				echo "Copied skin contents from $current_device_themePath to $themePath"
-			fi
-		fi
+			mkdir -p "$last_device_themePath"
+			mkdir -p "$current_device_themePath"
+            
+            # Save names of images to apply
+            cd "$current_device_themePath"
+            new_files=$(echo *.png)
+
+            # backup last device images
+            cd "$themePath"
+            mv $new_files "$last_device_themePath"
+
+            # apply current devices images
+            cd "$current_device_themePath"
+            mv $new_files "$themePath"
+
+			echo "Copied skin contents from $current_device_themePath to $themePath"
 	done
 	sync
 fi
