@@ -31,13 +31,13 @@ if [ "$device" = "tsp" ]; then
 elif [ "$device" = "brick" ]; then
     case "$polling_rate" in
     "1ms")
-        Sha_expected=064c4938cd5ddc309dad022b3927a9dbe978d33e
+        Sha_expected=591a98c8610282dd95fe5ecd0de42db563354408
         ;;
     "8ms")
-        Sha_expected=5762c86ca818e18ee82def56e594a59373bf2f51
+        Sha_expected=b09d47fdfcf6a3525638d13b3b337139107099eb
         ;;
     "16ms")
-        Sha_expected=0bc5eae5939dcc2b95501494c813348b7f70cbc0
+        Sha_expected=f650d992dc27cd200fd1d1f36fa1ef5addb067a0
         ;;
     esac
 fi
