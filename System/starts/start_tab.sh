@@ -1,10 +1,3 @@
-cat > /tmp/state.json <<- EOM2
-{
-"list":	[{
-"title":	0,
-"type":	0,
-"tabidx":	3,
-"tabstartidx":	2
-}]
-}
-EOM2
+#!/bin/sh
+
+cp /mnt/SDCARD/System/resources/default_state.json /tmp/state.json
