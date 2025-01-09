@@ -4,9 +4,9 @@ PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 script_name="$(basename "$0" .sh)"
 if [ "$script_name" = "overlays_switcher" ]; then
-    script_name=$(/mnt/SDCARD/System/bin/jq -r '.["OVERLAYS"]' "/mnt/SDCARD/System/etc/crossmix.json")
+    script_name=$(jq -r '.["OVERLAYS"]' "/mnt/SDCARD/System/etc/crossmix.json")
 else
-    [ "$1" != "-s" ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" by default..."
 fi
 
 ratio=$(echo "${script_name#*- }" | tr ' ' '-')
