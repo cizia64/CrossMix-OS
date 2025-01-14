@@ -120,6 +120,9 @@ if [ "$version" != "$FW_patched_version" ]; then
 	# Displaying only Emulators with roms
 	/mnt/SDCARD/Apps/EmuCleaner/launch.sh -s
 
+	# Use Pico-8 Cartiges as their own Images 
+ 	mount -o bind /mnt/SDCARD/Roms/PICO /mnt/SDCARD/Imgs/PICO
+
 	################ Flash boot logo ################
 	if [ "$CrossMix_Update" = "0" ]; then
 		CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
