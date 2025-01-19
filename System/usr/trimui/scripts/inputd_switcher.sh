@@ -4,34 +4,44 @@ LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 script_name=$(basename "$0" .sh)
 if [ "$script_name" = "inputd_switcher" ]; then
-    polling_rate=$(/mnt/SDCARD/System/bin/jq -r '.["POLLING RATE"]' "/mnt/SDCARD/System/etc/crossmix.json")
+    script_name=$(jq -r '.["POLLING RATE"]' "/mnt/SDCARD/System/etc/crossmix.json")
 else
-    polling_rate=$script_name
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying $polling_rate polling rate..."
 fi
+polling_rate=$script_name
 
 bin_dir="/mnt/SDCARD/trimui/app"
 
-read -r device < /etc/trimui_device.txt
-if [ "$device" = "brick" ]; then
-    cp /usr/trimui/bin/trimui_inputd $bin_dir/trimui_inputd
-    [ "$script_name" != "inputd_switcher" ] && infoscreen -m "Feature not supported yet on brick"
-    exit 1
-fi
+read -r device </etc/trimui_device.txt
 
 inputd_src_dir=/mnt/SDCARD/System/resources/${device}_inputd
 [ -f "$inputd_src_dir/$polling_rate" ] || polling_rate=16ms
 
-case "$polling_rate" in
-"1ms")
-    Sha_expected=93454518ccacd4d3ffe22b0811cae0ac3c00a714
-    ;;
-"8ms")
-    Sha_expected=306d1693d4da4257eb0b7bcf13ec113019b87e69
-    ;;
-"16ms")
-    Sha_expected=1f15184d75911c115bac9fc7cab8d79d4f311bf4
-    ;;
-esac
+if [ "$device" = "tsp" ]; then
+    case "$polling_rate" in
+    "1ms")
+        Sha_expected=93454518ccacd4d3ffe22b0811cae0ac3c00a714
+        ;;
+    "8ms")
+        Sha_expected=306d1693d4da4257eb0b7bcf13ec113019b87e69
+        ;;
+    "16ms")
+        Sha_expected=1f15184d75911c115bac9fc7cab8d79d4f311bf4
+        ;;
+    esac
+elif [ "$device" = "brick" ]; then
+    case "$polling_rate" in
+    "1ms")
+        Sha_expected=591a98c8610282dd95fe5ecd0de42db563354408
+        ;;
+    "8ms")
+        Sha_expected=b09d47fdfcf6a3525638d13b3b337139107099eb
+        ;;
+    "16ms")
+        Sha_expected=f650d992dc27cd200fd1d1f36fa1ef5addb067a0
+        ;;
+    esac
+fi
 
 Sha=$(sha1sum "$inputd_src_dir/$polling_rate" | cut -d ' ' -f 1)
 if [ "$Sha_expected" = "$Sha" ]; then
@@ -41,6 +51,7 @@ else
     infoscreen -m "Inputd switch failed: new inputd is corrupted."
     exit 1
 fi
+sync
 
 # Menu modification to reflect the change immediately
 
@@ -54,6 +65,5 @@ jq --arg polling_rate "$polling_rate" '. += {"POLLING RATE": $polling_rate}' "$j
 # update database of "System Tools" database
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "POLLING RATE" "$polling_rate"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying $polling_rate polling rate..." -t 1
 pkill trimui_inputd
 pkill -KILL MainUI

@@ -54,7 +54,7 @@ fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$LaunchMessage"
 
-cp /mnt/SDCARD/Apps/SystemTools/GoTo_SystemTools_List_$current_device.json /tmp/state.json
+cp /mnt/SDCARD/Apps/SystemTools/GoTo_SystemTools_List.json /tmp/state.json
 
 # We re-create the database only if it doesn't exist...
 if [ -f "$database_file" ]; then
