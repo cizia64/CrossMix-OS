@@ -23,7 +23,7 @@
       "launch": "ppsspp_1.17.1_vulkan.sh"
     },
     {
-      "name": "PPSSPP-1.5.4",
+      "name": "PPSSPP-1.15.4",
       "name.ch.lang": "PPSSPP-1.5.4性能模式",
       "launch": "ppsspp_1.15.4.sh"
     },
@@ -43,7 +43,7 @@
       "launch": "ppsspp_1.17.1_vulkan.sh"
     },
     {
-      "name": "PPSSPP-1.5.4 - Perf.",
+      "name": "PPSSPP-1.15.4 - Perf.",
       "name.ch.lang": "PPSSPP-1.5.4性能模式 - Perf.",
       "launch": "ppsspp_1.15.4.sh"
     }
