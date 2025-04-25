@@ -3,10 +3,13 @@ romdir=/mnt/SDCARD/Roms/SCUMMVM
 imgdir=/mnt/SDCARD/Imgs/SCUMMVM
 scandir=/mnt/SDCARD/Emus/SCUMMVM/../../Roms/SCUMMVM/GAMES
 scummvm_config=/mnt/SDCARD/BIOS/scummvm.ini
+# for Imgs
+DAT_DIR=/mnt/SDCARD/Emus/SCUMMVM/ScummVM/icon
+DEST_DIR=/mnt/SDCARD/Imgs/SCUMMVM
 
 ui_title="ScummVM Import"
 naming_mode=0
-skip_scan=1 # We set it like this for CrossMix as we don't have ScummVM standalone
+skip_scan=0 # We set it like this for CrossMix as we don't have ScummVM standalone
 
 if [ "$1" == "skip_scan" ]; then
     skip_scan=1
@@ -23,26 +26,37 @@ main() {
     echo -e "\n=================================== $ui_title ==================================="
     echo "Naming scheme: $naming_mode"
 
-    # if [ $skip_scan -eq 0 ]; then
-    # infoPanel -t "$ui_title" -m "Scanning..." --persistent 2> /dev/null &
-    # echo -e "\nScanning...\n"
-    # start=`date +%s`
+    if [ $skip_scan -eq 0 ]; then
+        # infoPanel -t "$ui_title" -m "Scanning..." --persistent 2> /dev/null &
+        echo -e "\nScanning...\n"
+        start=$(date +%s)
 
-    # scummvm -c "$scummvm_config" -p "$romdir" --add --recursive 2> /dev/null
+        cd /mnt/SDCARD/Emus/SCUMMVM/ScummVM
+        HOME=/mnt/SDCARD/Emus/SCUMMVM/ScummVM
+        export SDL_GAMECONTROLLERCONFIG_FILE=./gamecontrollerdb.txt
+        export LD_LIBRARY_PATH=./lib:/mnt/SDCARD/System/lib/:/usr/lib:LD_LIBRARY_PATH
 
-    # end=`date +%s`
-    # echo -e "\n:: Scan finished in $((end-start))s"
-    # fi
+        # ScummVM binary extraction
+        if [ ! -f "/mnt/SDCARD/Emus/SCUMMVM/ScummVM/scummvm" ]; then
+            /mnt/SDCARD/System/bin/7zz x "/mnt/SDCARD/Emus/SCUMMVM/ScummVM/scummvm.7z" -o"/mnt/SDCARD/Emus/SCUMMVM/ScummVM" && rm "/mnt/SDCARD/Emus/SCUMMVM/ScummVM/scummvm.7z"
+        fi
+
+        ./scummvm -c "$scummvm_config" -p "$scandir" --add --recursive 2>/dev/null
+        ./scummvm -p "$scandir" --add --recursive 2>/dev/null
+        end=$(date +%s)
+        echo -e "\n:: Scan finished in $((end - start))s"
+    fi
 
     # if [ ! -f "$scummvm_config" ]; then
-    # infoPanel -t "$ui_title" -m "No scan found\n \nPlease run import first" --auto 2> /dev/null
+    # infoPanel -t "$ui_title" -m "No scan found\n \nPlease run import first" --auto 2>/dev/null
+    # sleep 0.3
     # exit
     # fi
 
     scummvm_result="$(cat "$scummvm_config")"
 
     # removing all the old shortcuts
-    rm -f $scandir/*.scummvm 2>/dev/null
+    rm -f $romdir/*.scummvm 2>/dev/null
     sync
 
     # here we get all the targets names
@@ -60,27 +74,24 @@ main() {
             # get the path of the game:
             game_path=$(echo "$scummvm_result" | sed -n "/^[ \t]*\["$target"]/,/\[/s/^[ \t]*path[ \t]*=[ \t]*//p")
 
+            # get the ID of the game:
+            game_id=$(echo "$scummvm_result" | sed -n "/^[ \t]*\["$target"]/,/\[/s/^[ \t]*gameid[ \t]*=[ \t]*//p")
+
             save_shortcut "$target" "$description" "$game_path"
+            extract_game_icon "$game_id"
+            move_duplicates
+            sync
             let count++
         done
 
         end=$(date +%s)
         echo -e "\n:: Parsed in $((end - start))s"
 
-        # touch /tmp/dismiss_info_panel
         sync
 
         if [ $count -eq 0 ]; then
             result_message="No games found"
-            pkill -f sdl2imgshow
-            /mnt/SDCARD/System/bin/sdl2imgshow \
-                -i "$Current_bg" \
-                -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-                -s 30 \
-                -c "220,220,220" \
-                -t "Launch ScummVM and add games before importing." &
-            sleep 0.5
-            pkill -f sdl2imgshow
+            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "No games found." -t 0.5
         elif [ $count -eq 1 ]; then
             result_message="Found 1 game"
         else
@@ -89,23 +100,9 @@ main() {
 
         echo -e "\n================================= DONE! $result_message =================================\n\n"
 
-        # infoPanel -t "$ui_title" -m "$result_message" --auto 2> /dev/null
-        pkill -f sdl2imgshow
-        Current_bg="$Current_Theme/skin/bg.png"
-        if [ ! -f "$Current_bg" ]; then
-            Current_bg="/mnt/SDCARD/trimui/res/skin/transparent.png"
-        fi
-        /mnt/SDCARD/System/bin/sdl2imgshow \
-            -i "$Current_bg" \
-            -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
-            -s 30 \
-            -c "220,220,220" \
-            -t "$result_message" &
-        sleep 0.3
-        pkill -f sdl2imgshow
-    )
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "$result_message" -t 0.3
 
-    # rm -f /tmp/dismiss_info_panel 2> /dev/null
+    )
     sync
 
     # Reset rom list and cache
@@ -149,6 +146,7 @@ save_shortcut() {
         name="$d_name_n"
     fi
 
+    name=$name
     image_save_path="$imgdir/$name.png"
     target_save_path="$romdir/$name.scummvm"
 
@@ -177,6 +175,47 @@ escape_filename_old() {
 
 remove_parens() {
     echo "$1" | sed -e 's/\s*([^)]*)//g' -e 's/\s*\[[^]]*\]//g'
+}
+
+move_duplicates() {
+
+    if [ "$game_id" = "$previous_ID" ]; then
+        mkdir -p "$romdir/duplicates"
+        mv "$target_save_path" "$romdir/duplicates"
+    fi
+    previous_ID=$game_id
+}
+
+extract_game_icon() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: extract_game_icon <game_id>"
+        return 1
+    fi
+
+    GAME_ID="$1"
+    FOUND=0
+
+    for datfile in "$DAT_DIR"/*.dat; do
+        [ -f "$datfile" ] || continue
+
+        # Look for a PNG path matching the game ID inside the archive
+        MATCH=$(unzip -l "$datfile" | awk '{print $NF}' | grep "^icons/.*$GAME_ID\.png$")
+
+        if [ -n "$MATCH" ]; then
+            echo "✅ Game ID '$GAME_ID' found: $MATCH"
+            echo "📦 In archive: $(basename "$datfile")"
+            mkdir -p "$DEST_DIR"
+            /mnt/SDCARD/System/bin/7zz e "$datfile" "$MATCH" -o"$DEST_DIR" -y
+            mv "$DEST_DIR/$(basename "$MATCH")" "$DEST_DIR/$(basename "${target_save_path%.scummvm}.png")"
+            FOUND=1
+            break
+        fi
+    done
+
+    if [ "$FOUND" -eq 0 ]; then
+        echo "❌ Game ID '$GAME_ID' not found in any .dat file."
+        return 2
+    fi
 }
 
 main

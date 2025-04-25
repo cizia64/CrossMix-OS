@@ -13,18 +13,10 @@ if [ "$romName" = "° Run ScummVM.launch" ]; then
 fi
 
 if [ "$romName" = "° Import ScummVM Games.launch" ]; then
-	Current_Theme=$(/usr/trimui/bin/systemval theme)
-	Current_bg="$Current_Theme/skin/bg.png"
-	if [ ! -f "$Current_bg" ]; then
-		Current_bg="/mnt/SDCARD/trimui/res/skin/transparent.png"
-	fi
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$Current_bg" -m "Importing ScummVM games."
+	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "Importing ScummVM games."
 	sh "$Rom"
-	sleep 0.3
 	exit
 fi
 
-
 cd $RA_DIR/
-
 HOME=$RA_DIR/ $RA_DIR/ra64.trimui -v -L $RA_DIR/.retroarch/cores/scummvm_libretro-2.9.so "$@"
