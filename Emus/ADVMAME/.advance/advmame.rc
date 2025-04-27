@@ -133,7 +133,7 @@ display_beam 1
 display_brightness 1
 display_buffer no
 display_color auto
-display_expand 1.25
+display_expand 1
 display_flicker 0
 display_flipx no
 display_flipy no
