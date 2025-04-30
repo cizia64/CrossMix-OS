@@ -1,0 +1,1 @@
+Scripts to add new options to the FN Editor. Just run `install.sh` for the behavior you want.

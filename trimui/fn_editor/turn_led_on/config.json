@@ -1,0 +1,5 @@
+{
+    "name":"LED On",
+    "name.ch.lang":"LED 亮起",
+    "launch":"com.trimui.led_on.sh"
+}
