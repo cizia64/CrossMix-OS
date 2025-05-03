@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export PATH="/mnt/SDCARD/System/opt/helix-25:$PATH"
+hx $@
