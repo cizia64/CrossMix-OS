@@ -1,6 +1,8 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/mnt/SDCARD/System/lib/samba:/mnt/SDCARD/Apps/PortMaster/PortMaster:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
+thd /dev/input/event3  --triggers /mnt/SDCARD/System/etc/shortcuts.conf &
+
 if [ -f /tmp/device_changed ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
 fi
