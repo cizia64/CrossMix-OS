@@ -25,7 +25,8 @@ EOF
 }
 
 get_param() {
-    cat "/sys/class/disp/disp/attr/$1" 2>/dev/null
+    val=$(cat "/sys/class/disp/disp/attr/$1" 2>/dev/null)
+    echo "${val%% *}"
 }
 
 set_param() {
@@ -48,12 +49,16 @@ backup_current_settings() {
     > "$BACKUP_FILE"
     for p in $PARAMS; do
         if [ "$p" = "backlight" ]; then
+            # val=$(cat /sys/kernel/debug/dispdbg/param 2>/dev/null)
+            # if [ -z "$val" ] || [ "$val" = "0" ]; then
+                # Fallback via system.json
             sttbrt=$(/usr/trimui/bin/shmvar brightness 2>/dev/null)
             if [ -n "$sttbrt" ]; then
                 val=$(printf "%.0f" "$(echo "$sttbrt * 23" | bc)")
             else
                 val=200
             fi
+            # fi
         else
             val=$(get_param "$p")
         fi
@@ -107,7 +112,7 @@ set_day_mode() {
 }
 
 print_current_settings() {
-    echo "Current display settings:"
+    echo "📊 Current display settings:"
     for p in $PARAMS; do
         if [ "$p" = "backlight" ]; then
             value=$(cat /sys/kernel/debug/dispdbg/param)
@@ -122,7 +127,7 @@ print_current_settings() {
         else
             value=$(get_param "$p")
         fi
-        echo "$p = $value"
+        echo "  $p: $value"
     done
 }
 
@@ -130,7 +135,7 @@ update_config() {
     param="$1"
     value="$2"
     if echo "$PARAMS" | grep -qw "$param"; then
-        echo "Updating $param to $value"
+        echo "🔧 Updating $param to $value"
         sed -i "s/^$param=.*/$param=$value/" "$CONFIG_FILE"
         # Apply immediately
         if [ "$param" = "backlight" ]; then
