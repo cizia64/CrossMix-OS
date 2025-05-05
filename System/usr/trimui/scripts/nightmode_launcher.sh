@@ -2,13 +2,20 @@
 export LD_LIBRARY_PATH="/usr/trimui/lib:$LD_LIBRARY_PATH"
 PATH="/mnt/SDCARD/System/bin:$PATH"
 
-NightMode=$(/mnt/SDCARD/System/bin/jq -r '.["NightMode"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$1" = "osd" ]; then
+    NightMode=$(/mnt/SDCARD/System/bin/jq -r '.["NightMode_OSD"]' "/mnt/SDCARD/System/etc/crossmix.json")
+else
+    NightMode=$(/mnt/SDCARD/System/bin/jq -r '.["NightMode"]' "/mnt/SDCARD/System/etc/crossmix.json")
+fi
 
 if [ "$NightMode" = "Configurator" ]; then
     # if pgrep -f ra64.trimui >/dev/null; then
         # echo -n "MENU_TOGGLE" | netcat -u -w1 127.0.0.1 55355 &  # problem : RA TrimUI Menu restore day mode
     # fi
-    /mnt/SDCARD/System/usr/trimui/scripts/nightmode.sh -night
+    # /mnt/SDCARD/System/usr/trimui/scripts/nightmode.sh -night
+    if [ "$1" = "osd" ]; then
+        touch /tmp/hide_osdd
+    fi
     if ! pgrep -f nightmode_osdd >/dev/null; then
         cd /mnt/SDCARD/System/usr/trimui/osd/
         ./nightmode_osdd &
@@ -24,4 +31,3 @@ elif [ "$NightMode" = "Disabled" ]; then
 else # "$NightMode" = "Toggle" or else
     /mnt/SDCARD/System/usr/trimui/scripts/nightmode.sh
 fi
-
