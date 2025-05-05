@@ -1,0 +1,13 @@
+{
+    "type":"slider",
+    "package":"com.trimui.osd.slider.slider_backlight",
+    "label":"backlight",
+    "label.ch.lang":"背光",
+    "gridwidth":4,
+    "gridheight":1,
+    "icon0":"icon.png",
+    "icon1":"background.png",
+    "launch":"set.sh",
+    "status":"/tmp/trimui_osd/slider_backlight/status",
+    "description":"backlight"
+}

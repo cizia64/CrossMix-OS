@@ -1,0 +1,13 @@
+{
+    "type":"slider",
+    "package":"com.trimui.osd.slider.slider_brightness",
+    "label":"brightness",
+    "label.ch.lang":"亮度",
+    "gridwidth":4,
+    "gridheight":1,
+    "icon0":"icon.png",
+    "icon1":"icon2.png",
+    "launch":"set.sh",
+    "status":"/tmp/trimui_osd/slider_brightness/status",
+    "description":"brightness"
+}

@@ -1,0 +1,13 @@
+{
+    "type":"slider",
+    "package":"com.trimui.osd.slider.slider_contrast",
+    "label":"contrast",
+    "label.ch.lang":"对照",
+    "gridwidth":4,
+    "gridheight":1,
+    "icon0":"icon.png",
+    "icon1":"background.png",
+    "launch":"set.sh",
+    "status":"/tmp/trimui_osd/slider_contrast/status",
+    "description":"contrast"
+}

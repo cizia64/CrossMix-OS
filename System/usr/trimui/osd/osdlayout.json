@@ -1,0 +1,32 @@
+{
+    "hotkey": "SELECT+START",
+    "timefadein": 250,
+    "timefadeout": 0,
+    "timeupdatevalue": 3000,
+    "widgetlist": [
+        {
+            "package": "com.trimui.osd.static.pic1"
+        },
+        {
+            "package": "com.trimui.osd.toggle.toggle_nightmode"
+        },
+        {
+            "package": "com.trimui.osd.slider.slider_backlight"
+        },
+        {
+            "package": "com.trimui.osd.slider.slider_brightness"
+        },
+        {
+            "package": "com.trimui.osd.slider.slider_contrast"
+        },
+        {
+            "package": "com.trimui.osd.slider.slider_saturation"
+        },
+        {
+            "package": "com.trimui.osd.slider.slider_color_temperature"
+        },
+        {
+            "package": "com.trimui.osd.static.reset"
+        }
+    ]
+}
