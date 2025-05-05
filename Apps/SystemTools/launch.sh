@@ -314,22 +314,37 @@ sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND di
 # ============================================== Modify folders which requires a "value" value ==============================================
 
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (value)' ;" |
-  while IFS='|' read -r disp path; do
+while IFS='|' read -r disp path; do
     disp_withoutvalue=$(echo "$disp" | sed 's/ (value)//g')
+
+    # Set ConfigKey based on disp_withoutvalue
+    case "$disp_withoutvalue" in
+        "OSD BUTTON ACTION")
+            ConfigKey="NightMode_OSD"
+            ;;
+        "SHORTCUT ACTION")
+            ConfigKey="NightMode"
+            ;;
+        *)
+            ConfigKey="$disp_withoutvalue"
+            ;;
+    esac
+
+    # Determine the current state
     if [ "$disp_withoutvalue" = "THEMES" ]; then
-      CurState=$(basename "$CurrentTheme")
+        CurState=$(basename "$CurrentTheme")
     else
-      CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
+        CurState=$(jq -r --arg disp "$ConfigKey" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
     fi
 
-    if [ -z "$CurState" ]; then
-      CurState="not set"
-    fi
+    [ -z "$CurState" ] && CurState="not set"
+
     disp_withvalue="$disp_withoutvalue ($CurState)"
     sqlite3 "$database_file" "UPDATE Menu_roms SET disp = '$disp_withvalue',pinyin = '$disp_withvalue',cpinyin = '$disp_withvalue',opinyin = '$disp_withvalue' WHERE path = '$path';"
     sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = '$disp_withvalue' WHERE ppath = '$disp';"
 
     echo "==== Updated \"$disp_withoutvalue\" to \"$disp_withvalue\""
-  done
+done
+
 
 sync

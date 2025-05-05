@@ -17,5 +17,7 @@
   "OVERLAYS": "Overlays - max ratio",
   "RESUME AT BOOT": 1,
   "AUTO LOAD STATE": 1,
-  "POLLING RATE": "16ms"
+  "POLLING RATE": "16ms",
+  "SWAP A B": 0,
+  "NightMode": "Toggle"
 }

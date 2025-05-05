@@ -1,0 +1,14 @@
+{
+    "type":"static",
+    "package":"com.trimui.osd.static.reset",
+    "label":"reset",
+    "label.ch.lang":"重置",
+    "gridwidth":1,
+    "gridheight":1,
+    "icon0":"overlay.png",
+    "icon1":"icon.png",
+    "launch":"set.sh",
+    "set":"set.sh",
+    "status":"",
+    "description":"Reset night mode settings"
+}

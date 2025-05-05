@@ -1,0 +1,14 @@
+{
+    "type":"static",
+    "package":"com.trimui.osd.static.pic1",
+    "label":"",
+    "label.ch.lang":"",
+    "gridwidth":3,
+    "gridheight":2,
+    "icon0":"overlay.png",
+    "icon1":"screenshot.png",
+    "launch":"set.sh",
+    "set":"set.sh",
+    "status":"",
+    "description":"Just a picture"
+}
