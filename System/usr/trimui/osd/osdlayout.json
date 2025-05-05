@@ -11,7 +11,7 @@
             "package": "com.trimui.osd.toggle.toggle_nightmode"
         },
         {
-            "package": "com.trimui.osd.slider.slider_backlight"
+            "package": "com.trimui.osd.slider.slider_nightbacklight"
         },
         {
             "package": "com.trimui.osd.slider.slider_brightness"

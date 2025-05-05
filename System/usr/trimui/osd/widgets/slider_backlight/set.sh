@@ -5,7 +5,7 @@ PATH="/mnt/SDCARD/System/usr/trimui/scripts:/mnt/SDCARD/System/bin:$PATH"
 source /mnt/SDCARD/System/etc/nightmode.conf
 
 varname="backlight"
-osd_varname="slider_backlight"
+osd_varname="slider_nightbacklight"
 eval Cur_Value=\$$varname
 
 Min_Value=1
