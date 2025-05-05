@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>MSX-Audio</name>
+    <manufacturer>Philips</manufacturer>
+    <code/>
+    <release_year>2009</release_year>
+    <description>Philips NMS-1205 Music Module, upgraded with the MSXPro expansion that includes 256KB of SampleRAM and the MSX-Audio BIOS that makes it a fully compatible MSX-Audio device.</description>
+    <type>sound expansion</type>
+  </info>
+  <devices>
+    <MSX-AUDIO id="MSX-Audio">
+      <io base="0xC0" num="2"/>
+      <io base="0x0A" num="1" type="O"/>
+      <type>Philips</type>
+      <sound>
+        <volume>12000</volume>
+      </sound>
+      <sampleram>256</sampleram>
+    </MSX-AUDIO>
+
+    <MusicModuleMIDI id="Philips NMS-1205 MIDI">
+      <io base="0x00" num="2" type="O"/>
+      <io base="0x04" num="2" type="I"/>
+    </MusicModuleMIDI>
+
+    <primary slot="any">
+      <secondary slot="any">
+       <ROM id="MSX-Audio BIOS for the NMS-1205">
+         <mem base="0x0000" size="0x3000"/>
+         <mem base="0x4000" size="0x3000"/>
+         <mem base="0x8000" size="0x3000"/>
+         <mem base="0xC000" size="0x3000"/>
+         <mappertype>Normal0000</mappertype>
+         <rom>
+           <sha1>3b02e5f45603df2c180f9c07d59b2ccc5a87bd0a</sha1> <!-- MSX-Audio BIOS v1.3 -->
+           <sha1>dde213b6d9324b94e78ed8df753042469bd31ef0</sha1> <!-- MSX-Audio v1.2pre4 with aditional fixes by SuperSoniqs -->
+           <sha1>05e9f40bb7bdc46b557d445c717cb84ad75252f6</sha1> <!-- MSX-Audio v1.2pre4 -->
+           <sha1>7f115ff923a1cc0d1944cf280168add946fde854</sha1> <!-- MSX-Audio BIOS v1.0, patched to disable the I/O port configuration, the mute-switch and the SYNTHE-switch  -->
+           <filename>msxaudio12pre4a.rom</filename>
+         </rom>
+       </ROM>
+       <RAM id="MSX-Audio BIOS base WorkRAM">
+         <mem base="0x3000" size="0x1000"/>
+         <mem base="0x7000" size="0x1000"/>
+         <size>0x1000</size>
+       </RAM>
+       <RAM id="MSX-Audio BIOS expanded WorkRAM">
+         <mem base="0xB000" size="0x1000"/>
+         <mem base="0xF000" size="0x1000"/>
+         <size>0x1000</size>
+       </RAM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>
