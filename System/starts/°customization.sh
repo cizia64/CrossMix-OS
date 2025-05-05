@@ -46,11 +46,11 @@ if [ "$version" != "$FW_patched_version" ]; then
     cp "/mnt/SDCARD/System/resources/usb_storage/"* "/usr/trimui/apps/usb_storage/"
 
     # add language files
-	if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
-		cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
-		cp "/mnt/SDCARD/trimui/res/lang/"*.short "/usr/trimui/res/lang/"
-		cp "/mnt/SDCARD/trimui/res/lang/"*.png "/usr/trimui/res/skin/"
-	fi
+    if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
+        cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
+        cp "/mnt/SDCARD/trimui/res/lang/"*.short "/usr/trimui/res/lang/"
+        cp "/mnt/SDCARD/trimui/res/lang/"*.png "/usr/trimui/res/skin/"
+    fi
 
     # custom shutdown script for "Resume at Boot"
     cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
@@ -68,8 +68,7 @@ if [ "$version" != "$FW_patched_version" ]; then
     # mv "/usr/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580_old.png"
     cp "/mnt/SDCARD/trimui/res/skin/ic-game-580.png" "/usr/trimui/res/skin/ic-game-580.png"
 
-    # modifying FN cpu script (don't force slow cpu, only force high speed when FN is set to ON) (and we set it as default)
-
+    # Fnkey app modifications
     CrossMixSourceDir="/mnt/SDCARD/System/usr/trimui/res/apps/fn_editor"
     FWappDir="/usr/trimui/apps/fn_editor"
     FWsceneDir="/usr/trimui/scene"
@@ -82,20 +81,22 @@ if [ "$version" != "$FW_patched_version" ]; then
         scene_dest="$FWsceneDir/$filename"
 
         # Always copy to the apps directory
-        cp "$src" "$app_dest"
+        cp "$src" "$app_dest" && echo "  $filename copied to $FWappDir"
         chmod a+x "$app_dest"
 
         # Conditional copy to the scene directory
-        if [ "$CrossMix_Update" = "1" ]; then
-            # If updating, only overwrite the scene file if it already exists
-            [ -f "$scene_dest" ] && cp "$src" "$scene_dest"
+        if [ "$CrossMix_Update" = "1" ] && [ -f "$scene_dest" ]; then
+            cp "$src" "$scene_dest" && echo "  $filename copied to $FWsceneDir"
             chmod a+x "$scene_dest"
         fi
     done
 
+    # On fresh install, always set the default FN function to CPU performance
     if [ ! "$CrossMix_Update" = "1" ]; then
-        cp "$CrossMixSourceDir/com.trimui.cpuperformance.sh" "$FWsceneDir/com.trimui.cpuperformance.sh"
-        chmod a+x "$FWsceneDir/com.trimui.cpuperformance.sh"
+        src="$CrossMixSourceDir/com.trimui.cpuperformance.sh"
+        dest="$FWsceneDir/com.trimui.cpuperformance.sh"
+        cp "$src" "$dest" && echo "  com.trimui.cpuperformance.sh copied to $FWsceneDir"
+        chmod a+x "$dest"
     fi
 
     # fix potential bad asound configuration
