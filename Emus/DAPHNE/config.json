@@ -1,5 +1,5 @@
 {
-  "label": "Daphne",
+  "label": "DAPHNE",
   "icon": "/mnt/SDCARD/Icons/Default/Emus/DAPHNE.png",
   "launch": "default.sh",
   "rompath": "../../Roms/DAPHNE/roms",
@@ -7,5 +7,24 @@
   "useswap": 1,
   "shortname": 0,
   "hidebios": 0,
-  "extlist": "daphne"
+  "extlist": "daphne",
+  "background": "/mnt/SDCARD/Backgrounds/Default/DAPHNE.png",
+  "launchlist": [
+    {
+      "name": "--------------  libretro  --------------",
+      "launch": ""
+    },
+    {
+      "name": "Daphne      ",
+      "launch": "daphne.sh"
+    },
+    {
+      "name": "-------------  standalone  -------------",
+      "launch": ""
+    },
+    {
+      "name": "hypseus-singe      ",
+      "launch": "hypseus-singe_standalone.sh"
+    }
+  ]
 }

@@ -1,0 +1,61 @@
+/mnt/SDCARD/Roms/DAPHNE/framefile/ace.txt
+ace
+
+
+Hypseus-Singe CrossMix Launcher Demo
+====================================
+
+This is a demo .daphne launcher file for the game "Space Ace" using hypseus-singe.
+
+Hypseus-singe requires two parameters to start a game:
+- A framefile (.txt file)
+- A game type string (list available here: https://github.com/DirtBagXon/hypseus-singe/blob/master/doc/CmdLine.md#game-types)
+
+CrossMix provides three ways to locate the required .txt file:
+
+1. Explicit path in the .daphne file:
+   - The first line must contain the path to the .txt framefile.
+   - The second line must specify the game type.
+   (See the example for "Space Ace" above.)
+   The advantage of this method is that you can provide the .daphne name file you want.
+
+2. Automatic search in the framefile folder:
+   - If no path is specified in the .daphne file, CrossMix will search in:
+     SDCARD/Roms/DAPHNE/framefile/
+   - It will look for a file with the same name as the .daphne file but with a .txt extension.
+     Example: for "ace.daphne", it will search for "ace.txt".
+	 The game type will be "ace" (launcher file name wihtout extension).
+
+3. Fallback search inside a dedicated subfolder:
+   - If still not found, CrossMix will search inside a folder named after the .daphne file, located in:
+     SDCARD/Roms/DAPHNE/framefile/
+   - Example: for "ace.daphne", it will look for:
+     SDCARD/Roms/DAPHNE/framefile/ace.daphne/ace.txt
+	 The game type will be "ace" (launcher file name wihtout extension).
+
+
+File tree example for "Space Ace"
+=================================
+
+Roms
+    |_ DAPHNE
+       |_ framefile
+       |  |_ ace.daphne
+       |     |  |_ ace.commands
+       |     |  |_ ace.dat
+       |     |  |_ ace.m2v
+       |     |  |_ ace.m2v.bf
+       |     |  |_ ace.ogg
+       |     |  |_ ace.ogg.bf
+       |     |_ ace.txt
+       |_ roms
+          |_ ace.zip
+       |_ pics
+          |_ ...
+       |_ ram
+          |_ ...
+       |_ sound
+          |_ ...
+Imgs
+   |_ DAPHNE
+           |_ ace.png
