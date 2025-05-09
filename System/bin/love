@@ -1,0 +1,11 @@
+#!/bin/sh
+
+controlfolder=/mnt/SDCARD/Apps/PortMaster/PortMaster
+
+export LOVE_VERSION=11.5
+
+source $controlfolder/device_info.txt
+source $controlfolder/control.txt
+source "$controlfolder/runtimes/love_$LOVE_VERSION/love.txt"
+
+$LOVE_RUN $1
