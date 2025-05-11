@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if ! read -r current_device < /etc/trimui_device.txt; then
-    display=$(fbset | grep ^mode | cut -d "\"" -f 2)
-    if [ "$display" = "1280x720-64" ]; then
+    hwserial=$(awk '/^hwserial/{print $NF}' /proc/cpuinfo )
+    if [ "${hwserial::6}" = "TG5040" ]; then
         current_device="tsp"
     else
         current_device="brick"
