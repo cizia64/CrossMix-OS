@@ -16,7 +16,7 @@ if grep -q ra64.trimui "$0"; then
     RA_DIR="/mnt/SDCARD/RetroArch"
     export PATH=$PATH:$RA_DIR
 
-    source $dir/FolderOverrideFinder.sh
+    source $dir/SubFolderManager.sh
 
     ra_audio_switcher.sh
     touch /var/trimui_inputd/ra_hotkey
