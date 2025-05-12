@@ -1,0 +1,42 @@
+{
+    "hotkey" : "MENU+SELECT",
+    "timefadein" : 250,
+    "timefadeout" : 0,
+    "timeupdatevalue" : 3000,
+    "widgetlist": [
+        {
+            "package":"com.trimui.osd.static.pic1"
+        },
+        {
+            "package":"com.trimui.osd.app.musicplayer"
+        },
+        {
+            "package":"com.trimui.osd.slider.backlight"
+        },
+        {
+            "package":"com.trimui.osd.slider.volumeglobal"
+        },
+        {
+            "package":"com.trimui.osd.toggle.btenable"
+        },
+        {
+            "package":"com.trimui.osd.toggle.wifienable"
+        },
+        {
+            "package":"com.trimui.osd.toggle.ledenable"
+        },
+        {
+            "package":"com.trimui.osd.toggle.rumble"
+        },        
+        {
+            "package":"com.trimui.osd.static.temperature"
+        },
+        {
+            "package":"com.trimui.osd.static.cpuinfo"
+        },
+        {
+            "package":"com.trimui.osd.toggle.nightmode"
+        }
+
+    ]
+}

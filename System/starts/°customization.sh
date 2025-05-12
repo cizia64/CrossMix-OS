@@ -81,13 +81,19 @@ if [ "$version" != "$FW_patched_version" ]; then
         scene_dest="$FWsceneDir/$filename"
 
         # Always copy to the apps directory
-        cp "$src" "$app_dest" && echo "  $filename copied to $FWappDir"
-        chmod a+x "$app_dest"
+        if cp "$src" "$app_dest"; then
+            echo "$filename copied to $FWappDir"
+            chmod a+x "$app_dest"
+        fi
 
         # Conditional copy to the scene directory
-        if [ "$CrossMix_Update" = "1" ] && [ -f "$scene_dest" ]; then
-            cp "$src" "$scene_dest" && echo "  $filename copied to $FWsceneDir"
-            chmod a+x "$scene_dest"
+        if [ "$CrossMix_Update" = "1" ]; then
+            if [ -f "$scene_dest" ]; then
+                if cp "$src" "$scene_dest"; then
+                    echo "$filename copied to $FWsceneDir"
+                    chmod a+x "$scene_dest"
+                fi
+            fi
         fi
     done
 
@@ -95,12 +101,17 @@ if [ "$version" != "$FW_patched_version" ]; then
     if [ ! "$CrossMix_Update" = "1" ]; then
         src="$CrossMixSourceDir/com.trimui.cpuperformance.sh"
         dest="$FWsceneDir/com.trimui.cpuperformance.sh"
-        cp "$src" "$dest" && echo "  com.trimui.cpuperformance.sh copied to $FWsceneDir"
-        chmod a+x "$dest"
+        if cp "$src" "$dest"; then
+            echo "com.trimui.cpuperformance.sh copied to $FWsceneDir"
+            chmod a+x "$dest"
+        fi
     fi
 
+    # Upgrade the stock OSD
+    cp -a /mnt/SDCARD/System/usr/trimui/res/osd/. /usr/trimui/osd/
+
     # fix potential bad asound configuration
-    sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
+    # sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
 
     # Apply default CrossMix theme, sound volume, and grid view
     if [ "$CrossMix_Update" = "0" ]; then
