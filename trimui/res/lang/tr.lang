@@ -159,7 +159,7 @@
 	"155":  "Lütfen maksimum aralığa göre \nbirkaç kez döndürün",
 	"156":  "Kalibrasyon Tamamlandı",
 	"157":  "Lütfen basın",
-	"158":  "B tuşu",
+	"158":  "B-Tuşu",
 	"159":  "çıkmak için",
 	"160":  "Linux Sürümü",
 	"161":  "Değişikliği kaydetmek istiyor musunuz?",
@@ -198,4 +198,11 @@
 	"194":  "Doygunluk",
 	"195":  "Pozlama",
 	"196":  "Bağlantı Noktaları"
+	"197":  "Ana Sayfa",
+    "198":  "Gezinme Sayfası",
+    "199":  "Sekme Çubuğuna Odaklan",
+    "200":  "Onay Butonu",
+    "201":  "A-Tuşu",
+    "202":  "OSD Kısayolu",
+    "203":  "Sekme Görünürlüğü"
 }  
