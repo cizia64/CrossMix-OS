@@ -109,6 +109,8 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     # Upgrade the stock OSD
     cp -a /mnt/SDCARD/System/usr/trimui/res/osd/. /usr/trimui/osd/
+    find /usr/trimui/osd/ -type f -name "*.sh" -exec chmod a+x {} \;
+
 
     # fix potential bad asound configuration
     # sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
