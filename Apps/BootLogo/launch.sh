@@ -1,11 +1,17 @@
 #!/bin/sh
-CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
 Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
-Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
 
-if [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Not compatible with firmware superior to v1.0.4 hotfix 6." -t 3
-    exit 1
+read -r Current_device </etc/trimui_device.txt
+
+if [ "$Current_device" = "tsp" ]; then
+
+    if [ "$Current_FW_Revision" -gt "20240413" ] && [ "$Current_FW_Revision" -lt "20250505" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Not compatible with firmware superior to v1.0.4 hotfix 6." -t 3
+        exit 1
+    fi
+    src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720/"
+else
+    src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1024x768/"
 fi
 
 echo performance >/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -17,7 +23,6 @@ rm -f ./GoBackTo_Apps.json
 cp /tmp/state.json ./GoBackTo_Apps.json
 cp ./GoTo_Bootlogo_List.json /tmp/state.json
 
-src_dir="/mnt/SDCARD/Apps/BootLogo/Images/"
 dest_dir="/mnt/SDCARD/Apps/BootLogo/Thumbnails/"
 find "$dest_dir" -type f -not -name "- Default Trimui.png" -exec rm -f {} \;
 sync
@@ -47,7 +52,7 @@ find "$src_dir" -type f -iname "*.bmp" | while read -r bmp_file; do
 done
 sync
 
-rm -f "/mnt/SDCARD/Apps/BootLogo/Thumbnails/Thumbnails_cache7.db"
+rm -f "$dest_dir/Thumbnails_cache7.db"
 echo "All conversions have been made."
 
 sync
