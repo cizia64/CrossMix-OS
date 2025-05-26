@@ -1,0 +1,13 @@
+{
+    "type":"slider",
+    "package":"com.trimui.osd.slider.cpu_preset",
+    "label":"CPU preset",
+    "label.ch.lang":"CPU 频率",
+    "gridwidth":3.2,
+    "gridheight":1,
+    "icon0":"",
+    "icon1":"background.png",
+    "launch":"set.sh",
+    "status":"/tmp/trimui_osd/slider_cpu_preset/status",
+    "description":""
+}
