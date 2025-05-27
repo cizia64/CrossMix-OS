@@ -54,7 +54,7 @@ case "$Cur_Value" in
     ;;
 2)
     Cur_Preset="normal"
-    cpufreq.sh ondemand 4 4 4
+    cpufreq.sh ondemand 3 5 4
     ;;
 3)
     Cur_Preset="performance"
