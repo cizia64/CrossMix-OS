@@ -5,16 +5,16 @@
     "timeupdatevalue" : 3000,
     "widgetlist": [
         {
-            "package":"com.trimui.osd.static.pic1"
+            "package":"com.trimui.osd.app.info"
         },
         {
             "package":"com.trimui.osd.app.musicplayer"
         },
         {
-            "package":"com.trimui.osd.slider.backlight"
+            "package":"com.trimui.osd.slider.volumeglobal"
         },
         {
-            "package":"com.trimui.osd.slider.volumeglobal"
+            "package":"com.trimui.osd.slider.backlight"
         },
         {
             "package":"com.trimui.osd.toggle.btenable"
@@ -29,10 +29,10 @@
             "package":"com.trimui.osd.toggle.rumble"
         },        
         {
-            "package":"com.trimui.osd.static.temperature"
+            "package":"com.trimui.osd.slider.cpu_preset"
         },
         {
-            "package":"com.trimui.osd.static.cpuinfo"
+            "package":"com.trimui.osd.static.cpu_osd"
         },
         {
             "package":"com.trimui.osd.toggle.nightmode"

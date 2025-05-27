@@ -1,0 +1,14 @@
+{
+    "type":"toggle",
+    "package":"com.trimui.osd.toggle.rumble",
+    "label":"Motor",
+    "label.ch.lang":"振动",
+    "gridwidth":1,
+    "gridheight":1,
+    "icon0":"icon-vibrate-off.png",
+    "icon1":"icon-vibrate-on.png",
+    "launch":"set.sh",
+    "update":"update.sh",
+    "status":"/tmp/trimui_osd/toggle_rumble/status",
+    "description":"Wifi Power Switch"
+}

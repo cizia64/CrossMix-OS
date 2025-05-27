@@ -109,7 +109,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     # Upgrade the stock OSD
     cp -a /mnt/SDCARD/System/usr/trimui/res/osd/. /usr/trimui/osd/
-    find /usr/trimui/osd/ -type f -name "*.sh" -exec chmod a+x {} \;
+    find /usr/trimui/osd/ -type f -name "*" -exec chmod a+x {} \;
 
 
     # fix potential bad asound configuration
@@ -172,3 +172,4 @@ fi
 /mnt/SDCARD/System/etc/led_config.sh &
 
 hostname "TSP"
+

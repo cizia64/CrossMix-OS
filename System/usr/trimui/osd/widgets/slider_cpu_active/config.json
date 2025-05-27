@@ -1,0 +1,12 @@
+{
+  "type": "slider",
+  "package": "com.trimui.osd.slider.cpu_active",
+  "label": "Active CPU",
+  "gridwidth": 3,
+  "gridheight": 1,
+  "icon0": "",
+  "icon1": "background.png",
+  "launch": "set.sh",
+  "status": "/tmp/trimui_osd/slider_cpu_active/status",
+  "description": "Set active CPU cores"
+}
