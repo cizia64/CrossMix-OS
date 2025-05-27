@@ -1,0 +1,22 @@
+{
+    "type":"app",
+    "package":"com.trimui.osd.app.info",
+    "label":"HW info",
+    "label.ch.lang":"HW 信息",
+    "gridwidth":2,
+    "gridheight":2,
+    "icon0":"",
+    "icon1":"",
+    "launch":"launch.sh",
+    "update":"update.sh",
+    "set":"",
+    "status":"",
+    "cmd" : "",
+    "canvasv" : "/tmp/crossmix_info/vfb_osd",
+    "canvasp" : "",
+    "canvaswidth" : 260,
+    "canvasheight" : 260,
+    "canvasbpp" : 32,
+    "canvasfps" : 1,
+    "description":"CrossMix HW info Widget"
+}

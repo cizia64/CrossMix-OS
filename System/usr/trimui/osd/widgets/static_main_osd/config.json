@@ -1,0 +1,14 @@
+{
+    "type":"static",
+    "package":"com.trimui.osd.static.main_osd",
+    "label":"",
+    "label.ch.lang":"",
+    "gridwidth":1,
+    "gridheight":1,
+    "icon0":"icon.png",
+    "icon1":"",
+    "launch":"set.sh",
+    "set":"",
+    "status":"",
+    "description":"Main OSD launcher"
+}

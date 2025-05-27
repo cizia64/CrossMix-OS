@@ -1,5 +1,5 @@
 #!/bin/sh
-
+rm /tmp/nightmode
 UDISK_TIRMUI_DIR=/mnt/UDISK/trimui_dir
 SDCARD_TRIMUI_DIR=/mnt/SDCARD/trimui
 export LD_LIBRARY_PATH=/usr/trimui/lib:${SDCARD_TRIMUI_DIR}/lib

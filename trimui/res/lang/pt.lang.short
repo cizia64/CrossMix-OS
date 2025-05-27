@@ -1,0 +1,23 @@
+{
+	"46": "OK",
+	"88": "ABRIR",
+	"89": "VOLTAR",
+	"90": "NAV",
+	"91": "MENU",
+	"92": "Continuar",
+	"93": "Gravar",
+	"94": "Ler",
+	"95": "Volume",
+	"96": "Sair do jogo",
+	"97": "Registro %d/%d",
+	"98": "Vazio",
+	"99": "Sem miniatura",
+	"100": "falha na leitura",
+	"101": "falha ao gravar",
+	"102": "espaço %d recuperado",
+	"103": "Ecrã completo",
+	"104": "Ligado",
+	"105": "Desligado",
+	"118": "Netplay",
+	"126": "Menu avançado"
+}

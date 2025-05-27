@@ -1,0 +1,12 @@
+{
+  "type": "slider",
+  "package": "com.trimui.osd.slider.cpu_governor",
+  "label": "CPU Governor",
+  "gridwidth": 3,
+  "gridheight": 1,
+  "icon0": "",
+  "icon1": "background.png",
+  "launch": "set.sh",
+  "status": "/tmp/trimui_osd/slider_cpu_governor/status",
+  "description": "Set CPU governor"
+}

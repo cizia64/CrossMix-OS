@@ -86,6 +86,10 @@ echo "   $alt_count replaced by max ratio"
 echo "   $skip_count skipped (specific configugration)"
 echo "   $notfound_count withtout png file at all"
 
+
+# Other emulators
+sed -i 's/^display_expand.*/display_expand 1/' /mnt/SDCARD/Emus/ADVMAME/.advance/advmame.rc
+
 # Menu modification to reflect the change immediately
 
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
