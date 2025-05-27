@@ -1,6 +1,12 @@
 #!/bin/sh
 #echo $0 $*    # for debugging
 
+source /mnt/SDCARD/System/usr/trimui/scripts/common_functions.sh
+
+enable_wifi
+check_connection
+
+
 if [ -z "$1" ]; then
     echo -e "\nusage : scrap_screenscraper.sh emu_folder_name [rom_name]\nexample : scrap_screenscraper.sh SFC\n"
     exit
@@ -84,7 +90,7 @@ search_on_screenscraper() {
 
     # Don't check art after a failed curl request
     if [ -z "$Head_api_result" ]; then
-        echo -e "${RED}Request failed${NONE}"
+        echo -e "${RED}Request failed${NC}"
         echo "$(date '+%Y-%m-%d %Hh%M') : Request failed for ${romNameTrimmed}"
         let Scrap_Fail++
         return
@@ -92,7 +98,7 @@ search_on_screenscraper() {
 
     # Don't check art if screenscraper can't find a match
     if echo "$Head_api_result" | grep -q "^Erreur"; then
-        echo -e "${RED}No match found${NONE}"
+        echo -e "${RED}No match found${NC}"
         echo "$(date '+%Y-%m-%d %Hh%M') : Couldn't find a match for ${romNameTrimmed}"
         return
     fi
@@ -269,17 +275,18 @@ else
 fi
 
 
-if ! pgrep "text_viewer" >/dev/null  && [ "$ScrapeInBackground" = "false" ]; then
-	NONE='\033[00m'
-	RED='\033[01;31m'
-	GREEN='\033[01;32m'
-	YELLOW='\033[01;33m'
-	PURPLE='\033[01;35m'
-	CYAN='\033[01;36m'
-	WHITE='\033[01;37m'
-	BOLD='\033[1m'
-	UNDERLINE='\033[4m'
-	BLINK='\x1b[5m'
+if pgrep "text_viewer" >/dev/null  || [ "$ScrapeInBackground" = "true" ]; then
+	NONE=""
+	NC=""
+	RED=""
+	GREEN=""
+	YELLOW=""
+	PURPLE=""
+	CYAN=""
+	WHITE=""
+	BOLD=""
+	UNDERLINE=""
+	BLINK=""
 fi
 
 
@@ -378,7 +385,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     #echo $romNameTrimmed # for debugging
 
     if [ -f "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" ]; then
-        echo -e "${YELLOW}already Scraped !${NONE}"
+        echo -e "${YELLOW}already Scraped !${NC}"
         let Scrap_notrequired++
 
     else
@@ -395,7 +402,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
             MAX_FILE_SIZE_BYTES=104857600 #100MB
 
             if [ "$rom_size" -gt "$MAX_FILE_SIZE_BYTES" ]; then
-                echo -e "${RED}Rom is too big to make a checksum.${NONE}"
+                echo -e "${RED}Rom is too big to make a checksum.${NC}"
                 let Scrap_Fail++
                 continue
 
@@ -408,7 +415,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
                 url="https://www.screenscraper.fr/api2/jeuInfos.php?devid=${u%?}&devpassword=${p#??}&softname=crossmix&output=json&ssid=${userSS}&sspassword=${passSS}&sha1=${checksum}&systemeid=&romtype=rom&romnom=${romNameTrimmed}.zip&romtaille=${rom_size}"
                 search_on_screenscraper
                 if ! [ "$gameIDSS" -eq "$gameIDSS" ] 2>/dev/null; then
-                    echo -e "${RED}Failed to get game ID${NONE}"
+                    echo -e "${RED}Failed to get game ID${NC}"
                     let Scrap_Fail++
                     continue
                 fi
@@ -455,7 +462,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
 									.[0].url' | head -n 1)
 
         if [ -z "$MediaURL" ] || [ "$MediaURL" = "null" ]; then
-            echo -e "${YELLOW}Game matches but no media found!${NONE}"
+            echo -e "${YELLOW}Game matches but no media found!${NC}"
             let Scrap_Fail++
             continue
         fi
@@ -467,17 +474,31 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
         # direct download triggers an error on Miyoo Mini Plus
         #wget --no-check-certificate "$MediaURL" -P "/mnt/SDCARD/Roms/$CurrentSystem/Imgs" -O "$romNameNoExtension.png"
 
-        urlcmd=$(echo "wget  "$MediaURL" -O \"/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png\"")
-        echo $urlcmd >/tmp/rundl.sh
-        sh /tmp/rundl.sh  >/dev/null 2>&1
+        output_dir="/mnt/SDCARD/Imgs/$CurrentSystem"
+        output_file="$output_dir/$romNameNoExtension.png"
+        temp_file="/tmp/${romNameNoExtension}.tmpdl"
+        
+        MediaURL=${MediaURL//\"/}
+        
+        wget "$MediaURL" -O "$temp_file"   >/dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            mv "$temp_file" "$output_file"
+            echo "Download successful: $output_file"
+        if [ -d /tmp/trimui_osd/ ]; then
+            echo -e "{ \"duration\":2000, \"x\":920, \"y\":330, \"message\":\" \", \"font\":\"\", \"icon\":\"$output_file\", \"fontsize\":24 }" > /tmp/trimui_osd/osd_toast_msg
+        fi
+        else
+            echo "Download failed. Cleaning up."
+            rm -f "$temp_file"
+        fi
 
         # /mnt/SDCARD/System/bin/wget "$MediaURL" -O "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png"
 
         if [ -f "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" ]; then
-            echo -e "${GREEN}Scraped!${NONE}"
+            echo -e "${GREEN}Scraped!${NC}"
             let Scrap_Success++
         else
-            echo -e "${RED}Download failed.${NONE}"
+            echo -e "${RED}Download failed.${NC}"
             let Scrap_Fail++
         fi
 
@@ -493,7 +514,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     #       mkdir -p /mnt/SDCARD/Roms/$CurrentSystem/info > /dev/null
     #
     #       if [ -f "/mnt/SDCARD/Roms/$CurrentSystem/info/$romNameNoExtension.txt" ]; then
-    #           echo -e "${YELLOW}Metadata already Scraped !${NONE}"
+    #           echo -e "${YELLOW}Metadata already Scraped !${NC}"
     #       else
     #           genre_array=$( echo $api_result | jq -r '[foreach .response.jeu.genres[].noms[] as $item ([[],[]]; if $item.langue == "en" then $item.text else "" end)]'  )
     #           echo "" >> "/mnt/SDCARD/Roms/$CurrentSystem/info/$romNameNoExtension.txt"
