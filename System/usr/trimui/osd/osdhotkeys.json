@@ -1,0 +1,25 @@
+{
+"osdshowkey":[
+    "MENU+SELECT",
+    "MENU+START",
+    "MENU+MENU",
+    "MENU+L2",
+    "MENU+R2",
+    "MENU+L",
+    "MENU+R",
+    "MENU+A",
+    "MENU+B",
+    "MENU+X",
+    "MENU+Y",
+    "SELECT+START",
+    "SELECT+L2",
+    "SELECT+R2",
+    "SELECT+L",
+    "SELECT+R",
+    "START+L2",
+    "START+R2",
+    "START+L",
+    "START+R",
+    "MENU+L2+R2"
+]
+}
