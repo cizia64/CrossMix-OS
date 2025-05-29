@@ -10,5 +10,16 @@
   "imgpath": "../../Imgs/SEGACD",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "extlist": "gen|smd|md|32x|bin|iso|sms|68k|chd|zip|7z",
+  "launchlist": [
+    {
+      "name": "PicoDrive",
+      "launch": "picodrive.sh"
+    },
+    {
+      "name": "GenesisPlusGX",
+      "launch": "genplus.sh"
+    }
+  ]
 }
