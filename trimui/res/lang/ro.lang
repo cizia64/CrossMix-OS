@@ -197,5 +197,12 @@
 	"193":  "Contrast",
 	"194":  "Saturație",
 	"195":  "Expunere",
-	"196":  "Porturi"
+	"196":  "Porturi",
+	"197": "Pagina Principală",
+	"198": "Pagina de navigare",
+	"199": "Permite focalizarea pe bara de file",
+	"200": "Buton de Confirmare",
+	"201": "Tasta A",
+	"202": "Comandă rapidă OSD",
+	"203": "Vizibilitate File"
 }
