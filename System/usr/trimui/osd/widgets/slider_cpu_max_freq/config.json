@@ -1,0 +1,12 @@
+{
+  "type": "slider",
+  "package": "com.trimui.osd.slider.cpu_maxfreq",
+  "label": "Max Freq",
+  "gridwidth": 3,
+  "gridheight": 1,
+  "icon0": "",
+  "icon1": "background.png",
+  "launch": "set.sh",
+  "status": "/tmp/trimui_osd/slider_cpu_maxfreq/status",
+  "description": "Set CPU maximum frequency"
+}

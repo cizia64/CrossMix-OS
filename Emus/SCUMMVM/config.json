@@ -12,12 +12,25 @@
   "extlist": "scummvm|squashfs|launch",
   "launchlist": [
     {
+      "name": "--------------  libretro  --------------",
+      "launch": ""
+    },
+    {
       "name": "ScummVM 2.8      ",
       "launch": "scummvm-2.8.sh"
     },
     {
       "name": "ScummVM 2.9      ",
       "launch": "scummvm-2.9.sh"
+    },
+    {
+      "name": "-------------  standalone  -------------",
+      "launch": ""
+    },
+    {
+      "name": "ScummVM 2.10      ",
+      "launch": "scummvm_standalone.sh"
     }
+
   ]
 }
