@@ -20,6 +20,11 @@
     {
       "name": "GenesisPlusGX",
       "launch": "genplus.sh"
+    },
+    {
+      "name": "GenesisPlusGX Wide",
+      "launch": "genplus_wide.sh"
     }
   ]
 }
+
