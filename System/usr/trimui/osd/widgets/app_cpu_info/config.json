@@ -1,0 +1,22 @@
+{
+    "type":"app",
+    "package":"com.trimui.osd.app.cpu_info",
+    "label":"cpu info",
+    "label.ch.lang":"CPU 信息",
+    "gridwidth":2,
+    "gridheight":2,
+    "icon0":"",
+    "icon1":"",
+    "launch":"launch.sh",
+    "update":"update.sh",
+    "set":"",
+    "status":"",
+    "cmd" : "",
+    "canvasv" : "/tmp/crossmix_cpu_info/vfb_osd",
+    "canvasp" : "",
+    "canvaswidth" : 260,
+    "canvasheight" : 260,
+    "canvasbpp" : 32,
+    "canvasfps" : 1,
+    "description":"CrossMix cpu info Widget"
+}

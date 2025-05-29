@@ -1,5 +1,5 @@
 #!/bin/sh
-export LD_LIBRARY_PATH=./lib:/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/lib:/usr/lib:./lib:/usr/lib64:/mnt/SDCARD/System/lib
 export PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts:$PATH"
 
 cpufreq.sh ondemand 2 6
