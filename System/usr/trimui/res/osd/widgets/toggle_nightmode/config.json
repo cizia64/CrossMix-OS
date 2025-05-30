@@ -1,0 +1,14 @@
+{
+    "type":"toggle",
+    "package":"com.trimui.osd.toggle.nightmode",
+    "label":"Night Mode",
+    "label.ch.lang":"关机",
+    "gridwidth":1,
+    "gridheight":1,
+    "icon0":"icon-off.png",
+    "icon1":"icon-on.png",
+    "launch":"set.sh",
+    "update":"update.sh",
+    "status":"/tmp/trimui_osd/toggle_nightmode/status",
+    "description":"nightmode Switch"
+}

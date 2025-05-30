@@ -35,4 +35,12 @@ else
 fi
 
 echo "load_launcher.sh : $Launcher_name dowork 0x" >>/tmp/log/messages
+{
+rm "/tmp/trimui_osd/slider_cpu_preset/curpreset"
+echo "0/3" > "/tmp/trimui_osd/slider_cpu_preset/status"
+} &
 "$EMU_DIR/$Launcher_command" "$@"
+{
+rm "/tmp/trimui_osd/slider_cpu_preset/curpreset"
+echo "0/3" > "/tmp/trimui_osd/slider_cpu_preset/status"
+} &
