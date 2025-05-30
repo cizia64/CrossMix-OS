@@ -204,5 +204,6 @@
 	"200":  "Botão de confirmação",
 	"201":  "tecla A",
 	"202":  "Tecla de atalho OSD",
-	"203":  "Visibilidade das abas"
+	"203":  "Visibilidade das abas",
+	"204":  "Pasta"
 }
