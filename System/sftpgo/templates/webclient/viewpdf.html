@@ -1,24 +1,26 @@
 <!--
-Copyright (C) 2019-2023 Nicola Murino
+Copyright (C) 2023 Nicola Murino
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, version 3.
+This WebUI uses the KeenThemes Mega Bundle, a proprietary theme:
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU Affero General Public License for more details.
+https://keenthemes.com/products/templates-mega-bundle
 
-You should have received a copy of the GNU Affero General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+KeenThemes HTML/CSS/JS components are allowed for use only within the
+SFTPGo product and restricted to be used in a resealable HTML template
+that can compete with KeenThemes products anyhow.
+
+This WebUI is allowed for use only within the SFTPGo product and
+therefore cannot be used in derivative works/products without an
+explicit grant from the SFTPGo Team (support@sftpgo.com).
 -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title></title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{.Title}}</title>
+        <meta name="robots" content="noindex">
+        <link rel="shortcut icon" href="{{.StaticURL}}{{.Branding.FaviconPath}}" />
 
         {{range .Branding.ExtraCSS}}
         <link href="{{$.StaticURL}}{{.}}" rel="stylesheet" type="text/css">
@@ -26,8 +28,8 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
     </head>
 
 <body>
-    <script src="{{.StaticURL}}/vendor/pdfobject/pdfobject.min.js"></script>
-    <script type="text/javascript">
+    <script {{- if .CSPNonce}} nonce="{{.CSPNonce}}"{{- end}} src="{{.StaticURL}}/vendor/pdfobject/pdfobject.min.js"></script>
+    <script type="text/javascript" {{- if .CSPNonce}} nonce="{{.CSPNonce}}"{{- end}}>
         PDFObject.embed("{{.URL}}", document.body);
     </script>
 </body>

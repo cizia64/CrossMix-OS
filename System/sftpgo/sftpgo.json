@@ -105,7 +105,7 @@
   "ftpd": {
     "bindings": [
       {
-        "port": 0,
+        "port": 21,
         "address": "",
         "apply_proxy_config": true,
         "tls_mode": 0,
@@ -303,8 +303,8 @@
         },
         "branding": {
           "web_admin": {
-            "name": "",
-            "short_name": "",
+            "name": "CrossMix-OS",
+            "short_name": "CrossMix-OS",
             "favicon_path": "",
             "logo_path": "",
             "login_image_path": "",
@@ -314,8 +314,8 @@
             "extra_css": []
           },
           "web_client": {
-            "name": "",
-            "short_name": "",
+            "name": "CrossMix-OS",
+            "short_name": "CrossMix-OS",
             "favicon_path": "",
             "logo_path": "",
             "login_image_path": "",
