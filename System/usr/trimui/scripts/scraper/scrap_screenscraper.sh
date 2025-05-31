@@ -374,7 +374,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
 
     romNameTrimmed="${romNameNoExtension/".nkit"/}"
     romNameTrimmed="$(echo "$romNameTrimmed" | sed \
-       -e 's/\(!\|&\|Disc\|Rev\)//g' \
+       -e 's/\(!\|&\|Disc\|Rev\|CD[0-9]\)//g' \
        -e 's/([^()]*)//g' \
        -e 's/\[[^]]*\]//g' \
        -e 's/[_ -]*$//' \
