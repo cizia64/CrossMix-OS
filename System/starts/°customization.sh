@@ -129,6 +129,9 @@ if [ "$version" != "$FW_patched_version" ]; then
         /usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
     fi
 
+    # Fix app icons
+    "/mnt/SDCARD/Apps/SystemTools//Menu/ADVANCED SETTINGS##APP ICONS (value)/Default.sh"
+
     # modifying performance mode for Moonlight
 
     if ! grep -qF "performance" "/usr/trimui/apps/moonlight/launch.sh"; then
