@@ -10,7 +10,7 @@ read -r Current_device </etc/trimui_device.txt
 if [ "$Current_device" = "tsp" ]; then
 
     if [ "$Current_FW_Revision" -gt "20240413" ] && [ "$Current_FW_Revision" -lt "20250505" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Not compatible with firmware superior to v1.0.4 hotfix 6." -t 3
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Bootlogo is not compatible with this firmware ($Current_FW_Revision)." -t 3
         exit 1
     fi
     src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720/"
@@ -28,6 +28,9 @@ echo "===================================="
 date +'%Y-%m-%d %H:%M:%S'
 echo "===================================="
 silent=0
+if [ "$2" = "-s" ]; then
+    silent=1
+fi
 input_file="$1"
 filename=$(basename "$input_file")
 extension="${filename##*.}"
@@ -39,12 +42,6 @@ if [ "$extension" = "bmp" ]; then
     silent=1
 else
     SOURCE_FILE="$src_dir/${filename}.bmp"
-fi
-
-if [ $? -ne 0 ]; then
-    echo "Failed to mount $TARGET_PARTITION."
-    sync
-    exit 1
 fi
 
 echo "Source file: $SOURCE_FILE"
@@ -98,6 +95,11 @@ if [ -f "$SOURCE_FILE" ]; then
     echo "Mounting $TARGET_PARTITION to $MOUNT_POINT..."
     mkdir -p $MOUNT_POINT
     mount $TARGET_PARTITION $MOUNT_POINT
+    if [ $? -ne 0 ]; then
+        echo "Failed to mount $TARGET_PARTITION."
+        sync
+        exit 1
+    fi
 
     [ "$silent" -eq 0 ] && /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$SOURCE_FILE" -m "Flashing logo..." -fs 100 -t 2.5
 

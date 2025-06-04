@@ -111,7 +111,6 @@ if [ "$version" != "$FW_patched_version" ]; then
     cp -a /mnt/SDCARD/System/usr/trimui/res/osd/. /usr/trimui/osd/
     find /usr/trimui/osd/ -type f -name "*" -exec chmod a+x {} \;
 
-
     # fix potential bad asound configuration
     # sed -i -e 's/period_size 2048/period_size 1024/' -e 's/period_size 4096/period_size 1024/' -e '/buffer_size 16384/d' "/etc/asound.conf"
 
@@ -129,6 +128,9 @@ if [ "$version" != "$FW_patched_version" ]; then
     if [ "$Current_Theme" = "../res/" ]; then
         /usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
     fi
+
+    # Fix app icons
+    "/mnt/SDCARD/Apps/SystemTools//Menu/ADVANCED SETTINGS##APP ICONS (value)/Default.sh"
 
     # modifying performance mode for Moonlight
 
@@ -155,14 +157,16 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     ################ Flash boot logo ################
     if [ "$CrossMix_Update" = "0" ]; then
-        CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
-        Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
-        Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
-
-        if ! [ "$Current_FW_Revision" -gt "$Required_FW_Revision" ]; then # on firmware hotfix 9 there is less space than before on /dev/mmcblk0p1 so we avoid to flash the logo
-            SOURCE_FILE="/mnt/SDCARD/Apps/BootLogo/Images/- CrossMix-OS.bmp"
-            "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$SOURCE_FILE"
+	
+        read -r Current_device </etc/trimui_device.txt
+		
+        if [ "$Current_device" = "tsp" ]; then
+            src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720"
+        else
+            src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1024x768"
         fi
+
+        "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$src_dir/- CrossMix-OS.bmp"
     fi
 fi
 
@@ -172,4 +176,3 @@ fi
 /mnt/SDCARD/System/etc/led_config.sh &
 
 hostname "TSP"
-

@@ -14,6 +14,7 @@ style="Default"
 theme="CrossMix - OS"
 bootlogo="- CrossMix-OS.bmp"
 icon="Default"
+appicons="Default"
 background="Default"
 emulabels="Default"
 
