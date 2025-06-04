@@ -1,0 +1,39 @@
+{
+    "name":"Windows95",
+    "font":"W95font.otf",
+    "fontascii":"W95font.otf",
+    "fontsize":{
+        "nav_font1":30,
+        "nav_font2":30,
+        "content_font1":34,
+        "content_font2":28,
+        "content_font3":42,
+        "content_font4":35,
+        "content_font5":42,
+        "content_font6":28,
+        "stat_font1":28,
+        "menu_font1":30,
+        "popup_font1":45,
+        "popup_font2":35,
+        "popup_font3":37
+    },
+    "fontcolor":{
+        "nav_color1":"#FF000000",
+        "nav_color2":"#FF000000",
+        "nav_color3":"#FF000000",
+        "content_color1":"#FF000000",
+        "content_color2":"#FF000000",
+        "content_color3":"#FF000000",
+        "content_color4":"#FF000000",
+        "stat_color1":"#FF000000",
+        "stat_color2":"#FF000000",
+        "menu_color1":"#FF000000",
+        "menu_color2":"#FF000000",
+        "popup_color1":"#FF000000",
+        "popup_color2":"#FF000000",
+        "popup_color3":"#FF000000",
+        "highlight_color1":"#FF000000",
+        "shadow_color1":"#FF000000"
+    }
+} 
+                    
