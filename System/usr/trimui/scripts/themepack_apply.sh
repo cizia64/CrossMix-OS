@@ -63,6 +63,16 @@ if [ -n "$appicons" ]; then
     fi
 fi
 
+# Apply app icons collection
+if [ -n "$appicons" ]; then
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh" ]; then
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh"
+    else
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh\" does not exist !!" -fs 22 -c red -t 3
+    fi
+fi
+
 # Apply background collection
 if [ -n "$background" ]; then
     if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##BACKGROUNDS (value)/${background}.sh" ]; then
