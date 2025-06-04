@@ -117,7 +117,7 @@ for subdir in /mnt/SDCARD/Icons/*/; do
   # Check if preview.png file exists
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
-    cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
+    cp "${subdir}preview_$CrossMix_Style.png" "${ICON_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
@@ -133,6 +133,31 @@ for subdir in /mnt/SDCARD/Icons/*/; do
       fi
     fi
   fi
+done
+
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/"
+ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##APP ICONS (value)/"
+# Cleaning old list
+find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
+rm "$ICON_imgs_directory"/*.png
+for subdir in /mnt/SDCARD/Icons/*/; do
+if [ -d "${subdir}Apps" ]; then
+  subdir_name=$(basename "$subdir")
+  cp "${ICON_list_directory}Default.sh" "${ICON_list_directory}${subdir_name}.sh"
+  # Check if preview.png file exists
+  if [ -f "${subdir}preview_apps_$CrossMix_Style.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview_apps_$CrossMix_Style.png" "${ICON_imgs_directory}${subdir_name}.png"
+  elif [ -f "${subdir}preview_apps.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview_apps.png" "${ICON_imgs_directory}${subdir_name}.png"
+  else
+      first_png=$(find "${subdir}Apps/" -maxdepth 2 -type f -name "*.png" | head -n 1)
+      if [ -n "$first_png" ]; then
+        cp "$first_png" "${ICON_imgs_directory}${subdir_name}.png"
+      fi
+  fi
+fi
 done
 
 THEME_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/"
