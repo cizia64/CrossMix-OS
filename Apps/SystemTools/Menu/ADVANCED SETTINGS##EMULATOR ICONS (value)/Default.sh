@@ -18,4 +18,4 @@ if [ ! -f "$json_file" ]; then
 fi
 /mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"ICONS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
-/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "ICONS" "$script_name"
+/mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "EMULATOR ICONS" "$script_name"
