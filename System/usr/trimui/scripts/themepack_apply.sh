@@ -43,23 +43,23 @@ if [ -n "$bootlogo" ]; then
     fi
 fi
 
-# Apply icon collection
-if [ -n "$icon" ]; then
-    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${icon}.sh" ]; then
-        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh"
+# Apply emulator icon collection
+if [ -n "$emuicons" ]; then
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh" ]; then
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh"
     else
-        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${icon}.sh does not exist."
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh\" does not exist !!" -fs 22 -c red -t 3
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh\" does not exist !!" -fs 22 -c red -t 3
     fi
 fi
 
 # Apply app icons collection
 if [ -n "$appicons" ]; then
-    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh" ]; then
-        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh"
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh" ]; then
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh"
     else
-        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh does not exist."
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${icon}.sh\" does not exist !!" -fs 22 -c red -t 3
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh\" does not exist !!" -fs 22 -c red -t 3
     fi
 fi
 

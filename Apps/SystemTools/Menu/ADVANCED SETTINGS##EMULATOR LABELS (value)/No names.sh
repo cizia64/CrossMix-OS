@@ -48,7 +48,7 @@ json_file="/mnt/SDCARD/System/etc/crossmix.json"
 if [ ! -f "$json_file" ]; then
   echo "{}" >"$json_file"
 fi
-/mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"EMU LABELS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
+/mnt/SDCARD/System/bin/jq --arg script_name "$script_name" '. += {"EMULATOR LABELS": $script_name}' "$json_file" >"/tmp/json_file.tmp" && mv "/tmp/json_file.tmp" "$json_file"
 
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "EMULATOR LABELS" "$script_name"
 
