@@ -1,5 +1,6 @@
 {
     "name":"Windows95",
+    "preview":"preview.png", 
     "font":"W95font.otf",
     "fontascii":"W95font.otf",
     "fontsize":{
