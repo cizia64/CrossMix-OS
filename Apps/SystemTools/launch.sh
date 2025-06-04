@@ -106,8 +106,8 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
 
 done
 
-ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/"
-ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##ICONS (value)/"
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/"
+ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##EMULATOR ICONS (value)/"
 # Cleaning old list
 find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
 rm "$ICON_imgs_directory"/*.png

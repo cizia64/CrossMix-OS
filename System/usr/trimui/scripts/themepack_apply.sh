@@ -45,10 +45,10 @@ fi
 
 # Apply icon collection
 if [ -n "$icon" ]; then
-    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh" ]; then
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${icon}.sh" ]; then
         "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh"
     else
-        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh does not exist."
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${icon}.sh does not exist."
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh\" does not exist !!" -fs 22 -c red -t 3
     fi
 fi
