@@ -1,5 +1,6 @@
 {
     "name":"Simple Blue",
+    "preview":"preview.png", 
     "font":"Montserrat-Light.ttf",
     "fontascii":"Montserrat-Light.ttf",
     "fontsize":{
