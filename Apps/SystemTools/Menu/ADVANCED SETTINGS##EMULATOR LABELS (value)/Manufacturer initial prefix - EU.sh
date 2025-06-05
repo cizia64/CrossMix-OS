@@ -5,7 +5,7 @@ export PATH="/mnt/SDCARD/System/bin:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 # Display a message indicating the application of default icons
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" icons by default..."
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"$(basename "$0" .sh)\" emulator labels..."
 
 # Get the script name without the extension
 script_name=$(basename "$0" .sh)
