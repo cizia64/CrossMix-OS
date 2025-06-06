@@ -38,8 +38,8 @@ if [ -n "$bootlogo" ]; then
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$src_dir/$bootlogo" -m "Flashing logo..." -fs 100 -c green -t 0.5
         "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$src_dir/$bootlogo"
     else
-        echo "BootLogo Apps/BootLogo/Images/$bootlogo does not exist."
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/BootLogo/Images/$bootlogo\" does not exist !!" -fs 27 -c red -t 3
+        echo "${src_dir#/mnt/SDCARD/}$bootlogo does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"${src_dir#/mnt/SDCARD/}$bootlogo\" does not exist !!"  -c red -t 3
     fi
 fi
 
@@ -99,4 +99,4 @@ sync
 
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "THEME PACK" "$packname"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" applied" -t3
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" Theme Pack applied" -t3
