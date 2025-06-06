@@ -17,6 +17,7 @@ fi
 if [ -n "$theme" ]; then
     if [ -d "/mnt/SDCARD/Themes/${theme}" ]; then
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"${theme}\" theme." -t 1
+        [ "$theme" = "CrossMix - OS" ] && theme="Default"
         "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/${theme}.sh"
     else
         echo "Theme directory Themes/${theme} does not exist."
@@ -99,4 +100,4 @@ sync
 
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "THEME PACK" "$packname"
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" Theme Pack applied" -t3
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" Theme Pack applied" -t 1
