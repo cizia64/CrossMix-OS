@@ -1,5 +1,22 @@
 #!/bin/sh
 
+kill_childs() {
+  pids="$*"
+
+  set -- $(pgrep -P "$@" 2>/dev/null)
+  if [ -n "$*" ]; then
+    kill_childs "$@"
+  fi
+
+  echo "Killing PIDs: $pids"
+  kill $pids 2>/dev/null
+  for pid in $pids; do
+    while kill -0 "$pid" 2>/dev/null; do
+      sleep 0.1
+    done
+  done
+}
+
 #pid=`ps | grep cmd_to_run | grep -v grep | sed 's/[ ]\+/ /g' | cut -d' ' -f1`
 
 /mnt/SDCARD/System/usr/trimui/scripts/button_state.sh MENU
@@ -64,30 +81,7 @@ sync
 pkill -9 preload.sh # avoid to remove /mnt/SDCARD/trimui/app/cmd_to_run.sh when we shutdown directly from a resume
 pkill -9 runtrimui.sh
 
-pid=$1
-ppid=$pid
-
-echo "Initial pid: $pid"
-
-# Loop to find the last descendant process
-while [ -n "$pid" ]; do
-   ppid=$pid
-   pid=$(pgrep -P $ppid)
-done
-
-# Kill the last descendant process if it exists
-if [ -n "$ppid" ]; then
-   echo "Killing process $ppid"
-   kill $ppid
-fi
-
-# Wait while the process identified by ppid still exists
-while kill -0 $ppid 2>/dev/null; do
-   echo "Waiting for process $ppid to exit..."
-   wait $ppid 2>/dev/null
-done
-
-echo "Process $ppid has exited."
+kill_childs "$1"
 
 aplay /mnt/SDCARD/trimui/res/sound/PowerOff.wav -d 1
 
