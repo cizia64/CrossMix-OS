@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Daewoo</manufacturer>
+    <code>CPC-51 Zemmix V</code>
+    <release_year>1986</release_year>
+    <description>MSX game console</description>
+    <type>MSX</type>
+  </info>
+
+  <!-- Note: not emulated is:
+       - missing sound IN pin on the cartridge slot (you can't hear sound
+         from cartridges with SCC)
+       - the machine does not have a keyboard (not even an external connector)
+   -->
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>kr</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9118</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>cpc-51_basic-bios.rom</filename>
+            <sha1>a08a940aa87313509e00bc5ac7494d53d8e03492</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1"/>
+
+      <secondary slot="2">
+       <RAM id="Main RAM">
+         <mem base="0x0000" size="0x10000"/>
+       </RAM>
+      </secondary>
+
+      <secondary slot="3"/>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2"/>
+
+    <primary slot="3"/>
+
+  </devices>
+
+</msxconfig>

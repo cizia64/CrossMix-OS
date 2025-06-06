@@ -1,0 +1,9 @@
+<!ELEMENT softwaredb (person*)>
+<!ELEMENT software (title, genmsxid?, system, company,year,country,dump)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT genmsxid (#PCDATA)>
+<!ELEMENT system (#PCDATA)>
+<!ELEMENT company (#PCDATA)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+<!ELEMENT dump (#PCDATA)>

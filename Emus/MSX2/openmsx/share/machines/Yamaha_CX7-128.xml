@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+<!-- 
+  Note: info taken from Peter Hanraets's machine, with serial number 001267 .
+  No pictures of the mobo were available, but it looks like
+  the CX7, CX7M and YIS604 share the same motherboard.
+  Such mobo has an S-3527.
+
+  I'm not certain if this machine was delivered without SFG-05 and software module.
+  But we can't seem to find another reason that this model is different than the
+  CX7M/128. Still, Peter's machine did have the SFG-05, but not the software (FMV2).
+  We'll assume it was built in later and this model didn't have the SFG-05, which seems
+  to be consistent with the price difference (99000 Yen vs 129000 Yen). 
+-->
+
+  <info>
+    <manufacturer>Yamaha</manufacturer>
+    <code>CX7/128</code>
+    <release_year>1985</release_year>
+    <description>"Music Computer"</description>
+    <type>MSX2</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-3527 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-3527 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-3527 MSX-ENGINE -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>cx7-128.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>cx7-128_basic_bios2.rom</filename>
+          <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>cx7-128_msx2sub.rom</filename>
+            <sha1>b8e30d604d319d511cbfbc61e5d8c38fbb9c5a33</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1"/> <!-- mini cartridge slot -->
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>128</size>
+          <mem base="0x0000" size="0x10000"/>
+          <initialContent encoding="gz-base64">eJz7/58ywEAhoNB6iu0f6u4ftX9gwUC7n1L7AT7T/hA=</initialContent> <!--1010010101011010 where 1= (chr(255) * 64) and 0= (chr(0) * 64)) -->
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="3"/> <!-- module slot -->
+
+    </primary>
+
+  </devices>
+
+</msxconfig>
