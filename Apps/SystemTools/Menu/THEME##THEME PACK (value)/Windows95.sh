@@ -13,7 +13,7 @@
 packname="Windows95"
 style="Default"
 theme="Windows95"
-bootlogo="Windows95"
+bootlogo="Windows95.bmp"
 emuicons="Windows95"
 appicons="Windows95"
 background="No Backgrounds"
