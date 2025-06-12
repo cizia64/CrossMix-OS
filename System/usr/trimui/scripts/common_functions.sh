@@ -246,3 +246,96 @@ download_file() {
         return 1
     fi
 }
+
+
+
+
+# Show an OSD message
+show_osd_message() {
+  message="$1"
+  duration="$2"
+  type="$3"
+  [ -z "$type" ] && type="info"
+  
+  cat <<EOF > "/tmp/trimui_osd/osd_toast_msg"
+{
+  "type": "$type",
+  "id": "com.trimui.osd.msg.infoglobal",
+  "duration": 5000,
+  "size": 3,
+  "x": 150,
+  "y": 550,
+  "w": 600,
+  "h": 80,
+  "message": "$message",
+  "font": "",
+  "icon": "",
+  "fontsize": 24
+}
+EOF
+}
+
+extract_7z() {
+
+ARCHIVE="$1"
+DEST="$2"
+SEVENZ="/mnt/SDCARD/System/bin/7zz"
+ARCHIVE_NAME=$(basename "$ARCHIVE")
+SUCCESS_FLAG="/tmp/${ARCHIVE_NAME}_unpack_ok"
+
+# Remove any previous success SUCCESS_FLAG
+rm -f "$SUCCESS_FLAG"
+
+# Check parameters
+[ -z "$ARCHIVE" ] || [ -z "$DEST" ] && {
+  echo "Usage: $0 archive.7z destination_path"
+  exit 1
+}
+
+# Count the number of files in the archive (skip headers, count only actual entries)
+total=$($SEVENZ l "$ARCHIVE" | awk '/^-------------------/ {count++; next} count==1 && NF {n++} END {print n}')
+[ -z "$total" ] && total=0
+echo "Extracting $ARCHIVE_NAME, Total files: $total"
+
+# Initial OSD info
+show_osd_message "Extracting $ARCHIVE_NAME: $total files" 5000
+
+# Exit if nothing to extract
+[ "$total" -eq 0 ] && exit 0
+
+extracted=0
+last_percent=0
+
+# Run extraction and process output
+$SEVENZ x "$ARCHIVE" -o"$DEST" -aoa -bb1 2>/dev/null | while IFS= read -r line; do
+    # File line detected
+    echo "$line" | grep -q "^-" && {
+        extracted=$((extracted + 1))
+        percent=$((extracted * 100 / total))
+        if [ "$percent" -gt "$last_percent" ]; then
+            last_percent=$percent
+            echo "$percent% done ($extracted / $total files)"
+            show_osd_message "Unpacking $ARCHIVE_NAME... $percent% complete ($extracted / $total files)" 5000
+        fi
+    }
+
+    # Extraction success message
+    echo "$line" | grep -q "Everything is Ok" && touch "$SUCCESS_FLAG"
+done
+
+sync
+sleep 2
+
+# Check extraction result
+if [ -f "$SUCCESS_FLAG" ]; then
+    rm -f "$SUCCESS_FLAG"
+    show_osd_message "Extraction complete: $total files extracted." 5000
+    echo "Extraction complete: $extracted / $total"
+    /usr/trimui/bin/mplayer -ao alsa -format s16le -novideo -softvol -softvol-max 30 -volume 30 /mnt/SDCARD/trimui/res/sound/success.mp3
+else
+    echo "Extraction failed or incomplete."
+    show_osd_message "Error: Extraction failed or incomplete." 5000 "error"
+    /usr/trimui/bin/mplayer -ao alsa -format s16le -novideo -softvol -softvol-max 30 -volume 30 /mnt/SDCARD/trimui/res/sound/fail.mp3
+    exit 1
+fi
+}
