@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Olympia</manufacturer>
+    <code>PHC-2</code>
+    <release_year>1985</release_year>
+    <description>French MSX machine (built by Daewoo).</description>
+    <type>MSX</type>
+  </info>
+
+ <!-- 
+One specimen on MSX.org has:
+Serial number: L5EP10111
+IC4: NEC D780C-1 CPU 8423X5
+IC5: GI AY-3-8910 PSG 8435
+IC6: INTEL P8255A-5 PPI U3381873
+IC8: ROM: GI 9256C-0033 RO9256C-FRA 8441 CEA
+IC18-IC25: RAM: 8x Mitsubishi M5K4164ANP 8419A9/8422B6/842202
+Mobo: Daewoo DP640728 / 9906500900
+Xtal: Sony 10.738635MHz _ON107
+VDP and VRAM are under heat sink :(
+
+Patrick's machine has:
+Serial Number: L5EP10182
+IC4: Zilog Z8400A PS Z80A CPU 8412
+IC5: GI AY-3-8910A 8442 CBA
+IC6: NEC D8255AC-2 PPI
+IC8: ROM: GI 9256C-0033 RO9256C-FRA 8446 CEA
+IC18-IC25: RAM: 8x Mitsubishi M5K4164ANP 8424A6
+Mobo: Daewoo DP645038 / 9906500900
+Xtal: Sony 10.738635MHz _ON107
+VDP and VRAM are under heat sink :(
+
+Z80 scf: 01ED29ED01FC29FC (standard)
+Z80 cpl: 3AFF12D7 (standard)
+Z80 out (c),0: 0 (MSX)
+PSG pin 6/7 quirk: C (YES)
+PSG mask: AY8910-like
+ -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>fr</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected> <!-- confirmed -->
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9129</version>
+      <io base="0x98" num="2"/>
+      <saturation>100</saturation> <!-- TMS9x2x and RGB output -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>olympia_phc-2_basic-bios1.rom</filename>
+          <sha1>d3af963e2529662eae63f04a2530454685a1989f</sha1> <!-- Confirmed by Patrick -->
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary slot="1">
+
+      <RAM id="Main RAM">
+        <mem base="0x0000" size="0x10000"/>
+        <initialContent encoding="hex">FF00</initialContent>
+      </RAM>
+
+    </primary>
+
+    <primary external="true" slot="2"/> <!-- Yeah, first cartridge slot is actually slot 2! -->
+
+    <primary external="true" slot="3"/> <!-- Note: this connector is actually a non-standard expansion connector on the back -->
+
+  </devices>
+
+</msxconfig>

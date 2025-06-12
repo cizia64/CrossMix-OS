@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Yamaha</manufacturer>
+    <code>YIS-503F</code>
+    <release_year>1984?</release_year>
+    <description/>
+    <type>MSX</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>gb</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9929A</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0x8000" size="0x8000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>yis-503f_basic-bios1.rom</filename>
+          <sha1>8963fc041975f31dc2ab1019cfdd4967999de53e</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+     <!-- Note that this slot is not a standard MSX cartridgeslot, but a 50 pins
+    male connector, carrying all MSX cartridgeslot signals. On a real machine
+    you can use the Yamaha CA-01 Single Cartridge Adapter to change this slot
+    into a normal MSX cartridge slot. As openMSX doesn't model these, consider
+    this slot to have this adapter connected... -->
+   <primary external="true" slot="2"/>
+
+    <!-- Note that this is not a standard MSX cartridgeslot, but a 60 pins card
+    edge connector, carrying all MSX cartridgeslot signals. It is made to
+    connect the Yamaha SFG-01/05 and other "units" with the same connector. As
+    openMSX doesn't model this, we just make it available as an MSX cartridge
+    slot here. -->
+   <primary external="true" slot="3"/>
+
+  </devices>
+
+</msxconfig>

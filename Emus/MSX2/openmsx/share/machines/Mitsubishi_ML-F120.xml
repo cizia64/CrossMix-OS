@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Mitsubishi</manufacturer>
+    <code>ML-F120</code>
+    <release_year></release_year>
+    <description>A Japanese MSX1 with built in software.</description>
+    <type>MSX</type>
+  </info>
+
+  <!-- Based on Werner Kai's machine with serial 1012478
+
+       CPU: NEC D780C-1
+       VDP: TMS9918ANL - Note: the ML-F120D with RGB out uses a TMS9928ANL, see https://goo.gl/bxH7nG
+       PPI: Mitsubishi M5L8255AP-5
+       PSG: GI AY-3-8910A
+
+       Z80 scf: 01C501ED01D401FC (NEC)
+       Z80 cpl: 3AFF12D7 (standard)
+       Z80 out (c),0: 0 (MSX)
+       PSG pin 6/7 quirk: C (YES)
+       PSGmask: AY8910-like
+
+       See: https://plus.google.com/u/0/photos/112629367302659371233/albums/6162689764184673953
+  -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9918A</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <keyboardlayout>jis</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>ml-f120_basic-bios1.rom</filename>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+      <RAM id="Main RAM">
+        <mem base="0x8000" size="0x8000"/>
+      </RAM>
+    </primary>
+
+    <primary external="true" slot="1"/> <!-- top slot -->
+
+    <primary external="true" slot="2"/> <!-- back slot -->
+
+    <primary slot="3">
+      <ROM id="ML-F120 firmware ROM">
+        <rom>
+          <filename>ml-f120_firmware.rom</filename>
+          <sha1>21a9f60cb6370d0617ce54c42bb7d8e40a4ab560</sha1>
+        </rom>
+        <mem base="0x4000" size="0x4000"/>
+      </ROM>
+    </primary>
+
+  </devices>
+
+</msxconfig>

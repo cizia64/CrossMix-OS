@@ -1,0 +1,187 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Panasonic</manufacturer>
+    <code>FS-A1FX</code>
+    <release_year>1988</release_year>
+    <description/>
+    <type>MSX2+</type>
+  </info>
+
+  <RenShaTurbo>
+    <min_ints>47</min_ints>
+    <max_ints>221</max_ints>
+  </RenShaTurbo>
+
+  <MapperReadBackBits>2</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <!-- all individual ROMs are matching against the EPROM dump made by Erik Luppes, except for the kanji font ROM. Probably because the way you read it out from software is not how it is in the ROM, see https://github.com/openMSX/openMSX/issues/299 -->
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+    <!-- see remark above, this is the EPROM dump by Erik Luppes
+      <rom>
+        <filename>fs-a1fx_IC16.rom</filename> 
+        <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+        <window base="0x0000" size="0x20000"/>
+      </rom>
+    -->
+      <rom>
+        <filename>fs-a1fx_kanjifont.rom</filename>
+        <sha1>e0e99cd91e88ce2676445663f832c835d74d6fd4</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>fs-a1fx.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <ResetStatusRegister id="Reset Status register">
+      <inverted>true</inverted>
+      <io base="0xF4" num="1"/>
+    </ResetStatusRegister>
+
+    <Matsushita id="Switch">
+      <sramname>fs-a1fx.sram</sramname>
+      <device idref="VDP"/>
+      <hasturbo>true</hasturbo>
+    </Matsushita>
+
+    <T9769 id="T9769">
+      <subtype>B</subtype>
+    </T9769>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>fs-a1fx_IC16.rom</filename> <!-- EPROM dump by Erik Luppes -->
+          <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+          <window base="0x30000" size="0x8000"/>
+        </rom>
+        <rom>
+          <filename>fs-a1fx_basic-bios2p.rom</filename>
+          <sha1>e90f80a61d94c617850c415e12ad70ac41e66bb7</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <MemoryMapper id="Main RAM">
+          <size>64</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>fs-a1fx_IC16.rom</filename> <!-- EPROM dump by Erik Luppes -->
+            <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+            <window base="0x38000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>fs-a1fx_msx2psub.rom</filename>
+            <sha1>fe0254cbfc11405b79e7c86c7769bd6322b04995</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="MSX Kanji Driver with BASIC">
+          <rom>
+            <filename>fs-a1fx_IC16.rom</filename> <!-- EPROM dump by Erik Luppes -->
+            <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+            <window base="0x28000" size="0x8000"/>
+          </rom>
+          <rom>
+            <filename>fs-a1fx_kanjibasic.rom</filename>
+            <sha1>1ef3956f7f918873fb9b031339bba45d1e5e5878</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF8</io_regs>
+          <drives>1</drives>
+          <rom>
+            <filename>fs-a1fx_IC16.rom</filename> <!-- EPROM dump by Erik Luppes -->
+            <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+            <window base="0x3C000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>fs-a1fx_disk.rom</filename>
+            <sha1>bb59c849898d46a23fdbd0cc04ab35088e74a18d</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="A1 Cockpit">
+          <rom>
+            <filename>fs-a1fx_IC16.rom</filename> <!-- EPROM dump by Erik Luppes -->
+            <sha1>623cbca109b6410df08ee7062150a6bda4b5d5d4</sha1>
+            <window base="0x20000" size="0x8000"/>
+          </rom>
+          <rom>
+            <filename>fs-a1fx_cockpit.rom</filename>
+            <sha1>9d67fab55b85f4ac4f5924323a70020eb8589057</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>
