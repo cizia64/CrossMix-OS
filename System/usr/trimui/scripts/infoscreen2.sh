@@ -22,6 +22,7 @@ usage() {
     echo "  -fb             Preserve framebuffer on exit"
     echo "  -fi <spacing>   Font interline/line-spacing"
     echo "  -sp             Show spinner"
+    echo "  -k <map> <button> <text>  Set a button and optional label. <map>: lout|lin|rin|rout, <button>: A|B|X|Y, <text>: label to display (if empty, no label shown). Example: -key lout Y 'Left label'"
     exit 1
 }
 
@@ -35,7 +36,7 @@ is_number() {
 
 # Function to validate keys
 validate_keys() {
-    valid_keys="A B Y X START"
+    valid_keys="A B Y X"
     for key in $1; do
         if ! echo "$valid_keys" | grep -qw "$key"; then
             echo "Invalid key: $key. Using default."
@@ -118,13 +119,6 @@ while [ "$#" -gt 0 ]; do
         image="$2"
         shift 2
         ;;
-    -k)
-        validate_keys "$2"
-        if [ $? -eq 0 ]; then
-            wait_keys="$2"
-        fi
-        shift 2
-        ;;
     -t)
         if is_number "$2"; then
             timer="$2"
@@ -191,15 +185,42 @@ while [ "$#" -gt 0 ]; do
         COMMAND="$COMMAND --show-spinner"
         shift
         ;;
+    -k)
+        # Handle -key <position> <button> <text>
+        key_map="$2"
+        key_button="$3"
+        key_text="$4"
+        validate_keys "$3"
+        if [ $? -eq 0 ]; then
+
+            case "$key_map" in
+            lout) # exit code 11
+                COMMAND="$COMMAND --inaction-button $key_button"
+                [ -n "$key_text" ] && COMMAND="$COMMAND --inaction-text \"$key_text\" --inaction-show"
+                ;;
+            lin) # exit code 12
+                COMMAND="$COMMAND --action-button $key_button"
+                [ -n "$key_text" ] && COMMAND="$COMMAND --action-text \"$key_text\" --action-show"
+                ;;
+            rin) # exit code 13
+                COMMAND="$COMMAND --cancel-button $key_button"
+                [ -n "$key_text" ] && COMMAND="$COMMAND --cancel-text \"$key_text\" --cancel-show"
+                ;;
+            rout) # exit code 14
+                COMMAND="$COMMAND --confirm-button $key_button"
+                [ -n "$key_text" ] && COMMAND="$COMMAND --confirm-text \"$key_text\" --confirm-show"
+                ;;
+            esac
+        fi
+        shift 4
+        ;;
     *) shift ;;
     esac
 done
 
-
 # we set default values if not set by args
 image=$(determine_image_path "$image")
 COMMAND="$COMMAND  --background-image \"$image\""
-
 
 echo "$COMMAND"
 eval $COMMAND
