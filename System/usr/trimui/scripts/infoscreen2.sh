@@ -222,5 +222,5 @@ done
 image=$(determine_image_path "$image")
 COMMAND="$COMMAND  --background-image \"$image\""
 
-echo "$COMMAND"
+echo -e "infoscreen2 command line:\n$COMMAND"
 eval $COMMAND
