@@ -8,16 +8,19 @@ restore_file() {
   path="$1"
   relative_path="${path#/}" # Remove leading "/" from the path
   [ -n "$relative_path" ] && $SEVENZ x "$ARCHIVE_PATH" "$relative_path" -y -o/ && echo "Restored: $path"
+  chmod 644 "$path"
+  chown root:root "$path"
 }
 
 if ! read -r current_device </etc/trimui_device.txt; then
-  display=$(fbset | grep ^mode | cut -d "\"" -f 2)
-  if [ "$display" = "1280x720-64" ]; then
+  RES=$(fbset | awk '/geometry/ {print $2 "x" $3}')
+  if [ "$RES" = "1280x720" ]; then
     current_device="tsp"
   else
     current_device="brick"
   fi
   echo -n $current_device >/etc/trimui_device.txt
+
 fi
 
 selector_output=$(selector -t "Choose an action to perform:                           (B to cancel)" -c "Backup" "Restore")
@@ -34,7 +37,8 @@ case "$selected_action" in
   $SEVENZ a "$ARCHIVE_PATH" \
     etc/wifi/wpa_supplicant.conf \
     mnt/UDISK/system.json \
-    mnt/UDISK/joypad.config
+    mnt/UDISK/joypad.config \
+    root/.ash_history
 
   infoscreen.sh -m "\"backup_$(date +'%Y%m%d-%Hh%M-%S').7z\"    saved." -t 2
 
