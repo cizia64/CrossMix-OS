@@ -48,6 +48,9 @@ if [ "$version" != "$FW_patched_version" ]; then
     # Disable Stock Music app
     mv /usr/trimui/apps/musicplayer/config.json /usr/trimui/apps/musicplayer/config_disabled.json
 
+    # Disable Stock Reader app
+    mv /usr/trimui/apps/bookreader/config.json /usr/trimui/apps/bookreader/config_disabled.json
+
     # add language files
     if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
         cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
