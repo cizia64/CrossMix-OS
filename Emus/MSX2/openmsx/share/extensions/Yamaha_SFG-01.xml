@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <name>FM Sound Synthesizer Unit</name>
+    <manufacturer>Yamaha</manufacturer>
+    <code>SFG-01</code>
+    <release_year>1983</release_year>
+    <description>Yamaha YM-2151 based sound cartridge with MIDI</description>
+    <type>sound expansion</type>
+  </info>
+
+<!-- Note that actually this device has a non-standard 60-pin female connector,
+incompatible with the MSX cartridge slot, but suitable for the side slot of the
+Yamaha CX5M series. However, a separate Yamaha UCN-01 Unit Connector can be
+bought which makes it possible to connect this device to any MSX. The unit is
+nothing more than a rewiring of the same signals to a standard cartridge slot
+connector. In openMSX we do not model these different slot connectors, so
+consider this device to have built in the Unit Connector. -->
+
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <YamahaSFG id="Yamaha SFG-01">
+          <mem base="0x0000" size="0x10000"/> <!-- 16kB ROM mirrored over the whole slot -->
+          <sound>
+            <volume>30000</volume>
+          </sound>
+          <rom>
+            <sha1>49a1750c10e407293af6bce27a02e99307ceba12</sha1>
+            <filename>sfg-01.rom</filename>
+          </rom>
+        </YamahaSFG>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

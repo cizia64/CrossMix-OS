@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Debug Device</name>
+    <manufacturer>openMSX Team</manufacturer>
+    <code/>
+    <release_year>2003</release_year>
+    <description>Artificial device to create debug output, see the openMSX manual.</description>
+    <type>debug tool</type>
+  </info>
+  <devices>
+    <DebugDevice id="Debug Device">
+      <io base="0x2E" num="2" type="O"/>
+      <filename>stdout</filename>
+    </DebugDevice>
+  </devices>
+</msxconfig>

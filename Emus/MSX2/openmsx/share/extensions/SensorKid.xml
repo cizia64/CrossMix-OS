@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM "msxconfig2.dtd">
+<msxconfig>
+  <info>
+    <name>Sensor Kid Cartridge</name>
+    <manufacturer>Sony</manufacturer>
+    <code>HBJ-H081C</code>
+    <release_year>1988</release_year>
+    <description>Sony Sensor Kid cartridge</description>
+    <type>sensor cartridge</type>
+  </info>
+  <devices>
+    <SensorKid id="sensor_kid">
+      <io base="0x00" num="2"/>
+    </SensorKid>
+
+    <primary slot="any">
+      <secondary slot="any">
+        <ROM id="Sensor Kid ROM">
+          <rom>
+              <sha1>794aca3c2136933f1fe6405e56e0ce7fdbb10385</sha1>
+              <filename>sensor-kid.rom</filename>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

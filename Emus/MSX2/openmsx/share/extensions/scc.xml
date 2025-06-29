@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>SCC</name>
+    <manufacturer>Konami</manufacturer>
+    <code/>
+    <release_year/>
+    <description>Empty Konami SCC cartridge.</description>
+    <type>sound expansion</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <ROM id="Empty Konami SCC Cartridge">
+          <mem base="0x4000" size="0x8000"/>
+          <sound>
+            <volume>11500</volume>
+          </sound>
+          <mappertype>SCC</mappertype>
+          <rom/>
+        </ROM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>
