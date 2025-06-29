@@ -45,6 +45,9 @@ if [ "$version" != "$FW_patched_version" ]; then
     rm "/usr/trimui/apps/usb_storage/"*.png
     cp "/mnt/SDCARD/System/resources/usb_storage/"* "/usr/trimui/apps/usb_storage/"
 
+    # Disable Stock Music app
+    mv /usr/trimui/apps/musicplayer/config.json /usr/trimui/apps/musicplayer/config_disabled.json
+
     # add language files
     if [ ! -e "/usr/trimui/res/skin/pl.lang" ]; then
         cp "/mnt/SDCARD/trimui/res/lang/"*.lang "/usr/trimui/res/lang/"
@@ -157,9 +160,9 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     ################ Flash boot logo ################
     if [ "$CrossMix_Update" = "0" ]; then
-	
+
         read -r Current_device </etc/trimui_device.txt
-		
+
         if [ "$Current_device" = "tsp" ]; then
             src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720"
         else
