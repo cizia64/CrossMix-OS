@@ -1,18 +1,21 @@
 #!/bin/sh
 
 STATUS_FILE="/tmp/trimui_osd/toggle_fastforward/status"
-CMD="/mnt/SDCARD/System/bin/thd --triggers /mnt/SDCARD/System/etc/thd_fastforward.conf /dev/input/event*"
+CMD="/mnt/SDCARD/System/bin/r2_fastforward /dev/input/event3"
 
-if [ $# -eq 0 ] ; then
+if [ $# -eq 0 ]; then
     mkdir -p "$(dirname "$STATUS_FILE")"
 else
-    PID=$(pgrep -f "thd.*thd_fastforward\.conf")
+    # Get PIDs of matching process
+    PIDS=$(pgrep -f "r2_fastforward /dev/input/event3")
 
-    if [ -n "$PID" ]; then
-        kill "$PID"
-        echo 0 > "$STATUS_FILE"
+    if [ -n "$PIDS" ]; then
+        echo "Killing r2_fastforward..."
+        echo "$PIDS" | xargs kill
+        echo 0 >"$STATUS_FILE"
     else
+        echo "Launching r2_fastforward..."
         $CMD &
-        echo 1 > "$STATUS_FILE"
+        echo 1 >"$STATUS_FILE"
     fi
 fi
