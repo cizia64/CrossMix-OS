@@ -95,12 +95,12 @@ while true; do
 			cp "./$sel" "/mnt/SDCARD/RetroArch/.retroarch/assets/sounds/unlock.ogg"
 			sleep 0.5
 			sync
-			killall -9 "Retroachievement Unlock Sound.sh"
+			killall -9 "RetroAchievement Unlock Sound.sh"
             exit 0
             ;;
         "B")
             [ -n "$player_pid" ] && kill "$player_pid" 2>/dev/null
-			killall -9 "Retroachievement Unlock Sound.sh"
+			killall -9 "RetroAchievement Unlock Sound.sh"
             exit 1
             ;;
     esac
