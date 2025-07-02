@@ -36,6 +36,9 @@
         },
         {
             "package":"com.trimui.osd.toggle.nightmode"
+        },
+        {
+            "package":"com.trimui.osd.toggle.fastforward"
         }
 
     ]
