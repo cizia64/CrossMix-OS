@@ -1,0 +1,235 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>FRS</manufacturer>
+    <code>Acid3Test-mapper</code>
+    <release_year>2014</release_year>
+    <description>Acid3Test v0.1, aka "unusual memory-mapper configuration"
+
+  This machine was carefully dedigned to stress-test memory-mapper handling
+  routines. Any of the following bad practices will fail to run:
+  - Reading the Memory Mapper registers
+  - Assuming that the primary mapper is the biggest one
+
+For more info, see http://frs.badcoffee.info/MSXAcidTests.html
+    </description>
+    <type>MSXturboR</type>
+  </info>
+
+
+<!--
+==Changelog==
+- v0.1: Initial version
+
+==TODO==
+- Change the machine to MSX2+/128KB and patch the BIOS to select the smaller
+  mapper.
+- Set <MapperReadBackBits> to 3.
+
+-->
+
+  <RenShaTurbo>
+    <min_ints>47</min_ints>
+    <max_ints>221</max_ints>
+  </RenShaTurbo>
+
+  <MapperReadBackBits>5</MapperReadBackBits>
+
+  <PanasonicRom id="Firmware ROM">
+    <rom>
+      <sha1>c212b11fda13f83dafed688c54d098e7e47ab225</sha1>
+      <sha1>4b84465c2faa802bfd5f772118c4d31f993f29d0</sha1>
+      <filename>fs-a1st_firmware.rom</filename>
+    </rom>
+  </PanasonicRom>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>fs-a1st_kanjifont.rom</filename>
+        <sha1>5aff2d9b6efc723bc395b0f96f0adfa83cc54a49</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+      <io base="0xDA" num="2" type="O"/>
+      <io base="0xDB" num="1" type="I"/>
+    </Kanji>
+
+    <S1990 id="S1990">
+      <io base="0xE4" num="2"/>
+    </S1990>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <has_yesno_keys>true</has_yesno_keys>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>Acid3Test-mapper.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <E6Timer id="Turbo-R timer">
+      <io base="0xE6" num="2"/>
+    </E6Timer>
+
+    <ResetStatusRegister id="Reset Status register">
+      <inverted>false</inverted>
+      <io base="0xF4" num="1"/>
+    </ResetStatusRegister>
+
+    <TurboRPause id="TurboRPause">
+      <io base="0xA7" num="1"/>
+    </TurboRPause>
+
+    <TurboRPCM id="PCM">
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA4" num="2"/>
+    </TurboRPCM>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>40</firstblock>
+            <lastblock>43</lastblock>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <MSX-MUSIC id="MSX Music">
+          <rom>
+            <firstblock>62</firstblock>
+            <lastblock>63</lastblock>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+          <io base="0x7C" num="2" type="O"/>
+          <mem base="0x4000" size="0x4000"/>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="MSX Opening ROM">
+          <rom>
+            <firstblock>36</firstblock>
+            <lastblock>37</lastblock>
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2">
+      <secondary external="true" slot="0"/>
+
+      <secondary slot="3">
+        <MemoryMapper id="4MB External RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>4096</size>
+        </MemoryMapper>
+      </secondary>
+    </primary>
+
+    <primary slot="3">
+      <secondary slot="0">
+        <PanasonicRAM id="Main RAM">
+          <size>256</size>
+          <mem base="0x0000" size="0x10000"/>
+        </PanasonicRAM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>56</firstblock>
+            <lastblock>57</lastblock>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="MSX Kanji Driver with BASIC 1">
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>58</firstblock>
+            <lastblock>61</lastblock>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF2</io_regs>
+          <rom>
+            <firstblock>48</firstblock>
+            <lastblock>55</lastblock>
+          </rom>
+          <drives>1</drives>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="FS-A1ST">
+          <mappertype>PANASONIC</mappertype>
+          <sramsize>16</sramsize>
+          <sram-mirrored>false</sram-mirrored>
+          <sramname>Acid3Test-mapper.sram</sramname>
+          <rom>
+            <firstblock>0</firstblock>
+            <lastblock>255</lastblock>
+          </rom>
+          <mem base="0x0000" size="0x10000"/>
+          <device idref="Main RAM"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

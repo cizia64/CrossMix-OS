@@ -1,0 +1,233 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>FRS</manufacturer>
+    <code>Acid2Test-hardware</code>
+    <release_year>2013</release_year>
+    <description>Acid2Test v0.5, "unusual hardware in usual slot layout"
+
+  This is certainly the hardest of all tests. It's aimed to detect illegal
+direct hardware access.
+
+  The MSX Technical Handbook, pg-336 clearly states that programs should not
+handle the hardware directly and the only direct I/O allowed is to the VDP, by
+using the ports indicated on addresses 0006h and 0007h of the BIOS. Pg-42 of
+this same book, on "Notes on I/O Address Assignments", mentions the reason:
+"Although I/O addresses are defined above, the software must not access those
+devices directly using the above ports. All I/O accesses must be done using
+BIOS calls, in order to make the software independent of hardware differences.
+MSX manufacturers may change some of the hardware from the standard MSX system
+and maintain software compatibility by rewriting BIOS. The hardware differences
+would thus be transparent to the software."
+
+Remarks:
+  Because of technical restrictions on openMSX, the MemoryMapper I/O ports
+and the expanded-slot register cannot have their addresses changed.
+This means that this version of the AcidTest2 will not yet be able to
+test if those two devices are being correctly handled.
+
+For more info, see http://frs.badcoffee.info/MSXAcidTests.html
+</description>
+
+    <type>MSX2+</type>
+  </info>
+
+<!--
+==Changelog==
+- v0.1: Initial version
+- v0.2: Several improvements
+- v0.5: Added MSX-Audio, and MSX-Music/MSX-Audio are now on left channel/right channel respectively, in moonblaster stereo configuration. This helps to programmer to quickly detect which chip is being used.
+-->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0x28" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x88" num="4" type="O"/>
+      <io base="0x18" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0x20" num="2" type="O"/>
+      <io base="0x22" num="1" type="I"/>
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>Acid2Test-hardware.cmos</sramname>
+      <io base="0x34" num="2" type="O"/>
+      <io base="0x35" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x10" num="2"/>
+    </PrinterPort>
+
+    <F4Device id="F4Device">
+      <inverted>true</inverted>
+      <io base="0xF4" num="1"/>
+    </F4Device>
+
+    <primary slot="0">
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>phc-70fd2_basic-bios2p.rom</filename>
+            <sha1>e90f80a61d94c617850c415e12ad70ac41e66bb7</sha1>
+            <patches>
+              <ips>acid-tests/Acid2Test_basic-bios2p.vdp.ips</ips>
+              <ips>acid-tests/Acid2Test_basic-bios2p.psg.ips</ips>
+              <ips>acid-tests/Acid2Test_basic-bios2p.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_basic-bios2p.lpt.ips</ips>
+            </patches>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+
+        <MSX-AUDIO id="MSX-Audio">
+          <io base="0x50" num="2"/>
+          <type>Toshiba</type>
+          <sound>
+            <volume>12000</volume>
+            <balance>75</balance>
+          </sound>
+          <sampleram>256</sampleram>
+        </MSX-AUDIO>
+
+        <ROM id="MSX-Audio BIOS">
+          <mem base="0x0000" size="0x3000"/>
+          <mem base="0x4000" size="0x3000"/>
+          <mem base="0x8000" size="0x3000"/>
+          <mem base="0xC000" size="0x3000"/>
+          <mappertype>Normal0000</mappertype>
+          <rom>
+            <filename>Generic_msxaudio.rom</filename>
+            <sha1>7f115ff923a1cc0d1944cf280168add946fde854</sha1>  <!-- MSX-Audio BIOS v1.0 -->
+            <patches>
+              <ips>acid-tests/Acid2Test_msxaudio.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_msxaudio.psg.ips</ips>
+              <ips>acid-tests/Acid2Test_msxaudio.opl1.ips</ips>
+            </patches>
+          </rom>
+        </ROM>
+        <RAM id="MSX-Audio BIOS WorkRAM">
+          <mem base="0x3000" size="0x1000"/>
+          <mem base="0x7000" size="0x1000"/>
+          <size>0x1000</size>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="MSX-DOS2">
+          <mem base="0x4000" size="0x08000"/>
+          <rom>
+            <filename>Generic_msxdos22.rom</filename>
+            <sha1>c36c9e0f96738a340381e23b4f97245388801a46</sha1>
+            <patches>
+              <ips>acid-tests/Acid2Test_msxdos22.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_msxdos22.rtc.ips</ips>
+            </patches>
+          </rom>
+          <mappertype>MSXDOS2</mappertype>
+        </ROM>
+
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <MemoryMapper id="Main RAM">
+          <size>1024</size>
+          <mem base="0x0000" size="0x10000"/>
+          <io base="0xBC" num="4"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="1">
+        <!-- This slot contains both the SubROM and the MSX-Music BIOS -->
+        <MSX-MUSIC id="MSX-Music">
+
+          <rom> <!-- From original EPROM dump -->
+            <filename>2+FM cks-B414h.ROM</filename>
+            <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+            <window base="0x0000" size="0x8000"/>
+            <patches>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.vdp.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.psg.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.opll.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.rtc.ips</ips>
+            </patches>
+          </rom>
+          <rom>
+            <filename>ExpertTurbo_msx2psub-fmbasic.rom</filename>
+            <sha1>ca79a8cc7714a5d48d2e567a2d4d7ba3fe587825</sha1>
+            <patches>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.vdp.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.psg.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.opll.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_msx2psub-fmbasic.rtc.ips</ips>
+            </patches>
+          </rom>
+          <sound>
+            <volume>12000</volume>
+            <balance>-75</balance>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+          <io base="0x1C" num="2" type="O"/>
+          <mem base="0x0000" size="0x8000"/>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <drives>2</drives>
+          <rom>
+            <filename>phc-70fd2_disk.rom</filename>
+            <sha1>9efa744be8355675e7bfdd3976bbbfaf85d62e1d</sha1>
+            <patches>
+              <ips>acid-tests/Acid2Test_disk.ppi.ips</ips>
+              <ips>acid-tests/Acid2Test_disk.rtc.ips</ips>
+            </patches>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

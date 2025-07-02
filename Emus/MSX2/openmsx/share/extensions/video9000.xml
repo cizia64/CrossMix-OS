@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Video9000</name>
+    <manufacturer>Sunrise</manufacturer>
+    <code/>
+    <release_year>1997</release_year>
+    <description>Yamaha V9990 based digitizer/superimposer expansion.</description>
+    <type>graphics expansion</type>
+  </info>
+  <devices>
+    <V9990 id="Sunrise GFX9000">
+      <io base="0x60" num="0x0f"/>
+    </V9990>
+    <Video9000 id="Video9000">
+      <io base="0x6f" num="0x01"/>
+      <device idref="VDP"/>
+      <device idref="Sunrise GFX9000"/>
+    </Video9000>
+  </devices>
+</msxconfig>

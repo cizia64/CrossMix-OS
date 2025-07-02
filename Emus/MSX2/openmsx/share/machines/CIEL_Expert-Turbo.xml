@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>CIEL</manufacturer>
+    <code>Expert Turbo</code>
+    <release_year>2000</release_year>
+    <description/>
+    <type>MSX2+</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>br_gradiente_1_1</keyboard_type> <!-- It has a Brazillian/Portuguese layout, with special composing capabilities in the ROM -->
+      <has_keypad>false</has_keypad> <!-- The keypad of the Experts is not a real one. It uses the same keycodes of the standard 1,2,3,4... keys. I.e: If you press SHIFT+4 on the keypad, you'll get the $ sign  -->
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <sound>
+        <volume>21000</volume>
+        <!-- PSG is mixed on right, with the YM2413 rhythm channels -->
+        <!-- This way the computer has 6 channels on each side -->
+        <balance channel="1-3">100</balance>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>ExpertTurbo.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <ResetStatusRegister id="Reset Status register">
+      <inverted>true</inverted>
+      <io base="0xB7" num="1"/>
+    </ResetStatusRegister>
+
+    <CielTurbo id="CielTurbo">
+      <io base="0xB6" num="1"/>
+    </CielTurbo>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom> <!-- From original EPROM dump -->
+          <filename>2+FM cks-B414h.ROM</filename>
+          <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+          <window base="0x8000" size="0x8000"/>
+        </rom>
+        <rom>
+          <filename>ExpertTurbo_basic-bios2p.rom</filename>
+          <sha1>5029cf47031b22bd5d1f68ebfd3be6d6da56dfe9</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary slot="1">
+
+      <secondary external="true" slot="0"/>
+
+      <secondary slot="1">
+
+        <ROM id="MSX2+ Sub ROM">
+          <rom> <!-- From original EPROM dump -->
+            <filename>2+FM cks-B414h.ROM</filename>
+            <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+            <window base="0x0000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>ExpertTurbo_msx2psub.rom</filename>
+            <sha1>cc1744c6c513d6409a142b4fb42fbe70a95d9b7f</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+
+        <MSX-MUSIC id="MSX Music">
+          <rom> <!-- From original EPROM dump -->
+            <filename>2+FM cks-B414h.ROM</filename>
+            <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+            <window base="0x4000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>ExpertTurbo_fmbasic.rom</filename>
+            <sha1>befebc916bfdb5e8057040f0ae82b5517a7750db</sha1>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+            <!-- melody channels left, rhythm channels right -->
+            <balance channel="1-9">-100</balance>
+            <balance channel="10-14">100</balance>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+          <io base="0x7C" num="2" type="O"/>
+          <mem base="0x4000" size="0x4000"/>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary external="true" slot="2"/>
+
+      <secondary external="true" slot="3"/>
+
+    </primary>
+
+    <primary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>1024</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+    </primary>
+
+    <primary external="true" slot="2"/>
+
+  </devices>
+
+</msxconfig>

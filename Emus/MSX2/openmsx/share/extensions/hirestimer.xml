@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <devices>
+    <HiResTimer id="HiResTimer">
+      <io base="0x20" num="4"/>
+    </HiResTimer>
+  </devices>
+</msxconfig>

@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Al Alamiah</manufacturer>
+    <code>AX230</code>
+    <release_year>1986</release_year>
+    <description>Arabic MSX1 machine with built in games.</description>
+    <type>MSX</type>
+  </info>
+
+  <!-- Thanks to Tabajara Labs for his information, based on S/N: 00 AA432877
+       Mainboard says Sanyo 2CA4B10550A__ 2CA0U20899X1_
+
+       MSX-ENGINE: Toshiba T7937A
+       RAM in slot 3.0
+
+       Z80 scf: 01ED29ED01FC29FC (standard)
+       Z80 cpl: 3AF12D7 (standard)
+       Z80 out (c),0: FF (turboR)
+       PSG pin 6/7 quirk: C (YES)
+       PSG mask like AY8910
+  -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>int</keyboard_type> <!-- Is actually Arabic... -->
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>T7937APAL</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>IC125.BIN</filename>
+          <sha1>0340707c5de2310dcf5e569b7db4c6a6a5590cb7</sha1>
+          <window base="0x0000" size="0x8000"/>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary slot="1">
+      <secondary slot="0">
+        <ROM id="Arabic ROM">
+          <rom>
+            <filename>IC125.BIN</filename>
+            <sha1>0340707c5de2310dcf5e569b7db4c6a6a5590cb7</sha1>
+            <window base="0x8000" size="0x8000"/>
+          </rom>
+          <!-- the following puts the 3rd 16kB of the EPROM in page 2 and the
+          4th 16kB in page 1: the ROM is mirrored from 0x0000, but visibility
+          is arranged by the mem tag -->
+          <mem base="0x4000" size="0x8000"/>
+          <mappertype>Mirrored0000</mappertype>
+        </ROM>
+      </secondary>
+    </primary>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <RAM id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <initialContent encoding="hex">0000FFFFFFFF0000</initialContent>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="Games ROM">
+          <rom>
+            <filename>IC127.BIN</filename>
+            <sha1>620a209bdfdb65a22380031fce654bd1df61def2</sha1>
+          </rom>
+          <mem base="0x0000" size="0x10000"/>
+          <mappertype>ASCII8</mappertype>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>
