@@ -13,10 +13,10 @@
 packname="Greys-Dark"
 style="CrossMix - Refreshed"
 theme="Greys-Dark"
-bootlogo="Epic noir - tenlevels.bmp"
+bootlogo="Epic noir.bmp"
 emuicons="Greys-Dark"
 appicons="Default"
-background="Greys-Dark"
+background="No Backgrounds"
 emulabels="Default"
 
 ####################################################################################################################
