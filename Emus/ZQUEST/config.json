@@ -1,0 +1,15 @@
+{
+  "label": "ZQUEST",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/ZQUEST.png",
+  "iconsmall": "",
+  "iconlist": "",
+  "background": "/mnt/SDCARD/Backgrounds/Default/ZQUEST.png",
+  "themecolor": "FFFF88",
+  "launch": "default.sh",
+  "rompath": "../../Roms/ZQUEST",
+  "imgpath": "../../Imgs/ZQUEST",
+  "useswap": 1,
+  "shortname": 0,
+  "hidebios": 1,
+  "extlist": "qst|zip|launch"
+}
