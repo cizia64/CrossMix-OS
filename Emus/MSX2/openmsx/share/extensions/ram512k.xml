@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Memory Mapper (512 kB)</name>
+    <manufacturer/>
+    <code/>
+    <release_year/>
+    <description>512 kB memory mapper cartridge.</description>
+    <type>RAM expansion</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <MemoryMapper id="512k External RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>512</size>
+        </MemoryMapper>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

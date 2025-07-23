@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE msxconfig SYSTEM "msxconfig2.dtd">
+<msxconfig>
+  <info>
+    <name>3.5Inch MSX Micro FDD</name>
+    <manufacturer>Yamaha</manufacturer>
+    <code>FD-05/FD-051</code>
+    <release_year>1985</release_year>
+    <description>External double sided double density 3.5" disk drive.</description>
+    <type>external disk drive</type>
+  </info>
+  <!-- Note: the service manual mentions that there is an OLD TYPE (with
+       WD1793) and a new type (with WD2793). It's not sure from which version
+       the ROM below originates. -->
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <WD2793 id="Yamaha FD-051 diskROM/FDC">
+          <connectionstyle>Sony</connectionstyle>
+          <mem base="0x0000" size="0x10000"/> <!-- Verified by Max Iwamoto that the registers are mirrored on all pages -->
+          <rom>
+            <sha1>4b08a057e5863ade179dcf8bc9377e90940e6d61</sha1>
+            <filename>FD-051.BIN</filename>
+          </rom>
+          <drives>1</drives>
+        </WD2793>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>
