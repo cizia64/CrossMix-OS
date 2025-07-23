@@ -10,6 +10,21 @@ if [ "$SWAP_AB_enabled" -eq 1 ]; then
 fi
 rm -f /var/trimui_inputd/ra_hotkey
 
+
+# Move files taged to be moved.
+while read src <&3 && read dst <&4; do
+    mv "$src" "$dst"
+done 3</mnt/SDCARD/to_move_src 4</mnt/SDCARD/to_move_dst
+rm /mnt/SDCARD/to_move_src
+rm /mnt/SDCARD/to_move_dst
+
+# Delete files taged to be deleted.
+while read file; do
+    rm "$file"
+done < /mnt/SDCARD/to_del
+rm /mnt/SDCARD/to_del
+
+
 runifnecessary() {
 	a=$(pgrep "$1")
 	if [ "$a" = "" ]; then
