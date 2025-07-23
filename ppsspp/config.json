@@ -1,0 +1,7 @@
+{
+    "label": "PPSSPP",
+    "icon": "icon.png",
+    "iconsel": "icon.png",
+    "launch": "launch.sh",
+    "description": "Launch PPSSPP Emulator with OpenGL backend"
+}
