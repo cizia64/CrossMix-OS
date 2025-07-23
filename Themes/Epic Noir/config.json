@@ -1,8 +1,6 @@
 {
-    "name":"Epic Noir by tenlevels",
+    "name":"Epic Noir",
     "preview":"preview.png", 
-    "font":"Acre.ttf",
-    "fontascii":"Acre.ttf",
     "fontsize":{
         "nav_font1":24,
         "nav_font2":24,
