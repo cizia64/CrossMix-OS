@@ -43,9 +43,9 @@ set_credentials() {
 	Token="$2"
 
 	# PPSSPP
-	sed -i "s/^AchievementsEnable =.*/AchievementsEnable = True/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
-	sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
-	echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
+	sed -i "s/^AchievementsEnable =.*/AchievementsEnable = True/" /mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
+	sed -i "s/^AchievementsUserName =.*/AchievementsUserName = \"$Username\"/" /mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/ppsspp.ini
+	echo "$Token" >/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/ppsspp_retroachievements.dat
 
 	# Flycast
 	sed -i "s/^Enabled =.*/Enabled = true/" /mnt/SDCARD/Emus/DC/flycast_v2.4/config/emu.cfg
