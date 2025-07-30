@@ -10,7 +10,7 @@
   "useswap": 1,
   "shortname": 1,
   "hidebios": 1,
-  "extlist": "mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|m3u|m3u8|wma|jpg|png|bmp|launch",
+  "extlist": "mp4|mkv|avi|mpg|mpeg|wmv|asf|rm|rmvb|m4v|ts|mp3|m3u|m3u8|wma|jpg|png|bmp|launch|7z",
   "launchlist": [
     {
       "name": "mpv",

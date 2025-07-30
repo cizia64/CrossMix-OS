@@ -106,8 +106,8 @@ for subdir in /mnt/SDCARD/Backgrounds/*/; do
 
 done
 
-ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/"
-ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##ICONS (value)/"
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/"
+ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##EMULATOR ICONS (value)/"
 # Cleaning old list
 find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
 rm "$ICON_imgs_directory"/*.png
@@ -117,7 +117,7 @@ for subdir in /mnt/SDCARD/Icons/*/; do
   # Check if preview.png file exists
   if [ -f "${subdir}preview_$CrossMix_Style.png" ]; then
     # Copy preview.png with subfolder name
-    cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
+    cp "${subdir}preview_$CrossMix_Style.png" "${ICON_imgs_directory}${subdir_name}.png"
   elif [ -f "${subdir}preview.png" ]; then
     # Copy preview.png with subfolder name
     cp "${subdir}preview.png" "${ICON_imgs_directory}${subdir_name}.png"
@@ -133,6 +133,31 @@ for subdir in /mnt/SDCARD/Icons/*/; do
       fi
     fi
   fi
+done
+
+ICON_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/"
+ICON_imgs_directory="${img_path}/ADVANCED SETTINGS##APP ICONS (value)/"
+# Cleaning old list
+find "$ICON_list_directory" -type f -name "*.sh" ! -name "Default.sh" -exec rm {} +
+rm "$ICON_imgs_directory"/*.png
+for subdir in /mnt/SDCARD/Icons/*/; do
+if [ -d "${subdir}Apps" ]; then
+  subdir_name=$(basename "$subdir")
+  cp "${ICON_list_directory}Default.sh" "${ICON_list_directory}${subdir_name}.sh"
+  # Check if preview.png file exists
+  if [ -f "${subdir}preview_apps_$CrossMix_Style.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview_apps_$CrossMix_Style.png" "${ICON_imgs_directory}${subdir_name}.png"
+  elif [ -f "${subdir}preview_apps.png" ]; then
+    # Copy preview.png with subfolder name
+    cp "${subdir}preview_apps.png" "${ICON_imgs_directory}${subdir_name}.png"
+  else
+      first_png=$(find "${subdir}Apps/" -maxdepth 2 -type f -name "*.png" | head -n 1)
+      if [ -n "$first_png" ]; then
+        cp "$first_png" "${ICON_imgs_directory}${subdir_name}.png"
+      fi
+  fi
+fi
 done
 
 THEME_list_directory="/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/"
@@ -314,22 +339,37 @@ sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND di
 # ============================================== Modify folders which requires a "value" value ==============================================
 
 sqlite3 "$database_file" "SELECT disp, path FROM Menu_roms WHERE type = 1 AND disp LIKE '% (value)' ;" |
-  while IFS='|' read -r disp path; do
+while IFS='|' read -r disp path; do
     disp_withoutvalue=$(echo "$disp" | sed 's/ (value)//g')
+
+    # Set ConfigKey based on disp_withoutvalue
+    case "$disp_withoutvalue" in
+        "OSD BUTTON ACTION")
+            ConfigKey="NightMode_OSD"
+            ;;
+        "SHORTCUT ACTION")
+            ConfigKey="NightMode"
+            ;;
+        *)
+            ConfigKey="$disp_withoutvalue"
+            ;;
+    esac
+
+    # Determine the current state
     if [ "$disp_withoutvalue" = "THEMES" ]; then
-      CurState=$(basename "$CurrentTheme")
+        CurState=$(basename "$CurrentTheme")
     else
-      CurState=$(jq -r --arg disp "$disp_withoutvalue" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
+        CurState=$(jq -r --arg disp "$ConfigKey" '.[$disp] // "Default"' "/mnt/SDCARD/System/etc/crossmix.json")
     fi
 
-    if [ -z "$CurState" ]; then
-      CurState="not set"
-    fi
+    [ -z "$CurState" ] && CurState="not set"
+
     disp_withvalue="$disp_withoutvalue ($CurState)"
     sqlite3 "$database_file" "UPDATE Menu_roms SET disp = '$disp_withvalue',pinyin = '$disp_withvalue',cpinyin = '$disp_withvalue',opinyin = '$disp_withvalue' WHERE path = '$path';"
     sqlite3 "$database_file" "UPDATE Menu_roms SET ppath = '$disp_withvalue' WHERE ppath = '$disp';"
 
     echo "==== Updated \"$disp_withoutvalue\" to \"$disp_withvalue\""
-  done
+done
+
 
 sync

@@ -10,5 +10,6 @@
   "imgpath": "../../Imgs/VB",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "extlist":"vb|vboy|bin|zip|7z"
 }

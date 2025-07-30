@@ -50,5 +50,5 @@ selector_output="${selector_output#*: }"
 
 language=$(echo "$selector_output" | sed -n 's/.*(\(.*\)).*/\1/p')
 
-RomFullPath="/mnt/SDCARD/Best/Free Games Collection/Roms/GB/GB-Wordyl/gb-wordyl_1.0.5_mbc5_$language.gb"
+RomFullPath="/mnt/SDCARD/Best/Free Games Collection/Roms/GB/GB-Wordyl/gb-wordyl_mbc5_$language.gb"
 

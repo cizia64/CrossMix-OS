@@ -1,0 +1,13 @@
+{
+    "type":"slider",
+    "package":"com.trimui.osd.slider.volumeglobal",
+    "label":"Volume",
+    "label.ch.lang":"音量",
+    "gridwidth":4,
+    "gridheight":1,
+    "icon0":"icon-volume.png",
+    "icon1":"background.png",
+    "launch":"set.sh",
+    "status":"/tmp/trimui_osd/slider_volume/status",
+    "description":""
+}

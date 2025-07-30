@@ -6,18 +6,19 @@ export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
 # Update theme pack in CrossMix configuration
 if [ -n "$packname" ] && [ -n "$style" ]; then
-    jq --arg packname "$packname" --arg style "$style" '.["THEME PACK"] = $packname | .["CROSSMIX STYLE"] = $style' /mnt/SDCARD/System/etc/crossmix.json > /tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
+    jq --arg packname "$packname" --arg style "$style" '.["THEME PACK"] = $packname | .["CROSSMIX STYLE"] = $style' /mnt/SDCARD/System/etc/crossmix.json >/tmp/crossmix.json && mv /tmp/crossmix.json /mnt/SDCARD/System/etc/crossmix.json
 else
-	echo "packname and style variables are not defined."
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "packname and style variables are not defined." -c red -t 4
-	exit
+    echo "packname and style variables are not defined."
+    /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "packname and style variables are not defined." -c red -t 4
+    exit
 fi
 
 # Apply theme
 if [ -n "$theme" ]; then
     if [ -d "/mnt/SDCARD/Themes/${theme}" ]; then
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "Applying \"${theme}\" theme." -t 1
-        /usr/trimui/bin/systemval "theme" "/mnt/SDCARD/Themes/${theme}/"
+        [ "$theme" = "CrossMix - OS" ] && theme="Default"
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##THEMES (value)/${theme}.sh"
     else
         echo "Theme directory Themes/${theme} does not exist."
         /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"${theme}\" theme directory does not exist !!" -c red -t 3
@@ -26,22 +27,40 @@ fi
 
 # Apply boot logo
 if [ -n "$bootlogo" ]; then
-    if [ -f "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo" ]; then
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo" -m "Flashing logo..." -fs 100 -c green -t 0.5
-        "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "/mnt/SDCARD/Apps/BootLogo/Images/$bootlogo"
+    read -r Current_device </etc/trimui_device.txt
+
+    if [ "$Current_device" = "tsp" ]; then
+        src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720/"
     else
-        echo "BootLogo Apps/BootLogo/Images/$bootlogo does not exist."
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/BootLogo/Images/$bootlogo\" does not exist !!" -fs 27 -c red -t 3
+        src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1024x768/"
+    fi
+
+    if [ -f "$src_dir/$bootlogo" ]; then
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "$src_dir/$bootlogo" -m "Flashing logo..." -fs 100 -c green -t 0.5
+        "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$src_dir/$bootlogo"
+    else
+        echo "${src_dir#/mnt/SDCARD/}$bootlogo does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"${src_dir#/mnt/SDCARD/}$bootlogo\" does not exist !!"  -c red -t 3
     fi
 fi
 
-# Apply icon collection
-if [ -n "$icon" ]; then
-    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh" ]; then
-        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh"
+# Apply emulator icon collection
+if [ -n "$emuicons" ]; then
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh" ]; then
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh"
     else
-        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh does not exist."
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##ICONS (value)/${icon}.sh\" does not exist !!" -fs 22 -c red -t 3
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##EMULATOR ICONS (value)/${emuicons}.sh\" does not exist !!" -fs 22 -c red -t 3
+    fi
+fi
+
+# Apply app icons collection
+if [ -n "$appicons" ]; then
+    if [ -f "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh" ]; then
+        "/mnt/SDCARD/Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh"
+    else
+        echo "Icon script Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh does not exist."
+        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"Apps/SystemTools/Menu/ADVANCED SETTINGS##APP ICONS (value)/${appicons}.sh\" does not exist !!" -fs 22 -c red -t 3
     fi
 fi
 
@@ -81,5 +100,4 @@ sync
 
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "THEME PACK" "$packname"
 
-
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" applied" -t3
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "\"$packname\" Theme Pack applied" -t 1
