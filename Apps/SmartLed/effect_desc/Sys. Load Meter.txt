@@ -1,0 +1,8 @@
+Shows CPU and RAM usage
+as two filling LED gauges.
+(Updates every second)
+ 
+ - Left stick: CPU %
+ - Right stick: RAM usage %
+ - Automatic color: 
+   Green -> Orange -> Red

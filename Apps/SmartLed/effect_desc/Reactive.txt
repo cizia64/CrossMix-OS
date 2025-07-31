@@ -1,0 +1,7 @@
+Lights up only when input
+(triggered) is active, then fades.
+ 
+ - Color1: On-press color.
+ - Color2: Fade-to color.
+ - Speed: Fade duration.
+ - Trigger: Button ID or type.

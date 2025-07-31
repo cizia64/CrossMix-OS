@@ -1,0 +1,14 @@
+Displays a smooth color
+gradient based on battery
+charge percentage.
+ 
+Transitions from red to
+green as charge increases,
+and blinks red when low.
+ 
+It adjusts based on:
+- Battery %: Determines
+  the LED color (0-100%).
+- Speed (duration):
+  Controls blink rate below 10%.
+- Brightness: Sets the intensity.

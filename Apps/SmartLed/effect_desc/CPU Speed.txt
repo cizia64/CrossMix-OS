@@ -1,0 +1,14 @@
+A real-time visual indicator
+of the CPU frequency, 
+displaying a dynamic gradient
+from green (low speed) to 
+red (max speed).
+ 
+It adjusts based on:
+
+- CPU frequency: Determines 
+  the LED color: below 1000 
+  Mhz green, 2000 MHz red.
+- Brightness:
+  Sets the overall light
+  intensity.
