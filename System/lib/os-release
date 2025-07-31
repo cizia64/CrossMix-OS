@@ -1,0 +1,11 @@
+NAME=Batocera.linux
+PRETTY_NAME=\"Batocera.linux gladiator\"
+VERSION=gladiator
+ID=buildroot
+VERSION_ID=2024.11
+HOME_URL="https://batocera.org/"
+DOCUMENTATION_URL="https://wiki.batocera.org/"
+BUG_REPORT_URL="https://github.com/batocera-linux/batocera.linux/issues"
+OS_NAME="knulli"
+OS_VERSION=
+OS_DATE=20250506
