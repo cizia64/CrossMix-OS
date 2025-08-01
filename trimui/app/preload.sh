@@ -4,10 +4,6 @@ UDISK_TIRMUI_DIR=/mnt/UDISK/trimui_dir
 SDCARD_TRIMUI_DIR=/mnt/SDCARD/trimui
 export LD_LIBRARY_PATH=/usr/trimui/lib:${SDCARD_TRIMUI_DIR}/lib
 
-SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")
-if [ "$SWAP_AB_enabled" -eq 1 ]; then
-  touch /var/trimui_inputd/swap_ab
-fi
 rm -f /var/trimui_inputd/ra_hotkey
 
 runifnecessary() {
