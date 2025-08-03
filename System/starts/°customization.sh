@@ -135,6 +135,9 @@ if [ "$version" != "$FW_patched_version" ]; then
         /usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
     fi
 
+    # hide netplay tab in MainUI
+    /usr/trimui/bin/systemval netplaytab 0
+
     # Fix app icons
     "/mnt/SDCARD/Apps/SystemTools//Menu/ADVANCED SETTINGS##APP ICONS (value)/Default.sh"
 
