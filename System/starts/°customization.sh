@@ -139,10 +139,22 @@ if [ "$version" != "$FW_patched_version" ]; then
     "/mnt/SDCARD/Apps/SystemTools//Menu/ADVANCED SETTINGS##APP ICONS (value)/Default.sh"
 
     # modifying performance mode for Moonlight
-
     if ! grep -qF "performance" "/usr/trimui/apps/moonlight/launch.sh"; then
         sed -i 's|^\./moonlightui|echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor\necho 1608000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq\n\./moonlightui|' /usr/trimui/apps/moonlight/launch.sh
     fi
+
+    # Restore FW settings
+    if -f "/mnt/SDCARD/trimui/firmwares/Last_Automatic_Backup.txt"; then
+        Last_Automatic_Backup=$(cat /mnt/SDCARD/trimui/firmwares/Last_Automatic_Backup.txt)
+        if [ -f "/mnt/SDCARD/System/backups/firmware_settings/$current_device/$Last_Automatic_Backup" ]; then
+            echo "Restoring firmware settings from $Last_Automatic_Backup"
+            "/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/FW Settings Save-Load.sh" --restore "/mnt/SDCARD/System/backups/firmware_settings/$current_device/$Last_Automatic_Backup" joystick
+            "/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/FW Settings Save-Load.sh" --restore "/mnt/SDCARD/System/backups/firmware_settings/$current_device/$Last_Automatic_Backup" wifi
+        else
+            echo "No automatic backup found for $Last_Automatic_Backup"
+        fi
+    fi
+
     # we set the customization flag
     rm "/usr/trimui/fw_mod_done"
     echo $version >/usr/trimui/crossmix-version.txt

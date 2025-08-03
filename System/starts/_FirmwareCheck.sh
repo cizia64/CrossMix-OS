@@ -105,17 +105,21 @@ else
 
         # Install new busybox from PortMaster, credits : https://github.com/kloptops/TRIMUI_EX
 
-        Current_busybox_crc=$(crc32 "/bin/busybox" | awk '{print $1}')
-        target_busybox_crc=$(crc32 "/mnt/SDCARD/System/usr/trimui/scripts/busybox" | awk '{print $1}')
+        Current_busybox_crc=$(/mnt/SDCARD/System/usr/trimui/scripts/busybox crc32 "/bin/busybox" | awk '{print $1}')
+        target_busybox_crc=$(/mnt/SDCARD/System/usr/trimui/scripts/busybox crc32 "/mnt/SDCARD/System/usr/trimui/scripts/busybox" | awk '{print $1}')
 
-        if [ "$Current_busybox_crc" != "$target_busybox_crc" ]; then
+        echo "Current busybox CRC: $Current_busybox_crc"
+        echo "Target busybox CRC: $target_busybox_crc"
+        # fi values are different or not set
+
+        if [ -z "$Current_busybox_crc" ] || [ -z "$target_busybox_crc" ] || [ "$Current_busybox_crc" != "$target_busybox_crc" ]; then
 
             # make some place
             rm -rf /usr/trimui/apps/zformatter_fat32/
             rm -rf /usr/trimui/res/sound/bgm2.mp3
             swapoff -a
             rm -rf /swapfile
-            cp "/mnt/SDCARD/trimui/res/skin/bg.png" "/usr/trimui/res/skin/"
+            # cp "/mnt/SDCARD/trimui/res/skin/bg.png" "/usr/trimui/res/skin/"
 
             cp -vf /bin/busybox /mnt/SDCARD/System/bin/busybox.bak
             /mnt/SDCARD/System/bin/rsync /mnt/SDCARD/System/usr/trimui/scripts/busybox /bin/busybox
@@ -173,7 +177,7 @@ else
         fi
 
         if [ "$crc_verified" = false ]; then
-            message="${message}\n \n \nExtracting new firmware v$Required_FW_Version..."
+            message="${message}\n \nExtracting new firmware v$Required_FW_Version..."
             pkill presenter
             sleep 0.5
             /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -sp -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Wait.jpg" &
@@ -208,21 +212,28 @@ else
         fi
 
         if [ "$crc_verified" = true ]; then
-
+            # Removing backup from previous FW update runs
+            if -f "/mnt/SDCARD/trimui/firmwares/Last_Automatic_Backup.txt"; then
+                Last_Automatic_Backup=$(cat /mnt/SDCARD/trimui/firmwares/Last_Automatic_Backup.txt)
+                if [ -f "/mnt/SDCARD/System/backups/firmware_settings/$current_device/$Last_Automatic_Backup" ]; then
+                    echo "Removing last automatic backup: $Last_Automatic_Backup"
+                    rm "/mnt/SDCARD/System/backups/firmware_settings/$current_device/$Last_Automatic_Backup"
+                fi
+            fi
+            # backup settings
+            Backup_file=$("/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/FW Settings Save-Load.sh" --backup | tail -n 1)
+            echo $Backup_file >/mnt/SDCARD/trimui/firmwares/Last_Automatic_Backup.txt
+            pkill presenter
+            sleep 0.5
+            message="${message}\n \nFirmware settings saved:\n$Backup_file"
+            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Ready.jpg" &
+            sleep 1.5
             pkill presenter
             sleep 0.5
             message="${message}\nReady for update!\n \nPlease read instructions at the right\nto launch your firmware upgrade."
             /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Ready.jpg" -k rout A "" -k rin B ""
 
             if [ "$?" -eq 14 ]; then # A has been pressed
-                # backup settings
-                Backup_file=$("/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/FW Settings Save-Load.sh" --backup | tail -n 1)
-
-                pkill presenter
-                sleep 0.5
-                message="${message}\n \nFirmware settings saved:\n$Backup_file"
-                /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Ready.jpg" &
-                sleep 3
                 pkill presenter
                 sync
                 /usr/trimui/bin/kill_apps.sh

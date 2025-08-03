@@ -145,6 +145,7 @@ case "$selected_action" in
     ;;
   "joystick")
     restore_file "/mnt/UDISK/joypad.config"
+    restore_file "/mnt/UDISK/joypad_right.config"
     restore_message="Joystick calibration restored."
     ;;
   "mainui")
