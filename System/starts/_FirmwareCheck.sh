@@ -1,4 +1,8 @@
 #!/bin/sh
+# Set PATH and library path
+PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts/:$PATH"
+export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+
 
 if ! read -r current_device </etc/trimui_device.txt; then
     RES=$(fbset | awk '/geometry/ {print $2 "x" $3}')
@@ -257,9 +261,7 @@ fi
 
 ################ check if a CrossMix-OS update is available ################
 
-# Set PATH and library path
-PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts/:$PATH"
-export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
+
 
 # Find the update file
 UPDATE_FILE=$(find /mnt/SDCARD -maxdepth 1 -name "CrossMix-OS_v*.zip" -print -quit)

@@ -111,3 +111,62 @@ if [ "$SmartLed_enabled" -eq 1 ]; then
 	cd /mnt/SDCARD/Apps/SmartLed
 	./smartledd &
 fi
+
+wifi_workaround() {
+
+	TIMEOUT=8                    # in seconds
+	INTERVAL=0.5                 # in seconds
+	MAX_RETRIES=$((TIMEOUT * 2)) # 0.5s interval → 2 retries per second
+	attempt_count=0
+
+	check_ip() {
+		ip addr show "wlan0" | grep -q "inet "
+	}
+
+	wait_for_ip() {
+		count=0
+		while [ $count -lt $MAX_RETRIES ]; do
+			if check_ip; then
+				echo "[OK] IP address found on wlan0"
+				return 0
+			else
+				attempt_count=$((attempt_count + 1))
+			fi
+			sleep $INTERVAL
+			count=$((count + 1))
+		done
+		return 1
+	}
+
+	sleep 6 # necessary for hardwareservice initialization
+	echo "[INFO] Checking if wlan0 has an IP address..."
+	if ! check_ip; then
+		echo "[INFO] No IP found. Triggering Wi-Fi ON..."
+		touch "/tmp/system/wifi_turn_on"
+
+		if ! wait_for_ip; then
+			echo "[WARN] Still no IP after first attempt. Cycling Wi-Fi..."
+			pgrep hardwareservice >/dev/null || /usr/trimui/bin/hardwareservice &
+			sleep 1
+			touch "/tmp/system/wifi_turn_off"
+			sleep 2
+			touch "/tmp/system/wifi_turn_on"
+
+			if check_ip; then
+				echo "IP acquired after $attempt_count attempt(s)."
+			else
+				echo "[FAIL] No IP address acquired after $attempt_count attempts. Aborting."
+			fi
+		else
+			echo "[INFO] IP address already present on wlan0."
+		fi
+	else
+		echo "[INFO] IP address already present on wlan0."
+	fi
+}
+
+# hardwareservice race condition workaround for wifi initialization
+wifi_value=$(/usr/trimui/bin/systemval wifi)
+if [ "$wifi_value" -eq 1 ]; then
+	wifi_workaround & # for debugging: wifi_workaround >>/tmp/wifi_debug.log 2>&1 &
+fi
