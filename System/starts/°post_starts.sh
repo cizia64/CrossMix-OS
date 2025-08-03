@@ -32,7 +32,7 @@ fi
 # Telnet service
 TELNET_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["TELNET"]' "/mnt/SDCARD/System/etc/crossmix.json")
 if [ "$TELNET_enabled" -eq 1 ]; then
-	telnetd
+	telnetd &
 fi
 
 # Syncthing service
@@ -56,9 +56,9 @@ if [ "$smb_enabled" -eq 1 ]; then
 		CONFIGFILE="/mnt/SDCARD/System/etc/samba/smb.conf"
 	fi
 
-	wsddn --user root --unixd --smb-conf /mnt/SDCARD/System/etc/samba --log-level 0
-	smbd -s ${CONFIGFILE} -D
-	nmbd -D --configfile="${CONFIGFILE}"
+	wsddn --user root --unixd --smb-conf /mnt/SDCARD/System/etc/samba --log-level 0 &
+	smbd -s ${CONFIGFILE} -D &
+	nmbd -D --configfile="${CONFIGFILE}" &
 
 fi
 
@@ -96,4 +96,18 @@ if [ "$VNC_enabled" -eq 1 ]; then
 fi
 
 # Avahi (DNS name) service
-/usr/sbin/avahi-daemon --file=/mnt/SDCARD/System/etc/avahi/avahi-daemon.conf --no-drop-root -D
+/usr/sbin/avahi-daemon --file=/mnt/SDCARD/System/etc/avahi/avahi-daemon.conf --no-drop-root -D &
+
+# TrimUI In Game Menu state
+IngameMenu_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["IN GAME MENU"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$IngameMenu_enabled" -eq 0 ]; then
+	mkdir -p /tmp/trimui_ra64/
+	touch /tmp/trimui_ra64/disable_tmenu
+fi
+
+# SmartLed
+SmartLed_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["SMARTLED"]' "/mnt/SDCARD/System/etc/crossmix.json")
+if [ "$SmartLed_enabled" -eq 1 ]; then
+	cd /mnt/SDCARD/Apps/SmartLed
+	./smartledd &
+fi
