@@ -150,8 +150,11 @@ else
         crc_verified=false
 
         if [ ! -f "$FIRMWARE_PATH" ]; then
-            echo "Firmware file not found: $FIRMWARE_PATH"
-            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i bg-exit.png -m "Firmware file not found, canceling update." -k A
+            echo "Firmware archive file not found: $FIRMWARE_PATH"
+            pkill presenter
+            sleep 0.5
+            message="${message}Firmware compressed file not found\nCanceling update.\n"
+            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Fail.jpg" -k rout A "Exit"
             exit 1
         fi
 
@@ -208,13 +211,18 @@ else
 
             pkill presenter
             sleep 0.5
-
             message="${message}\nReady for update!\n \nPlease read instructions at the right\nto launch your firmware upgrade."
-
             /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Ready.jpg" -k rout A "" -k rin B ""
 
             if [ "$?" -eq 14 ]; then # A has been pressed
-                sleep 1
+                # backup settings
+                Backup_file=$("/mnt/SDCARD/Apps/SystemTools/Menu/TOOLS/FW Settings Save-Load.sh" --backup | tail -n 1)
+
+                pkill presenter
+                sleep 0.5
+                message="${message}\n \nFirmware settings saved:\n$Backup_file"
+                /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$message" -fs 12 -fi 0 -p top-left -fb -ff "/mnt/SDCARD/Themes/CrossMix - OS/wqy-microhei.ttf" -i "/mnt/SDCARD/trimui/firmwares/FW_Screen_Ready.jpg" &
+                sleep 3
                 pkill presenter
                 sync
                 /usr/trimui/bin/kill_apps.sh
