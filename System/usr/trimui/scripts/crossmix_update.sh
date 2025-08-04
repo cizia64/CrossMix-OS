@@ -122,22 +122,22 @@ restore_files "PPSSPP 1.15.4 cheats"            "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4
 restore_files "PPSSPP 1.15.4 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/"        "/mnt/SDCARD/Emus/PSP/PPSSPP_1.15.4/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path = 1.0.0)
-restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/" "*"
-restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"   "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
-restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*.dat"
-restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/Cheats/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/" "*.ini"
-restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/GAME/"           "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/" "*"
-restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/" "*"
-restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
+restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SAVEDATA/"       "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SAVEDATA/" "*"
+restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/PPSSPP_STATE/"   "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
+restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/" "*.dat"
+restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/Cheats/"         "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/Cheats/" "*.ini"
+restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/GAME/"           "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/GAME/" "*"
+restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/TEXTURES/"       "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/TEXTURES/" "*"
+restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/.config/ppsspp/PSP/SYSTEM/"         "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore PPSSPP 1.17.1 standalone saves, savestates and retroachievements (CrossMix path > 1.1.0)
-restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"     "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/" "*"
-restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
-restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*.dat"
-restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/" "*.ini"
-restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"         "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/" "*"
-restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"     "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/" "*"
-restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
+restore_files "PPSSPP 1.17.1 saves"             "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SAVEDATA/"     "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SAVEDATA/" "*"
+restore_files "PPSSPP 1.17.1 savestates"        "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/PPSSPP_STATE/" "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/PPSSPP_STATE/" "*"
+restore_files "PPSSPP 1.17.1 retroachievements" "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/" "*.dat"
+restore_files "PPSSPP 1.17.1 cheats"            "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/Cheats/"       "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/Cheats/" "*.ini"
+restore_files "PPSSPP 1.17.1 game assets"       "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/GAME/"         "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/GAME/" "*"
+restore_files "PPSSPP 1.17.1 textures"          "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/TEXTURES/"     "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/TEXTURES/" "*"
+restore_files "PPSSPP 1.17.1 game settings"     "$BCK_DIR/Emus/PSP/PPSSPP_1.17.1/.config/ppsspp/PSP/SYSTEM/"       "/mnt/SDCARD/Emus/PSP/PPSSPP/.config/ppsspp/PSP/SYSTEM/" "*_ppsspp.ini"
 
 # Restore Drastic standalone saves and savestates
 restore_files "Drastic saves"                   "$BCK_DIR/Emus/NDS/drastic/backup/"             "/mnt/SDCARD/Emus/NDS/drastic/backup/" "*"
@@ -176,6 +176,9 @@ restore_files "Restore PICO-8 Splore games"     "/mnt/SDCARD/Emus/PICO/PICO8_Wra
 # PortMaster themes and runtimes
 move_without_replace "Restore PortMaster themes"       "$BCK_DIR/Apps/PortMaster/PortMaster/themes/" "/mnt/SDCARD/Apps/PortMaster/PortMaster/themes/"
 restore_files "Restore PortMaster runtimes"      "$BCK_DIR/Apps/PortMaster/PortMaster/libs/"  "/mnt/SDCARD/Apps/PortMaster/PortMaster/libs/" "*"
+
+# Restore user apps
+move_without_replace "Restore User Apps"       "$BCK_DIR/Apps/" "/mnt/SDCARD/Apps/"
 
 # Restore previous recordings
 restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/"      "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
@@ -308,6 +311,10 @@ for item in /mnt/SDCARD/Roms/SCUMMVM/*; do
     ;;
   esac
 done
+
+# Clean Best collection: remove old Wordyl versions:
+rm "/mnt/SDCARD/Best/Free Games Collection/Roms/GB/GB-Wordyl/gb-wordyl_1.0.5_mbc5_"*
+
 
 # be sure that the PortMaster python install will be triggered
 rm "/mnt/SDCARD/System/bin/python3"
