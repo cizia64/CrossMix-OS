@@ -3,15 +3,12 @@ if [ -n "$2" ]; then
     return
 fi
 
-ROM_PATH=$(realpath "$1")
-rom_path_after_roms=${ROM_PATH#*/Roms/}
+rom_path_after_roms=${ROM_REAL_PATH#*/Roms/}
 subdir_count=$(echo "$rom_path_after_roms" | grep -o '/' | wc -l)
 
 if [ "$subdir_count" -gt 1 ]; then
-    ROM_DIRECTORY=${ROM_PATH%/*}
+    ROM_DIRECTORY=${ROM_REAL_PATH%/*}
     first_subdir=${rom_path_after_roms%%/*}
-    ROM_FILENAME=$(basename "$1")
-    ROM_FILENAME_NOEXT=${ROM_FILENAME%.*}
     SPOOFING_DIRECTORY="/tmp/folderspoof/$ROM_FILENAME_NOEXT/$first_subdir"
 
     echo "Subdirectory from $first_subdir detected !"
