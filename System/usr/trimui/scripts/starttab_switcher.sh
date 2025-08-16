@@ -11,8 +11,8 @@ fi
 
 # Get the tab id or check if disabled/unknown
 
-bests="$(find /mnt/SDCARD/Best -maxdepth 2 -type f -name launch.sh | wc -l )";
-ports="$(find /mnt/SDCARD/Ports -maxdepth 2 -type f -name launch.sh | wc -l )";
+bests="$(find /mnt/SDCARD/Best -maxdepth 2 -type f -name launch.sh | wc -l)"
+ports="$(find /mnt/SDCARD/Ports -maxdepth 2 -type f -name launch.sh | wc -l)"
 
 tabN=$(awk -v tabName="$tabName" -v ignore_bests=$((!bests)) -v ignore_ports=$((!ports)) '
 BEGIN {tabName=tolower(tabName)}
@@ -20,14 +20,18 @@ $0 ~ /tab/ && !($0 ~ /focuson/) {
     if ((ignore_ports && $0 ~ /portstab/) || (ignore_bests && $0 ~ /beststab/)){
         next
     }
-    count++
-    if ( $0 ~ tabName) {
-        if ($2 ~ 0 ) {
-            print 0
-        } else {
+    if ( $2 ~ 1) {
+        count++
+        if ($0 ~ tabName) {
             print count
+            exit
         }
-        exit
+    }
+    else {
+        if ($0 ~ tabName) {
+            print 0
+            exit
+        }
     }
 }
 ' /mnt/UDISK/system.json)
