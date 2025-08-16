@@ -1,41 +1,63 @@
 {
-	"list":	[{
-			"title":	198,
-			"type":	0,
-			"tabidx":	4,
-			"tabstartidx":	2,
-			"tabstate":	[{
-				}, {
-					"currpos":	0,
-					"pagestart":	0,
-					"pageend":	7
-				}, {
-					"currpos":	0,
-					"pagestart":	0,
-					"pageend":	7
-				}, {
-					"currpos":	0,
-					"pagestart":	0,
-					"pageend":	7
-				}, {
-					"currpos":	0,
-					"pagestart":	0,
-					"pageend":	7
-				}, {
-					"currpos":	0,
-					"pagestart":	0,
-					"pageend":	7
-				}, {
-					"currpos":	7,
-					"pagestart":	0,
-					"pageend":	7
-				}]
-		}, {
-			"title":	-1,
-			"type":	23,
-			"currpos":	0,
-			"pagestart":	0,
-			"pageend":	7,
-			"emulaunch":	"/mnt/SDCARD/Emus/_SystemTools/launch.sh"
-		}]
+    "list": [
+        {
+            "title": 206,
+            "type": 48,
+            "currpos": 0,
+            "pagestart": 0,
+            "pageend": 0
+        },
+        {
+            "title": 206,
+            "type": 0,
+            "tabidx": 4,
+            "tabstartidx": 3,
+            "tabstate": [
+                {},
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                },
+                {
+                    "currpos": 0,
+                    "pagestart": 0,
+                    "pageend": 0
+                }
+            ]
+        },
+        {
+            "title": -1,
+            "type": 23,
+            "currpos": 7,
+            "pagestart": 0,
+            "pageend": 7,
+            "emulaunch": "/mnt/SDCARD/Emus/_SystemTools/launch.sh"
+        }
+    ]
 }
