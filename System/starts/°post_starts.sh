@@ -23,7 +23,7 @@ if [ -f /tmp/device_changed ]; then
 fi
 
 # Apply default state.json (starttab application)
-cp /mnt/SDCARD/System/resources/default_state.json /tmp/state.json
+/mnt/SDCARD/System/usr/trimui/scripts/starttab_switcher.sh
 
 # Swap A B
 SWAP_AB_enabled=$(/mnt/SDCARD/System/bin/jq -r '.["SWAP A B"]' "/mnt/SDCARD/System/etc/crossmix.json")

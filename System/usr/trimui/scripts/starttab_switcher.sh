@@ -10,10 +10,17 @@ else
 fi
 
 # Get the tab id or check if disabled/unknown
-tabN=$(awk -v tabName="$tabName" '
+
+bests="$(find /mnt/SDCARD/Best -maxdepth 2 -type f -name launch.sh | wc -l )";
+ports="$(find /mnt/SDCARD/Ports -maxdepth 2 -type f -name launch.sh | wc -l )";
+
+tabN=$(awk -v tabName="$tabName" -v ignore_bests=$((!bests)) -v ignore_ports=$((!ports)) '
 BEGIN {tabName=tolower(tabName)}
 $0 ~ /tab/ && !($0 ~ /focuson/) {
-    count++;
+    if ((ignore_ports && $0 ~ /portstab/) || (ignore_bests && $0 ~ /beststab/)){
+        next
+    }
+    count++
     if ( $0 ~ tabName) {
         if ($2 ~ 0 ) {
             print 0
@@ -35,7 +42,10 @@ tab0=0
 [ "$tabN" -gt 2 ] && tab0=$((tabN - 2))
 
 jq ".[].[1].tabidx = $tabN | .[].[1].tabstartidx = $tab0" /mnt/SDCARD/System/resources/default_state.json >/tmp/tmp.json
-mv /tmp/tmp.json /mnt/SDCARD/System/resources/default_state.json
+mv /tmp/tmp.json /mnt/SDCARD/System/resources/start_state.json
+if [ $# -eq 0 ]; then
+    cp /mnt/SDCARD/System/resources/start_state.json /tmp/state.json
+fi
 
 # update crossmix.json configuration file
 json_file="/mnt/SDCARD/System/etc/crossmix.json"
