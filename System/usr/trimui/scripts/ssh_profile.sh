@@ -36,6 +36,10 @@ EOF
     export MAGICK_CONFIGURE_PATH=/mnt/SDCARD/System/bin/imagemagick/bin
     # for mbrola voices:
     export XDG_DATA_DIRS=/mnt/SDCARD/System/etc/espeak-ng-data:$XDG_DATA_DIRS
+
+    # set default path
+    cd /tmp
+
 else
     echo "CrossMix dev profile not enabled."
 fi
