@@ -1,7 +1,7 @@
 #!/bin/sh
-# Silent background OTA checker for CrossMix-OS
+# Silent background update checker for CrossMix-OS
 # - Runs at boot in background
-# - No UI output; logs to $updatedir/ota_check.log
+# - No UI output; logs to $updatedir/update_check.log
 # - Detects newer major/minor versions and sets flags consumed by UI scripts
 
 # Common env, paths, helpers
@@ -10,10 +10,10 @@ source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 # Set to 1 to write logs to file, 0 to print logs to console
 LOG_TO_FILE=0
 
-LOG_FILE="$updatedir/ota_check.log"
+LOG_FILE="$updatedir/update_check.log"
 RELEASE_META="$updatedir/available_release.json"
 HOTFIX_META="$updatedir/available_hotfix.json"
-STAMP_FILE="$updatedir/ota_check_last_run.txt"
+STAMP_FILE="$updatedir/update_check_last_run.txt"
 
 mkdir -p "$updatedir"
 
@@ -155,11 +155,11 @@ main() {
 
     # Quick network check
     if [ -z "$(has_ip)" ]; then
-        log "No IP at boot; skipping OTA check."
+        log "No IP at boot; skipping Update Check."
         exit 1
     fi
     if ! can_reach_github; then
-        log "GitHub API not reachable; skipping OTA check."
+        log "GitHub API not reachable; skipping Update Check."
         exit 1
     fi
 
