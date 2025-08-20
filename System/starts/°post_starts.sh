@@ -109,7 +109,7 @@ wifi_workaround() {
 		echo "[INFO] IP address already present on wlan0."
 	fi
 	if [ "$CheckUpdate" -eq 1 ]; then
-		/mnt/SDCARD/System/usr/trimui/scripts/ota_check_silent.sh &
+		/mnt/SDCARD/System/usr/trimui/scripts/update_notification.sh &
 	fi
 
 }
