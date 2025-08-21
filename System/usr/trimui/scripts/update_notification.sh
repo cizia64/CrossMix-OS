@@ -10,11 +10,12 @@ source /mnt/SDCARD/System/usr/trimui/scripts/update_common.sh
 # Set to 1 to write logs to file, 0 to print logs to console
 LOG_TO_FILE=0
 
-LOG_FILE="$updatedir/update_check.log"
+LOG_FILE="/mnt/SDCARD/System/logs/update_check.log"
 RELEASE_META="$updatedir/available_release.json"
 HOTFIX_META="$updatedir/available_hotfix.json"
 STAMP_FILE="$updatedir/update_check_last_run.txt"
 
+mkdir -p "$(dirname "$LOG_FILE")"
 mkdir -p "$updatedir"
 
 log() {
