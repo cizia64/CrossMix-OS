@@ -20,5 +20,6 @@
   "AUTO LOAD STATE": 1,
   "POLLING RATE": "16ms",
   "SWAP A B": 0,
-  "NightMode": "Toggle"
+  "NightMode": "Toggle",
+  "STARTUP APP": "MainUI"
 }
