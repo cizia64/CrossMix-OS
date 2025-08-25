@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>MegaRAM DISK</name>
+    <manufacturer>Digital Design</manufacturer>
+    <code/>
+    <release_year></release_year>
+    <description>MegaRAM with built in RAM disk.</description>
+    <type>RAM disk expansion</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <MegaRam id="MegaRam">
+          <io base="0x8e" num="2"/>
+          <mem base="0x0000" size="0x10000"/>
+          <size>512</size>
+          <rom>
+            <sha1>f0abc38f345c05e2112079239d09f25fb08a7c56</sha1>
+            <filename>mr512.rom</filename>
+          </rom>
+        </MegaRam>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>FAC MIDI Interface</name>
+    <manufacturer>FAC</manufacturer>
+    <code></code>
+    <release_year>1991</release_year>
+    <description></description>
+    <type>MIDI cartridge</type>
+  </info>
+
+  <devices>
+    <FACMIDIInterface id="FAC MIDI Interface MIDI">
+      <io base="0x00" num="8"/> <!-- Actually port 2 and 3, but it's mirrored in 0-7 -->
+    </FACMIDIInterace>
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,245 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>FRS</manufacturer>
+    <code>Acid1Test-slots</code>
+    <release_year>2014</release_year>
+    <description>Acid1Test v0.7, aka "Usual hardware in unusual slot layout".
+
+  This machine was carefully dedigned to stress-test slot accesses routines.
+Incorrect assumptions about memory/resources layout will fail to run. Software
+must also correctly handle extended slots to run properly.
+
+For more info, see http://frs.badcoffee.info/MSXAcidTests.html
+</description>
+    <type>MSX2+</type>
+  </info>
+
+<!--
+==Changelog==
+- v0.1: Initial version
+- v0.2: Several improvements
+- v0.4: Changed the slot of the disk interface, to force the same stack issues
+  that happens on the Sony HB-F500
+- v0.5: Added MSX-Audio, and MSX-Music/MSX-Audio are now on left channel/right
+  channel respectively, in moonblaster stereo configuration. This also helps the
+  programmer to quickly detect which chip is being used.
+- v0.6: Acid1Test-slots now feature plainRAM, and the memory mapper test was
+  moved to Acid3Test-mapper. Here, this allow better detection of bugs related
+  to plain RAM manipulation that were not being detected. For example, games
+  that fail to run on a 16KB machine with the Casio OR-216 connected (to expand
+  the RAM to 32KB).
+- v0.7: Fixed a bug in the slot layout (frame0 was missing, and frame-2 was
+  repeated), and moved frame-3 to catch some buggy programs that fail to run on
+  the Victor HX-90 and Victor-HC-95 machines.  Moved the SubROM to a subslot of
+  slot-0, to catch buggy programs that fail to run on National FS-4x00 machines.
+
+==TODO==
+- Move the BIOS to a slot other than 0-0, to simulate what happens when an
+  NEOS MA-20 is connected to the MSX.
+
+-->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>Acid1Test-slots.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <F4Device id="Reset Status">
+      <inverted>true</inverted>
+      <io base="0xF4" num="1"/>
+    </F4Device>
+
+    <primary slot="0">
+
+     <secondary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>phc-70fd2_basic-bios2p.rom</filename>
+          <sha1>e90f80a61d94c617850c415e12ad70ac41e66bb7</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+
+      <RAM id="Main RAM frame2">
+        <mem base="0x8000" size="0x4000"/>
+      </RAM>
+
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>phc-35j_msx2psub.rom</filename>
+            <sha1>fe0254cbfc11405b79e7c86c7769bd6322b04995</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="MSX Boot Logo">
+          <rom>
+            <filename>phc-35j_kanjibasic.rom</filename>
+            <sha1>dcc3a67732aa01c4f2ee8d1ad886444a4dbafe06</sha1>
+	    <!-- Crop the Kanji driver out -->
+            <window base="0x2000" size="0x2000"/>
+          </rom>
+          <mem base="0x6000" size="0x2000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM frame3">
+          <mem base="0xc000" size="0x4000"/>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3">
+        <TC8566AF id="Memory Mapped FDC">
+          <drives>2</drives>
+          <rom>
+           <filename>Sanyo_PHC-70FD2_disk.rom</filename>
+             <sha1>9efa744be8355675e7bfdd3976bbbfaf85d62e1d</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+    </primary>
+
+    <primary slot="1">
+
+      <secondary slot="1">
+        <!-- This slot contains both the SubROM, the MSX-Music BIOS and RAM -->
+        <ROM id="MSX2+ Sub ROM">
+          <rom> <!-- From original EPROM dump -->
+            <filename>2+FM cks-B414h.ROM</filename>
+            <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+            <window base="0x0000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>ExpertTurbo_msx2psub.rom</filename>
+            <sha1>cc1744c6c513d6409a142b4fb42fbe70a95d9b7f</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+
+        <MSX-MUSIC id="MSX Music">
+          <rom> <!-- From original EPROM dump -->
+            <filename>2+FM cks-B414h.ROM</filename>
+            <sha1>c5bfa85f7315fb11928b27a721a908c93b7d3fbf</sha1>
+            <window base="0x4000" size="0x4000"/>
+          </rom>
+          <rom>
+            <filename>ExpertTurbo_fmbasic.rom</filename>
+            <sha1>befebc916bfdb5e8057040f0ae82b5517a7750db</sha1>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+            <balance>-75</balance>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+          <io base="0x7C" num="2" type="O"/>
+          <mem base="0x4000" size="0x4000"/>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM frame1">
+          <mem base="0x4000" size="0x4000"/>
+        </RAM>
+      </secondary>
+
+      <secondary external="true" slot="3"/>
+
+    </primary>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary external="true" slot="1"/>
+
+      <secondary slot="2">
+
+        <MSX-AUDIO id="MSX-Audio">
+          <io base="0xC0" num="2"/>
+          <type>Toshiba</type>
+          <sound>
+            <volume>12000</volume>
+            <balance>75</balance>
+          </sound>
+          <sampleram>256</sampleram>
+        </MSX-AUDIO>
+        <ROM id="MSX-Audio BIOS v1.3">
+          <mem base="0x0000" size="0x3000"/>
+          <mem base="0x4000" size="0x3000"/>
+          <mem base="0x8000" size="0x3000"/>
+          <mem base="0xC000" size="0x3000"/>
+          <mappertype>Normal0000</mappertype>
+          <rom>
+            <sha1>3b02e5f45603df2c180f9c07d59b2ccc5a87bd0a</sha1> <!-- MSX-Audio BIOS v1.3 -->
+            <filename>msxaudio13.NMS-1205.rom</filename>
+          </rom>
+        </ROM>
+        <RAM id="MSX-Audio BIOS base WorkRAM">
+          <mem base="0x3000" size="0x1000"/>
+          <mem base="0x7000" size="0x1000"/>
+          <size>0x1000</size>
+        </RAM>
+        <RAM id="MSX-Audio BIOS expanded WorkRAM">
+          <mem base="0xB000" size="0x1000"/>
+          <mem base="0xF000" size="0x1000"/>
+          <size>0x1000</size>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3">
+        <RAM id="Main RAM frame0">
+          <mem base="0x0000" size="0x4000"/>
+        </RAM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

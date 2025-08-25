@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Nowind USB Interface</name>
+    <manufacturer>Sunrise</manufacturer>
+    <code/>
+    <release_year>2008</release_year>
+    <description>An interface that emulates a (hard) disk drive on an MSX, backed by (hard) disk images on another computer connected via USB. For now only Nowind 4.0 is supported.</description>
+    <type></type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <Nowind id="Nowind">
+          <mem base="0x0000" size="0x10000"/>
+          <rom>
+            <filename>nowindDos2.rom</filename>
+            <sha1>1d4c09166755c6569ff0ed3878bbf1b22d7e3864</sha1> <!-- 4.0 dos1 -->
+            <sha1>8afd1ec5843ecfdcbff11497fa8c55b870c0c6f5</sha1> <!-- 4.0 dos2 -->
+            <sha1>7f49675940b9a4ffff4e8abc0b410c7b1fe22b87</sha1> <!-- pre-4.0 dos1 -->
+            <sha1>2c359c979fbfe5c7c3cce90b4593dba4b7cbcd92</sha1> <!-- pre-4.0 dos2 -->
+          </rom>
+          <sramname>nowind.flash</sramname>
+        </Nowind>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

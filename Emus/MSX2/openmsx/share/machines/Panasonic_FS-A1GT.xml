@@ -1,0 +1,215 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Panasonic</manufacturer>
+    <code>FS-A1GT</code>
+    <release_year>1992</release_year>
+    <description>The last officially released MSX machine.</description>
+    <type>MSXturboR</type>
+  </info>
+
+  <RenShaTurbo>
+    <min_ints>47</min_ints>
+    <max_ints>221</max_ints>
+  </RenShaTurbo>
+
+  <MapperReadBackBits>5</MapperReadBackBits>
+
+  <PanasonicRom id="Firmware ROM">
+    <rom>
+      <sha1>e779c338eb91a7dea3ff75f3fde76b8af22c4a3a</sha1>
+      <sha1>5fa3aa79aeba2c0441f349e78e9a16d9d64422ea</sha1>
+      <filename>fs-a1gt_firmware.rom</filename>
+    </rom>
+  </PanasonicRom>
+
+  <devices>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <mem base="0x0000" size="0x8000"/>
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>40</firstblock>
+            <lastblock>43</lastblock>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <MSX-MUSIC id="MSX Music">
+          <mem base="0x4000" size="0x4000"/>
+          <io base="0x7C" num="2" type="O"/>
+          <rom>
+            <firstblock>62</firstblock>
+            <lastblock>63</lastblock>
+          </rom>
+          <sound>
+            <volume>9000</volume>
+          </sound>
+          <ym2413-core>NukeYKT</ym2413-core>
+        </MSX-MUSIC>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="MSX Opening ROM">
+          <mem base="0x4000" size="0x4000"/>
+          <rom>
+            <firstblock>36</firstblock>
+            <lastblock>37</lastblock>
+          </rom>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <PanasonicRAM id="Main RAM">
+          <initialContent encoding="hex">FF00FF0000FF00FF</initialContent> <!-- At least for QBee's GT... -->
+          <mem base="0x0000" size="0x10000"/>
+          <size>512</size>
+        </PanasonicRAM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <mem base="0x0000" size="0x4000"/>
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>56</firstblock>
+            <lastblock>57</lastblock>
+          </rom>
+        </ROM>
+        <ROM id="MSX Kanji Driver with BASIC">
+          <mem base="0x4000" size="0x8000"/>
+          <mappertype>DRAM</mappertype>
+          <rom>
+            <firstblock>58</firstblock>
+            <lastblock>61</lastblock>
+          </rom>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF2</io_regs>
+          <mem base="0x4000" size="0x8000"/>
+          <rom>
+            <firstblock>48</firstblock>
+            <lastblock>55</lastblock>
+          </rom>
+          <drives>1</drives>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="Firmware">
+          <mem base="0x0000" size="0x10000"/>
+          <mappertype>PANASONIC</mappertype>
+          <rom>
+            <firstblock>0</firstblock>
+            <lastblock>511</lastblock>
+          </rom>
+          <sramsize>32</sramsize>
+          <sram-mirrored>false</sram-mirrored>
+          <sramname>fs-a1gt.sram</sramname>
+          <device idref="Main RAM"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <Kanji id="Kanji ROM">
+      <io base="0xD8" num="4"/>
+      <rom>
+        <sha1>5aff2d9b6efc723bc395b0f96f0adfa83cc54a49</sha1>
+        <filename>fs-a1gt_kanjifont.rom</filename>
+      </rom>
+    </Kanji>
+
+    <S1990 id="S1990">
+      <io base="0xE4" num="2"/>
+    </S1990>
+
+    <T9769 id="T9769">
+      <subtype>C</subtype>
+    </T9769>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <has_yesno_keys>true</has_yesno_keys>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <io base="0x98" num="4" type="O"/> <!-- No mirroring of VDP ports -->
+      <io base="0x98" num="2" type="I"/>
+      <version>V9958</version>
+      <vram>128</vram>
+    </VDP>
+
+    <PSG id="psg">
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <keyboardlayout>JIS</keyboardlayout>
+      <mirrored_registers>false</mirrored_registers>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+      <sramname>fs-a1gt.cmos</sramname>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <E6Timer id="Turbo-R timer">
+      <io base="0xE6" num="2"/>
+    </E6Timer>
+
+    <ResetStatusRegister id="Reset Status register">
+      <io base="0xF4" num="1"/>
+      <inverted>false</inverted>
+    </ResetStatusRegister>
+
+    <TurboRPause id="TurboRPause">
+      <io base="0xA7" num="1"/>
+    </TurboRPause>
+
+    <TurboRPCM id="PCM">
+      <io base="0xA4" num="2"/>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+    </TurboRPCM>
+
+    <MSX-MIDI id="MSX-Midi">
+      <io base="0xE8" num="8"/>
+    </MSX-MIDI>
+
+  </devices>
+
+</msxconfig>

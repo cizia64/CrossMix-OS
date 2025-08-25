@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Canon</manufacturer>
+    <code>V-10</code>
+    <release_year></release_year>
+    <description/>
+    <type>MSX</type>
+  </info>
+
+  <!-- Info provided by Werner Kai, based on serial 126034:
+       HAS 4k/16k efect
+       no address latch
+       HAS sprite clones
+       has screen 2 mirrored mode
+       has mode 3 mixed mode
+       Z80 scf: 01ED29ED01FC29FC (standard)
+       Z80 cpl: 3AFF12D7 (standard)
+       PSG pin 6/7 quirk: C (YES)
+       PSGmask like YM2149 (FFFFFFetc.)
+
+       Mobo photo shows chips:
+       VDP: TMS9918ANL MHU 8327 9736 PHILIPPINES
+       PPI: NEC D8255AC-5
+       PSG: Yamaha YM2149C
+       CPU: Zilog Z8400AP S
+       ROM: 3256D19-3J1 Z-1 (C) 1983 MICROSOFT
+       RAM and VRAM: both have 8x Toshiba TMM416P-2 4116-28336ADA
+
+       See: https://plus.google.com/photos/112629367302659371233/albums/6153338169041664593
+  -->
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9918A</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <keyboardlayout>jis</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0xC000" size="0x4000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>v-10_basic-bios1.rom</filename>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3"/>
+
+  </devices>
+
+</msxconfig>

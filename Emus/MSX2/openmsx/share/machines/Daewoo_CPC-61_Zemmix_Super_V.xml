@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Daewoo</manufacturer>
+    <code>CPC-61 Zemmix Super V</code>
+    <release_year>1990</release_year>
+    <description>MSX2 game console</description>
+    <type>MSX2</type>
+  </info>
+
+  <!-- the motherboard has a DW61MX1 chip, the system controller? -->
+  <!-- apart from the ROM dump, nothing is confirmed on this configuration! -->
+  <!-- please submit fixes or information to improve this config -->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <!-- no cassette port and no printer port -->
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>kr</keyboard_type> <!-- note that there is no keyboard present actually. But there is a keyboard connector to which a Sony keyboard can be connected -->
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>AY8910</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>cpc-61.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>CPC64122.ROM</filename>
+            <sha1>dd3c39c8cfa06ec69f54c95c3b2291e3da7bd4f2</sha1>
+            <window base="0x0000" size="0x8000"/>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="MSX Hangul Driver">
+          <rom>
+            <filename>CPC64122.ROM</filename>
+            <sha1>dd3c39c8cfa06ec69f54c95c3b2291e3da7bd4f2</sha1>
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>64</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>CPC64122.ROM</filename>
+            <sha1>dd3c39c8cfa06ec69f54c95c3b2291e3da7bd4f2</sha1>
+            <window base="0x8000" size="0x4000"/>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+  </devices>
+
+</msxconfig>

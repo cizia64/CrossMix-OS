@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+<!--
+     Information provided by http://msxarcheology.blogspot.nl/ (Piter Punk)
+     Serial number JL1000114
+
+     - Uses same keyboard as Mitsubishi ML-G30
+     - 2 FDD's
+     - RS-232C interface
+     - superimpose capabilities (not emulated!)
+     - 64kB RAM (memory mapped)
+     - Printer port
+     - No cassette port
+     - slot layout:        
+       - SLOT0-0: MSX-BIOS
+       - SLOT0-1: MSX2 SUB-ROM
+       - SLOT0-2: 64KB RAM
+       - SLOT1: External
+       - SLOT2-0: MSX-SERIAL
+       - SLOT2-1: Internal
+       - SLOT2-2: Internal
+       - SLOT2-3: Internal
+       - SLOT3-0: MSX Disk-ROM
+       - SLOT3-1: Internal
+       - SLOT3-2: Internal
+       - SLOT3-3: Internal
+     - S1985 MSX-ENGINE (MSX-SYSTEM II)
+     - CPU: SHARP LH0080A
+     - Serial: i8251/8253 (Mitsubishi M5L8251 and Mitsubishi M5L8253)
+     - Video: V9938 (128k)
+     - FDC: WD1793 compatible: Mitsubishi M5W1793
+     - unknown custom chip: Pioneer PD5044
+  -->
+
+  <info>
+    <manufacturer>Pioneer</manufacturer>
+    <code>UC-V102</code>
+    <release_year>1987</release_year>
+    <description>Videodisc Controller, internally an MSX2.</description>
+    <type>MSX2</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>uc-v102_kanjifont.rom</filename>
+        <sha1>db03211b7db46899df41db2b1dfbec972109a967</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+
+    <PPI id="ppi">
+      <key_ghosting>true</key_ghosting>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <S1985 id="S1985">
+      <sramname>uc-v102_s1985.sram</sramname>
+    </S1985>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>uc-v102.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>uc-v102_basic-bios2.rom</filename>
+            <sha1>c1e46c00f1e38fc9e0ab487bf0513bd93ce61f3f</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+      <secondary slot="1">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>uc-v102_msx2sub.rom</filename>
+            <sha1>0fbd45ef3dd7bb82d4c31f1947884f411f1ca344</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+      </secondary>
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>64</size>
+        </MemoryMapper>
+      </secondary>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2">
+
+      <secondary slot="0">
+        <MSX-RS232 id="MSX RS-232">
+          <rom>
+            <sha1>a4f19371fd09b73f2776cb637b0e9cbd8415f8eb</sha1>
+            <filename>uc-v102_rs232.rom</filename>
+          </rom>
+          <io base="0x80" num="8"/>
+          <mem base="0x4000" size="0x4000"/>
+        </MSX-RS232>
+      </secondary>
+
+      <secondary slot="1"/> <!-- Only available internally... -->
+      <secondary slot="2"/> <!-- Only available internally... -->
+      <secondary slot="3"/> <!-- Only available internally... -->
+
+    </primary>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <broken_fdc_read>false</broken_fdc_read>
+          <drives>2</drives>
+          <rom>
+            <sha1>f7c3ac138918a493eb91628ed88cf37999059579</sha1>
+            <filename>uc-v102_disk.rom</filename>
+          </rom>
+          <mem base="0x0000" size="0x10000"/>
+        </WD2793>
+      </secondary>
+
+      <secondary slot="1"/> <!-- Only available internally... -->
+      <secondary slot="2"/> <!-- Only available internally... -->
+      <secondary slot="3"/> <!-- Only available internally... -->
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

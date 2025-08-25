@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>Docking station</name>
+    <manufacturer>Casio</manufacturer>
+    <code>KB-10</code>
+    <release_year>1984</release_year>
+    <description>Docking station for the Casio MX-10 and MX-101 with 2 slots and a printer port</description>
+    <type>docking station</type>
+  </info>
+
+  <devices>
+
+    <PrinterPort id="KB-10 Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary external="true" slot="2"/>
+    <primary external="true" slot="3"/>
+
+  </devices>
+
+</msxconfig>

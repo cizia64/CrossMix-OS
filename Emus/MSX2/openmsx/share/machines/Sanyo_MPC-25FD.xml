@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+<!-- config according to this info: https://www.msx.org/forum/msx-talk/trading-and-collecting/msx-junk-sale?page=1 -->
+<!-- CPU: NEC D780C-1, MSX-ENGINE: S3527 -->
+
+  <info>
+    <manufacturer>Sanyo</manufacturer>
+    <code>MPC-25FD</code>
+    <release_year></release_year>
+    <description>An MSX2 with diskdrive and only one cartridge port.</description>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <io base="0xA8" num="4"/>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <keyboard_type>jp_jis</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-3527 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-3527 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- In S3527 -->
+      <keyboardlayout>JIS</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>mpc-25fd.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>mpc-25fd_basic-bios2.rom</filename>
+          <sha1>0081ea0d25bc5cd8d70b60ad8cfdc7307812c0fd</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2">
+      <ROM id="MSX Sub ROM">
+        <rom>
+          <filename>mpc-25fd_msx2sub.rom</filename>
+          <sha1>b8e30d604d319d511cbfbc61e5d8c38fbb9c5a33</sha1>
+        </rom>
+        <mem base="0x0000" size="0x10000"/>
+      </ROM>
+    </primary>
+
+    <primary slot="3">
+
+      <secondary slot="1">
+
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <mem base="0x0000" size="0x10000"/>
+          <drives>1</drives>
+          <rom>
+            <filename>mpc-25fd_disk.rom</filename>
+            <sha1>58ac78bba29a06645ca8d6a94ef2ac68b743ad32</sha1>
+          </rom>
+        </WD2793>
+
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+        </RAM>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

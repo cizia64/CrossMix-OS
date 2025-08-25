@@ -1,0 +1,278 @@
+#region: Korean
+#format: <UNICODE>, <ROW><COL>, <MODIFIERS>
+# <UNICODE>: hexadecimal unicode number or DEADKEY<N>
+# <ROW>: row in keyboard matrix (hexadecimal: 0-B)
+# <COL>: column in keyboard matrix (0-7)
+# <MODIFIERS>: space separated list of modifiers:
+#              SHIFT CTRL GRAPH CODE CAPSLOCK
+#
+# NOTE: looks like this map isn't complete??
+0000, 02, CTRL SHIFT # ^@
+0001, 26, CTRL       # ^A
+0002, 27, CTRL       # ^B
+0003, 30, CTRL       # ^C
+0004, 31, CTRL       # ^D
+0005, 32, CTRL       # ^E
+0006, 33, CTRL       # ^F
+0007, 34, CTRL       # ^G
+0008, 75,            # Backspace
+0009, 73,            # Tab
+000a, 37, CTRL       # ^J
+000b, 81,            # Home (is Home a unicode character?)
+000c, 41, CTRL       # ^L
+000d, 77,            # Enter/CR
+000e, 43, CTRL       # ^N
+000f, 44, CTRL       # ^O
+0010, 45, CTRL       # ^P
+0011, 46, CTRL       # ^Q
+0012, 82,            # Insert (is Insert a unicode character?)
+0013, 50, CTRL       # ^S
+0014, 51, CTRL       # ^T
+0015, 52, CTRL       # ^U
+0016, 53, CTRL       # ^V
+0017, 54, CTRL       # ^W
+0018, 76,            # Select (is Select a unicode character?)
+0019, 56, CTRL       # ^Y
+001a, 57, CTRL       # ^Z
+001b, 72,            # Escape(SDL maps ESC and ^[ to this code)
+001c, 87,            # Right (SDL maps ^\ to this code)
+001d, 84,            # Left  (SDL maps ^] to this code)
+001e, 85,            # Up    (SDL maps ^6 to this code)
+001f, 86,            # Down  (SDL maps ^/ to this code)
+007f, 83,            # Delete
+0020, 80,
+0021, 01, SHIFT
+0022, 02, SHIFT
+0023, 03, SHIFT
+0024, 04, SHIFT
+0025, 05, SHIFT
+0026, 06, SHIFT
+0027, 07, SHIFT
+0028, 10, SHIFT
+0029, 11, SHIFT
+002a, 20, SHIFT
+002b, 17, SHIFT
+002c, 22,
+002d, 12,
+002e, 23,
+002f, 24,
+0030, 00,
+0031, 01,
+0032, 02,
+0033, 03,
+0034, 04,
+0035, 05,
+0036, 06,
+0037, 07,
+0038, 10,
+0039, 11,
+003a, 20,
+003b, 17,
+003c, 22, SHIFT
+003d, 12, SHIFT
+003e, 23, SHIFT
+003f, 24, SHIFT
+0040, 15,
+0041, 26, SHIFT
+0042, 27, SHIFT
+0043, 30, SHIFT
+0044, 31, SHIFT
+0045, 32, SHIFT
+0046, 33, SHIFT
+0047, 34, SHIFT
+0048, 35, SHIFT
+0049, 36, SHIFT
+004a, 37, SHIFT
+004b, 40, SHIFT
+004c, 41, SHIFT
+004d, 42, SHIFT
+004e, 43, SHIFT
+004f, 44, SHIFT
+0050, 45, SHIFT
+0051, 46, SHIFT
+0052, 47, SHIFT
+0053, 50, SHIFT
+0054, 51, SHIFT
+0055, 52, SHIFT
+0056, 53, SHIFT
+0057, 54, SHIFT
+0058, 55, SHIFT
+0059, 56, SHIFT
+005a, 57, SHIFT
+005b, 16,
+005c, 14,
+005d, 21,
+005e, 13,
+005f, 25, SHIFT
+0060, 15, SHIFT
+0061, 26,
+0062, 27,
+0063, 30,
+0064, 31,
+0065, 32,
+0066, 33,
+0067, 34,
+0068, 35,
+0069, 36,
+006a, 37,
+006b, 40,
+006c, 41,
+006d, 42,
+006e, 43,
+006f, 44,
+0070, 45,
+0071, 46,
+0072, 47,
+0073, 50,
+0074, 51,
+0075, 52,
+0076, 53,
+0077, 54,
+0078, 55,
+0079, 56,
+007a, 57,
+007b, 16, SHIFT
+007c, 14, SHIFT
+007d, 21, SHIFT
+007e, 13, SHIFT
+00a0, 80,
+00a1, 80,
+00a2, 36, CODE
+00a3, 44, SHIFT CODE
+00a5, 37, CODE
+00a7, 33, GRAPH
+00aa, 41, CODE
+00ab, 80,
+00ac, 80,
+00b0, 80,
+00b1, 80,
+00b2, 80,
+00b5, 80,
+00b6, 31, GRAPH
+00b7, 80,
+00ba, 80,
+00bb, 80,
+00bc, 80,
+00bd, 80,
+00bf, 80,
+00c4, 46, SHIFT CODE
+00c5, 51, CODE
+00c6, 54, CODE
+00c7, 24, GRAPH
+00c9, 51, SHIFT CODE
+00d1, 42, CODE
+00d6, 40, CODE
+00dc, 44, CODE
+00df, 80,
+00e0, 21, GRAPH
+00e1, 45, SHIFT CODE
+00e2, 25, GRAPH
+00e4, 16, GRAPH
+00e5, 47, CODE
+00e6, 31, CODE
+00e7, 47, SHIFT CODE
+00e8, 32, SHIFT CODE
+00e9, 17, GRAPH
+00ea, 50, CODE
+00eb, 32, CODE
+00ec, 46, CODE
+00ed, 35, CODE
+00ee, 26, CODE
+00ef, 33, CODE
+00f1, 27, CODE
+00f2, 57, CODE
+00f3, 56, CODE
+00f4, 54, SHIFT CODE
+00f6, 30, CODE
+00f7, 80,
+00f9, 53, CODE
+00fa, 43, CODE
+00fb, 55, CODE
+00fc, 20, GRAPH
+00ff, 34, CODE
+0192, 52, CODE
+0393, 80,
+0398, 80,
+03a3, 80,
+03a6, 80,
+03a9, 80,
+03b1, 80,
+03b4, 80,
+03b5, 80,
+03c0, 80,
+03c3, 80,
+03c4, 80,
+03c6, 80,
+203c, 34, GRAPH
+207f, 80,
+20a7, 45, CODE
+2190, 27, GRAPH
+2191, 32, GRAPH
+2192, 30, GRAPH
+2193, 51, GRAPH
+2195, 47, GRAPH
+21a8, 12, GRAPH
+2219, 80,
+221a, 80,
+221e, 80,
+221f, 55, GRAPH
+2229, 80,
+2248, 80,
+2261, 80,
+2264, 80,
+2265, 80,
+2310, 80,
+2320, 80,
+2321, 80,
+2500, 80,
+2502, 80,
+250c, 80,
+2510, 80,
+2514, 80,
+2518, 80,
+251c, 80,
+2524, 80,
+252c, 80,
+2534, 80,
+253c, 80,
+2550, 80,
+2551, 80,
+2552, 80,
+2553, 80,
+2554, 80,
+2555, 80,
+2556, 80,
+2557, 80,
+2558, 80,
+2559, 80,
+255a, 80,
+255b, 80,
+255c, 80,
+255d, 80,
+255e, 80,
+255f, 80,
+2560, 80,
+2561, 80,
+2562, 80,
+2563, 80,
+2564, 80,
+2565, 80,
+2566, 80,
+2567, 80,
+2568, 80,
+2569, 80,
+256a, 80,
+256b, 80,
+256c, 80,
+2580, 80,
+2584, 80,
+2588, 80,
+258c, 80,
+2590, 80,
+2591, 80,
+2592, 80,
+2593, 80,
+25a0, 80,
+25ac, 36, GRAPH
+25ba, 45, GRAPH
+25c4, 53, GRAPH

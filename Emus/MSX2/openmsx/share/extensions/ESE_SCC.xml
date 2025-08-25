@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>ESE SCC</name>
+    <manufacturer>ESE Artists' Factory</manufacturer>
+    <code/>
+    <release_year>1995?</release_year>
+    <description>MSX SRAM disk with built in SCC</description>
+    <type>SRAM cartridge with SCC</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <ESESCC id="ESE SCC">
+          <mem base="0x4000" size="0x8000"/>
+          <sramsize>256</sramsize> <!-- this seems to be standard -->
+          <sramname>ESE_SCC_256.sram</sramname>
+          <sound>
+            <volume>13000</volume>
+          </sound>
+       </ESESCC>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

@@ -1,0 +1,156 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Daewoo</manufacturer>
+    <code>CPC-400S</code>
+    <release_year>1986</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <!-- All ROMs except font ROM verified by Alwin Henseler with EPROM dumps -->
+  <!-- Note that the content of these EPROMs were identical to what was
+       specified in this file before using the EPROM dumps. -->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Kanji id="Hangul ROM">
+      <type>hangul</type>
+      <rom>
+        <filename>cpc-400s_hangulfont.rom</filename>
+        <sha1>22d5f4e522250dc5eb17e15b68f4a51bb752cba1</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <S1985 id="S1985">
+      <sramname>cpc-400s_s1985.sram</sramname>
+    </S1985>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>kr</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-1985 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-1985 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-1985 MSX-ENGINE -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>cpc-400s.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>CPC-400S.U38</filename>
+            <sha1>75f5f0a5a2e8f0935f33bb3cf07b83dd3e5f3347</sha1>
+            <window base="0x0000" size="0x8000"/>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="Hangul ROM 1">
+          <rom>
+            <filename>CPC-400S.U44</filename>
+            <sha1>6b640c1d8cbeda6ca7d6facd16a206b62e059eee</sha1>
+            <window base="0x4000" size="0x4000"/>
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </ROM>
+        <ROM id="Kanji control ROM">
+          <rom>
+            <filename>CPC-400S.U44</filename>
+            <sha1>6b640c1d8cbeda6ca7d6facd16a206b62e059eee</sha1>
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <mem base="0x8000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <size>128</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="3">
+        <ROM id="EXTEND BIOS ROM">
+          <rom>
+            <filename>CPC-400S.U38</filename>
+            <sha1>75f5f0a5a2e8f0935f33bb3cf07b83dd3e5f3347</sha1>
+            <window base="0xC000" size="0x4000"/>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="Hangul ROM 2">
+          <rom>
+            <filename>CPC-400S.U44</filename>
+            <sha1>6b640c1d8cbeda6ca7d6facd16a206b62e059eee</sha1>
+            <window base="0x0000" size="0x4000"/>
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </ROM>
+      </secondary>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="2">
+      <WD2793 id="Memory Mapped FDC">
+        <connectionstyle>National</connectionstyle>
+        <drives>1</drives>
+        <rom>
+          <filename>CPC-400S.U38</filename>
+          <sha1>75f5f0a5a2e8f0935f33bb3cf07b83dd3e5f3347</sha1>
+          <window base="0x8000" size="0x4000"/>
+        </rom>
+        <mem base="0x4000" size="0x8000"/>
+      </WD2793>
+    </primary>
+
+    <!-- Note: this connector is actually a non-standard expansion connector on the back -->
+    <primary external="true" slot="3"/>
+
+  </devices>
+
+</msxconfig>

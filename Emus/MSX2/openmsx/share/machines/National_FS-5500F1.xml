@@ -1,0 +1,145 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>National</manufacturer>
+    <code>FS-5500F1</code>
+    <release_year>1985</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <CassettePort/>
+
+  <devices>
+
+    <Kanji id="Kanji ROM">
+      <rom>
+        <filename>fs-5500_kanjifont.rom</filename>
+        <sha1>9ed3ab6d893632b9246e91b412cd5db519e7586b</sha1>
+      </rom>
+      <io base="0xD8" num="2" type="O"/>
+      <io base="0xD9" num="1" type="I"/>
+    </Kanji>
+
+    <S1985 id="S1985">
+      <sramname>fs-5000f1_s1985.sram</sramname>
+    </S1985>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="8" type="O"/> <!-- S-1985 mirrors -->
+      <io base="0x98" num="8" type="I"/> <!-- S-1985 mirrors -->
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type> <!-- in S-1985 MSX-ENGINE -->
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>fs-5500f1.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>fs-5500_basic-bios2.rom</filename>
+            <sha1>44e0dd215b2a9f0770dd76fb49187c05b083eed9</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1"/>
+
+      <secondary slot="2"/>
+
+      <secondary slot="3"/>
+
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>fs-5500_msx2sub.rom</filename>
+            <sha1>4be8371f3b03e70ddaca495958345f3c4f8e2d36</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <ROM id="MSX Kanji Driver">
+          <rom>
+            <filename>fs-5500_kanjibasic.rom</filename>
+            <sha1>3a9a942ed888dd641cddf8deada1879c454df3c6</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="Super Impose">
+          <rom>
+            <filename>fs-5500_superimp.rom</filename>
+            <sha1>b677a861b67e8763a11d5dcf52416b42493ade57</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="2">
+        <RAM id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+        </RAM>
+      </secondary>
+
+      <secondary slot="3">
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>National</connectionstyle>
+          <drives>1</drives>
+          <rom>
+            <filename>fs-5500_disk.rom</filename>
+            <sha1>78cd7f847e77fd8cd51a647efb2725ba93f4c471</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </WD2793>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

@@ -1,0 +1,16 @@
+Moero!! Nettou Yakyuu '88 Sample Data
+=====================================
+
+The Jaleco game cartridge Moero!! Nettou Yakyuu '88 has a built in ROM with
+samples that are replayed during the game.
+
+Due to copyright reasons, we cannot distribute these samples with openMSX.
+
+If you have the samples (in WAV format), you should put them in this directory,
+with the following file names:
+  nettou_yakyuu_0.wav
+  nettou_yakyuu_1.wav
+  ...
+  nettou_yakyuu_15.wav
+
+If you want to have real fun, provide your own samples instead of the original ones!

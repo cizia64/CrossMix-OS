@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+  <info>
+    <name>RAM (16 kB)</name>
+    <manufacturer/>
+    <code/>
+    <release_year/>
+    <description>Generic 16 kB RAM cartridge.</description>
+    <type>RAM expansion</type>
+  </info>
+  <devices>
+    <primary slot="any">
+      <secondary slot="any">
+        <RAM id="16kB RAM">
+          <mem base="0x8000" size="0x4000"/>
+        </RAM>
+      </secondary>
+    </primary>
+  </devices>
+</msxconfig>

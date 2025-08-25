@@ -1,0 +1,150 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Al Alamiah</manufacturer>
+    <code>AX370</code>
+    <release_year>1988</release_year>
+    <description>Arabic MSX2 version of Sanyo PHC-70FD MSX2+.</description>
+    <type>MSX2</type>
+  </info>
+
+ <!-- Information provided by Hashem Khalifa
+      Based on machine with serial 01- 59706754 -->
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>int</keyboard_type> <!-- Is actually Arabic... -->
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected> <!-- not sure -->
+      <code_kana_locks>true</code_kana_locks> <!-- has a LED for it that can be toggled with CODE key -->
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9958</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <keyboardlayout>JIS</keyboardlayout> <!-- verified by reading PSG -->
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>ax370.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <T9769 id="T9769">
+      <subtype>A</subtype> <!-- To be verified with PCB shot -->
+    </T9769>
+
+    <primary slot="0">
+
+      <secondary slot="0">
+        <ROM id="MSX BIOS with BASIC ROM">
+          <rom>
+            <filename>ax370_basic-bios2.rom</filename>
+            <sha1>35195ab67c289a0b470883464df66bc6ea5b00d3</sha1>
+          </rom>
+          <mem base="0x0000" size="0x8000"/>
+        </ROM>
+      </secondary>
+      <secondary slot="1">
+        <ROM id="Al Alamiah BASIC 2.03 ROM">
+          <rom>
+            <filename>ax370_rom01.rom</filename>
+            <sha1>0c08e799a7cf130ae2b9bc93f28bd4959cee6fdc</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+      <secondary slot="2">
+        <ROM id="Sakhr Word Processor">
+          <rom>
+            <filename>ax370_swp.rom</filename>
+            <sha1>4b4508131dca6d811694ae6379f41364c477de58</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+      <secondary slot="3">
+        <ROM id="Sakhr BASIC">
+          <rom>
+            <filename>ax370_sb.rom</filename>
+            <sha1>8167117a003824220c36775682acbb36b3733c5e</sha1>
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </ROM>
+      </secondary>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+      <secondary slot="0">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>ax370_msx2sub.rom</filename>
+            <sha1>ee9c6a073766bef2220a57372f5c0dbfc6e55c8c</sha1> <!-- Taken from blueMSX config, because could not be dumped with SAVEROM/GETROM! -->
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <TC8566AF id="Memory Mapped FDC">
+          <io_regs>7FF8</io_regs>
+          <drives>1</drives>
+          <rom>
+            <filename>ax370_disk.rom</filename>
+            <sha1>9efa744be8355675e7bfdd3976bbbfaf85d62e1d</sha1> <!-- Taken from blueMSX config, because could not be dumped with SAVEROM/GETROM! -->
+          </rom>
+          <mem base="0x4000" size="0x8000"/>
+        </TC8566AF>
+      </secondary>
+
+      <secondary slot="1">
+        <ROM id="Painter">
+          <rom>
+            <filename>ax370_painter.rom</filename>
+            <sha1>1c9a5867d39f6f02a0a4ef291904623e2521c2c5</sha1> <!-- Same as AX-350II ROM, but has different value on 0xFFFF due to SSR -->
+          </rom>
+          <mem base="0x0000" size="0x10000"/>
+        </ROM>
+      </secondary>
+
+      <secondary slot="3">
+        <MemoryMapper id="Main RAM">
+          <size>128</size>
+          <mem base="0x0000" size="0x10000"/>
+        </MemoryMapper>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

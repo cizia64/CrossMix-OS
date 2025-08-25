@@ -1,0 +1,118 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+<!-- Information provided by Ruben Arraya. Thanks! -->
+
+  <info>
+    <manufacturer>Mitsubishi</manufacturer>
+    <code>ML-G3 (ES)</code>
+    <release_year>1986</release_year>
+    <description/>
+    <type>MSX2</type>
+  </info>
+
+  <MapperReadBackBits>largest</MapperReadBackBits>
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>es</keyboard_type>
+      <has_keypad>true</has_keypad>
+      <key_ghosting_sgc_protected>true</key_ghosting_sgc_protected>
+      <code_kana_locks>false</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>V9938</version>
+      <vram>128</vram>
+      <io base="0x98" num="4" type="O"/>
+      <io base="0x98" num="2" type="I"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>true</ignorePortDirections> <!-- not sure, but guess based on use of Engine IC -->
+    </PSG>
+
+    <RTC id="Real time clock">
+      <sramname>ml-g3_es.cmos</sramname>
+      <io base="0xB4" num="2" type="O"/>
+      <io base="0xB5" num="1" type="I"/>
+    </RTC>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>ml-g3_es_basic-bios2.rom</filename>
+          <sha1>e4fdf518a8b9c8ab4290c21b83be2c347965fc24</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary slot="3">
+
+      <secondary slot="0">
+        <ROM id="MSX Sub ROM">
+          <rom>
+            <filename>ml-g3_es_msx2sub.rom</filename>
+            <sha1>1e9a955943aeea9b1807ddf1250ba6436d8dd276</sha1>
+          </rom>
+          <mem base="0x0000" size="0x4000"/>
+        </ROM>
+        <WD2793 id="Memory Mapped FDC">
+          <connectionstyle>Philips</connectionstyle>
+          <broken_fdc_read>false</broken_fdc_read>
+          <drives>1</drives>
+          <rom>
+            <sha1>30ba1144c872a0bb1c91768e75a2c28ab1f4e3c6</sha1>
+            <filename>ml-g3_es_disk.rom</filename>
+          </rom>
+          <mem base="0x4000" size="0x4000"/>
+        </WD2793>
+      </secondary>
+
+      <secondary slot="1"/>
+
+      <secondary slot="2">
+        <MemoryMapper id="Main RAM">
+          <mem base="0x0000" size="0x10000"/>
+          <size>128</size>
+        </MemoryMapper>
+      </secondary>
+
+      <secondary slot="3">
+        <MSX-RS232 id="MSX RS-232">
+          <rom>
+            <sha1>b1ac74c2550d553579c1176f5dfde814218ec311</sha1>
+            <filename>ml-g3_es_rs232.rom</filename>
+          </rom>
+          <io base="0x80" num="8"/>
+          <mem base="0x4000" size="0x4000"/>
+        </MSX-RS232>
+      </secondary>
+
+    </primary>
+
+  </devices>
+
+</msxconfig>

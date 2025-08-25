@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<!DOCTYPE msxconfig SYSTEM 'msxconfig2.dtd'>
+<msxconfig>
+
+  <info>
+    <manufacturer>Sony</manufacturer>
+    <code>HB-101</code>
+    <release_year>1984</release_year>
+    <description/>
+    <type>MSX</type>
+  </info>
+
+  <!-- 
+      Info based on Werner Kai's red Sony HB-101 with serial 207174.
+
+      https://plus.google.com/photos/112629367302659371233/albums/6155507573429019985
+
+      There are 2 models of the HB-101. Werner's is of the first kind:
+      - does not have springs in the transportation handle, which mean that the
+        handle can be left extended. 
+      - does not have gate arrays cX chips
+      - does not have pull ups on the bus
+      So all these things were added in the 2nd model:
+      - has 2 sprints in the transportation handle so that it cannot be left extended
+      - has 2 Sony CXxxx gate arrays in the PCB, same as used in HB-F5
+      - has pull-ups, so that e.g. PEEK(&H8000) gives 255.
+
+      Machines of the second model seem to have the same ROMs: the ROMs of a
+      white HB-101 with SN 237929 were the same as the red one on which this
+      config was based.
+
+      Z80: SHARP LH0080A Z80A-CPU-D
+      PPI: NEC D8255AC-5
+      PSG: Yamaha YM2149F
+      VDP: TMS9118NL
+      1x OKI M38128A 16Kx8 Mask ROM
+      1x Hitachi HN613256P 32Kx8 mask rom
+
+      VDP 4k/16k: NO
+      VDP has address latch: NO
+      VDP has sprite clones: YES
+      VDP has screen 2 mirrored mode: YES
+      VDP has mode 3 mixed mode: YES
+      Z80 scf: 01C529ED01D429FDC (dunno)
+      Z80 cpl: 3AFF12D7 (standard)
+      Z80 out (c),0: 0 (MSX)
+      PSG pin 6/7 quirk: C (YES)
+      PSGmask: YM2149 like
+  -->
+
+  <CassettePort/>
+
+  <devices>
+
+    <PPI id="ppi">
+      <key_ghosting_sgc_protected>false</key_ghosting_sgc_protected>
+      <sound>
+        <volume>16000</volume>
+      </sound>
+      <io base="0xA8" num="4"/>
+      <keyboard_type>jp_ansi</keyboard_type>
+      <has_keypad>false</has_keypad>
+      <code_kana_locks>true</code_kana_locks>
+      <graph_locks>false</graph_locks>
+    </PPI>
+
+    <VDP id="VDP">
+      <version>TMS9118</version>
+      <io base="0x98" num="2"/>
+    </VDP>
+
+    <PSG id="PSG">
+      <type>YM2149</type>
+      <keyboardlayout>50on</keyboardlayout>
+      <sound>
+        <volume>21000</volume>
+      </sound>
+      <io base="0xA0" num="2" type="O"/>
+      <io base="0xA2" num="1" type="I"/>
+      <ignorePortDirections>false</ignorePortDirections> <!-- not sure, but guess based on discrete PSG chip -->
+    </PSG>
+
+    <PrinterPort id="Printer Port">
+      <io base="0x90" num="2"/>
+    </PrinterPort>
+
+    <primary slot="0">
+      <RAM id="Main RAM">
+        <mem base="0xC000" size="0x4000"/>
+      </RAM>
+      <ROM id="MSX BIOS with BASIC ROM">
+        <rom>
+          <filename>hb-101_basic-bios1.rom</filename>
+          <sha1>302afb5d8be26c758309ca3df611ae69cced2821</sha1>
+        </rom>
+        <mem base="0x0000" size="0x8000"/>
+      </ROM>
+    </primary>
+
+    <primary external="true" slot="1"/>
+
+    <primary external="true" slot="2"/>
+
+    <primary slot="3">
+      <ROM id="Personal Data Bank">
+        <rom>
+          <filename>hb-101_firmware.rom</filename>
+          <sha1>64adb7fcf9b86f59d8658badb02f58e61bb15712</sha1> <!-- note: original ROM dump showed a 2nd 16kB, but that one was completely 0x7E. As there's only a 16kB and a 32kB mask ROM on the PCB, it must really be a 16kB ROM. Moreover, we found out that all unconnected memory showed as 0x7E (but unconnected I/O ports showed 0xFF) The latter is probably due to the fact that this dump was based on a machine of the first model, see above.  -->
+        </rom>
+        <mem base="0x4000" size="0x4000"/>
+      </ROM>
+    </primary>
+
+  </devices>
+
+</msxconfig>
