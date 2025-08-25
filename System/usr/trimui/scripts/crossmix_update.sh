@@ -147,13 +147,16 @@ restore_files "Drastic savestates"              "$BCK_DIR/Emus/NDS/drastic/saves
 restore_files "Mupen saves"                     "$BCK_DIR/Emus/N64/mupen64plus/save/"           "/mnt/SDCARD/Emus/N64/mupen64plus/save/" "*"
 
 # Restore mGBA standalone savestates (saves are in Roms folder)
-restore_files "mGBA saves"                     "$BCK_DIR/Emus/GBA/.config/mgba/savestates/"           "/mnt/SDCARD/Emus/GBA/.config/mgba/savestates/" "*"
+restore_files "mGBA saves"                     "$BCK_DIR/Emus/GBA/.config/mgba/savestates/"     "/mnt/SDCARD/Emus/GBA/.config/mgba/savestates/" "*"
 
 # Restore AdvanceMame standalone savestates
-restore_files "AdvanceMame saves"              "$BCK_DIR/Emus/ADVMAME/.advance/sta/"           "/mnt/SDCARD/Emus/ADVMAME/.advance/sta/" "*"
+restore_files "AdvanceMame saves"              "$BCK_DIR/Emus/ADVMAME/.advance/sta/"            "/mnt/SDCARD/Emus/ADVMAME/.advance/sta/" "*"
 
 # Restore Saturn / yabasanshiro standalone savestates
-restore_files "Saturn saves"                   "$BCK_DIR/Emus/SATURN/.yabasanshiro/"           "/mnt/SDCARD/Emus/SATURN/.yabasanshiro/" "*" "--exclude=keymapv2.json"
+restore_files "Saturn saves"                   "$BCK_DIR/Emus/SATURN/.yabasanshiro/"            "/mnt/SDCARD/Emus/SATURN/.yabasanshiro/" "*" "--exclude=keymapv2.json"
+
+# Restore openMSX standalone parameters, saves and savestates
+restore_files "MSX saves"                      "$BCK_DIR/Emus/MSX2/.openMSX/"                   "/mnt/SDCARD/Emus/MSX2/.openMSX/" "*"
 
 # Dreamcast saves are located in BIOS folder -> nothing to do
 
