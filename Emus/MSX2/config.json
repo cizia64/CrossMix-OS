@@ -18,7 +18,11 @@
     },
     {
       "name": "Bluemsx",
-      "launch": "launch.sh"
+      "launch": "bluemsx.sh"
+    },
+    {
+      "name": "fMSX",
+      "launch": "fmsx.sh"
     },
     {
       "name": "--- Standalone  ---",

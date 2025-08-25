@@ -1,5 +1,0 @@
-This directory is the default file pool for software (i.e. not system ROMs). If
-you put your software here (e.g. ROM images), openMSX will find them if they
-are used in a replay or savestate you are trying to load, if they have the
-right sha1 sum, i.e. if they are exactly the right ROMs. The file name is
-irrelevant.
