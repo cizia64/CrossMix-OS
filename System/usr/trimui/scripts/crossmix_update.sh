@@ -184,7 +184,7 @@ restore_files "Restore PortMaster runtimes"      "$BCK_DIR/Apps/PortMaster/PortM
 move_without_replace "Restore User Apps"       "$BCK_DIR/Apps/" "/mnt/SDCARD/Apps/"
 
 # Restore previous recordings
-restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/"      "/mnt/SDCARD/Apps/ScreenRecorder/output/" "*.mp4"
+restore_files "Video recordings"                "$BCK_DIR/Apps/ScreenRecorder/output/"      "/mnt/SDCARD/Videos/ScreenRecorder/" "*.mp4"
 
 # Restore Tailscale configuration
 restore_files "Restore Tailscale configuration" "$BCK_DIR/System/etc/tailscale/" "/mnt/SDCARD/System/etc/tailscale" "*"
