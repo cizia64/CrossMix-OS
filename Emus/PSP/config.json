@@ -13,36 +13,45 @@
   "hidebios": 0,
   "launchlist": [
     {
-      "name": "PPSSPP 1.19.0",
-      "launch": "ppsspp_1.19.0_gl.sh"
-    },
-    {
-      "name": "PPSSPP 1.18.1",
-      "launch": "ppsspp_1.18.1_gl.sh"
-    },
-    {
-      "name": "PPSSPP 1.17.1",
-      "launch": "ppsspp_1.17.1_gl.sh"
-    },
-    {
-      "name": "PPSSPP-1.5.4",
-      "launch": "ppsspp_1.15.4.sh"
-    },
-    {
-      "name": "---------- Vulkan ----------",
+      "name": "------- PPSSPP 1.19.0 -------",
       "launch": ""
     },
     {
-      "name": "PPSSPP 1.19.0",
-      "launch": "ppsspp_1.19.0_vulkan.sh"
+      "name": "OpenGL           ",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+    {
+      "name": "OpenGL - Perf.",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+    {
+      "name": "Vulkan             ",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+
+    {
+      "name": "Vulkan - Perf. ",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+    {
+      "name": "------- Older versions -------",
+      "launch": ""
     },
     {
       "name": "PPSSPP 1.18.1",
-      "launch": "ppsspp_1.18.1_vulkan.sh"
+      "launch": "ppsspp_1.18.1.sh"
     },
     {
       "name": "PPSSPP 1.17.1",
-      "launch": "ppsspp_1.17.1_vulkan.sh"
+      "launch": "ppsspp_1.17.1.sh"
+    },
+    {
+      "name": "PPSSPP 1.15.4",
+      "launch": "ppsspp_1.15.4.sh"
+    },
+    {
+      "name": "help",
+      "launch": "ppsspp_help.sh"
     }
   ]
 }
