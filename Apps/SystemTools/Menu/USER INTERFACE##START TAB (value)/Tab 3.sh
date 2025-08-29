@@ -2,9 +2,34 @@
 PATH="/mnt/SDCARD/System/bin:$PATH"
 LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-rm /mnt/SDCARD/System/starts/start_tab.sh
+silent=false
+for arg in "$@"; do
+  if [ "$arg" = "-s" ]; then
+    silent=true
+    break
+  fi
+done
 
-/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(basename "$0" .sh) by default."
+if [ "$silent" = false ]; then
+  /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -m "$(basename "$0" .sh) by default."
+fi
+
+cat >/mnt/SDCARD/System/starts/start_tab.sh <<-EOM
+cat > /tmp/state.json <<- EOM2
+{
+	"list":	[{
+		}, {
+			"title":	0,
+			"type":	0,
+			"tabidx":	2,
+			"tabstartidx":	1,
+			"tabstate":	[{}]
+		}]
+}
+EOM2
+EOM
+
+chmod a+x /mnt/SDCARD/System/starts/start_tab.sh
 
 # Menu modification to reflect the change immediately
 

@@ -18,10 +18,12 @@ cat >/mnt/SDCARD/System/starts/start_tab.sh <<-EOM
 cat > /tmp/state.json <<- EOM2
 {
 	"list":	[{
+		}, {
 			"title":	0,
 			"type":	0,
 			"tabidx":	4,
-			"tabstartidx":	3
+			"tabstartidx":	3,
+			"tabstate":	[{}]
 		}]
 }
 EOM2
