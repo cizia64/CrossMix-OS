@@ -10,5 +10,19 @@
   "useswap": 0,
   "shortname": 0,
   "hidebios": 0,
-  "extlist": "sms|rom|gg|sg|zip|7z"
+  "extlist": "sms|rom|gg|sg|zip|7z",
+  "launchlist": [
+    {
+      "name": "PicoDrive",
+      "launch": "picodrive.sh"
+    },
+    {
+      "name": "GenesisPlusGX",
+      "launch": "genplus.sh"
+    },
+    {
+      "name": "GenesisPlusGX Wide",
+      "launch": "genplus_wide.sh"
+    }
+  ]
 }
