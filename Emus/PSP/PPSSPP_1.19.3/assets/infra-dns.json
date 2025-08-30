@@ -1,0 +1,267 @@
+{
+	"comment": "This file contains our built-in DNS used by the Auto mode in Infrastructure. In addition to being shipped, it's also hosted on https://metadata.ppsspp.org/infra-dns.json. (Exact game names below are not important).",
+	"default": {
+		"dns": "67.222.156.250",
+		"revival_credits": {
+			"group": "PS Rewired",
+			"url": "https://psrewired.com/"
+		}
+	},
+	"games": [
+		{
+			"name": "Medal of Honor: Heroes",
+			"comment": {
+				"en_US": "Works"
+			},
+			"revival_credits": {
+				"group": "MOHH Revival",
+				"url": "https://mohh-revival.pages.dev/"
+			},
+			"dns": "81.49.107.142",
+			"dyn_dns": "ablondel.ddns.net",
+			"domains": {
+				"pspmoh07.ea.com": "81.49.107.142",
+				"tos.ea.com": "81.49.107.142"
+			},
+			"score": 5,
+			"known_working_ids": [
+				"ULUS10141",
+				"ULES00557",
+				"ULES00558",
+				"ULES00559",
+				"ULES00560",
+				"ULES00561",
+				"ULES00562"
+			],
+			"not_working_ids": [],
+			"other_ids": [
+				"ULJM05213",
+				"NPJH50306"
+			]
+		},
+		{
+			"name": "Medal of Honor: Heroes 2",
+			"comment": {
+				"en_US": "Only the menu works!"
+			},
+			"revival_credits": {
+				"group": "MOHH Revival",
+				"url": "https://mohh-revival.pages.dev/"
+			},
+			"dns": "ablondel.ddns.net",
+			"dyn_dns": "ablondel.ddns.net",
+			"domains": {
+				"pspmoh08.ea.com": "ablondel.ddns.net",
+				"tos.ea.com": "ablondel.ddns.net"
+			},
+			"score": 1,
+			"known_working_ids": [
+				"ULUS10310",
+				"ULES00955",
+				"ULES00956",
+				"ULES00988"
+			],
+			"not_working_ids": [
+				"ULJM05301"
+			]
+		},
+		{
+			"name": "WipEout Pure",
+			"comment": {
+				"en_US": "Web browser only, no multiplayer"
+			},
+			"revival_credits": {
+				"group": "The AG Racing Foundation",
+				"url": "https://agracingfoundation.org/"
+			},
+			"dns": "147.135.213.57",
+			"domains": {
+				"hub.psnexus.net": "147.135.213.57",
+				"ingame.scea.com": "147.135.213.57",
+				"wipeoutpurepsp.scej-online.jp": "147.135.213.57"
+			},
+			"other_ids": [
+				"UCUS98612",
+				"UCJS10007",
+				"UCES00001",
+				"UCKS45008",
+				"NPJG00059"
+			]
+		},
+		{
+			"name": "WipEout Pulse",
+			"comment": {
+				"en_US": "Great"
+			},
+			"revival_credits": {
+				"group": "The AG Racing Foundation",
+				"url": "https://agracingfoundation.org/"
+			},
+			"dns": "147.135.213.57",
+			"score": 5,
+			"known_working_ids": [
+				"UCES00465",
+				"UCUS98712",
+				"UCAS40179",
+				"WPCE02025"
+			],
+			"not_working_ids": [],
+			"other_ids": [
+				"UCKS45078"
+			],
+			"not_working_platforms": []
+		},
+		{
+			"name": "MotorStorm: Arctic Edge",
+			"comment": {
+				"en_US": "Works"
+			},
+			"revival_credits": {
+				"group": "The AG Racing Foundation",
+				"url": "https://agracingfoundation.org/"
+			},
+			"dns": "147.135.213.57",
+			"score": 5,
+			"known_working_ids": [
+				"UCES01250",
+				"UCUS98743",
+				"UCJS10104"
+			],
+			"not_working_ids": [],
+			"other_ids": [
+				"UCAS40266",
+				"UCKS45124",
+				"NPJG00047"
+			]
+		},
+		{
+			"name": "Ratchet & Clank - Size Matters",
+			"dns": "67.222.156.250",
+			"other_ids": [
+				"UCES00420",
+				"UCUS98633"
+			]
+		},
+		{
+			"name": "Outrun 2006 - Coast 2 Coast",
+			"not_working_ids": [
+				"ULES00262",
+				"ULUS10064",
+				"ULKS46087"
+			],
+			"dns": "45.7.228.197",
+			"score": 1,
+			"revival_credits": {
+				"group": "OutRun2006Tweaks"
+			}
+		},
+		{
+			"name": "SOCOM Fireteam Bravo",
+			"known_working_ids": [
+				"UCUS98615",
+				"UCES00038"
+			],
+			"not_working_ids": [
+				"UCKS45021"	
+			],
+			"score": 4,
+			"domains": {
+				"socompsp-prod.muis.pdonline.scea.com": "67.222.156.250",
+				"socomftb.online.scee.com": "67.222.156.250"
+			}
+		},
+		{
+			"name": "SOCOM Fireteam Bravo Public Beta",
+			"known_working_ids": [
+				"UCUS98637"
+			],
+			"score": 4,
+			"domains": {
+				"socompsp-pubeta.muis.pdonline.scea.com": "67.222.156.250"
+			}
+		},
+		{
+			"name": "SOCOM Fireteam Bravo 2",
+			"known_working_ids": [
+				"UCUS98645",
+				"UCES00543"
+			],
+			"not_working_ids": [
+				"UCKS45043",
+				"UCUS80171"
+			],
+			"score": 4,
+			"domains": {
+				"socomftb2.online.scee.com": "67.222.156.250",
+				"socomftb2.psp.online.scea.com": "67.222.156.250"
+			}
+		},
+		{
+			"name": "SOCOM Tactical Strike",
+			"known_working_ids": [
+				"UCUS98649",
+				"UCES00855"
+			],
+			"not_working_ids": [
+				"NPUG80220"
+			],
+			"score": 3,
+			"domains": {
+				"socomtacticspsp.online.scee.com": "67.222.156.250",
+				"socomtactics.psp.online.scea.com": "67.222.156.250"
+			}
+		},
+		{
+			"name": "Syphon Filter: Dark Mirror",
+			"known_working_ids": [
+				"UCUS98641"
+			],
+			"score": 5,
+			"domains": {
+				"syphonfilterdm-prod.pdonline.scea.com": "67.222.156.250"
+			}
+		},
+		{
+			"name": "Driver '76",
+			"known_working_ids": [
+				"ULUS10235",
+				"ULES00740"
+			],
+			"score": 5,
+			"connect_adhoc_for_grouping": true
+		},
+		{
+			"name": "Rocky Balboa",
+			"other_ids": [
+				"ULES00670"
+			],
+			"score": 0,
+			"connect_adhoc_for_grouping": true
+		},
+		{
+			"name": "Onore no Shinzuru",
+			"other_ids": [
+				"ULJM05465"
+			],
+			"score": 0,
+			"connect_adhoc_for_grouping": true
+		},
+		{
+			"name": "Patapon 3",
+			"comment": {
+				"en_US": "Not working yet"
+			},
+			"not_working_ids": [
+				"UCUS98751",
+				"UCES01421",
+				"UCAS40318",
+				"UCKS45169",
+				"UCJS10113",
+				"UCJS18048",
+				"NPJG00122",
+				"UCJS18059"
+			],
+			"score": 0
+		}
+	]
+}

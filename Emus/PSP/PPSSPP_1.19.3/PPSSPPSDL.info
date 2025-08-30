@@ -1,0 +1,52 @@
+Version: Release-1.19.3
+Compatible with trimui firmwares 1.1.0 for sure.
+Cross-compiled with gcc10.3, libc2.33, SDL2-2.30.8, SDL_ttf-2.24.0 (required by 1.19.3 but not included in fw 1.1.0) and 
+using libIMGegl wrapper dynamicly. ( will fail to start on systems without libIMGegl).
+
+Two binaries provided:
+PPSSPPDL : built with -Ofast + striped.
+PPSSPPDL.lto: built with -Ofast and -Flto + striped
+I provide both i still didn't test both enouth to say if lto is more performant, same or worse.
+
+PPSSPP flags:
+set(CMAKE_BUILD_TYPE "Release")
+set(ARM ON)
+set(ARMIPS ON)
+set(ENABLE_HLSL ON)
+set(ENABLE_OPT ON)
+set(ENABLE_PCH ON)
+set(ENABLE_SPVREMAPPER OFF)
+set(HEADLESS OFF)
+set(LIBRETRO OFF)
+set(LOONGARCH64 OFF)
+set(MIPS OFF)
+set(MOBILDE_DEVICE OFF)
+set(NO_GETADDRINFO OFF)
+set(RISCV64 OFF)
+set(SIMULATOR OFF)
+set(SKIP_GLSLANG_INSTALL ON)
+set(SPIRV_CROSS_EXCEPTIONS_TO_ASSERTIONS ON)
+set(UPNC_BUILD_STATIC ON)
+set(USE_ARMIPS ON)
+set(USE_ASAN OFF)
+set(USE_CCACHE ON)
+set(USE_DISCORD OFF)
+set(USE_FFMPEG ON)
+set(USE_LIBNX OFF)
+set(USE_MINIUPNC ON)
+set(USE_NO_MMAP OFF)
+set(USE_SYSTEM_FFMPEG OFF)
+set(USE_SYSTEM_LIBPNG ON)
+set(USE_SYSTEM_LIBSDL2 ON)
+set(USE_SYSTEM_LIBZIP OFF)
+set(USE_SYSTEM_MINIUPNC OFF)
+set(USE_SYSTEM_SNAPPY OFF)
+set(USE_SYSTEM_ZSTD OFF)
+set(USE_UBSAN OFF)
+set(USE_VULKAN_DISPLAY_KHR ON)
+set(USE_WAYLAND_WSI OFF)
+set(USING_EGL ON)
+set(USING_FBDEV ON)
+set(USING_GLES2 ON)
+set(USING_QT_UI OFF)
+set(USING_X11_VULKAN OFF)
