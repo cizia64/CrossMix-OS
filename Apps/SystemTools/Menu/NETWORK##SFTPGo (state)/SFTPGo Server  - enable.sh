@@ -13,7 +13,7 @@ fi
 sed -i 's/export NETWORK_SFTPGO="N"/export NETWORK_SFTPGO="Y"/' /mnt/SDCARD/System/etc/ex_config
 pkill /mnt/SDCARD/System/sftpgo/sftpgo
 mkdir -p /opt/sftpgo
-nice -2 /mnt/SDCARD/System/sftpgo/sftpgo serve -c /mnt/SDCARD/System/sftpgo/ >/dev/null &
+nice -2 /mnt/SDCARD/System/sftpgo/sftpgo serve -c /mnt/SDCARD/System/sftpgo/ --log-level error --log-file-path="" > /dev/null &
 
 # we modify the DB entries to reflect the current state
 /mnt/SDCARD/System/usr/trimui/scripts/mainui_state_update.sh "SFTPGo" "enabled"
