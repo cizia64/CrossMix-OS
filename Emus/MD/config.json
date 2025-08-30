@@ -24,6 +24,10 @@
     {
       "name": "GenesisPlusGX Wide",
       "launch": "genplus_wide.sh"
+    },
+    {
+      "name": "GenesisPlusGX PUNCHiUM",
+      "launch": "genplus_punchium.sh"
     }
   ]
 }
