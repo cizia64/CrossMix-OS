@@ -3,15 +3,19 @@
     "icon": "/mnt/SDCARD/Icons/Default/Emus/NDS.png",
     "launch": "default.sh",
     "background": "/mnt/SDCARD/Backgrounds/Default/NDS.png",
-    "themecolor":"FF8800",
-    "iconsel":"",
-    "rompath":"../../Roms/NDS",
-    "imgpath":"../../Imgs/NDS",
-    "useswap":1,
-    "shortname":1,
-    "hidebios":1,
+    "themecolor": "FF8800",
+    "iconsel": "",
+    "rompath": "../../Roms/NDS",
+    "imgpath": "../../Imgs/NDS",
+    "useswap": 1,
+    "shortname": 1,
+    "hidebios": 1,
     "extlist": "nds|zip|7z|rar",
     "launchlist": [
+        {
+            "name": "Drastic Advanced",
+            "launch": "drastic.sh"
+        },
         {
             "name": "Drastic (Overlay + Bilinear)",
             "launch": "drastic.sh"
