@@ -1,0 +1,7 @@
+{
+  "label": "Activities",
+  "icon": "/mnt/SDCARD/Apps/Activities/icon.png",
+  "launch": "launch.sh",
+  "description": "Activities GUI",
+  "icontop": ""
+}
