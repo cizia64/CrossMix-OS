@@ -19,10 +19,15 @@ fi
 
 ################ check min Firmware version required ################
 
-CrossMixFWfile="/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+getRequiredFW() {
+    awk -v device="$1" -v line="$2" '
+        $0 ~ device {start=1;next}
+        start {count++; if (count == line) {print; exit}}
+' "/mnt/SDCARD/trimui/firmwares/MinFwVersion.txt"
+}
 
 Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
-Required_FW_Revision=$(sed -n '2p' "$CrossMixFWfile")
+Required_FW_Revision=$(getRequiredFW "$current_device" 2)
 
 echo "Current FW Revision: $Current_FW_Revision"
 echo "Required FW Revision: $Required_FW_Revision"
@@ -38,7 +43,7 @@ else
         pgrep -f /usr/trimui/bin/trimui_inputd >/dev/null || /usr/trimui/bin/trimui_inputd & # we need input
 
         Current_FW_Version="$(cat /etc/version)"
-        Required_FW_Version=$(sed -n '1p' "$CrossMixFWfile")
+        Required_FW_Version=$(getRequiredFW "$current_device" 1)
 
         Echo "Current firmware ($Current_FW_Version - $Current_FW_Revision) must be updated to $Required_FW_Version - $Required_FW_Revision to support CrossMix OS v$version."
 
@@ -91,21 +96,24 @@ else
 
             /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "/mnt/SDCARD/trimui/firmwares/FW_Copy.png" -m "Please wait, copying Firmware v$Required_FW_Version - $Required_FW_Revision..."
 
-            FIRMWARE_PATH="/mnt/SDCARD/trimui/firmwares/trimui_tg5040_20240413_v1.0.4_hotfix6.7z"
-            FIRMWARE_FILE="trimui_tg5040.awimg"
+            if [ "$current_device" = tsp ]; then
+                FIRMWARE_PATH="/mnt/SDCARD/trimui/firmwares/trimui_tg5040_20250505_1.1.0.7z.001"
+                FIRMWARE_FILE="trimui_tg5040.awimg"
+            elif [ "$current_device" = brick ]; then
+                FIRMWARE_PATH="/mnt/SDCARD/trimui/firmwares/trimui_tg3040_20250610_v1.1.0.7z.001"
+                FIRMWARE_FILE="trimui_tg3040.awimg"
+            fi
             /mnt/SDCARD/System/bin/7zz x "$FIRMWARE_PATH" -o"/mnt/SDCARD" -y
-            # cp "/mnt/SDCARD/trimui/firmwares/1.0.4 hotfix - 20240413.awimg" "/mnt/SDCARD/trimui_tg5040.awimg"
-            sync
             sync
 
             # Extract CRC from the 7z archive
             ARCHIVE_CRC=$(/mnt/SDCARD/System/bin/7zz l "$FIRMWARE_PATH" -slt "$FIRMWARE_FILE" | grep "CRC = " | awk '{print $3}' | tr 'a-f' 'A-F')
 
             # Calculate CRC of the extracted file
-            EXTRACTED_CRC=$(crc32 "/mnt/SDCARD/trimui_tg5040.awimg" | awk '{print $1}' | tr 'a-f' 'A-F')
+            EXTRACTED_CRC=$(crc32 "/mnt/SDCARD/$FIRMWARE_FILE" | awk '{print $1}' | tr 'a-f' 'A-F')
 
             # Compare the CRC values
-            if [ "$ARCHIVE_CRC" == "$EXTRACTED_CRC" ]; then
+            if [ "$ARCHIVE_CRC" = "$EXTRACTED_CRC" ]; then
                 echo "FW CRC check passed: $EXTRACTED_CRC"
             else
                 echo "CRC check failed: Archive CRC = $ARCHIVE_CRC, Extracted CRC = $EXTRACTED_CRC"
