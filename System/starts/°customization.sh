@@ -155,7 +155,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     # Game tab by default
     if [ "$CrossMix_Update" = "0" ]; then
-        "/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab Game.sh" -s
+        /mnt/SDCARD/System/usr/trimui/scripts/starttab_switcher.sh RetroGame
     fi
 
     # Displaying only Emulators with roms
