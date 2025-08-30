@@ -18,6 +18,10 @@
       "launch": "pcsx.sh"
     },
     {
+      "name": "PCSX-ReArmed - HiRes",
+      "launch": "pcsx.sh"
+    },
+    {
       "name": "Duckstation",
       "launch": "duckstation.sh"
     },
@@ -27,7 +31,7 @@
     },
     {
       "name": "SwanStation 16:9",
-      "launch": "swanstation_wide.sh"
+      "launch": "swanstation.sh"
     }
   ]
 }
