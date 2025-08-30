@@ -1,8 +1,8 @@
 {
-    "name":"Greys-Dark by tenlevels",
+    "name":"Greys-Dark",
     "preview":"preview.png", 
-    "font":"nunwen.ttf",
-    "fontascii":"nunwen.ttf",
+    "font":"TSP_CJK_Rounded-Heavy.otf",
+    "fontascii":"TSP_CJK_Rounded-Heavy.otf",
     "fontsize":{
         "nav_font1":26,
         "nav_font2":24,

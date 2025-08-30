@@ -13,7 +13,7 @@
 packname="Epic Noir"
 style="CrossMix - Refreshed"
 theme="Epic Noir"
-bootlogo="Epic noir - tenlevels.bmp"
+bootlogo="Epic noir.bmp"
 emuicons="Epic Noir (Controllers)"
 appicons="Default"
 background="Epic Noir"
