@@ -1,0 +1,15 @@
+{
+"label":"JAVA",
+"icon":"i.png",
+"iconsmall":"80.png",
+"iconlist":"32.png",
+"background":"bg.png",
+"themecolor":"CD6155",
+"launch":"launch.sh",
+"rompath":"../../Roms/JAVA",
+"imgpath":"../../Imgs/JAVA",
+"useswap":1,
+"shortname":1,
+"hidebios":1,
+"extlist":"jar"
+}
