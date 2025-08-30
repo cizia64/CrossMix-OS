@@ -1,14 +1,8 @@
 #!/bin/bash
 
-# Fix slowdown caused by moded inputd
-touch /var/trimui_inputd/sticks_disabled
+progdir=$(dirname "$0")
+export LD_LIBRARY_PATH="$progdir/lib:$LD_LIBRARY_PATH"
 
-if [ "$#" -gt 0 ]; then
- /mnt/SDCARD/Apps/Terminal/SimpleTerminal "$@"
-else
-  progdir=$(dirname "$0")
-  cd $progdir
-  ./SimpleTerminal
-fi
+[ $# -eq 0 ] && FLAGS="-k"
 
-rm /var/trimui_inputd/sticks_disabled
+$progdir/TermSP $FLAGS "$@"
