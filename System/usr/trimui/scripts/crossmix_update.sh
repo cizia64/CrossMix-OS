@@ -96,9 +96,9 @@ fi
 
 echo "${BLUE}=====================  Restoring saves and savestates...  =====================${NC}"
 
-# Restore saves and savestates from Retroarch
-restore_files "Retroarch saves"  "$BCK_DIR/RetroArch/.retroarch/saves/"  "/mnt/SDCARD/RetroArch/.retroarch/saves/" "*"
-restore_files "Retroarch savestates"  "$BCK_DIR/RetroArch/.retroarch/states/" "/mnt/SDCARD/RetroArch/.retroarch/states/" "*"
+# Restore saves and savestates from RetroArch (per-CORE directory layout)
+migrate_ra_flat "RetroArch saves"     "$BCK_DIR/RetroArch/.retroarch/saves"  "/mnt/SDCARD/RetroArch/.retroarch/saves"
+migrate_ra_flat "RetroArch savestates" "$BCK_DIR/RetroArch/.retroarch/states" "/mnt/SDCARD/RetroArch/.retroarch/states"
 restore_files "Retroarch cheats"  "$BCK_DIR/RetroArch/.retroarch/cheats/" "/mnt/SDCARD/RetroArch/.retroarch/cheats/" "*"
 restore_files "Retroarch database"  "$BCK_DIR/RetroArch/.retroarch/database/" "/mnt/SDCARD/RetroArch/.retroarch/database/" "*"
 restore_files "Retroarch filters"  "$BCK_DIR/RetroArch/.retroarch/filters/" "/mnt/SDCARD/RetroArch/.retroarch/filters/" "*" No_Overwrite
@@ -359,6 +359,65 @@ restore_files() {
   else
     echo "$NAME: No files to restore."
   fi
+}
+
+# Merge RetroArch saves/states from per-ROM/per-CORE subfolders into per per-CORE only
+# (new structure since CrossMix 1.3.5).
+# - For each subfolder under /mnt/SDCARD/Roms, if a same-named folder exists in SRC,
+#   copy its CONTENTS into DST (flattened).
+# - Files at the root of SRC are copied directly into DST.
+# - Folders in SRC that don't match any ROM subfolder are copied as-is into DST.
+migrate_ra_flat() {
+  local NAME="$1"       # Friendly name for logs
+  local SRC_DIR="$2"    # Source directory (backup) without trailing slash
+  local DST_DIR="$3"    # Destination directory (current)
+
+  echo "------------------------------------------------------------------------------"
+
+  if [ ! -d "$SRC_DIR" ] || [ -z "$(find "$SRC_DIR" -mindepth 1 -maxdepth 1 2>/dev/null | head -n1)" ]; then
+    echo "$NAME: No files to restore."
+    return 0
+  fi
+
+  echo -e "$NAME: migrating files (flatten by ROM folders)...\n"
+  mkdir -p "$DST_DIR"
+
+  # Build the ROM folder name list
+  local tmp_roms
+  tmp_roms=$(mktemp)
+  for romdir in /mnt/SDCARD/Roms/*; do
+    [ -d "$romdir" ] || continue
+    basename "$romdir"
+  done | sort -u >"$tmp_roms"
+
+  # 1) For each ROM folder, if matching folder exists in backup, copy its CONTENTS to DST
+  while IFS= read -r romname; do
+    [ -n "$romname" ] || continue
+    if [ -d "$SRC_DIR/$romname" ]; then
+      /mnt/SDCARD/System/bin/rsync -av "$SRC_DIR/$romname/" "$DST_DIR/"
+    fi
+  done <"$tmp_roms"
+
+  # 2) Copy root-level files from SRC to DST
+  #    (Only files directly in SRC, not in subfolders)
+  if ls -1A "$SRC_DIR" 2>/dev/null | grep -q .; then
+    for f in "$SRC_DIR"/*; do
+      [ -f "$f" ] || continue
+      /mnt/SDCARD/System/bin/rsync -av "$f" "$DST_DIR/"
+    done
+  fi
+
+  # 3) Copy unmatched directories from SRC to DST as-is
+  for d in "$SRC_DIR"/*; do
+    [ -d "$d" ] || continue
+    base=$(basename "$d")
+    if ! grep -Fxq "$base" "$tmp_roms"; then
+      /mnt/SDCARD/System/bin/rsync -av "$d" "$DST_DIR/"
+    fi
+  done
+
+  rm -f "$tmp_roms"
+  sync
 }
 
 move_without_replace() {
