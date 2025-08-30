@@ -35,7 +35,7 @@ else
 
     if [ "$Current_FW_Revision" -lt "$Required_FW_Revision" ]; then
 
-        pgrep -f /usr/trimui/bin/trimui_inputd >/dev/null || /usr/trimui/bin/trimui_inputd & # we need input
+        pgrep -f trimui_inputd >/dev/null || { cd "/mnt/SDCARD/trimui/app" && ./trimui_inputd & } # we need input
 
         Current_FW_Version="$(cat /etc/version)"
         Required_FW_Version=$(sed -n '1p' "$CrossMixFWfile")
