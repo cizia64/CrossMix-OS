@@ -1,0 +1,6 @@
+Fast blinking effect
+at a fixed rate.
+ 
+ - Color1: Blink color.
+ - Brightness: Max intensity.
+ - Blinks at a preset frequency.

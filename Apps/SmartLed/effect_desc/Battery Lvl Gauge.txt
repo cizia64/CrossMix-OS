@@ -1,0 +1,12 @@
+Displays the current battery 
+level as a LED bar on both 
+joysticks.
+ 
+ - Automatic colors: 
+   Green -> Orange -> Red.
+ - Updates dynamically 
+   every second.
+ - When charging: animated 
+   fill-up
+ - duration: Controls animation
+   speed while charging

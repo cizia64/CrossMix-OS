@@ -1,0 +1,7 @@
+A sparkling effect where
+LEDs randomly twinkle 
+like stars.
+ 
+ - Color1: Base color.
+ - Speed: Twinkle frequency.
+ - Brightness: Controls intensity.

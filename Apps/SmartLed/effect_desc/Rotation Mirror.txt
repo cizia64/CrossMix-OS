@@ -1,0 +1,7 @@
+Two points rotate in
+opposite directions, creating
+a mirrored spinning effect.
+ 
+ - Color1: Active color.
+ - Speed: Spin rate.
+ - Brightness: Affects visibility.

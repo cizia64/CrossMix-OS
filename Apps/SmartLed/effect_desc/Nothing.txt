@@ -1,0 +1,6 @@
+Disables LED control for this
+light entirely, allowing other
+apps to control it freely.
+ 
+ - No color. No output.
+ - Leaves LED untouched.

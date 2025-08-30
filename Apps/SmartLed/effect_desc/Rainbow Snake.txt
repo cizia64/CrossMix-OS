@@ -1,0 +1,6 @@
+Moves a colored pattern
+along both joystick LED rings,
+like a chasing snake.
+ 
+ - Speed: Movement speed.
+ - Brightness: LED intensity.

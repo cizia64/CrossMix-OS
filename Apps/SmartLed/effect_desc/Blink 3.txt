@@ -1,0 +1,8 @@
+Triple blinking every time 
+interval determined by 
+speed value.
+  
+ - Color1: Blink color.
+ - Speed: Affects cycle.
+ - Smooth transition 
+    between states.

@@ -1,0 +1,6 @@
+Aurora-like fade through
+cyan, teal, and blue shades.
+ 
+ - Speed: Flow speed.
+ - Brightness: Color intensity.
+ - Ignores Color1/2.

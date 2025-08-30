@@ -1,0 +1,15 @@
+Projects the dominant color
+of the screen onto the LEDs
+ 
+It adjusts based on:
+ 
+-Current screen content:
+  LEDs reflect screen tone
+- Speed (duration):
+  Controls how often colors
+  are updated (min 200 ms,
+  1000ms or more is 
+  recommended)
+-  Brightness: Sets the
+  intensity of the lighting.
+

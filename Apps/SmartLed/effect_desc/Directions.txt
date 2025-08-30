@@ -1,0 +1,7 @@
+Highlights LEDs in response
+to D-Pad input: up, down,
+left, or right.
+ 
+ - Color1: Direction color.
+ - Brightness: LED intensity.
+ - No animation; updates in real time.

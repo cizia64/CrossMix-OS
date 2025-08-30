@@ -1,0 +1,14 @@
+A real-time thermal indicator
+that changes color based on
+the CPU's current temperature.
+ 
+Color shifts from cool green
+to hot red across defined
+temperature thresholds.
+ 
+It adjusts based on:
+- CPU temp: Determines
+  the LED color using 8
+  color zones from 40 C 
+  to 80 C
+- Brightness: light intensity

@@ -1,0 +1,5 @@
+Loop starting from color 1 and 
+moving slowly toward white.
+ 
+ - Color1: initial color.
+ - Brightness: Light intensity.

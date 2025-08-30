@@ -1,0 +1,7 @@
+Glittering specks with
+random flickers, producing a
+dynamic shimmering effect.
+ 
+ - Color1: Glitter base color.
+ - Speed: Flicker rate.
+ - Brightness: Peak brightness.

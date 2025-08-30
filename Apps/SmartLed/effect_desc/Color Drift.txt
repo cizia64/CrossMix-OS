@@ -1,0 +1,9 @@
+A flowing rainbow effect,
+transitioning smoothly through
+the color spectrum.
+ 
+ - Speed: Controls the color 
+   cycle speed.
+ - Brightness: Applies to all
+   lights
+ - Ignores Color1/2.

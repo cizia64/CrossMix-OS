@@ -1,0 +1,7 @@
+Randomized flashing and
+disappearance, like
+fireflies in the dark.
+ 
+ - Color1: Firefly color.
+ - Speed: Blink randomness.
+ - Brightness: Flicker strength.
