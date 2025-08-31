@@ -396,7 +396,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
         # Don't check art if we didn't get screenscraper game ID
         if ! [ "$gameIDSS" -eq "$gameIDSS" ] 2>/dev/null; then
             # Last chance : we search thanks to rom checksum
-            MAX_FILE_SIZE_BYTES=104857600 #100MB
+            MAX_FILE_SIZE_BYTES=419430400 #400MB (~28sec)
 
             if [ "$rom_size" -gt "$MAX_FILE_SIZE_BYTES" ]; then
                 echo -e "${RED}Rom is too big to make a checksum.${NC}"
