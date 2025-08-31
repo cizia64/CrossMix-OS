@@ -21,5 +21,6 @@
   "POLLING RATE": "16ms",
   "SWAP A B": 0,
   "NightMode": "Toggle",
+  "CHECK UPDATE": 1,
   "IN GAME MENU": 1
 }
