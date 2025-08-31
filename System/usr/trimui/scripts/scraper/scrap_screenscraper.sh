@@ -373,14 +373,11 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     echo $romNameNoExtension
 
     romNameTrimmed="${romNameNoExtension/".nkit"/}"
-    romNameTrimmed="${romNameTrimmed//"!"/}"
-    romNameTrimmed="${romNameTrimmed//"&"/}"
-    romNameTrimmed="${romNameTrimmed/"Disc "/}"
-    romNameTrimmed="${romNameTrimmed/"Rev "/}"
-    romNameTrimmed="$(echo "$romNameTrimmed" | sed -e 's/ ([^()]*)//g' -e 's/ \[[^]]*\]//g')"
-    romNameTrimmed="${romNameTrimmed//" - "/"%20"}"
-    romNameTrimmed="${romNameTrimmed/"-"/"%20"}"
-    romNameTrimmed="${romNameTrimmed//" "/"%20"}"
+    romNameTrimmed="$(echo "$title" | sed -E \
+       	-e 's/(!|&|Disc|Rev|CD[0-9])//g' \
+        -e 's| *[[(].*||' \
+        -e 's/(\s|-|_)+$//' \
+        -e 's|[_ ]|%20|g')"
 
     #echo $romNameTrimmed # for debugging
 
@@ -391,7 +388,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     else
         rom_size=$(stat -c%s "$file")
         if [ "$rom_size" -eq 0 ]; then
-            rom_size=2 # otherwise screenscraper API send an error
+            rom_size=1048576 # otherwise screenscraper API send an error
         fi
         url="https://www.screenscraper.fr/api2/jeuInfos.php?devid=${u%?}&devpassword=${p#??}&softname=crossmix&output=json&ssid=${userSS}&sspassword=${passSS}&sha1=&systemeid=${ssSystemID}&romtype=rom&romnom=${romNameTrimmed}.zip&romtaille=${rom_size}"
         search_on_screenscraper
@@ -399,7 +396,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
         # Don't check art if we didn't get screenscraper game ID
         if ! [ "$gameIDSS" -eq "$gameIDSS" ] 2>/dev/null; then
             # Last chance : we search thanks to rom checksum
-            MAX_FILE_SIZE_BYTES=104857600 #100MB
+            MAX_FILE_SIZE_BYTES=419430400 #400MB (~28sec)
 
             if [ "$rom_size" -gt "$MAX_FILE_SIZE_BYTES" ]; then
                 echo -e "${RED}Rom is too big to make a checksum.${NC}"

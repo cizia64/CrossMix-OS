@@ -70,6 +70,11 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 	runifnecessary "inputd" /usr/trimui/bin/trimui_inputd
 	runifnecessary "scened" /usr/trimui/bin/trimui_scened
 	runifnecessary "trimui_btmanager" /usr/trimui/bin/trimui_btmanager
+	runifnecessary "hardwareservice" hardwareservice
+	mkdir -p /tmp/trimui_osd/
+	/mnt/SDCARD/System/usr/trimui/scripts/osd_hotkey.sh > /tmp/trimui_osd/hotkeyshow
+	cd /usr/trimui/osd
+	runifnecessary "trimui_osdd" /usr/trimui/osd/trimui_osdd
 
 	#########################################
 	# Set brightness
@@ -110,7 +115,7 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 
 	echo "Lets run"
 
-	sleep 0.3 # delay necessary for input initialization
+	# sleep 0.3 # delay necessary for input initialization
 	/mnt/SDCARD/System/usr/trimui/scripts/button_state.sh MENU
 	exit_code=$?
 	if [ $exit_code -eq 10 ]; then # we don't resume if menu is pressed during boot
@@ -126,7 +131,7 @@ if [ -f "/mnt/SDCARD/trimui/app/cmd_to_run.sh" ]; then
 		exit
 	fi
 
-	cp /mnt/SDCARD/trimui/app/cmd_to_run.sh /tmp/cmd_to_run.sh
+	# cp /mnt/SDCARD/trimui/app/cmd_to_run.sh /tmp/cmd_to_run.sh
 	/mnt/SDCARD/trimui/app/cmd_to_run.sh
 	rm /mnt/SDCARD/trimui/app/cmd_to_run.sh
 	sync
