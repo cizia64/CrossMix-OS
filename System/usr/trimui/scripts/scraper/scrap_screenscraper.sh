@@ -373,14 +373,11 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     echo $romNameNoExtension
 
     romNameTrimmed="${romNameNoExtension/".nkit"/}"
-    romNameTrimmed="${romNameTrimmed//"!"/}"
-    romNameTrimmed="${romNameTrimmed//"&"/}"
-    romNameTrimmed="${romNameTrimmed/"Disc "/}"
-    romNameTrimmed="${romNameTrimmed/"Rev "/}"
-    romNameTrimmed="$(echo "$romNameTrimmed" | sed -e 's/ ([^()]*)//g' -e 's/ \[[^]]*\]//g')"
-    romNameTrimmed="${romNameTrimmed//" - "/"%20"}"
-    romNameTrimmed="${romNameTrimmed/"-"/"%20"}"
-    romNameTrimmed="${romNameTrimmed//" "/"%20"}"
+    romNameTrimmed="$(echo "$title" | sed -E \
+       	-e 's/(!|&|Disc|Rev|CD[0-9])//g' \
+        -e 's| *[[(].*||' \
+        -e 's/(\s|-|_)+$//' \
+        -e 's|[_ ]|%20|g')"
 
     #echo $romNameTrimmed # for debugging
 
