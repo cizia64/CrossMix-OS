@@ -1,0 +1,85 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH="/usr/trimui/lib:/mnt/SDCARD/System/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export PATH="/mnt/SDCARD/System/usr/trimui/scripts/:/mnt/SDCARD/System/bin:$PM_DIR${PATH:+:$PATH}"
+
+Message="Checking prerequisites"
+
+infoscreen2.sh -m "$Message" -fi 0 -p top-left -fb -sp &
+
+############################ prerequisites ############################
+
+DEST_DIR="/mnt/SDCARD/BIOS/zc210"
+MARKER_FILE="$DEST_DIR/zcdata.dat"
+
+if [ ! -f "$MARKER_FILE" ]; then
+  echo "zcdata.dat not found, proceeding with download..."
+
+  # Variables
+  ZIP_URL="https://codeload.github.com/netux79/zc210-libretro/zip/refs/heads/main"
+  TMP_DIR="/tmp/zc210_download"
+  ZIP_FILE="$TMP_DIR/zc210-libretro.zip"
+
+  # Cleanup & setup
+  rm -rf "$TMP_DIR"
+  mkdir -p "$TMP_DIR"
+  mkdir -p "$DEST_DIR"
+
+  # Download the ZIP archive
+  echo "Downloading repository..."
+  wget -q "$ZIP_URL" -O "$ZIP_FILE" || {
+    echo "Download error."
+    exit 1
+  }
+
+  # Extract only the 'datfile' folder
+  echo "Extracting 'datfile' folder..."
+  unzip -q "$ZIP_FILE" "zc210-libretro-main/datfile/*" -d "$TMP_DIR" || {
+    echo "Extraction error."
+    exit 1
+  }
+
+  # Copy contents into DEST_DIR (overwrite if exists)
+  echo "Copying files to $DEST_DIR..."
+  cp -r "$TMP_DIR/zc210-libretro-main/datfile/"* "$DEST_DIR/" || {
+    echo "Copy error."
+    exit 1
+  }
+
+  echo "✅ Done: files have been copied to $DEST_DIR"
+else
+  echo "✅ $MARKER_FILE already exists. Skipping download."
+fi
+
+############################ purezc.net parsing ############################
+
+
+export LD_LIBRARY_PATH=/mnt/SDCARD/System/lib/:/lib64:/usr/trimui/lib:/usr/lib:/mnt/SDCARD/System/bin/imagemagick/lib64/
+export MAGICK_CODER_MODULE_PATH=/mnt/SDCARD/System/bin/imagemagick/lib64/ImageMagick-6.9.10/config-Q16/coders
+export MAGICK_CONFIGURE_PATH=/mnt/SDCARD/System/bin/imagemagick/bin   
+
+
+sleep 1
+pkill -9 presenter
+sleep 1
+Message="$Message - Done\nUpdating Quests from purezc.net"
+infoscreen2.sh -m "$Message" -fi 0 -p top-left -fb -sp &
+
+count=$(/mnt/SDCARD/System/bin/python3.11 /mnt/SDCARD/Emus/ZQUEST/zquest-parser.py | grep -c "✔ Quest downloaded:")
+
+
+/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "ZQUEST"
+sync
+
+
+# Final message:
+Message="$Message - Done\n"
+Message="$Message\n \n--------------------------------------\n"
+Message="$Message\n$count new quest(s) downloaded.\n"
+Message="$Message Finished.\n"
+Message="$Message \n--------------------------------------"
+
+sleep 0.5
+pkill -9 presenter
+sleep 0.5
+/mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$Message" -fb -fi 0 -p top-left -k rin B "Exit"
