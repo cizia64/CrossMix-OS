@@ -3,7 +3,7 @@
     "package":"com.trimui.osd.slider.cpu_preset",
     "label":"CPU preset",
     "label.ch.lang":"CPU 频率",
-    "gridwidth":4,
+    "gridwidth":3,
     "gridheight":1,
     "icon0":"icon.png",
     "icon1":"background.png",

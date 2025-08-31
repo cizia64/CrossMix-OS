@@ -10,5 +10,20 @@
   "imgpath": "../../Imgs/GG",
   "useswap": 1,
   "shortname": 0,
-  "hidebios": 1
+  "hidebios": 1,
+  "extlist": "gg|bin|sms|zip|7z",
+  "launchlist": [
+    {
+      "name": "PicoDrive",
+      "launch": "picodrive.sh"
+    },
+    {
+      "name": "GenesisPlusGX",
+      "launch": "genplus.sh"
+    },
+    {
+      "name": "GenesisPlusGX Wide",
+      "launch": "genplus_wide.sh"
+    }
+  ]
 }
