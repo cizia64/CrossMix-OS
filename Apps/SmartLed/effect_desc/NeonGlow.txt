@@ -1,0 +1,6 @@
+Smooth neon-style glowing
+in and out, like neon signage.
+ 
+ - Color1: Glow color.
+ - Speed: Pulse rate.
+ - Brightness: Intensity.

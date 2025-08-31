@@ -1,0 +1,2 @@
+JAVA_VERSION="17"
+MODULES="java.base java.datatransfer java.xml java.prefs java.desktop jdk.unsupported jdk.zipfs"
