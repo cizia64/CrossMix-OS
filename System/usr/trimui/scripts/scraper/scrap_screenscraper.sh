@@ -388,7 +388,7 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     else
         rom_size=$(stat -c%s "$file")
         if [ "$rom_size" -eq 0 ]; then
-            rom_size=2 # otherwise screenscraper API send an error
+            rom_size=1048576 # otherwise screenscraper API send an error
         fi
         url="https://www.screenscraper.fr/api2/jeuInfos.php?devid=${u%?}&devpassword=${p#??}&softname=crossmix&output=json&ssid=${userSS}&sspassword=${passSS}&sha1=&systemeid=${ssSystemID}&romtype=rom&romnom=${romNameTrimmed}.zip&romtaille=${rom_size}"
         search_on_screenscraper
