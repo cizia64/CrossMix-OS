@@ -1,7 +1,7 @@
 # Software Information
 display_name = "Sega - MS/GG/MD/CD/32X (PicoDrive)"
 authors = "notaz|fdave|irixxxx"
-supported_extensions = "bin|gen|gg|smd|pco|md|32x|chd|cue|iso|sms|68k|sgd|m3u"
+supported_extensions = "bin|gen|smd|md|32x|cue|iso|chd|sms|gg|sg|sc|m3u|68k|sgd|pco"
 corename = "PicoDrive"
 license = "MAME"
 permissions = "dynarec_optional"
