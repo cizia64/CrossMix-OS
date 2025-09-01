@@ -14,8 +14,14 @@ save_launcher() {
 }
 
 button_state.sh L
-[ $? -eq 10 ] && save_launcher "$1"
+if [ $? -eq 10 ]; then
+    save_launcher "$1"
+    echo -e "{ \"type\":\"info\", \"size\":2, \"duration\":3000, \"x\":660, \"y\":0,  \"message\":\"Game preset created: $Launcher_name\",  \"icon\":\"\" }" >/tmp/trimui_osd/osd_toast_msg
+fi
 
 # Save launcher as default one
 button_state.sh R
-[ $? -eq 10 ] && save_launcher
+if [ $? -eq 10 ]; then
+    save_launcher
+    echo -e "{ \"type\":\"info\", \"size\":2, \"duration\":3000, \"x\":660, \"y\":0,  \"message\":\"Emu preset created: $Launcher_name\",  \"icon\":\"\" }" >/tmp/trimui_osd/osd_toast_msg
+fi

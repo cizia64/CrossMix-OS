@@ -1,0 +1,6 @@
+A single point rotates along
+each joystick's LEDs in sync.
+ 
+ - Color1: Trail color.
+ - Speed: Rotation speed.
+ - Brightness: Light level.

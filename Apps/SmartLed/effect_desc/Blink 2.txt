@@ -1,0 +1,7 @@
+Double blink every time laps
+determined by speed value.
+ 
+ - Color1: Blink color.
+ - Speed: Controls rate.
+ - Smooth transition 
+    between states.

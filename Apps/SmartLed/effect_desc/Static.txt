@@ -1,0 +1,6 @@
+Displays a static color
+with no transition or animation.
+ 
+ - Color1: Displayed color.
+ - No dynamic behavior.
+ - Ideal for idle state.

@@ -1,0 +1,13 @@
+A smooth, rhythmic pulsation 
+that gradually fades in and out,
+mimicking the ebb and flow of 
+breathing. 
+ 
+It adjusts based on:
+
+ - Color1: Primary color for 
+                 the effect.
+ - Speed: Controls the pace of
+                 the pulsation.
+ - Brightness: Alters the 
+                 intensity of the light.
