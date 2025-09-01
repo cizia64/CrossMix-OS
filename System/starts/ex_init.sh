@@ -16,5 +16,5 @@ fi
 if [[ "$NETWORK_SFTPGO" == "Y" ]]; then
     mkdir -p /opt/sftpgo
 
-    nice -2 /mnt/SDCARD/System/sftpgo/sftpgo serve -c /mnt/SDCARD/System/sftpgo/ > /dev/null &
+    nice -2 /mnt/SDCARD/System/sftpgo/sftpgo serve -c /mnt/SDCARD/System/sftpgo/ --log-level error --log-file-path="" > /dev/null &
 fi

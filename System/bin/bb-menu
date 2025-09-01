@@ -1,0 +1,278 @@
+#!/bin/sh
+###
+# File: bb-menu
+# Desc: BusyBox-compatible menu system
+# File Created: Tuesday, 20th May 2025 12:42:44 pm
+# Author: Josh.5 (jsunnex@gmail.com)
+# -----
+# Last Modified: Friday, 23rd May 2025 10:34:53 pm
+# Modified By: Josh.5 (jsunnex@gmail.com)
+###
+
+# ========== Argument Parsing ==========
+parse_args() {
+    while [ $# -gt 0 ]; do
+        case "$1" in
+        --*=*)
+            key="${1%%=*}"
+            val="${1#*=}"
+            key="${key#--}"
+            upper_key="$(echo "$key" | tr '[:lower:]-' '[:upper:]_')"
+            export "BB_MENU_${upper_key}"="$val"
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+        *)
+            BB_MENU_GLOBAL_MENU_PATH="$1"
+            ;;
+        esac
+        shift
+    done
+
+    if [ -z "${BB_MENU_GLOBAL_MENU_PATH:-}" ]; then
+        echo "Usage: $0 [--option=value ...] <main-menu-path>"
+        exit 1
+    fi
+
+    if [ ! -d "$BB_MENU_GLOBAL_MENU_PATH/items" ]; then
+        echo "Error: Menu path '$BB_MENU_GLOBAL_MENU_PATH' must contain an 'items/' directory."
+        exit 1
+    fi
+}
+
+# ========== Shared Helpers ==========
+press_any_key_to_exit() {
+    local exit_code=${1:-0}
+    echo
+    echo "Press any key to return [${exit_code:?}]..."
+    IFS= read -rsn1 _
+    exit $exit_code
+}
+
+launch_submenu() {
+    local submenu="$1"
+    exec "${BB_MENU_CMD:?}" "${BB_MENU_ROOT:?}/${submenu}"
+}
+
+# ========== Menu Generators ==========
+get_bg_color_code() {
+    case "${BB_MENU_BG_COLOR:-}" in
+    black) echo "40" ;;
+    red) echo "41" ;;
+    green) echo "42" ;;
+    yellow) echo "43" ;;
+    blue) echo "44" ;;
+    magenta) echo "45" ;;
+    cyan) echo "46" ;;
+    white) echo "47" ;;
+    *) echo "" ;;
+    esac
+}
+
+generate_menu_items_ini() {
+    local items_path="$1"
+    local config_ini="$2"
+    local index=1
+    local output=""
+
+    for script in "$items_path"/*.sh; do
+        key="item$index"
+
+        # Extract title and description from the script header
+        title=$(head -n 20 "$script" | grep '^# *title:' | cut -d':' -f2- | sed 's/^ *//')
+        desc=$(head -n 20 "$script" | grep '^# *description:' | cut -d':' -f2- | sed 's/^ *//')
+
+        output="$output
+${key}.title=$title
+${key}.description=$desc
+${key}.exec=$script"
+        index=$((index + 1))
+    done
+
+    # Pull config from menu.ini string
+    local exit_title
+    exit_title=$(echo "$config_ini" | grep '^exit_title=' | cut -d'=' -f2-)
+    [ -z "$exit_title" ] && exit_title="Quit"
+
+    local hide_exit
+    hide_exit=$(echo "$config_ini" | grep '^hide_exit_item=' | cut -d'=' -f2- | tr '[:upper:]' '[:lower:]')
+
+    if [ "$hide_exit" != "true" ]; then
+        output="$output
+item999.title=$exit_title
+item999.description=Return to previous menu
+item999.exec=<EXIT>"
+    fi
+
+    echo "$output"
+}
+
+delay_on_error() {
+    echo
+    echo "❌ An error occurred. See above for more information."
+    echo "Returning to menu in 5 seconds..."
+    sleep 5
+    while read -rs -t 0.1; do :; done
+}
+
+scroll_description() {
+    local desc="$1"
+    local width=$((TCOLS - 6))
+    local delay=1
+    local spacer="   "
+    local scroll_line=$((TROWS - 1)) # last visible line
+
+    # If the text fits, show it statically and skip scrolling
+    if [ ${#desc} -le $((width - 2)) ]; then
+        printf "\033[%s;2H| %-*s |\n" "$scroll_line" $((width - 2)) "$desc"
+        return
+    fi
+
+    # Prepare scrolling text (wrap twice for smooth loop)
+    local scroll_text="${desc}${spacer}${desc}${spacer}"
+    local scroll_text_len=${#scroll_text}
+
+    local i=0
+    while :; do
+        local part=$(echo "$scroll_text" | cut -c $((i + 1))-$((i + width)))
+        printf "\033[%s;2H| %-*s |\n" "$scroll_line" $((width - 2)) "$part"
+        i=$(((i + 1) % scroll_text_len))
+        sleep "$delay"
+        delay=0.1
+    done
+}
+
+draw_menu() {
+    local title="$1"
+    local selected="$2"
+    local config_ini="$3"
+
+    local inner_width=$((TCOLS - 3))
+    local usable_rows=$((TROWS - 1))
+    local row_count=0
+
+    clear
+
+    # Set background colour
+    local bg_code="$(get_bg_color_code)"
+    [ -n "$bg_code" ] && printf "\033[${bg_code}m"
+
+    # Top border and title
+    printf "+%s+\n" "$(printf -- '-%.0s' $(seq 1 "$inner_width"))"
+
+    # Centered menu title
+    local formatted=":: ${title:-Menu} ::"
+    local pad_left=$(((inner_width - ${#formatted}) / 2))
+    printf "|%*s%s%*s|\n" "$pad_left" "" "$formatted" $((inner_width - pad_left - ${#formatted})) ""
+
+    # Divider
+    printf "+%s+\n" "$(printf -- '-%.0s' $(seq 1 "$inner_width"))"
+
+    # Menu items
+    for key in $(echo "$config_ini" | grep '\.title=' | cut -d'.' -f1 | sort -u); do
+        item_title=$(echo "$config_ini" | grep "^${key}.title=" | cut -d'=' -f2-)
+        if [ "$key" = "$selected" ]; then
+            printf "| > %-*s |\n" $((inner_width - 4)) "$item_title"
+        else
+            printf "|   %-*s |\n" $((inner_width - 4)) "$item_title"
+        fi
+        row_count=$((row_count + 1))
+    done
+
+    local remaining=$((usable_rows - 4 - row_count))
+    while [ "$remaining" -gt 0 ]; do
+        printf "|%*s|\n" "$inner_width" ""
+        remaining=$((remaining - 1))
+    done
+
+    # Close background colour
+    [ -n "$bg_code" ] && printf "\033[0m"
+
+    # Bottom border
+    printf "+%s+\n" "$(printf -- '-%.0s' $(seq 1 "$inner_width"))"
+}
+
+create_menu() {
+    local config_ini="$1"
+    local menu_title selected_key keylist=""
+    local selected_index=0 scroll_pid
+    local screen_output input_hex
+
+    menu_title=$(echo "$config_ini" | grep '^menu_title=' | cut -d'=' -f2-)
+    selected_key=$(echo "$config_ini" | grep '^selected=' | cut -d'=' -f2-)
+
+    # Get all item keys
+    keylist=$(echo "$config_ini" | grep '\.title=' | cut -d'.' -f1 | sort -u)
+    key_count=$(echo "$keylist" | wc -w)
+
+    # Get first key as default selected
+    [ -z "$selected_key" ] && selected_key=$(echo "$keylist" | awk 'NR==1')
+
+    # Input loop
+    local menu_back="f"
+    while true; do
+        # Pre-fetch the full menu output. Then draw it
+        screen_output=$(draw_menu "$menu_title" "$selected_key" "$config_ini")
+        if [ "${menu_back:-}" = "t" ]; then
+            while read -t 0.2 discard; do true; done
+            menu_back="f"
+        fi
+        clear
+        echo -e "$screen_output"
+
+        # Scroll line
+        desc=$(echo "$config_ini" | grep "^${selected_key}.description=" | cut -d'=' -f2-)
+        scroll_description "$desc" &
+        scroll_pid=$!
+
+        # Read key input
+        IFS= read -rsn1 input
+        if [ "$input" = $'\x1b' ]; then
+            IFS= read -rsn2 rest
+            input="$input$rest"
+        fi
+
+        input_hex=$(echo -n "${input:-}" | hexdump -v -e '/1 "%02X "' | sed 's/ *$//')
+        kill "${scroll_pid:-}" 2>/dev/null
+        printf "\033[%s;1H\033[K" "$((TROWS - 1))"
+
+        case "$input_hex" in
+        "1B 5B 41") selected_index=$(((selected_index - 1 + key_count) % key_count)) ;;
+        "1B 5B 42") selected_index=$(((selected_index + 1) % key_count)) ;;
+        "20" | "")
+            exec_cmd=$(echo "$config_ini" | grep "^${selected_key}.exec=" | cut -d'=' -f2-)
+            if [ "$exec_cmd" = "<EXIT>" ]; then exit 0; fi
+            clear
+            sh -c ". '$BB_MENU_CMD' && . '$exec_cmd'" || delay_on_error
+            menu_back="t"
+            ;;
+        "7F") exit 0 ;;
+        esac
+
+        selected_key=$(echo "$keylist" | awk "NR==$((selected_index + 1))")
+    done
+}
+
+main() {
+    parse_args "$@"
+    export BB_MENU_CMD="$(realpath "$0")"
+    export BB_MENU_ROOT="$(cd "$(dirname "$menu_path")" && pwd -P)"
+
+    TTY_SIZE="$(stty size 2>/dev/null)"
+    TROWS="$(echo "$TTY_SIZE" | awk '{print $1}')"
+    TCOLS="$(echo "$TTY_SIZE" | awk '{print $2}')"
+
+    local config=""
+    [ -f "${BB_MENU_GLOBAL_MENU_PATH%/}/menu.ini" ] && config="$(cat "${BB_MENU_GLOBAL_MENU_PATH%/}/menu.ini")"
+    local menu_items
+    menu_items="$(generate_menu_items_ini "${BB_MENU_GLOBAL_MENU_PATH%/}/items" "$config")"
+    create_menu "${config}
+${menu_items}"
+}
+
+# Run main only if not sourced
+if [ "${0##*/}" = "bb-menu" ] || [ "$0" = "./bb-menu" ]; then
+    main "$@"
+fi
