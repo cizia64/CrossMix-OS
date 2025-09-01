@@ -1,0 +1,7 @@
+A flame-inspired animation
+cycling through red, orange,
+and yellow tones.
+ 
+ - Speed: Flame tempo.
+ - Brightness: Intensity of glow.
+ - Ignores Color1/2.

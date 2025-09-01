@@ -90,12 +90,18 @@ enable_wifi() {
         return 1
     fi
 }
-
 check_filesystem() {
     echo -e "\n${BLUE}================== CHECKDISK ==================${NC}\n"
+
+    force=0
+    if [ "$1" = "--force" ]; then
+        force=1
+    fi
+
     # Check the filesystem
     last_fsck_date=$(cat /mnt/SDCARD/System/updates/last_fsck.txt 2>/dev/null)
-    if [ "$last_fsck_date" == "$current_date" ]; then
+
+    if [ "$force" -eq 0 ] && [ "$last_fsck_date" = "$current_date" ]; then
         echo -e "The last fsck was performed today ($current_date).\nNo need to rerun."
     else
         echo -ne "\n" \
@@ -105,8 +111,10 @@ check_filesystem() {
             "about 2 minutes for 128GB SD card\n\n"
 
         mount_point=$(mount | grep -m 1 '/mnt/SDCARD' | awk '{print $1}')
-        /mnt/SDCARD/System/bin/fsck.fat -a $mount_point 2>&1 | awk 'NR > 3'
+        /mnt/SDCARD/System/bin/fsck.fat -a "$mount_point" 2>&1 | awk 'NR > 3'
+
         echo "$current_date" >/mnt/SDCARD/System/updates/last_fsck.txt
+
         if ls /mnt/SDCARD/FSCK*.REC 1>/dev/null 2>&1; then
             rec_dir="/mnt/SDCARD/rec_files"
             mkdir -p "$rec_dir"
