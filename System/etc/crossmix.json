@@ -21,6 +21,7 @@
   "POLLING RATE": "16ms",
   "SWAP A B": 0,
   "NightMode": "Toggle",
+  "STARTUP APP": "MainUI",
   "CHECK UPDATE": 1,
   "IN GAME MENU": 1
 }
