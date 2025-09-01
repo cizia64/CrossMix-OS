@@ -15,7 +15,7 @@ systemid = "arduboy"
 
 # Libretro Features
 supports_no_game = "false"
-database = "Arduboy"
+database = "Arduboy Inc - Arduboy"
 savestate = "true"
 cheats = "false"
 core_options = "false"

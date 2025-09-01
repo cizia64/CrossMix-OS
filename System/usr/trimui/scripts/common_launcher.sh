@@ -55,6 +55,9 @@ fi
 dir=/mnt/SDCARD/System/usr/trimui/scripts
 source $dir/save_launcher.sh
 
+if [ -z "$2" ]; then
+    /mnt/SDCARD/System/bin/activities time "$1" $$ &
+fi
 
 if grep -q ra64.trimui "$0"; then
     RA_DIR="/mnt/SDCARD/RetroArch"
