@@ -13,39 +13,45 @@
   "hidebios": 0,
   "launchlist": [
     {
-      "name": "PPSSPP 1.17.1 - OpenGL",
-      "name.ch.lang": "PPSSPP正常模式",
-      "launch": "ppsspp_1.17.1_gl.sh"
-    },
-    {
-      "name": "PPSSPP 1.17.1 - Vulkan",
-      "name.ch.lang": "PPSSPP性能模式",
-      "launch": "ppsspp_1.17.1_vulkan.sh"
-    },
-    {
-      "name": "PPSSPP-1.5.4",
-      "name.ch.lang": "PPSSPP-1.5.4性能模式",
-      "launch": "ppsspp_1.15.4.sh"
-    },
-    {
-      "name": "---------- Performance ----------",
-      "name.ch.lang": "---------------------------",
+      "name": "------- PPSSPP 1.19.0 -------",
       "launch": ""
     },
     {
-      "name": "PPSSPP 1.17.1 - OpenGL - Perf.",
-      "name.ch.lang": "PPSSPP正常模式 - Perf.",
-      "launch": "ppsspp_1.17.1_gl.sh"
+      "name": "OpenGL           ",
+      "launch": "ppsspp_1.19.0.sh"
     },
     {
-      "name": "PPSSPP 1.17.1 - Vulkan - Perf.",
-      "name.ch.lang": "PPSSPP性能模式 - Perf.",
-      "launch": "ppsspp_1.17.1_vulkan.sh"
+      "name": "OpenGL - Perf.",
+      "launch": "ppsspp_1.19.0.sh"
     },
     {
-      "name": "PPSSPP-1.5.4 - Perf.",
-      "name.ch.lang": "PPSSPP-1.5.4性能模式 - Perf.",
+      "name": "Vulkan             ",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+
+    {
+      "name": "Vulkan - Perf. ",
+      "launch": "ppsspp_1.19.0.sh"
+    },
+    {
+      "name": "------- Older versions -------",
+      "launch": ""
+    },
+    {
+      "name": "PPSSPP 1.18.1",
+      "launch": "ppsspp_1.18.1.sh"
+    },
+    {
+      "name": "PPSSPP 1.17.1",
+      "launch": "ppsspp_1.17.1.sh"
+    },
+    {
+      "name": "PPSSPP 1.15.4",
       "launch": "ppsspp_1.15.4.sh"
+    },
+    {
+      "name": "help",
+      "launch": "ppsspp_help.sh"
     }
   ]
 }
