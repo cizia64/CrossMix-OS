@@ -129,6 +129,16 @@ while [ "$#" -gt 0 ]; do
         fi
         shift 2
         ;;
+    -ts) # silent timer
+        if is_number "$2"; then
+            timer="$2"
+            # Add timer option if numeric
+            COMMAND="$COMMAND --timeout $timer"
+        else
+            echo "Invalid timer: $2. Using default."
+        fi
+        shift 2
+        ;;
     -m)
         message="${2:- }"
         # Add message option

@@ -1,0 +1,8 @@
+{
+  "label": "SmartLed",
+  "icon": "icon.png",
+  "iconsel": "icon.png",
+  "launch": "launch.sh",
+  "description": "Control Leds",
+  "icontop": ""
+}

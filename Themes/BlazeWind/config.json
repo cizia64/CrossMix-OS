@@ -1,5 +1,6 @@
 {
     "name":"BlazeWind",
+    "preview":"preview.png", 
     "font":"segoe-ui.ttf",
     "fontascii":"segoe-ui.ttf",
     "fontsize":{

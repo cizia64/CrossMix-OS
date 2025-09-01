@@ -1,0 +1,6 @@
+A light sweeps back and forth
+in a retro car scanner style.
+ 
+ - Color1: Base color.
+ - duration: Controls 
+   sweep speed.
