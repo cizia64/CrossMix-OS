@@ -53,12 +53,6 @@ fi
 
 ############################ purezc.net parsing ############################
 
-
-export LD_LIBRARY_PATH=/mnt/SDCARD/System/lib/:/lib64:/usr/trimui/lib:/usr/lib:/mnt/SDCARD/System/bin/imagemagick/lib64/
-export MAGICK_CODER_MODULE_PATH=/mnt/SDCARD/System/bin/imagemagick/lib64/ImageMagick-6.9.10/config-Q16/coders
-export MAGICK_CONFIGURE_PATH=/mnt/SDCARD/System/bin/imagemagick/bin   
-
-
 sleep 1
 pkill -9 presenter
 sleep 1

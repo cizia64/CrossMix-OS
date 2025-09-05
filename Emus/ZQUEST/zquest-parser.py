@@ -16,7 +16,7 @@ URLS = [
 cafile = "/etc/ssl/certs/ca-certificates.crt"
 img_dir = "/mnt/SDCARD/Imgs/ZQUEST/"
 font_path = "/mnt/SDCARD/System/resources/DejaVuSans.ttf"
-convert_bin = "/mnt/SDCARD/System/bin/imagemagick/bin/convert"
+convert_bin = "/mnt/SDCARD/System/bin/convert"
 
 os.makedirs(img_dir, exist_ok=True)
 ctx = ssl.create_default_context(cafile=cafile)
