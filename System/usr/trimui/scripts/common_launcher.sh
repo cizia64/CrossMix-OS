@@ -32,7 +32,6 @@ else
     ROM_DIR=$(echo "$1" | sed -E 's|(.*Roms/[^/]+)/.*|\1|')
 fi
 
-
 ROM_FILENAME=$(basename "$1")
 ROM_FILENAME_NOEXT=${ROM_FILENAME%.*}
 
@@ -45,6 +44,13 @@ print_var "ROM_FILENAME_NOEXT" "$ROM_FILENAME_NOEXT"
 print_var "EMU_DIR" "$EMU_DIR"
 print_blue "======================="
 
+/mnt/SDCARD/System/usr/trimui/scripts/button_state.sh A
+if [ $? -eq 10 ]; then
+    if ! pgrep -f "activities gui"; then
+        /mnt/SDCARD/System/bin/activities gui "$1"
+        exit 0
+    fi
+fi
 
 /mnt/SDCARD/System/usr/trimui/scripts/button_state.sh Y
 if [ $? -eq 10 ]; then
