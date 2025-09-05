@@ -311,7 +311,7 @@ mkdir -p "/mnt/SDCARD/Imgs/$CurrentSystem/" >/dev/null
 #fi
 if ! [ -z "$CurrentRom" ]; then
     # Escaping single quotes in CurrentRom
-    CurrentRom_noapostrophe=${CurrentRom//\'/\\\'}
+    CurrentRom_noapostrophe="*$(echo "$CurrentRom"   | sed -e "s/'/\\\\'/g" -e 's/\[/\\\[/g' -e 's/\]/\\\]/g')*"
     romfilter="-name '*$CurrentRom_noapostrophe*'"
 fi
 
@@ -373,13 +373,13 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
     echo $romNameNoExtension
 
     romNameTrimmed="${romNameNoExtension/".nkit"/}"
-    romNameTrimmed="$(echo "$title" | sed -E \
+    romNameTrimmed="$(echo "$romNameTrimmed" | sed -E \
        	-e 's/(!|&|Disc|Rev|CD[0-9])//g' \
         -e 's| *[[(].*||' \
         -e 's/(\s|-|_)+$//' \
         -e 's|[_ ]|%20|g')"
 
-    #echo $romNameTrimmed # for debugging
+    # echo "romNameTrimmed -> $romNameTrimmed" # for debugging
 
     if [ -f "/mnt/SDCARD/Imgs/$CurrentSystem/$romNameNoExtension.png" ]; then
         echo -e "${YELLOW}already Scraped !${NC}"

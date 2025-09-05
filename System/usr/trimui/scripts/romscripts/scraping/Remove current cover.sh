@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Check that variables are defined and not empty
 if [ -z "$EMU_DIR" ] || [ -z "$ROM_FILENAME_NOEXT" ]; then
     echo "Error: EMU_DIR or ROM_FILENAME_NOEXT is empty."
