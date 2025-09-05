@@ -13,58 +13,53 @@ DEST_DIR="/mnt/SDCARD/BIOS/zc210"
 MARKER_FILE="$DEST_DIR/zcdata.dat"
 
 if [ ! -f "$MARKER_FILE" ]; then
-  echo "zcdata.dat not found, proceeding with download..."
+    echo "zcdata.dat not found, proceeding with download..."
 
-  # Variables
-  ZIP_URL="https://codeload.github.com/netux79/zc210-libretro/zip/refs/heads/main"
-  TMP_DIR="/tmp/zc210_download"
-  ZIP_FILE="$TMP_DIR/zc210-libretro.zip"
+    # Variables
+    ZIP_URL="https://codeload.github.com/netux79/zc210-libretro/zip/refs/heads/main"
+    TMP_DIR="/tmp/zc210_download"
+    ZIP_FILE="$TMP_DIR/zc210-libretro.zip"
 
-  # Cleanup & setup
-  rm -rf "$TMP_DIR"
-  mkdir -p "$TMP_DIR"
-  mkdir -p "$DEST_DIR"
+    # Cleanup & setup
+    rm -rf "$TMP_DIR"
+    mkdir -p "$TMP_DIR"
+    mkdir -p "$DEST_DIR"
 
-  # Download the ZIP archive
-  echo "Downloading repository..."
-  wget -q "$ZIP_URL" -O "$ZIP_FILE" || {
-    echo "Download error."
-    exit 1
-  }
+    # Download the ZIP archive
+    echo "Downloading repository..."
+    wget -q "$ZIP_URL" -O "$ZIP_FILE" || {
+        echo "Download error."
+        exit 1
+    }
 
-  # Extract only the 'datfile' folder
-  echo "Extracting 'datfile' folder..."
-  unzip -q "$ZIP_FILE" "zc210-libretro-main/datfile/*" -d "$TMP_DIR" || {
-    echo "Extraction error."
-    exit 1
-  }
+    # Extract only the 'datfile' folder
+    echo "Extracting 'datfile' folder..."
+    unzip -q "$ZIP_FILE" "zc210-libretro-main/datfile/*" -d "$TMP_DIR" || {
+        echo "Extraction error."
+        exit 1
+    }
 
-  # Copy contents into DEST_DIR (overwrite if exists)
-  echo "Copying files to $DEST_DIR..."
-  cp -r "$TMP_DIR/zc210-libretro-main/datfile/"* "$DEST_DIR/" || {
-    echo "Copy error."
-    exit 1
-  }
+    # Copy contents into DEST_DIR (overwrite if exists)
+    echo "Copying files to $DEST_DIR..."
+    cp -r "$TMP_DIR/zc210-libretro-main/datfile/"* "$DEST_DIR/" || {
+        echo "Copy error."
+        exit 1
+    }
 
-  echo "✅ Done: files have been copied to $DEST_DIR"
+    echo "✅ Done: files have been copied to $DEST_DIR"
 else
-  echo "✅ $MARKER_FILE already exists. Skipping download."
+    echo "✅ $MARKER_FILE already exists. Skipping download."
 fi
 
 ############################ purezc.net parsing ############################
 
-sleep 1
-pkill -9 presenter
-sleep 1
 Message="$Message - Done\nUpdating Quests from purezc.net"
 infoscreen2.sh -m "$Message" -fi 0 -p top-left -fb -sp &
 
 count=$(/mnt/SDCARD/System/bin/python3.11 /mnt/SDCARD/Emus/ZQUEST/zquest-parser.py | grep -c "✔ Quest downloaded:")
 
-
 /mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "ZQUEST"
 sync
-
 
 # Final message:
 Message="$Message - Done\n"
@@ -73,7 +68,4 @@ Message="$Message\n$count new quest(s) downloaded.\n"
 Message="$Message Finished.\n"
 Message="$Message \n--------------------------------------"
 
-sleep 0.5
-pkill -9 presenter
-sleep 0.5
 /mnt/SDCARD/System/usr/trimui/scripts/infoscreen2.sh -m "$Message" -fb -fi 0 -p top-left -k rin B "Exit"
