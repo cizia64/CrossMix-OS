@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuremap [
+  <!ELEMENT configuremap (configure)+>
+  <!ATTLIST configuremap xmlns CDATA #FIXED ''>
+  <!ELEMENT configure EMPTY>
+  <!ATTLIST configure xmlns CDATA #FIXED '' name NMTOKEN #REQUIRED
+    value CDATA #REQUIRED>
+]>
+<!--
+  ImageMagick build configuration.
+-->
+<configuremap>
+  <configure name="CC" value="/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-gcc"/>
+  <configure name="CFLAGS" value="-I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/libxml2 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/libpng12 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/freetype2 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/home/alfchen/TheData/ProjectData2/trimui_allwinner/5inch_SmartPro_A133/tina_smartpro_4.0.0/out/a133-aw3/staging_dir/target/usr/include -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/home/alfchen/TheData/ProjectData2/trimui_allwinner/5inch_SmartPro_A133/tina_smartpro_4.0.0/out/a133-aw3/staging_dir/target/usr/include/freetype2 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/home/alfchen/TheData/ProjectData2/trimui_allwinner/5inch_SmartPro_A133/tina_smartpro_4.0.0/out/a133-aw3/staging_dir/target/usr/include -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/freetype2  -fopenmp -Wall -O3 -pipe -march=armv8-a+crc -mcpu=cortex-a53 -mtune=cortex-a53 -fomit-frame-pointer -ffast-math -funroll-loops -fdata-sections -ffunction-sections -fexceptions -pthread -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="CODER_PATH" value="/opt/imagemagick-tsp/lib/ImageMagick-6.9.12/modules-Q16/coders"/>
+  <configure name="CONFIGURE_PATH" value="/opt/imagemagick-tsp/etc/ImageMagick-6/"/>
+  <configure name="CONFIGURE" value="./configure  '--host=aarch64-linux-gnu' '--build=x86_64-pc-linux-gnu' '--without-x' '--without-perl' '--disable-shared' '--with-modules=no' '--enable-static' '--with-modules' '--without-magick-plus-plus' '--disable-opencl' '--prefix=/opt/imagemagick-tsp' 'CPPFLAGS=--sysroot=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/freetype2 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/libxml2' 'LDFLAGS=--sysroot=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot -L/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/lib' 'PKG_CONFIG=/usr/bin/pkg-config' 'build_alias=x86_64-pc-linux-gnu' 'host_alias=aarch64-linux-gnu' 'CC=/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-gcc' 'CFLAGS=-O3 -pipe -march=armv8-a+crc -mcpu=cortex-a53 -mtune=cortex-a53 -fomit-frame-pointer -ffast-math -funroll-loops -fdata-sections -ffunction-sections' 'PKG_CONFIG_PATH=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/lib/pkgconfig' 'PKG_CONFIG_LIBDIR=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/lib/pkgconfig' 'CXX=/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-g++' 'CXXFLAGS=-fPIC'"/>
+  <configure name="COPYRIGHT" value="Copyright (C) 1999-2021 ImageMagick Studio LLC"/>
+  <configure name="CPPFLAGS" value="-I/opt/imagemagick-tsp/include/ImageMagick-6"/>
+  <configure name="CXXFLAGS" value="-fPIC -pthread"/>
+  <configure name="CXX" value="/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-g++"/>
+  <configure name="DEFS" value="-DHAVE_CONFIG_H"/>
+  <configure name="DELEGATES" value="bzlib fontconfig freetype jng jpeg png xml zlib"/>
+  <configure name="DISTCHECK_CONFIG_FLAGS" value="'CC=/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-gcc' 'CFLAGS=-O3 -pipe -march=armv8-a+crc -mcpu=cortex-a53 -mtune=cortex-a53 -fomit-frame-pointer -ffast-math -funroll-loops -fdata-sections -ffunction-sections' 'CPPFLAGS=--sysroot=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/freetype2 -I/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/include/libxml2' 'CXX=/opt/aarch64-linux-gnu-7.5.0-linaro/bin/aarch64-linux-gnu-g++' 'LDFLAGS=--sysroot=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot -L/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/lib'  --disable-deprecated  --with-quantum-depth=16  --with-jemalloc=no  --with-umem=no  --with-autotrace=no  --with-fftw=no  --with-gslib=no  --with-fontpath=  --with-rsvg=no  --with-wmf=no  --with-perl=no "/>
+  <configure name="DOCUMENTATION_PATH" value="/opt/imagemagick-tsp/share/doc/ImageMagick-6"/>
+  <configure name="EXEC-PREFIX" value="/opt/imagemagick-tsp"/>
+  <configure name="EXECUTABLE_PATH" value="/opt/imagemagick-tsp/bin"/>
+  <configure name="FEATURES" value="DPC Cipher OpenMP"/>
+  <configure name="FILTER_PATH" value="/opt/imagemagick-tsp/lib/ImageMagick-6.9.12/modules-Q16/filters"/>
+  <configure name="GIT_REVISION" value="16710" />
+  <configure name="HOST" value="aarch64-unknown-linux-gnu"/>
+  <configure name="INCLUDE_PATH" value="/opt/imagemagick-tsp/include/ImageMagick-6"/>
+  <configure name="LDFLAGS" value="-L/opt/imagemagick-tsp/lib --sysroot=/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot -L/opt/aarch64-linux-gnu-7.5.0-linaro/sysroot/usr/lib"/>
+  <configure name="LIBRARY_PATH" value="/opt/imagemagick-tsp/lib/ImageMagick-6.9.12"/>
+  <configure name="LIBS" value="    -lfreetype  -ljpeg    -lpng12      -lfontconfig -lfreetype           -lbz2      -lxml2  -lz    -lm    -lpthread  -lgomp"/>
+  <configure name="LIB_VERSION_NUMBER" value="6,9,12,18"/>
+  <configure name="LIB_VERSION" value="0x69C"/>
+  <configure name="NAME" value="ImageMagick"/>
+  <configure name="PCFLAGS" value="-fopenmp -DMAGICKCORE_HDRI_ENABLE=0 -DMAGICKCORE_QUANTUM_DEPTH=16"/>
+  <configure name="PREFIX" value="/opt/imagemagick-tsp"/>
+  <configure name="QuantumDepth" value="16"/>
+  <configure name="RELEASE_DATE" value="2021-07-14"/>
+  <configure name="SHAREARCH_PATH" value="/opt/imagemagick-tsp/lib/ImageMagick-6.9.12/config-Q16"/>
+  <configure name="SHARE_PATH" value="/opt/imagemagick-tsp/share/ImageMagick-6"/>
+  <configure name="TARGET_CPU" value="aarch64"/>
+  <configure name="TARGET_OS" value="linux-gnu"/>
+  <configure name="TARGET_VENDOR" value="unknown"/>
+  <configure name="VERSION" value="6.9.12"/>
+  <configure name="WEBSITE" value="https://imagemagick.org"/>
+</configuremap>

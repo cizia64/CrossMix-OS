@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# wrapper for ImageMagick convert
+export MAGICK_CONFIGURE_PATH=/mnt/SDCARD/System/bin/imagemagick/config-Q16
+exec /mnt/SDCARD/System/bin/imagemagick/convert "$@"
