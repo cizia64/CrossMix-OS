@@ -26,6 +26,9 @@ main() {
     echo -e "\n=================================== $ui_title ==================================="
     echo "Naming scheme: $naming_mode"
 
+    Message="Importing ScummVM games"
+    infoscreen2.sh -m "$Message" -fi 0 -p top-left -fb -sp &
+	
     if [ $skip_scan -eq 0 ]; then
         # infoPanel -t "$ui_title" -m "Scanning..." --persistent 2> /dev/null &
         echo -e "\nScanning...\n"
@@ -91,7 +94,6 @@ main() {
 
         if [ $count -eq 0 ]; then
             result_message="No games found"
-            /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "No games found." -t 0.5
         elif [ $count -eq 1 ]; then
             result_message="Found 1 game"
         else
@@ -99,9 +101,8 @@ main() {
         fi
 
         echo -e "\n================================= DONE! $result_message =================================\n\n"
-
-        /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "$result_message" -t 0.3
-
+            Message="$Message - Done\n$result_message"
+            infoscreen2.sh -m "$Message" -fi 0 -p top-left -fb -ts 3
     )
     sync
 
@@ -194,19 +195,26 @@ extract_game_icon() {
 
     GAME_ID="$1"
     FOUND=0
+    echo "$GAME_ID"
 
     for datfile in "$DAT_DIR"/*.dat; do
         [ -f "$datfile" ] || continue
+        echo "$datfile"
 
-        # Look for a PNG path matching the game ID inside the archive
-        MATCH=$(unzip -l "$datfile" | awk '{print $NF}' | grep "^icons/.*$GAME_ID\.png$")
+        FILES=$(/mnt/SDCARD/System/bin/7zz l -ba "$datfile" | awk '{print $NF}' | sed 's|\\|/|g')
+
+        MATCH=$(echo "$FILES" | grep -E "^icons/.*/?$GAME_ID\.png$")
 
         if [ -n "$MATCH" ]; then
             echo "✅ Game ID '$GAME_ID' found: $MATCH"
             echo "📦 In archive: $(basename "$datfile")"
             mkdir -p "$DEST_DIR"
-            /mnt/SDCARD/System/bin/7zz e "$datfile" "$MATCH" -o"$DEST_DIR" -y
-            mv "$DEST_DIR/$(basename "$MATCH")" "$DEST_DIR/$(basename "${target_save_path%.scummvm}.png")"
+
+            # We retrieve the real internal path (with \ if necessary)
+            RAW_MATCH=$(/mnt/SDCARD/System/bin/7zz l -ba "$datfile" | awk '{print $NF}' | grep -E "icons[\\/].*$GAME_ID\.png$")
+
+            # Extract via stdout and rename directly
+            /mnt/SDCARD/System/bin/7zz e "$datfile" "$RAW_MATCH" -so >"$DEST_DIR/$(basename "${target_save_path%.scummvm}.png")"
             FOUND=1
             break
         fi

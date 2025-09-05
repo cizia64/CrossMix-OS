@@ -8,14 +8,13 @@ romName=$(basename "$@")
 romNameNoExtension=${romName%.*}
 
 if [ "$romName" = "° Run ScummVM.launch" ]; then
-	mv "$Rom" "$RomPath/$romNameNoExtension.squashfs"
-	/mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "SCUMMVM"
+    mv "$Rom" "$RomPath/$romNameNoExtension.squashfs"
+    /mnt/SDCARD/System/usr/trimui/scripts/reset_list.sh "SCUMMVM"
 fi
 
 if [ "$romName" = "° Import ScummVM Games.launch" ]; then
-	/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "bg-info.png" -m "Importing ScummVM games."
-	sh "$Rom"
-	exit
+    sh "$Rom"
+    exit
 fi
 
 cd $RA_DIR/
