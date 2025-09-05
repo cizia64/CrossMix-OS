@@ -228,6 +228,25 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
+# Stop any previous instances of presenter
+pids=$(pidof infoscreen2.sh)
+this_pid=$$
+
+if [ -n "$pids" ]; then
+    max_pid=$(echo $pids | tr ' ' '\n' | sort -n | tail -n1)
+
+    if [ "$this_pid" -eq "$max_pid" ]; then
+        sleep 1.5
+    fi
+
+    if pidof presenter >/dev/null 2>&1; then
+        killall -9 presenter
+        while pidof presenter >/dev/null 2>&1; do
+            sleep 0.1
+        done
+    fi
+fi
+
 # we set default values if not set by args
 image=$(determine_image_path "$image")
 COMMAND="$COMMAND  --background-image \"$image\""
