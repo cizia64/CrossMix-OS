@@ -249,7 +249,7 @@
   "httpd": {
     "bindings": [
       {
-        "port": 8080,
+        "port": 80,
         "address": "",
         "enable_web_admin": false,
         "enable_web_client": true,
