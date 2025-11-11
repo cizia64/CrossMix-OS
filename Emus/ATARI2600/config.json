@@ -11,14 +11,15 @@
   "useswap": 0,
   "shortname": 0,
   "hidebios": 0,
+  "extlist": "a26|bin|zip|7z",
   "launchlist": [
     {
-    "name": "Stella2014",
-    "launch": "stella2014.sh"
+      "name": "Stella2014",
+      "launch": "stella2014.sh"
     },
     {
-    "name": "Stella",
-    "launch": "stella.sh"
+      "name": "Stella",
+      "launch": "stella.sh"
     }
   ]
 }
