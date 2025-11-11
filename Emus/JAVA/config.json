@@ -1,15 +1,25 @@
 {
-"label":"JAVA",
-"icon":"i.png",
-"iconsmall":"80.png",
-"iconlist":"32.png",
-"background":"bg.png",
-"themecolor":"CD6155",
-"launch":"launch.sh",
-"rompath":"../../Roms/JAVA",
-"imgpath":"../../Imgs/JAVA",
-"useswap":1,
-"shortname":1,
-"hidebios":1,
-"extlist":"jar"
+  "label": "JAVA",
+  "icon": "/mnt/SDCARD/Icons/Default/Emus/JAVA.png",
+  "iconsmall": "80.png",
+  "iconlist": "32.png",
+  "background": "/mnt/SDCARD/Backgrounds/Default/JAVA.png",
+  "themecolor": "CD6155",
+  "launch": "default.sh",
+  "rompath": "../../Roms/JAVA",
+  "imgpath": "../../Imgs/JAVA",
+  "useswap": 1,
+  "shortname": 1,
+  "hidebios": 1,
+  "extlist": "jar",
+  "launchlist": [
+    {
+      "name": "Launch freej2me",
+      "launch": "launch.sh"
+    },
+    {
+      "name": "Switch resolution",
+      "launch": "launch.sh"
+    }
+  ]
 }

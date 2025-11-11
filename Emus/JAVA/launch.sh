@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "$0 $*"
+source /mnt/SDCARD/System/usr/trimui/scripts/common_launcher.sh
 
 # Environment setup
 export LD_LIBRARY_PATH=./lib:/mnt/SDCARD/System/lib:$LD_LIBRARY_PATH
@@ -56,18 +57,35 @@ update_configs() {
     fi
 }
 
-
 # Helper: launch selector and set resx/resy
 choose_resolution() {
-    selector_output=$(selector -t "Choose resolution for $rom_name:" -c $resolutions)
+    selector_output=$(selector -t "Choose resolution for $rom_name:\n \n  (see https://tasemulators.github.io/freej2me-plus\n   for resolution database)" -fs 160 -c $resolutions)
     selected="${selector_output#*: }"
     case "$selected" in
-        "240x320") resx=240; resy=320 ;;
-        "320x240") resx=320; resy=240 ;;
-        "128x128") resx=128; resy=128 ;;
-        "176x208") resx=176; resy=208 ;;
-        "640x360") resx=640; resy=360 ;;
-        *) echo "Cancelled."; exit 0 ;;
+    "240x320")
+        resx=240
+        resy=320
+        ;;
+    "320x240")
+        resx=320
+        resy=240
+        ;;
+    "128x128")
+        resx=128
+        resy=128
+        ;;
+    "176x208")
+        resx=176
+        resy=208
+        ;;
+    "640x360")
+        resx=640
+        resy=360
+        ;;
+    *)
+        echo "Cancelled."
+        exit 0
+        ;;
     esac
 }
 
@@ -81,11 +99,26 @@ if echo "$Launcher" | grep -q "Switch resolution"; then
 elif echo "$Launcher" | grep -Eq "240x320|320x240|128x128|176x208|640x360"; then
     echo "Resolution detected in logs"
     case "$Launcher" in
-        *240x320*) resx=240; resy=320 ;;
-        *320x240*) resx=320; resy=240 ;;
-        *128x128*) resx=128; resy=128 ;;
-        *176x208*) resx=176; resy=208 ;;
-        *640x360*) resx=640; resy=360 ;;
+    *240x320*)
+        resx=240
+        resy=320
+        ;;
+    *320x240*)
+        resx=320
+        resy=240
+        ;;
+    *128x128*)
+        resx=128
+        resy=128
+        ;;
+    *176x208*)
+        resx=176
+        resy=208
+        ;;
+    *640x360*)
+        resx=640
+        resy=360
+        ;;
     esac
     update_configs
 
@@ -96,9 +129,10 @@ else
         resy="${res#*x}"
         if [ -d "$config_dir/${rom_name}${resx}${resy}" ]; then
             echo "Existing config found: ${resx}x${resy}"
-			thd --triggers /mnt/SDCARD/Emus/JAVA/thd.conf /dev/input/event3 &
+            thd --triggers /mnt/SDCARD/Emus/JAVA/thd.conf /dev/input/event3 &
+            cpufreq.sh performance 7 7
             exec java -jar freej2me-sdl.jar "$rom_path" "$resx" "$resy" 100
-			pkill -f "thd --triggers /mnt/SDCARD/Emus/JAVA/thd.conf /dev/input/event3"
+            pkill -f "thd --triggers /mnt/SDCARD/Emus/JAVA/thd.conf /dev/input/event3"
         fi
     done
 
