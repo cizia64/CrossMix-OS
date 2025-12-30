@@ -1,0 +1,2 @@
+# Ignore CSV files generated via PPSSPP setup
+utils/ppsspp_setup/*.csv
