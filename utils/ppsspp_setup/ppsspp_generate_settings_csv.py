@@ -1,6 +1,8 @@
 import csv
+import io
 import os
 import re
+import urllib.request
 import zipfile
 import xml.etree.ElementTree as ET
 
@@ -8,6 +10,10 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 COMPAT_XLSX = os.path.join(
     ROOT_DIR,
     "TRIMUI Smart Pro - PSP Compatibility List (CrossMix-OS).xlsx",
+)
+COMPAT_REMOTE_URL = (
+    "https://docs.google.com/spreadsheets/d/"
+    "1fYv-rpOha_mvVn6-urlHKZh6sDM61J0YdCViFve0xH0/export?format=xlsx"
 )
 COMPAT_CSV = os.path.join(
     ROOT_DIR,
@@ -286,69 +292,90 @@ def find_header_row(sheet_root, shared_strings):
     return None, {}
 
 
-def load_compat_entries_xlsx():
-    with zipfile.ZipFile(COMPAT_XLSX, "r") as zf:
-        shared_strings = read_shared_strings(zf)
-        style_fill_ids = load_style_fill_ids(zf)
-        sheet1 = ET.fromstring(zf.read("xl/worksheets/sheet1.xml"))
-        sheet2 = ET.fromstring(zf.read("xl/worksheets/sheet2.xml"))
+def load_compat_entries_xlsx_zf(zf):
+    shared_strings = read_shared_strings(zf)
+    style_fill_ids = load_style_fill_ids(zf)
+    sheet1 = ET.fromstring(zf.read("xl/worksheets/sheet1.xml"))
+    sheet2 = ET.fromstring(zf.read("xl/worksheets/sheet2.xml"))
 
-        default_line = ""
-        for row in sheet1.findall(".//main:sheetData/main:row", XLSX_NS):
-            if row.get("r") == "1":
-                for cell in row.findall("main:c", XLSX_NS):
-                    if cell.get("r") == "A1":
-                        default_line = cell_value(cell, shared_strings).strip()
-                        break
-                break
-        defaults = parse_defaults(default_line)
-
-        playability_legend = parse_playability_legend(sheet2, shared_strings, style_fill_ids)
-        header_idx, headers = find_header_row(sheet1, shared_strings)
-        if header_idx is None:
-            raise SystemExit("Header row not found in compatibility list.")
-
-        col_game = headers.get("Game")
-        col_res = headers.get("Resolution")
-        col_backend = headers.get("Backend")
-        col_notes = headers.get("Notes")
-        col_playability = headers.get("Playability")
-
-        rows = sheet1.findall(".//main:sheetData/main:row", XLSX_NS)
-        entries = []
-        for row in rows[header_idx + 1 :]:
-            values = {}
-            styles = {}
+    default_line = ""
+    for row in sheet1.findall(".//main:sheetData/main:row", XLSX_NS):
+        if row.get("r") == "1":
             for cell in row.findall("main:c", XLSX_NS):
-                col = col_from_ref(cell.get("r"))
-                if col:
-                    values[col] = cell_value(cell, shared_strings).strip()
-                    styles[col] = cell.get("s")
+                if cell.get("r") == "A1":
+                    default_line = cell_value(cell, shared_strings).strip()
+                    break
+            break
+    defaults = parse_defaults(default_line)
 
-            game = values.get(col_game or "", "").strip()
-            if not game:
-                continue
+    playability_legend = parse_playability_legend(sheet2, shared_strings, style_fill_ids)
+    header_idx, headers = find_header_row(sheet1, shared_strings)
+    if header_idx is None:
+        raise SystemExit("Header row not found in compatibility list.")
 
-            playability = ""
-            if col_playability and col_playability in styles and styles[col_playability] is not None:
-                sidx = int(styles[col_playability])
-                fill_id = style_fill_ids[sidx] if sidx < len(style_fill_ids) else None
-                if fill_id is not None:
-                    playability = playability_legend.get(fill_id, "Unknown")
+    col_game = headers.get("Game")
+    col_res = headers.get("Resolution")
+    col_backend = headers.get("Backend")
+    col_notes = headers.get("Notes")
+    col_playability = headers.get("Playability")
 
-            entries.append(
-                {
-                    "Game": game,
-                    "Normalized": normalize_title(game),
-                    "Tokens": tokens_for_match(game),
-                    "Resolution": values.get(col_res or "", "").strip(),
-                    "Backend": values.get(col_backend or "", "").strip(),
-                    "Notes": values.get(col_notes or "", "").strip(),
-                    "Playability": playability,
-                }
-            )
+    rows = sheet1.findall(".//main:sheetData/main:row", XLSX_NS)
+    entries = []
+    for row in rows[header_idx + 1 :]:
+        values = {}
+        styles = {}
+        for cell in row.findall("main:c", XLSX_NS):
+            col = col_from_ref(cell.get("r"))
+            if col:
+                values[col] = cell_value(cell, shared_strings).strip()
+                styles[col] = cell.get("s")
+
+        game = values.get(col_game or "", "").strip()
+        if not game:
+            continue
+
+        playability = ""
+        if col_playability and col_playability in styles and styles[col_playability] is not None:
+            sidx = int(styles[col_playability])
+            fill_id = style_fill_ids[sidx] if sidx < len(style_fill_ids) else None
+            if fill_id is not None:
+                playability = playability_legend.get(fill_id, "Unknown")
+
+        entries.append(
+            {
+                "Game": game,
+                "Normalized": normalize_title(game),
+                "Tokens": tokens_for_match(game),
+                "Resolution": values.get(col_res or "", "").strip(),
+                "Backend": values.get(col_backend or "", "").strip(),
+                "Notes": values.get(col_notes or "", "").strip(),
+                "Playability": playability,
+            }
+        )
 
     return defaults, entries
+
+
+def load_compat_entries_xlsx_path(xlsx_path):
+    with zipfile.ZipFile(xlsx_path, "r") as zf:
+        return load_compat_entries_xlsx_zf(zf)
+
+
+def load_compat_entries_xlsx_bytes(xlsx_bytes):
+    with zipfile.ZipFile(io.BytesIO(xlsx_bytes), "r") as zf:
+        return load_compat_entries_xlsx_zf(zf)
+
+
+def download_compat_xlsx(url, timeout=20):
+    req = urllib.request.Request(url, headers={"User-Agent": "CrossMix-OS/ppsspp_setup"})
+    with urllib.request.urlopen(req, timeout=timeout) as response:
+        status = getattr(response, "status", None)
+        if status is not None and status >= 400:
+            raise RuntimeError(f"HTTP {status}")
+        data = response.read()
+    if not data.startswith(b"PK"):
+        raise RuntimeError("Downloaded file does not look like a .xlsx archive.")
+    return data
 
 
 def load_compat_entries_csv():
@@ -381,10 +408,22 @@ def load_compat_entries_csv():
 
 
 def load_compat_entries():
+    if COMPAT_REMOTE_URL:
+        try:
+            remote_bytes = download_compat_xlsx(COMPAT_REMOTE_URL)
+            result = load_compat_entries_xlsx_bytes(remote_bytes)
+            print(f"Compatibility list source: remote ({COMPAT_REMOTE_URL})")
+            return result
+        except (Exception, SystemExit) as exc:
+            print(f"Remote compatibility list unavailable ({exc}); using local files instead.")
     if os.path.isfile(COMPAT_XLSX):
-        return load_compat_entries_xlsx()
+        result = load_compat_entries_xlsx_path(COMPAT_XLSX)
+        print(f"Compatibility list source: local xlsx ({COMPAT_XLSX})")
+        return result
     if os.path.isfile(COMPAT_CSV):
-        return load_compat_entries_csv()
+        result = load_compat_entries_csv()
+        print(f"Compatibility list source: local csv ({COMPAT_CSV})")
+        return result
     raise SystemExit("Missing compatibility list (.xlsx or .csv).")
 
 
