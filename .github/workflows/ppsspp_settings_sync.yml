@@ -1,0 +1,95 @@
+name: Sync PSP Compatibility List
+
+on:
+  schedule:
+    - cron: "0 6 * * 5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-compat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download remote XLSX
+        id: compat
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          url="https://docs.google.com/spreadsheets/d/1fYv-rpOha_mvVn6-urlHKZh6sDM61J0YdCViFve0xH0/export?format=xlsx"
+          target="utils/ppsspp_setup/TRIMUI Smart Pro - PSP Compatibility List (CrossMix-OS).xlsx"
+          tmp="$(mktemp)"
+
+          curl -L --fail -o "$tmp" "$url"
+
+          python3 - <<'PY' "$tmp"
+          import sys
+          path = sys.argv[1]
+          with open(path, "rb") as f:
+              header = f.read(2)
+          if header != b"PK":
+              raise SystemExit("Downloaded file is not a valid XLSX (missing PK header).")
+          PY
+
+          remote_hash="$(sha256sum "$tmp" | awk '{print $1}')"
+          local_hash=""
+
+          if [ -f "$target" ]; then
+            local_hash="$(sha256sum "$target" | awk '{print $1}')"
+          fi
+
+          if [ "$remote_hash" = "$local_hash" ]; then
+            echo "No changes detected."
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mkdir -p "$(dirname "$target")"
+          mv "$tmp" "$target"
+          echo "updated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: steps.compat.outputs.updated == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Regenerate settings
+        if: steps.compat.outputs.updated == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          curl -L --fail -o utils/ppsspp_setup/psp_redump.csv \
+            "https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redump.csv"
+
+          python3 utils/ppsspp_setup/psp_game_ids_from_redump.py
+          python3 utils/ppsspp_setup/ppsspp_generate_settings_csv.py
+
+      - name: Create pull request
+        if: steps.compat.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Update PSP compatibility list"
+          title: "Update PSP compatibility list (XLSX sync)"
+          body: |
+            Summary
+            - Refreshed the local XLSX fallback from the Google Sheets export.
+            - Regenerated `ppsspp_game_settings.csv` from the updated sheet.
+
+            Notes
+            - Redump data is fetched from the upstream PPSSPP repo during regeneration.
+
+            Files
+            - `utils/ppsspp_setup/TRIMUI Smart Pro - PSP Compatibility List (CrossMix-OS).xlsx`
+            - `utils/ppsspp_setup/ppsspp_game_settings.csv`
+          branch: "automation/ppsspp-compat-sync"
+          delete-branch: true
