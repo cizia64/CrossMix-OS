@@ -65,18 +65,23 @@ fi
 
 REDUMP_URL="https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redump.csv"
 
+echo
 echo "Step 1/5: Downloading redump.csv..."
 curl -L -o "$SETUP_DIR/psp_redump.csv" "$REDUMP_URL" || exit 1
 
+echo
 echo "Step 2/5: Generating PSP game IDs..."
 "$PYTHON" "$SETUP_DIR/psp_game_ids_from_redump.py" || exit 1
 
+echo
 echo "Step 3/5: Generating PPSSPP settings CSV..."
 "$PYTHON" "$SETUP_DIR/ppsspp_generate_settings_csv.py" || exit 1
 
+echo
 echo "Step 4/5: Applying settings to PPSSPP installs..."
 "$PYTHON" "$SETUP_DIR/ppsspp_apply_game_settings.py" || exit 1
 
+echo
 echo "Step 5/5: Updating PPSSPP configs..."
 if [ -d "$ROOT_DIR/Emus/PSP" ]; then
   for ppsspp_dir in "$ROOT_DIR/Emus/PSP"/PPSSPP_*; do
