@@ -1,2 +1,3 @@
 # Ignore CSV files generated via PPSSPP setup
 utils/ppsspp_setup/*.csv
+!utils/ppsspp_setup/ppsspp_game_settings.csv
