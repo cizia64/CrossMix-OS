@@ -25,6 +25,35 @@ if [ ! -d "$ROOT_DIR/Emus" ]; then
   exit 1
 fi
 
+download_file() {
+  url="$1"
+  out="$2"
+  curl_bin=""
+  wget_bin=""
+
+  if command -v wget >/dev/null 2>&1; then
+    wget_bin="wget"
+  elif [ -x "$ROOT_DIR/System/bin/wget" ]; then
+    wget_bin="$ROOT_DIR/System/bin/wget"
+  fi
+
+  if command -v curl >/dev/null 2>&1; then
+    curl_bin="curl"
+  elif [ -x "$ROOT_DIR/System/bin/curl-aarch64" ]; then
+    curl_bin="$ROOT_DIR/System/bin/curl-aarch64"
+  fi
+
+  if [ -n "$wget_bin" ]; then
+    "$wget_bin" --no-check-certificate -O "$out" "$url"
+    return $?
+  fi
+  if [ -n "$curl_bin" ]; then
+    "$curl_bin" -k -L -o "$out" "$url"
+    return $?
+  fi
+  return 127
+}
+
 ROM_DIR="$ROOT_DIR/Roms/PSP"
 if [ ! -d "$ROM_DIR" ]; then
   echo "Missing ROM folder: $ROM_DIR"
@@ -37,11 +66,6 @@ if [ "$ROM_DIR" != "$DEVICE_ROM_DIR" ]; then
   UPDATE_CURRENT_DIR=0
 else
   UPDATE_CURRENT_DIR=1
-fi
-
-if ! command -v curl >/dev/null 2>&1; then
-  echo "curl not found."
-  exit 1
 fi
 
 find_python() {
@@ -67,7 +91,14 @@ REDUMP_URL="https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redu
 
 echo
 echo "Step 1/5: Downloading redump.csv..."
-curl -L -o "$SETUP_DIR/psp_redump.csv" "$REDUMP_URL" || exit 1
+if ! download_file "$REDUMP_URL" "$SETUP_DIR/psp_redump.csv"; then
+  if [ -s "$SETUP_DIR/psp_redump.csv" ]; then
+    echo "Download failed; using existing psp_redump.csv."
+  else
+    echo "Download failed and no cached psp_redump.csv is available."
+    exit 1
+  fi
+fi
 
 echo
 echo "Step 2/5: Generating PSP game IDs..."
