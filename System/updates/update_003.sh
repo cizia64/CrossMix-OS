@@ -22,10 +22,14 @@ echo "- $UPDATE_DIR"
 echo "- $UPDATE_ID"
 
 # CONTENT
-HOSTNAME="$(hostname 2>/dev/null || echo "")"
-HOST_UPPER="$(printf '%s' "$HOSTNAME" | tr '[:lower:]' '[:upper:]')"
-if [ "$HOST_UPPER" != "TSP" ]; then
-    echo "Skipping PPSSPP setup: hostname is '$HOSTNAME', expected 'TSP'."
+DEVICE_FILE="/etc/trimui_device.txt"
+DEVICE_ID=""
+if [ -f "$DEVICE_FILE" ]; then
+    DEVICE_ID="$(tr '[:upper:]' '[:lower:]' < "$DEVICE_FILE" | tr -d '\r\n')"
+fi
+
+if [ "$DEVICE_ID" != "tsp" ]; then
+    echo "Skipping PPSSPP setup: device is '$DEVICE_ID', expected 'tsp'."
 else
     echo "Starting PPSSPP setup..."
     UTILS_DIR="/mnt/SDCARD/utils"
