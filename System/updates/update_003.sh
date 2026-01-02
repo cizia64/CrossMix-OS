@@ -43,6 +43,12 @@ else
         else
             (cd "$UTILS_DIR" && sh "$SETUP_SCRIPT")
         fi
+
+        # Check the exit status of the setup script
+        setup_status=$?
+        if [ "$setup_status" -ne 0 ]; then
+            echo "PPSSPP setup failed with status $setup_status."
+        fi
     fi
 fi
 
