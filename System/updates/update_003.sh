@@ -32,16 +32,16 @@ if [ "$DEVICE_ID" != "tsp" ]; then
     echo "Skipping PPSSPP setup: device is '$DEVICE_ID', expected 'tsp'."
 else
     echo "Starting PPSSPP setup..."
-    UTILS_DIR="/mnt/SDCARD/utils"
-    SETUP_SCRIPT="$UTILS_DIR/ppsspp_setup.sh"
+    SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
+    SETUP_SCRIPT="$SETUP_DIR/ppsspp_setup.sh"
     if [ ! -f "$SETUP_SCRIPT" ]; then
         echo "PPSSPP setup script not found: $SETUP_SCRIPT"
     else
         echo "Launching PPSSPP setup..."
         if command -v bash >/dev/null 2>&1; then
-            (cd "$UTILS_DIR" && bash "$SETUP_SCRIPT")
+            (cd "$SETUP_DIR" && bash "$SETUP_SCRIPT")
         else
-            (cd "$UTILS_DIR" && sh "$SETUP_SCRIPT")
+            (cd "$SETUP_DIR" && sh "$SETUP_SCRIPT")
         fi
 
         # Check the exit status of the setup script

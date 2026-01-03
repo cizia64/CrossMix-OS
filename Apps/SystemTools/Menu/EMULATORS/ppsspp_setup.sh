@@ -2,7 +2,7 @@
 set -u
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SETUP_DIR="$SCRIPT_DIR/ppsspp_setup"
+SETUP_DIR="$SCRIPT_DIR/.ppsspp_setup"
 
 if [ ! -d "$SETUP_DIR" ]; then
   echo "Missing setup directory: $SETUP_DIR"
