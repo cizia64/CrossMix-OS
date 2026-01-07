@@ -34,7 +34,7 @@ def main() -> None:
         "w", encoding="utf-8", newline=""
     ) as f_out:
         reader = csv.DictReader(f_in)
-        writer = csv.writer(f_out)
+        writer = csv.writer(f_out, lineterminator="\n")
         writer.writerow(["title_id", "title", "region", "category"])
 
         for row in reader:
