@@ -62,12 +62,17 @@ if [ ! -d "$ROM_DIR" ]; then
 fi
 
 DEVICE_ROM_DIR="/mnt/SDCARD/Roms/PSP"
-if [ "$ROM_DIR" != "$DEVICE_ROM_DIR" ]; then
-  echo "Skipping CurrentDirectory update (expected $DEVICE_ROM_DIR, got $ROM_DIR)."
-  UPDATE_CURRENT_DIR=0
+ALT_ROM_DIR="$ROOT_DIR/Roms/PSP"
+CURRENT_DIR=""
+if [ -d "$DEVICE_ROM_DIR" ]; then
+  CURRENT_DIR="$DEVICE_ROM_DIR"
+elif [ -d "$ALT_ROM_DIR" ]; then
+  CURRENT_DIR="$ALT_ROM_DIR"
 else
-  UPDATE_CURRENT_DIR=1
+  echo "Could not locate PSP ROMs directory."
+  exit 1
 fi
+echo "ROMs directory found in $CURRENT_DIR"
 
 find_python() {
   host_python3="$(command -v python3 || true)"
@@ -124,8 +129,8 @@ if [ -d "$ROOT_DIR/Emus/PSP" ]; then
 
     mkdir -p "$system_dir"
 
-    if [ -f "$ini" ] && [ "$UPDATE_CURRENT_DIR" -eq 1 ]; then
-      "$PYTHON" - "$ini" "$ROM_DIR" <<'PYCODE'
+    if [ -f "$ini" ]; then
+      "$PYTHON" - "$ini" "$CURRENT_DIR" <<'PYCODE'
 import sys
 from pathlib import Path
 
