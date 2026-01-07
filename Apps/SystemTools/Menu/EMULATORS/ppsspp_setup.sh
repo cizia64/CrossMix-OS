@@ -19,6 +19,7 @@ for _ in 1 2 3 4 5 6; do
   fi
   ROOT_DIR="$(dirname "$ROOT_DIR")"
 done
+echo "Root directory: $ROOT_DIR"
 
 if [ ! -d "$ROOT_DIR/Emus" ]; then
   echo "Could not locate SD root (missing Emus folder)."
