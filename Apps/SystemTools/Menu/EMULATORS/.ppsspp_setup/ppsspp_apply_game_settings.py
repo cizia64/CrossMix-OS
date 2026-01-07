@@ -43,13 +43,17 @@ def best_game_row(game_rows, title):
 
 def resolve_root(script_dir: Path) -> Path:
     root = script_dir
+    emus_root = None
     for _ in range(6):
-        if (root / "Emus").is_dir() or (root / "Apps").is_dir() or (root / "RetroArch").is_dir():
-            return root
+        if (root / "Emus").is_dir():
+            if emus_root is None:
+                emus_root = root
+            if (root / "Roms").is_dir():
+                return root
         if root.parent == root:
             break
         root = root.parent
-    return script_dir
+    return emus_root or script_dir
 
 
 def main() -> int:
