@@ -26,6 +26,14 @@ if [ ! -d "$ROOT_DIR/Emus" ]; then
   exit 1
 fi
 
+INFOSCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
+show_step() {
+  message="$1"
+  if [ -x "$INFOSCREEN" ]; then
+    "$INFOSCREEN" -m "$message" -t 1
+  fi
+}
+
 download_file() {
   url="$1"
   out="$2"
@@ -97,6 +105,7 @@ REDUMP_URL="https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redu
 
 echo
 echo "Step 1/5: Downloading redump.csv..."
+show_step "Step 1/5: Downloading redump.csv..."
 if ! download_file "$REDUMP_URL" "$SETUP_DIR/psp_redump.csv"; then
   if [ -s "$SETUP_DIR/psp_redump.csv" ]; then
     echo "Download failed; using existing psp_redump.csv."
@@ -108,18 +117,22 @@ fi
 
 echo
 echo "Step 2/5: Generating PSP game IDs..."
+show_step "Step 2/5: Generating PSP game IDs..."
 "$PYTHON" "$SETUP_DIR/psp_game_ids_from_redump.py" || exit 1
 
 echo
 echo "Step 3/5: Generating PPSSPP settings CSV..."
+show_step "Step 3/5: Generating PPSSPP settings CSV..."
 "$PYTHON" "$SETUP_DIR/ppsspp_generate_settings_csv.py" || exit 1
 
 echo
 echo "Step 4/5: Applying settings to PPSSPP installs..."
+show_step "Step 4/5: Applying settings to PPSSPP installs..."
 "$PYTHON" "$SETUP_DIR/ppsspp_apply_game_settings.py" || exit 1
 
 echo
 echo "Step 5/5: Updating PPSSPP configs..."
+show_step "Step 5/5: Updating PPSSPP configs..."
 if [ -d "$ROOT_DIR/Emus/PSP" ]; then
   for ppsspp_dir in "$ROOT_DIR/Emus/PSP"/PPSSPP_*; do
     [ -d "$ppsspp_dir" ] || continue
