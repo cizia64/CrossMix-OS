@@ -4,9 +4,29 @@ set -u
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 SETUP_DIR="$SCRIPT_DIR/.ppsspp_setup"
 
+INFOSCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
+show_step() {
+  message="$1"
+  if [ -x "$INFOSCREEN" ]; then
+    "$INFOSCREEN" -m "$message" -t 1
+  fi
+}
+show_error() {
+  message="$1"
+  echo "ERROR: $message" >&2
+  if [ -x "$INFOSCREEN" ]; then
+    "$INFOSCREEN" -m "$message" -c red -t 4
+  fi
+}
+die() {
+  message="$1"
+  code="${2:-1}"
+  show_error "$message"
+  exit "$code"
+}
+
 if [ ! -d "$SETUP_DIR" ]; then
-  echo "Missing setup directory: $SETUP_DIR"
-  exit 1
+  die "Missing setup directory: $SETUP_DIR"
 fi
 
 ROOT_DIR="$SCRIPT_DIR"
@@ -22,17 +42,8 @@ done
 echo "Root directory: $ROOT_DIR"
 
 if [ ! -d "$ROOT_DIR/Emus" ]; then
-  echo "Could not locate SD root (missing Emus folder)."
-  exit 1
+  die "Could not locate SD root (missing Emus folder)."
 fi
-
-INFOSCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
-show_step() {
-  message="$1"
-  if [ -x "$INFOSCREEN" ]; then
-    "$INFOSCREEN" -m "$message" -t 1
-  fi
-}
 
 download_file() {
   url="$1"
@@ -65,8 +76,7 @@ download_file() {
 
 ROM_DIR="$ROOT_DIR/Roms/PSP"
 if [ ! -d "$ROM_DIR" ]; then
-  echo "Missing ROM folder: $ROM_DIR"
-  exit 1
+  die "Missing ROM folder: $ROM_DIR"
 fi
 
 DEVICE_ROM_DIR="/mnt/SDCARD/Roms/PSP"
@@ -77,8 +87,7 @@ if [ -d "$DEVICE_ROM_DIR" ]; then
 elif [ -d "$ALT_ROM_DIR" ]; then
   CURRENT_DIR="$ALT_ROM_DIR"
 else
-  echo "Could not locate PSP ROMs directory."
-  exit 1
+  die "Could not locate PSP ROMs directory."
 fi
 echo "ROMs directory found in $CURRENT_DIR"
 
@@ -97,8 +106,7 @@ find_python() {
 
 PYTHON="$(find_python || true)"
 if [ -z "$PYTHON" ]; then
-  echo "Python not found."
-  exit 1
+  die "Python not found."
 fi
 
 REDUMP_URL="https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redump.csv"
@@ -110,25 +118,30 @@ if ! download_file "$REDUMP_URL" "$SETUP_DIR/psp_redump.csv"; then
   if [ -s "$SETUP_DIR/psp_redump.csv" ]; then
     echo "Download failed; using existing psp_redump.csv."
   else
-    echo "Download failed and no cached psp_redump.csv is available."
-    exit 1
+    die "Download failed and no cached psp_redump.csv is available."
   fi
 fi
 
 echo
 echo "Step 2/5: Generating PSP game IDs..."
 show_step "Step 2/5: Generating PSP game IDs..."
-"$PYTHON" "$SETUP_DIR/psp_game_ids_from_redump.py" || exit 1
+if ! "$PYTHON" "$SETUP_DIR/psp_game_ids_from_redump.py"; then
+  die "Step 2/5 failed: could not generate PSP game IDs."
+fi
 
 echo
 echo "Step 3/5: Generating PPSSPP settings CSV..."
 show_step "Step 3/5: Generating PPSSPP settings CSV..."
-"$PYTHON" "$SETUP_DIR/ppsspp_generate_settings_csv.py" || exit 1
+if ! "$PYTHON" "$SETUP_DIR/ppsspp_generate_settings_csv.py"; then
+  die "Step 3/5 failed: could not generate PPSSPP settings CSV."
+fi
 
 echo
 echo "Step 4/5: Applying settings to PPSSPP installs..."
 show_step "Step 4/5: Applying settings to PPSSPP installs..."
-"$PYTHON" "$SETUP_DIR/ppsspp_apply_game_settings.py" || exit 1
+if ! "$PYTHON" "$SETUP_DIR/ppsspp_apply_game_settings.py"; then
+  die "Step 4/5 failed: could not apply PPSSPP game settings."
+fi
 
 echo
 echo "Step 5/5: Updating PPSSPP configs..."
