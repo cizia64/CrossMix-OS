@@ -33,7 +33,7 @@ if [ "$DEVICE_ID" != "tsp" ]; then
 else
     echo "Starting PPSSPP setup..."
     SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
-    SETUP_SCRIPT="$SETUP_DIR/ppsspp_setup.sh"
+    SETUP_SCRIPT="$SETUP_DIR/Optimize PPSSPP Settings.sh"
     if [ ! -f "$SETUP_SCRIPT" ]; then
         echo "PPSSPP setup script not found: $SETUP_SCRIPT"
     else
