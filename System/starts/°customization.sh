@@ -15,6 +15,58 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 ################ CrossMix-OS internal storage Customization ################
 FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
 
+PPSSPP_SETUP_MARKER="/etc/ppsspp_setup_done"
+run_ppsspp_setup() {
+    if [ -f "$PPSSPP_SETUP_MARKER" ]; then
+        return
+    fi
+
+    DEVICE_FILE="/etc/trimui_device.txt"
+    DEVICE_ID=""
+    if [ -f "$DEVICE_FILE" ]; then
+        DEVICE_ID="$(tr '[:upper:]' '[:lower:]' < "$DEVICE_FILE" | tr -d '\r\n')"
+    fi
+    if [ "$DEVICE_ID" != "tsp" ]; then
+        echo "Skipping PPSSPP setup: device is '$DEVICE_ID', expected 'tsp'."
+        return
+    fi
+
+    SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
+    SETUP_SCRIPT="$SETUP_DIR/Optimize PPSSPP Settings.sh"
+    INFO_SCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
+
+    if [ -x "$INFO_SCREEN" ]; then
+        "$INFO_SCREEN" -m "Optimizing PPSSPP settings..." -t 1
+    fi
+
+    if [ ! -f "$SETUP_SCRIPT" ]; then
+        echo "PPSSPP setup script not found: $SETUP_SCRIPT"
+        if [ -x "$INFO_SCREEN" ]; then
+            "$INFO_SCREEN" -m "PPSSPP setup script not found." -c red -t 3
+        fi
+        return
+    fi
+
+    if command -v bash >/dev/null 2>&1; then
+        (cd "$SETUP_DIR" && bash "$SETUP_SCRIPT")
+    else
+        (cd "$SETUP_DIR" && sh "$SETUP_SCRIPT")
+    fi
+
+    setup_status=$?
+    if [ "$setup_status" -ne 0 ]; then
+        echo "PPSSPP setup failed with status $setup_status."
+        if [ -x "$INFO_SCREEN" ]; then
+            "$INFO_SCREEN" -m "PPSSPP setup failed." -c red -t 3
+        fi
+        return
+    fi
+
+    touch "$PPSSPP_SETUP_MARKER"
+}
+
+inputd_ran=0
+
 if [ "$version" != "$FW_patched_version" ]; then
 
     if [ -f "/usr/trimui/crossmix-version.txt" ]; then
@@ -26,37 +78,8 @@ if [ "$version" != "$FW_patched_version" ]; then
     Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
 
     /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
-
-    # Apply PPSSPP per-game settings
-    DEVICE_FILE="/etc/trimui_device.txt"
-    DEVICE_ID=""
-    if [ -f "$DEVICE_FILE" ]; then
-        DEVICE_ID="$(tr '[:upper:]' '[:lower:]' < "$DEVICE_FILE" | tr -d '\r\n')"
-    fi
-
-    # Apply PPSSPP optimizations only on TSP devices
-    if [ "$DEVICE_ID" = "tsp" ]; then
-        SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
-        SETUP_SCRIPT="$SETUP_DIR/Optimize PPSSPP Settings.sh"
-        INFO_SCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
-
-        if [ -x "$INFO_SCREEN" ]; then
-            "$INFO_SCREEN" -m "Optimizing PPSSPP settings..." -t 1
-        fi
-
-        if [ -f "$SETUP_SCRIPT" ]; then
-            if command -v bash >/dev/null 2>&1; then
-                (cd "$SETUP_DIR" && bash "$SETUP_SCRIPT")
-            else
-                (cd "$SETUP_DIR" && sh "$SETUP_SCRIPT")
-            fi
-        else
-            echo "PPSSPP setup script not found: $SETUP_SCRIPT"
-            if [ -x "$INFO_SCREEN" ]; then
-                "$INFO_SCREEN" -m "PPSSPP setup script not found." -c red -t 3
-            fi
-        fi
-    fi
+    inputd_ran=1
+    run_ppsspp_setup
 
     # Removing duplicated app
     rm -rf /usr/trimui/apps/zformatter_fat32/
@@ -224,6 +247,11 @@ if [ "$version" != "$FW_patched_version" ]; then
 
         "/mnt/SDCARD/Emus/_BootLogo/launch.sh" "$src_dir/- CrossMix-OS.bmp"
     fi
+fi
+
+if [ ! -f "$PPSSPP_SETUP_MARKER" ] && [ "$inputd_ran" -eq 0 ]; then
+    /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
+    run_ppsspp_setup
 fi
 
 ######################### CrossMix-OS at each boot #########################
