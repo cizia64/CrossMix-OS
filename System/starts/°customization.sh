@@ -27,6 +27,37 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
 
+    # Apply PPSSPP per-game settings
+    DEVICE_FILE="/etc/trimui_device.txt"
+    DEVICE_ID=""
+    if [ -f "$DEVICE_FILE" ]; then
+        DEVICE_ID="$(tr '[:upper:]' '[:lower:]' < "$DEVICE_FILE" | tr -d '\r\n')"
+    fi
+
+    # Apply PPSSPP optimizations only on TSP devices
+    if [ "$DEVICE_ID" = "tsp" ]; then
+        SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
+        SETUP_SCRIPT="$SETUP_DIR/Optimize PPSSPP Settings.sh"
+        INFO_SCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
+
+        if [ -x "$INFO_SCREEN" ]; then
+            "$INFO_SCREEN" -m "Optimizing PPSSPP settings..." -t 1
+        fi
+
+        if [ -f "$SETUP_SCRIPT" ]; then
+            if command -v bash >/dev/null 2>&1; then
+                (cd "$SETUP_DIR" && bash "$SETUP_SCRIPT")
+            else
+                (cd "$SETUP_DIR" && sh "$SETUP_SCRIPT")
+            fi
+        else
+            echo "PPSSPP setup script not found: $SETUP_SCRIPT"
+            if [ -x "$INFO_SCREEN" ]; then
+                "$INFO_SCREEN" -m "PPSSPP setup script not found." -c red -t 3
+            fi
+        fi
+    fi
+
     # Removing duplicated app
     rm -rf /usr/trimui/apps/zformatter_fat32/
 
@@ -115,7 +146,7 @@ if [ "$version" != "$FW_patched_version" ]; then
     # Upgrade the stock OSD
     cp -a /mnt/SDCARD/System/usr/trimui/res/osd/. /usr/trimui/osd/
     find /usr/trimui/osd/ -type f -name "*" -exec chmod a+x {} \;
-    
+
     # Customize SSH sessions
     if ! grep -q "SSH_CONNECTION" /etc/profile; then
         printf '\n\n[ -n "$SSH_CONNECTION" ] || [ -n "$SSH_CLIENT" ] && . /mnt/SDCARD/System/usr/trimui/scripts/ssh_profile.sh\n' >> /etc/profile
