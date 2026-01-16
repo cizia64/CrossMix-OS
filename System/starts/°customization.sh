@@ -16,6 +16,35 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
 
 PPSSPP_SETUP_MARKER="/mnt/SDCARD/System/etc/ppsspp_setup_done"
+show_ppsspp_notice() {
+    message="$1"
+    color="${2:-}"
+    info_screen="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
+    if [ -x "$info_screen" ] && [ ! -f "/tmp/infoscreen_disabled" ]; then
+        if [ -n "$color" ]; then
+            "$info_screen" -m "$message" -c "$color" -t 2
+        else
+            "$info_screen" -m "$message" -t 2
+        fi
+        return
+    fi
+    if [ -x "/mnt/SDCARD/System/bin/sdl2imgshow" ] \
+        && [ -f "/mnt/SDCARD/System/resources/background.png" ] \
+        && [ -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" ]; then
+        if [ -z "$color" ]; then
+            color="0,0,0"
+        fi
+        /mnt/SDCARD/System/bin/sdl2imgshow \
+            -i "/mnt/SDCARD/System/resources/background.png" \
+            -f "/mnt/SDCARD/System/resources/DejaVuSans.ttf" \
+            -s 48 \
+            -c "$color" \
+            -t "$message" &
+        sleep 2
+        pkill -f sdl2imgshow >/dev/null 2>&1 || true
+    fi
+}
+
 run_ppsspp_setup() {
     if [ -f "$PPSSPP_SETUP_MARKER" ]; then
         return
@@ -33,17 +62,11 @@ run_ppsspp_setup() {
 
     SETUP_DIR="/mnt/SDCARD/Apps/SystemTools/Menu/EMULATORS"
     SETUP_SCRIPT="$SETUP_DIR/Optimize PPSSPP Settings.sh"
-    INFO_SCREEN="/mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh"
-
-    if [ -x "$INFO_SCREEN" ]; then
-        "$INFO_SCREEN" -m "Optimizing PPSSPP settings..." -t 1
-    fi
+    show_ppsspp_notice "Optimizing PPSSPP settings..."
 
     if [ ! -f "$SETUP_SCRIPT" ]; then
         echo "PPSSPP setup script not found: $SETUP_SCRIPT"
-        if [ -x "$INFO_SCREEN" ]; then
-            "$INFO_SCREEN" -m "PPSSPP setup script not found." -c red -t 3
-        fi
+        show_ppsspp_notice "PPSSPP setup script not found." "red"
         return
     fi
 
@@ -56,9 +79,7 @@ run_ppsspp_setup() {
     setup_status=$?
     if [ "$setup_status" -ne 0 ]; then
         echo "PPSSPP setup failed with status $setup_status."
-        if [ -x "$INFO_SCREEN" ]; then
-            "$INFO_SCREEN" -m "PPSSPP setup failed." -c red -t 3
-        fi
+        show_ppsspp_notice "PPSSPP setup failed." "red"
         return
     fi
 
