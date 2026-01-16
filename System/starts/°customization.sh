@@ -101,6 +101,9 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
     inputd_ran=1
+    if [ -f /tmp/device_changed ]; then
+        rm -f /tmp/device_changed
+    fi
     run_ppsspp_setup
 
     # Removing duplicated app
@@ -273,6 +276,9 @@ fi
 
 if [ ! -f "$PPSSPP_SETUP_MARKER" ] && [ "$inputd_ran" -eq 0 ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/inputd_switcher.sh
+    if [ -f /tmp/device_changed ]; then
+        rm -f /tmp/device_changed
+    fi
     run_ppsspp_setup
 fi
 
