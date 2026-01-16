@@ -15,7 +15,7 @@ version=$(cat /mnt/SDCARD/System/usr/trimui/crossmix-version.txt)
 ################ CrossMix-OS internal storage Customization ################
 FW_patched_version=$(cat /usr/trimui/crossmix-version.txt)
 
-PPSSPP_SETUP_MARKER="/etc/ppsspp_setup_done"
+PPSSPP_SETUP_MARKER="/mnt/SDCARD/System/etc/ppsspp_setup_done"
 run_ppsspp_setup() {
     if [ -f "$PPSSPP_SETUP_MARKER" ]; then
         return
@@ -62,6 +62,7 @@ run_ppsspp_setup() {
         return
     fi
 
+    mkdir -p "$(dirname "$PPSSPP_SETUP_MARKER")"
     touch "$PPSSPP_SETUP_MARKER"
 }
 
