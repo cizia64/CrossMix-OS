@@ -112,40 +112,40 @@ fi
 REDUMP_URL="https://raw.githubusercontent.com/hrydgard/ppsspp/master/assets/redump.csv"
 
 echo
-echo "Step 1/5: Downloading redump.csv..."
-show_step "Step 1/5: Downloading redump.csv..."
+echo "Step 1/5: Fetching PSP games database..."
+show_step "Step 1/5: Fetching PSP games database..."
 if ! download_file "$REDUMP_URL" "$SETUP_DIR/psp_redump.csv"; then
   if [ -s "$SETUP_DIR/psp_redump.csv" ]; then
-    echo "Download failed; using existing psp_redump.csv."
+    echo "Download failed; using local CSV fallback."
   else
-    die "Download failed and no cached psp_redump.csv is available."
+    die "Download failed and no local CSV fallback has been found."
   fi
 fi
 
 echo
-echo "Step 2/5: Generating PSP game IDs..."
-show_step "Step 2/5: Generating PSP game IDs..."
+echo "Step 2/5: Building PSP game ID list..."
+show_step "Step 2/5: Building PSP game ID list..."
 if ! "$PYTHON" "$SETUP_DIR/psp_game_ids_from_redump.py"; then
   die "Step 2/5 failed: could not generate PSP game IDs."
 fi
 
 echo
-echo "Step 3/5: Generating PPSSPP settings CSV..."
-show_step "Step 3/5: Generating PPSSPP settings CSV..."
+echo "Step 3/5: Building PPSSPP per-game settings..."
+show_step "Step 3/5: Building PPSSPP per-game settings..."
 if ! "$PYTHON" "$SETUP_DIR/ppsspp_generate_settings_csv.py"; then
   die "Step 3/5 failed: could not generate PPSSPP settings CSV."
 fi
 
 echo
-echo "Step 4/5: Applying settings to PPSSPP installs..."
-show_step "Step 4/5: Applying settings to PPSSPP installs..."
+echo "Step 4/5: Writing per-game configs to PPSSPP..."
+show_step "Step 4/5: Writing per-game configs to PPSSPP..."
 if ! "$PYTHON" "$SETUP_DIR/ppsspp_apply_game_settings.py"; then
   die "Step 4/5 failed: could not apply PPSSPP game settings."
 fi
 
 echo
-echo "Step 5/5: Updating PPSSPP configs..."
-show_step "Step 5/5: Updating PPSSPP configs..."
+echo "Step 5/5: Updating PPSSPP ROM path..."
+show_step "Step 5/5: Updating PPSSPP ROM path..."
 if [ -d "$ROOT_DIR/Emus/PSP" ]; then
   for ppsspp_dir in "$ROOT_DIR/Emus/PSP"/PPSSPP_*; do
     [ -d "$ppsspp_dir" ] || continue
