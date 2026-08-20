@@ -66,5 +66,5 @@ cpufreq.sh performance 6 7 4
 
 esac
 
-./show_info_msg.sh "Preset: $Cur_Preset"
+# ./show_info_msg.sh "Preset: $Cur_Preset"
 echo -n "$Cur_Preset" > "$curpreset_file" 

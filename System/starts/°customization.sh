@@ -226,4 +226,11 @@ if [ -f "/tmp/device_changed" ]; then
     latest_file=$(echo "$files" | sort -V | tail -n 1)
     cp "$latest_file" "/mnt/SDCARD/RetroArch/ra64.trimui"
 
+    # OSD customization
+    cp /mnt/SDCARD/System/usr/trimui/res/osd/osdlayout_${current_device}.json /usr/trimui/osd/osdlayout.json
+    # OSD binaries
+    chmod a+x /usr/trimui/osd/trimui_osdd
+    cp /mnt/SDCARD/System/usr/trimui/osd/cpuinfo_osdd_${current_device}   /mnt/SDCARD/System/usr/trimui/osd/cpuinfo_osdd
+    cp /mnt/SDCARD/System/usr/trimui/osd/nightmode_osdd_${current_device} /mnt/SDCARD/System/usr/trimui/osd/nightmode_osdd
+
 fi

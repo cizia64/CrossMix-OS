@@ -1,0 +1,16 @@
+{
+    "type":"stepper",
+    "package":"com.trimui.osd.stepper.cpu_preset",
+    "label":"CPU preset",
+    "label.ch.lang":"CPU 频率",
+    "gridwidth":2,
+    "gridheight":1,
+    "icon0":"icon-cpu.png",
+    "stepiconlist":["cpu-notset.png", "cpu-eco.png", "cpu-dyn.png", "cpu-perf.png"],
+    "minstep":0,
+    "maxstep":3,
+    "launch":"set.sh",
+    "update":"set.sh",
+    "status":"/tmp/trimui_osd/slider_cpu_preset/status",
+    "description":""
+}
