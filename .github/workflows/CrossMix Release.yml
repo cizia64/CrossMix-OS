@@ -47,12 +47,16 @@ jobs:
         run: |
           shopt -s dotglob
           cd /home/runner/work/CrossMix-OS/CrossMix-OS
-          zip -r "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip" ./*
+          # Use zip with -s option to split the archive into multiple volumes
+          # Create a 2GB (2000m) split zip file
+          zip -r -s 2000m "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip" ./*
       - name: Create Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           title: "CrossMix-OS v${{ env.BUILD_VERSION }}"
           prerelease: false
-          files: "/home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip"
+          files: |
+            /home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.zip
+            /home/runner/work/CrossMix-OS/CrossMix-OS_v${{ env.BUILD_VERSION }}.z01
           draft: true
