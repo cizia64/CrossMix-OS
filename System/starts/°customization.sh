@@ -67,6 +67,10 @@ if [ "$version" != "$FW_patched_version" ]; then
         cp "/mnt/SDCARD/trimui/res/lang/"*.png "/usr/trimui/res/skin/"
     fi
 
+    # patching language files for MainUI device specific texts
+    source /mnt/SDCARD/System/etc/ex_config # required to initialize python3 environment for lang_patches.sh
+    /mnt/SDCARD/System/usr/trimui/scripts/lang_patches.sh "$current_device"
+
     # custom shutdown script for "Resume at Boot"
     cp "/mnt/SDCARD/System/usr/trimui/bin/kill_apps.sh" "/usr/trimui/bin/kill_apps.sh"
     chmod a+x "/usr/trimui/bin/kill_apps.sh"
@@ -91,39 +95,51 @@ if [ "$version" != "$FW_patched_version" ]; then
     CrossMixSourceDir="/mnt/SDCARD/System/usr/trimui/res/apps/fn_editor"
     FWappDir="/usr/trimui/apps/fn_editor"
     FWsceneDir="/usr/trimui/scene"
+    fnkeysDir="/usr/trimui/fnkeys"
 
     mkdir -p "$FWappDir" "$FWsceneDir"
 
+    copy_file() {
+        src=$1
+        dest=$2
+
+        if cp "$src" "$dest"; then
+            chmod a+x "$dest"
+            echo "$(basename "$src") -> $dest"
+        fi
+    }
+
+    # Always install applications
     for src in "$CrossMixSourceDir"/*; do
         filename=$(basename "$src")
-        app_dest="$FWappDir/$filename"
-        scene_dest="$FWsceneDir/$filename"
 
-        # Always copy to the apps directory
-        if cp "$src" "$app_dest"; then
-            echo "$filename copied to $FWappDir"
-            chmod a+x "$app_dest"
-        fi
+        copy_file "$src" "$FWappDir/$filename"
 
-        # Conditional copy to the scene directory (update enabled scene scripts)
         if [ "$CrossMix_Update" = "1" ]; then
-            if [ -f "$scene_dest" ]; then
-                if cp "$src" "$scene_dest"; then
-                    echo "$filename copied to $FWsceneDir"
-                    chmod a+x "$scene_dest"
-                fi
-            fi
+            [ -f "$FWsceneDir/$filename" ] &&
+                copy_file "$src" "$FWsceneDir/$filename"
+
+            [ -f "$fnkeysDir/$filename" ] &&
+                copy_file "$src" "$fnkeysDir/$filename"
         fi
     done
 
-    # On fresh install, always set the default FN function to CPU performance
-    if [ ! "$CrossMix_Update" = "1" ]; then
-        src="$CrossMixSourceDir/com.trimui.cpuperformance.sh"
-        dest="$FWsceneDir/com.trimui.cpuperformance.sh"
-        if cp "$src" "$dest"; then
-            echo "com.trimui.cpuperformance.sh copied to $FWsceneDir"
-            chmod a+x "$dest"
-        fi
+    # Fresh install: install default FN functions
+    if [ "$CrossMix_Update" != "1" ]; then
+        case "$current_device" in
+        tsp | tsps)
+            copy_file "$CrossMixSourceDir/com.trimui.cpuperformance.sh" "$FWsceneDir/com.trimui.cpuperformance.sh"
+            ;;
+
+        brick | brickpro)
+            copy_file "$CrossMixSourceDir/com.crossmix.nightmode.sh" "$FWsceneDir/com.crossmix.nightmode.sh"
+            copy_file "$FWappDir/com.trimui.ledc.sh" "$FWsceneDir/com.trimui.ledc.sh"
+            copy_file "$CrossMixSourceDir/com.trimui.switch.cpufreq.sh" "$fnkeysDir/com.trimui.switch.cpufreq.sh"
+            copy_file "$CrossMixSourceDir/com.trimui.switch.backlight.sh" "$fnkeysDir/com.trimui.switch.backlight.sh"
+            copy_file "$CrossMixSourceDir/f1key.json" "$fnkeysDir/f1key.json"
+            copy_file "$CrossMixSourceDir/f2key.json" "$fnkeysDir/f2key.json"
+            ;;
+        esac
     fi
 
     # Upgrade the stock OSD
@@ -150,6 +166,7 @@ if [ "$version" != "$FW_patched_version" ]; then
                 /usr/trimui/bin/systemval theme "/mnt/SDCARD/Themes/CrossMix - OS/"
                 /usr/trimui/bin/systemval menustylel1 1
                 /usr/trimui/bin/systemval bgmvol 10
+                /usr/trimui/bin/systemval picturesize 100
             fi
         fi
     fi
@@ -180,7 +197,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
     # Game tab by default
     if [ "$CrossMix_Update" = "0" ]; then
-        "/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Emulators.sh" -s
+        "/mnt/SDCARD/Apps/SystemTools/Menu/USER INTERFACE##START TAB (value)/Tab 4.sh" -s
     fi
 
     # Displaying only Emulators with roms
@@ -192,7 +209,7 @@ if [ "$version" != "$FW_patched_version" ]; then
         tsp | tsps)
             src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1280x720"
             ;;
-        brick)
+        brick | brickpro)
             src_dir="/mnt/SDCARD/Apps/BootLogo/Images_1024x768"
             ;;
         *)
@@ -207,6 +224,7 @@ if [ "$version" != "$FW_patched_version" ]; then
 
 fi
 
+
 ######################### CrossMix-OS at each boot #########################
 
 # override empty password on firmware >= v1.1.1
@@ -218,8 +236,6 @@ echo "root:tina" | chpasswd
 ######################### Device Type customization #########################
 
 if [ -f "/tmp/device_changed" ]; then
-    # patching language files for MainUI device specific texts
-    /mnt/SDCARD/System/usr/trimui/scripts/lang_patches.sh "$current_device"
 
     # copy of the most up-to-date version of retroarch for this device
     files=$(ls /mnt/SDCARD/RetroArch/ra64.trimui_${current_device}_*.bin 2>/dev/null)
@@ -232,5 +248,10 @@ if [ -f "/tmp/device_changed" ]; then
     chmod a+x /usr/trimui/osd/trimui_osdd
     cp /mnt/SDCARD/System/usr/trimui/osd/cpuinfo_osdd_${current_device}   /mnt/SDCARD/System/usr/trimui/osd/cpuinfo_osdd
     cp /mnt/SDCARD/System/usr/trimui/osd/nightmode_osdd_${current_device} /mnt/SDCARD/System/usr/trimui/osd/nightmode_osdd
+
+    sync
+
+    # Change Avahi DNS name
+    sed -i "s/^host-name=.*/host-name=$current_device/" /mnt/SDCARD/System/etc/avahi/avahi-daemon.conf
 
 fi

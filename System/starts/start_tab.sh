@@ -4,8 +4,8 @@ cat > /tmp/state.json <<- EOM2
 }, {
 "title":	0,
 "type":	0,
-"tabidx":	2,
-"tabstartidx":	1,
+"tabidx":	3,
+"tabstartidx":	2,
 "tabstate":	[{}]
 }]
 }

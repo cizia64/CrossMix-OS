@@ -2,30 +2,51 @@
 PATH="/mnt/SDCARD/System/bin:/mnt/SDCARD/System/usr/trimui/scripts/:$PATH"
 export LD_LIBRARY_PATH="/mnt/SDCARD/System/lib:/usr/trimui/lib:$LD_LIBRARY_PATH"
 
-if ! read -r current_device </etc/trimui_device.txt; then
-    read -r -d '' cpuinfo </proc/cpuinfo
-    case "$cpuinfo" in
-    *TG5040*)
-        current_device="tsp"
-        Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
-        FIRMWARE_FILENAME="trimui_tg5040.awimg"
-        ;;
-    *TG5050*)
-        current_device="tsps"
-        Current_FW_Revision=$(uname -v | cut -d'#' -f2 | cut -d' ' -f1)
-        FIRMWARE_FILENAME="trimui_tg5050.awimg"
-        ;;
-    *TG3040*)
-        current_device="brick"
-        Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
-        FIRMWARE_FILENAME="trimui_tg3040.awimg"
-        ;;
-    *)
-        current_device="unknown"
-        ;;
-    esac
-    echo -n $current_device >/etc/trimui_device.txt
+if [ -f /etc/trimui_device.txt ]; then
+    read -r current_device </etc/trimui_device.txt
 fi
+
+case "$current_device" in
+    tsp|tsps|brick|brickpro)
+        # Device already known
+        ;;
+
+    *)
+        cpuinfo=$(cat /proc/cpuinfo 2>/dev/null)
+
+        case "$cpuinfo" in
+            *TG5040*)
+                current_device="tsp"
+                Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+                FIRMWARE_FILENAME="trimui_tg5040.awimg"
+                ;;
+
+            *TG5050*)
+                current_device="tsps"
+                Current_FW_Revision=$(uname -v | cut -d '#' -f2 | cut -d ' ' -f1)
+                FIRMWARE_FILENAME="trimui_tg5050.awimg"
+                ;;
+
+            *TG3040*)
+                current_device="brick"
+                Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+                FIRMWARE_FILENAME="trimui_tg3040.awimg"
+                ;;
+
+            *TG4040*)
+                current_device="brickpro"
+                Current_FW_Revision=$(grep 'DISTRIB_DESCRIPTION' /etc/openwrt_release | cut -d '.' -f 3)
+                FIRMWARE_FILENAME="trimui_tg4040.awimg"
+                ;;
+
+            *)
+                current_device="unknown"
+                ;;
+        esac
+
+        echo "$current_device" >/etc/trimui_device.txt
+        ;;
+esac
 
 read -r last_device </mnt/SDCARD/System/etc/last_device.txt
 if [ "$current_device" != "$last_device" ]; then
