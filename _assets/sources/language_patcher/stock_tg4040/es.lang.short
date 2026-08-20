@@ -1,0 +1,23 @@
+{
+	"46":	"OK",	
+	"88":	"ABIERTO",
+	"89":	"ATRÁS",
+	"90":	"NAV",
+	"91":	"MENÚ",
+	"92":	"Continuar",
+	"93":	"Guardar",
+	"94":	"Cargar",
+	"95":	"Volumen",
+	"96":	"Salir del juego",
+	"97":	"Registro %d/%d",
+	"98":	"Vacío",
+	"99":	"Sin pulgar",
+	"100":	"fallo de carga",
+	"101":	"fallo al guardar",
+	"102":	"ranura %d guardada",
+	"103":  "Pantalla completa",
+	"104": "Activado",
+	"105": "Desactivado",
+	"118": "Reproducción en red",
+	"126": "Menú Avanzado"
+}

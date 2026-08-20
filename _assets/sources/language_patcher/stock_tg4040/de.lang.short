@@ -1,0 +1,23 @@
+{
+	"46": "OK",	
+     "88": "OFFEN",
+     "89": "Abbrechen",
+     "90": "NAV",
+     "91": "MENÜ",
+     "92": "Fortsetzen",
+     "93": "Stand speichern",
+     "94": "Stand laden",
+     "95": "Volumen",
+     "96": "Spiel beenden",
+     "97": "%d/%d aufzeichnen",
+     "98": "Leer",
+     "99": "Kein Daumen",
+     "100": "Ladefehler",
+     "101": "Speichern fehlgeschlagen",
+     "102": "Slot%d gespeichert",
+     "103": "Vollbild",
+	"104":  "On",
+	"105":  "Off",
+	"118":  "Netplay",
+	"126":  "Erweitertes Menü"
+}

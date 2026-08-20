@@ -27,7 +27,8 @@ def main():
     targets = [
         ('stock_tg3040', 'brick'),
         ('stock_tg5040', 'tsp'),
-        ('stock_tg5050', 'tsps')
+        ('stock_tg5050', 'tsps'),
+        ('stock_tg4040', 'brickpro')
     ]
 
     # Create patches directory if it doesn't exist
