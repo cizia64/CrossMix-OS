@@ -1,0 +1,4 @@
+[{
+		"name":	"LCD brigheness switcher",
+		"launch":	"com.trimui.switch.backlight.sh"
+	}]

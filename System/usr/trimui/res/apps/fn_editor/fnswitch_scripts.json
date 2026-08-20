@@ -1,0 +1,71 @@
+[
+    {
+        "name":"Night Mode",
+        "name.ch.lang":"夜间模式",
+        "launch":"com.crossmix.nightmode.sh"
+    },{
+        "name":"LED off",
+        "name.ch.lang":"关闭氛围灯",
+        "launch":"com.trimui.ledc.sh"
+    },
+    {
+        "name":"Quiet Mode",
+        "name.ch.lang":"减弱音量",
+        "launch":"com.trimui.quiet.sh"
+    },
+    {
+        "name":"Silent Mode",
+        "name.ch.lang":"静音",
+        "launch":"com.trimui.silent.sh"
+    },
+    {
+        "name":"CPU Power Save",
+        "name.ch.lang":"保持低功耗模式",
+        "launch":"com.trimui.cpusave.sh"
+    },
+    {
+        "name":"CPU Performance Mode",
+        "name.ch.lang":"保持性能模式",
+        "launch":"com.trimui.cpuperformance.sh"
+    },
+    {
+        "name":"Turbo Button A",
+        "name.ch.lang":"全局连发按键 A",
+        "launch":"com.trimui.turbo_a.sh"
+    },
+    {
+        "name":"Turbo Button B",
+        "name.ch.lang":"全局连发按键 B",
+        "launch":"com.trimui.turbo_b.sh"
+    },
+    {
+        "name":"Turbo Button X",
+        "name.ch.lang":"全局连发按键 X",
+        "launch":"com.trimui.turbo_x.sh"
+    },
+    {
+        "name":"Turbo Button Y",
+        "name.ch.lang":"全局连发按键 Y",
+        "launch":"com.trimui.turbo_y.sh"
+    },
+    {
+        "name":"Turbo Button L",
+        "name.ch.lang":"全局连发按键 L",
+        "launch":"com.trimui.turbo_l.sh"
+    },
+    {
+        "name":"Turbo Button R",
+        "name.ch.lang":"全局连发按键 R",
+        "launch":"com.trimui.turbo_r.sh"
+    },
+    {
+        "name":"Turbo Button L2",
+        "name.ch.lang":"全局连发按键 L2",
+        "launch":"com.trimui.turbo_l2.sh"
+    },
+    {
+        "name":"Turbo Button R2",
+        "name.ch.lang":"全局连发按键 R2",
+        "launch":"com.trimui.turbo_r2.sh"
+    }
+]

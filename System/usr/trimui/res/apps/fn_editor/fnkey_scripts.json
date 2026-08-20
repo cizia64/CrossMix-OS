@@ -1,0 +1,22 @@
+[
+    {
+        "name":"CPU clock switcher",
+        "name.ch.lang":"CPU变频换挡",
+        "launch":"com.trimui.switch.cpufreq.sh"
+    },    
+    {
+        "name":"LCD brigheness switcher",
+        "name.ch.lang":"屏幕亮度快速切换",
+        "launch":"com.trimui.switch.backlight.sh"
+    },
+    {
+        "name":"Night Mode switcher",
+        "name.ch.lang":"夜间模式",
+        "launch":"com.crossmix.toggle.nightmode.sh"
+    },
+    {
+        "name":"LED ON/OFF toggle",
+        "name.ch.lang":"LED氛围灯开关",
+        "launch":"com.trimui.toggle.ledc.sh"
+    }    
+]

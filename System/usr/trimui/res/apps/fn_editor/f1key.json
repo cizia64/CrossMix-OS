@@ -1,0 +1,4 @@
+[{
+		"name":	"CPU clock switcher",
+		"launch":	"com.trimui.switch.cpufreq.sh"
+	}]

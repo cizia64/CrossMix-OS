@@ -3,6 +3,11 @@ PATH="/mnt/SDCARD/System/usr/trimui/scripts:/mnt/SDCARD/System/bin:$PATH"
 
 echo "============= scene Night Mode ============"
 
+if [ -z "$1" ]; then
+    nightmode.sh
+fi
+
+
 while true; do
 case "$1" in
 1)

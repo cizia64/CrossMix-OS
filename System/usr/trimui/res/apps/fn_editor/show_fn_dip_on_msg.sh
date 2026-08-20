@@ -1,7 +1,6 @@
 #!/bin/sh
 PATH="/mnt/SDCARD/System/bin:$PATH"
 SCENE_DIR="/usr/trimui/scene"
-SCRIPT_JSON="/usr/trimui/apps/fn_editor/scripts.json"
 
 # Find current script name (only if one fn action is enabled)
 files=$(find "$SCENE_DIR" -type f)
@@ -10,7 +9,27 @@ if [ -z "$files" ]; then
     Current_FnScript="No Fn action set"
 elif [ $(echo "$files" | wc -l) -eq 1 ]; then
     filename=$(basename "$files")
-    Current_FnScript="$(jq -r --arg launch "$filename" '.[] | select(.launch == $launch) | .name' "$SCRIPT_JSON") ON"
+    
+    
+    for SCRIPT_JSON in \
+    /usr/trimui/apps/fn_editor/scripts.json \
+    /usr/trimui/apps/fn_editor/fnswitch_scripts.json
+do
+    [ -s "$SCRIPT_JSON" ] || continue
+
+    Current_FnScript=$(jq -r --arg launch "$filename" \
+        '.[] | select(.launch == $launch) | .name // empty' \
+        "$SCRIPT_JSON")
+
+    [ -n "$Current_FnScript" ] && {
+        Current_FnScript="$Current_FnScript ON"
+        break
+    }
+done
+
+
+
+    # Current_FnScript="$(jq -r --arg launch "$filename" '.[] | select(.launch == $launch) | .name' "$SCRIPT_JSON") ON"
 else
     Current_FnScript="Multiple Fn actions ON"
 fi
