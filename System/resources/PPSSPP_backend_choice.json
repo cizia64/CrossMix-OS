@@ -1,0 +1,19 @@
+{
+    "items": [
+      {
+        "text": "",
+        "horizontal_alignment": "left",
+        "background_color": "#000000",
+        "background_image": "/mnt/SDCARD/System/resources/PPSSPP_backend_opengl.png",
+        "line_spacing": "0"
+      },
+      {
+        "text": "",
+        "horizontal_alignment": "right",
+        "background_color": "#000000",
+        "background_image": "/mnt/SDCARD/System/resources/PPSSPP_backend_vulkan.png",
+        "line_spacing": "0"
+
+      }
+    ]
+  }

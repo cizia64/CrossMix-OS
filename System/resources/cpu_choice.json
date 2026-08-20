@@ -1,0 +1,19 @@
+{
+    "items": [
+      {
+        "text": "",
+        "horizontal_alignment": "left",
+        "background_color": "#000000",
+        "background_image": "/mnt/SDCARD/System/resources/cpu_normal.png",
+        "line_spacing": "0"
+      },
+      {
+        "text": "",
+        "horizontal_alignment": "right",
+        "background_color": "#000000",
+        "background_image": "/mnt/SDCARD/System/resources/cpu_max.png",
+        "line_spacing": "0"
+
+      }
+    ]
+  }
