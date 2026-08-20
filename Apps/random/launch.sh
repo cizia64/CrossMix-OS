@@ -42,6 +42,10 @@ add_line_to_recentlist() {
 
 # Main function
 main() {
+
+# Remove empty databases created by search function in MainUI
+./DBcleanup
+
   if [ -f "./random_manual.png" ]; then
     /mnt/SDCARD/System/usr/trimui/scripts/infoscreen.sh -i "./random_manual.png" -k "A B Y X L R SELECT START MENU"
     mv ./random_manual.png ./random_manual_done.png
