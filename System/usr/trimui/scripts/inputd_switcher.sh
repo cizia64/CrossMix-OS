@@ -21,6 +21,7 @@ if [ "$device" = "brick" ]; then
     exit 1
 fi
 
+
 if [ -f "/mnt/SDCARD/System/resources/${device}_inputd" ]; then
     cp /mnt/SDCARD/System/resources/${device}_inputd "$bin_dir/trimui_inputd"
     chmod +x "$bin_dir/trimui_inputd"
@@ -28,6 +29,10 @@ if [ -f "/mnt/SDCARD/System/resources/${device}_inputd" ]; then
 else
     [ "$script_name" != "inputd_switcher" ] && infoscreen -m "Input daemon not found!"
     exit 1
+fi
+
+if [ "$device" = "brickpro" ]; then
+    exit 1  # No configurable polling rate on TrimUI Brick Pro
 fi
 
 case "$polling_rate" in
