@@ -13,14 +13,14 @@
   "hidebios": 0,
   "launchlist": [
     {
-      "name": "PPSSPP 1.17.1 - OpenGL",
+      "name": "PPSSPP 1.19.3 - OpenGL",
       "name.ch.lang": "PPSSPP正常模式",
-      "launch": "ppsspp_1.17.1_gl.sh"
+      "launch": "ppsspp_1.19.3.sh"
     },
     {
-      "name": "PPSSPP 1.17.1 - Vulkan",
+      "name": "PPSSPP 1.19.3 - Vulkan",
       "name.ch.lang": "PPSSPP性能模式",
-      "launch": "ppsspp_1.17.1_vulkan.sh"
+      "launch": "ppsspp_1.19.3.sh"
     },
     {
       "name": "PPSSPP-1.5.4",
@@ -33,14 +33,14 @@
       "launch": ""
     },
     {
-      "name": "PPSSPP 1.17.1 - OpenGL - Perf.",
+      "name": "PPSSPP 1.19.3 - OpenGL - Perf.",
       "name.ch.lang": "PPSSPP正常模式 - Perf.",
-      "launch": "ppsspp_1.17.1_gl.sh"
+      "launch": "ppsspp_1.19.3.sh"
     },
     {
-      "name": "PPSSPP 1.17.1 - Vulkan - Perf.",
+      "name": "PPSSPP 1.19.3 - Vulkan - Perf.",
       "name.ch.lang": "PPSSPP性能模式 - Perf.",
-      "launch": "ppsspp_1.17.1_vulkan.sh"
+      "launch": "ppsspp_1.19.3.sh"
     },
     {
       "name": "PPSSPP-1.5.4 - Perf.",
