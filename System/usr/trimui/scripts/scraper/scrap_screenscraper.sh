@@ -482,7 +482,21 @@ for file in $(eval "find /mnt/SDCARD/Roms/$CurrentSystem -maxdepth 2 -type f \
             mv "$temp_file" "$output_file"
             echo "Download successful: $output_file"
         if [ -d /tmp/trimui_osd/ ]; then
-            echo -e "{ \"duration\":2000, \"x\":920, \"y\":330, \"message\":\" \", \"font\":\"\", \"icon\":\"$output_file\", \"fontsize\":24 }" > /tmp/trimui_osd/osd_toast_msg
+            read -r current_device </etc/trimui_device.txt
+            case "$current_device" in
+            tsp | tsps)
+                echo -e "{ \"duration\":2000, \"x\":920, \"y\":330, \"message\":\" \", \"font\":\"\", \"icon\":\"$output_file\", \"fontsize\":24 }" > /tmp/trimui_osd/osd_toast_msg
+                ;;
+            brick | brickpro)
+                echo -e "{ \"duration\":2000, \"x\":350, \"y\":350, \"message\":\" \", \"font\":\"\", \"icon\":\"$output_file\", \"fontsize\":24 }" > /tmp/trimui_osd/osd_toast_msg
+                ;;
+            *)
+                ;;
+        esac
+
+            
+            
+            
         fi
         else
             echo "Download failed. Cleaning up."
