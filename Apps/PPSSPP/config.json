@@ -1,0 +1,8 @@
+{
+"label":"PPSSPP",
+"icon":"/mnt/SDCARD/Icons/Default/Emus/PSP.png",
+"iconsel":"/mnt/SDCARD/Icons/Default/Emus/PSP.png",
+"launch":"launch.sh",
+"useswap":1,
+"description":"Open the PPSSPP menu."
+}
