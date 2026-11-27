@@ -1,0 +1,5 @@
+{
+  "label": "Instalar correcao USB",
+  "icon": "icon.png",
+  "launch": "launch.sh"
+}
