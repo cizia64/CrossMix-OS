@@ -1,0 +1,11 @@
+Correcao USB Storage - TrimUI Smart Pro / CrossMix OS
+
+1. Extraia o ZIP na raiz do cartao CrossMix, preservando a pasta Apps.
+2. Abra Apps > Instalar correcao USB. Tambem e possivel executar o launch.sh no Commander.
+3. A instalacao preserva copias dos arquivos anteriores em Data/USBStorageFix.
+4. Inicie USB Storage normalmente. Ao terminar a copia, use a opcao de ejetar no
+   computador. Depois pressione B no console para encerrar e reiniciar o CrossMix.
+
+O console nao consegue garantir que o Windows gravou todos os dados pendentes.
+O uso em hardware ainda precisa ser verificado. Registro da instalacao em
+/tmp/usb-storage-fix-install.log enquanto o console estiver ligado.

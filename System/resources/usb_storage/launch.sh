@@ -53,6 +53,13 @@ kill_hooked_tasks() {
 
 if [ "$0" = "/tmp/usb_storage.sh" ]; then
 
+	# The SD card is about to be unmounted; keep the input fallback in RAM.
+	rm -f /tmp/usb_exit_watchdog
+	if cp /usr/trimui/apps/usb_storage/usb_exit_watchdog /tmp/usb_exit_watchdog; then
+		chmod 755 /tmp/usb_exit_watchdog
+	else
+		echo "USB Storage: B fallback unavailable" > /tmp/usb_exit_watchdog.log
+	fi
 	sync
 	killall -9 S99runtrimui
 	killall -9 runtrimui.sh
@@ -84,6 +91,14 @@ if [ "$0" = "/tmp/usb_storage.sh" ]; then
 	umount /mnt/SDCARD
 	umount /mnt/UDISK
 
+	# Never expose a filesystem to the PC while Linux still has it mounted.
+	if awk '$2 == "/mnt/SDCARD" || $2 == "/mnt/UDISK" { found=1 } END { exit !found }' /proc/mounts; then
+		echo "USB Storage: a filesystem could not be unmounted; aborting export" >> /tmp/usb_exit_watchdog.log
+		sync
+		/sbin/reboot
+		exit 1
+	fi
+
 	############# DEBUG #############
 	# fuser -m /mnt/SDCARD > /usr/trimui/usb_storage.log
 	# lsof /mnt/SDCARD >> /usr/trimui/usb_storage.log
@@ -98,7 +113,21 @@ if [ "$0" = "/tmp/usb_storage.sh" ]; then
 	# TrimUI waiting app
 	cd /usr/trimui/apps/usb_storage/
 	chmod 777 usb_storage
-	./usb_storage
+	./usb_storage &
+	usb_ui_pid=$!
+	usb_watch_pid=
+	if [ -x /tmp/usb_exit_watchdog ]; then
+		/tmp/usb_exit_watchdog "$usb_ui_pid" >> /tmp/usb_exit_watchdog.log 2>&1 &
+		usb_watch_pid=$!
+	fi
+	wait "$usb_ui_pid"
+	if [ -n "$usb_watch_pid" ]; then
+		# Only signal the still-running child, never a recycled PID.
+		if awk -v parent="$$" '$1 == "PPid:" && $2 == parent { found=1 } END { exit !found }' "/proc/$usb_watch_pid/status" 2>/dev/null; then
+			kill "$usb_watch_pid" 2>/dev/null
+		fi
+		wait "$usb_watch_pid" 2>/dev/null
+	fi
 	sync
 
 	# Reboot message
@@ -120,8 +149,9 @@ if [ "$0" = "/tmp/usb_storage.sh" ]; then
 
 fi
 
-if [ ! -f /tmp/usb_storage.sh ]; then
-	cp -f "$0" /tmp/usb_storage.sh
+if ! pgrep -f /tmp/usb_storage.sh >/dev/null; then
+	# Always pick up fixes installed since the preceding USB Storage session.
+	cp -f "$0" /tmp/usb_storage.sh || exit 1
 fi
 
 # run the script totally detached from current shell
